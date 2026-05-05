@@ -45,3 +45,8 @@ footer{border-top:1px solid var(--line);margin-top:2.5rem;padding:2rem 0 2.8rem;
 
 .btn-secondary{display:inline-block;border:1px solid var(--gold);color:var(--ink)!important;background:transparent;border-radius:999px;padding:.55rem .95rem;text-decoration:none}
 .btn-secondary:hover{background:#f7f1e5}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1rem}
+.contact-panel,.newsletter-panel,.social-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem}
+.social-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.7rem}
+@media (max-width:900px){.contact-grid,.social-grid{grid-template-columns:1fr}}
