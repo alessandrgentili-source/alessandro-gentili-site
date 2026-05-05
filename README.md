@@ -35,6 +35,8 @@ Sito statico multipagina per la piattaforma editoriale di Alessandro Gentili.
 - Open Graph image URL (`index.html`)
 - Endpoint Formspree (`index.html`)
 - URL definitiva del Saggio 0 (attualmente link Medium)
+- Circolo APS manifesto PDF (`assets/docs/manifesto-il-circolo-aps.pdf`)
+- Verifica del link pubblico GPT (Scaffale Strategico)
 
 ## Nota su file legacy
 `delos-reference.html` è un riferimento visivo/legacy e non fa parte del sito in produzione.
