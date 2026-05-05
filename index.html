@@ -36,13 +36,15 @@
     </script>
     <style>
       :root {
-        --paper: #f7f2e8;
+        --paper: #f6f0e4;
+        --paper-soft: #fcf9f2;
         --ink: #1e1f1d;
         --ink-soft: #434642;
         --gold: #9b7d4b;
         --petrol: #2f5b56;
-        --line: #d8cebb;
+        --line: #d9c9ad;
         --card: #fffdf8;
+        --shadow: 0 12px 28px rgba(48, 41, 30, 0.08);
       }
 
       * {
@@ -52,7 +54,7 @@
       body {
         margin: 0;
         font-family: "Inter", "Segoe UI", Arial, sans-serif;
-        background: var(--paper);
+        background: radial-gradient(circle at top right, #fbf5e8 0%, var(--paper) 48%, #f0e7d7 100%);
         color: var(--ink);
         line-height: 1.7;
       }
@@ -102,7 +104,8 @@
       header {
         position: sticky;
         top: 0;
-        background: color-mix(in srgb, var(--paper), white 22%);
+        background: rgba(246, 240, 228, 0.88);
+        backdrop-filter: blur(8px);
         border-bottom: 1px solid var(--line);
         z-index: 10;
       }
@@ -167,6 +170,8 @@
         background: var(--card);
         border: 1px solid var(--line);
         padding: 1.15rem;
+        border-radius: 16px;
+        box-shadow: var(--shadow);
       }
 
       .card {
@@ -242,6 +247,7 @@
         padding: 0.42rem 0.7rem;
         border: 1px solid var(--gold);
         text-decoration: none;
+        border-radius: 999px;
       }
 
       .feedback {
@@ -595,7 +601,7 @@
       <section id="contatti" class="section wrap">
         <h2>Contatti</h2>
         <article class="item">
-          <p>Email: <a href="mailto:contatti@example.com">contatti@example.com</a></p>
+          <p>Email: <a href="mailto:collaborazioni.alessandrogentili@gmail.com">collaborazioni.alessandrogentili@gmail.com</a></p>
           <p>Medium: <a href="https://medium.com/@alessandrgentili">@alessandrgentili</a></p>
           <p>Instagram: <a href="https://www.instagram.com/alessandro__gentili/">@alessandro__gentili</a></p>
           <p>Facebook: <a href="https://www.facebook.com/AlessandroGentiliPage/">AlessandroGentiliPage</a></p>
