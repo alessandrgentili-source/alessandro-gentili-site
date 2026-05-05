@@ -1,0 +1,52 @@
+:root {
+  --paper: #f4efe3;
+  --paper-soft: #faf6ee;
+  --ink: #202320;
+  --ink-soft: #4a514c;
+  --gold: #9b7a45;
+  --line: #d8ccba;
+  --card: #fffdf8;
+  --cta: #1f3f52;
+  --cta-hover: #193242;
+  --shadow: 0 14px 34px rgba(20, 23, 21, 0.07);
+  --radius: 14px;
+}
+* { box-sizing: border-box; }
+body { margin:0; font-family: Inter, "Segoe UI", Arial, sans-serif; background: radial-gradient(circle at top, #fbf8f1 0%, var(--paper) 52%); color: var(--ink); line-height: 1.75; }
+.wrap { width:min(1120px, 92vw); margin:auto; }
+h1,h2,h3 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif; line-height:1.2; font-weight:500; letter-spacing:.01em; }
+h1{font-size:clamp(2.1rem,6vw,4rem)} h2{font-size:clamp(1.5rem,3vw,2.3rem)} h3{font-size:clamp(1.15rem,2vw,1.5rem)}
+a { color: inherit; text-decoration-color: var(--gold); text-underline-offset:.2rem; }
+a:hover { color:#274d4a; }
+a:focus-visible,button:focus-visible,input:focus-visible { outline:2px solid #274d4a; outline-offset:3px; }
+header { position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--paper),white 24%); border-bottom:1px solid var(--line); }
+.topbar { display:flex; gap:1.2rem; justify-content:space-between; align-items:center; padding:1rem 0; }
+.brand { font-family: "Iowan Old Style", serif; font-size:1.18rem; }
+nav ul { display:flex; flex-wrap:wrap; gap:.65rem 1rem; list-style:none; margin:0; padding:0; }
+nav a { text-decoration:none; font-size:.92rem; color:var(--ink-soft); padding:.12rem 0; border-bottom:1px solid transparent; }
+nav a.active, nav a:hover { color:var(--ink); border-color:var(--gold); }
+.hero{padding:5.2rem 0 2.6rem}.section{padding:3.8rem 0; border-top:1px solid var(--line)}
+.narrow{max-width:70ch}.lead{font-size:1.07rem;color:var(--ink-soft)}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.1rem}.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem}
+.card,.item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.35rem}
+.meta{color:var(--ink-soft);font-size:.92rem}.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:.09em;font-size:.8rem;font-weight:600}
+.btn{display:inline-block;background:var(--cta);color:#eef5f7!important;text-decoration:none;border-radius:999px;padding:.58rem 1rem;border:1px solid #173342}
+.btn:hover{background:var(--cta-hover)}
+.list{display:grid;gap:.95rem}.filters{display:flex;gap:.55rem;flex-wrap:wrap;margin:1rem 0}
+.filters button{background:transparent;border:1px solid var(--line);padding:.45rem .75rem;cursor:pointer;border-radius:999px}
+.filters button[aria-pressed="true"]{border-color:var(--gold);color:#274d4a}
+form{display:grid;max-width:560px;gap:.45rem}input{padding:.6rem;border-radius:8px;border:1px solid var(--line);background:#fffdfa}button{font:inherit}
+button[type="submit"]{background:var(--cta);color:#eef5f7;border:1px solid #173342;padding:.62rem 1rem;border-radius:999px;width:fit-content;cursor:pointer}
+.feedback{font-size:.9rem;color:var(--ink-soft)}.feedback[data-state="error"]{color:#7b1f1f}
+footer{border-top:1px solid var(--line);margin-top:2.5rem;padding:2rem 0 2.8rem;color:var(--ink-soft)}
+[hidden]{display:none!important}
+@media (max-width:980px){.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.topbar{align-items:flex-start}.hero{padding-top:3.8rem}.grid-4,.grid-2{grid-template-columns:1fr}nav ul{gap:.5rem .8rem}}
+
+.btn-secondary{display:inline-block;border:1px solid var(--gold);color:var(--ink)!important;background:transparent;border-radius:999px;padding:.55rem .95rem;text-decoration:none}
+.btn-secondary:hover{background:#f7f1e5}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1rem}
+.contact-panel,.newsletter-panel,.social-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem}
+.social-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.7rem}
+@media (max-width:900px){.contact-grid,.social-grid{grid-template-columns:1fr}}
