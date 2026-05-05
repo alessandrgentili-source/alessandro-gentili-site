@@ -1,41 +1,28 @@
-# Alessandro Gentili — refined static editorial website
+# Alessandro Gentili — static editorial website v2.0
 
-Sito statico multipagina per la piattaforma editoriale di Alessandro Gentili.
+Versione premium statica HTML/CSS/JS per GitHub Pages.
 
-## Architettura attuale
-- `index.html`
-- `saggi.html`
-- `metodo-ai.html`
-- `portfolio.html`
-- `poesia.html`
-- `strumenti.html`
-- `archivio.html`
-- `en.html`
-- `contatti.html`
-- `assets/style.css`
-- `assets/script.js`
+## Cosa contiene
 
-## Stack tecnico
-- HTML semantico
-- CSS condiviso in `assets/style.css`
-- JavaScript condiviso in `assets/script.js`
-- Nessun framework
-- Nessun build step
-- Compatibile con GitHub Pages
+- `index.html` — home editoriale più forte e orientata a posizionamento senior.
+- `saggi.html` — selezione saggi con invito all’archivio ragionato.
+- `metodo-ai.html` — metodo operativo e AI systems.
+- `portfolio.html` — progetti culturali e manifesto Il Circolo APS.
+- `poesia.html` — Im|perfetto, Romansìa e materiali.
+- `strumenti.html` — strumenti editoriali e AI.
+- `archivio.html` — archivio completo con filtri.
+- `en.html` — gateway internazionale.
+- `contatti.html` — email, newsletter via mailto, canali pubblici.
+- `assets/style.css` — sistema visivo premium editoriale.
+- `assets/script.js` — filtri archivio e gestione newsletter via email.
+- `assets/docs/manifesto-il-circolo-aps.pdf` — manifesto PDF.
 
-## Placeholder / checklist pre-pubblicazione
-- [ ] Sostituire Canonical URL in `index.html`.
-- [ ] Sostituire Open Graph URL e Open Graph image.
-- [ ] Sostituire endpoint Formspree (`https://formspree.io/f/TUO_ID_FORMSPREE`).
-- [ ] Caricare PDF manifesto Circolo APS: `assets/docs/manifesto-il-circolo-aps.pdf`.
-- [ ] Confermare URL finale del Saggio 0 (attualmente link Medium).
-- [ ] Verificare funzionamento pubblico del link GPT (Scaffale Strategico).
+## Regole link
 
-## Nota su file legacy
-`delos-reference.html` è un riferimento visuale/legacy e non fa parte della navigazione di produzione.
+- Link interni `.html`: stessa scheda.
+- Link esterni e PDF: nuova scheda con `target="_blank" rel="noopener noreferrer"`.
+- Mailto: comportamento normale.
 
-## Avvio locale
-```bash
-python3 -m http.server 8000
-```
-Apri `http://localhost:8000`.
+## Note operative
+
+Per pubblicare su GitHub Pages: caricare questi file nella root del repository e verificare che Pages punti a `main / root`.
