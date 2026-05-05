@@ -4,120 +4,458 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alessandro Gentili | Scrittura, strategia e sistemi AI</title>
-    <meta name="description" content="Piattaforma editoriale di Alessandro Gentili: saggi sulla contemporaneità, poesia e voce, portfolio culturale, metodo e sistemi AI." />
-    <!-- TODO: Replace with production canonical URL -->
+    <meta
+      name="description"
+      content="Piattaforma editoriale di Alessandro Gentili: saggi sulla contemporaneità, poesia e voce, portfolio culturale, metodo e sistemi AI."
+    />
     <link rel="canonical" href="https://example.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Alessandro Gentili | Scrittura, strategia e sistemi AI" />
-    <meta property="og:description" content="Scrittura, cultura editoriale e architetture operative tra marketing strategico, sistemi AI e territorio." />
-    <!-- TODO: Replace with production Open Graph URL and image -->
+    <meta
+      property="og:description"
+      content="Scrittura, cultura editoriale e architetture operative tra marketing strategico, sistemi AI e territorio."
+    />
     <meta property="og:url" content="https://example.com/" />
     <meta property="og:image" content="https://example.com/og-image.jpg" />
-    <style>
-      :root { --paper:#f7f2e8; --ink:#1e1f1d; --ink-soft:#434642; --gold:#9b7d4b; --petrol:#2f5b56; --line:#d8cebb; --card:#fffdf8; }
-      * { box-sizing:border-box; }
-      body { margin:0; font-family: "Inter", "Segoe UI", Arial, sans-serif; background:var(--paper); color:var(--ink); line-height:1.7; }
-      .wrap { width:min(1080px,92vw); margin:auto; }
-      h1,h2,h3 { font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif; line-height:1.2; font-weight:500; }
-      h1{font-size:clamp(2rem,6vw,3.8rem)} h2{font-size:clamp(1.45rem,3.5vw,2.1rem)} h3{font-size:clamp(1.1rem,2.4vw,1.35rem)}
-      a { color:inherit; text-decoration-color:var(--gold); text-underline-offset:.2rem; }
-      a:hover{color:var(--petrol)}
-      a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--petrol);outline-offset:3px}
-      header{position:sticky;top:0;background:color-mix(in srgb,var(--paper),white 22%);border-bottom:1px solid var(--line);z-index:10}
-      .topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1rem 0}
-      nav ul{display:flex;flex-wrap:wrap;gap:.85rem;list-style:none;padding:0;margin:0}
-      nav a{text-decoration:none;font-size:.92rem;border-bottom:1px solid transparent} nav a:hover{border-color:var(--gold)}
-      .section{padding:5rem 0;border-top:1px solid var(--line)}
-      .hero{padding:5.5rem 0 3rem}
-      .narrow{max-width:68ch}
-      .manifesto{margin-top:1.5rem;padding-left:1rem;border-left:2px solid var(--gold);color:var(--ink-soft)}
-      .grid-4{display:grid;gap:1rem;grid-template-columns:repeat(4,minmax(0,1fr))}
-      .card,.item{background:var(--card);border:1px solid var(--line);padding:1.15rem}
-      .meta{font-size:.88rem;color:var(--ink-soft)}
-      .kicker{color:var(--gold);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-      .list{display:grid;gap:.9rem}
-      .door-cta{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600}
-      .featured{padding:1.6rem}
-      .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0 1.2rem}
-      .filters button{border:1px solid var(--line);background:transparent;padding:.45rem .75rem;cursor:pointer}
-      .filters button[aria-pressed="true"]{border-color:var(--gold);color:var(--petrol)}
-      .btn-link{display:inline-block;margin-top:.4rem;padding:.42rem .7rem;border:1px solid var(--gold);text-decoration:none}
-      .feedback{margin-top:.5rem;font-size:.9rem;color:var(--ink-soft)}
-      .feedback[data-state="error"]{color:#7b1f1f}
-      footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.9rem}
-      @media (max-width:980px){.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-      @media (max-width:640px){.grid-4{grid-template-columns:1fr}.hero{padding-top:3.2rem}}
-      [hidden]{display:none !important}
-    </style>
     <script type="application/ld+json">
       {
-        "@context":"https://schema.org",
-        "@type":"Person",
-        "name":"Alessandro Gentili",
-        "url":"https://example.com/",
-        "jobTitle":"Autore, stratega editoriale, AI systems designer",
-        "sameAs":[
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Alessandro Gentili",
+        "url": "https://example.com/",
+        "jobTitle": "Autore, stratega editoriale, AI systems designer",
+        "sameAs": [
           "https://medium.com/@alessandrgentili",
           "https://www.instagram.com/alessandro__gentili/",
           "https://www.facebook.com/AlessandroGentiliPage/",
           "https://x.com/GentiliAlessand",
-          "https://www.threads.com/@alessandro__gentili"
+          "https://www.threads.com/@alessandro__gentili",
+          "https://www.linkedin.com/in/alessandro-gentili-78315226/"
         ]
       }
     </script>
+    <style>
+      :root {
+        --paper: #f6f0e4;
+        --paper-soft: #fcf9f2;
+        --ink: #1e1f1d;
+        --ink-soft: #434642;
+        --gold: #9b7d4b;
+        --petrol: #2f5b56;
+        --line: #d9c9ad;
+        --card: #fffdf8;
+        --shadow: 0 12px 28px rgba(48, 41, 30, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        background: radial-gradient(circle at top right, #fbf5e8 0%, var(--paper) 48%, #f0e7d7 100%);
+        color: var(--ink);
+        line-height: 1.7;
+      }
+
+      .wrap {
+        width: min(1160px, 94vw);
+        margin: 0 auto;
+      }
+      .hero-grid { display:grid; grid-template-columns: 1.2fr .8fr; gap:1.4rem; align-items:start; }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+        line-height: 1.2;
+        font-weight: 500;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 6vw, 3.8rem);
+      }
+
+      h2 {
+        font-size: clamp(1.45rem, 3.5vw, 2.1rem);
+      }
+
+      h3 {
+        font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+      }
+
+      a {
+        color: inherit;
+        text-decoration-color: var(--gold);
+        text-underline-offset: 0.2rem;
+      }
+
+      a:hover {
+        color: var(--petrol);
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible {
+        outline: 2px solid var(--petrol);
+        outline-offset: 3px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        background: rgba(246, 240, 228, 0.88);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+        z-index: 10;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 1.5rem;
+        align-items: center;
+        padding: 1rem 0;
+      }
+
+      nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.8rem 1rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      nav a {
+        text-decoration: none;
+        font-size: 0.92rem;
+        border-bottom: 1px solid transparent;
+        white-space: nowrap;
+      }
+
+      nav a:hover {
+        border-color: var(--gold);
+      }
+
+      .section {
+        padding: 5rem 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .hero {
+        padding: 6.5rem 0 3.6rem;
+      }
+
+      .narrow {
+        max-width: 68ch;
+      }
+
+      .manifesto {
+        margin-top: 1.5rem;
+        padding-left: 1rem;
+        border-left: 2px solid var(--gold);
+        color: var(--ink-soft);
+      }
+
+      .grid-4 {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .card,
+      .item {
+        background: var(--card);
+        border: 1px solid var(--line);
+        padding: 1.15rem;
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card .door-cta,
+      .card .btn-link {
+        margin-top: auto;
+        padding-top: 0.75rem;
+      }
+
+      .meta {
+        font-size: 0.88rem;
+        color: var(--ink-soft);
+      }
+
+      .kicker {
+        color: var(--gold);
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .essay-note {
+        display: inline-block;
+        margin-top: 0.3rem;
+        font-size: 0.78rem;
+        color: var(--ink-soft);
+      }
+
+      .list {
+        display: grid;
+        gap: 0.9rem;
+      }
+      .list.cards-compact { grid-template-columns: repeat(2,minmax(0,1fr)); gap:1rem; }
+
+      .door-cta {
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 600;
+      }
+
+      .featured {
+        padding: 1.6rem;
+      }
+
+      .filters {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin: 1rem 0 1.2rem;
+      }
+
+      .filters button {
+        border: 1px solid var(--line);
+        background: transparent;
+        padding: 0.45rem 0.75rem;
+        cursor: pointer;
+      }
+
+      .filters button[aria-pressed="true"] {
+        border-color: var(--gold);
+        color: var(--petrol);
+      }
+
+      .btn-link {
+        display: inline-block;
+        margin-top: 0.4rem;
+        padding: 0.42rem 0.7rem;
+        border: 1px solid var(--gold);
+        text-decoration: none;
+        border-radius: 999px;
+      }
+      .btn-primary{
+        display:inline-block;
+        margin-top:.5rem;
+        padding:.56rem .95rem;
+        border-radius:999px;
+        background:var(--petrol);
+        color:#f7f2e9;
+        text-decoration:none;
+        border:1px solid color-mix(in srgb,var(--petrol),#000 12%);
+      }
+
+      .feedback {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--ink-soft);
+      }
+
+      .feedback[data-state="error"] {
+        color: #7b1f1f;
+      }
+
+      footer {
+        padding: 2rem 0 3rem;
+        border-top: 1px solid var(--line);
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @media (max-width: 980px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        nav ul {
+          justify-content: flex-start;
+        }
+
+        .grid-4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .hero-grid { grid-template-columns: 1fr; }
+        .list.cards-compact { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 640px) {
+        .grid-4 {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 3.2rem;
+        }
+
+        nav ul {
+          gap: 0.55rem 0.85rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
       <div class="wrap topbar">
         <div>Alessandro Gentili</div>
-        <nav aria-label="Navigazione principale"><ul>
-          <li><a href="#hero">Home</a></li><li><a href="#saggi">Saggi</a></li><li><a href="#archivio">Archivio ragionato</a></li>
-          <li><a href="#poesia">Poesia e voce</a></li><li><a href="#eventi">Eventi / Portfolio culturale</a></li>
-          <li><a href="#metodo">Metodo / AI Systems</a></li><li><a href="#laboratorio">Laboratorio editoriale</a></li>
-          <li><a href="#newsletter">Newsletter</a></li><li><a href="#contatti">Contatti</a></li>
-        </ul></nav>
+        <nav aria-label="Navigazione principale">
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#saggi">Saggi</a></li>
+            <li><a href="#metodo">Metodo / AI</a></li>
+            <li><a href="#eventi">Portfolio</a></li>
+            <li><a href="#poesia">Poesia</a></li>
+            <li><a href="#laboratorio">Strumenti</a></li>
+            <li><a href="#archivio">Archivio</a></li>
+            <li><a href="#en">EN</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
+
     <main>
       <section id="hero" class="hero wrap">
-        <div class="narrow">
+        <div class="hero-grid">
+          <div class="narrow">
           <h1>Scrittura, strategia e sistemi AI.</h1>
-          <p>Lavoro tra marketing strategico, cultura editoriale e architetture operative per trasformare idee, contenuti e conoscenza in sistemi leggibili, ripetibili e misurabili.</p>
-          <p>Uso la scrittura per capire dove finisce l’uomo e dove comincia il meccanismo. Porto questa stessa disciplina nei sistemi: marketing, AI, editoria, strategia.</p>
-          <p class="manifesto">Una piattaforma editoriale per rendere i saggi più trovabili, il lavoro culturale più leggibile e i processi più utili a collaborazioni, servizi e traiettorie future.</p>
+          <p>
+            Lavoro tra marketing strategico, cultura editoriale e architetture operative per trasformare idee, contenuti e
+            conoscenza in sistemi leggibili, ripetibili e misurabili.
+          </p>
+          <p>
+            Uso la scrittura per capire dove finisce l’uomo e dove comincia il meccanismo. Porto questa stessa disciplina
+            nei sistemi: marketing, AI, editoria, strategia.
+          </p>
+          <p class="manifesto">
+            Una piattaforma editoriale per rendere i saggi più trovabili, il lavoro culturale più leggibile e i processi più
+            utili a collaborazioni, servizi e traiettorie future.
+          </p>
+          <a class="btn-primary" href="#saggi">Esplora i saggi</a>
+          <a class="btn-link" href="#en">International gateway</a>
+          </div>
+          <aside class="item">
+            <p class="kicker">Mappa editoriale</p>
+            <h3>Una piattaforma personale in evoluzione</h3>
+            <p class="meta">Saggi · Metodo · Territorio · Sistemi AI</p>
+            <p>Dal pensiero alla pratica: un percorso che tiene insieme scrittura culturale, posizionamento e workflow eseguibili.</p>
+            <a class="btn-link" href="#metodo">Vedi il metodo</a>
+          </aside>
         </div>
       </section>
 
-      <section class="section wrap" aria-labelledby="porte-title"><h2 id="porte-title">Quattro percorsi principali</h2>
+      <section class="section wrap" aria-labelledby="porte-title">
+        <h2 id="porte-title">Quattro percorsi principali</h2>
         <div class="grid-4">
-          <article class="card"><h3><a href="#saggi">Saggi sulla contemporaneità</a></h3><p>Analisi culturale, politica e tecnica per leggere i segni del presente.</p><span class="door-cta">Apri percorso</span></article>
-          <article class="card"><h3><a href="#poesia">Poesia e voce</a></h3><p>La radice originaria del percorso: parola, voce e sperimentazione.</p><span class="door-cta">Vai all’origine</span></article>
-          <article class="card"><h3><a href="#eventi">Eventi / Portfolio culturale</a></h3><p>Progetti territoriali, formati editoriali e lavoro culturale pubblico.</p><span class="door-cta">Esplora progetti</span></article>
-          <article class="card"><h3><a href="#metodo">Metodo / AI Systems</a></h3><p>Dalla scrittura ai sistemi operativi editoriali, tra metodo e automazione.</p><span class="door-cta">Vedi metodo</span></article>
+          <article class="card">
+            <h3><a href="#saggi">Saggi sulla contemporaneità</a></h3>
+            <p>Analisi culturale, politica e tecnica per leggere i segni del presente.</p>
+            <span class="door-cta">Apri percorso</span>
+          </article>
+          <article class="card">
+            <h3><a href="#poesia">Poesia e voce</a></h3>
+            <p>La radice originaria del percorso: parola, voce e sperimentazione.</p>
+            <span class="door-cta">Vai all’origine</span>
+          </article>
+          <article class="card">
+            <h3><a href="#eventi">Eventi / Portfolio culturale</a></h3>
+            <p>Progetti territoriali, formati editoriali e lavoro culturale pubblico.</p>
+            <span class="door-cta">Esplora progetti</span>
+          </article>
+          <article class="card">
+            <h3><a href="#metodo">Metodo / AI Systems</a></h3>
+            <p>Dalla scrittura ai sistemi operativi editoriali, tra metodo e automazione.</p>
+            <span class="door-cta">Vedi metodo</span>
+          </article>
         </div>
       </section>
 
-      <section class="section wrap" aria-labelledby="featured-title"><p class="kicker">Featured Saggio 0</p>
+      <section class="section wrap" aria-labelledby="featured-title">
+        <p class="kicker">Featured Saggio 0</p>
         <article class="item featured" id="featured-title">
           <h2>0 — Il potere di leggere i segni</h2>
           <p class="meta">2025/2026 · da ripubblicare</p>
           <p>Chi trasforma il caos in ordine, governa il mondo.</p>
           <p>Testo-origine della linea su segni, AI, interpretazione, tecnica e potere.</p>
-          <a class="btn-link" href="https://medium.com/@alessandrgentili/dal-cosmo-vivo-allalgoritmo-chi-ha-il-potere-di-leggere-i-segni-844c79e1c056" target="_blank" rel="noopener noreferrer">Leggi il testo-origine</a>
+          <a
+            class="btn-link"
+            href="https://medium.com/@alessandrgentili/dal-cosmo-vivo-allalgoritmo-chi-ha-il-potere-di-leggere-i-segni-844c79e1c056"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Leggi il testo-origine</a
+          >
         </article>
       </section>
 
-      <section id="saggi" class="section wrap" aria-labelledby="saggi-title"><h2 id="saggi-title">Saggi sulla contemporaneità</h2>
-        <div class="list">
-          <article class="item"><h3>1 — 1999: non temevamo la fine del mondo. Temevamo di diventare uguali</h3><p class="meta">16 dicembre 2025</p><p>Vigilia, tecnica, omologazione, soglia.</p><a href="https://medium.com/@alessandrgentili/1999-non-temevamo-la-fine-del-mondo-temevamo-di-diventare-uguali-fe2614307441" target="_blank" rel="noopener noreferrer">Leggi</a></article>
-          <article class="item"><h3>2 — Il Primo Cerchio</h3><p class="meta">15 gennaio 2026</p><p>L’impegno e il ruolo degli intellettuali.</p><a href="https://medium.com/@alessandrgentili/il-primo-cerchio-bbd211a7a587" target="_blank" rel="noopener noreferrer">Leggi</a></article>
-          <article class="item"><h3>3 — Governi senza firma</h3><p class="meta">29 gennaio 2026</p><p>Rapsodicità politico-culturale europea.</p><a href="https://medium.com/@alessandrgentili/governi-senza-firma-rapsodicit%C3%A0-politico-culturale-europea-78820996d01b" target="_blank" rel="noopener noreferrer">Leggi</a></article>
+      <section id="saggi" class="section wrap" aria-labelledby="saggi-title">
+        <h2 id="saggi-title">Saggi sulla contemporaneità</h2>
+        <p class="narrow">
+          Questa pagina raccoglie il percorso saggistico di Alessandro Gentili: potere, tecnica, comunità, desiderio,
+          linguaggio, Europa, AI e forme del reale.
+        </p>
+        <p class="narrow">
+          I saggi nascono in italiano perché la lingua madre non è un limite, ma la condizione di una maggiore precisione:
+          tono, sfumatura, ritmo e profondità prendono forma lì.
+        </p>
+        <p class="narrow">
+          Quando presente, una nota finale in inglese offre al lettore internazionale una soglia di accesso, senza
+          impoverire la voce originaria del testo.
+        </p>
+        <div class="list cards-compact">
+          <article class="item">
+            <h3>1 — 1999: non temevamo la fine del mondo. Temevamo di diventare uguali</h3>
+            <p class="meta">16 dicembre 2025</p>
+            <p>Vigilia, tecnica, omologazione, soglia.</p>
+            <span class="essay-note">Italian essay · English note at the end</span>
+            <a href="https://medium.com/@alessandrgentili/1999-non-temevamo-la-fine-del-mondo-temevamo-di-diventare-uguali-fe2614307441" target="_blank" rel="noopener noreferrer">Leggi</a>
+          </article>
+          <article class="item">
+            <h3>2 — Il Primo Cerchio</h3>
+            <p class="meta">15 gennaio 2026</p>
+            <p>L’impegno e il ruolo degli intellettuali.</p>
+            <span class="essay-note">Italian essay · English note at the end</span>
+            <a href="https://medium.com/@alessandrgentili/il-primo-cerchio-bbd211a7a587" target="_blank" rel="noopener noreferrer">Leggi</a>
+          </article>
+          <article class="item">
+            <h3>3 — Governi senza firma</h3>
+            <p class="meta">29 gennaio 2026</p>
+            <p>Rapsodicità politico-culturale europea.</p>
+            <a href="https://medium.com/@alessandrgentili/governi-senza-firma-rapsodicit%C3%A0-politico-culturale-europea-78820996d01b" target="_blank" rel="noopener noreferrer">Leggi</a>
+          </article>
         </div>
+        <a class="btn-link" href="#archivio">Vedi tutti i saggi nell’Archivio</a>
       </section>
 
-      <section id="archivio" class="section wrap" aria-labelledby="archivio-title"><h2 id="archivio-title">Archivio ragionato</h2>
+      <section id="archivio" class="section wrap" aria-labelledby="archivio-title">
+        <h2 id="archivio-title">Archivio ragionato</h2>
         <div class="filters" aria-label="Filtri archivio">
-          <button type="button" data-filter="all" aria-pressed="true">Tutti</button><button type="button" data-filter="saggi" aria-pressed="false">Saggi</button><button type="button" data-filter="international" aria-pressed="false">International</button><button type="button" data-filter="poesia" aria-pressed="false">Poesia</button><button type="button" data-filter="eventi" aria-pressed="false">Eventi</button>
+          <button type="button" data-filter="all" aria-pressed="true">Tutti</button>
+          <button type="button" data-filter="saggi" aria-pressed="false">Saggi</button>
+          <button type="button" data-filter="international" aria-pressed="false">International</button>
+          <button type="button" data-filter="poesia" aria-pressed="false">Poesia</button>
+          <button type="button" data-filter="eventi" aria-pressed="false">Eventi</button>
+          <button type="button" data-filter="strumenti" aria-pressed="false">Strumenti</button>
         </div>
         <div class="list">
           <article class="item" data-category="saggi"><h3>4 — Metafisica del sesso</h3><p class="meta">14 febbraio 2026</p><p>Desiderio, potere, solitudine dal ’68 a San Valentino.</p><a href="https://medium.com/@alessandrgentili/metafisica-del-sesso-desiderio-potere-solitudine-dal-68-a-san-valentino-acfef3745841" target="_blank" rel="noopener noreferrer">Leggi</a></article>
@@ -128,50 +466,178 @@
           <article class="item" data-category="saggi"><h3>9 — La promessa del ritorno</h3><p class="meta">aprile 2026</p><p>Chi parte senza recidere, chi resta senza arrendersi.</p><a href="https://medium.com/@alessandrgentili/la-promessa-del-ritorno-3ee487c8c341" target="_blank" rel="noopener noreferrer">Leggi</a></article>
           <article class="item" data-category="international"><h3>The Price of Attention</h3><p class="meta">19 febbraio 2026</p><p>Manifesto breve su scrittura, attenzione e identità autoriale.</p><a href="https://medium.com/@alessandrgentili/the-price-of-attention-b392a908ec0a" target="_blank" rel="noopener noreferrer">Leggi</a></article>
           <article class="item" data-category="international"><h3>My First Writers Circle: Why I’m Coming Back</h3><p class="meta">8 gennaio 2026</p><p>Ponte internazionale, lingua e comunità Medium.</p><a href="https://medium.com/@alessandrgentili/my-first-writers-circle-why-im-coming-back-895ae9de5b2b" target="_blank" rel="noopener noreferrer">Leggi</a></article>
-          <article class="item" data-category="poesia"><h3>Im|perfetto</h3><p class="meta">2020</p><p>Raccolta di Romansìa: poesia, racconto, voce e riflessione sull’uomo contemporaneo.</p><p class="meta">67 pagine · ISBN 9788892368439 · Gedi Spa – Gruppo Feltrinelli / ilmiolibro</p></article>
-          <article class="item" data-category="eventi"><h3>Anteprima di un libro mai scritto</h3><p class="meta">agosto 2025</p><p>Lettura corale itinerante nel borgo di Castelletta, con snodi narrativi a buste chiuse e finale scelto dal pubblico.</p><p><em>“Non lo leggerete: lo scriverete camminando.”</em></p><a href="https://medium.com/@alessandrgentili/anteprima-di-un-libro-mai-scritto-cfac35b0b25e" target="_blank" rel="noopener noreferrer">Approfondisci</a></article>
+          <article class="item" data-category="poesia">
+            <h3>Im|perfetto</h3>
+            <p class="meta">2020</p>
+            <p>Raccolta di Romansìa: poesia, racconto, voce e riflessione sull’uomo contemporaneo.</p>
+            <a href="https://www.lafeltrinelli.it/imperfetto-libro-alessandro-gentili/e/9788892368439" target="_blank" rel="noopener noreferrer">Scheda libro</a>
+            <a href="https://www.viverepesaro.it/2020/10/08/imperfetto-romanzo-e-poesia-nel-libro-di-alessandro-gentili/840852/" target="_blank" rel="noopener noreferrer">Rassegna stampa</a>
+          </article>
+          <article class="item" data-category="eventi">
+            <h3>Anteprima di un libro mai scritto</h3>
+            <p class="meta">agosto 2025</p>
+            <p>Lettura corale itinerante nel borgo di Castelletta, con snodi narrativi a buste chiuse e finale scelto dal pubblico.</p>
+            <a href="https://medium.com/@alessandrgentili/anteprima-di-un-libro-mai-scritto-cfac35b0b25e" target="_blank" rel="noopener noreferrer">Approfondisci</a>
+            <a href="https://www.radiogold.tv/2025/08/03/castelletta-anteprima-di-un-libro-mai-scritto-alla-scoperta-del-tempietto-di-minerva/" target="_blank" rel="noopener noreferrer">Approfondimento stampa</a>
+          </article>
+          <article class="item" data-category="strumenti">
+            <h3>Scaffale Strategico GPT</h3>
+            <p class="meta">GPT aperto con link</p>
+            <p>Uno strumento per costruire una biblioteca coerente: priorità, valore, alternative, edizioni, anti-doppioni e lista Obsidian-ready. Pensato per lettura, scrittura, Delōs e IN|SUPERFICIE.</p>
+            <a class="btn-link" href="https://chatgpt.com/g/g-69264b3869ac81918a0d3ff4a1754d98-ph-delos-scaffale-strategico-acquisti-libri" target="_blank" rel="noopener noreferrer">Apri lo Scaffale Strategico</a>
+          </article>
         </div>
       </section>
 
-      <section id="poesia" class="section wrap" aria-labelledby="poesia-title"><h2 id="poesia-title">Poesia e voce</h2>
-        <p class="narrow">Prima dei saggi sulla contemporaneità, c’è stata la poesia. Im|perfetto è stato il primo tentativo di dare forma a una lingua personale: una raccolta di Romansìa, a metà tra poesia, racconto, musica e interrogazione sull’uomo. Oggi non è più il centro del lavoro, ma ne resta l’origine: il luogo in cui la parola ha cominciato a cercare una forma pubblica.</p>
+      <section id="poesia" class="section wrap" aria-labelledby="poesia-title">
+        <h2 id="poesia-title">Poesia e voce</h2>
+        <p class="narrow">
+          Prima dei saggi sulla contemporaneità, c’è stata la poesia. Im|perfetto è stato il primo tentativo di dare
+          forma a una lingua personale: una raccolta di Romansìa, a metà tra poesia, racconto, musica e interrogazione
+          sull’uomo. Oggi non è più il centro del lavoro, ma ne resta l’origine: il luogo in cui la parola ha cominciato a
+          cercare una forma pubblica.
+        </p>
         <div class="list">
-          <article class="item"><h3>Una lunga attesa e una promessa</h3><p class="meta">7 maggio 2020</p><p>Genesi del libro, copia staffetta, attesa e promessa ai lettori.</p><a href="https://medium.com/@alessandrgentili/una-lunga-attesa-e-una-promessa-d1b4d91663de" target="_blank" rel="noopener noreferrer">Leggi</a></article>
-          <article class="item"><h3>Come ho scelto la copertina del libro Im|perfetto?</h3><p class="meta">8 maggio 2020</p><p>Identità visiva, cover, tre alberi-uomo, rapporto testo/immagine.</p><a href="https://medium.com/@alessandrgentili/come-ho-scelto-la-copertina-del-libro-im-perfetto-aa72f9d9e538" target="_blank" rel="noopener noreferrer">Leggi</a></article>
-          <article class="item"><h3>La linea e la struttura di un libro</h3><p class="meta">22 agosto 2025</p><p>Architettura interna, indice, partizioni e metodo.</p><a href="https://medium.com/@alessandrgentili/la-linea-e-la-struttura-di-un-libro-3080ed3d22b4" target="_blank" rel="noopener noreferrer">Leggi</a></article>
-          <article class="item"><h3>Presentazione Im|perfetto — Pesaro</h3><p class="meta">9 ottobre 2020</p><p>Presentazione presso Sala Rossa, Piazza del Popolo 1, Pesaro, con patrocinio del Comune di Pesaro.</p></article>
-          <article class="item"><h3>Prove d’autore</h3><p class="meta">9 agosto 2021</p><p>Frammenti di musica e poesia con Alessandro Gentili e Gianmarco Cavalieri a Castelletta di Fabriano.</p></article>
-          <article class="item"><h3>Trema</h3><p class="meta">2020</p><p>Brano realizzato da Thriphasik con la voce della cantante basca Andrea Devora, a partire da una poesia di Im|perfetto.</p></article>
-          <article class="item"><h3>Romansìa</h3><p class="meta">cantiere poetico-musicale</p><p>Brano di Gianmarco Cavalieri nato dal cantiere Romansìa.</p><a href="https://open.spotify.com/intl-it/track/5vTqzA4gzkJXj8E6sRASnX?si=3a6893d9fe83458a" target="_blank" rel="noopener noreferrer">Ascolta</a></article>
+          <article class="item">
+            <h3>Im|perfetto</h3>
+            <p class="meta">2020 · ISBN 9788892368439</p>
+            <p>Romansìa tra poesia, racconto, voce e interrogazione sull’uomo contemporaneo.</p>
+            <a class="btn-link" href="https://www.lafeltrinelli.it/imperfetto-libro-alessandro-gentili/e/9788892368439" target="_blank" rel="noopener noreferrer">Scheda libro</a>
+            <a class="btn-link" href="https://www.viverepesaro.it/2020/10/08/imperfetto-romanzo-e-poesia-nel-libro-di-alessandro-gentili/840852/" target="_blank" rel="noopener noreferrer">Rassegna stampa</a>
+          </article>
+          <article class="item"><h3>Una lunga attesa e una promessa</h3><a class="btn-link" href="https://medium.com/@alessandrgentili/una-lunga-attesa-e-una-promessa-d1b4d91663de" target="_blank" rel="noopener noreferrer">Leggi</a></article>
+          <article class="item"><h3>Come ho scelto la copertina del libro Im|perfetto?</h3><a class="btn-link" href="https://medium.com/@alessandrgentili/come-ho-scelto-la-copertina-del-libro-im-perfetto-aa72f9d9e538" target="_blank" rel="noopener noreferrer">Leggi</a></article>
+          <article class="item"><h3>La linea e la struttura di un libro</h3><a class="btn-link" href="https://medium.com/@alessandrgentili/la-linea-e-la-struttura-di-un-libro-3080ed3d22b4" target="_blank" rel="noopener noreferrer">Leggi</a></article>
+          <article class="item"><h3>Presentazione Im|perfetto — Pesaro</h3><p class="meta">9 ottobre 2020 · Sala Rossa, Piazza del Popolo 1, Pesaro.</p></article>
+          <article class="item"><h3>Prove d’autore</h3><p class="meta">9 agosto 2021 · Frammenti di musica e poesia a Castelletta di Fabriano.</p></article>
+          <article class="item"><h3>Trema</h3><p class="meta">Brano realizzato da Thriphasik con la voce della cantante basca Andrea Devora.</p></article>
+          <article class="item"><h3>Romansìa</h3><a class="btn-link" href="https://open.spotify.com/intl-it/track/5vTqzA4gzkJXj8E6sRASnX?si=3a6893d9fe83458a" target="_blank" rel="noopener noreferrer">Ascolta</a></article>
         </div>
       </section>
-
-      <section id="eventi" class="section wrap"><h2>Eventi / Portfolio culturale</h2>
-        <article class="item"><h3>Anteprima di un libro mai scritto</h3><p class="meta">agosto 2025</p><p>Lettura corale itinerante nel borgo di Castelletta, con snodi narrativi a buste chiuse e finale scelto dal pubblico.</p><p><em>“Non lo leggerete: lo scriverete camminando.”</em></p><a href="https://medium.com/@alessandrgentili/anteprima-di-un-libro-mai-scritto-cfac35b0b25e" target="_blank" rel="noopener noreferrer">Leggi il progetto</a></article>
+      <section id="eventi" class="section wrap">
+        <h2>Eventi / Portfolio culturale</h2>
+        <p class="narrow">
+          Con Il Circolo APS lavoro sulla scala più concreta delle cose: il territorio, la comunità, la memoria, la
+          possibilità di restituire forma a luoghi che non vogliono diventare margine.
+        </p>
+        <article class="item">
+          <h3>Anteprima di un libro mai scritto</h3>
+          <p class="meta">agosto 2025</p>
+          <p>
+            Lettura corale itinerante nel borgo di Castelletta, con snodi narrativi a buste chiuse e finale scelto dal
+            pubblico.
+          </p>
+          <p><em>“Non lo leggerete: lo scriverete camminando.”</em></p>
+          <a href="https://medium.com/@alessandrgentili/anteprima-di-un-libro-mai-scritto-cfac35b0b25e" target="_blank" rel="noopener noreferrer">Leggi il progetto</a>
+          <a href="https://www.radiogold.tv/2025/08/03/castelletta-anteprima-di-un-libro-mai-scritto-alla-scoperta-del-tempietto-di-minerva/" target="_blank" rel="noopener noreferrer">Approfondimento stampa</a>
+        </article>
+        <article class="item">
+          <h3>Il Circolo APS</h3>
+          <p class="meta">Territorio, comunità, memoria</p>
+          <p>
+            Un presidio culturale e associativo nato per dare continuità a progetti, incontri, restituzioni pubbliche e
+            forme di cura civile del territorio.
+          </p>
+        </article>
+      </section>
+      <section id="metodo" class="section wrap">
+        <h2>Metodo / AI Systems</h2>
+        <article class="item">
+          <p>
+            Dalla scrittura ai sistemi: come trasformare idee, contenuti e conoscenza in processi leggibili, ripetibili e
+            misurabili.
+          </p>
+          <ul>
+            <li>laboratorio editoriale/AI interno</li>
+            <li>workflow editoriali</li>
+            <li>agenti GPT</li>
+            <li>Obsidian come knowledge base</li>
+            <li>content registry</li>
+            <li>publishing workflow</li>
+            <li>social distribution workflow</li>
+            <li>analytics</li>
+            <li>futuro AI Editorial System Audit</li>
+          </ul>
+        </article>
+      </section>
+      <section id="laboratorio" class="section wrap">
+        <h2>Strumenti dal laboratorio</h2>
+        <article class="item">
+          <p>
+            Il laboratorio editoriale è il luogo in cui saggi, letture, note e sistemi AI vengono trasformati in una forma
+            più ordinata: archivio, metodo, collana, possibili strumenti futuri.
+          </p>
+        </article>
+        <article class="item">
+          <h3>Scaffale Strategico GPT</h3>
+          <p class="meta">GPT aperto con link</p>
+          <p>
+            Uno strumento per costruire una biblioteca coerente: priorità, valore, alternative, edizioni, anti-doppioni e
+            lista Obsidian-ready. Pensato per lettura, scrittura, Delōs e IN|SUPERFICIE.
+          </p>
+          <a class="btn-link" href="https://chatgpt.com/g/g-69264b3869ac81918a0d3ff4a1754d98-ph-delos-scaffale-strategico-acquisti-libri" target="_blank" rel="noopener noreferrer">Apri lo Scaffale Strategico</a>
+        </article>
       </section>
 
-      <section id="metodo" class="section wrap"><h2>Metodo / AI Systems</h2><article class="item"><p>Dalla scrittura ai sistemi: come trasformare idee, contenuti e conoscenza in processi leggibili, ripetibili e misurabili.</p><ul><li>laboratorio editoriale/AI interno</li><li>workflow editoriali</li><li>agenti GPT</li><li>Obsidian come knowledge base</li><li>content registry</li><li>publishing workflow</li><li>social distribution workflow</li><li>analytics</li><li>futuro AI Editorial System Audit</li></ul></article></section>
+      <section id="en" class="section wrap" aria-labelledby="en-title">
+        <h2 id="en-title">A working map, not a static portfolio.</h2>
+        <article class="item narrow">
+          <p>
+            This page is not a traditional portfolio. It is a working map of how I think, write, organize knowledge and
+            build systems.
+          </p>
+          <p>
+            For companies, founders and institutions, it shows how I approach complexity: I turn it into structure,
+            language, positioning and executable workflows.
+          </p>
+          <p>
+            The website is mainly in Italian because my essays are rooted in language, civic thought and cultural nuance.
+            This page offers an international entry point for professional conversations and collaborations.
+          </p>
+          <p>
+            I am an Italian marketing strategist, writer and AI systems architect with 20+ years of experience across
+            strategic marketing, brand communication, retail activation, commercial planning and agency coordination, with
+            hands-on experience across kitchen furniture, furniture, retail and design-driven industries.
+          </p>
+          <p>
+            My work combines AI-enabled workflows, editorial systems and cultural positioning to make complexity actionable
+            for companies, founders and institutions.
+          </p>
+          <p>
+            <a class="btn-link" href="https://www.linkedin.com/in/alessandro-gentili-78315226/" target="_blank" rel="noopener noreferrer">View LinkedIn profile</a>
+            <a class="btn-link" href="#saggi">Explore essays</a>
+            <a class="btn-link" href="#metodo">View method</a>
+          </p>
+        </article>
+      </section>
 
-      <section id="laboratorio" class="section wrap"><h2>Laboratorio editoriale</h2><article class="item"><p>Il laboratorio editoriale è il luogo in cui saggi, letture, note e sistemi AI vengono trasformati in una forma più ordinata: archivio, metodo, collana, possibili strumenti futuri.</p></article></section>
-
-      <section id="newsletter" class="section wrap"><h2>Note dalla superficie</h2><p>Una lettera periodica su saggi, letture, territorio, tecnica e forme del presente.</p><p><strong>Ricevi i prossimi saggi e appunti dal cantiere.</strong></p>
+      <section id="newsletter" class="section wrap">
+        <article class="item featured">
+        <h2>Note dalla superficie</h2>
+        <p>Una lettera periodica su saggi, letture, territorio, tecnica e forme del presente.</p>
+        <p><strong>Ricevi i prossimi saggi e appunti dal cantiere.</strong></p>
         <form id="newsletter-form" action="https://formspree.io/f/TUO_ID_FORMSPREE" method="post" novalidate>
           <label for="name">Nome</label><input id="name" name="name" type="text" required />
           <label for="email">Email</label><input id="email" name="email" type="email" required aria-describedby="newsletter-feedback" />
-          <button type="submit">Iscriviti</button>
+          <button class="btn-primary" type="submit">Iscriviti</button>
           <p id="newsletter-feedback" class="feedback" role="status" aria-live="polite"></p>
         </form>
+        </article>
       </section>
 
-      <section id="contatti" class="section wrap"><h2>Contatti</h2><article class="item">
-        <p>Email: <a href="mailto:contatti@example.com">contatti@example.com</a></p>
-        <p>Medium: <a href="https://medium.com/@alessandrgentili">@alessandrgentili</a></p>
-        <p>Instagram: <a href="https://www.instagram.com/alessandro__gentili/">@alessandro__gentili</a></p>
-        <p>Facebook: <a href="https://www.facebook.com/AlessandroGentiliPage/">AlessandroGentiliPage</a></p>
-        <p>X: <a href="https://x.com/GentiliAlessand">@GentiliAlessand</a></p>
-        <p>Threads: <a href="https://www.threads.com/@alessandro__gentili">@alessandro__gentili</a></p>
-      </article></section>
+      <section id="contatti" class="section wrap">
+        <h2>Contatti</h2>
+        <article class="item">
+          <p>Email: <a href="mailto:collaborazioni.alessandrogentili@gmail.com">collaborazioni.alessandrogentili@gmail.com</a></p>
+          <p>Medium: <a href="https://medium.com/@alessandrgentili">@alessandrgentili</a></p>
+          <p>Instagram: <a href="https://www.instagram.com/alessandro__gentili/">@alessandro__gentili</a></p>
+          <p>Facebook: <a href="https://www.facebook.com/AlessandroGentiliPage/">AlessandroGentiliPage</a></p>
+          <p>X: <a href="https://x.com/GentiliAlessand">@GentiliAlessand</a></p>
+          <p>Threads: <a href="https://www.threads.com/@alessandro__gentili">@alessandro__gentili</a></p>
+        </article>
+      </section>
     </main>
+
     <footer><div class="wrap">© Alessandro Gentili — piattaforma editoriale in evoluzione.</div></footer>
 
     <script>
@@ -189,21 +655,23 @@
       const form = document.getElementById('newsletter-form');
       const emailInput = document.getElementById('email');
       const feedback = document.getElementById('newsletter-feedback');
-      form.addEventListener('submit', (event) => {
-        const value = emailInput.value.trim();
-        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        if (!valid) {
-          event.preventDefault();
-          feedback.textContent = 'Inserisci un indirizzo email valido prima di inviare il modulo.';
-          feedback.dataset.state = 'error';
-          emailInput.setAttribute('aria-invalid', 'true');
-          emailInput.focus();
-          return;
-        }
-        feedback.textContent = 'Formato email valido. Puoi procedere con l’iscrizione.';
-        feedback.dataset.state = 'ok';
-        emailInput.removeAttribute('aria-invalid');
-      });
+      if (form && emailInput && feedback) {
+        form.addEventListener('submit', (event) => {
+          const value = emailInput.value.trim();
+          const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+          if (!valid) {
+            event.preventDefault();
+            feedback.textContent = 'Inserisci un indirizzo email valido prima di inviare il modulo.';
+            feedback.dataset.state = 'error';
+            emailInput.setAttribute('aria-invalid', 'true');
+            emailInput.focus();
+            return;
+          }
+          feedback.textContent = 'Formato email valido. Puoi procedere con l’iscrizione.';
+          feedback.dataset.state = 'ok';
+          emailInput.removeAttribute('aria-invalid');
+        });
+      }
     </script>
   </body>
 </html>
