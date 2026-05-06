@@ -371,7 +371,7 @@ button[type="submit"]{border-radius:7px;padding:.58rem .86rem;margin-top:.14rem;
 .contact-home{display:flex;flex-direction:column;padding:clamp(1.34rem,2.05vw,1.86rem);padding-right:clamp(1.2rem,2vw,1.82rem)}
 .contact-home p{max-width:36ch;line-height:1.62}
 .contact-home p strong{font-size:.95rem;line-height:1.45;word-break:break-word}
-.contact-home .actions{margin-top:auto;padding-top:.72rem;gap:.52rem}
+.contact-home .actions{margin-top:.28rem;padding-top:.08rem;gap:.52rem}
 .contact-home::before,.contact-home::after{display:none}
 .contact-home > *{position:relative;z-index:1}
 .footer{margin-top:1rem;border-top-color:rgba(141,109,55,.075);padding:1.08rem 0 1.62rem;font-size:.78rem;line-height:1.45;letter-spacing:.01em;color:rgba(53,64,74,.66)}
@@ -403,7 +403,7 @@ button[type="submit"]{border-radius:7px;padding:.58rem .86rem;margin-top:.14rem;
   .note-card::before,.note-card::after,.contact-home::before,.contact-home::after{display:none}
   .closing-section .grid-2{grid-template-columns:1fr;gap:.9rem}
   .letter-card form{max-width:none}
-  .contact-home .actions{margin-top:.5rem;padding-top:.2rem}
+  .contact-home .actions{margin-top:.32rem;padding-top:.08rem}
   .footer .wrap{gap:.55rem;flex-direction:column;align-items:flex-start}
   .footer .wrap::before{left:0;transform:none}
 }
