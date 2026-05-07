@@ -23,9 +23,9 @@ document.querySelectorAll('[data-newsletter-form]').forEach((form) => {
       }
       return;
     }
-    const subject = encodeURIComponent('Iscrizione a Note dalla superficie');
-    const body = encodeURIComponent(`Ciao Alessandro,\n\nvorrei iscrivermi a Note dalla superficie.\n\nNome: ${name}\nEmail: ${email}\n`);
-    window.location.href = `mailto:collaborazioni.alessandrogentili@gmail.com?subject=${subject}&body=${body}`;
+    const subject = encodeURIComponent('Iscrizione alla Lettera periodica');
+    const body = encodeURIComponent(`Ciao Alessandro,\n\nvorrei iscrivermi alla Lettera periodica.\n\nNome: ${name}\nEmail: ${email}\n`);
+    window.location.href = `mailto:lettera@alessandro-gentili.it?subject=${subject}&body=${body}`;
     if (feedback) {
       feedback.textContent = 'Si aprirà il tuo client email per confermare l’iscrizione.';
       feedback.dataset.state = 'ok';
