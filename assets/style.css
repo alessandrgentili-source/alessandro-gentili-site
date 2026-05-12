@@ -422,7 +422,7 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
   .footer .wrap::before{left:0;transform:none}
 }
 
-/* Editorial essays archive and IN|SUPERFICIE landing pages */
+/* Editorial essays archive and local landing pages */
 .essays-page .hero,.essay-landing .hero{border-bottom-color:rgba(141,109,55,.14)}
 .essay-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:stretch}
 .essay-grid-compact{grid-template-columns:repeat(3,minmax(0,1fr))}

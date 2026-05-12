@@ -17,6 +17,6 @@ Contact email: contatti@alessandro-gentili.it
 Privacy email: privacy@alessandro-gentili.it
 
 Editorial essay system:
-- IN|SUPERFICIE is the structured essay archive of the site.
+- The essay archive is the structured editorial home for local essay landing pages.
 - Local essay landing pages provide abstracts, context, selected short excerpts and links to Medium without duplicating full essays.
 - Main archive: https://alessandro-gentili.it/saggi.html

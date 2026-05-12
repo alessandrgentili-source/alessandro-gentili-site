@@ -5,7 +5,7 @@ Questo documento definisce il flusso consigliato per integrare Medium con l’ar
 ## Principi
 
 - Il sito non deve duplicare integralmente i saggi pubblicati su Medium, salvo istruzione esplicita.
-- Ogni pagina locale deve aggiungere valore editoriale: abstract, contesto, posizione nella serie, estratto breve verificato, collegamenti interni.
+- Ogni pagina locale deve aggiungere valore editoriale: abstract, contesto, posizione nell’archivio, estratto breve verificato, collegamenti interni.
 - Il tono resta sobrio, italiano, editoriale: nessun formato da blog generico, nessuna CTA aggressiva.
 - La struttura deve restare statica, leggera e coerente con privacy e GDPR: niente analytics, pixel o cookie marketing.
 
@@ -16,10 +16,10 @@ Questo documento definisce il flusso consigliato per integrare Medium con l’ar
 3. Inserire nella pagina locale:
    - titolo e sottotitolo;
    - data di pubblicazione;
-   - label di serie IN|SUPERFICIE;
+   - indicazione editoriale della sezione saggi;
    - abstract originale e sintetico;
    - breve estratto selezionato, solo se verificato;
-   - contesto editoriale: perché il testo conta nel progetto;
+   - contesto editoriale: perché il testo conta nell’archivio saggi;
    - saggio correlato o saggio in coppia;
    - link esterno a Medium.
 4. Aggiornare `saggi.html` con la scheda del saggio.
