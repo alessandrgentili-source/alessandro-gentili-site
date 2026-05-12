@@ -421,3 +421,27 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
   .footer .wrap{gap:.55rem;flex-direction:column;align-items:flex-start}
   .footer .wrap::before{left:0;transform:none}
 }
+
+/* Editorial essays archive and local landing pages */
+.essays-page .hero,.essay-landing .hero{border-bottom-color:rgba(141,109,55,.14)}
+.essay-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:stretch}
+.essay-grid-compact{grid-template-columns:repeat(3,minmax(0,1fr))}
+.essay-card{position:relative;overflow:hidden;padding:clamp(1.18rem,2vw,1.65rem);border:1px solid rgba(141,109,55,.18);border-radius:2px;background:linear-gradient(180deg,rgba(255,250,241,.72),rgba(248,239,224,.54));box-shadow:var(--shadow-soft)}
+.essay-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,rgba(141,109,55,.62),rgba(141,109,55,.08))}
+.essay-card::after{content:"";position:absolute;right:1rem;top:1rem;width:34px;height:34px;border:1px solid rgba(141,109,55,.12);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;pointer-events:none}
+.essay-card-muted{background:linear-gradient(180deg,rgba(255,250,241,.46),rgba(239,231,216,.32));border-style:dashed}
+.essay-number{margin:0 0 .55rem;color:rgba(141,109,55,.92);font-size:.72rem;font-weight:760;letter-spacing:.16em;text-transform:uppercase}
+.essay-card h3{font-size:clamp(1.24rem,1.65vw,1.62rem);line-height:1.18;margin-bottom:.42rem;max-width:15ch}
+.essay-card h3 a{text-decoration:none;color:inherit}
+.essay-card h3 a:hover{color:var(--petrol)}
+.essay-subtitle{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;color:var(--ink);font-size:1.02rem;line-height:1.45;margin:.25rem 0 .6rem}
+.essay-status{display:flex;gap:.42rem;flex-wrap:wrap;margin:1rem 0 .9rem}
+.essay-status span{border:1px solid rgba(141,109,55,.22);border-radius:999px;padding:.28rem .52rem;background:rgba(255,250,241,.42);color:var(--ink-2);font-size:.72rem;font-weight:650}
+.essay-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.34fr);gap:1rem;align-items:start}
+.essay-main{padding:clamp(1.25rem,2.4vw,2.15rem)}
+.essay-main blockquote{margin:1rem 0;padding:1rem 1.1rem;border-left:2px solid rgba(141,109,55,.5);background:rgba(255,250,241,.42);font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;font-size:clamp(1.08rem,1.2vw,1.24rem);line-height:1.62;color:var(--ink)}
+.essay-side{position:sticky;top:5.5rem;display:grid;gap:.62rem}
+.essay-side .btn,.essay-side .btn-secondary{width:100%;text-align:center}
+.latest-essays .section-head p{max-width:54ch}
+@media(max-width:1060px){.essay-grid-compact{grid-template-columns:repeat(2,minmax(0,1fr))}.essay-layout{grid-template-columns:1fr}.essay-side{position:relative;top:auto}}
+@media(max-width:760px){.essay-grid,.essay-grid-compact{grid-template-columns:1fr}.essay-card h3{max-width:none}}

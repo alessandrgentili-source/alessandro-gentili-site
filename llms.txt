@@ -15,3 +15,8 @@ Main areas of the site:
 
 Contact email: contatti@alessandro-gentili.it
 Privacy email: privacy@alessandro-gentili.it
+
+Editorial essay system:
+- The essay archive is the structured editorial home for local essay landing pages.
+- Local essay landing pages provide abstracts, context, selected short excerpts and links to Medium without duplicating full essays.
+- Main archive: https://alessandro-gentili.it/saggi.html
