@@ -46,3 +46,16 @@ Condizioni editoriali:
 - ogni nuova pagina deve essere rivista manualmente;
 - l’import automatico può servire solo come segnale o bozza di aggiornamento;
 - abstract, contesto, estratti e relazioni interne devono restare una scelta editoriale.
+
+## Checklist scheda locale
+
+Prima di pubblicare una nuova scheda in `/saggi/`, verificare che siano presenti dati editoriali reali e non provvisori:
+
+- titolo e sottotitolo definitivi;
+- data di pubblicazione o programmazione confermata;
+- abstract originale e sintetico;
+- breve estratto selezionato, solo se verificato;
+- contesto editoriale e collegamento a un testo correlato;
+- link Medium quando il testo integrale è disponibile;
+- canonical self, metadati Open Graph/Twitter e JSON-LD Article solo per pagine pubbliche complete;
+- nessuna pagina template o preparatoria in sitemap.
