@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="title desc">
+  <title id="title">Copertina orizzontale di Im|perfetto</title>
+  <desc id="desc">Versione orizzontale della copertina del libro Im|perfetto di Alessandro Gentili con cielo grigio, titolo e tre figure arboree.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#343536" />
+      <stop offset="0.34" stop-color="#777a7c" />
+      <stop offset="0.7" stop-color="#d7d8d6" />
+      <stop offset="1" stop-color="#ececea" />
+    </linearGradient>
+    <radialGradient id="break" cx="75%" cy="16%" r="62%">
+      <stop offset="0" stop-color="#f4f4f1" stop-opacity=".78" />
+      <stop offset=".38" stop-color="#d4d6d5" stop-opacity=".4" />
+      <stop offset="1" stop-color="#4f5051" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="cloudDark" cx="28%" cy="14%" r="52%">
+      <stop offset="0" stop-color="#232425" stop-opacity=".78" />
+      <stop offset=".62" stop-color="#3f4142" stop-opacity=".38" />
+      <stop offset="1" stop-color="#777" stop-opacity="0" />
+    </radialGradient>
+    <filter id="soften" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" />
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="3" seed="31" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 .08" />
+      </feComponentTransfer>
+    </filter>
+    <g id="foliage">
+      <circle cx="0" cy="0" r="78" />
+      <circle cx="-62" cy="18" r="58" />
+      <circle cx="62" cy="18" r="58" />
+      <circle cx="-36" cy="-58" r="50" />
+      <circle cx="34" cy="-58" r="52" />
+      <circle cx="0" cy="58" r="68" />
+      <circle cx="-94" cy="-22" r="36" />
+      <circle cx="96" cy="-24" r="34" />
+    </g>
+    <g id="headTree">
+      <path d="M-92 38 C-126 4 -120 -64 -78 -105 C-34 -148 41 -146 86 -105 C130 -65 132 9 92 44 C60 72 23 78 0 98 C-25 76 -59 72 -92 38Z" />
+      <use href="#foliage" transform="translate(0 -42) scale(.84)" opacity=".78" />
+      <path d="M-12 92 C-11 124 -19 157 -34 198 L34 198 C17 157 10 124 12 92 C4 94 -4 94 -12 92Z" />
+      <path d="M-4 111 C-34 72 -47 28 -70 -10" fill="none" stroke="#232526" stroke-width="6" stroke-linecap="round" opacity=".48" />
+      <path d="M5 112 C34 72 50 30 72 -18" fill="none" stroke="#232526" stroke-width="5" stroke-linecap="round" opacity=".5" />
+      <path d="M0 125 C-4 80 2 38 26 -18" fill="none" stroke="#232526" stroke-width="4" stroke-linecap="round" opacity=".43" />
+    </g>
+    <g id="bareBranches" fill="none" stroke="#27292a" stroke-linecap="round" opacity=".66">
+      <path d="M0 110 C18 52 16 7 -10 -54" stroke-width="5" />
+      <path d="M6 46 C42 14 54 -19 70 -66" stroke-width="4" />
+      <path d="M0 15 C-36 -10 -48 -40 -62 -78" stroke-width="3.5" />
+      <path d="M38 12 C73 -10 96 -31 124 -67" stroke-width="3.3" />
+      <path d="M53 -14 C82 -12 105 -4 130 10" stroke-width="2.8" />
+      <path d="M-28 -10 C-70 2 -101 18 -134 44" stroke-width="2.8" />
+      <path d="M15 -24 C-3 -62 -17 -89 -38 -116" stroke-width="2.6" />
+    </g>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)" />
+  <rect width="1600" height="900" fill="url(#break)" />
+  <rect width="1600" height="900" fill="url(#cloudDark)" />
+  <g filter="url(#soften)" opacity=".58">
+    <ellipse cx="250" cy="150" rx="370" ry="120" fill="#202123" />
+    <ellipse cx="620" cy="260" rx="300" ry="100" fill="#8d9091" />
+    <ellipse cx="1060" cy="250" rx="360" ry="120" fill="#c2c4c4" />
+    <ellipse cx="1270" cy="76" rx="290" ry="110" fill="#f0f0ee" opacity=".8" />
+    <ellipse cx="286" cy="486" rx="420" ry="100" fill="#b6b8b8" opacity=".45" />
+    <ellipse cx="902" cy="516" rx="490" ry="116" fill="#ececea" opacity=".48" />
+  </g>
+  <rect width="1600" height="900" filter="url(#grain)" opacity=".7" />
+
+  <g font-family="Helvetica Neue, Arial, sans-serif" text-anchor="start">
+    <text x="820" y="164" fill="#9b2031" font-size="78" font-weight="400" letter-spacing="1.2">Alessandro Gentili</text>
+    <text x="1004" y="248" fill="#2f353a" font-size="69" font-weight="300" letter-spacing="1.4">Im|perfetto</text>
+  </g>
+
+  <g opacity=".22">
+    <path d="M0 805 C180 760 360 760 540 805 C740 856 936 848 1130 806 C1300 770 1460 770 1600 810 L1600 900 L0 900Z" fill="#262728" />
+  </g>
+  <rect y="780" width="1600" height="120" fill="#202122" opacity=".11" />
+
+  <g fill="#222425" opacity=".82">
+    <g transform="translate(312 704) scale(1.22)">
+      <use href="#headTree" />
+    </g>
+    <g transform="translate(778 706) scale(1.18)">
+      <use href="#headTree" opacity=".82" />
+      <path d="M-70 -56 C-8 -28 40 -28 91 -61" fill="none" stroke="#d0d2d2" stroke-width="8" stroke-linecap="round" opacity=".16" />
+    </g>
+    <g transform="translate(1230 704) scale(1.2)">
+      <use href="#headTree" opacity=".55" />
+      <use href="#bareBranches" transform="translate(18 -50)" />
+    </g>
+  </g>
+
+  <g fill="#222425" opacity=".72">
+    <ellipse cx="1282" cy="497" rx="9" ry="4" transform="rotate(-22 1282 497)" />
+    <ellipse cx="1334" cy="530" rx="8" ry="3.7" transform="rotate(18 1334 530)" />
+    <ellipse cx="1386" cy="486" rx="9" ry="4" transform="rotate(-36 1386 486)" />
+    <ellipse cx="1426" cy="554" rx="8" ry="3.5" transform="rotate(-18 1426 554)" />
+    <ellipse cx="1470" cy="506" rx="9" ry="4" transform="rotate(-28 1470 506)" />
+    <ellipse cx="1320" cy="458" rx="8" ry="3.5" transform="rotate(-50 1320 458)" />
+    <ellipse cx="1512" cy="572" rx="8" ry="3.5" transform="rotate(-12 1512 572)" />
+    <ellipse cx="1184" cy="534" rx="7" ry="3" transform="rotate(-44 1184 534)" />
+    <ellipse cx="1118" cy="578" rx="7" ry="3" transform="rotate(-14 1118 578)" />
+  </g>
+</svg>
