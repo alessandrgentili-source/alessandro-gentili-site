@@ -1,22 +1,39 @@
 # Alessandro Gentili
 
-Primary site URL: https://alessandro-gentili.it
+Official site: https://alessandro-gentili.it
 
-Alessandro Gentili is an author and strategist working across writing, editorial architecture, AI systems and civic interpretation.
+Alessandro Gentili is an Italian author and strategist working across writing, editorial systems, AI, cultural interpretation and civic responsibility.
 
-Main areas of the site:
-- Saggi
-- Metodo / AI
-- Portfolio
-- Poesia
-- Strumenti
-- Archivio
-- Contatti
+## Official identity
 
-Contact email: contatti@alessandro-gentili.it
-Privacy email: privacy@alessandro-gentili.it
+This site is the primary public archive of Alessandro Gentili.
+The author profile is the primary source for public identity: https://alessandro-gentili.it/autore.html
+Medium hosts long-form essays and selected articles.
+LinkedIn is the professional profile.
 
-Editorial essay system:
-- The essay archive is the structured editorial home for local essay landing pages.
-- Local essay landing pages provide abstracts, context, selected short excerpts and links to Medium without duplicating full essays.
-- Main archive: https://alessandro-gentili.it/saggi.html
+## Main areas
+
+- Home: https://alessandro-gentili.it/
+- Author profile: https://alessandro-gentili.it/autore.html
+- Essays archive: https://alessandro-gentili.it/saggi.html
+- Method / AI: https://alessandro-gentili.it/metodo-ai.html
+- Archive: https://alessandro-gentili.it/archivio.html
+- Contact: https://alessandro-gentili.it/contatti.html
+- Privacy: https://alessandro-gentili.it/privacy.html
+
+## Essay archive
+
+"Archivio saggi" is the neutral public name of the essay corpus on this site.
+Local essay pages provide abstracts, editorial context, selected excerpts and internal relations.
+Full readings are usually hosted on Medium and linked from each local page.
+Saggio 10, "Giovani e senilità del potere", was published on 14 May 2026 and links to Medium from its local page.
+Saggio XI, "Chi decide il Sole?", is an anticipation card, not the definitive text.
+
+## Key themes
+
+Writing, strategy, systems, AI, editorial architecture, power, culture, technology, civic responsibility, interpretation of the present.
+
+## Official channels
+
+- Medium: https://medium.com/@alessandrgentili
+- LinkedIn: https://www.linkedin.com/in/alessandro-gentili-78315226/
