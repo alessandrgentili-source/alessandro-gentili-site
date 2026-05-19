@@ -514,3 +514,64 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
   .btn,.btn-secondary{min-height:44px}
   body{line-height:1.76}
 }
+
+
+/* Guide page scoped rhythm */
+.guide-page-main .guide-index {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.guide-page-main .guide-body {
+  display: grid;
+  gap: clamp(1.6rem, 3vw, 2.6rem);
+}
+
+.guide-page-main .guide-section {
+  padding: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.guide-page-main .guide-section h2 {
+  font-size: clamp(1.8rem, 2.7vw, 2.55rem);
+  line-height: 1.08;
+  margin-bottom: 1rem;
+}
+
+.guide-page-main .guide-section h3 {
+  font-size: clamp(1.2rem, 1.1vw + 1rem, 1.55rem);
+  line-height: 1.25;
+  margin-top: 1.35rem;
+  margin-bottom: .45rem;
+}
+
+.guide-page-main .guide-section p,
+.guide-page-main .guide-section li {
+  font-size: clamp(1rem, .25vw + .98rem, 1.12rem);
+  line-height: 1.84;
+}
+
+.guide-page-main .guide-section ul,
+.guide-page-main .guide-section ol {
+  margin-top: .6rem;
+  margin-bottom: 1rem;
+  padding-left: 1.35rem;
+}
+
+.guide-page-main .guide-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem .75rem;
+}
+
+.guide-page-main .guide-toc a {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(141,109,55,.22);
+  border-radius: 999px;
+  padding: .35rem .65rem;
+  text-decoration: none;
+}
+
+.guide-page-main .guide-section p + p {
+  margin-top: .9rem;
+}
