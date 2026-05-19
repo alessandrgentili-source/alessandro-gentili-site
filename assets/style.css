@@ -532,7 +532,7 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 }
 
 .guide-page-main .guide-section h2 {
-  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-size: clamp(1.8rem, 2.7vw, 2.55rem);
   line-height: 1.08;
   margin-bottom: 1rem;
 }
@@ -547,7 +547,7 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 .guide-page-main .guide-section p,
 .guide-page-main .guide-section li {
   font-size: clamp(1rem, .25vw + .98rem, 1.12rem);
-  line-height: 1.78;
+  line-height: 1.84;
 }
 
 .guide-page-main .guide-section ul,
@@ -570,4 +570,8 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
   border-radius: 999px;
   padding: .35rem .65rem;
   text-decoration: none;
+}
+
+.guide-page-main .guide-section p + p {
+  margin-top: .9rem;
 }
