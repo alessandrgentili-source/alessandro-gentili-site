@@ -522,6 +522,13 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
+@media (min-width: 760px) {
+  .guide-hero .lead {
+    max-width: 74ch;
+    text-wrap: balance;
+  }
+}
+
 .guide-page-main .guide-body {
   display: grid;
   gap: clamp(1.6rem, 3vw, 2.6rem);
