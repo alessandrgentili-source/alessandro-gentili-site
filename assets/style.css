@@ -442,6 +442,9 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 .essay-main p{font-size:clamp(1.05rem,.98rem + .25vw,1.16rem);line-height:1.82;margin:0 0 1.15rem}
 .essay-main h2{margin-top:4rem;margin-bottom:1.1rem;line-height:1.05}
 .essay-main h3{margin-top:1.5rem;margin-bottom:.75rem;line-height:1.12}
+.essay-question-block{margin:1.4rem 0 1.8rem;padding:1rem 1.1rem;border-left:2px solid rgba(141,109,55,.5);background:rgba(255,250,241,.38)}
+.essay-question-block p{margin:0 0 .35rem;font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;color:var(--ink)}
+.essay-question-block p:last-child{margin-bottom:0}
 .essay-main blockquote{margin:1rem 0;padding:1rem 1.1rem;border-left:2px solid rgba(141,109,55,.5);background:rgba(255,250,241,.42);font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;font-size:clamp(1.08rem,1.2vw,1.24rem);line-height:1.62;color:var(--ink)}
 .essay-side{position:sticky;top:5.5rem;display:grid;gap:.62rem;align-content:start}
 .essay-layout .essay-side.item{height:auto;align-self:start}
