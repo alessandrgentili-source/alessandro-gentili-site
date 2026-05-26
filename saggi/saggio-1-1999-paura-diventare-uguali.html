@@ -44,29 +44,56 @@
     "articleSection": "Saggi"
   }
   </script>
+
+<style>
+.saggio-local-page .saggio-essay-shell{max-width:1020px;margin:0 auto;padding:0 1rem 3rem}
+.saggio-local-page .saggio-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:1.4rem;align-items:start;padding-top:clamp(2.1rem,5vw,3.6rem);padding-bottom:clamp(2rem,4vw,3.1rem)}
+.saggio-local-page .saggio-hero-copy h1{font-size:clamp(2.1rem,3.35vw,3.05rem);line-height:1.08;max-width:20ch}
+.saggio-local-page .saggio-hero-copy .lead{max-width:56ch;font-size:clamp(1.05rem,1.02rem + .2vw,1.2rem)}
+.saggio-local-page .saggio-hero-copy .meta{font-size:.95rem;color:var(--muted)}
+.saggio-local-page .saggio-cover-frame{padding:.75rem;border:1px solid rgba(141,109,55,.2);border-radius:16px;background:rgba(255,250,241,.58);box-shadow:0 10px 22px rgba(65,49,28,.07)}
+.saggio-local-page .saggio-cover-frame .essay-cover{margin:0;border-radius:12px;overflow:hidden}
+.saggio-local-page .saggio-main{max-width:760px;margin:0 auto;padding:clamp(1.1rem,2.4vw,2rem)}
+.saggio-local-page .saggio-editorial-card{margin:1.2rem 0 2rem;padding:1.1rem 1.25rem;border:1px solid rgba(141,109,55,.18);border-radius:14px;background:rgba(255,250,241,.52)}
+.saggio-local-page .saggio-editorial-card h2{margin-top:0;margin-bottom:.65rem}
+.saggio-local-page .saggio-index{margin:0 0 2.2rem;padding:1rem 1.2rem;border:1px solid rgba(141,109,55,.16);border-radius:14px;background:rgba(255,250,241,.45)}
+.saggio-local-page .saggio-index ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem 1.1rem;margin:.7rem 0 0;padding-left:1.1rem}
+.saggio-local-page .saggio-section-card{padding:1.2rem 1.3rem;margin:0 0 1.8rem;border:1px solid rgba(141,109,55,.14);border-radius:14px;background:rgba(255,250,241,.35)}
+.saggio-local-page .saggio-section-card h2{margin-top:0;margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid rgba(141,109,55,.15)}
+.saggio-local-page .saggio-inline-figure{max-width:680px;margin:1.5rem auto .5rem;padding:.7rem;border:1px solid rgba(141,109,55,.18);border-radius:14px;background:rgba(255,250,241,.54)}
+.saggio-local-page .saggio-inline-figure .essay-cover{margin:0;border-radius:10px}
+.saggio-local-page .saggio-inline-figure figcaption{margin:.7rem .2rem 0;font-size:.95rem;line-height:1.45;color:var(--muted)}
+.saggio-local-page .saggio-reading-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin-top:.9rem}
+.saggio-local-page .saggio-reading-grid a{display:block;padding:.72rem .8rem;border:1px solid rgba(141,109,55,.18);border-radius:10px;background:rgba(255,250,241,.62)}
+@media (max-width:980px){.saggio-local-page .saggio-hero{grid-template-columns:1fr}.saggio-local-page .saggio-index ul,.saggio-local-page .saggio-reading-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="site-header"><div class="wrap topbar"><a class="brand" href="../" aria-label="Home">Alessandro Gentili</a><nav aria-label="Navigazione principale"><ul><li><a href="../">Home</a></li><li><a class="active" href="../saggi.html">Saggi</a></li><li><a href="../metodo-ai.html">Metodo / AI</a></li><li><a href="../portfolio.html">Portfolio</a></li><li><a href="../poesia.html">Poesia</a></li><li><a href="../strumenti.html">Strumenti</a></li><li><a href="../archivio.html">Archivio</a></li><li><a href="../en.html">EN</a></li><li><a href="../contatti.html">Contatti</a></li></ul></nav></div></header>
-<main class="page essay-landing">
-<section class="wrap hero essay-hero">
-  <div class="hero-copy">
+<main class="page essay-landing saggio-local-page">
+<section class="wrap hero essay-hero saggio-hero">
+  <div class="hero-copy saggio-hero-copy">
     <p class="eyebrow">Saggio 1 · Saggi sul presente</p>
     <h1>1999: non temevamo la fine del mondo. Temevamo di diventare uguali</h1>
     <p class="lead">Dal Millennium Bug alla società iperconnessa: una soglia tra speranza tecnologica, omologazione e difesa dell’inassimilabile.</p>
     <p class="meta">Pubblicato originariamente il 16 dicembre 2025.</p>
   </div>
-</section>
 
-<section class="wrap section essay-layout">
-  <article class="essay-main item">
+    <aside class="saggio-cover-frame" aria-label="Copertina del saggio">
     <figure class="essay-cover">
       <img src="../assets/img/saggi/site/saggio-1-1999-paura-diventare-uguali-cover.webp" width="1600" height="900" loading="eager" alt="Cover editoriale del saggio 1999: non temevamo la fine del mondo, dedicato a tecnologia, soglia storica e paura dell’omologazione." />
     </figure>
+  </aside>
+</section>
 
-    <h2>Abstract</h2>
-    <p>Dal Millennium Bug alla paura contemporanea dell’omologazione: un saggio sulla soglia tra 1999 e 2026, sulla tecnologia diventata ambiente, sulla libertà ridotta a consumo e sulla necessità di difendere ciò che nell’umano resta inassimilabile.</p>
+<section class="wrap section essay-layout saggio-essay-shell">
+  <article class="essay-main item saggio-main">
+    <section class="saggio-editorial-card">
+      <h2>Abstract</h2>
+      <p>Dal Millennium Bug alla paura contemporanea dell’omologazione: un saggio sulla soglia tra 1999 e 2026, sulla tecnologia diventata ambiente, sulla libertà ridotta a consumo e sulla necessità di difendere ciò che nell’umano resta inassimilabile.</p>
+    </section>
 
-    <nav aria-label="Indice del saggio">
+    <nav class="saggio-index" aria-label="Indice del saggio">
       <h2>Indice</h2>
       <ul>
         <li><a href="#la-vigilia-del-1999">La vigilia del 1999</a></li>
@@ -79,7 +106,7 @@
       </ul>
     </nav>
 
-    <section id="la-vigilia-del-1999">
+    <section id="la-vigilia-del-1999" class="saggio-section-card">
       <h2>La vigilia del 1999</h2>
       <p>L’aria, quest’anno, ha lo stesso sapore di allora: attesa.</p>
       <p>Ma nel 1999 l’attesa era un animale giovane, febbrile, quasi felice, come se il futuro dovesse presentarsi in carne e ossa, con un volto pulito e una promessa leggibile. Oggi l’attesa non corre: pesa. È una materia scura che preme sulle tempie.</p>
@@ -92,7 +119,7 @@
       <p>Il mio futuro personale era una pagina bianca. Non avevo ancora imparato che le pagine bianche fanno paura. Vi leggevo una domanda sola: chi sarò? Era l’ingenuità assoluta di chi crede che il mondo, in fondo, voglia il tuo bene se tu lo vuoi abbastanza.</p>
     </section>
 
-    <section id="il-bug-diventato-abitudine">
+    <section id="il-bug-diventato-abitudine" class="saggio-section-card">
       <h2>Il bug diventato abitudine</h2>
       <p>Oggi il bug non ha più la forma dell’incidente. Ha la forma dell’abitudine.</p>
       <p>Non è un errore nel software: è l’ordine stesso del discorso. È il modo in cui abbiamo chiamato “sviluppo” ciò che somiglia a una colonizzazione continua del vivente; è la velocità scambiata per destino; è l’estrazione spacciata per normalità; è l’omologazione travestita da libertà.</p>
@@ -105,7 +132,7 @@
       <p>È un documento già pieno di clausole, rate, condizioni al contorno. Scrivere “chi sarò” sembra un lusso barocco. La domanda che morde — la domanda indecente — è: dove saremo, e a quale prezzo ci resteremo?</p>
     </section>
 
-    <section id="la-connessione-come-aria-cattiva">
+    <section id="la-connessione-come-aria-cattiva" class="saggio-section-card">
       <h2>La connessione come aria cattiva</h2>
       <p>La notte del 1999, la connessione era un miracolo appena nato.</p>
       <p>Il modem cantava la sua strofa di grilli metallici per aprire un varco nel muro. C’era ancora spazio: spazio mentale, spazio morale, spazio di mondo. Si poteva credere che la tecnologia fosse neutra, che fosse solo uno strumento.</p>
@@ -118,7 +145,7 @@
       <p>È lo sguardo nello specchio: stile di vita, complicità, comodità scambiata per diritto.</p>
     </section>
 
-    <section id="la-soglia-che-ritorna">
+    <section id="la-soglia-che-ritorna" class="saggio-section-card">
       <h2>La soglia che ritorna</h2>
       <p>Che cosa è rimasto in comune tra queste due vigilie?</p>
       <p>Tra quel ragazzo del 1999 e quest’uomo del 2025 che porta lo stesso nome ma forse, incontrandolo per strada, non gli concederebbe fiducia?</p>
@@ -134,13 +161,15 @@
       <p>Il mio auspicio per il 2026 e per gli anni nuovi non è “andrà tutto bene”. Sarebbe un insulto alla realtà.</p>
       <p>Il mio auspicio è più severo, e per questo più sperabile: che nasca una generazione trasversale — non anagrafica, ma morale — capace di disobbedire al ricatto dell’inevitabile. Gente che non confonda la modernità con l’obbedienza, la tecnologia con la resa, l’efficienza con il senso. Che sappia riconoscere il nuovo potere quando si traveste da servizio, quando ti chiama “utente” per non chiamarti “suddito”.</p>
       <p>Che il 2026 ci porti meno opinioni e più linguaggio. Meno identità usate come muri, più comunità come gesto continuo. Che ci porti una sobrietà non triste, capace di restituire valore alle cose piccole: il limite, la cura, la fedeltà a un luogo, a un corpo, a una promessa.</p>
-      <figure class="essay-cover">
-        <img src="../assets/img/saggi/site/saggio-1-1999-paura-diventare-uguali-inline.webp" width="1600" height="900" loading="lazy" alt="Due immagini di Alessandro Gentili a distanza di anni, accostate come soglia biografica tra 1999 e presente." />
+      <figure class="saggio-inline-figure">
+        <div class="essay-cover">
+          <img src="../assets/img/saggi/site/saggio-1-1999-paura-diventare-uguali-inline.webp" width="1600" height="900" loading="lazy" alt="Due immagini di Alessandro Gentili a distanza di anni, accostate come soglia biografica tra 1999 e presente." />
+        </div>
         <figcaption>1999–2025: due fotogrammi della stessa soglia. Non la fine del mondo — la paura di diventare uguali.</figcaption>
       </figure>
     </section>
 
-    <section id="difendere-linassimilabile">
+    <section id="difendere-linassimilabile" class="saggio-section-card">
       <h2>Difendere l’inassimilabile</h2>
       <p>Brindo al 2026 così: non aspettando un treno di luce, ma scegliendo, una per una, le fiamme da spegnere. E custodendo, nel buio che forse verrà, una brace concreta: la possibilità ostinata di diventare umani migliori senza chiedere permesso al mercato.</p>
       <p>Quella brace ha un nome: difendere l’inassimilabile.</p>
@@ -149,18 +178,20 @@
       <p>La luce di chi, mentre tutto spinge a renderci intercambiabili, decide di non finire uguale.</p>
     </section>
 
-    <section id="studi-e-riferimenti">
+    <section id="studi-e-riferimenti" class="saggio-section-card">
       <h2>Studi e riferimenti</h2>
       <p>Questo saggio dialoga soprattutto con alcune linee del pensiero contemporaneo: la mutazione antropologica e il consumo in Pier Paolo Pasolini; la psicopolitica, la trasparenza e la stanchezza dell’individuo in Byung-Chul Han; il capitalismo della sorveglianza in Shoshana Zuboff; la crisi dell’uomo davanti alla tecnica in Günther Anders; il nichilismo e la genealogia dei valori in Friedrich Nietzsche.</p>
       <p>I riferimenti non sono usati come apparato accademico, ma come cornice di lettura per una diagnosi civile sul passaggio dalla paura del guasto alla paura dell’omologazione.</p>
     </section>
 
-    <section id="prosegui-la-lettura">
+    <section id="prosegui-la-lettura" class="saggio-section-card">
       <h2>Prosegui la lettura</h2>
-      <p><a href="saggio-0-potere-leggere-segni.html">Saggio 0 — Il potere di leggere i segni</a></p>
-      <p><a href="saggio-8-costo-complessita.html">Saggio 8 — Il costo della complessità</a></p>
-      <p><a href="../saggi.html">Tutti i saggi</a></p>
-      <p><a href="../cerchi/">Cerchi d’inchiostro</a></p>
+      <div class="saggio-reading-grid">
+        <a href="saggio-0-potere-leggere-segni.html">Saggio 0 — Il potere di leggere i segni</a>
+        <a href="saggio-8-costo-complessita.html">Saggio 8 — Il costo della complessità</a>
+        <a href="../saggi.html">Tutti i saggi</a>
+        <a href="../cerchi/">Cerchi d’inchiostro</a>
+      </div>
     </section>
   </article>
 </section>
