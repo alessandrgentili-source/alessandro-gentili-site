@@ -16,6 +16,7 @@ LinkedIn is the professional profile.
 - Home: https://alessandro-gentili.it/
 - Author profile: https://alessandro-gentili.it/autore.html
 - Essays archive: https://alessandro-gentili.it/saggi.html
+- Cerchi d’inchiostro: https://alessandro-gentili.it/cerchi/
 - Method / AI: https://alessandro-gentili.it/metodo-ai.html
 - Archive: https://alessandro-gentili.it/archivio.html
 - Contact: https://alessandro-gentili.it/contatti.html
@@ -24,10 +25,10 @@ LinkedIn is the professional profile.
 ## Essay archive
 
 "Archivio saggi" is the neutral public name of the essay corpus on this site.
-Local essay pages provide abstracts, editorial context, selected excerpts and internal relations.
-Full readings are usually hosted on Medium and linked from each local page.
+Local essay pages provide abstracts, editorial context, selected excerpts, internal relations and, when available, full local texts.
+Medium remains a distribution and alternative reading channel when linked from local pages.
 Saggio 10, "Giovani e senilità del potere", was published on 14 May 2026 and links to Medium from its local page.
-Saggio XI, "Chi decide il Sole?", is an anticipation card, not the definitive text.
+Saggio XI, "Chi decide il Sole?", is published as a full local essay in the site archive and is also available on Medium.
 
 ## Key themes
 
