@@ -21,6 +21,7 @@
     .prototype-report{margin-top:1.4rem}
     .prototype-report[hidden]{display:none!important}
     .prototype-report .item{height:auto}
+    .prototype-report-note{margin:0 0 .95rem;padding:.78rem .95rem;border:1px solid rgba(143,113,62,.2);border-left:3px solid rgba(143,113,62,.42);border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(255,250,240,.48);color:var(--ink-2);font-size:.95rem}
     .prototype-score{display:flex;align-items:baseline;gap:.45rem;margin:.75rem 0 .35rem;color:var(--petrol)}
     .prototype-score strong{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;font-size:clamp(2.8rem,5vw,4.7rem);font-weight:500;line-height:1}
     .prototype-score span{color:var(--muted);font-weight:700}
@@ -106,10 +107,11 @@
         </label>
       </div>
 
-      <div class="actions"><button class="btn" type="button" data-prototype-trigger>Analizza il testo</button></div>
+      <div class="actions"><button class="btn" type="button" data-prototype-trigger aria-controls="prototype-report">Analizza il testo</button></div>
     </form>
 
-    <section class="prototype-report" data-prototype-report hidden aria-live="polite" aria-labelledby="prototype-report-title" tabindex="-1">
+    <section class="prototype-report" id="prototype-report" data-prototype-report hidden aria-live="polite" aria-labelledby="prototype-report-title" tabindex="-1">
+      <p class="prototype-report-note">Report dimostrativo. In questa versione 0.1 il referto non dipende ancora dal testo inserito: serve a mostrare struttura, esperienza e logica dello strumento.</p>
       <div class="grid-2">
         <article class="item">
           <p class="kicker">Verdetto sintetico</p>
@@ -128,7 +130,7 @@
             <li><span>Voce</span><strong>84</strong><progress value="84" max="100">84</progress></li>
             <li><span>Densità</span><strong>72</strong><progress value="72" max="100">72</progress></li>
             <li><span>Leggibilità</span><strong>79</strong><progress value="79" max="100">79</progress></li>
-            <li><span>Rischio genericità / AI tone</span><strong>38</strong><progress value="38" max="100">38</progress></li>
+            <li><span>Rischio genericità / AI tone — più basso è meglio</span><strong>38</strong><progress value="38" max="100">38</progress></li>
           </ul>
         </article>
       </div>
