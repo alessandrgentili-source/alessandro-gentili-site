@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>Lente Editoriale · Prototipo interno v0.1.1 | Alessandro Gentili</title>
+  <title>Lente Editoriale · Prototipo interno v0.1.2 | Alessandro Gentili</title>
   <meta name="description" content="Prototipo interno di Lente Editoriale per valutare struttura, chiarezza, voce e forza di un testo lungo." />
   <link rel="stylesheet" href="../assets/style.css" />
   <style>
@@ -45,7 +45,7 @@
 <main class="page">
   <section class="wrap hero">
     <div class="hero-copy">
-      <p class="eyebrow">Prototipo interno · Versione 0.1.1</p>
+      <p class="eyebrow">Prototipo interno · Versione 0.1.2</p>
       <h1>Lente Editoriale</h1>
       <p class="lead">Un prototipo AI-supported per valutare struttura, chiarezza, voce e forza di un testo lungo.</p>
       <p class="prototype-disclaimer" id="prototype-disclaimer">Questo strumento è una demo sperimentale. Non sostituisce un editor umano e non deve essere usato con testi riservati.</p>
@@ -116,7 +116,7 @@
     </form>
 
     <section class="prototype-report" id="prototype-report" data-prototype-report hidden aria-live="polite" aria-labelledby="prototype-report-title" tabindex="-1">
-      <p class="prototype-report-note">Report dimostrativo. In questa versione 0.1.1 il referto non analizza ancora semanticamente il testo: varia in base ai parametri selezionati e alla lunghezza indicativa del contenuto.</p>
+      <p class="prototype-report-note">Report dimostrativo. In questa versione 0.1.2 il referto non analizza ancora semanticamente il testo: varia in base ai parametri selezionati e alla lunghezza indicativa del contenuto.</p>
 
       <article class="item prototype-profile" aria-labelledby="prototype-profile-title">
         <p class="kicker">Profilo del referto</p>
@@ -169,7 +169,7 @@
     </section>
   </section>
 
-  <p class="wrap prototype-footnote">Prototipo interno · Versione 0.1.1</p>
+  <p class="wrap prototype-footnote">Prototipo interno · Versione 0.1.2</p>
 </main>
 <footer class="footer"><div class="wrap"><span>© Alessandro Gentili — casa editoriale e archivio in evoluzione.</span><span><a href="../autore.html">Autore</a> · <a href="../contatti.html">Contatti</a> · <a href="../privacy.html">Privacy</a> · <a href="../en.html">International gateway</a></span></div></footer>
 <script>
@@ -199,39 +199,94 @@
     },
     objectives: {
       Chiarire: {
-        focus: 'chiarezza, frase-guida, ordine gerarchico e leggibilità',
-        scores: { Tesi: 2, Struttura: 4, Chiarezza: 7, Voce: -1, Densità: -2, Leggibilità: 5, 'Rischio genericità / AI tone — più basso è meglio': -2 },
+        verdictLens: 'Per chiarire, la priorità è rendere subito visibili promessa, gerarchia e ordine dei passaggi.',
+        focus: 'frase guida, gerarchia, ordine dei passaggi, leggibilità e riduzione delle ambiguità',
+        scores: { Tesi: 1, Struttura: 2, Chiarezza: 6, Voce: -1, Densità: -2, Leggibilità: 5, 'Rischio genericità / AI tone — più basso è meglio': -1 },
+        overallOffset: 1,
         strengths: ['La direzione del testo può diventare riconoscibile con una frase-guida più esplicita.'],
-        issues: ['la gerarchia tra concetti principali e secondari non è ancora sempre immediata.'],
-        priorities: ['Aprire con una frase-guida che dichiari cosa il lettore deve capire e perché.', 'Riordinare i paragrafi dal concetto più necessario a quello di supporto.', 'Ridurre densità e incisi quando rallentano la comprensione.']
+        issues: [
+          'La promessa del testo va resa più immediata.',
+          'Alcuni passaggi chiedono una gerarchia più leggibile.',
+          'La densità concettuale rischia di rallentare la comprensione.'
+        ],
+        priorities: [
+          'Scrivere una frase-guida che orienti subito il lettore.',
+          'Riorganizzare i passaggi in blocchi più leggibili.',
+          'Ridurre formule ambigue o troppo dense.'
+        ],
+        recommendation: 'Prima di rifinire lo stile, costruire una soglia di ingresso più chiara: una frase-guida, blocchi ordinati e meno ambiguità nei passaggi chiave.'
       },
       Convincere: {
-        focus: 'prove, esempi, obiezioni e forza argomentativa',
-        scores: { Tesi: 5, Struttura: 2, Chiarezza: 1, Voce: 0, Densità: 2, Leggibilità: -1, 'Rischio genericità / AI tone — più basso è meglio': 2 },
+        verdictLens: 'Per convincere, il testo deve trasformare la posizione in una progressione sostenuta da prove, esempi e obiezioni governate.',
+        focus: 'forza argomentativa, prove, esempi, obiezioni e progressione persuasiva',
+        scores: { Tesi: 5, Struttura: 4, Chiarezza: 0, Voce: 0, Densità: 1, Leggibilità: -2, 'Rischio genericità / AI tone — più basso è meglio': 3 },
+        overallOffset: -1,
         strengths: ['La base argomentativa lascia intravedere una posizione difendibile.'],
-        issues: ['prove, esempi e obiezioni potrebbero sostenere meglio le affermazioni chiave.'],
-        priorities: ['Aggiungere un esempio concreto o una prova nei passaggi decisivi.', 'Anticipare una possibile obiezione e risponderle nel corpo del testo.', 'Rendere più esplicito il beneficio della posizione proposta.']
+        issues: [
+          'La posizione è riconoscibile, ma va sostenuta con passaggi più probanti.',
+          'Il testo potrebbe anticipare meglio le obiezioni del lettore.',
+          'Alcune affermazioni chiedono esempi o snodi argomentativi più forti.'
+        ],
+        priorities: [
+          'Rafforzare i passaggi che sostengono la tesi principale.',
+          'Inserire esempi o prove dove il testo resta assertivo.',
+          'Anticipare una possibile obiezione e integrarla nel ragionamento.'
+        ],
+        recommendation: 'Concentrare la revisione sui punti che devono persuadere: prove, esempi e gestione delle obiezioni prima della lucidatura linguistica.'
       },
       Posizionare: {
-        focus: 'promessa, differenza, voce, identità e memorabilità',
-        scores: { Tesi: 5, Struttura: 0, Chiarezza: 1, Voce: 6, Densità: 0, Leggibilità: 0, 'Rischio genericità / AI tone — più basso è meglio': 1 },
+        verdictLens: 'Per posizionare, il referto guarda soprattutto a differenza, promessa, identità della voce e memorabilità.',
+        focus: 'differenza, promessa, identità, voce e memorabilità',
+        scores: { Tesi: 4, Struttura: -1, Chiarezza: 0, Voce: 6, Densità: 0, Leggibilità: -1, 'Rischio genericità / AI tone — più basso è meglio': 5 },
+        overallOffset: -2,
         strengths: ['La voce può diventare un elemento distintivo del posizionamento.'],
-        issues: ['promessa e differenza non emergono sempre con sufficiente memorabilità.'],
-        priorities: ['Formulare una promessa editoriale riconoscibile in una frase.', 'Sostituire formule neutre con scelte lessicali più identitarie.', 'Chiudere con un’immagine o una sintesi che resti in memoria.']
+        issues: [
+          'Il testo ha voce, ma la differenza va resa più riconoscibile.',
+          'La promessa editoriale potrebbe emergere prima.',
+          'Alcuni passaggi rischiano di somigliare a formulazioni già viste.'
+        ],
+        priorities: [
+          'Rendere più netta la posizione distintiva del testo.',
+          'Portare prima la promessa o la frattura interpretativa.',
+          'Sostituire formule generiche con immagini, concetti o svolte più proprie.'
+        ],
+        recommendation: 'Rendere più riconoscibile ciò che il testo promette e ciò che lo distingue: meno formule intercambiabili, più voce e frattura interpretativa.'
       },
       Argomentare: {
-        focus: 'tesi, passaggi logici, contro-argomentazioni e progressione',
-        scores: { Tesi: 6, Struttura: 4, Chiarezza: 0, Voce: 1, Densità: 3, Leggibilità: -2, 'Rischio genericità / AI tone — più basso è meglio': 0 },
+        verdictLens: 'Per argomentare, la qualità decisiva è la tenuta della tesi lungo una catena logica esplicita e verificabile.',
+        focus: 'tesi, catena logica, contro-argomentazioni, progressione e coerenza interna',
+        scores: { Tesi: 6, Struttura: 5, Chiarezza: -1, Voce: 0, Densità: -2, Leggibilità: -2, 'Rischio genericità / AI tone — più basso è meglio': 1 },
+        overallOffset: 0,
         strengths: ['Il testo ha materia sufficiente per costruire una progressione argomentativa più netta.'],
-        issues: ['alcuni passaggi logici restano impliciti o non preparano abbastanza la conclusione.'],
-        priorities: ['Dichiarare la tesi e verificare che ogni sezione la sostenga.', 'Inserire snodi logici tra blocchi argomentativi.', 'Prevedere una contro-argomentazione per rafforzare la progressione.']
+        issues: [
+          'La tesi è presente, ma alcuni snodi logici vanno esplicitati meglio.',
+          'La progressione argomentativa può essere resa più controllata.',
+          'Il testo accumula concetti forti, ma non sempre li ordina in sequenza.'
+        ],
+        priorities: [
+          'Esplicitare meglio il passaggio dalla premessa alla tesi.',
+          'Separare intuizioni, prove e conseguenze.',
+          'Inserire una contro-argomentazione o una soglia critica.'
+        ],
+        recommendation: 'Rivedere il testo come una sequenza di passaggi: premessa, tesi, prove, conseguenze e soglie critiche devono risultare distinguibili.'
       },
       Pubblicare: {
-        focus: 'apertura, ritmo, chiusura, titolo/sottotitolo e pulizia finale',
-        scores: { Tesi: 1, Struttura: 3, Chiarezza: 3, Voce: 2, Densità: -1, Leggibilità: 4, 'Rischio genericità / AI tone — più basso è meglio': -1 },
+        verdictLens: 'Per pubblicare, la revisione deve verificare l’esperienza di lettura completa: attacco, ritmo, chiusura e pulizia finale.',
+        focus: 'attacco, ritmo, chiusura, titolo/sottotitolo, pulizia finale e leggibilità editoriale',
+        scores: { Tesi: 0, Struttura: 4, Chiarezza: 2, Voce: 1, Densità: -1, Leggibilità: 5, 'Rischio genericità / AI tone — più basso è meglio': -2 },
+        overallOffset: 2,
         strengths: ['La bozza sembra già orientata a una forma pubblicabile dopo una rifinitura mirata.'],
-        issues: ['apertura, ritmo e chiusura vanno verificati come esperienza di lettura completa.'],
-        priorities: ['Rendere l’attacco più netto e verificare titolo e sottotitolo.', 'Tagliare ripetizioni o passaggi di raccordo non indispensabili.', 'Chiudere con una frase che non riassuma soltanto, ma rilanci.']
+        issues: [
+          'Apertura, ritmo e chiusura vanno verificati come esperienza di lettura completa.',
+          'Alcuni passaggi possono diventare più concreti per il pubblico previsto.',
+          'Il finale può essere reso meno riassuntivo e più memorabile.'
+        ],
+        priorities: [
+          'Rendere l’attacco più netto e verificare titolo e sottotitolo.',
+          'Tagliare ripetizioni o passaggi di raccordo non indispensabili.',
+          'Chiudere con una frase che non riassuma soltanto, ma rilanci.'
+        ],
+        recommendation: 'Portare la bozza a una prova di pubblicazione: controllare titolo, attacco, ritmo dei raccordi e chiusura prima degli ultimi tagli.'
       }
     },
     audiences: {
@@ -277,7 +332,7 @@
     return Math.min(Math.max(value, min), max);
   }
 
-  function buildScores(type, audience, objective, severity) {
+  function buildScores(type, audience, objective, severity, lengthProfile) {
     const severityOffset = { Standard: 4, Severa: -2, 'Molto severa': -8 }[severity];
     const riskOffset = { Standard: -4, Severa: 2, 'Molto severa': 9 }[severity];
     const objectiveScores = reportModel.objectives[objective].scores;
@@ -292,9 +347,13 @@
       if (audience === 'Aziendale' && (label === 'Chiarezza' || label === 'Tesi')) score += 2;
       if (type === 'White paper' && label === 'Densità') score += 3;
       if (type === 'Pagina sito' && label === 'Leggibilità') score += 2;
-      if (isRisk && objective === 'Posizionare') score -= 2;
+      if (objective === 'Chiarire' && lengthProfile === 'lunga' && label === 'Struttura') score -= 3;
+      if (objective === 'Convincere' && label.startsWith('Rischio')) score += 1;
+      if (objective === 'Posizionare' && severity !== 'Standard' && isRisk) score += severity === 'Molto severa' ? 4 : 2;
+      if (objective === 'Argomentare' && severity === 'Molto severa' && label === 'Densità') score -= 3;
+      if (objective === 'Pubblicare' && lengthProfile === 'lunga' && severity !== 'Standard' && label === 'Densità') score -= 2;
 
-      return { label, score: clamp(score, isRisk ? 18 : 45, isRisk ? 62 : 94) };
+      return { label, score: clamp(score, isRisk ? 18 : 45, isRisk ? 68 : 94) };
     });
   }
 
@@ -302,48 +361,63 @@
     list.innerHTML = items.map((item) => `<li>${item}</li>`).join('');
   }
 
-  function updateReport() {
-    const type = document.querySelector('#text-type').value;
-    const audience = document.querySelector('#audience').value;
-    const objective = document.querySelector('#objective').value;
-    const severity = document.querySelector('#severity').value;
-    const lengthProfile = getLengthProfile(document.querySelector('#editorial-text').value);
+  function buildReportData({ text, type, audience, objective, severity }) {
+    const lengthProfile = getLengthProfile(text);
     const severityData = reportModel.severities[severity];
     const objectiveData = reportModel.objectives[objective];
     const typeNote = reportModel.types[type];
     const audienceNote = reportModel.audiences[audience];
-    const scores = buildScores(type, audience, objective, severity);
-    const overallScore = clamp(severityData.score + (lengthProfile === 'media' ? 1 : 0) + (lengthProfile === 'lunga' ? -1 : 0), 60, 88);
+    const lengthOffset = { breve: 0, media: 1, lunga: -1 }[lengthProfile];
+    const scores = buildScores(type, audience, objective, severity, lengthProfile);
+    const overallScore = clamp(severityData.score + objectiveData.overallOffset + lengthOffset, 60, 88);
 
-    document.querySelector('[data-report-type]').textContent = type;
-    document.querySelector('[data-report-audience]').textContent = audience;
-    document.querySelector('[data-report-objective]').textContent = objective;
-    document.querySelector('[data-report-severity]').textContent = severity;
-    document.querySelector('[data-report-length]').textContent = lengthProfile;
-    document.querySelector('[data-report-length-note]').textContent = reportModel.lengthNotes[lengthProfile];
-    document.querySelector('[data-report-verdict]').textContent = `${severityData.verdict} ${typeNote}`;
-    document.querySelector('[data-report-summary]').textContent = `Focus dimostrativo: ${objectiveData.focus}. ${audienceNote} ${severityData.tone}`;
-    document.querySelector('[data-report-score]').textContent = overallScore;
-    document.querySelector('[data-report-score-label]').setAttribute('aria-label', `Score complessivo dimostrativo ${overallScore} su 100`);
+    return {
+      type,
+      audience,
+      objective,
+      severity,
+      lengthProfile,
+      lengthNote: reportModel.lengthNotes[lengthProfile],
+      verdict: `${severityData.verdict} ${objectiveData.verdictLens} ${typeNote}`,
+      summary: `Focus dimostrativo: ${objectiveData.focus}. ${audienceNote} ${severityData.tone}`,
+      overallScore,
+      scores,
+      strengths: [objectiveData.strengths[0], audienceNote, typeNote],
+      issues: objectiveData.issues,
+      priorities: objectiveData.priorities,
+      recommendationTitle: severityData.recommendation,
+      recommendationText: `${objectiveData.recommendation} ${typeNote} ${audienceNote} Nella v0.1.2 questa raccomandazione resta dimostrativa: deriva da parametri, obiettivo, severità e lunghezza, non da una lettura semantica del contenuto.`
+    };
+  }
 
-    document.querySelector('[data-score-list]').innerHTML = scores.map(({ label, score }) => `<li><span>${label}</span><strong>${score}</strong><progress value="${score}" max="100">${score}</progress></li>`).join('');
+  function updateReport() {
+    const report = buildReportData({
+      text: document.querySelector('#editorial-text').value,
+      type: document.querySelector('#text-type').value,
+      audience: document.querySelector('#audience').value,
+      objective: document.querySelector('#objective').value,
+      severity: document.querySelector('#severity').value
+    });
 
-    listToItems(document.querySelector('[data-report-strengths]'), [
-      objectiveData.strengths[0],
-      audienceNote,
-      typeNote
-    ]);
+    document.querySelector('[data-report-type]').textContent = report.type;
+    document.querySelector('[data-report-audience]').textContent = report.audience;
+    document.querySelector('[data-report-objective]').textContent = report.objective;
+    document.querySelector('[data-report-severity]').textContent = report.severity;
+    document.querySelector('[data-report-length]').textContent = report.lengthProfile;
+    document.querySelector('[data-report-length-note]').textContent = report.lengthNote;
+    document.querySelector('[data-report-verdict]').textContent = report.verdict;
+    document.querySelector('[data-report-summary]').textContent = report.summary;
+    document.querySelector('[data-report-score]').textContent = report.overallScore;
+    document.querySelector('[data-report-score-label]').setAttribute('aria-label', `Score complessivo dimostrativo ${report.overallScore} su 100`);
 
-    listToItems(document.querySelector('[data-report-issues]'), [
-      `${severityData.issuePrefix} ${objectiveData.issues[0]}`,
-      audience === 'Internazionale' ? 'il contesto va reso più esplicito per evitare ambiguità interculturali.' : 'alcuni passaggi possono diventare più concreti per il pubblico previsto.',
-      type === 'Pagina sito' ? 'promessa e CTA devono emergere prima nella scansione della pagina.' : 'il finale può essere reso meno riassuntivo e più memorabile.'
-    ]);
+    document.querySelector('[data-score-list]').innerHTML = report.scores.map(({ label, score }) => `<li><span>${label}</span><strong>${score}</strong><progress value="${score}" max="100">${score}</progress></li>`).join('');
 
-    listToItems(document.querySelector('[data-report-priorities]'), objectiveData.priorities);
+    listToItems(document.querySelector('[data-report-strengths]'), report.strengths);
+    listToItems(document.querySelector('[data-report-issues]'), report.issues);
+    listToItems(document.querySelector('[data-report-priorities]'), report.priorities);
 
-    document.querySelector('[data-report-recommendation-title]').textContent = severityData.recommendation;
-    document.querySelector('[data-report-recommendation-text]').textContent = `${typeNote} ${audienceNote} Nella v0.1.1 questa raccomandazione resta dimostrativa: deriva da parametri, severità e lunghezza, non da una lettura semantica del contenuto.`;
+    document.querySelector('[data-report-recommendation-title]').textContent = report.recommendationTitle;
+    document.querySelector('[data-report-recommendation-text]').textContent = report.recommendationText;
   }
 
   document.querySelectorAll('[data-prototype-trigger]').forEach((button) => {
