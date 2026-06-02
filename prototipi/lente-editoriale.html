@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Lente Editoriale · Prototipo interno v0.1 | Alessandro Gentili</title>
+  <meta name="description" content="Prototipo interno di Lente Editoriale per valutare struttura, chiarezza, voce e forza di un testo lungo." />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .prototype-page .hero{align-items:start}
+    .prototype-page .hero-panel{align-self:start}
+    .prototype-disclaimer{border-left:3px solid rgba(143,113,62,.56);padding:.82rem 1rem;background:rgba(255,250,240,.5);color:var(--ink-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+    .prototype-form{display:grid;gap:1.05rem}
+    .prototype-form label{display:grid;gap:.38rem;color:var(--ink);font-weight:700}
+    .prototype-form textarea,.prototype-form select{width:100%;border:1px solid rgba(143,113,62,.28);border-radius:var(--radius-sm);background:rgba(255,250,240,.72);color:var(--ink);font:inherit;line-height:1.58;padding:.78rem .86rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
+    .prototype-form textarea{min-height:260px;resize:vertical}
+    .prototype-form textarea::placeholder{color:rgba(59,67,61,.64)}
+    .prototype-form textarea:focus,.prototype-form select:focus{outline:2px solid rgba(143,113,62,.35);outline-offset:2px;border-color:rgba(143,113,62,.55)}
+    .prototype-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+    .prototype-report{margin-top:1.4rem}
+    .prototype-report[hidden]{display:none!important}
+    .prototype-report .item{height:auto}
+    .prototype-score{display:flex;align-items:baseline;gap:.45rem;margin:.75rem 0 .35rem;color:var(--petrol)}
+    .prototype-score strong{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;font-size:clamp(2.8rem,5vw,4.7rem);font-weight:500;line-height:1}
+    .prototype-score span{color:var(--muted);font-weight:700}
+    .score-list{display:grid;gap:.7rem;margin:0;padding:0;list-style:none}
+    .score-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.8rem;align-items:center;color:var(--ink-2)}
+    .score-list progress{grid-column:1/-1;width:100%;height:8px;accent-color:var(--petrol)}
+    .prototype-report ul,.prototype-report ol{margin:.7rem 0 0;padding-left:1.2rem;color:var(--ink-2)}
+    .prototype-report li+li{margin-top:.35rem}
+    .prototype-report-grid,.prototype-recommendation{margin-top:.95rem}
+    .prototype-footnote{text-align:center;color:var(--muted);font-size:.86rem;margin:2rem 0 .2rem}
+    @media(max-width:760px){.prototype-fields{grid-template-columns:1fr}.prototype-form textarea{min-height:220px}.prototype-score strong{font-size:3rem}}
+  </style>
+</head>
+<body class="prototype-page">
+<header class="site-header"><div class="wrap topbar"><a class="brand" href="/" aria-label="Home">Alessandro Gentili</a><nav aria-label="Navigazione principale"><ul><li><a href="/">Home</a></li><li><a href="../saggi.html">Saggi</a></li><li><a href="../metodo-ai.html">Metodo / AI</a></li><li><a href="../portfolio.html">Portfolio</a></li><li><a href="../poesia.html">Poesia</a></li><li><a href="../strumenti.html">Strumenti</a></li><li><a href="../archivio.html">Archivio</a></li><li><a href="../en.html">EN</a></li><li><a href="../contatti.html">Contatti</a></li></ul></nav></div></header>
+<main class="page">
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Prototipo interno · Versione 0.1</p>
+      <h1>Lente Editoriale</h1>
+      <p class="lead">Un prototipo AI-supported per valutare struttura, chiarezza, voce e forza di un testo lungo.</p>
+      <p class="prototype-disclaimer" id="prototype-disclaimer">Questo strumento è una demo sperimentale. Non sostituisce un editor umano e non deve essere usato con testi riservati.</p>
+    </div>
+    <aside class="hero-panel">
+      <p class="panel-label">Metodo</p>
+      <h3>Una lente, non un correttore.</h3>
+      <p>La demo mostra come un metodo editoriale può diventare uno strumento: osserva tesi, struttura, voce e priorità di revisione senza riscrivere il testo.</p>
+    </aside>
+  </section>
+
+  <section class="wrap section" aria-labelledby="prototype-form-title">
+    <div class="section-head">
+      <div>
+        <p class="kicker">Input dimostrativo</p>
+        <h2 id="prototype-form-title">Testo da valutare</h2>
+        <p>Il prototipo non invia, salva o analizza realmente il contenuto: il report mostrato è statico e serve solo a verificare esperienza e struttura della pagina.</p>
+      </div>
+    </div>
+
+    <form class="item prototype-form" data-prototype-form aria-describedby="prototype-disclaimer" autocomplete="off">
+      <label for="editorial-text">Testo da valutare
+        <textarea id="editorial-text" name="editorial-text" autocomplete="off" placeholder="Incolla qui un saggio, un articolo, una newsletter, una pagina sito o un testo lungo."></textarea>
+      </label>
+
+      <div class="prototype-fields">
+        <label for="text-type">Tipo di testo
+          <select id="text-type" name="text-type">
+            <option>Saggio</option>
+            <option>Articolo</option>
+            <option>Newsletter</option>
+            <option>Pagina sito</option>
+            <option>Post lungo</option>
+            <option>White paper</option>
+          </select>
+        </label>
+
+        <label for="audience">Pubblico previsto
+          <select id="audience" name="audience">
+            <option>Generale</option>
+            <option>Professionale</option>
+            <option>Culturale</option>
+            <option>Aziendale</option>
+            <option>Internazionale</option>
+          </select>
+        </label>
+
+        <label for="objective">Obiettivo del testo
+          <select id="objective" name="objective">
+            <option>Chiarire</option>
+            <option>Convincere</option>
+            <option>Posizionare</option>
+            <option>Argomentare</option>
+            <option>Pubblicare</option>
+          </select>
+        </label>
+
+        <label for="severity">Severità
+          <select id="severity" name="severity">
+            <option>Standard</option>
+            <option>Severa</option>
+            <option>Molto severa</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions"><button class="btn" type="button" data-prototype-trigger>Analizza il testo</button></div>
+    </form>
+
+    <section class="prototype-report" data-prototype-report hidden aria-live="polite" aria-labelledby="prototype-report-title" tabindex="-1">
+      <div class="grid-2">
+        <article class="item">
+          <p class="kicker">Verdetto sintetico</p>
+          <h2 id="prototype-report-title">Buona base editoriale, da rendere più incisiva.</h2>
+          <p>Il testo appare solido nel tema e nel registro, ma ha bisogno di una tesi più esplicita, passaggi meno generici e una progressione argomentativa più leggibile.</p>
+          <div class="prototype-score" aria-label="Score complessivo 78 su 100"><strong>78</strong><span>/100</span></div>
+          <p class="meta">Score complessivo dimostrativo</p>
+        </article>
+
+        <article class="item">
+          <p class="kicker">Score per dimensioni</p>
+          <ul class="score-list">
+            <li><span>Tesi</span><strong>74</strong><progress value="74" max="100">74</progress></li>
+            <li><span>Struttura</span><strong>81</strong><progress value="81" max="100">81</progress></li>
+            <li><span>Chiarezza</span><strong>76</strong><progress value="76" max="100">76</progress></li>
+            <li><span>Voce</span><strong>84</strong><progress value="84" max="100">84</progress></li>
+            <li><span>Densità</span><strong>72</strong><progress value="72" max="100">72</progress></li>
+            <li><span>Leggibilità</span><strong>79</strong><progress value="79" max="100">79</progress></li>
+            <li><span>Rischio genericità / AI tone</span><strong>38</strong><progress value="38" max="100">38</progress></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid-3 prototype-report-grid">
+        <article class="item">
+          <p class="kicker">Tre punti forti</p>
+          <ol>
+            <li>Registro coerente e adatto a un testo lungo.</li>
+            <li>Buona intuizione centrale, riconoscibile anche nella bozza.</li>
+            <li>Lessico sobrio, con margine per una voce più personale.</li>
+          </ol>
+        </article>
+        <article class="item">
+          <p class="kicker">Tre criticità</p>
+          <ol>
+            <li>Tesi non sempre formulata in modo netto.</li>
+            <li>Alcuni paragrafi accumulano concetti senza gerarchia.</li>
+            <li>Chiusura da rendere meno riassuntiva e più memorabile.</li>
+          </ol>
+        </article>
+        <article class="item">
+          <p class="kicker">Tre priorità di revisione</p>
+          <ol>
+            <li>Scrivere una frase-guida che dichiari posizione e promessa.</li>
+            <li>Riorganizzare i passaggi in blocchi argomentativi leggibili.</li>
+            <li>Sostituire formule generiche con esempi, immagini o prove.</li>
+          </ol>
+        </article>
+      </div>
+
+      <article class="item prototype-recommendation">
+        <p class="kicker">Raccomandazione finale</p>
+        <h3>Procedere con una revisione strutturale leggera prima del lavoro di stile.</h3>
+        <p>Prima di lucidare le frasi, conviene rafforzare architettura, tesi e ritmo dei passaggi. La voce è già presente: va messa in condizioni di sostenere meglio il ragionamento.</p>
+      </article>
+    </section>
+  </section>
+
+  <p class="wrap prototype-footnote">Prototipo interno · Versione 0.1</p>
+</main>
+<footer class="footer"><div class="wrap"><span>© Alessandro Gentili — casa editoriale e archivio in evoluzione.</span><span><a href="../autore.html">Autore</a> · <a href="../contatti.html">Contatti</a> · <a href="../privacy.html">Privacy</a> · <a href="../en.html">International gateway</a></span></div></footer>
+<script>
+  document.querySelectorAll('[data-prototype-trigger]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const report = document.querySelector('[data-prototype-report]');
+      if (!report) return;
+      report.hidden = false;
+      report.focus({ preventScroll: true });
+      report.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
