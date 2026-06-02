@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>Lente Editoriale · Prototipo interno v0.1.2 | Alessandro Gentili</title>
+  <title>Lente Editoriale · Prototipo interno v0.2 | Alessandro Gentili</title>
   <meta name="description" content="Prototipo interno di Lente Editoriale per valutare struttura, chiarezza, voce e forza di un testo lungo." />
   <link rel="stylesheet" href="../assets/style.css" />
   <style>
@@ -36,7 +36,7 @@
     .prototype-report ul,.prototype-report ol{margin:.7rem 0 0;padding-left:1.2rem;color:var(--ink-2)}
     .prototype-report li+li{margin-top:.35rem}
     .prototype-report-grid,.prototype-recommendation{margin-top:.95rem}
-    .prototype-footnote{text-align:center;color:var(--muted);font-size:.86rem;margin:2rem 0 .2rem}
+    .prototype-footnote{text-align:center;color:var(--muted);font-size:.86rem;margin:2rem 0 .2rem}.prototype-status{margin:.1rem 0 0;color:var(--ink-2)}.prototype-status[data-state="error"]{color:#7b2d26}.btn.secondary{background:transparent;color:var(--petrol);border:1px solid rgba(143,113,62,.36)}
     @media(max-width:760px){.prototype-fields{grid-template-columns:1fr}.prototype-form textarea{min-height:220px}.prototype-score strong{font-size:3rem}}
   </style>
 </head>
@@ -45,24 +45,24 @@
 <main class="page">
   <section class="wrap hero">
     <div class="hero-copy">
-      <p class="eyebrow">Prototipo interno · Versione 0.1.2</p>
+      <p class="eyebrow">Prototipo interno · Versione 0.2</p>
       <h1>Lente Editoriale</h1>
-      <p class="lead">Un prototipo AI-supported per valutare struttura, chiarezza, voce e forza di un testo lungo.</p>
+      <p class="lead">Un prototipo AI-supported per valutare struttura, chiarezza, voce e forza di un testo lungo con backend server-side prudente.</p>
       <p class="prototype-disclaimer" id="prototype-disclaimer">Questo strumento è una demo sperimentale. Non sostituisce un editor umano e non deve essere usato con testi riservati.</p>
     </div>
     <aside class="hero-panel">
       <p class="panel-label">Metodo</p>
       <h3>Una lente, non un correttore.</h3>
-      <p>La demo mostra come un metodo editoriale può diventare uno strumento: osserva tesi, struttura, voce e priorità di revisione senza riscrivere il testo.</p>
+      <p>Lo strumento osserva tesi, struttura, voce e priorità di revisione senza riscrivere integralmente il testo e senza promettere verifiche di plagio o AI detection.</p>
     </aside>
   </section>
 
   <section class="wrap section" aria-labelledby="prototype-form-title">
     <div class="section-head">
       <div>
-        <p class="kicker">Input dimostrativo</p>
+        <p class="kicker">Input prototipo</p>
         <h2 id="prototype-form-title">Testo da valutare</h2>
-        <p>Il prototipo non invia, salva o analizza semanticamente il contenuto: il referto demo varia solo in base ai parametri selezionati e alla lunghezza indicativa del testo.</p>
+        <p>Il prototipo invia il testo al Worker AI solo al momento della richiesta, non lo salva nel browser e non usa storage persistente. Non inserire testi riservati o dati personali.</p>
       </div>
     </div>
 
@@ -74,59 +74,60 @@
       <div class="prototype-fields">
         <label for="text-type">Tipo di testo
           <select id="text-type" name="text-type">
-            <option>Saggio</option>
-            <option>Articolo</option>
-            <option>Newsletter</option>
-            <option>Pagina sito</option>
-            <option>Post lungo</option>
-            <option>White paper</option>
+            <option value="essay">Saggio</option>
+            <option value="article">Articolo</option>
+            <option value="newsletter">Newsletter</option>
+            <option value="website_page">Pagina sito</option>
+            <option value="long_post">Post lungo</option>
+            <option value="white_paper">White paper</option>
           </select>
         </label>
 
         <label for="audience">Pubblico previsto
           <select id="audience" name="audience">
-            <option>Generale</option>
-            <option>Professionale</option>
-            <option>Culturale</option>
-            <option>Aziendale</option>
-            <option>Internazionale</option>
+            <option value="general">Generale</option>
+            <option value="professional">Professionale</option>
+            <option value="cultural">Culturale</option>
+            <option value="corporate">Aziendale</option>
+            <option value="international">Internazionale</option>
           </select>
         </label>
 
         <label for="objective">Obiettivo del testo
           <select id="objective" name="objective">
-            <option>Chiarire</option>
-            <option>Convincere</option>
-            <option>Posizionare</option>
-            <option>Argomentare</option>
-            <option>Pubblicare</option>
+            <option value="clarify">Chiarire</option>
+            <option value="persuade">Convincere</option>
+            <option value="position">Posizionare</option>
+            <option value="argue">Argomentare</option>
+            <option value="publish">Pubblicare</option>
           </select>
         </label>
 
         <label for="severity">Severità
           <select id="severity" name="severity">
-            <option>Standard</option>
-            <option>Severa</option>
-            <option>Molto severa</option>
+            <option value="standard">Standard</option>
+            <option value="severe">Severa</option>
+            <option value="very_severe">Molto severa</option>
           </select>
         </label>
       </div>
 
-      <div class="actions"><button class="btn" type="button" data-prototype-trigger aria-controls="prototype-report">Genera referto demo</button></div>
+      <div class="actions"><button class="btn" type="button" data-prototype-trigger aria-controls="prototype-report">Genera referto AI</button><button class="btn secondary" type="button" data-demo-trigger aria-controls="prototype-report" hidden>Usa referto demo</button></div>
+      <p class="prototype-status" data-prototype-status role="status" aria-live="polite" hidden></p>
     </form>
 
     <section class="prototype-report" id="prototype-report" data-prototype-report hidden aria-live="polite" aria-labelledby="prototype-report-title" tabindex="-1">
-      <p class="prototype-report-note">Report dimostrativo. In questa versione 0.1.2 il referto non analizza ancora semanticamente il testo: varia in base ai parametri selezionati e alla lunghezza indicativa del contenuto.</p>
+      <p class="prototype-report-note" data-report-note>Report AI reale v0.2. Il referto è prudente, non sostituisce un editor umano e non include plagio check, fact checking o AI detection.</p>
 
       <article class="item prototype-profile" aria-labelledby="prototype-profile-title">
         <p class="kicker">Profilo del referto</p>
-        <h2 id="prototype-profile-title">Parametri usati per generare la simulazione</h2>
+        <h2 id="prototype-profile-title">Parametri usati per generare il referto</h2>
         <dl>
           <dt>Tipo:</dt><dd data-report-type>Saggio</dd>
           <dt>Pubblico:</dt><dd data-report-audience>Generale</dd>
           <dt>Obiettivo:</dt><dd data-report-objective>Chiarire</dd>
           <dt>Severità:</dt><dd data-report-severity>Standard</dd>
-          <dt>Lunghezza:</dt><dd><span data-report-length>breve</span> <span class="meta">(breve: meno di 1.500 caratteri; media: 1.500–6.000; lunga: oltre 6.000)</span></dd>
+          <dt>Lunghezza:</dt><dd><span data-report-length>breve</span> <span class="meta" data-report-length-meta>(minimo AI: 600 caratteri; massimo: 12.000)</span></dd>
         </dl>
         <p class="prototype-length-note" data-report-length-note>Il testo è ancora breve: il referto dimostrativo valuta soprattutto promessa, direzione e chiarezza dell’impianto.</p>
       </article>
@@ -136,8 +137,8 @@
           <p class="kicker">Verdetto sintetico</p>
           <h2 id="prototype-report-title" data-report-verdict>Buona base editoriale, con margini di affinamento.</h2>
           <p data-report-summary>La simulazione privilegia chiarezza, ordine e leggibilità: rende visibili le aree su cui concentrare una prima revisione editoriale.</p>
-          <div class="prototype-score" data-report-score-label aria-label="Score complessivo dimostrativo 82 su 100"><strong data-report-score>82</strong><span>/100</span></div>
-          <p class="meta">Score complessivo dimostrativo</p>
+          <div class="prototype-score" data-report-score-label aria-label="Score complessivo 82 su 100"><strong data-report-score>82</strong><span>/100</span></div>
+          <p class="meta">Score complessivo</p>
         </article>
 
         <article class="item">
@@ -169,7 +170,7 @@
     </section>
   </section>
 
-  <p class="wrap prototype-footnote">Prototipo interno · Versione 0.1.2</p>
+  <p class="wrap prototype-footnote">Prototipo interno · Versione 0.2</p>
 </main>
 <footer class="footer"><div class="wrap"><span>© Alessandro Gentili — casa editoriale e archivio in evoluzione.</span><span><a href="../autore.html">Autore</a> · <a href="../contatti.html">Contatti</a> · <a href="../privacy.html">Privacy</a> · <a href="../en.html">International gateway</a></span></div></footer>
 <script>
@@ -321,6 +322,90 @@
     'Rischio genericità / AI tone — più basso è meglio': 36
   };
 
+  const WORKER_ANALYZE_ENDPOINT = 'https://lente-editoriale.alessandro-gentili.workers.dev/analyze';
+
+  const optionLabels = {
+    text_type: {
+      essay: 'Saggio',
+      article: 'Articolo',
+      newsletter: 'Newsletter',
+      website_page: 'Pagina sito',
+      long_post: 'Post lungo',
+      white_paper: 'White paper'
+    },
+    audience: {
+      general: 'Generale',
+      professional: 'Professionale',
+      cultural: 'Culturale',
+      corporate: 'Aziendale',
+      international: 'Internazionale'
+    },
+    goal: {
+      clarify: 'Chiarire',
+      persuade: 'Convincere',
+      position: 'Posizionare',
+      argue: 'Argomentare',
+      publish: 'Pubblicare'
+    },
+    severity: {
+      standard: 'Standard',
+      severe: 'Severa',
+      very_severe: 'Molto severa'
+    }
+  };
+
+  const scoreLabels = {
+    overall: 'Score complessivo',
+    thesis: 'Tesi',
+    structure: 'Struttura',
+    clarity: 'Chiarezza',
+    voice: 'Voce',
+    density: 'Densità',
+    readability: 'Leggibilità',
+    generic_ai_tone_risk: 'Rischio genericità / AI tone — più basso è meglio'
+  };
+
+  function clearChildren(element) {
+    while (element.firstChild) element.removeChild(element.firstChild);
+  }
+
+  function appendTextItem(list, text) {
+    const item = document.createElement('li');
+    item.textContent = text;
+    list.appendChild(item);
+  }
+
+  function listToItems(list, items) {
+    clearChildren(list);
+    items.forEach((item) => appendTextItem(list, item));
+  }
+
+  function renderScores(scores) {
+    const scoreList = document.querySelector('[data-score-list]');
+    clearChildren(scoreList);
+
+    scores.forEach(({ label, score }) => {
+      const item = document.createElement('li');
+      const labelNode = document.createElement('span');
+      const scoreNode = document.createElement('strong');
+      const progress = document.createElement('progress');
+
+      labelNode.textContent = label;
+      scoreNode.textContent = score;
+      progress.value = score;
+      progress.max = 100;
+      progress.textContent = score;
+
+      item.append(labelNode, scoreNode, progress);
+      scoreList.appendChild(item);
+    });
+  }
+
+  function selectedLabel(selectId, group) {
+    const value = document.querySelector(selectId).value;
+    return optionLabels[group][value] || value;
+  }
+
   function getLengthProfile(text) {
     const length = text.trim().length;
     if (length < 1500) return 'breve';
@@ -357,10 +442,6 @@
     });
   }
 
-  function listToItems(list, items) {
-    list.innerHTML = items.map((item) => `<li>${item}</li>`).join('');
-  }
-
   function buildReportData({ text, type, audience, objective, severity }) {
     const lengthProfile = getLengthProfile(text);
     const severityData = reportModel.severities[severity];
@@ -372,6 +453,7 @@
     const overallScore = clamp(severityData.score + objectiveData.overallOffset + lengthOffset, 60, 88);
 
     return {
+      mode: 'demo',
       type,
       audience,
       objective,
@@ -386,19 +468,21 @@
       issues: objectiveData.issues,
       priorities: objectiveData.priorities,
       recommendationTitle: severityData.recommendation,
-      recommendationText: `${objectiveData.recommendation} ${typeNote} ${audienceNote} Nella v0.1.2 questa raccomandazione resta dimostrativa: deriva da parametri, obiettivo, severità e lunghezza, non da una lettura semantica del contenuto.`
+      recommendationText: `${objectiveData.recommendation} ${typeNote} ${audienceNote} Nella modalità demo questa raccomandazione deriva da parametri, obiettivo, severità e lunghezza, non da una lettura semantica del contenuto.`
     };
   }
 
-  function updateReport() {
-    const report = buildReportData({
+  function collectPayload() {
+    return {
       text: document.querySelector('#editorial-text').value,
-      type: document.querySelector('#text-type').value,
+      text_type: document.querySelector('#text-type').value,
       audience: document.querySelector('#audience').value,
-      objective: document.querySelector('#objective').value,
+      goal: document.querySelector('#objective').value,
       severity: document.querySelector('#severity').value
-    });
+    };
+  }
 
+  function renderReport(report) {
     document.querySelector('[data-report-type]').textContent = report.type;
     document.querySelector('[data-report-audience]').textContent = report.audience;
     document.querySelector('[data-report-objective]').textContent = report.objective;
@@ -408,27 +492,153 @@
     document.querySelector('[data-report-verdict]').textContent = report.verdict;
     document.querySelector('[data-report-summary]').textContent = report.summary;
     document.querySelector('[data-report-score]').textContent = report.overallScore;
-    document.querySelector('[data-report-score-label]').setAttribute('aria-label', `Score complessivo dimostrativo ${report.overallScore} su 100`);
+    document.querySelector('[data-report-score-label]').setAttribute('aria-label', `Score complessivo ${report.overallScore} su 100`);
 
-    document.querySelector('[data-score-list]').innerHTML = report.scores.map(({ label, score }) => `<li><span>${label}</span><strong>${score}</strong><progress value="${score}" max="100">${score}</progress></li>`).join('');
-
+    renderScores(report.scores);
     listToItems(document.querySelector('[data-report-strengths]'), report.strengths);
     listToItems(document.querySelector('[data-report-issues]'), report.issues);
     listToItems(document.querySelector('[data-report-priorities]'), report.priorities);
 
     document.querySelector('[data-report-recommendation-title]').textContent = report.recommendationTitle;
     document.querySelector('[data-report-recommendation-text]').textContent = report.recommendationText;
+    document.querySelector('[data-report-note]').textContent = report.mode === 'ai'
+      ? 'Report AI reale v0.2. Il referto è prudente, non sostituisce un editor umano e non include plagio check, fact checking o AI detection.'
+      : 'Report demo di fallback. Il backend AI non è stato usato: il referto varia solo in base ai parametri selezionati e alla lunghezza indicativa del contenuto.';
   }
 
-  document.querySelectorAll('[data-prototype-trigger]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const report = document.querySelector('[data-prototype-report]');
-      if (!report) return;
-      updateReport();
-      report.hidden = false;
-      report.focus({ preventScroll: true });
-      report.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  function renderDemoReport() {
+    renderReport(buildReportData({
+      text: document.querySelector('#editorial-text').value,
+      type: selectedLabel('#text-type', 'text_type'),
+      audience: selectedLabel('#audience', 'audience'),
+      objective: selectedLabel('#objective', 'goal'),
+      severity: selectedLabel('#severity', 'severity')
+    }));
+    revealReport();
+  }
+
+  function renderAiReport(apiReport) {
+    const meta = apiReport.meta || {};
+    const scores = apiReport.scores || {};
+    const lengthProfile = getLengthProfile('x'.repeat(meta.char_count || 0));
+    const evaluationLimits = Array.isArray(meta.evaluation_limits) ? meta.evaluation_limits.join(' ') : '';
+
+    renderReport({
+      mode: 'ai',
+      type: optionLabels.text_type[meta.text_type] || meta.text_type || selectedLabel('#text-type', 'text_type'),
+      audience: optionLabels.audience[meta.audience] || meta.audience || selectedLabel('#audience', 'audience'),
+      objective: optionLabels.goal[meta.goal] || meta.goal || selectedLabel('#objective', 'goal'),
+      severity: optionLabels.severity[meta.severity] || meta.severity || selectedLabel('#severity', 'severity'),
+      lengthProfile: `${meta.char_count || 0} caratteri`,
+      lengthNote: evaluationLimits || 'Valutazione automatica limitata al testo fornito e ai parametri selezionati.',
+      verdict: apiReport.verdict?.label || 'Referto editoriale generato',
+      summary: apiReport.verdict?.summary || '',
+      overallScore: normalizeScore(scores.overall),
+      scores: Object.entries(scoreLabels).filter(([key]) => key !== 'overall').map(([key, label]) => ({ label, score: normalizeScore(scores[key]) })),
+      strengths: normalizeDetails(apiReport.strengths, (item) => `${item.title}: ${item.detail}`),
+      issues: normalizeDetails(apiReport.weaknesses, (item) => `${item.title} (${severityLabel(item.severity)}): ${item.detail}`),
+      priorities: normalizeDetails(apiReport.revision_priorities, (item) => `${item.priority}. ${item.action} — ${item.reason}`),
+      recommendationTitle: decisionLabel(apiReport.final_recommendation?.decision),
+      recommendationText: [apiReport.final_recommendation?.summary, apiReport.final_recommendation?.next_step, apiReport.method_note?.summary]
+        .filter(Boolean)
+        .join(' ')
     });
+
+    revealReport();
+  }
+
+  function normalizeDetails(items, mapper) {
+    if (!Array.isArray(items)) return [];
+    return items.slice(0, 3).map((item) => mapper(item || {}));
+  }
+
+  function normalizeScore(value) {
+    const score = Number(value);
+    if (!Number.isFinite(score)) return 0;
+    return Math.min(Math.max(Math.round(score), 0), 100);
+  }
+
+  function severityLabel(value) {
+    return { low: 'bassa', medium: 'media', high: 'alta' }[value] || 'media';
+  }
+
+  function decisionLabel(value) {
+    return {
+      ready: 'Pronto con controllo finale',
+      revise_lightly: 'Rivedere leggermente',
+      revise_substantially: 'Rivedere in modo sostanziale',
+      not_ready: 'Non pronto per la pubblicazione'
+    }[value] || 'Raccomandazione finale';
+  }
+
+  function revealReport() {
+    const report = document.querySelector('[data-prototype-report]');
+    if (!report) return;
+    report.hidden = false;
+    report.focus({ preventScroll: true });
+    report.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function setStatus(message, state = 'info') {
+    const status = document.querySelector('[data-prototype-status]');
+    status.textContent = message;
+    status.dataset.state = state;
+    status.hidden = !message;
+  }
+
+  function setLoading(isLoading) {
+    const trigger = document.querySelector('[data-prototype-trigger]');
+    trigger.disabled = isLoading;
+    trigger.textContent = isLoading ? 'Analisi in corso…' : 'Genera referto AI';
+  }
+
+  async function requestAiReport() {
+    const payload = collectPayload();
+    const demoButton = document.querySelector('[data-demo-trigger]');
+    demoButton.hidden = true;
+
+    if (payload.text.trim().length < 600) {
+      setStatus('Per il referto AI servono almeno 600 caratteri. Puoi comunque usare il referto demo.', 'error');
+      demoButton.hidden = false;
+      return;
+    }
+
+    if (payload.text.trim().length > 12000) {
+      setStatus('Il referto AI accetta al massimo 12.000 caratteri. Riduci il testo o usa il referto demo.', 'error');
+      demoButton.hidden = false;
+      return;
+    }
+
+    setLoading(true);
+    setStatus('Invio al Worker e generazione del referto AI. Il testo non viene salvato nel browser.', 'info');
+
+    try {
+      const response = await fetch(WORKER_ANALYZE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok || !data || data.ok !== true || !data.report) {
+        const code = data?.error?.code || `HTTP_${response.status}`;
+        throw new Error(code);
+      }
+
+      renderAiReport(data.report);
+      setStatus('Referto AI generato correttamente.', 'info');
+    } catch (error) {
+      setStatus(`Backend AI non disponibile o non configurato (${error.message}). Puoi usare il referto demo di fallback.`, 'error');
+      demoButton.hidden = false;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  document.querySelector('[data-prototype-trigger]').addEventListener('click', requestAiReport);
+  document.querySelector('[data-demo-trigger]').addEventListener('click', () => {
+    setStatus('Referto demo generato localmente come fallback. Nessuna chiamata AI eseguita.', 'info');
+    renderDemoReport();
   });
 </script>
 </body>

@@ -1,0 +1,9 @@
+name = "lente-editoriale"
+main = "src/index.js"
+compatibility_date = "2026-06-01"
+
+[vars]
+# Set a production model explicitly before deploy if you want a different default.
+OPENAI_MODEL = "gpt-4.1-mini"
+# Local CORS is intentionally disabled by default. Set to "true" only in local/dev env.
+ALLOW_LOCALHOST = "false"
