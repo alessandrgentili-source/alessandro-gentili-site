@@ -17,6 +17,7 @@ LinkedIn is the professional profile.
 - Author profile: https://alessandro-gentili.it/autore.html
 - Essays archive: https://alessandro-gentili.it/saggi.html
 - Cerchi d’inchiostro: https://alessandro-gentili.it/cerchi/
+- Seneca: dominio di sé, tempo e morte — guida sistemica su stoicismo romano, tempo, morte, potere, dominio di sé, Nerone e ferita contemporanea del tempo sottratto: https://alessandro-gentili.it/cerchi/guide/seneca-dominio-tempo-morte/
 - Method / AI: https://alessandro-gentili.it/metodo-ai.html
 - Archive: https://alessandro-gentili.it/archivio.html
 - Contact: https://alessandro-gentili.it/contatti.html
