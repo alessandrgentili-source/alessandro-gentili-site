@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex,nofollow" />
-  <title>Lente Editoriale · Prototipo interno v0.2 | Alessandro Gentili</title>
-  <meta name="description" content="Prototipo interno di Lente Editoriale per valutare struttura, chiarezza, voce e forza di un testo lungo." />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>AgentGate — Lente Editoriale | Prototipo privato</title>
+  <meta name="description" content="Prototipo privato di AgentGate — Lente Editoriale, AI Publication Gate per contenuti marketing e comunicazione generati o assistiti da AI." />
   <link rel="stylesheet" href="../assets/style.css" />
   <style>
     .prototype-page .hero{align-items:start}
@@ -36,8 +36,10 @@
     .prototype-report ul,.prototype-report ol{margin:.7rem 0 0;padding-left:1.2rem;color:var(--ink-2)}
     .prototype-report li+li{margin-top:.35rem}
     .prototype-report-grid,.prototype-recommendation{margin-top:.95rem}
+    .prototype-decisions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem}.prototype-decision{padding:1rem;border:1px solid rgba(143,113,62,.2);border-radius:var(--radius-sm);background:rgba(255,250,240,.42)}.prototype-decision h3{margin:0 0 .35rem;font-size:1rem;letter-spacing:.05em}.prototype-decision p{margin:0;color:var(--ink-2);font-size:.92rem}
     .prototype-footnote{text-align:center;color:var(--muted);font-size:.86rem;margin:2rem 0 .2rem}.prototype-status{margin:.1rem 0 0;color:var(--ink-2)}.prototype-status[data-state="error"]{color:#7b2d26}.btn.secondary{background:transparent;color:var(--petrol);border:1px solid rgba(143,113,62,.36)}
-    @media(max-width:760px){.prototype-fields{grid-template-columns:1fr}.prototype-form textarea{min-height:220px}.prototype-score strong{font-size:3rem}}
+    @media(max-width:900px){.prototype-decisions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:760px){.prototype-fields,.prototype-decisions{grid-template-columns:1fr}.prototype-form textarea{min-height:220px}.prototype-score strong{font-size:3rem}}
   </style>
 </head>
 <body class="prototype-page">
@@ -45,16 +47,27 @@
 <main class="page">
   <section class="wrap hero">
     <div class="hero-copy">
-      <p class="eyebrow">Prototipo interno · Versione 0.2</p>
-      <h1>Lente Editoriale</h1>
-      <p class="lead">Un prototipo AI-supported per valutare struttura, chiarezza, voce e forza di un testo lungo con backend server-side prudente.</p>
-      <p class="prototype-disclaimer" id="prototype-disclaimer">Questo strumento è una demo sperimentale. Non sostituisce un editor umano e non deve essere usato con testi riservati.</p>
+      <p class="eyebrow">AgentGate · Prototipo privato · Versione 0.2</p>
+      <h1>AgentGate — Lente Editoriale</h1>
+      <p class="lead">AI Publication Gate per contenuti marketing e comunicazione generati o assistiti da AI.</p>
+      <p>Il prototipo non genera contenuti: controlla gli output prima della pubblicazione e produce un referto editoriale strutturato.</p>
+      <p class="prototype-disclaimer" id="prototype-disclaimer">Non inserire dati personali, riservati, legali, medici o finanziari. Il prototipo è privato/research-stage.</p>
     </div>
     <aside class="hero-panel">
       <p class="panel-label">Metodo</p>
       <h3>Una lente, non un correttore.</h3>
       <p>Lo strumento osserva tesi, struttura, voce e priorità di revisione senza riscrivere integralmente il testo e senza promettere verifiche di plagio o AI detection.</p>
     </aside>
+  </section>
+
+  <section class="wrap section" aria-labelledby="prototype-decisions-title">
+    <div class="section-head"><div><p class="kicker">Publication gate</p><h2 id="prototype-decisions-title">Quattro decisioni prima della pubblicazione</h2><p>Il referto editoriale alimenta un Publication Score e orienta una delle quattro decisioni, senza sostituire il giudizio umano.</p></div></div>
+    <div class="prototype-decisions">
+      <article class="prototype-decision"><h3>PASS</h3><p>Il contenuto è pubblicabile/usabile con rischi bassi.</p></article>
+      <article class="prototype-decision"><h3>REVISE</h3><p>Il contenuto ha potenziale ma richiede revisione.</p></article>
+      <article class="prototype-decision"><h3>BLOCK</h3><p>Il contenuto non deve uscire o deve essere rigenerato.</p></article>
+      <article class="prototype-decision"><h3>HUMAN REVIEW</h3><p>Serve revisione umana prima di procedere.</p></article>
+    </div>
   </section>
 
   <section class="wrap section" aria-labelledby="prototype-form-title">
@@ -138,7 +151,7 @@
           <h2 id="prototype-report-title" data-report-verdict>Buona base editoriale, con margini di affinamento.</h2>
           <p data-report-summary>La simulazione privilegia chiarezza, ordine e leggibilità: rende visibili le aree su cui concentrare una prima revisione editoriale.</p>
           <div class="prototype-score" data-report-score-label aria-label="Score complessivo 82 su 100"><strong data-report-score>82</strong><span>/100</span></div>
-          <p class="meta">Score complessivo</p>
+          <p class="meta">Publication Score complessivo, affiancato agli score editoriali esistenti</p>
         </article>
 
         <article class="item">
@@ -167,10 +180,12 @@
         <h3 data-report-recommendation-title>Procedere con una revisione strutturale leggera prima del lavoro di stile.</h3>
         <p data-report-recommendation-text>Prima di lucidare le frasi, conviene rafforzare architettura, tesi e ritmo dei passaggi.</p>
       </article>
+
+      <p class="prototype-report-note"><strong>Nota metodologica.</strong> Valutazione basata su qualità editoriale, pubblicabilità, coerenza di voce, rischio di genericità e adeguatezza al canale. Non è revisione legale, medica, finanziaria, rilevazione plagio o AI detector.</p>
     </section>
   </section>
 
-  <p class="wrap prototype-footnote">Prototipo interno · Versione 0.2</p>
+  <p class="wrap prototype-footnote">AgentGate — Lente Editoriale · Prototipo privato / research-stage · Versione 0.2</p>
 </main>
 <footer class="footer"><div class="wrap"><span>© Alessandro Gentili — casa editoriale e archivio in evoluzione.</span><span><a href="../autore.html">Autore</a> · <a href="../contatti.html">Contatti</a> · <a href="../privacy.html">Privacy</a> · <a href="../en.html">International gateway</a></span></div></footer>
 <script>
@@ -598,25 +613,30 @@
     demoButton.hidden = true;
 
     if (payload.text.trim().length < 600) {
-      setStatus('Per il referto AI servono almeno 600 caratteri. Puoi comunque usare il referto demo.', 'error');
+      renderDemoReport();
+      setStatus('Testo sotto il limite del Worker. È stato generato un referto demo locale.', 'info');
       demoButton.hidden = false;
       return;
     }
 
     if (payload.text.trim().length > 12000) {
-      setStatus('Il referto AI accetta al massimo 12.000 caratteri. Riduci il testo o usa il referto demo.', 'error');
+      renderDemoReport();
+      setStatus('Testo oltre il limite del Worker. È stato generato un referto demo locale.', 'info');
       demoButton.hidden = false;
       return;
     }
 
     setLoading(true);
     setStatus('Invio al Worker e generazione del referto AI. Il testo non viene salvato nel browser.', 'info');
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
 
     try {
       const response = await fetch(WORKER_ANALYZE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: controller.signal
       });
       const data = await response.json().catch(() => null);
 
@@ -628,9 +648,11 @@
       renderAiReport(data.report);
       setStatus('Referto AI generato correttamente.', 'info');
     } catch (error) {
-      setStatus(`Backend AI non disponibile o non configurato (${error.message}). Puoi usare il referto demo di fallback.`, 'error');
+      renderDemoReport();
+      setStatus('Backend AI non disponibile. È stato generato un referto demo locale.', 'info');
       demoButton.hidden = false;
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   }
