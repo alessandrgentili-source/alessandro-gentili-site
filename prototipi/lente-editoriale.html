@@ -613,25 +613,30 @@
     demoButton.hidden = true;
 
     if (payload.text.trim().length < 600) {
-      setStatus('Per il referto AI servono almeno 600 caratteri. Puoi comunque usare il referto demo.', 'error');
+      renderDemoReport();
+      setStatus('Testo sotto il limite del Worker. È stato generato un referto demo locale.', 'info');
       demoButton.hidden = false;
       return;
     }
 
     if (payload.text.trim().length > 12000) {
-      setStatus('Il referto AI accetta al massimo 12.000 caratteri. Riduci il testo o usa il referto demo.', 'error');
+      renderDemoReport();
+      setStatus('Testo oltre il limite del Worker. È stato generato un referto demo locale.', 'info');
       demoButton.hidden = false;
       return;
     }
 
     setLoading(true);
     setStatus('Invio al Worker e generazione del referto AI. Il testo non viene salvato nel browser.', 'info');
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
 
     try {
       const response = await fetch(WORKER_ANALYZE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: controller.signal
       });
       const data = await response.json().catch(() => null);
 
@@ -643,9 +648,11 @@
       renderAiReport(data.report);
       setStatus('Referto AI generato correttamente.', 'info');
     } catch (error) {
-      setStatus(`Backend AI non disponibile o non configurato (${error.message}). Puoi usare il referto demo di fallback.`, 'error');
+      renderDemoReport();
+      setStatus('Backend AI non disponibile. È stato generato un referto demo locale.', 'info');
       demoButton.hidden = false;
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   }
