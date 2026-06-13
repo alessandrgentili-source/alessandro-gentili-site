@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>Lente AI | Briefing privato — 26 giugno</title>
+  <meta name="description" content="Briefing privato su Lente AI, percorso di AI Output Governance basato su un prototipo già funzionante." />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    :root{--brief-teal:#173c3c;--brief-gold:#9a7842;--brief-ivory:#f6f0e3;--brief-graphite:#303633}
+    body{background:var(--brief-ivory);color:var(--brief-graphite)}
+    .brief-header{border-bottom:1px solid rgba(154,120,66,.28)}
+    .brief-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.15rem 0;color:var(--brief-teal)}
+    .brief-mark{font-family:"Iowan Old Style","Palatino Linotype",Palatino,serif;font-size:1.18rem;font-weight:700}
+    .private-label,.number{color:var(--brief-gold);font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+    .brief-hero{padding-top:clamp(4rem,9vw,8rem);padding-bottom:clamp(3rem,7vw,6rem);border-bottom:1px solid rgba(154,120,66,.28)}
+    .brief-hero h1{max-width:850px;color:var(--brief-teal);font-size:clamp(4.2rem,12vw,9rem);line-height:.85;margin:.5rem 0 1.5rem}
+    .brief-hero .lead{max-width:850px;font-size:clamp(1.35rem,3vw,2.25rem);line-height:1.2}
+    .brief-intro{max-width:690px;margin-top:2rem}
+    .brief-section{padding:clamp(3.5rem,7vw,6.5rem) 0;border-bottom:1px solid rgba(154,120,66,.22)}
+    .brief-section h2{max-width:780px;color:var(--brief-teal);font-size:clamp(2.2rem,5vw,4rem);line-height:1.05}
+    .brief-section p{max-width:760px}
+    .decision-grid,.line-grid,.path-grid{display:grid;gap:1rem;margin-top:2rem}
+    .decision-grid{grid-template-columns:repeat(4,1fr)}
+    .line-grid,.path-grid{grid-template-columns:repeat(3,1fr)}
+    .brief-card{padding:clamp(1.25rem,3vw,2rem);border:1px solid rgba(154,120,66,.3);background:rgba(255,255,255,.23)}
+    .brief-card h3{color:var(--brief-teal);margin:.55rem 0 .65rem}
+    .decision-grid h3{font-size:1.05rem;letter-spacing:.08em}
+    .brief-card p{margin:0;color:#46514c}
+    .brief-panel{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+    .brief-list{margin:1.5rem 0 0;padding:0;list-style:none}
+    .brief-list li{padding:.75rem 0;border-bottom:1px solid rgba(154,120,66,.22)}
+    .brief-note{padding:1.5rem;border-left:3px solid var(--brief-gold);background:rgba(255,255,255,.25)}
+    .brief-contact{background:var(--brief-teal);color:var(--brief-ivory)}
+    .brief-contact h2,.brief-contact a{color:var(--brief-ivory)}
+    .brief-contact a{text-decoration-color:var(--brief-gold)}
+    .brief-footer{padding:1.25rem 0;color:#58635d;font-size:.85rem}
+    @media(max-width:900px){.decision-grid{grid-template-columns:repeat(2,1fr)}.line-grid,.path-grid{grid-template-columns:1fr}}
+    @media(max-width:680px){.brief-top{align-items:flex-start;flex-direction:column}.brief-panel,.decision-grid{grid-template-columns:1fr}.brief-hero h1{font-size:clamp(3.8rem,22vw,6rem)}.brief-section{padding:3.5rem 0}}
+  </style>
+</head>
+<body>
+  <header class="brief-header"><div class="wrap brief-top"><span class="brief-mark">Lente AI</span><span class="private-label">Briefing privato · 26 giugno</span></div></header>
+  <main>
+    <section class="wrap brief-hero">
+      <p class="private-label">AI Output Governance</p>
+      <h1>Lente AI</h1>
+      <p class="lead">Qualità, revisione e responsabilità degli output generati dall’intelligenza artificiale</p>
+      <p class="brief-intro">Un briefing privato collegato a un prototipo già funzionante: un percorso autonomo per portare metodo, giudizio e responsabilità nel punto più delicato dell’uso dell’AI — prima che un output diventi azione, contenuto o decisione.</p>
+    </section>
+
+    <section class="wrap brief-section">
+      <p class="number">01 · La soglia operativa</p><h2>Quattro decisioni, prima di procedere.</h2>
+      <div class="decision-grid">
+        <article class="brief-card"><h3>PASS</h3><p>L’output può procedere nel workflow previsto.</p></article>
+        <article class="brief-card"><h3>REVISE</h3><p>L’output richiede una revisione mirata.</p></article>
+        <article class="brief-card"><h3>BLOCK</h3><p>L’output presenta criticità che impediscono di procedere.</p></article>
+        <article class="brief-card"><h3>HUMAN REVIEW</h3><p>Il contesto richiede esplicitamente giudizio umano.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap brief-section brief-panel">
+      <div><p class="number">02 · Il problema</p><h2>Non generare di più. Revisionare meglio.</h2></div>
+      <div><p>Oggi molti strumenti generano contenuti. Pochi aiutano a capire se gli output siano validi, coerenti, verificabili, non generici e responsabili.</p><p>La questione non è soltanto cosa l’AI sappia produrre, ma quale qualità e quale responsabilità siamo in grado di riconoscere prima di usarlo.</p></div>
+    </section>
+
+    <section class="wrap brief-section">
+      <div class="brief-panel"><div><p class="number">03 · Il prototipo</p><h2>AgentGate — Lente Editoriale</h2><p>Demo privata research-stage, mostrabile solo in incontro operativo.</p></div><aside class="brief-note"><strong>Un oggetto già funzionante.</strong><p>Consente di esplorare in modo concreto una logica di governance applicata agli output editoriali.</p></aside></div>
+      <ul class="brief-list"><li>Form avanzato per definire contesto e obiettivo</li><li>Referto qualitativo e score</li><li>Criticità e priorità operative</li><li>Raccomandazione finale</li></ul>
+    </section>
+
+    <section class="wrap brief-section">
+      <p class="number">04 · Tre linee</p><h2>Un metodo, tre contesti di applicazione.</h2>
+      <div class="line-grid">
+        <article class="brief-card"><h3>Lente Didattica</h3><p>Per scuola, docenti e studenti: AI literacy e pensiero critico, con il docente al centro.</p></article>
+        <article class="brief-card"><h3>Lente Impresa</h3><p>Per PMI, marketing e comunicazione: brand voice, pubblicabilità, workflow e human review.</p></article>
+        <article class="brief-card"><h3>Lente Civica</h3><p>Per enti, territori e associazioni: comunicazione pubblica, accessibilità e trasparenza.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap brief-section brief-panel">
+      <div><p class="number">05 · Perimetro</p><h2>Cosa non è.</h2><p>Una lente chiarisce il giudizio; non prende il posto di chi ha la responsabilità di esercitarlo.</p></div>
+      <ul class="brief-list"><li>Non è un generatore.</li><li>Non è un detector punitivo.</li><li>Non valuta studenti, non assegna voti e non fa ranking.</li><li>Non sostituisce docente, manager o decisore umano.</li><li>Non automatizza decisioni sensibili.</li></ul>
+    </section>
+
+    <section class="wrap brief-section">
+      <p class="number">06 · Primo percorso possibile</p><h2>Dal contesto reale a un pilot misurabile.</h2>
+      <div class="path-grid">
+        <article class="brief-card"><span class="number">2/3 settimane</span><h3>Assessment esplorativo</h3><p>Comprendere bisogni, output, rischi e criteri di qualità.</p></article>
+        <article class="brief-card"><span class="number">6/8 settimane</span><h3>Mini-pilot</h3><p>Provare il metodo su un perimetro limitato e concreto.</p></article>
+        <article class="brief-card"><span class="number">3/6 mesi</span><h3>Pilot strutturato</h3><p>Integrare, osservare e valutare il modello nel tempo.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap brief-section brief-panel">
+      <div><p class="number">07 · Obiettivo del confronto</p><h2>Costruire il primo caso reale.</h2></div>
+      <ul class="brief-list"><li>Individuare un primo soggetto promotore.</li><li>Individuare un contesto reale di test.</li><li>Definire partner e canale di sostenibilità.</li><li>Valutare assessment o mini-pilot.</li></ul>
+    </section>
+
+    <section class="brief-contact"><div class="wrap brief-section"><p class="number">Contatti</p><h2>Alessandro Gentili</h2><p><a href="https://alessandro-gentili.it">alessandro-gentili.it</a><br><a href="mailto:alessandrgentili@gmail.com">alessandrgentili@gmail.com</a></p></div></section>
+  </main>
+  <footer class="wrap brief-footer">Lente AI · Briefing privato · 26 giugno</footer>
+</body>
+</html>
