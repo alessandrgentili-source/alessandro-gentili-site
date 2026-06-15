@@ -99,19 +99,23 @@ h3{font-size:clamp(1.18rem,1.45vw,1.58rem);line-height:1.18;text-wrap:balance}
 
 /* Temi pages: contained editorial images and card section rhythm */
 .theme-editorial-image{
-  max-width:1040px;
+  max-width:960px;
   margin:clamp(2.5rem,5vw,4.5rem) auto;
 }
 .theme-editorial-image img{
   display:block;
   width:100%;
   height:auto;
-  border:1px solid rgba(143,113,62,.2);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow-soft);
+  border:1px solid rgba(120,96,60,.18);
+  border-radius:18px;
 }
-.temi-page .section-head{
-  margin-bottom:clamp(1.7rem,3vw,2.35rem);
+.theme-section-heading{
+  margin-bottom:clamp(1.5rem,3vw,2.25rem);
+}
+.theme-section-heading + .grid-2,
+.theme-section-heading + .essay-grid,
+.theme-section-heading + .cards-grid{
+  margin-top:clamp(1.25rem,2.5vw,2rem);
 }
 .grid-5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.9rem;align-items:stretch}
 .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem;align-items:stretch}
