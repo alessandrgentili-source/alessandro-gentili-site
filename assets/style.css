@@ -519,9 +519,9 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 .author-portrait-panel{width:100%;max-width:340px;padding:0;justify-self:end}
 .author-portrait{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain}
 .author-section{padding-top:clamp(2.6rem,4.8vw,4.5rem);padding-bottom:clamp(2.8rem,5.2vw,4.9rem)}
-.author-section > h2{margin-bottom:clamp(1.1rem,2vw,1.45rem)}
-.author-axis-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.95rem;align-items:stretch}
-.author-coordinate-grid{gap:.95rem}
+.author-section > h2{margin-bottom:clamp(.85rem,1.8vw,1.35rem)}
+.author-axis-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.95rem,1.8vw,1.25rem);align-items:stretch}
+.author-coordinate-grid{gap:clamp(.95rem,1.8vw,1.25rem)}
 .author-note h2{margin-bottom:.85rem}
 @media(max-width:1060px){
   .author-portrait-panel{justify-self:start}
