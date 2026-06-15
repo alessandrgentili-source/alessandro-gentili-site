@@ -96,6 +96,23 @@ h3{font-size:clamp(1.18rem,1.45vw,1.58rem);line-height:1.18;text-wrap:balance}
 .section:last-child{border-bottom:0}
 .section-head{display:flex;align-items:end;justify-content:space-between;gap:1.6rem;margin-bottom:1.55rem}
 .section-head p{max-width:58ch;margin:.62rem 0 0;color:var(--ink-2)}
+
+/* Temi pages: contained editorial images and card section rhythm */
+.theme-editorial-image{
+  max-width:1040px;
+  margin:clamp(2.5rem,5vw,4.5rem) auto;
+}
+.theme-editorial-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid rgba(143,113,62,.2);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-soft);
+}
+.temi-page .section-head{
+  margin-bottom:clamp(1.7rem,3vw,2.35rem);
+}
 .grid-5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.9rem;align-items:stretch}
 .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem;align-items:stretch}
 .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem;align-items:stretch}
