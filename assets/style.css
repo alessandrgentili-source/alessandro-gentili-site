@@ -518,11 +518,18 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 .author-hero{grid-template-columns:minmax(0,1fr) minmax(300px,340px);align-items:center;padding-bottom:clamp(2rem,4vw,3.6rem)}
 .author-portrait-panel{width:100%;max-width:340px;padding:0;justify-self:end}
 .author-portrait{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain}
+.author-section{padding-top:clamp(2.6rem,4.8vw,4.5rem);padding-bottom:clamp(2.8rem,5.2vw,4.9rem)}
+.author-section > h2{margin-bottom:clamp(1.1rem,2vw,1.45rem)}
+.author-axis-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.95rem;align-items:stretch}
+.author-coordinate-grid{gap:.95rem}
+.author-note h2{margin-bottom:.85rem}
 @media(max-width:1060px){
   .author-portrait-panel{justify-self:start}
+  .author-axis-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:760px){
   .author-portrait-panel{width:min(100%,340px)}
+  .author-axis-grid{grid-template-columns:1fr}
   nav a{min-height:44px;display:flex;align-items:center;padding:.45rem .58rem;line-height:1.25}
   .filters button{min-height:44px}
   .btn,.btn-secondary{min-height:44px}
