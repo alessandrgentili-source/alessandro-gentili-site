@@ -364,15 +364,15 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 }
 .surface-map{position:relative;min-height:272px;margin-left:clamp(-2.65rem,-2.3vw,-.8rem)}
 .surface-map svg{position:absolute;inset:50% auto auto 50%;width:min(506px,122%);max-width:none;transform:translate(-51.5%,-50%);overflow:visible}
-.map-arc,.map-line,.map-fracture{fill:none;stroke:rgba(141,109,55,.29);stroke-width:1.08;vector-effect:non-scaling-stroke;stroke-linecap:round}
-.map-arc-lg{stroke-dasharray:430 88 116 58;stroke-dashoffset:28;opacity:.62}
-.map-arc-md{stroke-dasharray:252 64 98 46;stroke-dashoffset:76;opacity:.42}
-.map-arc-sm{stroke-dasharray:148 42 58 52;stroke-dashoffset:34;opacity:.36}
-.map-line{stroke:rgba(141,109,55,.205);stroke-width:.92;stroke-dasharray:120 18 56 26;opacity:.68}
+.map-arc,.map-line,.map-fracture{fill:none;stroke:rgba(141,109,55,.38);stroke-width:1.18;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.map-arc-lg{stroke-dasharray:430 88 116 58;stroke-dashoffset:28;opacity:.74}
+.map-arc-md{stroke-dasharray:252 64 98 46;stroke-dashoffset:76;opacity:.56}
+.map-arc-sm{stroke-dasharray:148 42 58 52;stroke-dashoffset:34;opacity:.48}
+.map-line{stroke:rgba(141,109,55,.30);stroke-width:1.02;stroke-dasharray:120 18 56 26;opacity:.78}
 .map-line-vertical{stroke-dasharray:84 20 132 28}
-.map-line-oblique{stroke-dasharray:64 20;opacity:.34}
-.map-fracture{stroke:rgba(141,109,55,.32);stroke-dasharray:30 14;opacity:.45}
-.map-point{fill:rgba(141,109,55,.66)}
+.map-line-oblique{stroke-dasharray:64 20;opacity:.42}
+.map-fracture{stroke:rgba(141,109,55,.44);stroke-dasharray:30 14;opacity:.62}
+.map-point{fill:rgba(141,109,55,.78)}
 .surface-copy{max-width:590px}
 .surface-copy .kicker{margin-bottom:1.08rem}
 .surface-copy h2{font-size:clamp(2rem,3.65vw,3.78rem);line-height:1.055;letter-spacing:-.017em;color:#10202d}
