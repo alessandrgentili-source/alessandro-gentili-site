@@ -16,10 +16,10 @@
     .prototype-flow span{border:1px solid rgba(143,113,62,.28);border-radius:999px;padding:.42rem .72rem;background:rgba(255,250,240,.62)}
     .prototype-form{display:grid;gap:1.05rem}
     .prototype-form label,.risk-fieldset{display:grid;gap:.38rem;color:var(--ink);font-weight:700}
-    .prototype-form textarea,.prototype-form select{width:100%;border:1px solid rgba(143,113,62,.28);border-radius:var(--radius-sm);background:rgba(255,250,240,.72);color:var(--ink);font:inherit;line-height:1.58;padding:.78rem .86rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
+    .prototype-form textarea,.prototype-form select,.prototype-form input:not([type="checkbox"]){width:100%;border:1px solid rgba(143,113,62,.28);border-radius:var(--radius-sm);background:rgba(255,250,240,.72);color:var(--ink);font:inherit;line-height:1.58;padding:.78rem .86rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
     .prototype-form textarea{min-height:220px;resize:vertical}
     .prototype-form textarea::placeholder{color:rgba(59,67,61,.64)}
-    .prototype-form textarea:focus,.prototype-form select:focus{outline:2px solid rgba(143,113,62,.35);outline-offset:2px;border-color:rgba(143,113,62,.55)}
+    .prototype-form textarea:focus,.prototype-form select:focus,.prototype-form input:not([type="checkbox"]):focus{outline:2px solid rgba(143,113,62,.35);outline-offset:2px;border-color:rgba(143,113,62,.55)}
     .prototype-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
     .risk-fieldset{border:1px solid rgba(143,113,62,.22);border-radius:var(--radius-sm);padding:.85rem;margin:0;background:rgba(255,250,240,.36)}
     .risk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem .8rem;font-weight:500;color:var(--ink-2)}
@@ -57,9 +57,9 @@
       <p class="eyebrow">Lente AI · Dashboard pilot privata · Versione 0.1</p>
       <h1>Lente Impresa</h1>
       <p class="lead">Protegge le informazioni e valuta comunicazioni aziendali generate o assistite da AI prima dell’invio o dell’uso operativo.</p>
-      <p>Prima anonimizza. Poi valuta. Infine restituisce un referto operativo.</p>
+      <p>Crea o incolla una bozza. Poi anonimizza, valuta e genera un referto operativo.</p>
       <p class="prototype-disclaimer" id="prototype-disclaimer">Demo privata — research-stage — non usare con dati reali o riservati.</p>
-      <div class="prototype-flow" aria-label="Flusso operativo"><span>1. Anonimizza</span><span aria-hidden="true">→</span><span>2. Valuta</span><span aria-hidden="true">→</span><span>3. Referto</span></div>
+      <div class="prototype-flow" aria-label="Flusso operativo"><span>1. Crea o incolla</span><span aria-hidden="true">→</span><span>2. Anonimizza</span><span aria-hidden="true">→</span><span>3. Valuta</span><span aria-hidden="true">→</span><span>4. Referto</span></div>
     </div>
     <aside class="hero-panel">
       <p class="panel-label">Metodo</p>
@@ -78,8 +78,34 @@
     </div>
   </section>
 
+  <section class="wrap section" aria-labelledby="draft-builder-title">
+    <div class="section-head"><div><p class="kicker">Step 1</p><h2 id="draft-builder-title">Crea bozza guidata</h2><p>Per chi non ha ancora un testo pronto: scegli un’area, compila i campi e genera una bozza base da controllare.</p></div></div>
+    <form class="item prototype-form" data-draft-form autocomplete="off">
+      <p class="prototype-disclaimer">La bozza è generata localmente da modello. Non è una generazione AI libera.</p>
+      <p class="prototype-warning">La bozza guidata serve a partire da una struttura ordinata. Non sostituisce controllo umano, verifica commerciale, tecnica, amministrativa, HR o legale.</p>
+      <div class="prototype-fields">
+        <label for="business-area">Area aziendale
+          <select id="business-area">
+            <option value="commerciale">Commerciale / Clienti</option>
+            <option value="acquisti">Acquisti / Fornitori</option>
+            <option value="amministrazione">Amministrazione</option>
+            <option value="marketing">Marketing / Comunicazione</option>
+            <option value="hr">HR / Persone</option>
+          </select>
+        </label>
+        <label for="draft-model">Modello
+          <select id="draft-model"></select>
+        </label>
+      </div>
+      <p class="prototype-status" data-model-note role="status" aria-live="polite" hidden></p>
+      <div class="prototype-fields" data-draft-fields></div>
+      <div class="actions"><button class="btn" type="button" data-generate-draft>Genera bozza</button><button class="btn secondary" type="button" data-clear-draft>Svuota campi bozza</button></div>
+      <p class="prototype-status" data-draft-status role="status" aria-live="polite" hidden></p>
+    </form>
+  </section>
+
   <section class="wrap section" aria-labelledby="anonymize-title">
-    <div class="section-head"><div><p class="kicker">Step 1</p><h2 id="anonymize-title">Anonimizza</h2><p>L’anonimizzazione avviene localmente nel browser. Il testo originale non viene inviato al Worker.</p></div></div>
+    <div class="section-head"><div><p class="kicker">Step 2</p><h2 id="anonymize-title">Anonimizza</h2><p>L’anonimizzazione avviene localmente nel browser. Il testo originale non viene inviato al Worker.</p></div></div>
     <form class="item prototype-form" data-anonymize-form autocomplete="off">
       <label for="original-text">Documento originale
         <textarea id="original-text" autocomplete="off" placeholder="Incolla qui il documento da anonimizzare. Non usare dati reali o riservati in questa demo privata."></textarea>
@@ -93,7 +119,7 @@
       </label>
       <div class="actions"><button class="btn" type="button" data-load-demo>Carica esempio fittizio</button><button class="btn" type="button" data-anonymize-trigger>Anonimizza testo</button><button class="btn secondary" type="button" data-edit-anonymized>Modifica manualmente</button></div>
       <label for="anonymized-text">Testo anonimizzato
-        <textarea id="anonymized-text" autocomplete="off" placeholder="Il testo anonimizzato comparirà qui dopo lo Step 1."></textarea>
+        <textarea id="anonymized-text" autocomplete="off" placeholder="Il testo anonimizzato comparirà qui dopo lo Step 2."></textarea>
       </label>
       <div><h3>Entità rilevate</h3><ul class="entity-list" data-entity-list><li>Nessuna entità rilevata.</li></ul></div>
       <p class="prototype-warning">Controlla sempre manualmente il testo anonimizzato prima di procedere. L’anonimizzazione automatica può non rilevare tutti gli elementi sensibili o identificativi.</p>
@@ -103,10 +129,10 @@
   </section>
 
   <section class="wrap section" aria-labelledby="prototype-form-title">
-    <div class="section-head"><div><p class="kicker">Step 2</p><h2 id="prototype-form-title">Valuta</h2><p>La valutazione usa solo il testo anonimizzato approvato. Il testo originale non entra nel payload.</p></div></div>
+    <div class="section-head"><div><p class="kicker">Step 3</p><h2 id="prototype-form-title">Valuta</h2><p>La valutazione usa solo il testo anonimizzato approvato. Il testo originale non entra nel payload.</p></div></div>
     <form class="item prototype-form" data-prototype-form aria-describedby="prototype-disclaimer" autocomplete="off">
       <label for="approved-text">Testo anonimizzato approvato
-        <textarea id="approved-text" autocomplete="off" placeholder="Approva il testo anonimizzato nello Step 1 oppure incolla qui solo testo già anonimizzato."></textarea>
+        <textarea id="approved-text" autocomplete="off" placeholder="Approva il testo anonimizzato nello Step 2 oppure incolla qui solo testo già anonimizzato."></textarea>
       </label>
       <div class="prototype-fields">
         <label for="module">Modulo
@@ -158,6 +184,25 @@
   // Integrazione futura: collegare qui un adapter Worker reale che restituisca un referto strutturato.
   // La v0.1 usa solo referto demo locale dichiarato e non invia testi al Worker.
   const approvedState = { completed: false };
+  const draftModels = {
+    commerciale: [{ value: 'offer_cover', label: 'Accompagnamento offerta/preventivo' }],
+    acquisti: [{ value: 'supplier_quote', label: 'Richiesta preventivo fornitore' }],
+    amministrazione: [],
+    marketing: [],
+    hr: []
+  };
+  const draftFieldSets = {
+    offer_cover: [
+      ['subject','Oggetto email'],['recipientName','Nome destinatario'],['recipientCompany','Azienda destinataria'],['senderCompany','Azienda mittente'],['senderContact','Referente mittente'],['senderEmail','Email referente'],['senderPhone','Telefono referente'],['senderVat','P.IVA azienda mittente'],['offerCode','Codice offerta / ordine'],['workType','Tipo lavorazione / prodotto / servizio'],['deadline','Data consegna o scadenza'],['amount','Importo indicativo'],['condition','Condizione da verificare'],['nextAction','Prossima azione richiesta']
+    ],
+    supplier_quote: [
+      ['subject','Oggetto email'],['supplierContact','Nome referente fornitore'],['supplierCompany','Azienda fornitore'],['requestingCompany','Azienda richiedente'],['requestingContact','Referente richiedente'],['contactEmail','Email referente'],['contactPhone','Telefono referente'],['requestedItem','Prodotto / materiale / servizio richiesto'],['quantity','Quantità indicativa'],['quoteDeadline','Data entro cui ricevere preventivo'],['deliveryDate','Data consegna desiderata'],['technicalInfo','Informazioni tecniche disponibili'],['nextAction','Prossima azione richiesta']
+    ]
+  };
+  const draftToneOptions = {
+    offer_cover: ['neutro','commerciale','prudente'],
+    supplier_quote: ['neutro','operativo','urgente ma cortese']
+  };
   const policies = {
     clienti: [
       ['customer_operational_email_v0_1', 'Email operativa/commerciale'],
@@ -181,6 +226,13 @@
   function clearChildren(element){while(element.firstChild)element.removeChild(element.firstChild)}
   function listToItems(list, items){clearChildren(list);items.forEach((text)=>{const item=document.createElement('li');item.textContent=text;list.appendChild(item)})}
   function setStatus(selector,message,state='info'){const status=document.querySelector(selector);status.textContent=message;status.dataset.state=state;status.hidden=!message}
+  function updateDraftModels(){const area=document.querySelector('#business-area').value;const select=document.querySelector('#draft-model');const models=draftModels[area];clearChildren(select);if(!models.length){const option=document.createElement('option');option.value='';option.textContent='Modelli in preparazione';select.appendChild(option);document.querySelector('[data-draft-fields]').hidden=true;setStatus('[data-model-note]','Modelli in preparazione per questa area.','info');return}models.forEach(({value,label})=>{const option=document.createElement('option');option.value=value;option.textContent=label;select.appendChild(option)});select.value=models[0].value;document.querySelector('[data-draft-fields]').hidden=false;setStatus('[data-model-note]','', 'info');renderDraftFields()}
+  function renderDraftFields(){const model=document.querySelector('#draft-model').value;const container=document.querySelector('[data-draft-fields]');clearChildren(container);if(!model||!draftFieldSets[model])return;draftFieldSets[model].forEach(([name,label])=>{const fieldLabel=document.createElement('label');fieldLabel.setAttribute('for',`draft-${name}`);fieldLabel.textContent=label;const input=document.createElement('input');input.id=`draft-${name}`;input.name=name;input.type='text';input.autocomplete='off';fieldLabel.appendChild(input);container.appendChild(fieldLabel)});const toneLabel=document.createElement('label');toneLabel.setAttribute('for','draft-tone');toneLabel.textContent='Tono';const toneSelect=document.createElement('select');toneSelect.id='draft-tone';toneSelect.name='tone';draftToneOptions[model].forEach((tone)=>{const option=document.createElement('option');option.value=tone;option.textContent=tone;toneSelect.appendChild(option)});toneLabel.appendChild(toneSelect);container.appendChild(toneLabel)}
+  function getDraftValues(){const values={};document.querySelectorAll('[data-draft-fields] input,[data-draft-fields] select').forEach((field)=>{values[field.name]=field.value.trim()});return values}
+  function placeholder(value,label){return value||`[${label}]`}
+  function buildGuidedDraft(){const model=document.querySelector('#draft-model').value;const values=getDraftValues();if(model==='offer_cover'){return `Oggetto: ${placeholder(values.subject,'oggetto')}\n\nBuongiorno ${placeholder(values.recipientName,'nome destinatario')},\n\ncome anticipato, ${placeholder(values.senderCompany,'azienda mittente')} può occuparsi di ${placeholder(values.workType,'tipo lavorazione/prodotto/servizio')} per ${placeholder(values.recipientCompany,'azienda destinataria')}, in riferimento a ${placeholder(values.offerCode,'codice offerta/ordine')}.\n\nLa consegna è prevista entro ${placeholder(values.deadline,'data consegna/scadenza')}. L’importo indicativo è pari a ${placeholder(values.amount,'importo')}, salvo ${placeholder(values.condition,'condizione da verificare')}.\n\nPer procedere, ${placeholder(values.nextAction,'prossima azione richiesta')}.\n\nPer qualsiasi chiarimento può contattare ${placeholder(values.senderContact,'referente mittente')} all’indirizzo ${placeholder(values.senderEmail,'email referente')} o al numero ${placeholder(values.senderPhone,'telefono referente')}.\n\nP.IVA ${placeholder(values.senderCompany,'azienda mittente')}: ${placeholder(values.senderVat,'P.IVA')}\n\nCordiali saluti,\n${placeholder(values.senderContact,'referente mittente')}\n${placeholder(values.senderCompany,'azienda mittente')}`}if(model==='supplier_quote'){return `Oggetto: ${placeholder(values.subject,'oggetto')}\n\nBuongiorno ${placeholder(values.supplierContact,'nome referente fornitore')},\n\nvi contattiamo per richiedere un preventivo relativo a ${placeholder(values.requestedItem,'prodotto/materiale/servizio richiesto')} per ${placeholder(values.requestingCompany,'azienda richiedente')}.\n\nLa quantità indicativa è ${placeholder(values.quantity,'quantità indicativa')}. Le informazioni tecniche attualmente disponibili sono: ${placeholder(values.technicalInfo,'informazioni tecniche disponibili')}.\n\nAvremmo bisogno di ricevere un vostro riscontro entro ${placeholder(values.quoteDeadline,'data entro cui ricevere preventivo')}, con eventuale indicazione dei tempi di disponibilità e consegna. La data di consegna desiderata è ${placeholder(values.deliveryDate,'data consegna desiderata')}.\n\nPer procedere, ${placeholder(values.nextAction,'prossima azione richiesta')}.\n\nPer qualsiasi chiarimento può contattare ${placeholder(values.requestingContact,'referente richiedente')} all’indirizzo ${placeholder(values.contactEmail,'email referente')} o al numero ${placeholder(values.contactPhone,'telefono referente')}.\n\nCordiali saluti,\n${placeholder(values.requestingContact,'referente richiedente')}\n${placeholder(values.requestingCompany,'azienda richiedente')}`}return ''}
+  function generateDraft(){const draft=buildGuidedDraft();if(!draft){setStatus('[data-draft-status]','Seleziona un modello disponibile prima di generare la bozza.','error');return}document.querySelector('#original-text').value=draft;approvedState.completed=false;document.querySelector('#anonymized-text').value='';document.querySelector('#approved-text').value='';setStatus('[data-draft-status]','Bozza generata localmente. Controllala, poi procedi con anonimizzazione.','info');document.querySelector('#anonymize-title').scrollIntoView({behavior:'smooth',block:'start'});document.querySelector('#original-text').focus({preventScroll:true})}
+  function clearDraftFields(){document.querySelectorAll('[data-draft-fields] input').forEach((input)=>{input.value=''}) ;const tone=document.querySelector('#draft-tone');if(tone)tone.selectedIndex=0;setStatus('[data-draft-status]','Campi della bozza guidata svuotati.','info')}
   function updatePolicies(){const module=document.querySelector('#module').value;const select=document.querySelector('#policy');clearChildren(select);policies[module].forEach(([value,label])=>{const option=document.createElement('option');option.value=value;option.textContent=`${value} — ${label}`;select.appendChild(option)})}
   function replacePattern(text, regex, type, entities, counters){return text.replace(regex,(match)=>{counters[type]=(counters[type]||0)+1;const placeholder=`[${type}_${counters[type]}]`;entities.push({type,placeholder});return placeholder})}
   function anonymizeText(text, level){const entities=[];const counters={};let output=text;
@@ -215,15 +267,20 @@
   async function copyReport(){const text=buildReportClipboardText();if(!text){setStatus('[data-report-status]','Nessun referto da copiare.','error');return}if(!navigator.clipboard||!navigator.clipboard.writeText){setStatus('[data-report-status]','Clipboard API non disponibile. Seleziona e copia manualmente il referto visibile.','error');return}try{await navigator.clipboard.writeText(text);setStatus('[data-report-status]','Referto copiato negli appunti.','info')}catch(error){setStatus('[data-report-status]','Copia non riuscita. Seleziona e copia manualmente il referto visibile.','error')}}
   function resetEvaluation(){approvedState.completed=false;document.querySelector('[data-prototype-report]').hidden=true;document.querySelector('#original-text').value='';document.querySelector('#anonymized-text').value='';document.querySelector('#approved-text').value='';document.querySelectorAll('[data-risk]').forEach((input)=>{input.checked=false});renderEntities([]);setStatus('[data-anonymize-status]','Nuova valutazione avviata: riparti da anonimizzazione o incolla solo testo già anonimizzato nello Step 2.','info');setStatus('[data-prototype-status]','Riparti da anonimizzazione o approva un testo già anonimizzato prima di valutare.','info');setStatus('[data-report-status]','', 'info');document.querySelector('#original-text').focus()}
   function loadDemoExample(){document.querySelector('#original-text').value='Esempio completamente fittizio per demo: Giulia Bianchi, referente di Armonia Digitale S.r.l., scrive da giulia.bianchi@example.test e chiede conferma al numero +39 333 1234567. La P.IVA fittizia è 01234567890. Importo indicativo € 12.450,00, consegna prevista il 24/06/2026, codice offerta OFF-FITTIZIA-2026-042. Nessun dato è reale.';approvedState.completed=false;document.querySelector('#anonymized-text').value='';document.querySelector('#approved-text').value='';renderEntities([]);setStatus('[data-anonymize-status]','Esempio fittizio caricato. Procedi con anonimizzazione locale prima della valutazione.','info')}
+  document.querySelector('#business-area').addEventListener('change',updateDraftModels);
+  document.querySelector('#draft-model').addEventListener('change',renderDraftFields);
+  document.querySelector('[data-generate-draft]').addEventListener('click',generateDraft);
+  document.querySelector('[data-clear-draft]').addEventListener('click',clearDraftFields);
   document.querySelector('[data-load-demo]').addEventListener('click',loadDemoExample);
   document.querySelector('[data-anonymize-trigger]').addEventListener('click',()=>{const original=document.querySelector('#original-text').value;const level=document.querySelector('#anonymization-level').value;const result=anonymizeText(original,level);document.querySelector('#anonymized-text').value=result.output;approvedState.completed=false;renderEntities(result.entities);setStatus('[data-anonymize-status]','Anonimizzazione locale completata. Controlla manualmente prima di approvare.','info')});
   document.querySelector('[data-edit-anonymized]').addEventListener('click',()=>{document.querySelector('#anonymized-text').focus();approvedState.completed=false;setStatus('[data-anonymize-status]','Puoi modificare manualmente il testo anonimizzato prima di approvarlo.','info')});
-  document.querySelector('[data-approve-trigger]').addEventListener('click',()=>{const text=document.querySelector('#anonymized-text').value.trim();if(!text){setStatus('[data-anonymize-status]','Nessun testo anonimizzato da approvare.','error');return}document.querySelector('#approved-text').value=text;approvedState.completed=true;setStatus('[data-anonymize-status]','Testo anonimizzato approvato e trasferito allo Step 2.','info')});
+  document.querySelector('[data-approve-trigger]').addEventListener('click',()=>{const text=document.querySelector('#anonymized-text').value.trim();if(!text){setStatus('[data-anonymize-status]','Nessun testo anonimizzato da approvare.','error');return}document.querySelector('#approved-text').value=text;approvedState.completed=true;setStatus('[data-anonymize-status]','Testo anonimizzato approvato e trasferito allo Step 3.','info')});
   document.querySelector('[data-approve-existing]').addEventListener('click',()=>{const text=document.querySelector('#approved-text').value.trim();if(!text){setStatus('[data-prototype-status]','Inserisci un testo già anonimizzato prima di approvarlo per la valutazione.','error');return}approvedState.completed=true;setStatus('[data-prototype-status]','Testo già anonimizzato approvato per la valutazione.','info')});
   document.querySelector('#module').addEventListener('change',updatePolicies);
   document.querySelector('[data-prototype-trigger]').addEventListener('click',requestReport);
   document.querySelector('[data-copy-report]').addEventListener('click',copyReport);
   document.querySelector('[data-reset-evaluation]').addEventListener('click',resetEvaluation);
+  updateDraftModels();
   updatePolicies();
 </script>
 </body>
