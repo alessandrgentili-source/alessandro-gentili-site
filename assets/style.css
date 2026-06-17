@@ -231,7 +231,9 @@ button{font:inherit}
   .brand{font-size:1.14rem}
   .primary-nav-list{justify-content:flex-start;align-items:flex-start}
   .primary-nav-link{font-size:.85rem;padding:.27rem .43rem}
-  .primary-nav-dropdown{position:static;width:100%;min-width:0;max-width:none;margin:.18rem 0 .2rem;padding:.28rem;background:rgba(255,250,241,.42);box-shadow:none;opacity:1;visibility:visible;transform:none}
+  .primary-nav-dropdown{position:static;width:100%;min-width:0;max-width:none;margin:.18rem 0 .2rem;padding:.28rem;background:rgba(255,250,241,.42);box-shadow:none;opacity:0;visibility:hidden;transform:none;display:none}
+  .primary-nav-item--dropdown:hover .primary-nav-dropdown,.primary-nav-item--dropdown:focus-within .primary-nav-dropdown{opacity:0;visibility:hidden;transform:none;display:none}
+  .primary-nav-item--dropdown.is-open .primary-nav-dropdown{opacity:1;visibility:visible;display:grid}
   .page{padding-top:2.35rem}
   .hero{gap:1.45rem;padding-bottom:2rem}
   .grid-5,.grid-4,.grid-3,.grid-2,.contact-grid,.social-grid{grid-template-columns:1fr}
