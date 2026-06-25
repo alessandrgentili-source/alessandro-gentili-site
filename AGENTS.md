@@ -100,6 +100,87 @@ In `archivio.html`:
   * `Medium ↗`.
 * do not add Medium CTAs or canonicals to Medium-only content or non-duplicate content.
 
+
+## Saggi page card taxonomy
+
+For `saggi.html`, preserve the editorial card taxonomy.
+
+Top meta row:
+
+* Left side: `SAGGIO X`.
+* Right side: one separated kind pill only: `MICRO`, `MACRO`, or `SOGLIA`.
+* Never inline the kind as `SAGGIO X · MICRO`.
+* Never concatenate the kind as `SAGGIO XMICRO`.
+
+Kind mapping:
+
+* Saggio 13: `MICRO`
+* Saggio 12: `MICRO`
+* Saggio 11: `MACRO`
+* Saggio 10: `MACRO`
+* Saggio 9: `MICRO`
+* Saggio 8: `MICRO`
+* Saggio 7: `MICRO`
+* Saggio 6: `MACRO`
+* Saggio 5: `MACRO`
+* Saggio 4: `MACRO`
+* Saggio 3: `MACRO`
+* Saggio 2: `MACRO`
+* Saggio 1: `MACRO`
+* Saggio 0: `SOGLIA`
+
+Date/theme line:
+
+* Use only date and theme.
+* Preferred pattern: `date · Tema: short theme`.
+* Do not add publication state labels in this line.
+
+Bottom pills:
+
+* Allowed values only:
+
+  * `Testo integrale`
+  * `English note`
+  * `Saggio-cerniera`
+* Do not use bottom pills such as:
+
+  * `Pubblicato`
+  * `saggio pubblicato`
+  * `Medium`
+  * `Archivio locale`
+  * `Collegato al Saggio 0`
+  * `Saggio integrale`
+* Replace `Saggio integrale` with `Testo integrale`.
+
+Actions:
+
+* Use buttons for actions:
+
+  * `Leggi il saggio`
+  * `Medium ↗` only when a real Medium URL exists.
+* Do not duplicate Medium as a pill.
+
+Editorial meaning:
+
+* `MICRO` identifies essays focused on territory, community, civic thresholds, care, return, and concrete forms of common life.
+* `MACRO` identifies essays focused on power, apparatuses, technology, crisis, governance, systems, and broad historical forms.
+* `SOGLIA` identifies the introductory/editorial threshold essay.
+
+Before editing `saggi.html`, inspect existing card patterns and apply the taxonomy consistently.
+After editing `saggi.html`, verify there are no occurrences of:
+
+* `SAGGIO 13MICRO`
+* `SAGGIO 13 · MICRO`
+* `Pubblicato` as a bottom pill
+* `Medium` as a bottom pill
+* `Archivio locale` as a bottom pill
+
+Final report must confirm:
+
+* files modified;
+* whether only `AGENTS.md` was changed;
+* no protected SEO files were touched.
+
 ## Single essay page structure
 
 Each single essay page must preserve:
