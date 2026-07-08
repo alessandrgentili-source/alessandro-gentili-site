@@ -383,3 +383,219 @@ Do not expand the scope.
 Do not perform unnecessary aesthetic refactoring.
 Do not create new variants.
 When a structure has been standardized, preserve it.
+
+## Cerchi d’inchiostro guide standard
+
+Ogni guida autore di Cerchi d’inchiostro deve seguire un modello unico.
+
+### Struttura obbligatoria della guida
+
+Ogni guida deve contenere:
+
+1. meta title;
+2. meta description;
+3. canonical self-referencing;
+4. Open Graph title, description, image;
+5. Twitter card/title/description/image;
+6. Article JSON-LD;
+7. BreadcrumbList JSON-LD;
+8. FAQPage JSON-LD quando sono presenti FAQ visibili;
+9. hero compatto;
+10. cover 1600x900;
+11. indice `.guide-toc`;
+12. sezioni corpo;
+13. Fonti;
+14. Prosegui la lettura;
+15. Chiusura editoriale.
+
+### Hero standard
+
+Il hero deve essere compatto e uniforme.
+
+Deve contenere solo:
+
+* eyebrow: `Guida NN · Cerchi d’inchiostro`;
+* H1;
+* sottotitolo/lead breve, massimo circa 90 caratteri;
+* CTA primarie:
+
+  * `Hub Cerchi d’inchiostro`;
+  * `Triadi` oppure guida precedente/successiva della stessa triade, secondo il modello già approvato.
+
+Non inserire lunghi paragrafi nel hero.
+Non inserire apertura editoriale lunga nel hero.
+Non inserire newsletter nel hero delle guide autore.
+Non creare più varianti di hero.
+
+### Apertura editoriale
+
+L’apertura editoriale lunga va nel corpo guida, non nel hero.
+
+Deve comparire dopo cover/indice secondo il modello reale della guida più recente, senza creare un nuovo design.
+
+### Indice standard
+
+Ogni guida deve avere:
+
+`<nav class="guide-toc" aria-label="Indice della guida NOME AUTORE">`
+
+Il blocco deve avere titolo visivo:
+
+`Indice della guida`
+
+Regole:
+
+* nessuna riga duplicata “Indice” prima del titolo;
+* voci indice coerenti con gli H2;
+* ogni href deve avere id corrispondente;
+* titoli corpo non numerati;
+* voci indice numerate solo come testo della pillola, se il modello corrente le usa.
+
+### Corpo guida
+
+Ogni sezione deve usare wrapper coerente con:
+
+`<article class="item guide-section" id="...">`
+
+oppure con il wrapper equivalente già consolidato.
+
+Regole:
+
+* non accorpare sezioni;
+* non cambiare ordine senza richiesta;
+* non riscrivere contenuto in patch tecniche;
+* mantenere H2 puliti;
+* usare H3 per sottosezioni;
+* mantenere paragrafi leggibili e non martellati.
+
+### Ordine finale standard
+
+Ogni guida deve chiudere in questo ordine:
+
+1. Fonti;
+2. Prosegui la lettura;
+3. Chiusura editoriale.
+
+La Chiusura editoriale deve essere l’ultimo blocco narrativo della guida.
+
+### Prosegui la lettura standard
+
+Il blocco “Prosegui la lettura” serve alla navigazione editoriale, non alla newsletter.
+
+Deve contenere:
+
+* link all’hub Cerchi;
+* link alla pagina Triadi, quando pertinente;
+* link agli altri autori della stessa triade;
+* pochi link trasversali ad autori già pubblicati, solo se semanticamente utili.
+
+Regole:
+
+* ogni autore citato nel blocco deve essere linkato se la guida è pubblicata;
+* non citare guide future non pubblicate;
+* non trasformare il blocco in un archivio completo;
+* non inserire CTA newsletter nel blocco Prosegui;
+* non duplicare lo stesso link nello stesso blocco;
+* non lasciare titoli autore come testo non cliccabile se la pagina esiste.
+
+### Newsletter e lettera periodica
+
+La CTA newsletter non deve apparire dentro il blocco Prosegui delle guide autore, salvo richiesta esplicita.
+
+La newsletter può essere richiamata:
+
+* nel footer;
+* in pagine indice;
+* in pagine contatti;
+* in blocchi dedicati se approvati.
+
+### Chiusura editoriale
+
+La chiusura editoriale deve essere fluida, umana, alta e non schematica.
+
+Evitare:
+
+* frasi troppo brevi e martellate;
+* serie di frasi “La X non… La Y non…”;
+* chiusure da elenco;
+* retorica da AI;
+* simmetrie meccaniche.
+
+Preferire:
+
+* periodi distesi;
+* ritmo variato;
+* conclusione saggistica;
+* tono alto, chiaro, civile.
+
+### Asset guide
+
+Per le nuove guide, usare naming standard:
+
+`cerchi-guida-NN-nome-autore-temi-principali-1600x900.webp`
+
+Regole:
+
+* non rinominare asset già pubblicati per ragioni cosmetiche;
+* non modificare immagini già referenziate da pagine live, og:image, Twitter image, JSON-LD o sitemap senza patch dedicata;
+* per asset legacy, creare prima inventario;
+* usare WebP 1600x900 per nuove cover;
+* non introdurre JPG per nuove cover, salvo eccezione approvata.
+
+### Pagina triadi
+
+Quando una triade viene completata, aggiornare sempre:
+
+* `cerchi/triadi/index.html`;
+* meta description della pagina triadi;
+* JSON-LD CollectionPage;
+* card visibile della nuova triade;
+* link alle tre guide;
+* eventuale testo “Da dove iniziare”.
+
+Non lasciare una triade pubblicata assente dalla pagina Triadi.
+
+### Hub Cerchi
+
+Quando una nuova guida viene pubblicata, aggiornare sempre:
+
+* `cerchi/index.html`;
+* card guida;
+* numero guida;
+* titolo;
+* descrizione;
+* immagine;
+* alt;
+* CTA.
+
+Non modificare homepage automaticamente.
+La homepage resta soggetta alla regola delle 9 guide visibili.
+
+### Controlli obbligatori per ogni guida
+
+Ogni patch su guide Cerchi deve verificare:
+
+* H1 presente;
+* canonical self-referencing;
+* meta title;
+* meta description;
+* cover esistente;
+* og:image;
+* twitter:image;
+* Article JSON-LD valido;
+* BreadcrumbList valido;
+* FAQPage valido se presente;
+* indice presente;
+* href indice/id coerenti;
+* assenza placeholder;
+* assenza link PDF non richiesti;
+* Prosegui la lettura coerente;
+* Chiusura editoriale ultima;
+* sitemap aggiornata solo quando viene pubblicata nuova pagina;
+* homepage non modificata salvo richiesta esplicita.
+
+### Regola anti-variante
+
+Non creare una nuova variante strutturale se esiste già uno standard approvato.
+
+Se una guida precedente usa una struttura diversa, non copiarla automaticamente. Prima identificare il modello guida più recente e più coerente, poi applicare quello.
