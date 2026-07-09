@@ -131,6 +131,41 @@ h3{font-size:clamp(1.18rem,1.45vw,1.58rem);line-height:1.18;text-wrap:balance}
 .theme-section-heading + .cards-grid{
   margin-top:clamp(1.25rem,2.5vw,2rem);
 }
+.theme-path-card{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  padding:0;
+}
+.theme-path-media{
+  display:block;
+  overflow:hidden;
+  aspect-ratio:16/9;
+  background:rgba(141,109,55,.08);
+  text-decoration:none;
+}
+.theme-path-media img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:saturate(.9) contrast(.98);
+  transition:transform .22s ease,filter .22s ease;
+}
+.theme-path-card:hover .theme-path-media img{
+  transform:scale(1.014);
+  filter:saturate(.98) contrast(1);
+}
+.theme-path-body{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  padding:clamp(1.08rem,1.8vw,1.72rem);
+}
+.theme-path-body .actions{
+  margin-top:auto;
+  padding-top:1.18rem;
+}
 .grid-5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.9rem;align-items:stretch}
 .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem;align-items:stretch}
 .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem;align-items:stretch}
