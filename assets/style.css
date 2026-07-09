@@ -162,6 +162,12 @@ h3{font-size:clamp(1.18rem,1.45vw,1.58rem);line-height:1.18;text-wrap:balance}
   flex-direction:column;
   padding:clamp(1.08rem,1.8vw,1.72rem);
 }
+.theme-entry-note{
+  margin:.85rem 0 0;
+  color:var(--muted);
+  font-size:.88rem;
+  line-height:1.45;
+}
 .theme-path-body .actions{
   margin-top:auto;
   padding-top:1.18rem;
