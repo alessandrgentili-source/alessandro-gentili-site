@@ -1,14 +1,16 @@
-document.querySelectorAll('[data-editorial-constellation]').forEach((constellation) => {
-  const nodes = Array.from(constellation.querySelectorAll('[data-node]'));
-  const edges = Array.from(constellation.querySelectorAll('[data-edge]'));
-  const title = constellation.querySelector('[data-constellation-title]');
-  const description = constellation.querySelector('[data-constellation-description]');
+document.querySelectorAll('[data-editorial-atlas]').forEach((atlas) => {
+  const nodes = Array.from(atlas.querySelectorAll('[data-node]'));
+  const edges = Array.from(atlas.querySelectorAll('[data-connects]'));
+  const title = atlas.querySelector('[data-atlas-title]');
+  const description = atlas.querySelector('[data-atlas-description]');
   const defaultTitle = title?.textContent || '';
   const defaultDescription = description?.textContent || '';
 
   const clearActiveState = () => {
+    atlas.classList.remove('has-active');
     nodes.forEach((node) => node.classList.remove('is-active'));
     edges.forEach((edge) => edge.classList.remove('is-active'));
+
     if (title) {
       title.textContent = defaultTitle;
     }
@@ -19,8 +21,14 @@ document.querySelectorAll('[data-editorial-constellation]').forEach((constellati
 
   const setActiveState = (node) => {
     const nodeId = node.dataset.node;
+    atlas.classList.add('has-active');
+
     nodes.forEach((item) => item.classList.toggle('is-active', item === node));
-    edges.forEach((edge) => edge.classList.toggle('is-active', edge.dataset.edge === nodeId));
+    edges.forEach((edge) => {
+      const connectedNodes = (edge.dataset.connects || '').split(/\s+/);
+      edge.classList.toggle('is-active', connectedNodes.includes(nodeId));
+    });
+
     if (title) {
       title.textContent = node.dataset.title || defaultTitle;
     }
@@ -32,15 +40,17 @@ document.querySelectorAll('[data-editorial-constellation]').forEach((constellati
   nodes.forEach((node) => {
     node.addEventListener('mouseenter', () => setActiveState(node));
     node.addEventListener('focus', () => setActiveState(node));
+
     node.addEventListener('mouseleave', () => {
-      if (!constellation.contains(document.activeElement)) {
+      if (!atlas.contains(document.activeElement)) {
         clearActiveState();
       }
     });
+
     node.addEventListener('blur', () => {
       window.requestAnimationFrame(() => {
         const focusedNode = document.activeElement?.closest?.('[data-node]');
-        if (focusedNode && constellation.contains(focusedNode)) {
+        if (focusedNode && atlas.contains(focusedNode)) {
           setActiveState(focusedNode);
           return;
         }
@@ -49,24 +59,27 @@ document.querySelectorAll('[data-editorial-constellation]').forEach((constellati
     });
   });
 
-  constellation.addEventListener('mouseleave', () => {
-    if (!constellation.contains(document.activeElement)) {
+  atlas.addEventListener('mouseleave', () => {
+    if (!atlas.contains(document.activeElement)) {
       clearActiveState();
     }
   });
 
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if ('IntersectionObserver' in window && !prefersReducedMotion) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
           return;
         }
-        constellation.classList.add('is-visible');
-        observer.unobserve(constellation);
+        atlas.classList.add('is-visible');
+        observer.unobserve(atlas);
       });
-    }, { threshold: 0.28 });
-    observer.observe(constellation);
+    }, { threshold: 0.2 });
+
+    observer.observe(atlas);
   } else {
-    constellation.classList.add('is-visible');
+    atlas.classList.add('is-visible');
   }
 });
