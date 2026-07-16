@@ -1,373 +1,413 @@
-.constellation-prototype-intro{
-  position:relative;
+.atlas-prototype-intro{
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(280px,.72fr);
-  gap:clamp(2rem,5vw,5rem);
+  grid-template-columns:minmax(0,.82fr) minmax(320px,.72fr);
+  gap:clamp(2.4rem,6vw,6.8rem);
   align-items:end;
-  padding-bottom:clamp(2.8rem,5vw,4.8rem);
-  border-bottom:1px solid rgba(141,109,55,.11);
+  padding-bottom:clamp(3rem,5.8vw,5.6rem);
+  border-bottom:1px solid rgba(141,109,55,.1);
 }
-.constellation-prototype-intro h1{
+.atlas-prototype-intro h1{
   color:#10202d;
-  line-height:.98;
-  letter-spacing:-.018em;
+  font-size:clamp(3.15rem,6vw,6.2rem);
+  line-height:.92;
+  letter-spacing:-.028em;
 }
-.constellation-prototype-intro .lead{
-  max-width:44ch;
-  margin:0 0 .35rem;
+.atlas-intro-copy{
+  max-width:49ch;
+  padding-bottom:.45rem;
 }
-.constellation-section{
-  padding-top:clamp(3rem,5.4vw,5.3rem);
-}
-.constellation-heading{
-  display:grid;
-  grid-template-columns:minmax(0,.9fr) minmax(300px,.72fr);
-  gap:clamp(2rem,5vw,5rem);
-  align-items:end;
-  margin-bottom:clamp(1.8rem,3.7vw,3rem);
-}
-.constellation-heading > p{
-  max-width:54ch;
+.atlas-intro-copy .lead{
   margin:0;
-  color:var(--ink-2);
-}
-.editorial-constellation{
-  --constellation-gold:141,109,55;
-  --constellation-ink:16,32,45;
-  position:relative;
-  min-height:clamp(610px,61vw,690px);
-  overflow:hidden;
-  border:1px solid rgba(var(--constellation-gold),.12);
-  border-radius:20px;
-  background:
-    radial-gradient(circle at 50% 49%,rgba(255,250,241,.72) 0 9rem,rgba(255,250,241,.16) 26rem,transparent 35rem),
-    linear-gradient(180deg,rgba(255,250,241,.42),rgba(248,241,229,.32));
-  box-shadow:0 16px 42px rgba(31,25,16,.02);
-  isolation:isolate;
-}
-.editorial-constellation::before,
-.editorial-constellation::after{
-  content:"";
-  position:absolute;
-  pointer-events:none;
-  z-index:0;
-}
-.editorial-constellation::before{
-  inset:0;
-  background:
-    linear-gradient(90deg,transparent 0 49.94%,rgba(var(--constellation-gold),.055) 50%,transparent 50.06%),
-    linear-gradient(180deg,transparent 0 49.94%,rgba(var(--constellation-gold),.045) 50%,transparent 50.06%);
-  mask-image:radial-gradient(circle at center,#000 0 28rem,transparent 34rem);
-}
-.editorial-constellation::after{
-  right:clamp(1.2rem,2.5vw,2rem);
-  bottom:clamp(1.2rem,2.5vw,2rem);
-  width:42px;
-  height:42px;
-  border:1px solid rgba(var(--constellation-gold),.13);
-  border-left-color:transparent;
-  border-bottom-color:transparent;
-  border-radius:50%;
-  transform:rotate(20deg);
-}
-.constellation-lines{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:1;
-  overflow:visible;
-}
-.constellation-lines path{
-  fill:none;
-  stroke:rgba(var(--constellation-gold),.24);
-  stroke-width:1.2;
-  vector-effect:non-scaling-stroke;
-  stroke-linecap:round;
-  transition:stroke .28s ease,stroke-width .28s ease,opacity .28s ease;
-}
-.constellation-lines [data-edge]{
-  stroke-dasharray:4 9;
-  opacity:.62;
-}
-.constellation-lines [data-edge].is-active{
-  stroke:rgba(var(--constellation-gold),.78);
-  stroke-width:1.7;
-  opacity:1;
-}
-.constellation-orbit{
-  opacity:.28;
-  stroke-dasharray:190 32 76 19;
-}
-.constellation-orbit--inner{
-  opacity:.2;
-  stroke-dasharray:112 28 58 22;
-}
-.constellation-center{
-  position:absolute;
-  left:50%;
-  top:50%;
-  z-index:3;
-  width:clamp(205px,23vw,258px);
-  aspect-ratio:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:.55rem;
-  padding:2rem;
-  text-align:center;
-  transform:translate(-50%,-50%);
-}
-.constellation-center::before,
-.constellation-center::after{
-  content:"";
-  position:absolute;
-  border-radius:50%;
-  pointer-events:none;
-}
-.constellation-center::before{
-  inset:0;
-  border:1px solid rgba(var(--constellation-gold),.42);
-  border-right-color:transparent;
-  transform:rotate(-18deg);
-}
-.constellation-center::after{
-  inset:14px;
-  border:1px solid rgba(var(--constellation-gold),.12);
-  border-left-color:transparent;
-  border-bottom-color:transparent;
-  transform:rotate(29deg);
-}
-.constellation-center-index{
-  position:relative;
-  z-index:1;
-  color:rgba(var(--constellation-gold),.72);
-  font-size:.63rem;
-  font-weight:760;
-  letter-spacing:.16em;
-}
-.constellation-center strong{
-  position:relative;
-  z-index:1;
-  max-width:9ch;
-  color:#10202d;
+  color:#263540;
   font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;
-  font-size:clamp(1.48rem,2.5vw,2.2rem);
-  font-weight:500;
-  line-height:1.08;
+  font-size:clamp(1.22rem,1.65vw,1.65rem);
+  line-height:1.48;
 }
-.constellation-center > span:last-child{
-  position:relative;
-  z-index:1;
-  max-width:22ch;
-  min-height:3.2em;
-  color:rgba(var(--constellation-ink),.68);
-  font-size:.76rem;
-  line-height:1.5;
-}
-.constellation-node{
-  position:absolute;
-  z-index:4;
-  width:min(196px,20vw);
-  display:grid;
-  gap:.18rem;
-  padding:.7rem .78rem .74rem;
-  color:var(--ink);
-  text-decoration:none;
-  border:1px solid transparent;
-  border-radius:10px;
-  background:rgba(255,250,241,.12);
-  transform:translate(-50%,-50%);
-  transition:transform .22s ease,background .22s ease,border-color .22s ease,box-shadow .22s ease;
-}
-.constellation-node::before{
-  content:"";
-  position:absolute;
-  left:-12px;
-  top:50%;
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:rgba(var(--constellation-gold),.78);
-  box-shadow:0 0 0 4px rgba(var(--constellation-gold),.08);
-  transform:translateY(-50%);
-  transition:transform .22s ease,box-shadow .22s ease;
-}
-.constellation-node:hover,
-.constellation-node:focus-visible,
-.constellation-node.is-active{
-  color:var(--ink);
-  border-color:rgba(var(--constellation-gold),.18);
-  background:rgba(255,250,241,.72);
-  box-shadow:0 10px 26px rgba(31,25,16,.035);
-  transform:translate(-50%,-50%) translateY(-2px);
-}
-.constellation-node:hover::before,
-.constellation-node:focus-visible::before,
-.constellation-node.is-active::before{
-  transform:translateY(-50%) scale(1.2);
-  box-shadow:0 0 0 7px rgba(var(--constellation-gold),.09);
-}
-.constellation-node-index{
-  color:rgba(var(--constellation-gold),.68);
-  font-size:.62rem;
-  font-weight:760;
-  letter-spacing:.15em;
-}
-.constellation-node strong{
-  color:#10202d;
-  font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;
-  font-size:clamp(1.05rem,1.45vw,1.32rem);
-  font-weight:500;
-  line-height:1.12;
-}
-.constellation-node > span:last-child{
-  color:rgba(var(--constellation-ink),.67);
-  font-size:.72rem;
-  line-height:1.42;
-}
-.constellation-node--saggi{left:20.5%;top:19.5%}
-.constellation-node--cerchi{left:12.5%;top:49%}
-.constellation-node--scrittura{left:22%;top:81%}
-.constellation-node--poesia{left:78.5%;top:82%}
-.constellation-node--method{left:88%;top:49%}
-.constellation-node--system{left:79%;top:18.5%}
-.constellation-instruction{
+.atlas-intro-copy p:last-child{
+  max-width:41ch;
   margin:1rem 0 0;
   color:var(--muted);
+  font-size:.9rem;
+}
+.atlas-section{
+  padding-top:clamp(3rem,5.2vw,5rem);
+}
+.atlas-heading{
+  display:grid;
+  grid-template-columns:minmax(0,.8fr) minmax(320px,.72fr);
+  gap:clamp(2.5rem,6vw,7rem);
+  align-items:end;
+  margin-bottom:clamp(2.4rem,4.7vw,4.2rem);
+}
+.atlas-heading h2{
+  max-width:11ch;
+  font-size:clamp(2.25rem,4vw,4.1rem);
+  line-height:1.02;
+  letter-spacing:-.022em;
+}
+.atlas-heading > p{
+  max-width:54ch;
+  margin:0 0 .3rem;
+  color:var(--ink-2);
+}
+.editorial-atlas{
+  --atlas-gold:141,109,55;
+  --atlas-ink:16,32,45;
+  position:relative;
+  min-height:clamp(720px,67vw,790px);
+  overflow:hidden;
+  isolation:isolate;
+  border-top:1px solid rgba(var(--atlas-gold),.16);
+  border-bottom:1px solid rgba(var(--atlas-gold),.13);
+  background:
+    radial-gradient(ellipse at 58% 42%,rgba(255,250,241,.58),rgba(255,250,241,.12) 46%,transparent 72%),
+    linear-gradient(180deg,rgba(255,250,241,.2),rgba(248,241,229,.11));
+}
+.editorial-atlas::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent 0 31.98%,rgba(var(--atlas-gold),.035) 32%,transparent 32.04%),
+    linear-gradient(90deg,transparent 0 68.98%,rgba(var(--atlas-gold),.026) 69%,transparent 69.04%),
+    linear-gradient(180deg,transparent 0 54.96%,rgba(var(--atlas-gold),.027) 55%,transparent 55.04%);
+  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+}
+.atlas-lines{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  width:100%;
+  height:100%;
+  overflow:visible;
+  pointer-events:none;
+}
+.atlas-lines path{
+  fill:none;
+  vector-effect:non-scaling-stroke;
+  stroke-linecap:round;
+}
+.atlas-trace{
+  stroke:rgba(var(--atlas-gold),.11);
+  stroke-width:1;
+  stroke-dasharray:180 34 58 26;
+}
+.atlas-trace--two{
+  stroke:rgba(var(--atlas-gold),.075);
+  stroke-dasharray:128 42 74 22;
+}
+.atlas-trace--three{
+  stroke:rgba(var(--atlas-gold),.06);
+  stroke-dasharray:220 54 48 36;
+}
+.atlas-lines [data-connects]{
+  stroke:rgba(var(--atlas-gold),.12);
+  stroke-width:1;
+  stroke-dasharray:3 13;
+  opacity:.36;
+  transition:stroke .34s ease,stroke-width .34s ease,opacity .34s ease,stroke-dasharray .34s ease;
+}
+.atlas-lines [data-connects].is-active{
+  stroke:rgba(var(--atlas-gold),.7);
+  stroke-width:1.35;
+  stroke-dasharray:1 0;
+  opacity:.84;
+}
+.atlas-reading{
+  position:absolute;
+  left:38%;
+  top:31%;
+  z-index:3;
+  width:min(335px,27vw);
+  padding:1.25rem 0 1.3rem 1.55rem;
+}
+.atlas-reading::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:1px;
+  background:linear-gradient(180deg,rgba(var(--atlas-gold),.16),rgba(var(--atlas-gold),.62),rgba(var(--atlas-gold),.1));
+}
+.atlas-reading-index{
+  display:block;
+  margin-bottom:.85rem;
+  color:rgba(var(--atlas-gold),.76);
+  font-size:.63rem;
+  font-weight:760;
+  letter-spacing:.18em;
+}
+.atlas-reading strong{
+  display:block;
+  color:#10202d;
+  font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;
+  font-size:clamp(2rem,3.4vw,3.65rem);
+  font-weight:500;
+  line-height:.98;
+  letter-spacing:-.022em;
+  transition:opacity .18s ease;
+}
+.atlas-reading > span:last-child{
+  display:block;
+  max-width:34ch;
+  min-height:4.8em;
+  margin-top:1rem;
+  color:rgba(var(--atlas-ink),.7);
   font-size:.8rem;
-  line-height:1.5;
+  line-height:1.55;
+  transition:opacity .18s ease;
 }
-.constellation-note .card{
-  max-width:860px;
+.atlas-node{
+  position:absolute;
+  z-index:4;
+  display:block;
+  width:250px;
+  padding:.55rem .8rem .75rem 1rem;
+  color:var(--ink);
+  text-decoration:none;
+  background:linear-gradient(90deg,rgba(255,250,241,0),rgba(255,250,241,0));
+  transition:opacity .3s ease,transform .3s ease,background .3s ease;
 }
-.editorial-constellation:not(.is-visible) [data-edge]{
-  stroke-dasharray:0 1000;
+.atlas-node::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.7rem;
+  bottom:.65rem;
+  width:1px;
+  background:rgba(var(--atlas-gold),.12);
+  transform:scaleY(.22);
+  transform-origin:top;
+  transition:background .3s ease,transform .3s ease;
 }
-.editorial-constellation:not(.is-visible) .constellation-node,
-.editorial-constellation:not(.is-visible) .constellation-center{
+.atlas-node::after{
+  content:"↗";
+  position:absolute;
+  right:.3rem;
+  top:.38rem;
+  color:rgba(var(--atlas-gold),0);
+  font-size:.75rem;
+  transition:color .3s ease,transform .3s ease;
+}
+.atlas-node:hover,
+.atlas-node:focus-visible,
+.atlas-node.is-active{
+  color:var(--ink);
+  outline:none;
+  transform:translateX(5px);
+  background:linear-gradient(90deg,rgba(255,250,241,.62),rgba(255,250,241,0));
+}
+.atlas-node:hover::before,
+.atlas-node:focus-visible::before,
+.atlas-node.is-active::before{
+  background:rgba(var(--atlas-gold),.72);
+  transform:scaleY(1);
+}
+.atlas-node:hover::after,
+.atlas-node:focus-visible::after,
+.atlas-node.is-active::after{
+  color:rgba(var(--atlas-gold),.72);
+  transform:translate(2px,-2px);
+}
+.editorial-atlas.has-active .atlas-node:not(.is-active){
+  opacity:.42;
+}
+.atlas-node-index{
+  display:block;
+  margin-bottom:.5rem;
+  color:rgba(var(--atlas-gold),.73);
+  font-size:.6rem;
+  font-weight:760;
+  letter-spacing:.17em;
+}
+.atlas-node strong{
+  display:block;
+  max-width:11ch;
+  color:#10202d;
+  font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;
+  font-size:clamp(1.52rem,2.15vw,2.35rem);
+  font-weight:500;
+  line-height:1.02;
+  letter-spacing:-.016em;
+}
+.atlas-node > span:last-child{
+  display:block;
+  max-width:29ch;
+  margin-top:.62rem;
+  color:rgba(var(--atlas-ink),.67);
+  font-size:.75rem;
+  line-height:1.48;
+}
+.atlas-node--major strong{
+  font-size:clamp(2rem,3vw,3.2rem);
+}
+.atlas-node--major{
+  width:310px;
+}
+.atlas-node--minor strong{
+  font-size:clamp(1.35rem,1.8vw,1.9rem);
+  font-style:italic;
+}
+.atlas-node--minor{
+  width:220px;
+}
+.atlas-node--saggi{left:6%;top:9%}
+.atlas-node--poesia{right:5.5%;top:7%}
+.atlas-node--cerchi{right:4.5%;top:31%}
+.atlas-node--scrittura{left:8%;bottom:7%}
+.atlas-node--method{left:51%;bottom:6%}
+.atlas-node--system{right:5%;bottom:11%}
+.atlas-key{
+  position:absolute;
+  left:39.5%;
+  top:64%;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  gap:.58rem;
+  color:rgba(var(--atlas-ink),.38);
+  font-size:.57rem;
+  font-weight:700;
+  letter-spacing:.15em;
+}
+.atlas-key i{
+  width:26px;
+  height:1px;
+  background:rgba(var(--atlas-gold),.28);
+}
+.atlas-afterword{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:2rem;
+  padding-top:1.35rem;
+}
+.atlas-afterword p{
+  max-width:67ch;
+  margin:0;
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.55;
+}
+.atlas-afterword p span{
+  margin-right:.55rem;
+  color:rgba(141,109,55,.86);
+  font-weight:760;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.atlas-afterword .btn-secondary{
+  flex:0 0 auto;
+  margin:0;
+}
+.editorial-atlas:not(.is-visible) .atlas-node,
+.editorial-atlas:not(.is-visible) .atlas-reading,
+.editorial-atlas:not(.is-visible) .atlas-key{
   opacity:0;
+  filter:blur(2px);
 }
-.editorial-constellation.is-visible [data-edge]{
-  animation:constellation-draw 1.15s cubic-bezier(.22,.7,.25,1) both;
+.editorial-atlas.is-visible .atlas-node,
+.editorial-atlas.is-visible .atlas-reading,
+.editorial-atlas.is-visible .atlas-key{
+  animation:atlas-reveal .72s cubic-bezier(.22,.7,.25,1) both;
 }
-.editorial-constellation.is-visible .constellation-center{
-  animation:constellation-rise .7s .18s ease both;
-}
-.editorial-constellation.is-visible .constellation-node{
-  animation:constellation-rise .62s ease both;
-}
-.editorial-constellation.is-visible .constellation-node:nth-of-type(1){animation-delay:.22s}
-.editorial-constellation.is-visible .constellation-node:nth-of-type(2){animation-delay:.28s}
-.editorial-constellation.is-visible .constellation-node:nth-of-type(3){animation-delay:.34s}
-.editorial-constellation.is-visible .constellation-node:nth-of-type(4){animation-delay:.40s}
-.editorial-constellation.is-visible .constellation-node:nth-of-type(5){animation-delay:.46s}
-.editorial-constellation.is-visible .constellation-node:nth-of-type(6){animation-delay:.52s}
-@keyframes constellation-draw{
-  from{stroke-dasharray:0 1000;opacity:0}
-  to{stroke-dasharray:4 9;opacity:.62}
-}
-@keyframes constellation-rise{
-  from{opacity:0;filter:blur(3px)}
+.editorial-atlas.is-visible .atlas-reading{animation-delay:.08s}
+.editorial-atlas.is-visible .atlas-node--saggi{animation-delay:.16s}
+.editorial-atlas.is-visible .atlas-node--cerchi{animation-delay:.24s}
+.editorial-atlas.is-visible .atlas-node--scrittura{animation-delay:.31s}
+.editorial-atlas.is-visible .atlas-node--poesia{animation-delay:.38s}
+.editorial-atlas.is-visible .atlas-node--method{animation-delay:.45s}
+.editorial-atlas.is-visible .atlas-node--system{animation-delay:.52s}
+.editorial-atlas.is-visible .atlas-key{animation-delay:.6s}
+@keyframes atlas-reveal{
+  from{opacity:0;filter:blur(2px)}
   to{opacity:1;filter:blur(0)}
 }
-@media(max-width:960px){
-  .constellation-prototype-intro,
-  .constellation-heading{grid-template-columns:1fr;align-items:start}
-  .constellation-prototype-intro .lead{max-width:62ch}
-  .editorial-constellation{min-height:690px}
-  .constellation-node{width:180px}
-  .constellation-node--saggi{left:21%;top:18%}
-  .constellation-node--cerchi{left:15%;top:48%}
-  .constellation-node--scrittura{left:23%;top:81%}
-  .constellation-node--poesia{left:77%;top:82%}
-  .constellation-node--method{left:85%;top:48%}
-  .constellation-node--system{left:78%;top:17.5%}
+@media(max-width:1060px){
+  .atlas-prototype-intro,
+  .atlas-heading{grid-template-columns:1fr;gap:1.5rem;align-items:start}
+  .atlas-intro-copy{max-width:62ch}
+  .atlas-heading h2{max-width:16ch}
+  .editorial-atlas{min-height:760px}
+  .atlas-reading{left:36%;width:310px}
+  .atlas-node--saggi{left:3.5%}
+  .atlas-node--cerchi{right:2%}
+  .atlas-node--poesia{right:2%}
+  .atlas-node--scrittura{left:4%}
+  .atlas-node--system{right:2%}
 }
-@media(max-width:760px){
-  .constellation-prototype-intro{gap:1.2rem}
-  .constellation-heading{gap:.9rem;margin-bottom:1.6rem}
-  .editorial-constellation{
+@media(max-width:820px){
+  .atlas-prototype-intro h1{font-size:clamp(3.1rem,13vw,5.2rem)}
+  .atlas-heading{margin-bottom:2rem}
+  .editorial-atlas{
     min-height:0;
-    display:grid;
+    display:flex;
+    flex-direction:column;
     gap:0;
-    padding:1.15rem 1.05rem 1.25rem;
     overflow:visible;
-    background:linear-gradient(180deg,rgba(255,250,241,.48),rgba(248,241,229,.32));
-  }
-  .editorial-constellation::before{
-    inset:7.6rem auto 2rem 2.15rem;
-    width:1px;
-    background:linear-gradient(180deg,rgba(var(--constellation-gold),.12),rgba(var(--constellation-gold),.3),rgba(var(--constellation-gold),.1));
-    mask-image:none;
-  }
-  .editorial-constellation::after,
-  .constellation-lines{display:none}
-  .constellation-center{
-    position:relative;
-    left:auto;
-    top:auto;
-    width:100%;
-    aspect-ratio:auto;
-    align-items:flex-start;
-    padding:1.15rem 1rem 1.4rem 4.25rem;
-    text-align:left;
-    transform:none;
-    border-bottom:1px solid rgba(var(--constellation-gold),.12);
-    margin-bottom:.4rem;
-  }
-  .constellation-center::before{
-    inset:.95rem auto auto .55rem;
-    width:2.8rem;
-    height:2.8rem;
-  }
-  .constellation-center::after{display:none}
-  .constellation-center strong{max-width:none;font-size:1.6rem}
-  .constellation-center > span:last-child{min-height:0;max-width:32ch}
-  .constellation-node,
-  .constellation-node:hover,
-  .constellation-node:focus-visible,
-  .constellation-node.is-active{
-    position:relative;
-    left:auto;
-    top:auto;
-    width:100%;
-    min-height:92px;
-    padding:1rem .8rem 1rem 4.15rem;
-    border:0;
-    border-bottom:1px solid rgba(var(--constellation-gold),.095);
-    border-radius:0;
+    padding:1.6rem 0 .5rem;
+    border-top-color:rgba(var(--atlas-gold),.14);
     background:transparent;
-    box-shadow:none;
+  }
+  .editorial-atlas::before,
+  .atlas-lines,
+  .atlas-key{display:none}
+  .atlas-reading{
+    position:relative;
+    left:auto;
+    top:auto;
+    order:0;
+    width:min(88%,420px);
+    margin:0 0 2.3rem 5%;
+    padding:1rem 0 1rem 1.2rem;
+  }
+  .atlas-reading strong{font-size:clamp(2.35rem,10vw,3.35rem)}
+  .atlas-reading > span:last-child{min-height:0;font-size:.79rem}
+  .atlas-node,
+  .atlas-node:hover,
+  .atlas-node:focus-visible,
+  .atlas-node.is-active{
+    position:relative;
+    left:auto;
+    right:auto;
+    top:auto;
+    bottom:auto;
+    width:auto;
+    padding:1.35rem 1rem 1.55rem 1.15rem;
+    border-top:1px solid rgba(var(--atlas-gold),.11);
+    background:transparent;
     transform:none;
   }
-  .constellation-node:last-child{border-bottom:0}
-  .constellation-node::before{
-    left:1.83rem;
-    top:50%;
-  }
-  .constellation-node-index{
-    position:absolute;
-    left:.35rem;
-    top:50%;
-    transform:translateY(-50%);
-  }
-  .constellation-node strong{font-size:1.22rem}
-  .constellation-node > span:last-child{font-size:.76rem}
-  .constellation-instruction{display:none}
-  .editorial-constellation:not(.is-visible) .constellation-node,
-  .editorial-constellation:not(.is-visible) .constellation-center{opacity:1}
-  .editorial-constellation.is-visible .constellation-node,
-  .editorial-constellation.is-visible .constellation-center{animation:none}
+  .atlas-node::before{top:1.4rem;bottom:1.5rem}
+  .atlas-node::after{right:.7rem;top:1.25rem}
+  .atlas-node strong,
+  .atlas-node--major strong,
+  .atlas-node--minor strong{font-size:clamp(1.85rem,8vw,2.75rem)}
+  .atlas-node > span:last-child{max-width:38ch;font-size:.78rem}
+  .atlas-node--saggi{order:1;margin-right:13%}
+  .atlas-node--cerchi{order:2;margin-left:9%}
+  .atlas-node--scrittura{order:3;margin-right:4%}
+  .atlas-node--poesia{order:4;margin-left:19%}
+  .atlas-node--method{order:5;margin-right:12%}
+  .atlas-node--system{order:6;margin-left:7%}
+  .editorial-atlas.has-active .atlas-node:not(.is-active){opacity:1}
+  .atlas-afterword{display:grid;gap:1rem}
+  .atlas-afterword .btn-secondary{width:fit-content}
+  .editorial-atlas:not(.is-visible) .atlas-node,
+  .editorial-atlas:not(.is-visible) .atlas-reading{opacity:1;filter:none}
+  .editorial-atlas.is-visible .atlas-node,
+  .editorial-atlas.is-visible .atlas-reading{animation:none}
 }
 @media(prefers-reduced-motion:reduce){
-  .editorial-constellation.is-visible [data-edge],
-  .editorial-constellation.is-visible .constellation-center,
-  .editorial-constellation.is-visible .constellation-node{animation:none}
-  .editorial-constellation:not(.is-visible) .constellation-node,
-  .editorial-constellation:not(.is-visible) .constellation-center{opacity:1}
-  .editorial-constellation:not(.is-visible) [data-edge]{stroke-dasharray:4 9}
-  .constellation-node,
-  .constellation-lines path{transition:none}
+  .editorial-atlas.is-visible .atlas-node,
+  .editorial-atlas.is-visible .atlas-reading,
+  .editorial-atlas.is-visible .atlas-key{animation:none}
+  .editorial-atlas:not(.is-visible) .atlas-node,
+  .editorial-atlas:not(.is-visible) .atlas-reading,
+  .editorial-atlas:not(.is-visible) .atlas-key{opacity:1;filter:none}
+  .atlas-node,
+  .atlas-lines [data-connects]{transition:none}
 }
