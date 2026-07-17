@@ -6,70 +6,55 @@ document.querySelectorAll('[data-system-map]').forEach((map) => {
   const defaultTitle = title?.textContent || '';
   const defaultDescription = description?.textContent || '';
 
-  const nodeById = new Map(
-    nodes.map((node) => [node.dataset.nodeId, node])
-  );
-
   nodes.forEach((node) => {
-    if (!node.matches('a, button, [tabindex]')) {
+    if (!node.matches('a, button, input, select, textarea, [tabindex]')) {
       node.tabIndex = 0;
+      node.setAttribute('role', 'button');
     }
   });
 
   const clearActiveState = () => {
     map.classList.remove('has-active');
-    nodes.forEach((node) => {
-      node.classList.remove('is-active', 'is-related');
-    });
+    nodes.forEach((node) => node.classList.remove('is-active', 'is-related'));
     edges.forEach((edge) => edge.classList.remove('is-active'));
 
-    if (title) {
-      title.textContent = defaultTitle;
-    }
-    if (description) {
-      description.textContent = defaultDescription;
-    }
+    if (title) title.textContent = defaultTitle;
+    if (description) description.textContent = defaultDescription;
   };
 
-  const setActiveState = (node) => {
-    const nodeId = node.dataset.nodeId;
-    const relatedIds = new Set([nodeId]);
-
-    map.classList.add('has-active');
+  const setActiveState = (activeNode) => {
+    const activeId = activeNode.dataset.nodeId;
+    const relatedIds = new Set([activeId]);
 
     edges.forEach((edge) => {
-      const isConnected = edge.dataset.from === nodeId || edge.dataset.to === nodeId;
-      edge.classList.toggle('is-active', isConnected);
+      const from = edge.dataset.from;
+      const to = edge.dataset.to;
+      const isRelevant = from === activeId || to === activeId;
+      edge.classList.toggle('is-active', isRelevant);
 
-      if (isConnected) {
-        relatedIds.add(edge.dataset.from);
-        relatedIds.add(edge.dataset.to);
+      if (isRelevant) {
+        relatedIds.add(from);
+        relatedIds.add(to);
       }
     });
 
-    nodes.forEach((item) => {
-      item.classList.toggle('is-active', item === node);
-      item.classList.toggle('is-related', relatedIds.has(item.dataset.nodeId));
+    map.classList.add('has-active');
+    nodes.forEach((node) => {
+      const nodeId = node.dataset.nodeId;
+      node.classList.toggle('is-active', node === activeNode);
+      node.classList.toggle('is-related', node !== activeNode && relatedIds.has(nodeId));
     });
 
-    if (title) {
-      title.textContent = node.dataset.title || defaultTitle;
-    }
-    if (description) {
-      description.textContent = node.dataset.description || defaultDescription;
-    }
+    if (title) title.textContent = activeNode.dataset.title || defaultTitle;
+    if (description) description.textContent = activeNode.dataset.description || defaultDescription;
   };
 
   nodes.forEach((node) => {
     node.addEventListener('mouseenter', () => setActiveState(node));
     node.addEventListener('focus', () => setActiveState(node));
-
     node.addEventListener('mouseleave', () => {
-      if (!map.contains(document.activeElement)) {
-        clearActiveState();
-      }
+      if (!map.contains(document.activeElement)) clearActiveState();
     });
-
     node.addEventListener('blur', () => {
       window.requestAnimationFrame(() => {
         const focusedNode = document.activeElement?.closest?.('[data-node-id]');
@@ -83,23 +68,13 @@ document.querySelectorAll('[data-system-map]').forEach((map) => {
   });
 
   map.addEventListener('mouseleave', () => {
-    if (!map.contains(document.activeElement)) {
-      clearActiveState();
-    }
+    if (!map.contains(document.activeElement)) clearActiveState();
   });
 
   map.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
-      clearActiveState();
       document.activeElement?.blur?.();
+      clearActiveState();
     }
   });
-
-  const invalidRelations = edges.filter((edge) => (
-    !nodeById.has(edge.dataset.from) || !nodeById.has(edge.dataset.to)
-  ));
-
-  if (invalidRelations.length) {
-    console.warn('Editorial system map: unresolved relation endpoints.', invalidRelations);
-  }
 });
