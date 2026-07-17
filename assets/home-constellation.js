@@ -9,7 +9,6 @@ document.querySelectorAll('[data-system-map]').forEach((map) => {
   nodes.forEach((node) => {
     if (!node.matches('a, button, input, select, textarea, [tabindex]')) {
       node.tabIndex = 0;
-      node.setAttribute('role', 'button');
     }
   });
 
