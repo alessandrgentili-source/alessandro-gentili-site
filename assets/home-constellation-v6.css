@@ -1,0 +1,45 @@
+/* V6: maggiore distanza dell'Archivio e rifinitura della fascia conclusiva. */
+.editorial-system-map{
+  min-height:clamp(1220px,100vw,1320px);
+}
+.system-node--essays{
+  top:75%;
+}
+.system-reading{
+  top:68%;
+}
+.system-archive{
+  left:13%;
+  right:13%;
+  bottom:1.35%;
+  min-height:86px;
+  padding:1.35rem 1.75rem;
+  border-top-color:rgba(var(--map-gold),.42);
+  background:rgba(255,250,241,.76);
+  box-shadow:0 -28px 58px rgba(63,48,27,.028);
+}
+.system-archive::before{
+  top:-96px;
+  background:linear-gradient(90deg,transparent,rgba(var(--map-gold),.14) 20%,rgba(var(--map-gold),.14) 80%,transparent);
+}
+@media(max-width:1050px){
+  .editorial-system-map{min-height:1260px}
+  .system-reading{top:67%}
+  .system-node--essays{top:75%}
+  .system-archive{left:9%;right:9%}
+}
+@media(max-width:760px){
+  .editorial-system-map{min-height:0}
+  .system-node--essays{top:auto}
+  .system-reading{top:auto}
+  .system-archive,
+  .system-archive:hover,
+  .system-archive:focus-visible,
+  .system-archive.is-active{
+    margin-top:3.25rem;
+    padding-top:1.55rem;
+  }
+  .system-archive::before{
+    top:-1.65rem;
+  }
+}
