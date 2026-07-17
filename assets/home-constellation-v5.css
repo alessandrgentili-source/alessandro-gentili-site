@@ -1,0 +1,45 @@
+/* V5: terminologia di ricerca e maggiore autonomia visiva dell'Archivio. */
+.editorial-system-map{
+  min-height:clamp(1060px,90vw,1140px);
+}
+.system-archive{
+  left:11%;
+  right:11%;
+  bottom:.9%;
+  min-height:82px;
+  padding:1.25rem 1.6rem;
+  border-top-color:rgba(var(--map-gold),.38);
+  background:rgba(255,250,241,.72);
+  box-shadow:0 -22px 44px rgba(63,48,27,.025);
+}
+.system-archive::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-54px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(var(--map-gold),.13) 18%,rgba(var(--map-gold),.13) 82%,transparent);
+  pointer-events:none;
+}
+@media(max-width:1050px){
+  .editorial-system-map{min-height:1100px}
+  .system-archive{left:8%;right:8%}
+}
+@media(max-width:760px){
+  .editorial-system-map{min-height:0}
+  .system-archive,
+  .system-archive:hover,
+  .system-archive:focus-visible,
+  .system-archive.is-active{
+    margin-top:2.25rem;
+    padding-top:1.35rem;
+    border-top-color:rgba(var(--map-gold),.34);
+    box-shadow:none;
+  }
+  .system-archive::before{
+    top:-1.15rem;
+    left:.4rem;
+    right:.4rem;
+  }
+}
