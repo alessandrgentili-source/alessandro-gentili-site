@@ -1,0 +1,44 @@
+/* Integrazione della mappa di sistema nella homepage. */
+.home-system-section{
+  padding-top:clamp(4.5rem,7vw,7.5rem);
+}
+.home-system-heading{
+  margin-bottom:clamp(2.4rem,4.5vw,4.2rem);
+}
+.home-system-heading h2{
+  max-width:9ch;
+}
+.home-editorial-system-map{
+  margin-inline:0;
+}
+.home-system-footer{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:2rem;
+  padding:1.45rem 0 0;
+}
+.home-system-footer p{
+  max-width:760px;
+  margin:0;
+  color:var(--muted);
+  font-size:.84rem;
+  line-height:1.65;
+}
+.home-system-footer p span{
+  margin-right:.75rem;
+  color:rgba(141,109,55,.88);
+  font-size:.67rem;
+  font-weight:760;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.home-system-footer .btn-secondary{
+  flex:none;
+  margin-top:0;
+}
+@media(max-width:760px){
+  .home-system-section{padding-top:3.5rem}
+  .home-system-footer{display:grid;gap:1.15rem}
+  .home-system-footer .btn-secondary{width:100%}
+}
