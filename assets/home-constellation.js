@@ -1,14 +1,26 @@
-document.querySelectorAll('[data-editorial-atlas]').forEach((atlas) => {
-  const nodes = Array.from(atlas.querySelectorAll('[data-node]'));
-  const edges = Array.from(atlas.querySelectorAll('[data-connects]'));
-  const title = atlas.querySelector('[data-atlas-title]');
-  const description = atlas.querySelector('[data-atlas-description]');
+document.querySelectorAll('[data-system-map]').forEach((map) => {
+  const nodes = Array.from(map.querySelectorAll('[data-node-id]'));
+  const edges = Array.from(map.querySelectorAll('[data-from][data-to]'));
+  const title = map.querySelector('[data-system-title]');
+  const description = map.querySelector('[data-system-description]');
   const defaultTitle = title?.textContent || '';
   const defaultDescription = description?.textContent || '';
 
+  const nodeById = new Map(
+    nodes.map((node) => [node.dataset.nodeId, node])
+  );
+
+  nodes.forEach((node) => {
+    if (!node.matches('a, button, [tabindex]')) {
+      node.tabIndex = 0;
+    }
+  });
+
   const clearActiveState = () => {
-    atlas.classList.remove('has-active');
-    nodes.forEach((node) => node.classList.remove('is-active'));
+    map.classList.remove('has-active');
+    nodes.forEach((node) => {
+      node.classList.remove('is-active', 'is-related');
+    });
     edges.forEach((edge) => edge.classList.remove('is-active'));
 
     if (title) {
@@ -20,13 +32,24 @@ document.querySelectorAll('[data-editorial-atlas]').forEach((atlas) => {
   };
 
   const setActiveState = (node) => {
-    const nodeId = node.dataset.node;
-    atlas.classList.add('has-active');
+    const nodeId = node.dataset.nodeId;
+    const relatedIds = new Set([nodeId]);
 
-    nodes.forEach((item) => item.classList.toggle('is-active', item === node));
+    map.classList.add('has-active');
+
     edges.forEach((edge) => {
-      const connectedNodes = (edge.dataset.connects || '').split(/\s+/);
-      edge.classList.toggle('is-active', connectedNodes.includes(nodeId));
+      const isConnected = edge.dataset.from === nodeId || edge.dataset.to === nodeId;
+      edge.classList.toggle('is-active', isConnected);
+
+      if (isConnected) {
+        relatedIds.add(edge.dataset.from);
+        relatedIds.add(edge.dataset.to);
+      }
+    });
+
+    nodes.forEach((item) => {
+      item.classList.toggle('is-active', item === node);
+      item.classList.toggle('is-related', relatedIds.has(item.dataset.nodeId));
     });
 
     if (title) {
@@ -42,15 +65,15 @@ document.querySelectorAll('[data-editorial-atlas]').forEach((atlas) => {
     node.addEventListener('focus', () => setActiveState(node));
 
     node.addEventListener('mouseleave', () => {
-      if (!atlas.contains(document.activeElement)) {
+      if (!map.contains(document.activeElement)) {
         clearActiveState();
       }
     });
 
     node.addEventListener('blur', () => {
       window.requestAnimationFrame(() => {
-        const focusedNode = document.activeElement?.closest?.('[data-node]');
-        if (focusedNode && atlas.contains(focusedNode)) {
+        const focusedNode = document.activeElement?.closest?.('[data-node-id]');
+        if (focusedNode && map.contains(focusedNode)) {
           setActiveState(focusedNode);
           return;
         }
@@ -59,27 +82,24 @@ document.querySelectorAll('[data-editorial-atlas]').forEach((atlas) => {
     });
   });
 
-  atlas.addEventListener('mouseleave', () => {
-    if (!atlas.contains(document.activeElement)) {
+  map.addEventListener('mouseleave', () => {
+    if (!map.contains(document.activeElement)) {
       clearActiveState();
     }
   });
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  map.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      clearActiveState();
+      document.activeElement?.blur?.();
+    }
+  });
 
-  if ('IntersectionObserver' in window && !prefersReducedMotion) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-        atlas.classList.add('is-visible');
-        observer.unobserve(atlas);
-      });
-    }, { threshold: 0.2 });
+  const invalidRelations = edges.filter((edge) => (
+    !nodeById.has(edge.dataset.from) || !nodeById.has(edge.dataset.to)
+  ));
 
-    observer.observe(atlas);
-  } else {
-    atlas.classList.add('is-visible');
+  if (invalidRelations.length) {
+    console.warn('Editorial system map: unresolved relation endpoints.', invalidRelations);
   }
 });
