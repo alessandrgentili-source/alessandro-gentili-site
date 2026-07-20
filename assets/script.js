@@ -170,7 +170,7 @@ if (cookieStatisticsPreference === 'accepted') {
 // Keep Saggio 15 visible across the homepage, essays index and general archive.
 (() => {
   const essayUrl = '/saggi/saggio-15-il-mondo-senza-apprendisti.html';
-  const coverUrl = '/assets/img/saggi/site/saggio-15-il-mondo-senza-apprendisti_site_1600x900.svg';
+  const coverUrl = '/assets/img/saggi/site/saggio-15-il-mondo-senza-apprendisti_site_960x540.webp';
   const coverAlt = 'Cover del saggio Il mondo senza apprendisti: su fondo antracite, una sequenza di disegni tecnici conduce a un prototipo industriale, evocando il rapporto tra intelligenza artificiale, lavoro, apprendistato e formazione della competenza.';
 
   const latestGrid = document.querySelector('.latest-essays .essay-grid');
