@@ -166,3 +166,53 @@ if (cookieStatisticsPreference === 'accepted') {
 } else if (cookieStatisticsPreference !== 'rejected') {
   showCookieBanner();
 }
+
+// Keep Saggio 15 visible across the homepage, essays index and general archive.
+(() => {
+  const essayUrl = '/saggi/saggio-15-il-mondo-senza-apprendisti.html';
+  const coverUrl = '/assets/img/saggi/site/saggio-15-il-mondo-senza-apprendisti_site_1600x900.svg';
+  const coverAlt = 'Cover del saggio Il mondo senza apprendisti: su fondo antracite, una sequenza di disegni tecnici conduce a un prototipo industriale, evocando il rapporto tra intelligenza artificiale, lavoro, apprendistato e formazione della competenza.';
+
+  const latestGrid = document.querySelector('.latest-essays .essay-grid');
+  if (latestGrid && !latestGrid.querySelector('[data-saggio-15]')) {
+    latestGrid.insertAdjacentHTML('afterbegin', `
+      <article class="essay-card" data-saggio-15>
+        <figure class="essay-cover"><img src="${coverUrl}" width="1600" height="900" loading="lazy" alt="${coverAlt}" /></figure>
+        <div class="essay-card-body"><p class="essay-number">Saggio 15 · <span class="essay-release-label">SAGGIO INTEGRALE</span></p><h3><a href="${essayUrl}">Il mondo senza apprendisti</a></h3><p class="essay-subtitle">Intelligenza artificiale, lavoro e scomparsa del tempo necessario a diventare capaci.</p><p class="meta">20 luglio 2026 · Macro · Saggio integrale nell’archivio locale</p></div>
+        <div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div>
+      </article>`);
+    while (latestGrid.children.length > 3) {
+      latestGrid.lastElementChild.remove();
+    }
+  }
+
+  const essaysGrid = document.querySelector('#archivio-saggi .essay-grid');
+  if (essaysGrid && !essaysGrid.querySelector('[data-saggio-15]')) {
+    essaysGrid.insertAdjacentHTML('afterbegin', `
+      <article class="essay-card" data-saggio-15>
+        <figure class="essay-cover"><img src="${coverUrl}" width="1600" height="900" loading="lazy" alt="${coverAlt}" /></figure>
+        <div class="essay-card-body"><div class="essay-card-meta"><span>SAGGIO 15</span><span class="essay-kind-pill">MACRO</span></div><h3><a href="${essayUrl}">Il mondo senza apprendisti</a></h3><p class="essay-subtitle">Intelligenza artificiale, lavoro e scomparsa del tempo necessario a diventare capaci.</p><p>Un saggio su AI, lavoro e apprendistato: perché migliori output possono nascondere la perdita del tempo necessario a formare gli esperti futuri.</p><p class="meta">20 luglio 2026 · Tema: AI, lavoro e formazione della competenza</p><div class="essay-status"><span>Testo integrale</span><span>English note</span></div></div>
+        <div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div>
+      </article>`);
+  }
+
+  const corpusTitle = document.querySelector('#corpus-title');
+  if (corpusTitle) {
+    corpusTitle.textContent = 'Percorso 0–15.';
+  }
+  const corpusList = document.querySelector('.essay-index-list');
+  if (corpusList && !corpusList.querySelector('[data-saggio-15]')) {
+    corpusList.insertAdjacentHTML('beforeend', `<article class="item" data-saggio-15><div><h3>15 — Il mondo senza apprendisti</h3><p class="meta">20 luglio 2026 · Testo integrale</p></div><div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div></article>`);
+  }
+
+  const generalArchive = document.querySelector('.archive-list');
+  if (generalArchive && document.querySelector('[data-filter]') && !generalArchive.querySelector('[data-saggio-15]')) {
+    const saggio14 = Array.from(generalArchive.querySelectorAll('[data-archive-item]')).find((item) => item.querySelector('h3')?.textContent.trim().startsWith('14 —'));
+    const entry = `<article class="item" data-archive-item data-category="saggi" data-saggio-15><div><h3>15 — Il mondo senza apprendisti</h3><p class="meta">20 luglio 2026 · Saggio integrale · Archivio locale</p><p>Un saggio su intelligenza artificiale, lavoro e apprendistato: come preservare il processo che forma gli esperti futuri.</p></div><div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div></article>`;
+    if (saggio14) {
+      saggio14.insertAdjacentHTML('beforebegin', entry);
+    } else {
+      generalArchive.insertAdjacentHTML('afterbegin', entry);
+    }
+  }
+})();
