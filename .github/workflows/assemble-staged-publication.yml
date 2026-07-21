@@ -1,0 +1,73 @@
+name: Assemble staged static publication
+
+on:
+  push:
+    branches:
+      - 'publish/**'
+    paths:
+      - '.staging/**'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Validate and extract publication bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t manifests < <(find .staging -type f -name SHA256 -print | sort)
+          if [ "${#manifests[@]}" -ne 1 ]; then
+            echo "Expected exactly one SHA256 manifest, found ${#manifests[@]}" >&2
+            exit 1
+          fi
+
+          bundle_dir="$(dirname "${manifests[0]}")"
+          cat "$bundle_dir"/part-*.txt > /tmp/static-publication.b64
+          base64 --decode /tmp/static-publication.b64 > /tmp/static-publication.tar.gz
+
+          expected_sha="$(tr -d '[:space:]' < "${manifests[0]}")"
+          echo "$expected_sha  /tmp/static-publication.tar.gz" | sha256sum --check
+
+          python - <<'PY'
+          import pathlib
+          import tarfile
+
+          archive = pathlib.Path('/tmp/static-publication.tar.gz')
+          allowed_roots = ('cerchi/', 'assets/img/cerchi/', 'sitemap.xml')
+
+          with tarfile.open(archive, 'r:gz') as tar:
+              for member in tar.getmembers():
+                  name = member.name.lstrip('./')
+                  path = pathlib.PurePosixPath(name)
+                  if not name or path.is_absolute() or '..' in path.parts:
+                      raise SystemExit(f'Unsafe archive member: {member.name}')
+                  if member.issym() or member.islnk():
+                      raise SystemExit(f'Links are not allowed: {member.name}')
+                  if not any(name == root or name.startswith(root) for root in allowed_roots):
+                      raise SystemExit(f'Path outside publication scope: {member.name}')
+          PY
+
+          tar -xzf /tmp/static-publication.tar.gz -C .
+          rm -rf .staging
+          rm -f .github/workflows/publish-*.yml
+
+      - name: Commit assembled publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Assemble staged static publication"
+          git push origin HEAD:${{ github.ref_name }}
