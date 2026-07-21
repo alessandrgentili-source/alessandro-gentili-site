@@ -1,0 +1,50 @@
+name: Diagnose Cicerone staging checkout
+
+on:
+  push:
+    branches:
+      - publish/guide-16-cicerone
+    paths:
+      - '.staging/**'
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Capture commit and staging diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          trigger_sha='${{ github.event.after }}'
+          {
+            echo "GITHUB_SHA=$GITHUB_SHA"
+            echo "EVENT_AFTER=$trigger_sha"
+            echo "HEAD=$(git rev-parse HEAD)"
+            echo "REF=$GITHUB_REF"
+            echo "REF_NAME=$GITHUB_REF_NAME"
+            echo '--- HEAD staging tree ---'
+            git ls-tree -r --name-only HEAD | grep '^\.staging/' || true
+            echo '--- EVENT_AFTER staging tree ---'
+            git fetch --no-tags origin "$trigger_sha"
+            git ls-tree -r --name-only "$trigger_sha" | grep '^\.staging/' || true
+            echo '--- working tree staging ---'
+            find .staging -maxdepth 4 -type f -print 2>&1 | sort || true
+          } > assembler-debug.txt
+
+      - name: Commit diagnostics to publication branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assembler-debug.txt
+          git commit -m "Capture Cicerone staging diagnostics"
+          git push origin HEAD:publish/guide-16-cicerone
