@@ -40,21 +40,63 @@ jobs:
 
           python - <<'PY'
           import pathlib
+          import re
           import tarfile
 
           archive = pathlib.Path('/tmp/static-publication.tar.gz')
-          allowed_roots = ('cerchi/', 'assets/img/cerchi/', 'sitemap.xml')
+          allowed_directories = {
+              'cerchi',
+              'cerchi/guide',
+              'cerchi/triadi',
+              'assets',
+              'assets/img',
+              'assets/img/cerchi',
+          }
+          guide_directory = re.compile(r'cerchi/guide/[a-z0-9-]+')
+          guide_page = re.compile(r'cerchi/guide/[a-z0-9-]+/index\.html')
+          cerchi_asset = re.compile(
+              r'assets/img/cerchi/[A-Za-z0-9._-]+\.(?:webp|jpg|jpeg|png)'
+          )
 
           with tarfile.open(archive, 'r:gz') as tar:
-              for member in tar.getmembers():
-                  name = member.name.lstrip('./')
-                  path = pathlib.PurePosixPath(name)
-                  if not name or path.is_absolute() or '..' in path.parts:
-                      raise SystemExit(f'Unsafe archive member: {member.name}')
-                  if member.issym() or member.islnk():
-                      raise SystemExit(f'Links are not allowed: {member.name}')
-                  if not any(name == root or name.startswith(root) for root in allowed_roots):
-                      raise SystemExit(f'Path outside publication scope: {member.name}')
+              members = tar.getmembers()
+              if not members or len(members) > 20:
+                  raise SystemExit(f'Unexpected archive member count: {len(members)}')
+
+              seen = set()
+              for member in members:
+                  raw_name = member.name
+                  raw_path = pathlib.PurePosixPath(raw_name)
+                  if not raw_name or raw_path.is_absolute() or '..' in raw_path.parts:
+                      raise SystemExit(f'Unsafe archive member: {raw_name}')
+
+                  name = raw_name[2:] if raw_name.startswith('./') else raw_name
+                  name = name.rstrip('/')
+                  if not name or name in seen:
+                      raise SystemExit(f'Empty or duplicate archive member: {raw_name}')
+                  seen.add(name)
+
+                  if member.isdir():
+                      if name not in allowed_directories and not guide_directory.fullmatch(name):
+                          raise SystemExit(f'Directory outside publication scope: {raw_name}')
+                      continue
+
+                  if not member.isfile():
+                      raise SystemExit(f'Special files and links are not allowed: {raw_name}')
+                  if member.size > 10 * 1024 * 1024:
+                      raise SystemExit(f'Publication file is unexpectedly large: {raw_name}')
+
+                  allowed_file = (
+                      name in {
+                          'cerchi/index.html',
+                          'cerchi/triadi/index.html',
+                          'sitemap.xml',
+                      }
+                      or guide_page.fullmatch(name)
+                      or cerchi_asset.fullmatch(name)
+                  )
+                  if not allowed_file:
+                      raise SystemExit(f'File outside publication scope: {raw_name}')
           PY
 
           tar -xzf /tmp/static-publication.tar.gz -C .
