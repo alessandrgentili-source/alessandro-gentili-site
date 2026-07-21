@@ -1,0 +1,65 @@
+name: Assemble Cicerone publication
+
+on:
+  push:
+    branches:
+      - publish/guide-16-cicerone
+    paths:
+      - '.staging/cicerone/bundle/**'
+      - '.github/workflows/publish-cicerone.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: publish/guide-16-cicerone
+          fetch-depth: 0
+
+      - name: Reconstruct publication files
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp cerchi/index.html /tmp/cerchi-index-original.html
+          cat .staging/cicerone/bundle/part-*.txt > /tmp/cicerone_bundle.b64
+          base64 --decode /tmp/cicerone_bundle.b64 > /tmp/cicerone_bundle.tar.gz
+          echo "e943975d89ba890781451f2728b450ab9388c2ccd1fb2421d01c198d82919cf3  /tmp/cicerone_bundle.tar.gz" | sha256sum --check
+          tar -xzf /tmp/cicerone_bundle.tar.gz -C .
+          cp /tmp/cerchi-index-original.html cerchi/index.html
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("cerchi/index.html")
+          content = path.read_text(encoding="utf-8")
+          marker = '''      <div class="actions"><a class="btn-secondary" href="guide/adam-smith-scambio-simpatia-ricchezza/">Leggi la guida</a></div>
+              </article>'''
+          addition = marker + '''
+              <article class="essay-card">
+                <figure class="essay-cover"><img src="../assets/img/cerchi/cerchi-guida-16-cicerone-repubblica-legge-parola-civile-1600x900.webp" alt="Copertina della guida Cerchi d’inchiostro dedicata a Cicerone, repubblica, legge e parola civile" loading="lazy" width="1600" height="900" /></figure>
+                <p class="essay-number">Guida 16 · Apertura della sesta triade</p>
+                <h3>Cicerone</h3>
+                <p class="essay-subtitle">Repubblica, legge e parola civile.</p>
+                <p class="meta">Il pensatore che vide nella cosa pubblica un ordine fragile, affidato alla legge, al dovere e alla responsabilità della parola.</p>
+                <div class="actions"><a class="btn-secondary" href="guide/cicerone-repubblica-legge-parola-civile/">Leggi la guida</a></div>
+              </article>'''
+          if content.count(marker) != 1:
+              raise SystemExit(f"Hub insertion marker count: {content.count(marker)}")
+          path.write_text(content.replace(marker, addition), encoding="utf-8")
+          PY
+          rm -rf .staging/cicerone
+          rm -f .github/workflows/publish-cicerone.yml
+
+      - name: Commit assembled publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Publish Cicerone guide 16"
+          git push origin HEAD:publish/guide-16-cicerone
