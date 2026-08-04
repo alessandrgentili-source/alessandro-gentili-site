@@ -1,8 +1,8 @@
 name: Inspect Saggio 16 cover candidate
 
 on:
-  push:
-    branches: [fix/saggio-16-cover-final]
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
