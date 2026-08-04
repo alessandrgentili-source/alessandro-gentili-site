@@ -4,7 +4,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const coverPath = 'assets/img/saggi/site/saggio-16-la-pace-senza-forma-960x540.webp';
+const coverPath = 'assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp';
 const coverUrl = `/${coverPath}`;
 
 const assert = (condition, message) => {
@@ -19,6 +19,8 @@ const readBytes = async (path) => readFile(join(root, path));
 const parseWebpSize = (buffer) => {
   assert(buffer.subarray(0, 4).toString('ascii') === 'RIFF', 'Cover is not a RIFF file');
   assert(buffer.subarray(8, 12).toString('ascii') === 'WEBP', 'Cover is not a WEBP file');
+  const declaredLength = buffer.readUInt32LE(4) + 8;
+  assert(declaredLength === buffer.length, `Truncated WebP: RIFF declares ${declaredLength} bytes, file contains ${buffer.length}`);
 
   const vp8 = buffer.indexOf(Buffer.from('VP8 '));
   assert(vp8 !== -1, 'Cover is not a VP8 WebP file');
@@ -59,9 +61,9 @@ try {
   const home = await readText('index.html');
   const saggi = await readText('saggi.html');
   const essay = await readText('saggi/saggio-16-la-pace-senza-forma.html');
-  assert(home.includes(`src="${coverPath}"`), 'Homepage latest essays does not include the Saggio 16 cover');
-  assert(saggi.includes(`src="${coverPath}"`), 'saggi.html does not include the Saggio 16 cover');
-  assert(essay.includes(`src="../${coverPath}"`), 'Saggio 16 page body does not include the visible cover');
+  assert(home.includes(`src="${coverUrl}"`), 'Homepage latest essays does not include the Saggio 16 cover');
+  assert(saggi.includes(`src="${coverUrl}"`), 'saggi.html does not include the Saggio 16 cover');
+  assert(essay.includes(`src="${coverUrl}"`), 'Saggio 16 page body does not include the visible cover');
 
   const archive = await readText('archivio.html');
   let numbers = [...archive.matchAll(/<h3>(\d+) —/g)].map((match) => Number(match[1]));
