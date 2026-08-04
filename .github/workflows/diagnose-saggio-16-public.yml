@@ -1,0 +1,140 @@
+name: Diagnose Saggio 16 public delivery
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose-public-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Probe public HTTP responses
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p diagnostics/http
+          urls=(
+            "https://alessandro-gentili.it/"
+            "https://alessandro-gentili.it/saggi.html"
+            "https://alessandro-gentili.it/saggi/saggio-16-la-pace-senza-forma.html"
+            "https://alessandro-gentili.it/assets/img/saggi/site/saggio-16-la-pace-senza-forma-960x540.webp?v=20260804"
+            "https://alessandro-gentili.it/assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp?v=20260804"
+          )
+          n=0
+          for url in "${urls[@]}"; do
+            n=$((n+1))
+            echo "=== $url ===" | tee -a diagnostics/http/report.txt
+            curl -sS -L --fail-with-body \
+              -H 'Cache-Control: no-cache' \
+              -D "diagnostics/http/headers-$n.txt" \
+              -o "diagnostics/http/body-$n.bin" \
+              -w 'final_url=%{url_effective}\nstatus=%{http_code}\ncontent_type=%{content_type}\nsize_download=%{size_download}\nredirects=%{num_redirects}\n' \
+              "$url" | tee -a diagnostics/http/report.txt
+            grep -iE '^(cache-control|age|etag|last-modified|content-length|content-type|location|server|x-cache|via):' "diagnostics/http/headers-$n.txt" | tee -a diagnostics/http/report.txt || true
+            file "diagnostics/http/body-$n.bin" | tee -a diagnostics/http/report.txt
+            sha256sum "diagnostics/http/body-$n.bin" | tee -a diagnostics/http/report.txt
+          done
+          python3 - <<'PY' | tee -a diagnostics/http/report.txt
+          from pathlib import Path
+          import struct
+          for i in (4, 5):
+              p = Path(f'diagnostics/http/body-{i}.bin')
+              b = p.read_bytes()
+              print(f'asset_{i}_length={len(b)}')
+              print(f'asset_{i}_riff={b[:4]!r} webp={b[8:12]!r}')
+              if b[:4] == b'RIFF' and b[8:12] == b'WEBP':
+                  pos = b.find(b'VP8 ')
+                  if pos >= 0:
+                      start = pos + 8
+                      width = struct.unpack_from('<H', b, start + 6)[0] & 0x3fff
+                      height = struct.unpack_from('<H', b, start + 8)[0] & 0x3fff
+                      print(f'asset_{i}_dimensions={width}x{height}')
+          for i in (1, 2, 3):
+              text = Path(f'diagnostics/http/body-{i}.bin').read_text('utf-8', errors='replace')
+              print(f'page_{i}_has_saggio16={"saggio-16-la-pace-senza-forma" in text}')
+              print(f'page_{i}_has_new_asset={"saggio-16-la-pace-senza-forma-960x540.webp" in text}')
+              print(f'page_{i}_has_old_asset={"saggio-16-la-pace-senza-forma_site_960x540.webp" in text}')
+          PY
+
+      - name: Install browser probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p diagnostics/browser
+          npm --prefix diagnostics/browser init -y >/dev/null
+          npm --prefix diagnostics/browser install playwright@1.54.2 >/dev/null
+          npx --prefix diagnostics/browser playwright install --with-deps chromium >/dev/null
+
+      - name: Verify rendered DOM desktop and mobile
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > diagnostics/browser/probe.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs/promises';
+
+          const pages = [
+            ['home', 'https://alessandro-gentili.it/'],
+            ['saggi', 'https://alessandro-gentili.it/saggi.html'],
+            ['essay', 'https://alessandro-gentili.it/saggi/saggio-16-la-pace-senza-forma.html'],
+          ];
+          const viewports = [
+            ['desktop', { width: 1440, height: 1000 }],
+            ['mobile', { width: 390, height: 844 }],
+          ];
+          const browser = await chromium.launch({ headless: true });
+          const report = [];
+          let failed = false;
+          for (const [mode, viewport] of viewports) {
+            for (const [name, url] of pages) {
+              const context = await browser.newContext({ viewport });
+              const page = await context.newPage();
+              const errors = [];
+              page.on('console', msg => { if (msg.type() === 'error') errors.push(`console: ${msg.text()}`); });
+              page.on('pageerror', err => errors.push(`pageerror: ${err.message}`));
+              page.on('requestfailed', req => errors.push(`requestfailed: ${req.url()} :: ${req.failure()?.errorText}`));
+              const response = await page.goto(`${url}${url.includes('?') ? '&' : '?'}probe=20260804`, { waitUntil: 'networkidle', timeout: 60000 });
+              const result = await page.evaluate(() => {
+                const imgs = [...document.images].filter(img => img.currentSrc.includes('saggio-16-la-pace-senza-forma') || img.src.includes('saggio-16-la-pace-senza-forma'));
+                return imgs.map(img => {
+                  const css = getComputedStyle(img);
+                  const r = img.getBoundingClientRect();
+                  return {
+                    src: img.src,
+                    currentSrc: img.currentSrc,
+                    complete: img.complete,
+                    naturalWidth: img.naturalWidth,
+                    naturalHeight: img.naturalHeight,
+                    display: css.display,
+                    visibility: css.visibility,
+                    opacity: css.opacity,
+                    width: r.width,
+                    height: r.height,
+                  };
+                });
+              });
+              await page.screenshot({ path: `diagnostics/browser/${mode}-${name}.png`, fullPage: true });
+              const ok = response?.status() === 200 && result.length > 0 && result.every(img => img.complete && img.naturalWidth === 960 && img.naturalHeight === 540 && img.display !== 'none' && img.visibility !== 'hidden' && Number(img.opacity) > 0 && img.width > 0 && img.height > 0) && errors.length === 0;
+              if (!ok) failed = true;
+              report.push({ mode, name, url, documentStatus: response?.status(), images: result, errors, ok });
+              await context.close();
+            }
+          }
+          await browser.close();
+          await fs.writeFile('diagnostics/browser/report.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (failed) process.exitCode = 1;
+          JS
+          node diagnostics/browser/probe.mjs
+
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saggio-16-public-diagnostics
+          path: diagnostics/
+          retention-days: 7
