@@ -216,3 +216,53 @@ if (cookieStatisticsPreference === 'accepted') {
     }
   }
 })();
+
+// Keep Saggio 16 visible across the homepage, essays index and general archive.
+(() => {
+  const essayUrl = '/saggi/saggio-16-la-pace-senza-forma.html';
+  const coverUrl = '/assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp';
+  const coverAlt = 'Cover del saggio La pace senza forma: su fondo nero materico, due strutture verticali diseguali tendono senza riuscire a comporre una forma comune, immagine della distanza tra riarmo europeo e sovranità politica.';
+
+  const latestGrid = document.querySelector('.latest-essays .essay-grid');
+  if (latestGrid && !latestGrid.querySelector('[data-saggio-16]')) {
+    latestGrid.insertAdjacentHTML('afterbegin', `
+      <article class="essay-card" data-saggio-16>
+        <figure class="essay-cover"><img src="${coverUrl}" width="960" height="540" loading="lazy" alt="${coverAlt}" /></figure>
+        <div class="essay-card-body"><p class="essay-number">Saggio 16 · <span class="essay-release-label">SAGGIO INTEGRALE</span></p><h3><a href="${essayUrl}">La pace senza forma</a></h3><p class="essay-subtitle">L’Europa si arma, ma non ha ancora deciso quale ordine vuole difendere.</p><p class="meta">4 agosto 2026 · Macro · Saggio integrale nell’archivio locale</p></div>
+        <div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div>
+      </article>`);
+    while (latestGrid.children.length > 3) {
+      latestGrid.lastElementChild.remove();
+    }
+  }
+
+  const essaysGrid = document.querySelector('#archivio-saggi .essay-grid');
+  if (essaysGrid && !essaysGrid.querySelector('[data-saggio-16]')) {
+    essaysGrid.insertAdjacentHTML('afterbegin', `
+      <article class="essay-card" data-saggio-16>
+        <figure class="essay-cover"><img src="${coverUrl}" width="960" height="540" loading="lazy" alt="${coverAlt}" /></figure>
+        <div class="essay-card-body"><div class="essay-card-meta"><span>SAGGIO 16</span><span class="essay-kind-pill">MACRO</span></div><h3><a href="${essayUrl}">La pace senza forma</a></h3><p class="essay-subtitle">L’Europa si arma, ma non ha ancora deciso quale ordine vuole difendere.</p><p>Un saggio su riarmo europeo, NATO e sovranità: perché capacità militari senza autorità politica non bastano a dare forma alla pace.</p><p class="meta">4 agosto 2026 · Tema: Europa, difesa e sovranità strategica</p><div class="essay-status"><span>Testo integrale</span><span>English note</span></div></div>
+        <div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div>
+      </article>`);
+  }
+
+  const corpusTitle = document.querySelector('#corpus-title');
+  if (corpusTitle) {
+    corpusTitle.textContent = 'Percorso 0–16.';
+  }
+  const corpusList = document.querySelector('.essay-index-list');
+  if (corpusList && !corpusList.querySelector('[data-saggio-16]')) {
+    corpusList.insertAdjacentHTML('beforeend', `<article class="item" data-saggio-16><div><h3>16 — La pace senza forma</h3><p class="meta">4 agosto 2026 · Testo integrale</p></div><div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div></article>`);
+  }
+
+  const generalArchive = document.querySelector('.archive-list');
+  if (generalArchive && document.querySelector('[data-filter]') && !generalArchive.querySelector('[data-saggio-16]')) {
+    const saggio15 = Array.from(generalArchive.querySelectorAll('[data-archive-item]')).find((item) => item.querySelector('h3')?.textContent.trim().startsWith('15 —'));
+    const entry = `<article class="item" data-archive-item data-category="saggi" data-saggio-16><div><h3>16 — La pace senza forma</h3><p class="meta">4 agosto 2026 · Saggio integrale · Archivio locale</p><p>Un saggio sulla costruzione di una sovranità strategica europea capace di legare forza, legittimità e pace.</p></div><div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div></article>`;
+    if (saggio15) {
+      saggio15.insertAdjacentHTML('beforebegin', entry);
+    } else {
+      generalArchive.insertAdjacentHTML('afterbegin', entry);
+    }
+  }
+})();
