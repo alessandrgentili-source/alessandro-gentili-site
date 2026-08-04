@@ -4,7 +4,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const coverPath = 'assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp';
+const coverPath = 'assets/img/saggi/site/saggio-16-la-pace-senza-forma-960x540.webp';
 const coverUrl = `/${coverPath}`;
 
 const assert = (condition, message) => {
