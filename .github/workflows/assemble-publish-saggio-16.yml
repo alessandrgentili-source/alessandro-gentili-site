@@ -6,6 +6,11 @@ on:
       - publish-saggio-16-la-pace-senza-forma
     paths:
       - .staging/saggio16/READY
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .staging/saggio16/READY
 
 permissions:
   contents: write
@@ -17,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: publish-saggio-16-la-pace-senza-forma
           fetch-depth: 0
 
       - name: Assemble page and update publication surfaces
@@ -98,4 +103,4 @@ jobs:
           git add -A
           git diff --cached --quiet && exit 0
           git commit -m "Publish Saggio 16 La pace senza forma"
-          git push origin HEAD:${{ github.ref_name }}
+          git push origin HEAD:publish-saggio-16-la-pace-senza-forma
