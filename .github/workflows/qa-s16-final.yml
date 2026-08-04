@@ -32,7 +32,7 @@ jobs:
           print(len(b), hashlib.sha256(b).hexdigest(), im.size, stat.extrema)
           PY
           test "$(find assets/img/saggi/site -maxdepth 1 -type f -name 'saggio-16-la-pace-senza-forma*.webp' | wc -l)" -eq 1
-          ! rg 'saggio-16-la-pace-senza-forma-960x540\.webp' .
+          ! grep -R --line-number --exclude-dir=.git --exclude-dir=.github 'saggio-16-la-pace-senza-forma-960x540.webp' assets index.html saggi.html saggi tools
           node tools/check-saggio-16-publication.mjs
 
       - name: Install browser
@@ -45,7 +45,8 @@ jobs:
       - name: Render desktop and mobile
         run: |
           python3 -m http.server 8000 --bind 127.0.0.1 >evidence/server.log 2>&1 &
-          cat > /tmp/qa.mjs <<'JS'
+          sleep 2
+          cat > evidence/qa.mjs <<'JS'
           import { chromium } from 'playwright';
           import fs from 'node:fs/promises';
           const browser=await chromium.launch({headless:true});
@@ -54,7 +55,7 @@ jobs:
           const report=[]; let failed=false;
           for(const [mode,viewport] of modes){for(const [name,path] of targets){
             const c=await browser.newContext({viewport}); const p=await c.newPage(); const errors=[];
-            p.on('console',m=>{if(m.type()==='error')errors.push(m.text())}); p.on('pageerror',e=>errors.push(e.message));
+            p.on('console',m=>{if(m.type()==='error')errors.push(m.text())}); p.on('pageerror',e=>errors.push(e.message)); p.on('requestfailed',r=>errors.push(`${r.url()} :: ${r.failure()?.errorText}`));
             const r=await p.goto('http://127.0.0.1:8000'+path,{waitUntil:'networkidle'});
             const loc=p.locator('img[src*="saggio-16-la-pace-senza-forma"]');
             for(let i=0;i<await loc.count();i++)await loc.nth(i).scrollIntoViewIfNeeded();
@@ -64,10 +65,10 @@ jobs:
             const expected=name==='essay'?0:1; const ok=r.status()===200&&data.cards===expected&&data.images.length===1&&data.images.every(i=>i.w===960&&i.h===540&&i.rw>0&&i.rh>0&&i.display!=='none'&&i.visibility!=='hidden'&&Number(i.opacity)>0&&i.range>40)&&errors.length===0;
             if(!ok)failed=true; report.push({mode,name,status:r.status(),...data,errors,ok}); await c.close();
           }}
-          const c=await browser.newContext();const p=await c.newPage();await p.goto('http://127.0.0.1:8000/archivio.html',{waitUntil:'networkidle'});const order=await p.evaluate(()=>[...document.querySelectorAll('[data-archive-item][data-category="saggi"] h3')].map(h=>Number(h.textContent.match(/^(\d+)/)?.[1])).filter(Number.isFinite));const expected=[16,15,14,13,12],ok=expected.every((v,i)=>order[i]===v);if(!ok)failed=true;report.push({name:'archive-order',order:order.slice(0,8),ok});await c.close();
+          const c=await browser.newContext();const p=await c.newPage();const errors=[];p.on('console',m=>{if(m.type()==='error')errors.push(m.text())});p.on('requestfailed',r=>errors.push(`${r.url()} :: ${r.failure()?.errorText}`));await p.goto('http://127.0.0.1:8000/archivio.html',{waitUntil:'networkidle'});const order=await p.evaluate(()=>[...document.querySelectorAll('[data-archive-item][data-category="saggi"] h3')].map(h=>Number(h.textContent.match(/^(\d+)/)?.[1])).filter(Number.isFinite));const expected=[16,15,14,13,12],ok=expected.every((v,i)=>order[i]===v)&&errors.length===0;if(!ok)failed=true;report.push({name:'archive-order',order:order.slice(0,8),errors,ok});await c.close();
           await browser.close();await fs.writeFile('evidence/report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));if(failed)process.exit(1);
           JS
-          node /tmp/qa.mjs
+          node evidence/qa.mjs
 
       - name: Upload evidence
         if: always()
