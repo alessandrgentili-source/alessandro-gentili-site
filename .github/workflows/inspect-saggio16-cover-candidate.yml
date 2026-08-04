@@ -17,7 +17,7 @@ jobs:
           ref: fix/saggio-16-cover-final
           fetch-depth: 0
 
-      - name: Recover candidate from preserved asset branch
+      - name: Recover and decode candidate from preserved asset branch
         shell: bash
         run: |
           set -euo pipefail
@@ -39,11 +39,22 @@ jobs:
                   assert b[:4] == b'RIFF' and b[8:12] == b'WEBP'
                   assert declared == len(b), (declared, len(b))
           PY
-          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,pix_fmt -of default=noprint_wrappers=1 evidence/candidate.webp | tee -a evidence/report.txt
-          ffmpeg -v error -y -i evidence/candidate.webp -frames:v 1 evidence/candidate.png
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY' | tee -a evidence/report.txt
+          from PIL import Image, ImageStat
+          image = Image.open('evidence/candidate.webp').convert('RGB')
+          stat = ImageStat.Stat(image)
+          print(f'decoded_size={image.size}')
+          print(f'mean={[round(v, 2) for v in stat.mean]}')
+          print(f'extrema={stat.extrema}')
+          assert image.size == (960, 540)
+          assert any(high - low > 40 for low, high in stat.extrema)
+          image.save('evidence/candidate.png')
+          PY
           test -s evidence/candidate.png
 
       - name: Upload candidate evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: saggio-16-cover-candidate
