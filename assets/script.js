@@ -167,6 +167,34 @@ if (cookieStatisticsPreference === 'accepted') {
   showCookieBanner();
 }
 
+const getArchiveEssayNumber = (item) => {
+  const explicitNumber = Number(item.dataset.essayNumber);
+  if (Number.isFinite(explicitNumber)) {
+    return explicitNumber;
+  }
+
+  const match = item.querySelector('h3')?.textContent.trim().match(/^(\d+)\s+—/);
+  return match ? Number(match[1]) : null;
+};
+
+const sortNumberedArchiveEssays = (archiveList) => {
+  const numberedEssays = Array.from(archiveList.querySelectorAll('[data-archive-item][data-category="saggi"]'))
+    .map((item, index) => ({ item, index, number: getArchiveEssayNumber(item) }))
+    .filter(({ number }) => Number.isFinite(number));
+
+  if (numberedEssays.length < 2) {
+    return;
+  }
+
+  const insertionPoint = numberedEssays[numberedEssays.length - 1].item.nextSibling;
+  const sortedEssays = document.createDocumentFragment();
+  numberedEssays
+    .sort((a, b) => b.number - a.number || a.index - b.index)
+    .forEach(({ item }) => sortedEssays.appendChild(item));
+
+  archiveList.insertBefore(sortedEssays, insertionPoint);
+};
+
 // Keep Saggio 15 visible across the homepage, essays index and general archive.
 (() => {
   const essayUrl = '/saggi/saggio-15-il-mondo-senza-apprendisti.html';
@@ -208,12 +236,13 @@ if (cookieStatisticsPreference === 'accepted') {
   const generalArchive = document.querySelector('.archive-list');
   if (generalArchive && document.querySelector('[data-filter]') && !generalArchive.querySelector('[data-saggio-15]')) {
     const saggio14 = Array.from(generalArchive.querySelectorAll('[data-archive-item]')).find((item) => item.querySelector('h3')?.textContent.trim().startsWith('14 —'));
-    const entry = `<article class="item" data-archive-item data-category="saggi" data-saggio-15><div><h3>15 — Il mondo senza apprendisti</h3><p class="meta">20 luglio 2026 · Saggio integrale · Archivio locale</p><p>Un saggio su intelligenza artificiale, lavoro e apprendistato: come preservare il processo che forma gli esperti futuri.</p></div><div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div></article>`;
+    const entry = `<article class="item" data-archive-item data-category="saggi" data-saggio-15 data-essay-number="15"><div><h3>15 — Il mondo senza apprendisti</h3><p class="meta">20 luglio 2026 · Saggio integrale · Archivio locale</p><p>Un saggio su intelligenza artificiale, lavoro e apprendistato: come preservare il processo che forma gli esperti futuri.</p></div><div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div></article>`;
     if (saggio14) {
       saggio14.insertAdjacentHTML('beforebegin', entry);
     } else {
       generalArchive.insertAdjacentHTML('afterbegin', entry);
     }
+    sortNumberedArchiveEssays(generalArchive);
   }
 })();
 
@@ -258,11 +287,12 @@ if (cookieStatisticsPreference === 'accepted') {
   const generalArchive = document.querySelector('.archive-list');
   if (generalArchive && document.querySelector('[data-filter]') && !generalArchive.querySelector('[data-saggio-16]')) {
     const saggio15 = Array.from(generalArchive.querySelectorAll('[data-archive-item]')).find((item) => item.querySelector('h3')?.textContent.trim().startsWith('15 —'));
-    const entry = `<article class="item" data-archive-item data-category="saggi" data-saggio-16><div><h3>16 — La pace senza forma</h3><p class="meta">4 agosto 2026 · Saggio integrale · Archivio locale</p><p>Un saggio sulla costruzione di una sovranità strategica europea capace di legare forza, legittimità e pace.</p></div><div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div></article>`;
+    const entry = `<article class="item" data-archive-item data-category="saggi" data-saggio-16 data-essay-number="16"><div><h3>16 — La pace senza forma</h3><p class="meta">4 agosto 2026 · Saggio integrale · Archivio locale</p><p>Un saggio sulla costruzione di una sovranità strategica europea capace di legare forza, legittimità e pace.</p></div><div class="actions"><a class="btn-secondary" href="${essayUrl}">Leggi il saggio</a></div></article>`;
     if (saggio15) {
       saggio15.insertAdjacentHTML('beforebegin', entry);
     } else {
       generalArchive.insertAdjacentHTML('afterbegin', entry);
     }
+    sortNumberedArchiveEssays(generalArchive);
   }
 })();
