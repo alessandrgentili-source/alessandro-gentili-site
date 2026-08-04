@@ -249,7 +249,7 @@ const sortNumberedArchiveEssays = (archiveList) => {
 // Keep Saggio 16 visible across the homepage, essays index and general archive.
 (() => {
   const essayUrl = '/saggi/saggio-16-la-pace-senza-forma.html';
-  const coverUrl = '/assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp';
+  const coverUrl = '/assets/img/saggi/site/saggio-16-la-pace-senza-forma-960x540.webp';
   const coverAlt = 'Cover del saggio La pace senza forma: su fondo nero materico, due strutture verticali diseguali tendono senza riuscire a comporre una forma comune, immagine della distanza tra riarmo europeo e sovranità politica.';
 
   const latestGrid = document.querySelector('.latest-essays .essay-grid');
