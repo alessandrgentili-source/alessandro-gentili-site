@@ -12,7 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Probe public HTTP responses
+      - name: Check out PR source
+        uses: actions/checkout@v4
+
+      - name: Probe public HTTP and compare deployed binaries
         shell: bash
         run: |
           set -euo pipefail
@@ -38,26 +41,63 @@ jobs:
             file "diagnostics/http/body-$n.bin" | tee -a diagnostics/http/report.txt
             sha256sum "diagnostics/http/body-$n.bin" | tee -a diagnostics/http/report.txt
           done
+
+          cp diagnostics/http/body-4.bin diagnostics/http/public-versioned.webp
+          cp diagnostics/http/body-5.bin diagnostics/http/public-canonical.webp
+          cp assets/img/saggi/site/saggio-16-la-pace-senza-forma-960x540.webp diagnostics/http/repo-versioned.webp
+          cp assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp diagnostics/http/repo-canonical.webp
+
+          echo '=== Repository vs deployed files ===' | tee -a diagnostics/http/report.txt
+          wc -c diagnostics/http/*.webp | tee -a diagnostics/http/report.txt
+          sha256sum diagnostics/http/*.webp | tee -a diagnostics/http/report.txt
+          if cmp -s diagnostics/http/public-versioned.webp diagnostics/http/repo-versioned.webp; then
+            echo 'public_versioned_matches_repo=true' | tee -a diagnostics/http/report.txt
+          else
+            echo 'public_versioned_matches_repo=false' | tee -a diagnostics/http/report.txt
+          fi
+          if cmp -s diagnostics/http/public-canonical.webp diagnostics/http/repo-canonical.webp; then
+            echo 'public_canonical_matches_repo=true' | tee -a diagnostics/http/report.txt
+          else
+            echo 'public_canonical_matches_repo=false' | tee -a diagnostics/http/report.txt
+          fi
+
+          python3 -m pip install --quiet pillow
           python3 - <<'PY' | tee -a diagnostics/http/report.txt
           from pathlib import Path
-          import struct
-          for i in (4, 5):
-              p = Path(f'diagnostics/http/body-{i}.bin')
-              b = p.read_bytes()
-              print(f'asset_{i}_length={len(b)}')
-              print(f'asset_{i}_riff={b[:4]!r} webp={b[8:12]!r}')
-              if b[:4] == b'RIFF' and b[8:12] == b'WEBP':
-                  pos = b.find(b'VP8 ')
-                  if pos >= 0:
-                      start = pos + 8
-                      width = struct.unpack_from('<H', b, start + 6)[0] & 0x3fff
-                      height = struct.unpack_from('<H', b, start + 8)[0] & 0x3fff
-                      print(f'asset_{i}_dimensions={width}x{height}')
+          from PIL import Image, ImageStat, ImageChops, ImageDraw
+          import hashlib
+
+          files = [
+              'public-versioned.webp', 'public-canonical.webp',
+              'repo-versioned.webp', 'repo-canonical.webp'
+          ]
+          images = {}
+          for name in files:
+              p = Path('diagnostics/http') / name
+              data = p.read_bytes()
+              im = Image.open(p).convert('RGB')
+              images[name] = im
+              stat = ImageStat.Stat(im)
+              print(f'{name}: bytes={len(data)} sha256={hashlib.sha256(data).hexdigest()} size={im.size} mean={[round(v,2) for v in stat.mean]} extrema={stat.extrema}')
+
+          public = images['public-versioned.webp']
+          repo = images['repo-versioned.webp']
+          diff = ImageChops.difference(public, repo)
+          print(f'public_repo_bbox={diff.getbbox()} public_repo_rms={[round(v,2) for v in ImageStat.Stat(diff).rms]}')
+
+          canvas = Image.new('RGB', (1920, 620), 'white')
+          canvas.paste(public, (0, 0))
+          canvas.paste(repo, (960, 0))
+          draw = ImageDraw.Draw(canvas)
+          draw.text((20, 565), 'PUBLIC DEPLOYED', fill='black')
+          draw.text((980, 565), 'REPOSITORY MAIN/PR', fill='black')
+          canvas.save('diagnostics/http/public-vs-repository.png')
+
           for i in (1, 2, 3):
               text = Path(f'diagnostics/http/body-{i}.bin').read_text('utf-8', errors='replace')
               print(f'page_{i}_has_saggio16={"saggio-16-la-pace-senza-forma" in text}')
-              print(f'page_{i}_has_new_asset={"saggio-16-la-pace-senza-forma-960x540.webp" in text}')
-              print(f'page_{i}_has_old_asset={"saggio-16-la-pace-senza-forma_site_960x540.webp" in text}')
+              print(f'page_{i}_has_versioned_asset={"saggio-16-la-pace-senza-forma-960x540.webp" in text}')
+              print(f'page_{i}_has_canonical_asset={"saggio-16-la-pace-senza-forma_site_960x540.webp" in text}')
           PY
 
       - name: Install browser probe
@@ -77,7 +117,7 @@ jobs:
           import { chromium } from 'playwright';
           import fs from 'node:fs/promises';
 
-          const pages = [
+          const targets = [
             ['home', 'https://alessandro-gentili.it/'],
             ['saggi', 'https://alessandro-gentili.it/saggi.html'],
             ['essay', 'https://alessandro-gentili.it/saggi/saggio-16-la-pace-senza-forma.html'],
@@ -90,17 +130,25 @@ jobs:
           const report = [];
           let failed = false;
           for (const [mode, viewport] of viewports) {
-            for (const [name, url] of pages) {
+            for (const [name, url] of targets) {
               const context = await browser.newContext({ viewport });
               const page = await context.newPage();
               const errors = [];
               page.on('console', msg => { if (msg.type() === 'error') errors.push(`console: ${msg.text()}`); });
               page.on('pageerror', err => errors.push(`pageerror: ${err.message}`));
               page.on('requestfailed', req => errors.push(`requestfailed: ${req.url()} :: ${req.failure()?.errorText}`));
-              const response = await page.goto(`${url}${url.includes('?') ? '&' : '?'}probe=20260804`, { waitUntil: 'networkidle', timeout: 60000 });
-              const result = await page.evaluate(() => {
-                const imgs = [...document.images].filter(img => img.currentSrc.includes('saggio-16-la-pace-senza-forma') || img.src.includes('saggio-16-la-pace-senza-forma'));
-                return imgs.map(img => {
+              const response = await page.goto(`${url}${url.includes('?') ? '&' : '?'}probe=20260804b`, { waitUntil: 'networkidle', timeout: 60000 });
+              const locator = page.locator('img[src*="saggio-16-la-pace-senza-forma"]');
+              const count = await locator.count();
+              for (let i = 0; i < count; i += 1) {
+                await locator.nth(i).scrollIntoViewIfNeeded();
+              }
+              if (count > 0) {
+                await page.waitForFunction(() => [...document.images].filter(img => img.src.includes('saggio-16-la-pace-senza-forma')).every(img => img.complete && img.naturalWidth > 0), null, { timeout: 15000 });
+              }
+              const images = await page.evaluate(() => [...document.images]
+                .filter(img => img.src.includes('saggio-16-la-pace-senza-forma'))
+                .map(img => {
                   const css = getComputedStyle(img);
                   const r = img.getBoundingClientRect();
                   return {
@@ -115,12 +163,11 @@ jobs:
                     width: r.width,
                     height: r.height,
                   };
-                });
-              });
+                }));
               await page.screenshot({ path: `diagnostics/browser/${mode}-${name}.png`, fullPage: true });
-              const ok = response?.status() === 200 && result.length > 0 && result.every(img => img.complete && img.naturalWidth === 960 && img.naturalHeight === 540 && img.display !== 'none' && img.visibility !== 'hidden' && Number(img.opacity) > 0 && img.width > 0 && img.height > 0) && errors.length === 0;
+              const ok = response?.status() === 200 && images.length > 0 && images.every(img => img.complete && img.naturalWidth === 960 && img.naturalHeight === 540 && img.display !== 'none' && img.visibility !== 'hidden' && Number(img.opacity) > 0 && img.width > 0 && img.height > 0) && errors.length === 0;
               if (!ok) failed = true;
-              report.push({ mode, name, url, documentStatus: response?.status(), images: result, errors, ok });
+              report.push({ mode, name, url, documentStatus: response?.status(), images, errors, ok });
               await context.close();
             }
           }
