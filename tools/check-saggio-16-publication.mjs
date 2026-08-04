@@ -19,6 +19,8 @@ const readBytes = async (path) => readFile(join(root, path));
 const parseWebpSize = (buffer) => {
   assert(buffer.subarray(0, 4).toString('ascii') === 'RIFF', 'Cover is not a RIFF file');
   assert(buffer.subarray(8, 12).toString('ascii') === 'WEBP', 'Cover is not a WEBP file');
+  const declaredLength = buffer.readUInt32LE(4) + 8;
+  assert(declaredLength === buffer.length, `Truncated WebP: RIFF declares ${declaredLength} bytes, file contains ${buffer.length}`);
 
   const vp8 = buffer.indexOf(Buffer.from('VP8 '));
   assert(vp8 !== -1, 'Cover is not a VP8 WebP file');
