@@ -1,0 +1,197 @@
+name: Apply and test final Saggio 16 cover
+
+on:
+  push:
+    branches: [fix/saggio-16-cover-final]
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-test:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out fix branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/saggio-16-cover-final
+          fetch-depth: 0
+
+      - name: Restore the intact canonical WebP
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin saggio-16-cover-assets
+          git show origin/saggio-16-cover-assets:assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp > assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp
+          rm -f .github/workflows/inspect-saggio16-cover-candidate.yml
+          rm -f .github/workflows/apply-and-test-saggio16-cover.yml
+
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageStat
+          import hashlib, struct
+
+          path = Path('assets/img/saggi/site/saggio-16-la-pace-senza-forma_site_960x540.webp')
+          data = path.read_bytes()
+          declared = struct.unpack_from('<I', data, 4)[0] + 8
+          assert data[:4] == b'RIFF' and data[8:12] == b'WEBP'
+          assert declared == len(data), (declared, len(data))
+          image = Image.open(path).convert('RGB')
+          stat = ImageStat.Stat(image)
+          assert image.size == (960, 540), image.size
+          assert any(high - low > 40 for low, high in stat.extrema), stat.extrema
+          print(f'bytes={len(data)}')
+          print(f'sha256={hashlib.sha256(data).hexdigest()}')
+          print(f'size={image.size}')
+          print(f'extrema={stat.extrema}')
+          PY
+
+          if rg -n 'saggio-16-la-pace-senza-forma-960x540\.webp' --glob '!*.git*' .; then
+            echo 'Obsolete duplicate filename still referenced' >&2
+            exit 1
+          fi
+          test "$(find assets/img/saggi/site -maxdepth 1 -type f -name 'saggio-16-la-pace-senza-forma*.webp' | wc -l)" -eq 1
+          node tools/check-saggio-16-publication.mjs
+          git diff --check
+
+      - name: Install browser QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p final-evidence/browser
+          npm --prefix final-evidence/browser init -y >/dev/null
+          npm --prefix final-evidence/browser install playwright@1.54.2 >/dev/null
+          npx --prefix final-evidence/browser playwright install --with-deps chromium >/dev/null
+
+      - name: Run local desktop and mobile rendering QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >final-evidence/server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          sleep 2
+          cat > final-evidence/browser/qa.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs/promises';
+
+          const pages = [
+            ['home', 'http://127.0.0.1:8000/'],
+            ['saggi', 'http://127.0.0.1:8000/saggi.html'],
+            ['essay', 'http://127.0.0.1:8000/saggi/saggio-16-la-pace-senza-forma.html'],
+          ];
+          const viewports = [
+            ['desktop', { width: 1440, height: 1000 }],
+            ['mobile', { width: 390, height: 844 }],
+          ];
+          const browser = await chromium.launch({ headless: true });
+          const report = [];
+          let failed = false;
+
+          for (const [mode, viewport] of viewports) {
+            for (const [name, url] of pages) {
+              const context = await browser.newContext({ viewport });
+              const page = await context.newPage();
+              const errors = [];
+              page.on('console', msg => { if (msg.type() === 'error') errors.push(`console: ${msg.text()}`); });
+              page.on('pageerror', err => errors.push(`pageerror: ${err.message}`));
+              page.on('requestfailed', req => errors.push(`requestfailed: ${req.url()} :: ${req.failure()?.errorText}`));
+              const response = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+              const locator = page.locator('img[src*="saggio-16-la-pace-senza-forma"]');
+              const count = await locator.count();
+              for (let i = 0; i < count; i += 1) await locator.nth(i).scrollIntoViewIfNeeded();
+              await page.waitForFunction(() => [...document.images]
+                .filter(img => img.src.includes('saggio-16-la-pace-senza-forma'))
+                .every(img => img.complete && img.naturalWidth > 0), null, { timeout: 15000 });
+              const data = await page.evaluate(() => {
+                const images = [...document.images]
+                  .filter(img => img.src.includes('saggio-16-la-pace-senza-forma'))
+                  .map(img => {
+                    const css = getComputedStyle(img);
+                    const rect = img.getBoundingClientRect();
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 32;
+                    canvas.height = 18;
+                    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                    ctx.drawImage(img, 0, 0, 32, 18);
+                    const pixels = ctx.getImageData(0, 0, 32, 18).data;
+                    let min = 255;
+                    let max = 0;
+                    for (let i = 0; i < pixels.length; i += 4) {
+                      const luma = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
+                      min = Math.min(min, luma);
+                      max = Math.max(max, luma);
+                    }
+                    return {
+                      src: img.src,
+                      complete: img.complete,
+                      naturalWidth: img.naturalWidth,
+                      naturalHeight: img.naturalHeight,
+                      display: css.display,
+                      visibility: css.visibility,
+                      opacity: css.opacity,
+                      renderedWidth: rect.width,
+                      renderedHeight: rect.height,
+                      pixelRange: max - min,
+                    };
+                  });
+                return {
+                  images,
+                  saggio16Cards: document.querySelectorAll('[data-saggio-16]').length,
+                };
+              });
+              await page.screenshot({ path: `final-evidence/browser/${mode}-${name}.png`, fullPage: true });
+              const expectedCards = name === 'essay' ? 0 : 1;
+              const ok = response?.status() === 200 && data.images.length === 1 && data.saggio16Cards === expectedCards && data.images.every(img =>
+                img.complete && img.naturalWidth === 960 && img.naturalHeight === 540 &&
+                img.display !== 'none' && img.visibility !== 'hidden' && Number(img.opacity) > 0 &&
+                img.renderedWidth > 0 && img.renderedHeight > 0 && img.pixelRange > 40
+              ) && errors.length === 0;
+              if (!ok) failed = true;
+              report.push({ mode, name, url, status: response?.status(), ...data, errors, ok });
+              await context.close();
+            }
+          }
+
+          const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+          const archive = await context.newPage();
+          const archiveErrors = [];
+          archive.on('console', msg => { if (msg.type() === 'error') archiveErrors.push(msg.text()); });
+          await archive.goto('http://127.0.0.1:8000/archivio.html', { waitUntil: 'networkidle' });
+          const order = await archive.evaluate(() => [...document.querySelectorAll('[data-archive-item][data-category="saggi"] h3')]
+            .map(h => h.textContent.trim().match(/^(\d+)\s+—/)?.[1])
+            .filter(Boolean)
+            .map(Number));
+          const expected = [16, 15, 14, 13, 12];
+          const archiveOk = expected.every((value, index) => order[index] === value) && archiveErrors.length === 0;
+          if (!archiveOk) failed = true;
+          report.push({ name: 'archive-order', order: order.slice(0, 8), expected, errors: archiveErrors, ok: archiveOk });
+          await context.close();
+
+          await browser.close();
+          await fs.writeFile('final-evidence/browser/report.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (failed) process.exitCode = 1;
+          JS
+          node final-evidence/browser/qa.mjs
+
+      - name: Upload final rendering evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: saggio-16-final-local-qa
+          path: final-evidence/
+          retention-days: 7
+
+      - name: Commit tested binary replacement
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf final-evidence
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Replace truncated Saggio 16 cover binary'
+          git push origin HEAD:fix/saggio-16-cover-final
