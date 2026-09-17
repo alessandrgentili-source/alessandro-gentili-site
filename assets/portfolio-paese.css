@@ -1,0 +1,60 @@
+/* Un paese dentro la storia: editorial project page */
+.paese-page{padding-top:clamp(1.25rem,2.5vw,2.3rem)}
+.portfolio-breadcrumb{display:flex;align-items:center;gap:.55rem;color:var(--muted);font-size:.82rem;margin-bottom:clamp(2rem,4vw,4rem)}
+.portfolio-breadcrumb a{text-decoration:none;border-bottom:1px solid currentColor}
+.paese-page section{border-bottom:1px solid rgba(141,109,55,.18)}
+.paese-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.73fr);align-items:center;gap:clamp(2rem,7vw,7rem);padding-bottom:clamp(4rem,8vw,8rem)}
+.paese-hero h1{font-size:clamp(3.3rem,6.3vw,7.1rem);letter-spacing:-.038em;line-height:.96;max-width:none;color:#102a29}
+.paese-subtitle{font:italic clamp(1.2rem,2vw,1.85rem)/1.38 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color:var(--ink-2);margin:clamp(1.2rem,2.8vw,2.6rem) 0 0}
+.paese-hero-meta{display:flex;gap:.55rem 1.35rem;flex-wrap:wrap;padding-top:clamp(2rem,5vw,4.5rem);font-size:.83rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2)}
+.paese-hero-meta span+span::before{content:'·';margin-right:1.35rem;color:var(--gold)}
+.paese-attribution{font-size:.9rem;line-height:1.7;color:var(--muted);margin:1.1rem 0 1.6rem}
+.paese-attribution strong{font-weight:600;color:var(--ink-2)}
+.paese-hero-cover{margin:0;justify-self:center;width:min(100%,400px)}
+.paese-hero-cover img{display:block;width:100%;height:auto;box-shadow:0 18px 42px rgba(34,38,32,.10)}
+.paese-hero-cover figcaption{margin-top:.75rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:right}
+.paese-intro{display:grid;grid-template-columns:minmax(150px,.4fr) minmax(0,1fr);gap:clamp(2rem,8vw,8rem);padding-block:clamp(4.5rem,9vw,9rem)}
+.paese-side-note{display:flex;flex-direction:column;justify-content:space-between;gap:2rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+.paese-prose{max-width:730px}
+.paese-prose h2,.paese-section-heading h2{font-size:clamp(2.3rem,4.2vw,4.5rem);letter-spacing:-.02em;line-height:1.04}
+.paese-prose p{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-size:clamp(1.14rem,1.25vw,1.34rem);line-height:1.67;color:var(--ink-2);margin:1.5rem 0 0}
+.paese-method,.paese-pages,.paese-event,.paese-reader-section,.paese-credits{padding-block:clamp(4.5rem,8vw,8rem)}
+.paese-section-heading{max-width:780px;margin-bottom:clamp(2.5rem,5vw,5rem)}
+.paese-section-heading>p:last-child:not(.kicker){max-width:55ch;font-size:1.06rem;line-height:1.7;color:var(--ink-2);margin:1.4rem 0 0}
+.paese-steps{margin:0;padding:0;list-style:none;border-top:1px solid rgba(141,109,55,.48)}
+.paese-steps li{display:grid;grid-template-columns:minmax(56px,.18fr) minmax(0,.65fr) minmax(0,.65fr);gap:1rem;align-items:baseline;padding:clamp(1.25rem,2.5vw,2.25rem) .1rem;border-bottom:1px solid rgba(141,109,55,.22)}
+.paese-steps .step-no{font:italic 1.35rem Georgia,serif;color:var(--gold)}
+.paese-steps strong{font:normal clamp(1.4rem,2.6vw,2.3rem)/1.1 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color:#183b35}
+.paese-steps li>span:last-child{font-size:.96rem;color:var(--ink-2)}
+.paese-page-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(1rem,2.2vw,2.1rem);align-items:start}
+.paese-page-grid figure{margin:0;grid-column:span 2}
+.paese-page-grid figure:nth-child(4){grid-column:2 / span 2}
+.paese-page-grid figure:nth-child(5){grid-column:4 / span 2}
+.paese-page-grid img{display:block;width:100%;height:auto;border:1px solid rgba(34,38,32,.12);background:#fff}
+.paese-page-grid figcaption{display:flex;justify-content:space-between;gap:.7rem;margin-top:.72rem;font:italic .96rem/1.4 Georgia,serif;color:var(--ink-2)}
+.paese-page-grid figcaption span{font:normal .7rem/1.8 system-ui,sans-serif;letter-spacing:.08em;color:var(--gold);white-space:nowrap}
+.paese-event-image{margin:0}
+.paese-event-image img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.paese-event-image figcaption{margin-top:.75rem;font-size:.75rem;letter-spacing:.05em;color:var(--muted)}
+.paese-reader-heading{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:2.5rem}
+.paese-reader-heading p:not(.kicker){max-width:45ch;color:var(--ink-2)}
+.paese-reader-heading .actions{justify-content:flex-end}
+.paese-reader{border:1px solid rgba(141,109,55,.2);background:#fff}
+.paese-reader object{display:block;width:100%;height:min(80vh,950px);min-height:650px}
+.paese-reader object p{padding:2rem}
+.paese-credits{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,8vw,7rem);border-bottom:0!important}
+.paese-related{max-width:42ch;margin-top:2.2rem;font-size:.95rem;color:var(--ink-2)}
+.paese-credits dl{margin:0}
+.paese-credits dl>div{padding:1rem 0;border-top:1px solid rgba(141,109,55,.24)}
+.paese-credits dt{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.25rem}
+.paese-credits dd{margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.58}
+@media(max-width:900px){.paese-hero{gap:2rem;grid-template-columns:minmax(0,1.2fr) minmax(230px,.8fr)}.paese-reader-heading{display:block}.paese-reader-heading .actions{justify-content:flex-start}}
+@media(max-width:680px){
+ .paese-hero{grid-template-columns:1fr;gap:2.6rem}.paese-hero h1{font-size:clamp(3rem,12vw,5rem)}.paese-hero-cover{width:min(74%,310px)}
+ .paese-intro{grid-template-columns:1fr;gap:1.8rem}.paese-side-note{flex-direction:row}.paese-prose p{font-size:1.12rem}
+ .paese-steps li{grid-template-columns:42px 1fr;gap:.3rem .75rem}.paese-steps li>span:last-child{grid-column:2;font-size:.9rem}
+ .paese-page-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem .8rem}.paese-page-grid figure,.paese-page-grid figure:nth-child(4),.paese-page-grid figure:nth-child(5){grid-column:auto}.paese-page-grid figure:last-child{grid-column:1 / -1;max-width:66%;justify-self:center}
+ .paese-page-grid figcaption{display:block;font-size:.83rem}.paese-page-grid figcaption span{display:block}
+ .paese-event-image img{aspect-ratio:4/3}.paese-reader{display:none}.paese-credits{grid-template-columns:1fr}
+}
+@media(max-width:390px){.paese-hero-meta{display:block}.paese-hero-meta span{display:block}.paese-hero-meta span+span::before{display:none}.paese-hero-cover{width:83%}.paese-page-grid figure:last-child{max-width:80%}}
