@@ -30,10 +30,11 @@
   }
   </script>
   <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/author-v2.css" />
 </head>
 <body>
 <header class="site-header"><div class="wrap topbar"><a class="brand" href="/" aria-label="Home">Alessandro Gentili</a><nav class="primary-nav" aria-label="Navigazione principale"><ul class="primary-nav-list"><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="saggi.html" aria-haspopup="true">Saggi <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Saggi"><li><a class="primary-nav-dropdown-link" href="saggi.html">Saggi</a></li><li><a class="primary-nav-dropdown-link" href="temi/">Temi</a></li><li><a class="primary-nav-dropdown-link" href="poesia.html">Poesia</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="cerchi/" aria-haspopup="true">Cerchi <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Cerchi"><li><a class="primary-nav-dropdown-link" href="cerchi/">Cerchi d’inchiostro</a></li><li><a class="primary-nav-dropdown-link" href="cerchi/triadi/">Triadi</a></li><li><a class="primary-nav-dropdown-link" href="archivio.html">Archivio</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link active" href="autore.html" aria-haspopup="true">Autore <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Autore"><li><a class="primary-nav-dropdown-link" href="autore.html">Chi sono</a></li><li><a class="primary-nav-dropdown-link" href="portfolio.html">Scrittura civile</a></li><li><a class="primary-nav-dropdown-link" href="contatti.html">Contatti</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="en.html" aria-haspopup="true">International <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="International"><li><a class="primary-nav-dropdown-link" href="en.html">Positioning</a></li><li><a class="primary-nav-dropdown-link" href="metodo-ai.html">Method</a></li><li><a class="primary-nav-dropdown-link" href="strumenti.html">System</a></li></ul></li><li class="primary-nav-item"><a class="primary-nav-link nav-link-letter" href="contatti.html#lettera-periodica">Lettera periodica</a></li></ul></nav></div></header>
-<main class="page">
+<main class="page author-page-v2">
 <section class="wrap hero author-hero">
   <div class="hero-copy">
     <p class="eyebrow">Autore</p>
@@ -44,55 +45,79 @@
     <img class="author-portrait" src="assets/img/autore/alessandro-gentili-ritratto-autore-strategist-800x1000.webp" width="800" height="1000" loading="eager" decoding="async" alt="Ritratto in bianco e nero di Alessandro Gentili, autore e strategist." />
   </aside>
 </section>
-<section class="wrap section">
-  <article class="item author-profile">
-    <p>Alessandro Gentili è autore e strategist. Lavora sul punto di incontro tra scrittura civile, marketing strategico, comunicazione, business design e sistemi editoriali assistiti dall’intelligenza artificiale.</p>
-    <p>Il suo lavoro nasce da una cultura umanistica e da un’attenzione concreta alle strutture: testi, brand, archivi, processi, linguaggi e forme di decisione.</p>
-    <p>Questo sito raccoglie la parte pubblica di quel percorso: saggi, guide culturali, strumenti, progetti e materiali in evoluzione. Non una vetrina, ma una mappa.</p>
-  </article>
+<section class="wrap section author-intro-section" aria-labelledby="author-profile-title">
+  <div class="author-section-head">
+    <p class="kicker">Profilo</p>
+    <h2 id="author-profile-title">Scrittura, strategia, sistemi.</h2>
+  </div>
+  <div class="author-intro-grid">
+    <p class="author-intro-lead">Alessandro Gentili è autore e strategist. Lavora sul punto di incontro tra scrittura civile, marketing strategico, comunicazione, business design e sistemi editoriali assistiti dall’intelligenza artificiale.</p>
+    <div class="author-intro-copy">
+      <p>Il suo lavoro nasce da una cultura umanistica e da un’attenzione concreta alle strutture: testi, brand, archivi, processi, linguaggi e forme di decisione.</p>
+      <p>Questo sito raccoglie la parte pubblica di quel percorso: saggi, guide culturali, strumenti, progetti e materiali in evoluzione. Una mappa del lavoro, delle domande e delle forme che ne derivano.</p>
+    </div>
+  </div>
 </section>
-<section class="wrap section author-section">
-  <h2>Tre assi di lavoro</h2>
+<section class="wrap section author-section author-axes-section" aria-labelledby="author-axes-title">
+  <div class="author-section-head">
+    <p class="kicker">Pratica</p>
+    <h2 id="author-axes-title">Tre assi di lavoro.</h2>
+    <p>Tre campi distinti che condividono lo stesso metodo: leggere, collegare, dare forma.</p>
+  </div>
   <div class="author-axis-grid">
-    <article class="item">
+    <article class="author-axis-card">
+      <span class="author-axis-number">01</span>
       <h3>Scrittura civile e lettura del presente</h3>
       <p>Saggi su potere, tecnica, territorio, modernità, comunità e forme della visibilità, per leggere i segni del presente e le strutture che li producono.</p>
-      <a class="btn-secondary" href="saggi.html">Saggi sul presente</a>
+      <a class="author-text-link" href="saggi.html">Saggi sul presente <span aria-hidden="true">→</span></a>
     </article>
-    <article class="item">
+    <article class="author-axis-card">
+      <span class="author-axis-number">02</span>
       <h3>Strategia, comunicazione e sistemi editoriali</h3>
       <p>Marketing strategico, comunicazione, posizionamento, architetture di contenuto, business design e sistemi editoriali costruiti con chiarezza e controllo.</p>
-      <a class="btn-secondary" href="metodo-ai.html">Metodo editoriale e AI</a>
+      <a class="author-text-link" href="metodo-ai.html">Metodo editoriale e AI <span aria-hidden="true">→</span></a>
     </article>
-    <article class="item">
+    <article class="author-axis-card">
+      <span class="author-axis-number">03</span>
       <h3>Autori, idee e sistemi di pensiero</h3>
       <p>Cerchi d’inchiostro è un atlante culturale di autori, opere e concetti per comprendere il presente attraverso sistemi di pensiero ancora vivi.</p>
-      <a class="btn-secondary" href="cerchi/">Guide Cerchi d’inchiostro</a>
+      <a class="author-text-link" href="cerchi/">Guide Cerchi d’inchiostro <span aria-hidden="true">→</span></a>
     </article>
   </div>
 </section>
-<section class="wrap section author-section">
-  <h2>Coordinate</h2>
-  <div class="grid-2 author-coordinate-grid">
-    <article class="item"><h3>Saggi</h3><p>Scrittura civile sul presente.</p><a class="btn-secondary" href="saggi.html">Saggi</a></article>
-    <article class="item"><h3>Cerchi d’inchiostro</h3><p>Autori, idee e sistemi per capire il nostro tempo.</p><a class="btn-secondary" href="cerchi/">Cerchi d’inchiostro</a></article>
-    <article class="item"><h3>Method</h3><p>Ricerca, revisione, struttura e controllo qualità.</p><a class="btn-secondary" href="metodo-ai.html">Method</a></article>
-    <article class="item"><h3>Archivio</h3><p>Mappa generale dei contenuti pubblicati.</p><a class="btn-secondary" href="archivio.html">Archivio</a></article>
-    <article class="item"><h3>Temi e percorsi</h3><p>Mappa trasversale di saggi e guide.</p><a class="btn-secondary" href="temi/">Temi e percorsi</a></article>
-    <article class="item"><h3>Contatti</h3><p>Canale diretto per comunicazioni e proposte.</p><a class="btn-secondary" href="contatti.html">Contatti</a></article>
+<section class="wrap section author-section author-coordinates-section" aria-labelledby="author-coordinates-title">
+  <div class="author-section-head author-section-head--split">
+    <div>
+      <p class="kicker">Mappa pubblica</p>
+      <h2 id="author-coordinates-title">Coordinate.</h2>
+    </div>
+    <p>Sei accessi per orientarsi tra scrittura, ricerca, metodo e relazioni.</p>
+  </div>
+  <div class="author-coordinate-grid">
+    <a class="author-coordinate" href="saggi.html"><span class="author-coordinate-index">01</span><span><strong>Saggi</strong><small>Scrittura civile sul presente.</small></span><span class="author-coordinate-arrow" aria-hidden="true">↗</span></a>
+    <a class="author-coordinate" href="cerchi/"><span class="author-coordinate-index">02</span><span><strong>Cerchi d’inchiostro</strong><small>Autori, idee e sistemi per capire il nostro tempo.</small></span><span class="author-coordinate-arrow" aria-hidden="true">↗</span></a>
+    <a class="author-coordinate" href="metodo-ai.html"><span class="author-coordinate-index">03</span><span><strong>Method</strong><small>Ricerca, revisione, struttura e controllo qualità.</small></span><span class="author-coordinate-arrow" aria-hidden="true">↗</span></a>
+    <a class="author-coordinate" href="archivio.html"><span class="author-coordinate-index">04</span><span><strong>Archivio</strong><small>Mappa generale dei contenuti pubblicati.</small></span><span class="author-coordinate-arrow" aria-hidden="true">↗</span></a>
+    <a class="author-coordinate" href="temi/"><span class="author-coordinate-index">05</span><span><strong>Temi e percorsi</strong><small>Mappa trasversale di saggi e guide.</small></span><span class="author-coordinate-arrow" aria-hidden="true">↗</span></a>
+    <a class="author-coordinate" href="contatti.html"><span class="author-coordinate-index">06</span><span><strong>Contatti</strong><small>Canale diretto per comunicazioni e proposte.</small></span><span class="author-coordinate-arrow" aria-hidden="true">↗</span></a>
   </div>
 </section>
-<section class="wrap section author-section">
-  <article class="item author-note">
-    <h2>Nota sull’uso dell’AI</h2>
-    <p>L’intelligenza artificiale viene usata come infrastruttura di supporto per ricerca, confronto, struttura, revisione e controllo qualità. La selezione, il giudizio, la responsabilità editoriale e la forma finale restano umani.</p>
-    <div class="actions">
-      <a class="btn-secondary" href="saggi.html">Saggi</a>
-      <a class="btn-secondary" href="cerchi/">Cerchi d’inchiostro</a>
-      <a class="btn-secondary" href="metodo-ai.html">Method</a>
-      <a class="btn-secondary" href="contatti.html">Contatti</a>
+<section class="wrap section author-section author-ai-section" aria-labelledby="author-ai-title">
+  <div class="author-ai-note">
+    <div>
+      <p class="kicker">Metodo e responsabilità</p>
+      <h2 id="author-ai-title">Nota sull’uso dell’AI.</h2>
     </div>
-  </article>
+    <div class="author-ai-copy">
+      <p>L’intelligenza artificiale viene usata come infrastruttura di supporto per ricerca, confronto, struttura, revisione e controllo qualità. La selezione, il giudizio, la responsabilità editoriale e la forma finale restano umani.</p>
+      <nav class="author-inline-links" aria-label="Approfondimenti sull'autore">
+        <a href="saggi.html">Saggi</a>
+        <a href="cerchi/">Cerchi d’inchiostro</a>
+        <a href="metodo-ai.html">Method</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+    </div>
+  </div>
 </section>
 </main>
 <footer class="footer"><div class="wrap footer-wrap"><div class="footer-brand"><a href="/">Alessandro Gentili</a></div><nav class="footer-nav" aria-label="Navigazione footer"><section class="footer-group"><h2>Scrittura</h2><ul><li><a href="saggi.html">Saggi</a></li><li><a href="temi/">Temi</a></li><li><a href="poesia.html">Poesia</a></li></ul></section><section class="footer-group"><h2>Cerchi d’inchiostro</h2><ul><li><a href="cerchi/">Hub e guide</a></li><li><a href="cerchi/triadi/">Triadi</a></li><li><a href="archivio.html">Archivio</a></li></ul></section><section class="footer-group"><h2>Autore</h2><ul><li><a href="autore.html">Chi sono</a></li><li><a href="portfolio.html">Scrittura civile</a></li><li><a href="contatti.html">Contatti</a></li></ul></section><section class="footer-group"><h2>International</h2><ul><li><a href="en.html">Positioning</a></li><li><a href="metodo-ai.html">Method</a></li><li><a href="strumenti.html">System</a></li></ul></section></nav><div class="footer-bottom"><span>© Alessandro Gentili</span><span><a href="privacy.html">Privacy</a> · <a href="en.html">International gateway</a></span></div></div></footer>
