@@ -99,10 +99,10 @@
   right:2.2%;
   top:8.5%;
   max-width:10ch;
-  color:rgba(var(--atlas-gold),.64);
-  font-size:.58rem;
-  font-weight:760;
-  letter-spacing:.22em;
+  color:rgba(var(--atlas-gold),.38);
+  font-size:.55rem;
+  font-weight:720;
+  letter-spacing:.18em;
   line-height:1.8;
   text-align:right;
   writing-mode:vertical-rl;
@@ -149,11 +149,13 @@
 }
 
 .home-atlas-v2.has-active .system-node:not(.is-active):not(.is-related){
-  opacity:.25;
+  opacity:.43;
 }
 
+/* The reading core remains fully opaque while a node is active:
+   connections stay visible around it, never through the text. */
 .home-atlas-v2.has-active .system-reading{
-  opacity:.62;
+  opacity:1;
 }
 
 .home-atlas-v2 .system-node-index{
