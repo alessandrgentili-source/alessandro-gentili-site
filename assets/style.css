@@ -921,33 +921,33 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 
 /* Consent banner refinement: same choices, less visual obstruction. */
 .cookie-banner{
-  max-width:900px;
-  gap:.85rem;
-  padding:.78rem .86rem;
-  border-radius:14px;
+  max-width:780px;
+  gap:.7rem;
+  padding:.68rem .76rem;
+  border-radius:13px;
   background:rgba(255,251,243,.955);
-  box-shadow:0 14px 34px rgba(17,29,39,.11);
+  box-shadow:0 12px 30px rgba(17,29,39,.10);
   backdrop-filter:blur(16px);
 }
 .cookie-banner-copy{
-  gap:.24rem;
-  max-width:610px;
+  gap:.2rem;
+  max-width:500px;
 }
 .cookie-banner-copy p{
-  font-size:.87rem;
-  line-height:1.45;
+  font-size:.84rem;
+  line-height:1.42;
 }
 .cookie-banner-copy a{
-  font-size:.86rem;
+  font-size:.83rem;
 }
 .cookie-banner-actions{
-  gap:.42rem;
+  gap:.38rem;
 }
 .cookie-banner-actions .btn,
 .cookie-banner-actions .btn-secondary{
-  min-height:44px;
-  padding:.62rem .82rem;
-  font-size:.84rem;
+  min-height:42px;
+  padding:.58rem .76rem;
+  font-size:.82rem;
 }
 
 @media(max-width:760px){
