@@ -851,3 +851,134 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 .visual-atlas-card h3 a:hover{color:var(--petrol)}
 @media(max-width:1060px){.visual-atlas-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.visual-atlas-grid{grid-template-columns:1fr}.visual-atlas-body{padding:1rem}}
+
+
+/* Editorial navigation v2 — 2026-09-22 */
+.primary-nav-dropdown{
+  min-width:248px;
+  max-width:282px;
+  gap:0;
+  padding:.58rem .66rem .64rem;
+  border-color:rgba(143,113,62,.24);
+  border-radius:14px;
+  background:rgba(255,251,243,.975);
+  box-shadow:0 18px 42px rgba(31,25,16,.09),0 1px 0 rgba(255,255,255,.72) inset;
+  backdrop-filter:blur(18px);
+}
+.primary-nav-dropdown::before{
+  content:attr(aria-label);
+  display:block;
+  padding:.18rem .68rem .52rem;
+  color:rgba(141,109,55,.78);
+  font-size:.58rem;
+  font-weight:760;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+}
+.primary-nav-dropdown li+li{
+  border-top:1px solid rgba(143,113,62,.13);
+}
+.primary-nav-dropdown-link{
+  display:grid;
+  gap:.16rem;
+  padding:.66rem .68rem .68rem;
+  border-radius:7px;
+  color:var(--ink);
+  font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;
+  font-size:.99rem;
+  line-height:1.18;
+}
+.primary-nav-dropdown-link::after{
+  display:block;
+  color:rgba(38,49,58,.58);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:.68rem;
+  font-weight:450;
+  line-height:1.35;
+  letter-spacing:0;
+}
+.primary-nav-dropdown-link[href$="saggi.html"]::after{content:"Testi e percorsi";}
+.primary-nav-dropdown-link[href$="temi/"]::after{content:"Mappe del presente";}
+.primary-nav-dropdown-link[href$="poesia.html"]::after{content:"Il controcampo sensibile";}
+.primary-nav-dropdown-link[href$="cerchi/"]::after{content:"Autori, idee e sistemi";}
+.primary-nav-dropdown-link[href$="cerchi/triadi/"]::after{content:"Relazioni che generano senso";}
+.primary-nav-dropdown-link[href$="archivio.html"]::after{content:"Memoria trasversale";}
+.primary-nav-dropdown-link[href$="autore.html"]::after{content:"Identità e percorso";}
+.primary-nav-dropdown-link[href$="portfolio.html"]::after{content:"Presenza pubblica";}
+.primary-nav-dropdown-link[href$="contatti.html"]::after{content:"Relazioni e collaborazioni";}
+.primary-nav-dropdown-link[href$="en.html"]::after{content:"Strategic profile";}
+.primary-nav-dropdown-link[href$="metodo-ai.html"]::after{content:"How I read and decide";}
+.primary-nav-dropdown-link[href$="strumenti.html"]::after{content:"Operating layer";}
+.primary-nav-dropdown-link:hover,
+.primary-nav-dropdown-link:focus-visible{
+  color:var(--ink);
+  background:linear-gradient(90deg,rgba(141,109,55,.075),rgba(141,109,55,.025));
+}
+.primary-nav-item:nth-last-child(2) .primary-nav-dropdown{
+  left:auto;
+  right:0;
+}
+
+/* Consent banner refinement: same choices, less visual obstruction. */
+.cookie-banner{
+  max-width:900px;
+  gap:.85rem;
+  padding:.78rem .86rem;
+  border-radius:14px;
+  background:rgba(255,251,243,.955);
+  box-shadow:0 14px 34px rgba(17,29,39,.11);
+  backdrop-filter:blur(16px);
+}
+.cookie-banner-copy{
+  gap:.24rem;
+  max-width:610px;
+}
+.cookie-banner-copy p{
+  font-size:.87rem;
+  line-height:1.45;
+}
+.cookie-banner-copy a{
+  font-size:.86rem;
+}
+.cookie-banner-actions{
+  gap:.42rem;
+}
+.cookie-banner-actions .btn,
+.cookie-banner-actions .btn-secondary{
+  min-height:44px;
+  padding:.62rem .82rem;
+  font-size:.84rem;
+}
+
+@media(max-width:760px){
+  .primary-nav-dropdown{
+    padding:.35rem;
+    border-radius:10px;
+    box-shadow:none;
+    backdrop-filter:none;
+  }
+  .primary-nav-dropdown::before,
+  .primary-nav-dropdown-link::after{
+    display:none;
+  }
+  .primary-nav-dropdown li+li{
+    border-top:0;
+  }
+  .primary-nav-dropdown-link{
+    display:block;
+    padding:.52rem .58rem;
+    font-family:inherit;
+    font-size:.86rem;
+  }
+}
+
+@media(max-width:680px){
+  .cookie-banner{
+    gap:.65rem;
+    padding:.78rem;
+    border-radius:12px;
+  }
+  .cookie-banner-copy p{
+    font-size:.84rem;
+  }
+}
