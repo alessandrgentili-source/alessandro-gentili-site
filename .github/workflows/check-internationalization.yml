@@ -14,9 +14,9 @@ on:
       - 'cerchi/guide/platone-vita-opere-pensiero/index.html'
       - 'cerchi/guide/dante-vita-opere-commedia-esilio/index.html'
       - 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html'
-      - 'cerchi/guide/platone-vita-opere-pensiero/index.html'
-      - 'cerchi/guide/dante-vita-opere-commedia-esilio/index.html'
-      - 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html'
+      - 'cerchi/guide/marx-vita-opere-pensiero/index.html'
+      - 'cerchi/guide/nietzsche-vita-opere-pensiero/index.html'
+      - 'cerchi/guide/leopardi-desiderio-infinito-modernita/index.html'
       - 'en.html'
       - 'metodo-ai.html'
       - 'strumenti.html'
@@ -39,6 +39,12 @@ on:
       - 'cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/index.html'
       - 'cerchi/guide/carlo-collodi-formazione-prova-mondo/index.html'
       - 'cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/index.html'
+      - 'cerchi/guide/platone-vita-opere-pensiero/index.html'
+      - 'cerchi/guide/dante-vita-opere-commedia-esilio/index.html'
+      - 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html'
+      - 'cerchi/guide/marx-vita-opere-pensiero/index.html'
+      - 'cerchi/guide/nietzsche-vita-opere-pensiero/index.html'
+      - 'cerchi/guide/leopardi-desiderio-infinito-modernita/index.html'
       - 'en.html'
       - 'metodo-ai.html'
       - 'strumenti.html'
@@ -61,5 +67,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify bilingual architecture and English pilot
+      - name: Verify bilingual architecture and English rollout
         run: node tools/check-i18n-consistency.mjs

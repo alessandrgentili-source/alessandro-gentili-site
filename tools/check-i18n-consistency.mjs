@@ -23,7 +23,10 @@ const pages = [
   { path: 'en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/index.html', url: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/`, it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/plato-ideas-truth-power/index.html', url: `${base}/en/cerchi/guides/plato-ideas-truth-power/`, it: `${base}/cerchi/guide/platone-vita-opere-pensiero/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/dante-exile-language-divine-comedy/index.html', url: `${base}/en/cerchi/guides/dante-exile-language-divine-comedy/`, it: `${base}/cerchi/guide/dante-vita-opere-commedia-esilio/`, type: 'Article', breadcrumb: true },
-  { path: 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html', url: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/`, it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, type: 'Article', breadcrumb: true }
+  { path: 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html', url: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/`, it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/karl-marx-capital-labor-alienation/index.html', url: `${base}/en/cerchi/guides/karl-marx-capital-labor-alienation/`, it: `${base}/cerchi/guide/marx-vita-opere-pensiero/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/index.html', url: `${base}/en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/`, it: `${base}/cerchi/guide/nietzsche-vita-opere-pensiero/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/index.html', url: `${base}/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/`, it: `${base}/cerchi/guide/leopardi-desiderio-infinito-modernita/`, type: 'Article', breadcrumb: true }
 ];
 
 const italianPairs = [
@@ -36,7 +39,10 @@ const italianPairs = [
   { path: 'cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/index.html', it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, en: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/` },
   { path: 'cerchi/guide/platone-vita-opere-pensiero/index.html', it: `${base}/cerchi/guide/platone-vita-opere-pensiero/`, en: `${base}/en/cerchi/guides/plato-ideas-truth-power/` },
   { path: 'cerchi/guide/dante-vita-opere-commedia-esilio/index.html', it: `${base}/cerchi/guide/dante-vita-opere-commedia-esilio/`, en: `${base}/en/cerchi/guides/dante-exile-language-divine-comedy/` },
-  { path: 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html', it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, en: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/` }
+  { path: 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html', it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, en: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/` },
+  { path: 'cerchi/guide/marx-vita-opere-pensiero/index.html', it: `${base}/cerchi/guide/marx-vita-opere-pensiero/`, en: `${base}/en/cerchi/guides/karl-marx-capital-labor-alienation/` },
+  { path: 'cerchi/guide/nietzsche-vita-opere-pensiero/index.html', it: `${base}/cerchi/guide/nietzsche-vita-opere-pensiero/`, en: `${base}/en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/` },
+  { path: 'cerchi/guide/leopardi-desiderio-infinito-modernita/index.html', it: `${base}/cerchi/guide/leopardi-desiderio-infinito-modernita/`, en: `${base}/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/` }
 ];
 
 const extractJsonLd = (html, path) => {
