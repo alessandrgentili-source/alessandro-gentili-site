@@ -61,5 +61,11 @@ There are no automatic browser-language redirects.
 - Alessandro Manzoni — language, history and responsibility: https://alessandro-gentili.it/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/
 - Carlo Collodi — Pinocchio, education, desire and judgment: https://alessandro-gentili.it/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/
 - Pier Paolo Pasolini — anthropological mutation and consumer culture: https://alessandro-gentili.it/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/
+- Plato — ideas, truth and political power: https://alessandro-gentili.it/en/cerchi/guides/plato-ideas-truth-power/
+- Dante Alighieri — exile, language and the Divine Comedy: https://alessandro-gentili.it/en/cerchi/guides/dante-exile-language-divine-comedy/
+- Niccolò Machiavelli — power, the state and effectual truth: https://alessandro-gentili.it/en/cerchi/guides/machiavelli-power-state-effectual-truth/
 
 The first complete English triad asks: "Who — and what — forms a people?" It connects Manzoni (shared language, institutions and judgment), Collodi (formation through desire, experience and consequences), and Pasolini (environmental pedagogy, consumer culture and cultural homogenization).
+
+
+The second complete English triad localizes the first Cerchi d'inchiostro threshold: "Truth, language, power." It connects Plato (truth, education and the governance of visibility), Dante (exile, language and orientation), and Machiavelli (effectual truth, political capacity and the reality of power).
