@@ -66,11 +66,9 @@ try {
   assert(essay.includes(`src="${coverUrl}"`), 'Saggio 16 page body does not include the visible cover');
 
   const archive = await readText('archivio.html');
-  let numbers = [...archive.matchAll(/<h3>(\d+) —/g)].map((match) => Number(match[1]));
-  if (!numbers.includes(15)) numbers.splice(numbers.indexOf(14), 0, 15);
-  if (!numbers.includes(16)) numbers.splice(numbers.indexOf(15), 0, 16);
-  numbers = numbers.sort((a, b) => b - a);
+  const numbers = [...archive.matchAll(/data-essay-number="(\\d+)"/g)].map((match) => Number(match[1]));
   assert(numbers.slice(0, 5).join(',') === '16,15,14,13,12', `Unexpected archive order: ${numbers.slice(0, 5).join(',')}`);
+  assert(numbers.includes(15) && numbers.includes(16), 'Saggio 15/16 must be present statically in archivio.html');
 
   console.log('Saggio 16 publication checks passed');
 } finally {
