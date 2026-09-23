@@ -44,3 +44,22 @@ Writing, strategy, systems, AI, editorial architecture, power, culture, technolo
 
 - Medium: https://medium.com/@alessandrgentili
 - LinkedIn: https://www.linkedin.com/in/alessandro-gentili-78315226/
+
+
+## English / international cluster
+
+The site is bilingual by architecture: existing Italian canonical URLs remain unchanged, while English editorial pages live under https://alessandro-gentili.it/en/.
+There are no automatic browser-language redirects.
+
+- English home: https://alessandro-gentili.it/en/
+- Circles of Ink / Cerchi d'inchiostro: https://alessandro-gentili.it/en/cerchi/
+- English triads: https://alessandro-gentili.it/en/cerchi/triads/
+- English themes: https://alessandro-gentili.it/en/themes/
+- Positioning: https://alessandro-gentili.it/en/positioning/
+- Method: https://alessandro-gentili.it/en/method/
+- System: https://alessandro-gentili.it/en/system/
+- Alessandro Manzoni — language, history and responsibility: https://alessandro-gentili.it/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/
+- Carlo Collodi — Pinocchio, education, desire and judgment: https://alessandro-gentili.it/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/
+- Pier Paolo Pasolini — anthropological mutation and consumer culture: https://alessandro-gentili.it/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/
+
+The first complete English triad asks: "Who — and what — forms a people?" It connects Manzoni (shared language, institutions and judgment), Collodi (formation through desire, experience and consequences), and Pasolini (environmental pedagogy, consumer culture and cultural homogenization).
