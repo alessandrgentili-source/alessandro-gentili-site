@@ -1,0 +1,59 @@
+name: Check internationalization
+
+on:
+  pull_request:
+    paths:
+      - 'en/**'
+      - 'index.html'
+      - 'cerchi/index.html'
+      - 'cerchi/triadi/index.html'
+      - 'temi/index.html'
+      - 'cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/index.html'
+      - 'cerchi/guide/carlo-collodi-formazione-prova-mondo/index.html'
+      - 'cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/index.html'
+      - 'en.html'
+      - 'metodo-ai.html'
+      - 'strumenti.html'
+      - 'assets/script.js'
+      - 'assets/style.css'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'llms.txt'
+      - 'tools/check-i18n-consistency.mjs'
+      - '.github/workflows/check-internationalization.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'en/**'
+      - 'index.html'
+      - 'cerchi/index.html'
+      - 'cerchi/triadi/index.html'
+      - 'temi/index.html'
+      - 'cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/index.html'
+      - 'cerchi/guide/carlo-collodi-formazione-prova-mondo/index.html'
+      - 'cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/index.html'
+      - 'en.html'
+      - 'metodo-ai.html'
+      - 'strumenti.html'
+      - 'assets/script.js'
+      - 'assets/style.css'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'llms.txt'
+      - 'tools/check-i18n-consistency.mjs'
+      - '.github/workflows/check-internationalization.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  internationalization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify bilingual architecture and English pilot
+        run: node tools/check-i18n-consistency.mjs
