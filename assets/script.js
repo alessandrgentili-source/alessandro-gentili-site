@@ -166,3 +166,57 @@ if (cookieStatisticsPreference === 'accepted') {
 } else if (cookieStatisticsPreference !== 'rejected') {
   showCookieBanner();
 }
+
+
+const bilingualPairs = {
+  "/": { it: "/", en: "/en/" },
+  "/cerchi/": { it: "/cerchi/", en: "/en/cerchi/" },
+  "/cerchi/triadi/": { it: "/cerchi/triadi/", en: "/en/cerchi/triads/" },
+  "/temi/": { it: "/temi/", en: "/en/themes/" },
+  "/cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/": { it: "/cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/", en: "/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/" },
+  "/cerchi/guide/carlo-collodi-formazione-prova-mondo/": { it: "/cerchi/guide/carlo-collodi-formazione-prova-mondo/", en: "/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/" },
+  "/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/": { it: "/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/", en: "/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/" },
+  "/en/": { it: "/", en: "/en/" },
+  "/en/cerchi/": { it: "/cerchi/", en: "/en/cerchi/" },
+  "/en/cerchi/triads/": { it: "/cerchi/triadi/", en: "/en/cerchi/triads/" },
+  "/en/themes/": { it: "/temi/", en: "/en/themes/" },
+  "/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/": { it: "/cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/", en: "/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/" },
+  "/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/": { it: "/cerchi/guide/carlo-collodi-formazione-prova-mondo/", en: "/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/" },
+  "/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/": { it: "/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/", en: "/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/" },
+  "/en.html": { it: "/", en: "/en/positioning/" },
+  "/metodo-ai.html": { it: "/", en: "/en/method/" },
+  "/strumenti.html": { it: "/", en: "/en/system/" }
+};
+
+const normalizeLanguagePath = (pathname) => pathname.replace(/\/index\.html$/, "/") || "/";
+const currentLanguagePath = normalizeLanguagePath(window.location.pathname);
+const isEnglishPath = currentLanguagePath.startsWith("/en/");
+const explicitLanguagePair = bilingualPairs[currentLanguagePath];
+const languageTargets = explicitLanguagePair || (isEnglishPath
+  ? { it: "/", en: currentLanguagePath }
+  : { it: currentLanguagePath, en: "/en/" });
+
+document.querySelectorAll('.primary-nav a, .footer-nav a').forEach((link) => {
+  const raw = link.getAttribute('href');
+  if (!raw || /^(?:https?:|mailto:|tel:|#)/.test(raw)) return;
+  const path = normalizeLanguagePath(new URL(raw, window.location.href).pathname);
+  const migration = {
+    "/en.html": "/en/positioning/",
+    "/metodo-ai.html": "/en/method/",
+    "/strumenti.html": "/en/system/"
+  }[path];
+  if (migration) link.setAttribute('href', migration);
+});
+
+const primaryNavList = document.querySelector('.primary-nav-list');
+if (primaryNavList && !primaryNavList.querySelector('[data-language-switcher]')) {
+  const item = document.createElement('li');
+  item.className = 'primary-nav-item language-switcher';
+  item.dataset.languageSwitcher = '';
+  item.setAttribute('aria-label', 'Language');
+  item.innerHTML = `<a class="language-switcher-link${document.documentElement.lang.startsWith('it') ? ' active' : ''}" href="${languageTargets.it}" lang="it" hreflang="it">IT</a><span aria-hidden="true">|</span><a class="language-switcher-link${document.documentElement.lang.startsWith('en') ? ' active' : ''}" href="${languageTargets.en}" lang="en" hreflang="en">EN</a>`;
+  if (!explicitLanguagePair && !isEnglishPath) {
+    item.querySelector('a[lang="en"]')?.setAttribute('title', 'English home — this page does not have an English edition yet');
+  }
+  primaryNavList.appendChild(item);
+}
