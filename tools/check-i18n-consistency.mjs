@@ -26,7 +26,10 @@ const pages = [
   { path: 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html', url: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/`, it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/karl-marx-capital-labor-alienation/index.html', url: `${base}/en/cerchi/guides/karl-marx-capital-labor-alienation/`, it: `${base}/cerchi/guide/marx-vita-opere-pensiero/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/index.html', url: `${base}/en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/`, it: `${base}/cerchi/guide/nietzsche-vita-opere-pensiero/`, type: 'Article', breadcrumb: true },
-  { path: 'en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/index.html', url: `${base}/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/`, it: `${base}/cerchi/guide/leopardi-desiderio-infinito-modernita/`, type: 'Article', breadcrumb: true }
+  { path: 'en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/index.html', url: `${base}/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/`, it: `${base}/cerchi/guide/leopardi-desiderio-infinito-modernita/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/seneca-time-self-mastery-death/index.html', url: `${base}/en/cerchi/guides/seneca-time-self-mastery-death/`, it: `${base}/cerchi/guide/seneca-dominio-tempo-morte/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/aristotle-form-purpose-actuality/index.html', url: `${base}/en/cerchi/guides/aristotle-form-purpose-actuality/`, it: `${base}/cerchi/guide/aristotele-forma-fine-realta/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/max-weber-rationalization-power-disenchantment/index.html', url: `${base}/en/cerchi/guides/max-weber-rationalization-power-disenchantment/`, it: `${base}/cerchi/guide/weber-razionalizzazione-potere-disincanto/`, type: 'Article', breadcrumb: true }
 ];
 
 const italianPairs = [
@@ -42,7 +45,10 @@ const italianPairs = [
   { path: 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html', it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, en: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/` },
   { path: 'cerchi/guide/marx-vita-opere-pensiero/index.html', it: `${base}/cerchi/guide/marx-vita-opere-pensiero/`, en: `${base}/en/cerchi/guides/karl-marx-capital-labor-alienation/` },
   { path: 'cerchi/guide/nietzsche-vita-opere-pensiero/index.html', it: `${base}/cerchi/guide/nietzsche-vita-opere-pensiero/`, en: `${base}/en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/` },
-  { path: 'cerchi/guide/leopardi-desiderio-infinito-modernita/index.html', it: `${base}/cerchi/guide/leopardi-desiderio-infinito-modernita/`, en: `${base}/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/` }
+  { path: 'cerchi/guide/leopardi-desiderio-infinito-modernita/index.html', it: `${base}/cerchi/guide/leopardi-desiderio-infinito-modernita/`, en: `${base}/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/` },
+  { path: 'cerchi/guide/seneca-dominio-tempo-morte/index.html', it: `${base}/cerchi/guide/seneca-dominio-tempo-morte/`, en: `${base}/en/cerchi/guides/seneca-time-self-mastery-death/` },
+  { path: 'cerchi/guide/aristotele-forma-fine-realta/index.html', it: `${base}/cerchi/guide/aristotele-forma-fine-realta/`, en: `${base}/en/cerchi/guides/aristotle-form-purpose-actuality/` },
+  { path: 'cerchi/guide/weber-razionalizzazione-potere-disincanto/index.html', it: `${base}/cerchi/guide/weber-razionalizzazione-potere-disincanto/`, en: `${base}/en/cerchi/guides/max-weber-rationalization-power-disenchantment/` }
 ];
 
 const extractJsonLd = (html, path) => {
