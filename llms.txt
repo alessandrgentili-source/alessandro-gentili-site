@@ -76,6 +76,12 @@ There are no automatic browser-language redirects.
 - Averroes — reason, interpretation and law: https://alessandro-gentili.it/en/cerchi/guides/averroes-reason-interpretation-law/
 - Georg Simmel — money, metropolis and individuality: https://alessandro-gentili.it/en/cerchi/guides/georg-simmel-money-metropolis-individuality/
 - Adam Smith — exchange, sympathy and wealth: https://alessandro-gentili.it/en/cerchi/guides/adam-smith-exchange-sympathy-wealth/
+- Cicero — republic, law and civic speech: https://alessandro-gentili.it/en/cerchi/guides/cicero-republic-law-civic-speech/
+- Alexis de Tocqueville — democracy, opinion and liberty: https://alessandro-gentili.it/en/cerchi/guides/alexis-de-tocqueville-democracy-opinion-liberty/
+- Nicolas de Condorcet — education, progress and collective decision: https://alessandro-gentili.it/en/cerchi/guides/nicolas-de-condorcet-education-progress-decision/
+- Polybius — constitution, power and decline: https://alessandro-gentili.it/en/cerchi/guides/polybius-constitution-power-decline/
+- Gaetano Mosca — political class, organization and real government: https://alessandro-gentili.it/en/cerchi/guides/gaetano-mosca-political-class-organization-real-government/
+- Vilfredo Pareto — elites, residues and circulation: https://alessandro-gentili.it/en/cerchi/guides/vilfredo-pareto-elites-residues-circulation/
 
 The first complete English triad asks: "Who — and what — forms a people?" It connects Manzoni (shared language, institutions and judgment), Collodi (formation through desire, experience and consequences), and Pasolini (environmental pedagogy, consumer culture and cultural homogenization).
 
@@ -93,3 +99,10 @@ The fifth complete English triad localizes the fourth Cerchi d'inchiostro thresh
 
 
 The sixth complete English triad localizes the fifth Cerchi d'inchiostro threshold: "Interpretation, money, exchange." It connects Averroes (reason, interpretation and law), Georg Simmel (money, metropolis and individuality), and Adam Smith (exchange, sympathy and wealth). Its shared question is what lets strangers share a world when meaning must be interpreted, value made comparable and exchange sustained by trust.
+
+
+The seventh complete English triad localizes the sixth Cerchi d'inchiostro threshold: "Republic, opinion, decision." It connects Cicero (republic, law and civic speech), Tocqueville (democracy, opinion and liberty), and Condorcet (education, progress and collective decision). Its shared question is what makes political freedom durable: a common republic, citizens capable of acting together, and procedures that turn judgment into revisable collective decision.
+
+The eighth complete English triad localizes the seventh Cerchi d'inchiostro threshold: "Elite, mass, government." It connects Polybius (constitution, power and decline), Gaetano Mosca (political class, organization and real government), and Vilfredo Pareto (elites, residues and circulation). Its shared question is how political form, organization and the circulation of ruling groups shape government without reducing politics to conspiracy.
+
+The English Cerchi d'inchiostro author corpus is now complete: 24 of 24 author guides and all eight triads are represented in English.
