@@ -20,7 +20,10 @@ const pages = [
   { path: 'en/system/index.html', url: `${base}/en/system/`, type: 'WebPage' },
   { path: 'en/cerchi/guides/alessandro-manzoni-language-history-responsibility/index.html', url: `${base}/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/`, it: `${base}/cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/index.html', url: `${base}/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/`, it: `${base}/cerchi/guide/carlo-collodi-formazione-prova-mondo/`, type: 'Article', breadcrumb: true },
-  { path: 'en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/index.html', url: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/`, it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, type: 'Article', breadcrumb: true }
+  { path: 'en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/index.html', url: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/`, it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/plato-ideas-truth-power/index.html', url: `${base}/en/cerchi/guides/plato-ideas-truth-power/`, it: `${base}/cerchi/guide/platone-vita-opere-pensiero/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/dante-exile-language-divine-comedy/index.html', url: `${base}/en/cerchi/guides/dante-exile-language-divine-comedy/`, it: `${base}/cerchi/guide/dante-vita-opere-commedia-esilio/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html', url: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/`, it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, type: 'Article', breadcrumb: true }
 ];
 
 const italianPairs = [
@@ -30,7 +33,10 @@ const italianPairs = [
   { path: 'temi/index.html', it: `${base}/temi/`, en: `${base}/en/themes/` },
   { path: 'cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/index.html', it: `${base}/cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/`, en: `${base}/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/` },
   { path: 'cerchi/guide/carlo-collodi-formazione-prova-mondo/index.html', it: `${base}/cerchi/guide/carlo-collodi-formazione-prova-mondo/`, en: `${base}/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/` },
-  { path: 'cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/index.html', it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, en: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/` }
+  { path: 'cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/index.html', it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, en: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/` },
+  { path: 'cerchi/guide/platone-vita-opere-pensiero/index.html', it: `${base}/cerchi/guide/platone-vita-opere-pensiero/`, en: `${base}/en/cerchi/guides/plato-ideas-truth-power/` },
+  { path: 'cerchi/guide/dante-vita-opere-commedia-esilio/index.html', it: `${base}/cerchi/guide/dante-vita-opere-commedia-esilio/`, en: `${base}/en/cerchi/guides/dante-exile-language-divine-comedy/` },
+  { path: 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html', it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, en: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/` }
 ];
 
 const extractJsonLd = (html, path) => {
