@@ -1055,3 +1055,9 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
     max-width:none;
   }
 }
+
+
+.language-switcher{display:inline-flex;align-items:center;gap:.28rem;padding:.12rem .28rem;color:var(--muted);font-size:.78rem;line-height:1}
+.language-switcher-link{color:var(--muted);text-decoration:none;font-weight:700;letter-spacing:.04em;padding:.28rem .2rem;border-radius:6px}
+.language-switcher-link:hover,.language-switcher-link:focus-visible,.language-switcher-link.active{color:var(--ink)}
+.language-switcher-link.active{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:.28em}
