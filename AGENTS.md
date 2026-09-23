@@ -99,6 +99,10 @@ In `archivio.html`:
   * `Leggi il saggio`;
   * `Medium ↗`.
 * do not add Medium CTAs or canonicals to Medium-only content or non-duplicate content.
+* public essay pages and public nested portfolio projects must be represented statically in the archive;
+* do not inject archive entries from `assets/script.js`;
+* when a new public essay or portfolio project is published, keep the archive and sitemap aligned;
+* run `node tools/check-archive-consistency.mjs` after relevant changes.
 
 
 ## Saggi page card taxonomy
