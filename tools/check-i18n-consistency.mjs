@@ -35,7 +35,13 @@ const pages = [
   { path: 'en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/index.html', url: `${base}/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/`, it: `${base}/cerchi/guide/hobbes-paura-sovranita-ordine-politico/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/averroes-reason-interpretation-law/index.html', url: `${base}/en/cerchi/guides/averroes-reason-interpretation-law/`, it: `${base}/cerchi/guide/averroe-ragione-interpretazione-legge/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/georg-simmel-money-metropolis-individuality/index.html', url: `${base}/en/cerchi/guides/georg-simmel-money-metropolis-individuality/`, it: `${base}/cerchi/guide/simmel-denaro-metropoli-individualita/`, type: 'Article', breadcrumb: true },
-  { path: 'en/cerchi/guides/adam-smith-exchange-sympathy-wealth/index.html', url: `${base}/en/cerchi/guides/adam-smith-exchange-sympathy-wealth/`, it: `${base}/cerchi/guide/adam-smith-scambio-simpatia-ricchezza/`, type: 'Article', breadcrumb: true }
+  { path: 'en/cerchi/guides/adam-smith-exchange-sympathy-wealth/index.html', url: `${base}/en/cerchi/guides/adam-smith-exchange-sympathy-wealth/`, it: `${base}/cerchi/guide/adam-smith-scambio-simpatia-ricchezza/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/cicero-republic-law-civic-speech/index.html', url: `${base}/en/cerchi/guides/cicero-republic-law-civic-speech/`, it: `${base}/cerchi/guide/cicerone-repubblica-legge-parola-civile/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/alexis-de-tocqueville-democracy-opinion-liberty/index.html', url: `${base}/en/cerchi/guides/alexis-de-tocqueville-democracy-opinion-liberty/`, it: `${base}/cerchi/guide/alexis-de-tocqueville-democrazia-opinione-liberta/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/nicolas-de-condorcet-education-progress-decision/index.html', url: `${base}/en/cerchi/guides/nicolas-de-condorcet-education-progress-decision/`, it: `${base}/cerchi/guide/nicolas-de-condorcet-istruzione-progresso-decisione/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/polybius-constitution-power-decline/index.html', url: `${base}/en/cerchi/guides/polybius-constitution-power-decline/`, it: `${base}/cerchi/guide/polibio-costituzione-potenza-decadenza/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/gaetano-mosca-political-class-organization-real-government/index.html', url: `${base}/en/cerchi/guides/gaetano-mosca-political-class-organization-real-government/`, it: `${base}/cerchi/guide/gaetano-mosca-classe-politica-organizzazione-governo-reale/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/vilfredo-pareto-elites-residues-circulation/index.html', url: `${base}/en/cerchi/guides/vilfredo-pareto-elites-residues-circulation/`, it: `${base}/cerchi/guide/vilfredo-pareto-elite-residui-circolazione/`, type: 'Article', breadcrumb: true }
 ];
 
 const italianPairs = [
@@ -60,7 +66,13 @@ const italianPairs = [
   { path: 'cerchi/guide/hobbes-paura-sovranita-ordine-politico/index.html', it: `${base}/cerchi/guide/hobbes-paura-sovranita-ordine-politico/`, en: `${base}/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/` },
   { path: 'cerchi/guide/averroe-ragione-interpretazione-legge/index.html', it: `${base}/cerchi/guide/averroe-ragione-interpretazione-legge/`, en: `${base}/en/cerchi/guides/averroes-reason-interpretation-law/` },
   { path: 'cerchi/guide/simmel-denaro-metropoli-individualita/index.html', it: `${base}/cerchi/guide/simmel-denaro-metropoli-individualita/`, en: `${base}/en/cerchi/guides/georg-simmel-money-metropolis-individuality/` },
-  { path: 'cerchi/guide/adam-smith-scambio-simpatia-ricchezza/index.html', it: `${base}/cerchi/guide/adam-smith-scambio-simpatia-ricchezza/`, en: `${base}/en/cerchi/guides/adam-smith-exchange-sympathy-wealth/` }
+  { path: 'cerchi/guide/adam-smith-scambio-simpatia-ricchezza/index.html', it: `${base}/cerchi/guide/adam-smith-scambio-simpatia-ricchezza/`, en: `${base}/en/cerchi/guides/adam-smith-exchange-sympathy-wealth/` },
+  { path: 'cerchi/guide/cicerone-repubblica-legge-parola-civile/index.html', it: `${base}/cerchi/guide/cicerone-repubblica-legge-parola-civile/`, en: `${base}/en/cerchi/guides/cicero-republic-law-civic-speech/` },
+  { path: 'cerchi/guide/alexis-de-tocqueville-democrazia-opinione-liberta/index.html', it: `${base}/cerchi/guide/alexis-de-tocqueville-democrazia-opinione-liberta/`, en: `${base}/en/cerchi/guides/alexis-de-tocqueville-democracy-opinion-liberty/` },
+  { path: 'cerchi/guide/nicolas-de-condorcet-istruzione-progresso-decisione/index.html', it: `${base}/cerchi/guide/nicolas-de-condorcet-istruzione-progresso-decisione/`, en: `${base}/en/cerchi/guides/nicolas-de-condorcet-education-progress-decision/` },
+  { path: 'cerchi/guide/polibio-costituzione-potenza-decadenza/index.html', it: `${base}/cerchi/guide/polibio-costituzione-potenza-decadenza/`, en: `${base}/en/cerchi/guides/polybius-constitution-power-decline/` },
+  { path: 'cerchi/guide/gaetano-mosca-classe-politica-organizzazione-governo-reale/index.html', it: `${base}/cerchi/guide/gaetano-mosca-classe-politica-organizzazione-governo-reale/`, en: `${base}/en/cerchi/guides/gaetano-mosca-political-class-organization-real-government/` },
+  { path: 'cerchi/guide/vilfredo-pareto-elite-residui-circolazione/index.html', it: `${base}/cerchi/guide/vilfredo-pareto-elite-residui-circolazione/`, en: `${base}/en/cerchi/guides/vilfredo-pareto-elites-residues-circulation/` }
 ];
 
 const extractJsonLd = (html, path) => {
