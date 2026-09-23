@@ -67,6 +67,9 @@ There are no automatic browser-language redirects.
 - Karl Marx — capital, labor and alienation: https://alessandro-gentili.it/en/cerchi/guides/karl-marx-capital-labor-alienation/
 - Friedrich Nietzsche — nihilism, values and the death of God: https://alessandro-gentili.it/en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/
 - Giacomo Leopardi — desire, infinity and modernity: https://alessandro-gentili.it/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/
+- Seneca — time, self-mastery and death: https://alessandro-gentili.it/en/cerchi/guides/seneca-time-self-mastery-death/
+- Aristotle — form, purpose and actuality: https://alessandro-gentili.it/en/cerchi/guides/aristotle-form-purpose-actuality/
+- Max Weber — rationalization, power and disenchantment: https://alessandro-gentili.it/en/cerchi/guides/max-weber-rationalization-power-disenchantment/
 
 The first complete English triad asks: "Who — and what — forms a people?" It connects Manzoni (shared language, institutions and judgment), Collodi (formation through desire, experience and consequences), and Pasolini (environmental pedagogy, consumer culture and cultural homogenization).
 
@@ -75,3 +78,6 @@ The second complete English triad localizes the first Cerchi d'inchiostro thresh
 
 
 The third complete English triad localizes the second Cerchi d'inchiostro threshold: "Capital, values, desire." It connects Marx (capital, labor and alienation), Nietzsche (nihilism, values and the death of God), and Leopardi (desire, infinity and modernity). Its shared question is how modernity organizes what we produce, what we believe and what we desire.
+
+
+The fourth complete English triad localizes the third Cerchi d'inchiostro threshold: "Time, form, disenchantment." It connects Seneca (time, self-mastery and death), Aristotle (form, purpose and actuality), and Weber (rationalization, power and disenchantment). Its shared question is which forms can keep a life, a community and a decision from dissolving into acceleration, apparatus and loss of purpose.
