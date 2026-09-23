@@ -9,6 +9,7 @@ on:
       - 'sitemap.xml'
       - 'assets/script.js'
       - 'tools/check-archive-consistency.mjs'
+      - 'tools/check-saggio-16-publication.mjs'
       - '.github/workflows/check-archive-consistency.yml'
   push:
     branches:
@@ -20,6 +21,7 @@ on:
       - 'sitemap.xml'
       - 'assets/script.js'
       - 'tools/check-archive-consistency.mjs'
+      - 'tools/check-saggio-16-publication.mjs'
       - '.github/workflows/check-archive-consistency.yml'
 
 permissions:
@@ -35,3 +37,5 @@ jobs:
           node-version: '22'
       - name: Verify static archive coverage
         run: node tools/check-archive-consistency.mjs
+      - name: Verify Saggio 16 publication invariants
+        run: node tools/check-saggio-16-publication.mjs
