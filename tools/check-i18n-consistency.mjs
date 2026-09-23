@@ -29,7 +29,10 @@ const pages = [
   { path: 'en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/index.html', url: `${base}/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/`, it: `${base}/cerchi/guide/leopardi-desiderio-infinito-modernita/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/seneca-time-self-mastery-death/index.html', url: `${base}/en/cerchi/guides/seneca-time-self-mastery-death/`, it: `${base}/cerchi/guide/seneca-dominio-tempo-morte/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/aristotle-form-purpose-actuality/index.html', url: `${base}/en/cerchi/guides/aristotle-form-purpose-actuality/`, it: `${base}/cerchi/guide/aristotele-forma-fine-realta/`, type: 'Article', breadcrumb: true },
-  { path: 'en/cerchi/guides/max-weber-rationalization-power-disenchantment/index.html', url: `${base}/en/cerchi/guides/max-weber-rationalization-power-disenchantment/`, it: `${base}/cerchi/guide/weber-razionalizzazione-potere-disincanto/`, type: 'Article', breadcrumb: true }
+  { path: 'en/cerchi/guides/max-weber-rationalization-power-disenchantment/index.html', url: `${base}/en/cerchi/guides/max-weber-rationalization-power-disenchantment/`, it: `${base}/cerchi/guide/weber-razionalizzazione-potere-disincanto/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/sigmund-freud-unconscious-desire-civilization/index.html', url: `${base}/en/cerchi/guides/sigmund-freud-unconscious-desire-civilization/`, it: `${base}/cerchi/guide/freud-inconscio-desiderio-civilta/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/antonio-gramsci-hegemony-culture-common-sense/index.html', url: `${base}/en/cerchi/guides/antonio-gramsci-hegemony-culture-common-sense/`, it: `${base}/cerchi/guide/gramsci-egemonia-cultura-senso-comune/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/index.html', url: `${base}/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/`, it: `${base}/cerchi/guide/hobbes-paura-sovranita-ordine-politico/`, type: 'Article', breadcrumb: true }
 ];
 
 const italianPairs = [
@@ -48,7 +51,10 @@ const italianPairs = [
   { path: 'cerchi/guide/leopardi-desiderio-infinito-modernita/index.html', it: `${base}/cerchi/guide/leopardi-desiderio-infinito-modernita/`, en: `${base}/en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/` },
   { path: 'cerchi/guide/seneca-dominio-tempo-morte/index.html', it: `${base}/cerchi/guide/seneca-dominio-tempo-morte/`, en: `${base}/en/cerchi/guides/seneca-time-self-mastery-death/` },
   { path: 'cerchi/guide/aristotele-forma-fine-realta/index.html', it: `${base}/cerchi/guide/aristotele-forma-fine-realta/`, en: `${base}/en/cerchi/guides/aristotle-form-purpose-actuality/` },
-  { path: 'cerchi/guide/weber-razionalizzazione-potere-disincanto/index.html', it: `${base}/cerchi/guide/weber-razionalizzazione-potere-disincanto/`, en: `${base}/en/cerchi/guides/max-weber-rationalization-power-disenchantment/` }
+  { path: 'cerchi/guide/weber-razionalizzazione-potere-disincanto/index.html', it: `${base}/cerchi/guide/weber-razionalizzazione-potere-disincanto/`, en: `${base}/en/cerchi/guides/max-weber-rationalization-power-disenchantment/` },
+  { path: 'cerchi/guide/freud-inconscio-desiderio-civilta/index.html', it: `${base}/cerchi/guide/freud-inconscio-desiderio-civilta/`, en: `${base}/en/cerchi/guides/sigmund-freud-unconscious-desire-civilization/` },
+  { path: 'cerchi/guide/gramsci-egemonia-cultura-senso-comune/index.html', it: `${base}/cerchi/guide/gramsci-egemonia-cultura-senso-comune/`, en: `${base}/en/cerchi/guides/antonio-gramsci-hegemony-culture-common-sense/` },
+  { path: 'cerchi/guide/hobbes-paura-sovranita-ordine-politico/index.html', it: `${base}/cerchi/guide/hobbes-paura-sovranita-ordine-politico/`, en: `${base}/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/` }
 ];
 
 const extractJsonLd = (html, path) => {
