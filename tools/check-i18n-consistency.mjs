@@ -32,7 +32,10 @@ const pages = [
   { path: 'en/cerchi/guides/max-weber-rationalization-power-disenchantment/index.html', url: `${base}/en/cerchi/guides/max-weber-rationalization-power-disenchantment/`, it: `${base}/cerchi/guide/weber-razionalizzazione-potere-disincanto/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/sigmund-freud-unconscious-desire-civilization/index.html', url: `${base}/en/cerchi/guides/sigmund-freud-unconscious-desire-civilization/`, it: `${base}/cerchi/guide/freud-inconscio-desiderio-civilta/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/antonio-gramsci-hegemony-culture-common-sense/index.html', url: `${base}/en/cerchi/guides/antonio-gramsci-hegemony-culture-common-sense/`, it: `${base}/cerchi/guide/gramsci-egemonia-cultura-senso-comune/`, type: 'Article', breadcrumb: true },
-  { path: 'en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/index.html', url: `${base}/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/`, it: `${base}/cerchi/guide/hobbes-paura-sovranita-ordine-politico/`, type: 'Article', breadcrumb: true }
+  { path: 'en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/index.html', url: `${base}/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/`, it: `${base}/cerchi/guide/hobbes-paura-sovranita-ordine-politico/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/averroes-reason-interpretation-law/index.html', url: `${base}/en/cerchi/guides/averroes-reason-interpretation-law/`, it: `${base}/cerchi/guide/averroe-ragione-interpretazione-legge/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/georg-simmel-money-metropolis-individuality/index.html', url: `${base}/en/cerchi/guides/georg-simmel-money-metropolis-individuality/`, it: `${base}/cerchi/guide/simmel-denaro-metropoli-individualita/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/adam-smith-exchange-sympathy-wealth/index.html', url: `${base}/en/cerchi/guides/adam-smith-exchange-sympathy-wealth/`, it: `${base}/cerchi/guide/adam-smith-scambio-simpatia-ricchezza/`, type: 'Article', breadcrumb: true }
 ];
 
 const italianPairs = [
@@ -54,7 +57,10 @@ const italianPairs = [
   { path: 'cerchi/guide/weber-razionalizzazione-potere-disincanto/index.html', it: `${base}/cerchi/guide/weber-razionalizzazione-potere-disincanto/`, en: `${base}/en/cerchi/guides/max-weber-rationalization-power-disenchantment/` },
   { path: 'cerchi/guide/freud-inconscio-desiderio-civilta/index.html', it: `${base}/cerchi/guide/freud-inconscio-desiderio-civilta/`, en: `${base}/en/cerchi/guides/sigmund-freud-unconscious-desire-civilization/` },
   { path: 'cerchi/guide/gramsci-egemonia-cultura-senso-comune/index.html', it: `${base}/cerchi/guide/gramsci-egemonia-cultura-senso-comune/`, en: `${base}/en/cerchi/guides/antonio-gramsci-hegemony-culture-common-sense/` },
-  { path: 'cerchi/guide/hobbes-paura-sovranita-ordine-politico/index.html', it: `${base}/cerchi/guide/hobbes-paura-sovranita-ordine-politico/`, en: `${base}/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/` }
+  { path: 'cerchi/guide/hobbes-paura-sovranita-ordine-politico/index.html', it: `${base}/cerchi/guide/hobbes-paura-sovranita-ordine-politico/`, en: `${base}/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/` },
+  { path: 'cerchi/guide/averroe-ragione-interpretazione-legge/index.html', it: `${base}/cerchi/guide/averroe-ragione-interpretazione-legge/`, en: `${base}/en/cerchi/guides/averroes-reason-interpretation-law/` },
+  { path: 'cerchi/guide/simmel-denaro-metropoli-individualita/index.html', it: `${base}/cerchi/guide/simmel-denaro-metropoli-individualita/`, en: `${base}/en/cerchi/guides/georg-simmel-money-metropolis-individuality/` },
+  { path: 'cerchi/guide/adam-smith-scambio-simpatia-ricchezza/index.html', it: `${base}/cerchi/guide/adam-smith-scambio-simpatia-ricchezza/`, en: `${base}/en/cerchi/guides/adam-smith-exchange-sympathy-wealth/` }
 ];
 
 const extractJsonLd = (html, path) => {
