@@ -982,3 +982,76 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
     font-size:.84rem;
   }
 }
+
+
+/* Final readability closeout — 2026-09-23
+   Scoped refinements for Cerchi orientation and the essays quick index. */
+.cerchi-triad-bridge{
+  padding-top:clamp(2.2rem,4vw,3.8rem);
+  padding-bottom:clamp(2.2rem,4vw,3.8rem);
+  border-top:1px solid rgba(141,109,55,.16);
+  border-bottom:1px solid rgba(141,109,55,.12);
+}
+.cerchi-triad-bridge .section-head{
+  align-items:end;
+}
+.cerchi-triad-bridge .section-head > p{
+  max-width:58ch;
+}
+.cerchi-triad-bridge .actions{
+  margin-top:1rem;
+}
+
+.essay-index-list{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 clamp(1.5rem,3.2vw,3.2rem);
+  border-top:1px solid rgba(141,109,55,.2);
+}
+.essay-index-list .item{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:.38rem;
+  min-height:0;
+  padding:.88rem 0;
+  border:0;
+  border-bottom:1px solid rgba(141,109,55,.14);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.essay-index-list .item::before,
+.essay-index-list .item::after{
+  display:none;
+}
+.essay-index-list h3{
+  margin:0;
+  font-size:clamp(1rem,1.15vw,1.14rem);
+  line-height:1.34;
+}
+.essay-index-list .meta{
+  margin:.08rem 0 0;
+  font-size:.8rem;
+}
+.essay-index-list .actions{
+  gap:.42rem;
+  margin-top:.12rem;
+}
+.essay-index-list .btn-secondary{
+  padding:.46rem .65rem;
+  font-size:.78rem;
+}
+
+@media(max-width:760px){
+  .essay-index-list{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+  .essay-index-list .actions .btn-secondary{
+    width:auto;
+    min-height:44px;
+  }
+  .cerchi-triad-bridge .section-head > p{
+    max-width:none;
+  }
+}
