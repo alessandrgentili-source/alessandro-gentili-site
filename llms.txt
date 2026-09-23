@@ -70,6 +70,9 @@ There are no automatic browser-language redirects.
 - Seneca — time, self-mastery and death: https://alessandro-gentili.it/en/cerchi/guides/seneca-time-self-mastery-death/
 - Aristotle — form, purpose and actuality: https://alessandro-gentili.it/en/cerchi/guides/aristotle-form-purpose-actuality/
 - Max Weber — rationalization, power and disenchantment: https://alessandro-gentili.it/en/cerchi/guides/max-weber-rationalization-power-disenchantment/
+- Sigmund Freud — unconscious, desire and civilization: https://alessandro-gentili.it/en/cerchi/guides/sigmund-freud-unconscious-desire-civilization/
+- Antonio Gramsci — hegemony, culture and common sense: https://alessandro-gentili.it/en/cerchi/guides/antonio-gramsci-hegemony-culture-common-sense/
+- Thomas Hobbes — fear, sovereignty and political order: https://alessandro-gentili.it/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/
 
 The first complete English triad asks: "Who — and what — forms a people?" It connects Manzoni (shared language, institutions and judgment), Collodi (formation through desire, experience and consequences), and Pasolini (environmental pedagogy, consumer culture and cultural homogenization).
 
@@ -81,3 +84,6 @@ The third complete English triad localizes the second Cerchi d'inchiostro thresh
 
 
 The fourth complete English triad localizes the third Cerchi d'inchiostro threshold: "Time, form, disenchantment." It connects Seneca (time, self-mastery and death), Aristotle (form, purpose and actuality), and Weber (rationalization, power and disenchantment). Its shared question is which forms can keep a life, a community and a decision from dissolving into acceleration, apparatus and loss of purpose.
+
+
+The fifth complete English triad localizes the fourth Cerchi d'inchiostro threshold: "Unconscious, hegemony, sovereignty." It connects Freud (the divided subject and internal authority), Gramsci (the cultural construction of consent and common sense), and Hobbes (vulnerability, protection and sovereign political order). Its shared question is why people obey through inner conflict, cultural formation and the search for protection.
