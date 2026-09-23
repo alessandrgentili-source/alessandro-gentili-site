@@ -66,7 +66,7 @@ try {
   assert(essay.includes(`src="${coverUrl}"`), 'Saggio 16 page body does not include the visible cover');
 
   const archive = await readText('archivio.html');
-  const numbers = [...archive.matchAll(/data-essay-number="(\\d+)"/g)].map((match) => Number(match[1]));
+  const numbers = [...archive.matchAll(/data-essay-number="(\d+)"/g)].map((match) => Number(match[1]));
   assert(numbers.slice(0, 5).join(',') === '16,15,14,13,12', `Unexpected archive order: ${numbers.slice(0, 5).join(',')}`);
   assert(numbers.includes(15) && numbers.includes(16), 'Saggio 15/16 must be present statically in archivio.html');
 
