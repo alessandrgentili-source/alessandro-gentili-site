@@ -129,18 +129,33 @@ const closeCookieBanner = () => {
 const showCookieBanner = () => {
   closeCookieBanner();
 
+  const isEnglishPage = document.documentElement.lang.toLowerCase().startsWith('en');
+  const copy = isEnglishPage
+    ? {
+        ariaLabel: 'Cookie preferences',
+        message: 'We use necessary technical cookies and, only with your consent, statistical tools to understand how the site is read and improve its content.',
+        reject: 'Reject',
+        accept: 'Accept statistics',
+      }
+    : {
+        ariaLabel: 'Preferenze cookie',
+        message: 'Usiamo cookie tecnici necessari e, solo con il tuo consenso, strumenti statistici per capire come viene letto il sito e migliorare i contenuti.',
+        reject: 'Rifiuta',
+        accept: 'Accetta statistiche',
+      };
+
   const banner = document.createElement('section');
   banner.className = 'cookie-banner';
   banner.dataset.cookieBanner = '';
-  banner.setAttribute('aria-label', 'Preferenze cookie');
+  banner.setAttribute('aria-label', copy.ariaLabel);
   banner.innerHTML = `
     <div class="cookie-banner-copy">
-      <p>Usiamo cookie tecnici necessari e, solo con il tuo consenso, strumenti statistici per capire come viene letto il sito e migliorare i contenuti.</p>
+      <p>${copy.message}</p>
       <a href="/privacy.html">Privacy</a>
     </div>
     <div class="cookie-banner-actions">
-      <button type="button" class="btn-secondary" data-cookie-reject>Rifiuta</button>
-      <button type="button" class="btn" data-cookie-accept>Accetta statistiche</button>
+      <button type="button" class="btn-secondary" data-cookie-reject>${copy.reject}</button>
+      <button type="button" class="btn" data-cookie-accept>${copy.accept}</button>
     </div>
   `;
 
