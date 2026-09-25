@@ -15,10 +15,12 @@
 .international-entry p:not(.international-entry-label){margin:.62rem 0 1.1rem;color:var(--ink-2);font-size:.9rem;line-height:1.58}
 .international-entry .btn-secondary{align-self:flex-start;margin-top:auto}
 .international-triad-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(1.4rem,4vw,4rem);border-top:1px solid var(--line)}
-.international-triad-index article{display:grid;grid-template-columns:3.1rem minmax(0,1fr);gap:.75rem;padding:1.05rem 0 1.15rem;border-bottom:1px solid var(--line)}
+.international-triad-row{display:grid;grid-template-columns:3.1rem minmax(0,1fr) auto;gap:.75rem 1rem;align-items:center;padding:1.05rem 0 1.15rem;border-bottom:1px solid var(--line);color:inherit;text-decoration:none}
+.international-triad-row:hover strong,.international-triad-row:focus-visible strong{color:var(--petrol)}
 .international-triad-index .international-triad-no{color:var(--gold);font-size:.68rem;font-weight:760;letter-spacing:.12em}
-.international-triad-index h3{margin:0;font-size:clamp(1.14rem,1.45vw,1.42rem);line-height:1.2}
-.international-triad-index p{margin:.3rem 0 0;color:var(--ink-2);font-size:.82rem;line-height:1.45}
+.international-triad-row strong{display:block;font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Times New Roman",serif;font-size:clamp(1.14rem,1.45vw,1.42rem);font-weight:500;line-height:1.2}
+.international-triad-row small{display:block;margin-top:.3rem;color:var(--ink-2);font-size:.82rem;line-height:1.45}
+.international-triad-arrow{color:var(--petrol);font-size:1rem}
 .international-home-cta{display:flex;justify-content:flex-end;margin-top:1.25rem}
 
 /* Method */
