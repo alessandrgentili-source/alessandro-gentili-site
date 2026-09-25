@@ -1,0 +1,69 @@
+/* International V2 core refinement — Home, Method, System */
+.international-core-v2{padding-top:clamp(1.4rem,2.6vw,2.6rem)}
+.international-core-v2 .international-marker{margin-left:.7rem;color:var(--muted);font-size:.62rem;font-weight:650;letter-spacing:.15em}
+.international-core-v2 .international-section{padding-top:clamp(3.4rem,5.5vw,5.4rem);padding-bottom:clamp(3.4rem,5.5vw,5.4rem)}
+.international-core-v2 .international-section .section-head{align-items:end;margin-bottom:clamp(1.5rem,2.6vw,2.4rem)}
+.international-core-v2 .international-section .section-head>p{max-width:42ch}
+
+/* English gateway */
+.international-entry-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.international-entry{display:flex;flex-direction:column;min-width:0;padding:1.5rem clamp(1rem,2vw,1.6rem) 1.7rem;border-left:1px solid var(--line)}
+.international-entry:first-child{border-left:0;padding-left:0}
+.international-entry:last-child{padding-right:0}
+.international-entry .international-entry-label{margin:0 0 .75rem;color:var(--gold);font-size:.67rem;font-weight:760;letter-spacing:.14em;text-transform:uppercase}
+.international-entry h3{font-size:clamp(1.45rem,1.8vw,1.85rem);line-height:1.15}
+.international-entry p:not(.international-entry-label){margin:.62rem 0 1.1rem;color:var(--ink-2);font-size:.9rem;line-height:1.58}
+.international-entry .btn-secondary{align-self:flex-start;margin-top:auto}
+.international-triad-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(1.4rem,4vw,4rem);border-top:1px solid var(--line)}
+.international-triad-index article{display:grid;grid-template-columns:3.1rem minmax(0,1fr);gap:.75rem;padding:1.05rem 0 1.15rem;border-bottom:1px solid var(--line)}
+.international-triad-index .international-triad-no{color:var(--gold);font-size:.68rem;font-weight:760;letter-spacing:.12em}
+.international-triad-index h3{margin:0;font-size:clamp(1.14rem,1.45vw,1.42rem);line-height:1.2}
+.international-triad-index p{margin:.3rem 0 0;color:var(--ink-2);font-size:.82rem;line-height:1.45}
+.international-home-cta{display:flex;justify-content:flex-end;margin-top:1.25rem}
+
+/* Method */
+.international-method-flow{position:relative;list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.international-method-step{display:grid;grid-template-columns:4.2rem minmax(180px,.62fr) minmax(0,1.38fr);gap:clamp(.8rem,2.8vw,2.4rem);align-items:start;padding:1.35rem 0 1.45rem;border-bottom:1px solid var(--line)}
+.international-method-step .international-step-no{color:var(--gold);font-size:.72rem;font-weight:760;letter-spacing:.13em}
+.international-method-step h3{font-size:clamp(1.35rem,1.9vw,1.8rem);line-height:1.15}
+.international-method-step p{margin:0;color:var(--ink-2);font-size:.93rem;line-height:1.6}
+.international-method-arc{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:1rem;margin-top:1.45rem;color:var(--petrol);font-size:.7rem;font-weight:760;letter-spacing:.13em;text-transform:uppercase}
+.international-method-arc::before,.international-method-arc::after{content:"";height:1px;background:var(--gold-2)}
+.international-method-translation{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.international-method-translation article{padding:1.35rem 0;border-top:2px solid var(--gold)}
+.international-method-translation .international-field{margin:0 0 .45rem;color:var(--gold);font-size:.66rem;font-weight:760;letter-spacing:.13em;text-transform:uppercase}
+.international-method-translation h3{font-size:clamp(1.35rem,1.8vw,1.75rem)}
+.international-method-translation p:not(.international-field){margin:.55rem 0 0;color:var(--ink-2);font-size:.9rem;line-height:1.58}
+
+/* System */
+.international-system-stack{position:relative;display:grid;gap:.9rem}
+.international-system-layer{display:grid;grid-template-columns:minmax(150px,.45fr) minmax(0,1.55fr);gap:clamp(1.2rem,4vw,4rem);align-items:start;padding:1.35rem clamp(1rem,2vw,1.6rem);border:1px solid var(--line);border-radius:14px;background:rgba(255,250,240,.5)}
+.international-system-layer+.international-system-layer{position:relative}
+.international-system-layer+.international-system-layer::before{content:"↓";position:absolute;top:-1.35rem;left:50%;transform:translateX(-50%);color:var(--gold);font-size:1rem;background:var(--paper);padding:0 .35rem}
+.international-system-layer .international-layer-kicker{margin:0 0 .4rem;color:var(--gold);font-size:.66rem;font-weight:760;letter-spacing:.14em;text-transform:uppercase}
+.international-system-layer h3{font-size:clamp(1.35rem,1.85vw,1.8rem);line-height:1.18}
+.international-system-modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem 1.5rem}
+.international-system-module{padding:.2rem 0}
+.international-system-module strong{display:block;color:var(--petrol);font-size:.92rem}
+.international-system-module p{margin:.3rem 0 0;color:var(--ink-2);font-size:.86rem;line-height:1.52}
+.international-system-decision{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.5rem;align-items:end;padding-top:1.4rem;border-top:1px solid var(--line)}
+.international-system-decision p{max-width:62ch;margin:.6rem 0 0;color:var(--ink-2)}
+
+@media(max-width:900px){
+  .international-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .international-entry:nth-child(3){border-left:0}
+  .international-entry:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .international-entry:nth-child(odd){padding-left:0}
+  .international-entry:nth-child(even){padding-right:0}
+  .international-method-step{grid-template-columns:3.2rem minmax(155px,.7fr) minmax(0,1.3fr)}
+  .international-system-layer{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .international-entry-grid,.international-triad-index,.international-method-translation{grid-template-columns:1fr}
+  .international-entry{padding:1.25rem 0;border-left:0;border-bottom:1px solid var(--line)}
+  .international-entry:last-child{border-bottom:0}
+  .international-method-step{grid-template-columns:2.7rem minmax(0,1fr)}
+  .international-method-step p{grid-column:2}
+  .international-system-modules{grid-template-columns:1fr}
+  .international-system-decision{grid-template-columns:1fr}
+}
