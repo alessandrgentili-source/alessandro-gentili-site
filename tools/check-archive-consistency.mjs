@@ -68,10 +68,15 @@ for (const page of [...saggiPages, ...portfolioProjects]) {
 
 const essayNumbers = [...archive.matchAll(/data-essay-number="(\d+)"/g)]
   .map((match) => Number(match[1]));
-const expectedEssayNumbers = Array.from({ length: 17 }, (_, index) => 16 - index);
+const expectedEssayNumbers = [...new Set(
+  saggiPages
+    .map((path) => path.match(/saggio-(\\d+)/)?.[1])
+    .filter(Boolean)
+    .map(Number)
+)].sort((a, b) => b - a);
 assert(
   essayNumbers.join(',') === expectedEssayNumbers.join(','),
-  `Archive essay sequence must be static and ordered 16→0. Found: ${essayNumbers.join(',')}`
+  `Archive essay sequence must match published numbered essay pages in descending order. Expected: ${expectedEssayNumbers.join(',')}. Found: ${essayNumbers.join(',')}`
 );
 
 assert(
