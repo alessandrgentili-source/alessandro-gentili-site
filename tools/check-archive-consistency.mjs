@@ -70,7 +70,7 @@ const essayNumbers = [...archive.matchAll(/data-essay-number="(\d+)"/g)]
   .map((match) => Number(match[1]));
 const expectedEssayNumbers = [...new Set(
   saggiPages
-    .map((path) => path.match(/saggio-(\\d+)/)?.[1])
+    .map((path) => path.match(/saggio-(\d+)/)?.[1])
     .filter(Boolean)
     .map(Number)
 )].sort((a, b) => b - a);
