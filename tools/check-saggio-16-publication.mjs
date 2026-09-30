@@ -67,8 +67,10 @@ try {
 
   const archive = await readText('archivio.html');
   const numbers = [...archive.matchAll(/data-essay-number="(\d+)"/g)].map((match) => Number(match[1]));
-  assert(numbers.slice(0, 5).join(',') === '16,15,14,13,12', `Unexpected archive order: ${numbers.slice(0, 5).join(',')}`);
-  assert(numbers.includes(15) && numbers.includes(16), 'Saggio 15/16 must be present statically in archivio.html');
+  const index16 = numbers.indexOf(16);
+  assert(index16 !== -1, 'Saggio 16 must be present statically in archivio.html');
+  assert(numbers.slice(index16, index16 + 5).join(',') === '16,15,14,13,12', `Unexpected legacy Saggio 16 sequence: ${numbers.slice(index16, index16 + 5).join(',')}`);
+  assert(numbers.includes(15), 'Saggio 15 must be present statically in archivio.html');
 
   console.log('Saggio 16 publication checks passed');
 } finally {
