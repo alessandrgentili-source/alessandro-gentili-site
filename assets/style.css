@@ -1061,3 +1061,22 @@ a:focus-visible,button:focus-visible{outline-color:rgba(141,109,55,.82)}
 .language-switcher-link{color:var(--muted);text-decoration:none;font-weight:700;letter-spacing:.04em;padding:.28rem .2rem;border-radius:6px}
 .language-switcher-link:hover,.language-switcher-link:focus-visible,.language-switcher-link.active{color:var(--ink)}
 .language-switcher-link.active{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:.28em}
+
+/* Shared navigation and reading hardening. JS measures the real sticky header. */
+html{scroll-padding-top:calc(var(--site-header-height, 70px) + 16px)}
+@media(max-width:760px){html{scroll-padding-top:calc(var(--site-header-height, 200px) + 16px)}}
+.essay-main a{overflow-wrap:anywhere}
+.skip-link{position:fixed;top:.5rem;left:1rem;z-index:1000;padding:.65rem 1rem;background:var(--paper-3);color:var(--ink);transform:translateY(-200%)}
+.skip-link:focus{transform:none;outline:2px solid var(--gold);outline-offset:3px}
+.nav-enhanced .primary-nav-item--dropdown:not(.is-open) .primary-nav-dropdown{opacity:0;visibility:hidden;transform:translateY(-4px);pointer-events:none}
+.nav-enhanced .primary-nav-item--dropdown.is-open .primary-nav-dropdown{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+@media(max-width:760px){
+  .nav-enhanced .primary-nav-item--dropdown:not(.is-open) .primary-nav-dropdown{display:none}
+  .nav-enhanced .primary-nav-item--dropdown.is-open .primary-nav-dropdown{display:grid}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+.editorial-system-map .system-node:focus-visible,.editorial-system-map .system-archive:focus-visible{outline:2px solid var(--gold);outline-offset:4px}

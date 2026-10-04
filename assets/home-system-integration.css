@@ -37,7 +37,7 @@
   flex:none;
   margin-top:0;
 }
-@media(max-width:760px){
+@media(max-width:1050px){
   .home-system-section{padding-top:3.5rem}
   .home-system-footer{display:grid;gap:1.15rem}
   .home-system-footer .btn-secondary{width:100%}

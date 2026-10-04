@@ -335,7 +335,7 @@
   .home-atlas-v2 .system-node--territory{left:42%}
 }
 
-@media(max-width:760px){
+@media(max-width:1050px){
   .home-system-section{
     padding-top:3.8rem;
   }

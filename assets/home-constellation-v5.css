@@ -26,7 +26,7 @@
   .editorial-system-map{min-height:1100px}
   .system-archive{left:8%;right:8%}
 }
-@media(max-width:760px){
+@media(max-width:1050px){
   .editorial-system-map{min-height:0}
   .system-archive,
   .system-archive:hover,

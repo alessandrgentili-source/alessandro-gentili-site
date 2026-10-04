@@ -1,54 +1,76 @@
 const mobileNavQuery = window.matchMedia('(max-width: 760px)');
 const dropdownNavItems = document.querySelectorAll('.primary-nav-item--dropdown');
+document.documentElement.classList.add('nav-enhanced');
 
-const closePrimaryNavDropdowns = (exceptItem) => {
-  dropdownNavItems.forEach((item) => {
-    if (item === exceptItem) {
-      return;
-    }
-    item.classList.remove('is-open');
-    item.querySelector('.primary-nav-link')?.setAttribute('aria-expanded', 'false');
-  });
+const setPrimaryNavState = (item, open) => {
+  item.classList.toggle('is-open', open);
+  item.querySelector('.primary-nav-link')?.setAttribute('aria-expanded', String(open));
 };
-
-dropdownNavItems.forEach((item) => {
+const closePrimaryNavDropdowns = (exceptItem) => {
+  dropdownNavItems.forEach(item => { if (item !== exceptItem) setPrimaryNavState(item, false); });
+};
+dropdownNavItems.forEach((item, index) => {
   const trigger = item.querySelector('.primary-nav-link');
-  if (!trigger) {
-    return;
-  }
-
-  trigger.setAttribute('aria-expanded', 'false');
+  const submenu = item.querySelector('.primary-nav-dropdown');
+  if (!trigger || !submenu) return;
+  submenu.id ||= `primary-submenu-${index}`;
+  trigger.setAttribute('aria-controls', submenu.id);
+  // This is a disclosure containing ordinary navigation links, not an ARIA menu widget.
+  trigger.removeAttribute('aria-haspopup');
+  setPrimaryNavState(item, false);
+  const open = () => { closePrimaryNavDropdowns(item); setPrimaryNavState(item, true); };
+  item.addEventListener('mouseenter', () => { if (!mobileNavQuery.matches) open(); });
+  item.addEventListener('mouseleave', () => {
+    if (!mobileNavQuery.matches && !item.contains(document.activeElement)) setPrimaryNavState(item, false);
+  });
+  item.addEventListener('focusin', () => { if (!mobileNavQuery.matches) open(); });
+  item.addEventListener('focusout', (event) => {
+    if (!item.contains(event.relatedTarget)) setPrimaryNavState(item, false);
+  });
   trigger.addEventListener('click', (event) => {
-    if (!mobileNavQuery.matches) {
-      return;
-    }
-
+    if (!mobileNavQuery.matches) return;
     event.preventDefault();
-    const isOpen = item.classList.toggle('is-open');
-    trigger.setAttribute('aria-expanded', String(isOpen));
-    closePrimaryNavDropdowns(item);
+    const wasOpen = item.classList.contains('is-open');
+    closePrimaryNavDropdowns();
+    setPrimaryNavState(item, !wasOpen);
+  });
+  trigger.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowDown' && event.key !== ' ') return;
+    event.preventDefault();
+    open();
+    submenu.querySelector('a')?.focus();
   });
 });
-
 document.addEventListener('click', (event) => {
-  if (!mobileNavQuery.matches || event.target.closest('.primary-nav')) {
-    return;
-  }
-
-  closePrimaryNavDropdowns();
+  if (!event.target.closest('.primary-nav')) closePrimaryNavDropdowns();
 });
-
 document.addEventListener('keydown', (event) => {
-  if (event.key !== 'Escape') {
-    return;
-  }
-
+  if (event.key !== 'Escape') return;
+  const item = document.activeElement?.closest('.primary-nav-item--dropdown');
+  // Focus first: focusin may open the dropdown, which is then closed below.
+  if (item?.classList.contains('is-open')) item.querySelector('.primary-nav-link')?.focus();
   closePrimaryNavDropdowns();
 });
+mobileNavQuery.addEventListener('change', () => closePrimaryNavDropdowns());
 
-mobileNavQuery.addEventListener('change', () => {
-  closePrimaryNavDropdowns();
-});
+const mainContent = document.querySelector('main');
+if (mainContent) {
+  mainContent.id ||= 'main-content';
+  mainContent.setAttribute('tabindex', '-1');
+  const skip = document.createElement('a');
+  skip.className = 'skip-link';
+  skip.href = `#${mainContent.id}`;
+  skip.textContent = document.documentElement.lang.startsWith('en') ? 'Skip to content' : 'Salta al contenuto';
+  skip.addEventListener('click', () => mainContent.focus({ preventScroll: true }));
+  document.body.prepend(skip);
+}
+const siteHeader = document.querySelector('.site-header');
+if (siteHeader) {
+  const measureHeader = () => document.documentElement.style.setProperty('--site-header-height', `${Math.ceil(siteHeader.getBoundingClientRect().height)}px`);
+  measureHeader();
+  if ('ResizeObserver' in window) new ResizeObserver(measureHeader).observe(siteHeader);
+  else window.addEventListener('resize', measureHeader);
+}
 document.querySelectorAll('[data-filter]').forEach((button) => {
   button.addEventListener('click', () => {
     const filter = button.dataset.filter;
@@ -87,6 +109,8 @@ document.querySelectorAll('[data-newsletter-form]').forEach((form) => {
 const cookieConsentKey = 'ag_cookie_statistics';
 const googleAnalyticsId = 'G-NCN48MN7VJ';
 let googleAnalyticsLoaded = false;
+// Disable collection until this page has an explicit statistics opt-in.
+window[`ga-disable-${googleAnalyticsId}`] = true;
 
 const getCookieStatisticsPreference = () => {
   try {
@@ -105,22 +129,40 @@ const setCookieStatisticsPreference = (value) => {
 };
 
 const loadGoogleAnalytics = () => {
-  if (googleAnalyticsLoaded || document.querySelector(`script[src="https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}"]`)) {
-    googleAnalyticsLoaded = true;
-    return;
-  }
+  window[`ga-disable-${googleAnalyticsId}`] = false;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtag(){window.dataLayer.push(arguments);};
+  window.gtag('consent', 'update', { analytics_storage: 'granted' });
+  if (googleAnalyticsLoaded) return;
 
+  window.gtag('js', new Date());
+  window.gtag('config', googleAnalyticsId);
   const analyticsScript = document.createElement('script');
   analyticsScript.async = true;
   analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`;
   document.head.appendChild(analyticsScript);
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(){window.dataLayer.push(arguments);};
-  window.gtag('js', new Date());
-  window.gtag('config', googleAnalyticsId);
   googleAnalyticsLoaded = true;
 };
+
+const disableGoogleAnalytics = () => {
+  // The opt-out flag also blocks a tag that finishes loading after revocation.
+  // Already transmitted requests cannot be recalled; removing the script is not an opt-out.
+  window[`ga-disable-${googleAnalyticsId}`] = true;
+  window.gtag?.('consent', 'update', { analytics_storage: 'denied' });
+  const domains = ['', window.location.hostname, 'alessandro-gentili.it'];
+  for (const name of ['_ga', `_ga_${googleAnalyticsId.slice(2)}`]) {
+    for (const domain of new Set(domains)) {
+      document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax${domain ? `; domain=${domain}` : ''}`;
+    }
+  }
+};
+
+// Apply revocation in other open pages without waiting for navigation.
+window.addEventListener('storage', (event) => {
+  if ((event.key === cookieConsentKey && event.newValue !== 'accepted') || event.key === null) {
+    disableGoogleAnalytics();
+  }
+});
 
 const closeCookieBanner = () => {
   document.querySelector('[data-cookie-banner]')?.remove();
@@ -167,6 +209,7 @@ const showCookieBanner = () => {
 
   banner.querySelector('[data-cookie-reject]')?.addEventListener('click', () => {
     setCookieStatisticsPreference('rejected');
+    disableGoogleAnalytics();
     closeCookieBanner();
   });
 

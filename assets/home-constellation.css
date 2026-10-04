@@ -369,7 +369,7 @@
   .system-node--aps{left:50%}
   .system-reading{left:64%;width:300px}
 }
-@media(max-width:760px){
+@media(max-width:1050px){
   .system-intro{gap:1.7rem;padding-bottom:3rem}
   .system-intro h1{font-size:clamp(3rem,15vw,4.7rem)}
   .system-intro-copy .lead{font-size:1.15rem}
