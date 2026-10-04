@@ -87,6 +87,8 @@ document.querySelectorAll('[data-newsletter-form]').forEach((form) => {
 const cookieConsentKey = 'ag_cookie_statistics';
 const googleAnalyticsId = 'G-NCN48MN7VJ';
 let googleAnalyticsLoaded = false;
+// Disable collection until this page has an explicit statistics opt-in.
+window[`ga-disable-${googleAnalyticsId}`] = true;
 
 const getCookieStatisticsPreference = () => {
   try {
@@ -105,22 +107,40 @@ const setCookieStatisticsPreference = (value) => {
 };
 
 const loadGoogleAnalytics = () => {
-  if (googleAnalyticsLoaded || document.querySelector(`script[src="https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}"]`)) {
-    googleAnalyticsLoaded = true;
-    return;
-  }
+  window[`ga-disable-${googleAnalyticsId}`] = false;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtag(){window.dataLayer.push(arguments);};
+  window.gtag('consent', 'update', { analytics_storage: 'granted' });
+  if (googleAnalyticsLoaded) return;
 
+  window.gtag('js', new Date());
+  window.gtag('config', googleAnalyticsId);
   const analyticsScript = document.createElement('script');
   analyticsScript.async = true;
   analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`;
   document.head.appendChild(analyticsScript);
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(){window.dataLayer.push(arguments);};
-  window.gtag('js', new Date());
-  window.gtag('config', googleAnalyticsId);
   googleAnalyticsLoaded = true;
 };
+
+const disableGoogleAnalytics = () => {
+  // The opt-out flag also blocks a tag that finishes loading after revocation.
+  // Already transmitted requests cannot be recalled; removing the script is not an opt-out.
+  window[`ga-disable-${googleAnalyticsId}`] = true;
+  window.gtag?.('consent', 'update', { analytics_storage: 'denied' });
+  const domains = ['', window.location.hostname, 'alessandro-gentili.it'];
+  for (const name of ['_ga', `_ga_${googleAnalyticsId.slice(2)}`]) {
+    for (const domain of new Set(domains)) {
+      document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax${domain ? `; domain=${domain}` : ''}`;
+    }
+  }
+};
+
+// Apply revocation in other open pages without waiting for navigation.
+window.addEventListener('storage', (event) => {
+  if ((event.key === cookieConsentKey && event.newValue !== 'accepted') || event.key === null) {
+    disableGoogleAnalytics();
+  }
+});
 
 const closeCookieBanner = () => {
   document.querySelector('[data-cookie-banner]')?.remove();
@@ -167,6 +187,7 @@ const showCookieBanner = () => {
 
   banner.querySelector('[data-cookie-reject]')?.addEventListener('click', () => {
     setCookieStatisticsPreference('rejected');
+    disableGoogleAnalytics();
     closeCookieBanner();
   });
 
