@@ -188,4 +188,54 @@ assert(robots.includes('Sitemap: https://alessandro-gentili.it/sitemap.xml'), 'r
 await access(join(root, 'tools/check-archive-consistency.mjs'));
 await access(join(root, 'tools/check-saggio-16-publication.mjs'));
 
-console.log(`Internationalization checks passed: ${pages.length} canonical English pages, ${italianPairs.length} reciprocal IT/EN pairs, legacy compatibility verified.`);
+// Validate the selective corpus against files and visible reading paths, not
+// against a remembered promise of numerical parity between languages.
+const itGuides = await collectHtml('cerchi/guide');
+const enGuides = await collectHtml('en/cerchi/guides');
+const itTriads = await read('cerchi/triadi/index.html');
+const enTriads = await read('en/cerchi/triads/index.html');
+const counts = {
+  'it-guides': itGuides.length,
+  'en-guides': enGuides.length,
+  'it-triads': [...itTriads.matchAll(/<article\b[^>]*class="essay-card"/g)].length,
+  'en-triads': [...enTriads.matchAll(/<section\b[^>]*id="triad-\d+"/g)].length
+};
+assert(Object.values(counts).every(value => value > 0), 'Corpus inventory must not be empty');
+for (const path of ['en/index.html', 'en/cerchi/index.html', 'en/positioning/index.html', 'archivio.html']) {
+  const html = await read(path);
+  const claims = [...html.matchAll(/data-corpus-count="([^"]+)">(\d+)</g)];
+  assert(claims.length > 0, `${path}: missing corpus count declarations`);
+  for (const [, key, value] of claims) {
+    assert(Number(value) === counts[key], `${path}: stale ${key} count ${value}; repository has ${counts[key]}`);
+  }
+}
+const llms = await read('llms.txt');
+for (const [label, key] of Object.entries({
+  'Italian author guides': 'it-guides', 'English author guides': 'en-guides',
+  'Italian triads': 'it-triads', 'English triad reading paths': 'en-triads'
+})) {
+  const claim = llms.match(new RegExp(`^- ${label}: (\\d+)$`, 'm'));
+  assert(claim && Number(claim[1]) === counts[key], `llms.txt: stale or missing ${label}`);
+}
+assert(!llms.includes('24 of 24'), 'llms.txt: English must not claim to mirror the entire Italian corpus');
+
+const anchorPaths = (html, url) => new Set([...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)]
+  .map((match) => new URL(match[1], url).pathname.replace(/\/index\.html$/, '/')));
+for (const pair of italianPairs.filter(page => page.path !== 'index.html')) {
+  const itLinks = anchorPaths(await read(pair.path), pair.it);
+  assert(itLinks.has(new URL(pair.en).pathname), `${pair.path}: English counterpart needs a static HTML link`);
+  const englishPage = pages.find(page => page.url === pair.en);
+  const enLinks = anchorPaths(await read(englishPage.path), pair.en);
+  assert(enLinks.has(new URL(pair.it).pathname), `${englishPage.path}: Italian counterpart needs a static HTML link`);
+}
+for (const [hub, guides] of [['cerchi/index.html', itGuides], ['en/cerchi/index.html', enGuides]]) {
+  const links = anchorPaths(await read(hub), `${base}/${hub}`);
+  for (const guide of guides) {
+    assert(links.has(`/${guide.replace(/index\.html$/, '')}`), `${hub}: missing published guide ${guide}`);
+  }
+}
+const englishTriadLinks = anchorPaths(enTriads, `${base}/en/cerchi/triads/`);
+for (const guide of italianOnlyGuides) {
+  assert(englishTriadLinks.has(`/${guide.replace(/index\.html$/, '')}`), `English triads: missing Italian-only guide ${guide}`);
+}
+console.log(`Internationalization checks passed: ${pages.length} canonical English pages, ${italianPairs.length} reciprocal IT/EN pairs; ${counts['it-guides']} IT / ${counts['en-guides']} EN guides, ${counts['it-triads']} IT / ${counts['en-triads']} EN triads. Static language links, hub coverage and corpus claims verified.`);
