@@ -1,54 +1,76 @@
 const mobileNavQuery = window.matchMedia('(max-width: 760px)');
 const dropdownNavItems = document.querySelectorAll('.primary-nav-item--dropdown');
+document.documentElement.classList.add('nav-enhanced');
 
-const closePrimaryNavDropdowns = (exceptItem) => {
-  dropdownNavItems.forEach((item) => {
-    if (item === exceptItem) {
-      return;
-    }
-    item.classList.remove('is-open');
-    item.querySelector('.primary-nav-link')?.setAttribute('aria-expanded', 'false');
-  });
+const setPrimaryNavState = (item, open) => {
+  item.classList.toggle('is-open', open);
+  item.querySelector('.primary-nav-link')?.setAttribute('aria-expanded', String(open));
 };
-
-dropdownNavItems.forEach((item) => {
+const closePrimaryNavDropdowns = (exceptItem) => {
+  dropdownNavItems.forEach(item => { if (item !== exceptItem) setPrimaryNavState(item, false); });
+};
+dropdownNavItems.forEach((item, index) => {
   const trigger = item.querySelector('.primary-nav-link');
-  if (!trigger) {
-    return;
-  }
-
-  trigger.setAttribute('aria-expanded', 'false');
+  const submenu = item.querySelector('.primary-nav-dropdown');
+  if (!trigger || !submenu) return;
+  submenu.id ||= `primary-submenu-${index}`;
+  trigger.setAttribute('aria-controls', submenu.id);
+  // This is a disclosure containing ordinary navigation links, not an ARIA menu widget.
+  trigger.removeAttribute('aria-haspopup');
+  setPrimaryNavState(item, false);
+  const open = () => { closePrimaryNavDropdowns(item); setPrimaryNavState(item, true); };
+  item.addEventListener('mouseenter', () => { if (!mobileNavQuery.matches) open(); });
+  item.addEventListener('mouseleave', () => {
+    if (!mobileNavQuery.matches && !item.contains(document.activeElement)) setPrimaryNavState(item, false);
+  });
+  item.addEventListener('focusin', () => { if (!mobileNavQuery.matches) open(); });
+  item.addEventListener('focusout', (event) => {
+    if (!item.contains(event.relatedTarget)) setPrimaryNavState(item, false);
+  });
   trigger.addEventListener('click', (event) => {
-    if (!mobileNavQuery.matches) {
-      return;
-    }
-
+    if (!mobileNavQuery.matches) return;
     event.preventDefault();
-    const isOpen = item.classList.toggle('is-open');
-    trigger.setAttribute('aria-expanded', String(isOpen));
-    closePrimaryNavDropdowns(item);
+    const wasOpen = item.classList.contains('is-open');
+    closePrimaryNavDropdowns();
+    setPrimaryNavState(item, !wasOpen);
+  });
+  trigger.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowDown' && event.key !== ' ') return;
+    event.preventDefault();
+    open();
+    submenu.querySelector('a')?.focus();
   });
 });
-
 document.addEventListener('click', (event) => {
-  if (!mobileNavQuery.matches || event.target.closest('.primary-nav')) {
-    return;
-  }
-
-  closePrimaryNavDropdowns();
+  if (!event.target.closest('.primary-nav')) closePrimaryNavDropdowns();
 });
-
 document.addEventListener('keydown', (event) => {
-  if (event.key !== 'Escape') {
-    return;
-  }
-
+  if (event.key !== 'Escape') return;
+  const item = document.activeElement?.closest('.primary-nav-item--dropdown');
+  // Focus first: focusin may open the dropdown, which is then closed below.
+  if (item?.classList.contains('is-open')) item.querySelector('.primary-nav-link')?.focus();
   closePrimaryNavDropdowns();
 });
+mobileNavQuery.addEventListener('change', () => closePrimaryNavDropdowns());
 
-mobileNavQuery.addEventListener('change', () => {
-  closePrimaryNavDropdowns();
-});
+const mainContent = document.querySelector('main');
+if (mainContent) {
+  mainContent.id ||= 'main-content';
+  mainContent.setAttribute('tabindex', '-1');
+  const skip = document.createElement('a');
+  skip.className = 'skip-link';
+  skip.href = `#${mainContent.id}`;
+  skip.textContent = document.documentElement.lang.startsWith('en') ? 'Skip to content' : 'Salta al contenuto';
+  skip.addEventListener('click', () => mainContent.focus({ preventScroll: true }));
+  document.body.prepend(skip);
+}
+const siteHeader = document.querySelector('.site-header');
+if (siteHeader) {
+  const measureHeader = () => document.documentElement.style.setProperty('--site-header-height', `${Math.ceil(siteHeader.getBoundingClientRect().height)}px`);
+  measureHeader();
+  if ('ResizeObserver' in window) new ResizeObserver(measureHeader).observe(siteHeader);
+  else window.addEventListener('resize', measureHeader);
+}
 document.querySelectorAll('[data-filter]').forEach((button) => {
   button.addEventListener('click', () => {
     const filter = button.dataset.filter;
