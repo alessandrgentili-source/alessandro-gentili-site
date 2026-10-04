@@ -1070,6 +1070,16 @@ html{scroll-padding-top:calc(var(--site-header-height, 70px) + 16px)}
 .skip-link:focus{transform:none;outline:2px solid var(--gold);outline-offset:3px}
 .nav-enhanced .primary-nav-item--dropdown:not(.is-open) .primary-nav-dropdown{opacity:0;visibility:hidden;transform:translateY(-4px);pointer-events:none}
 .nav-enhanced .primary-nav-item--dropdown.is-open .primary-nav-dropdown{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+@media(min-width:761px){
+  /* Bridge the existing .45rem gap so pointer travel does not fire mouseleave. */
+  .primary-nav-dropdown::after{
+    content:"";
+    position:absolute;
+    left:-1px;right:-1px;
+    top:calc(-.45rem - 1px);
+    height:calc(.45rem + 1px);
+  }
+}
 @media(max-width:760px){
   .nav-enhanced .primary-nav-item--dropdown:not(.is-open) .primary-nav-dropdown{display:none}
   .nav-enhanced .primary-nav-item--dropdown.is-open .primary-nav-dropdown{display:grid}
