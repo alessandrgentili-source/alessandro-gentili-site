@@ -51,6 +51,15 @@ const archiveLocalHrefs = archiveHrefs
   .filter((href) => !/^(?:https?:|mailto:|tel:|#)/.test(href))
   .map((href) => href.split('#')[0].split('?')[0]);
 
+// The general archive exposes the editorial hubs and professional gateways;
+// the Cerchi hub indexes the individual English guides (checked by i18n).
+const internationalEntries = [...archive.matchAll(/<article\b[^>]*data-category="international"[^>]*>([\s\S]*?)<\/article>/g)]
+  .map(match => match[1]).join('\n');
+for (const path of ['en/', 'en/cerchi/', 'en/cerchi/triads/', 'en/themes/', 'en/positioning/', 'en/method/', 'en/system/']) {
+  assert(internationalEntries.includes(`href="${path}"`), `International archive missing static entry: ${path}`);
+  assert(sitemapUrls.has(baseUrl + path), `International archive target missing from sitemap: ${path}`);
+}
+
 const saggiPages = (await collectHtml('saggi'))
   .filter((path) => /saggio-\d+/.test(path) || path.includes('il-giorno-in-cui-un-paese-torna/'));
 const portfolioProjects = (await collectHtml('portfolio'))

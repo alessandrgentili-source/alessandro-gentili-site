@@ -17,6 +17,7 @@ on:
       - 'sitemap.xml'
       - 'robots.txt'
       - 'llms.txt'
+      - 'archivio.html'
       - 'tools/check-i18n-consistency.mjs'
       - '.github/workflows/check-internationalization.yml'
   push:
@@ -37,6 +38,7 @@ on:
       - 'sitemap.xml'
       - 'robots.txt'
       - 'llms.txt'
+      - 'archivio.html'
       - 'tools/check-i18n-consistency.mjs'
       - '.github/workflows/check-internationalization.yml'
 

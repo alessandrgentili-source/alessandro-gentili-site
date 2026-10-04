@@ -20,7 +20,7 @@ LinkedIn is the professional profile.
 - Seneca: dominio di sé, tempo e morte — guida sistemica su stoicismo romano, tempo, morte, potere, dominio di sé, Nerone e ferita contemporanea del tempo sottratto: https://alessandro-gentili.it/cerchi/guide/seneca-dominio-tempo-morte/
 - Aristotele: forma, fine e realtà — guida sistemica su sostanza, forma e materia, potenza e atto, quattro cause, etica, politica, Poetica e perdita della forma nel presente: https://alessandro-gentili.it/cerchi/guide/aristotele-forma-fine-realta/
 - Max Weber: razionalizzazione, potere e disincanto — guida sistemica su razionalizzazione, disincanto, burocrazia, dominazione legittima, Stato, capitalismo, Beruf, scienza, politica e apparato moderno: https://alessandro-gentili.it/cerchi/guide/weber-razionalizzazione-potere-disincanto/
-- Method / AI: https://alessandro-gentili.it/metodo-ai.html
+- Method / AI: https://alessandro-gentili.it/en/method/
 - Archive: https://alessandro-gentili.it/archivio.html
 - Contact: https://alessandro-gentili.it/contatti.html
 - Privacy: https://alessandro-gentili.it/privacy.html
@@ -28,7 +28,7 @@ LinkedIn is the professional profile.
 ## Essay archive
 
 "Archivio saggi" is the neutral public name of the essay corpus on this site.
-Local essay pages provide abstracts, editorial context, selected excerpts, internal relations and, when available, full local texts.
+Local essay pages hold the proprietary essay texts, editorial context and internal relations. Selected Italian essays also contain English notes; these are not standalone English essays.
 Medium remains a distribution and alternative reading channel when linked from local pages.
 Saggio 6, "Fenomenologia del potere", is published as a full local essay in the site archive.
 Saggio 10, "Giovani e senilità del potere", was published on 14 May 2026 and links to Medium from its local page.
@@ -105,4 +105,15 @@ The seventh complete English triad localizes the sixth Cerchi d'inchiostro thres
 
 The eighth complete English triad localizes the seventh Cerchi d'inchiostro threshold: "Elite, mass, government." It connects Polybius (constitution, power and decline), Gaetano Mosca (political class, organization and real government), and Vilfredo Pareto (elites, residues and circulation). Its shared question is how political form, organization and the circulation of ruling groups shape government without reducing politics to conspiracy.
 
-The English Cerchi d'inchiostro author corpus is now complete: 24 of 24 author guides and all eight triads are represented in English.
+## Published corpus scope
+
+- Italian author guides: 27
+- English author guides: 24
+- Italian triads: 9
+- English triad reading paths: 9
+
+Italian is the original, deeper archive. English is an autonomous, selective layer, not a complete mirror. Eight triads have English author guides. The ninth, "Desire, relation, judgment", connects Epicurus, Gabriel Tarde and Daniel Kahneman through their published Italian guides; no English guide is implied.
+
+The English editorial entrance is https://alessandro-gentili.it/en/ and the professional entrance is https://alessandro-gentili.it/en/positioning/. Positioning, Method and System describe professional practice; Circles of Ink, Triads and Themes serve cultural reading. The general archive represents both at https://alessandro-gentili.it/archivio.html.
+
+Privacy information is available in Italian at https://alessandro-gentili.it/privacy.html. No separate English privacy policy is published.

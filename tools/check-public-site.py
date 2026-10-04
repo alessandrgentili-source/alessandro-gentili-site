@@ -61,7 +61,7 @@ def check(pages, exceptions):
         scripts = [a.get('src', '') for t, a, _ in tags if t == 'script' and a.get('src')]
         if not any(urljoin(public_url(path), src) == BASE + 'assets/script.js' for src in scripts):
             missing.append('script')
-        require(set(missing) == set(exceptions.get(path, [])), f'common components {missing}; expected legacy debt {exceptions.get(path, [])}')
+        require(set(missing) == set(exceptions.get(path, [])), f'common components {missing}; admitted historical omissions {exceptions.get(path, [])}')
         if '/guide/' in path or '/guides/' in path:
             require(any(t == 'nav' and 'guide-toc' in a.get('class', '').split() for t, a, _ in tags), 'missing guide TOC')
         for block in page.blocks:
@@ -85,6 +85,8 @@ def check(pages, exceptions):
             if url.fragment and target in pages:
                 require(unquote(url.fragment) in pages[target].ids, f'line {line}: missing fragment {value}')
     for path in exceptions:
+        if exceptions[path] != ['footer']:
+            errors.append(f'{path}: only documented historical footer omissions are admitted')
         if path not in pages:
             errors.append(f'Stale legacy exception: {path}')
     return errors, references
@@ -116,7 +118,12 @@ def main():
     path = 'en/cerchi/guides/plato-ideas-truth-power/index.html'
     for mutated in [original.replace('<footer', '<div').replace('</footer>', '</div>'), original.replace('assets/script.js', 'assets/absent.js'), original.replace('href="#orientation"', 'href="#missing-section"')]:
         assert check({**pages, path: Page(mutated)}, exceptions)[0], 'Mutation escaped checks'
-    print(f'Public-site checks passed: {len(pages)} HTML documents, {references} local references, JSON-LD and mutation checks. Explicit unchanged legacy exceptions: {len(exceptions)}.')
+    # A legacy page may omit its footer, never its working navigation script.
+    for path in exceptions:
+        original = (ROOT / path).read_text()
+        mutated = original.replace('<script src="/assets/script.js"></script>', '')
+        assert check({**pages, path: Page(mutated)}, exceptions)[0], 'Legacy script regression escaped checks'
+    print(f'Public-site checks passed: {len(pages)} HTML documents, {references} local references, JSON-LD and mutation checks. Admitted historical footer omissions: {len(exceptions)}.')
 
 
 if __name__ == '__main__':
