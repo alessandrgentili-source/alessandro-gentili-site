@@ -1,4 +1,4 @@
-import { readFile, access } from 'node:fs/promises';
+import { readFile, access, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -11,6 +11,7 @@ const assert = (condition, message) => {
 const read = (path) => readFile(join(root, path), 'utf8');
 
 const pages = [
+  { path: 'en/contact/index.html', url: `${base}/en/contact/` },
   { path: 'en/index.html', url: `${base}/en/`, it: `${base}/`, type: 'WebSite' },
   { path: 'en/cerchi/index.html', url: `${base}/en/cerchi/`, it: `${base}/cerchi/`, type: 'CollectionPage' },
   { path: 'en/cerchi/triads/index.html', url: `${base}/en/cerchi/triads/`, it: `${base}/cerchi/triadi/`, type: 'CollectionPage' },
@@ -75,6 +76,32 @@ const italianPairs = [
   { path: 'cerchi/guide/vilfredo-pareto-elite-residui-circolazione/index.html', it: `${base}/cerchi/guide/vilfredo-pareto-elite-residui-circolazione/`, en: `${base}/en/cerchi/guides/vilfredo-pareto-elites-residues-circulation/` }
 ];
 
+// Every published page must have an explicit language decision; new guides cannot
+// silently fall outside this inventory. IT-only is valid and does not imply a future URL.
+const italianOnlyGuides = [
+  'cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/index.html',
+  'cerchi/guide/gabriel-tarde-imitazione-credenza-desiderio/index.html',
+  'cerchi/guide/daniel-kahneman-giudizio-bias-decisione-sotto-incertezza/index.html'
+];
+const collectHtml = async (directory) => {
+  const result = [];
+  for (const entry of await readdir(join(root, directory), { withFileTypes: true })) {
+    const path = `${directory}/${entry.name}`;
+    if (entry.isDirectory()) result.push(...await collectHtml(path));
+    else if (entry.name.endsWith('.html')) result.push(path);
+  }
+  return result.sort();
+};
+const sameInventory = (actual, expected, label) => {
+  assert(new Set(expected).size === expected.length, `${label}: duplicate inventory entries`);
+  assert(actual.join('\n') === [...expected].sort().join('\n'), `${label}: publication inventory changed; declare an IT/EN pair or an explicit Italian-only guide. Found: ${actual.join(', ')}`);
+};
+sameInventory(await collectHtml('en'), pages.map(page => page.path), 'English pages');
+sameInventory(await collectHtml('cerchi/guide'), [
+  ...italianPairs.filter(page => page.path.startsWith('cerchi/guide/')).map(page => page.path),
+  ...italianOnlyGuides
+], 'Italian guides');
+
 const extractJsonLd = (html, path) => {
   const blocks = [...html.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
     .map((match) => match[1].trim());
@@ -105,11 +132,13 @@ for (const page of pages) {
     assert(html.includes(`hreflang="x-default" href="${page.it}"`), `${page.path}: x-default must point to Italian canonical`);
   }
 
+  if (page.type) {
   const jsonLd = extractJsonLd(html, page.path);
   assert(jsonLd.some((node) => node['@type'] === page.type), `${page.path}: expected JSON-LD type ${page.type}`);
   assert(jsonLd.some((node) => node.inLanguage === 'en'), `${page.path}: at least one JSON-LD node must declare inLanguage=en`);
   if (page.breadcrumb) {
     assert(jsonLd.some((node) => node['@type'] === 'BreadcrumbList'), `${page.path}: missing BreadcrumbList`);
+  }
   }
 }
 

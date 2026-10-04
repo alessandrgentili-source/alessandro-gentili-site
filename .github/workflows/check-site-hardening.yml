@@ -1,0 +1,24 @@
+name: Check site hardening
+on:
+  pull_request:
+    paths: ['**/*.html', 'assets/*.css', 'assets/*.js', 'tools/**', 'sitemap.xml', '.github/templates/**', '.github/workflows/check-site-hardening.yml']
+  push:
+    branches: [main]
+    paths: ['**/*.html', 'assets/*.css', 'assets/*.js', 'tools/**', 'sitemap.xml', '.github/templates/**', '.github/workflows/check-site-hardening.yml']
+permissions:
+  contents: read
+jobs:
+  hardening:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: python3 tools/check-public-site.py
+      - run: node tools/check-consent-revocation.mjs
+      - run: node --check assets/script.js
+      - run: node tools/check-i18n-consistency.mjs
