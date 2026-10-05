@@ -81,7 +81,8 @@ const italianPairs = [
 const italianOnlyGuides = [
   'cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/index.html',
   'cerchi/guide/gabriel-tarde-imitazione-credenza-desiderio/index.html',
-  'cerchi/guide/daniel-kahneman-giudizio-bias-decisione-sotto-incertezza/index.html'
+  'cerchi/guide/daniel-kahneman-giudizio-bias-decisione-sotto-incertezza/index.html',
+  'cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html'
 ];
 const collectHtml = async (directory) => {
   const result = [];
