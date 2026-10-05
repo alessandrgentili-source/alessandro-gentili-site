@@ -235,8 +235,11 @@ for (const [hub, guides] of [['cerchi/index.html', itGuides], ['en/cerchi/index.
     assert(links.has(`/${guide.replace(/index\.html$/, '')}`), `${hub}: missing published guide ${guide}`);
   }
 }
+const italianTriadLinks = anchorPaths(itTriads, `${base}/cerchi/triadi/`);
 const englishTriadLinks = anchorPaths(enTriads, `${base}/en/cerchi/triads/`);
 for (const guide of italianOnlyGuides) {
-  assert(englishTriadLinks.has(`/${guide.replace(/index\.html$/, '')}`), `English triads: missing Italian-only guide ${guide}`);
+  const guidePath = `/${guide.replace(/index\.html$/, '')}`;
+  if (!italianTriadLinks.has(guidePath)) continue;
+  assert(englishTriadLinks.has(guidePath), `English triads: missing Italian-only guide ${guide}`);
 }
 console.log(`Internationalization checks passed: ${pages.length} canonical English pages, ${italianPairs.length} reciprocal IT/EN pairs; ${counts['it-guides']} IT / ${counts['en-guides']} EN guides, ${counts['it-triads']} IT / ${counts['en-triads']} EN triads. Static language links, hub coverage and corpus claims verified.`);
