@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Shannon: vita, teoria dell’informazione, bit, entropia e rumore | Cerchi d’inchiostro</title>
+  <meta name="description" content="Claude Shannon: vita, opere, teoria dell’informazione, bit, entropia, canale, rumore, capacità, codifica e limiti della trasmissione." />
+  <link rel="canonical" href="https://alessandro-gentili.it/cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/" />
+  <link rel="alternate" hreflang="it" href="https://alessandro-gentili.it/cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/" />
+  <link rel="alternate" hreflang="x-default" href="https://alessandro-gentili.it/cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/" />
+  <meta property="og:title" content="Claude Shannon: vita, teoria dell’informazione, bit, entropia e rumore | Cerchi d’inchiostro" />
+  <meta property="og:description" content="Claude Shannon: vita, opere, teoria dell’informazione, bit, entropia, canale, rumore, capacità, codifica e limiti della trasmissione." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://alessandro-gentili.it/cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/" />
+  <meta property="og:image" content="https://alessandro-gentili.it/assets/img/cerchi/claude-shannon-informazione-rumore-limiti-della-trasmissione-cerchi-d-inchiostro-alessandro-gentili-italia-cover-sito-1600x900.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Claude Shannon: vita, teoria dell’informazione, bit, entropia e rumore | Cerchi d’inchiostro" />
+  <meta name="twitter:description" content="Claude Shannon: vita, opere, teoria dell’informazione, bit, entropia, canale, rumore, capacità, codifica e limiti della trasmissione." />
+  <meta name="twitter:url" content="https://alessandro-gentili.it/cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/" />
+  <meta name="twitter:image" content="https://alessandro-gentili.it/assets/img/cerchi/claude-shannon-informazione-rumore-limiti-della-trasmissione-cerchi-d-inchiostro-alessandro-gentili-italia-cover-sito-1600x900.webp" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Claude Shannon — Informazione, rumore e limiti della trasmissione",
+  "description": "Claude Shannon: vita, opere, teoria dell’informazione, bit, entropia, canale, rumore, capacità, codifica e limiti della trasmissione.",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://alessandro-gentili.it/assets/img/cerchi/claude-shannon-informazione-rumore-limiti-della-trasmissione-cerchi-d-inchiostro-alessandro-gentili-italia-cover-sito-1600x900.webp",
+    "width": 1600,
+    "height": 900
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Alessandro Gentili"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cerchi d'inchiostro",
+    "url": "https://alessandro-gentili.it/cerchi/"
+  },
+  "mainEntityOfPage": "https://alessandro-gentili.it/cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/",
+  "url": "https://alessandro-gentili.it/cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/",
+  "inLanguage": "it-IT",
+  "datePublished": "2026-10-06",
+  "dateModified": "2026-10-06"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://alessandro-gentili.it/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Cerchi d’inchiostro",
+      "item": "https://alessandro-gentili.it/cerchi/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Claude Shannon",
+      "item": "https://alessandro-gentili.it/cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Chi era Claude Shannon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claude Shannon è stato un matematico e ingegnere statunitense, nato nel 1916 e morto nel 2001. Ha fondato la teoria matematica dell’informazione e ha dato contributi fondamentali alla teoria dei circuiti logici, alla comunicazione digitale e alla crittografia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Che cos’è la teoria dell’informazione di Shannon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "È una teoria matematica che studia come quantificare, rappresentare e trasmettere informazione attraverso canali soggetti a vincoli e rumore. Introduce concetti come entropia, capacità del canale, codifica e ridondanza."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Che cosa significa “informazione” per Shannon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Indica una quantità legata alle probabilità delle possibili selezioni prodotte da una sorgente. Non coincide con il significato del messaggio, con la sua verità o con la conoscenza che può produrre."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Shannon ha inventato il bit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shannon rese il bit centrale come unità della quantità d’informazione usando il logaritmo in base 2. Il termine bit, abbreviazione di binary digit, fu suggerito da John Tukey."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Che cos’è l’entropia di Shannon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "È una misura dell’incertezza media di una sorgente probabilistica. È massima, a parità di alternative, quando gli esiti sono equiprobabili e diminuisce quando la sorgente diventa più prevedibile."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "L’entropia di Shannon è la stessa cosa dell’entropia termodinamica?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le due formulazioni hanno una profonda parentela matematica e una storia concettuale intrecciata, ma appartengono a teorie differenti e non vanno identificate senza precisazioni."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Che cos’è la capacità di un canale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "È il massimo tasso d’informazione al quale, secondo il modello del canale, è possibile trasmettere con probabilità d’errore arbitrariamente piccola usando codici appropriati."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Perché Shannon esclude il significato?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Perché il suo obiettivo è formalizzare il problema tecnico della trasmissione. Il significato viene messo fuori dal modello perché non è necessario al calcolo di quantità come entropia, capacità ed errore; questo non equivale a negarne l’importanza nella comunicazione umana."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Che differenza c’è tra Shannon e Weaver?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shannon formula la teoria matematica del problema tecnico della comunicazione. Weaver, nell’introduzione al volume del 1949, distingue anche un livello semantico e uno dell’efficacia e contribuisce ad ampliare la ricezione interdisciplinare del lavoro. La comune etichetta “modello Shannon–Weaver” può quindi nascondere due contributi diversi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Un messaggio falso può avere molta informazione secondo Shannon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì. La quantità d’informazione dipende dalla probabilità della selezione, non dalla verità semantica. Un messaggio falso e improbabile può quindi avere alta auto-informazione in senso tecnico."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Che rapporto c’è tra Shannon e Internet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La teoria dell’informazione fornisce principi fondamentali per comunicazioni, codifica, compressione e gestione del rumore, tutti decisivi per le reti digitali. Shannon non ha però inventato Internet e la sua teoria non descrive da sola la sua architettura."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Che rapporto c’è tra Shannon e l’intelligenza artificiale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shannon lavorò su scacchi, automi e macchine e fu tra i firmatari della proposta di Dartmouth del 1955; nel 1956 curò con John McCarthy Automata Studies. Partecipò quindi alla formazione storica del campo, ma l’AI contemporanea deriva da sviluppi successivi e non può essere ridotta alla teoria dell’informazione."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Claude AI prende il nome da Claude Shannon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Secondo una ricostruzione del New Yorker del 2026 basata sulla cultura interna di Anthropic, il nome Claude è in parte un omaggio a Claude Shannon e in parte la scelta di un nome percepito come amichevole. Non risulta una dichiarazione istituzionale di Anthropic che presenti Shannon come unica origine del nome."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual è la differenza tra Shannon e McLuhan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shannon studia le condizioni quantitative della trasmissione attraverso un canale. McLuhan studia come i media trasformano percezione, ambiente e relazioni. Il channel di Shannon e il medium di McLuhan appartengono a problemi differenti."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Perché Shannon è ancora importante oggi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Perché il mondo digitale continua a dipendere da codifica, capacità, compressione e correzione degli errori; e perché distinguere informazione, significato, conoscenza e verità è diventato ancora più urgente in una società satura di dati e messaggi."
+      }
+    }
+  ]
+}
+  </script>
+  <link rel="stylesheet" href="../../../assets/style.css" />
+</head>
+<body class="guide-page">
+<header class="site-header">
+  <div class="wrap topbar">
+    <a class="brand" href="../../../" aria-label="Home">Alessandro Gentili</a>
+    <nav class="primary-nav" aria-label="Navigazione principale"><ul class="primary-nav-list"><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="../../../saggi.html" aria-haspopup="true">Saggi <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Saggi"><li><a class="primary-nav-dropdown-link" href="../../../saggi.html">Saggi</a></li><li><a class="primary-nav-dropdown-link" href="../../../temi/">Temi</a></li><li><a class="primary-nav-dropdown-link" href="../../../poesia.html">Poesia</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link active" href="../../../cerchi/" aria-haspopup="true">Cerchi <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Cerchi"><li><a class="primary-nav-dropdown-link" href="../../../cerchi/">Cerchi d’inchiostro</a></li><li><a class="primary-nav-dropdown-link" href="../../../cerchi/triadi/">Triadi</a></li><li><a class="primary-nav-dropdown-link" href="../../../archivio.html">Archivio</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="../../../autore.html" aria-haspopup="true">Autore <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Autore"><li><a class="primary-nav-dropdown-link" href="../../../autore.html">Chi sono</a></li><li><a class="primary-nav-dropdown-link" href="../../../portfolio.html">Scrittura civile</a></li><li><a class="primary-nav-dropdown-link" href="../../../contatti.html">Contatti</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="/en/positioning/" aria-haspopup="true">International <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="International"><li><a class="primary-nav-dropdown-link" href="/en/positioning/">Positioning</a></li><li><a class="primary-nav-dropdown-link" href="/en/method/">Method</a></li><li><a class="primary-nav-dropdown-link" href="/en/system/">System</a></li></ul></li><li class="primary-nav-item"><a class="primary-nav-link nav-link-letter" href="../../../contatti.html#lettera-periodica">Lettera periodica</a></li></ul></nav>
+  </div>
+</header>
+<main class="page guide-page-main">
+<section class="wrap hero guide-hero" style="grid-template-columns:minmax(0,1fr);">
+  <div class="hero-copy guide-hero-copy" style="padding-inline:clamp(1.08rem,1.8vw,1.72rem);">
+    <p class="eyebrow">Guida 30 · Chiusura della decima triade</p>
+    <h1>Claude Shannon — Informazione, rumore e limiti della trasmissione</h1>
+    <p class="lead"><strong>La misura dell’informazione e il confine tra comunicare, comprendere e conoscere</strong></p>
+    <div class="actions"><a class="btn" href="/cerchi/">Hub Cerchi d’inchiostro</a><a class="btn-secondary" href="/cerchi/triadi/">Triadi</a></div>
+  </div>
+</section>
+<section class="wrap section"><figure class="editorial-cover-card guide-cover"><img src="../../../assets/img/cerchi/claude-shannon-informazione-rumore-limiti-della-trasmissione-cerchi-d-inchiostro-alessandro-gentili-italia-cover-sito-1600x900.webp" alt="Copertina illustrata della guida a Claude Shannon, dedicata a informazione, rumore e limiti della trasmissione." loading="lazy" decoding="async" width="1600" height="900" /></figure></section>
+<section class="wrap section guide-body">
+  <article class="item guide-section" id="introduzione">
+    <p>Ci sono svolte intellettuali che nascono aggiungendo qualcosa al mondo; quella di Claude Shannon prende forma, anzitutto, da una sottrazione.</p>
+    <p>Un messaggio può essere una dichiarazione d’amore, una quotazione di borsa, un ordine militare, una pagina di poesia, un errore, una menzogna. Per chi lo riceve, le differenze sono immense. Per il problema che Shannon decide di affrontare, possono essere temporaneamente messe tra parentesi. La domanda diventa un’altra: come rappresentare, codificare e trasmettere un messaggio attraverso un canale, con risorse finite e in presenza di rumore, stabilendo quantitativamente che cosa sia possibile ottenere?</p>
+    <p>Da questa delimitazione nasce una parte decisiva dell’ingegneria della comunicazione del Novecento. Sorgenti differenti possono essere descritte attraverso probabilità; segnali diversi possono essere confrontati mediante quantità d’informazione; ogni canale possiede limiti; la struttura statistica di una sorgente può essere sfruttata per rappresentarla con maggiore efficienza; la ridondanza può essere introdotta per proteggere la trasmissione dagli errori.</p>
+    <p>La forza di Shannon sta nel rigore con cui stabilisce che cosa la teoria misura e che cosa lascia fuori.</p>
+    <p>Oggi chiamiamo “informazione” quasi tutto: dati, notizie, conoscenze, documenti, immagini, risultati di ricerca, contenuti social, risposte generate da una macchina. Il significato tecnico reso misurabile da Shannon è molto più stretto: non garantisce la verità di un contenuto, non coincide con la conoscenza e non misura l’importanza di un messaggio per una vita umana.</p>
+    <p>Una civiltà può quindi diventare straordinariamente capace di trasmettere informazione e restare esposta a un problema differente: capire che cosa, fra ciò che circola, meriti di essere creduto, compreso, ricordato.</p>
+    <p>La precisione della teoria e il confine che la rende possibile sono inseparabili.</p>
+  </article>
+</section>
+<section class="wrap section guide-body">
+  <article class="item guide-index" id="indice-della-guida">
+    <h2>Indice</h2>
+    <nav class="guide-toc" aria-label="Indice della guida Claude Shannon">
+      <a href="#claude-shannon-in-breve">1. Claude Shannon in breve</a>
+      <a href="#perche-shannon-conta">2. Perché Shannon conta</a>
+      <a href="#il-problema-umano-che-cosa-scegliamo-di-lasciare-fuori">3. Il problema umano: che cosa scegliamo di lasciare fuori</a>
+      <a href="#vita-essenziale">4. Vita essenziale</a>
+      <a href="#la-vita-che-illumina-l-opera">5. La vita che illumina l’opera</a>
+      <a href="#il-contesto-quando-comunicare-diventa-un-problema-matematico">6. Il contesto: quando comunicare diventa un problema matematico</a>
+      <a href="#cerchi-disciplinari">7. Cerchi disciplinari</a>
+      <a href="#opere-e-contributi-principali">8. Opere e contributi principali</a>
+      <a href="#prima-rivoluzione-quando-la-logica-entra-nei-circuiti">9. Prima rivoluzione: quando la logica entra nei circuiti</a>
+      <a href="#a-mathematical-theory-of-communication">10. <em>A Mathematical Theory of Communication</em></a>
+      <a href="#il-prezzo-dell-astrazione">11. Il prezzo dell’astrazione</a>
+      <a href="#che-cosa-significa-informazione">12. Che cosa significa “informazione”</a>
+      <a href="#il-bit-una-misura-non-una-metafisica">13. Il bit: una misura, non una metafisica</a>
+      <a href="#entropia-misurare-l-incertezza">14. Entropia: misurare l’incertezza</a>
+      <a href="#canale-rumore-e-capacita">15. Canale, rumore e capacità</a>
+      <a href="#la-ridondanza-che-salva-il-messaggio">16. La ridondanza che salva il messaggio</a>
+      <a href="#compressione-distorsione-e-correzione-degli-errori">17. Compressione, distorsione e correzione degli errori</a>
+      <a href="#il-significato-messo-tra-parentesi">18. Il significato messo tra parentesi</a>
+      <a href="#shannon-e-weaver-una-distinzione-necessaria">19. Shannon e Weaver</a>
+      <a href="#shannon-e-wiener-informazione-non-significa-cibernetica">20. Shannon e Wiener</a>
+      <a href="#shannon-e-turing-due-traiettorie-che-si-incontrano">21. Shannon e Turing</a>
+      <a href="#crittografia-e-segretezza">22. Crittografia e segretezza</a>
+      <a href="#scacchi-automi-e-problemi-trattabili">23. Scacchi, automi e problemi trattabili</a>
+      <a href="#la-forma-del-pensiero-di-shannon">24. La forma del pensiero di Shannon</a>
+      <a href="#idee-chiave">25. Idee chiave</a>
+      <a href="#concetti-chiave">26. Concetti chiave</a>
+      <a href="#costellazione">27. Costellazione</a>
+      <a href="#eredita">28. Eredità</a>
+      <a href="#lucrezio-mcluhan-shannon">29. Lucrezio, McLuhan, Shannon</a>
+      <a href="#ferita-contemporanea-la-trasmissione-senza-comprensione">30. Ferita contemporanea: la trasmissione senza comprensione</a>
+      <a href="#limiti-tensioni-e-abusi">31. Limiti, tensioni e abusi</a>
+      <a href="#curiosita-che-illuminano-il-metodo">32. Curiosità che illuminano il metodo</a>
+      <a href="#errori-comuni">33. Errori comuni</a>
+      <a href="#glossario">34. Glossario</a>
+      <a href="#percorsi-di-lettura">35. Percorsi di lettura</a>
+      <a href="#domande-per-orientarsi">36. Domande per orientarsi</a>
+      <a href="#nodi-da-ricordare">37. Nodi da ricordare</a>
+      <a href="#faq">38. FAQ</a>
+      <a href="#fonti-e-copyright">39. Fonti e copyright</a>
+      <a href="#prosegui-la-lettura">40. Prosegui la lettura</a>
+      <a href="#chiusura">41. Chiusura</a>
+    </nav>
+  </article>
+  <article class="item guide-section" id="claude-shannon-in-breve">
+    <h2>1. Claude Shannon in breve</h2>
+    <p><strong>Claude Elwood Shannon</strong> nasce nel 1916 a Petoskey, nel Michigan, e muore nel 2001. Matematico, ingegnere e ricercatore, attraversa alcuni dei luoghi decisivi della scienza statunitense del Novecento: University of Michigan, MIT, Institute for Advanced Study di Princeton, Bell Laboratories.</p>
+    <p>Il suo primo risultato destinato a durare nasce dall’incontro fra algebra booleana e circuiti a relè. Mostra come le operazioni logiche possano essere usate sistematicamente per analizzare e progettare reti di commutazione: una connessione fondamentale per la teoria dei circuiti digitali.</p>
+    <p>Il centro della sua opera è l’articolo del 1948 <em>A Mathematical Theory of Communication</em>. Shannon costruisce una teoria generale della trasmissione dell’informazione attraverso canali, rendendo rigorosi concetti che diventeranno centrali nel lessico del digitale: informazione misurabile, bit, entropia, capacità del canale, codifica, ridondanza, rumore.</p>
+    <p>Il passaggio decisivo consiste nel separare il problema tecnico della comunicazione dal significato semantico del messaggio. La teoria vuole sapere quanto può essere trasmesso, con quale efficienza e con quale affidabilità. Verità, importanza, comprensibilità e valore appartengono ad altri livelli del problema.</p>
+    <p>Questa delimitazione rende possibile la formalizzazione.</p>
+    <p>Da qui nasce il paradosso contemporaneo che rende Shannon ancora necessario. Abbiamo costruito una civiltà capace di produrre, archiviare e trasmettere quantità enormi di informazione; quantità d’informazione, significato, conoscenza e verità restano però grandezze e problemi differenti.</p>
+  </article>
+  <article class="item guide-section" id="perche-shannon-conta">
+    <h2>2. Perché Shannon conta</h2>
+    <p>Prima di Shannon, le telecomunicazioni disponevano già di una straordinaria ricchezza di dispositivi, tecniche e risultati matematici. Telegrafo, telefono e radio avevano creato problemi concreti di velocità, banda, distorsione, rumore, codifica. Harry Nyquist e Ralph Hartley avevano elaborato risultati essenziali sulla trasmissione e sulla misura logaritmica dell’informazione. George Boole aveva costruito nell’Ottocento un’algebra della logica. Norbert Wiener stava trattando comunicazione, filtraggio e previsione come problemi statistici.</p>
+    <p>Shannon porta questi fili entro una teoria di portata più generale.</p>
+    <p>L’originalità sta nel definire un oggetto abbastanza preciso da poter essere misurato. Restringere il problema consente di formalizzarlo; proprio quella restrizione produce risultati sorprendentemente generali.</p>
+    <p>Due risultati ne mostrano la portata.</p>
+    <p>Il primo riguarda la rappresentazione: una sorgente con una certa struttura statistica possiede un limite teorico alla compressione senza perdita. Se alcuni simboli o sequenze sono più prevedibili di altri, la rappresentazione può sfruttare quella regolarità.</p>
+    <p>Il secondo riguarda la trasmissione: un canale rumoroso possiede una capacità. Sotto quel limite esistono codifiche capaci, in senso asintotico, di rendere la probabilità d’errore arbitrariamente piccola; sopra il limite la stessa garanzia non è ottenibile.</p>
+    <p>Una parte decisiva delle infrastrutture digitali nasce dentro queste due domande: <strong>come rappresentare con efficienza</strong> e <strong>come trasmettere con affidabilità</strong>. Shannon rende formulabili limiti che ogni tecnologia concreta deve rispettare o cercare di avvicinare.</p>
+  </article>
+  <article class="item guide-section" id="il-problema-umano-che-cosa-scegliamo-di-lasciare-fuori">
+    <h2>3. Il problema umano: che cosa scegliamo di lasciare fuori</h2>
+    <p>Ogni misura comincia da una scelta: stabilire quali differenze contano per la domanda che stiamo ponendo.</p>
+    <p>Il problema umano emerge quando il successo di una misura nasconde quella scelta. Ciò che viene contato acquista allora un’evidenza superiore a ciò che resta fuori; una metrica nata per descrivere una parte del fenomeno può finire per rappresentarlo interamente.</p>
+    <p>Visualizzazioni, probabilità, punteggi, performance e flussi non sono falsi per il solo fatto di essere parziali. Diventano ingannevoli quando la parte misurata sostituisce l’oggetto che pretende soltanto di descrivere.</p>
+    <p>Shannon rende questa tensione particolarmente leggibile perché il suo ritaglio è dichiarato con precisione. Il problema tecnico della comunicazione viene isolato per poter essere trattato matematicamente. La validità del modello dipende anche dalla chiarezza del confine entro cui opera.</p>
+    <p>Cerchi d’inchiostro assume qui una lezione metodologica, non una filosofia universale: una formalizzazione responsabile deve conservare memoria di ciò che ha scelto di non misurare.</p>
+  </article>
+  <article class="item guide-section" id="vita-essenziale">
+    <h2>4. Vita essenziale</h2>
+    <p>Claude Elwood Shannon nasce il 30 aprile 1916 a Petoskey, nel Michigan, e cresce a Gaylord. Fin da giovane mostra familiarità con apparecchi elettrici e meccanici; lavora anche come messaggero per Western Union.</p>
+    <p>Nel 1936 conclude alla University of Michigan una doppia formazione in matematica e ingegneria elettrica. La combinazione resterà un tratto riconoscibile della sua intelligenza scientifica: Shannon attraversa continuamente il confine fra teoria e costruzione.</p>
+    <p>Al MIT lavora come assistente sul <strong>Differential Analyzer</strong> di Vannevar Bush, un grande calcolatore analogico. I circuiti di controllo della macchina utilizzano relè elettromeccanici. Shannon riconosce che gli stati aperto/chiuso degli interruttori possono essere descritti attraverso l’algebra logica di George Boole. La tesi di master viene elaborata nel 1937 e pubblicata nel 1938 come <em>A Symbolic Analysis of Relay and Switching Circuits</em>, trasformando quell’intuizione in un metodo per l’analisi e la sintesi dei circuiti.</p>
+    <p>Nel 1940 consegue al MIT il dottorato in matematica con <em>An Algebra for Theoretical Genetics</em>, applicazione di strumenti algebrici alla genetica teorica.</p>
+    <p>Tra il 1940 e il 1941 è National Research Fellow all’Institute for Advanced Study di Princeton. Nel 1941 entra ai Bell Laboratories, dove durante la guerra lavora su sistemi di controllo, comunicazioni e crittografia. È in questo ambiente che maturano molti degli elementi destinati a convergere nella teoria dell’informazione.</p>
+    <p>Nel 1948 pubblica in due parti sul <em>Bell System Technical Journal</em> <em>A Mathematical Theory of Communication</em>. L’anno successivo esce <em>Communication Theory of Secrecy Systems</em>, sviluppo pubblico di un rapporto crittografico riservato preparato durante la guerra.</p>
+    <p>Dal 1956 torna al MIT, inizialmente come visiting professor; nel 1958 diventa Donner Professor of Science. Va in pensione nel 1978.</p>
+    <p>Muore il 24 febbraio 2001, a ottantaquattro anni.</p>
+  </article>
+  <article class="item guide-section" id="la-vita-che-illumina-l-opera">
+    <h2>5. La vita che illumina l’opera</h2>
+    <p>La biografia di Shannon è interessante quando rende visibile il suo metodo.</p>
+    <p>Davanti al Differential Analyzer non si limita a comprendere come funziona una macchina. Cerca una struttura comune tra oggetti che appartengono a linguaggi diversi: interruttori elettrici e proposizioni logiche. Nel lavoro sulle telecomunicazioni compie un gesto affine: dietro mezzi differenti — telegrafo, telefono, radio, segnali discreti o continui — cerca una struttura abbastanza generale da rendere confrontabili i problemi.</p>
+    <p>Anche i suoi oggetti più giocosi hanno questo carattere. Il topo elettromeccanico <strong>Theseus</strong>, capace di percorrere un labirinto e memorizzare il cammino, le macchine per la giocoleria e gli esperimenti sugli scacchi mostrano la stessa inclinazione a trasformare un’idea in dispositivo e a sottoporre un’astrazione alla prova di una macchina. Il gioco diventa così un laboratorio in cui isolare una struttura.</p>
+    <p>Il suo intervento del 1952 sul pensiero creativo è coerente con questa postura. Shannon insiste su semplificazione, analogia, riformulazione, generalizzazione, scomposizione strutturale e inversione del problema. Sono strategie riconoscibili nelle opere maggiori: eliminare ciò che non serve, cambiare rappresentazione, cercare un livello più generale, invertire il punto di vista.</p>
+    <p>La conferenza va trattata per ciò che è: un dattiloscritto interno ai Bell Labs del 20 marzo 1952, non un articolo scientifico pubblicato. La bibliografia dei <em>Collected Papers</em> lo registra come <em>typescript</em> e specifica che non fu incluso nella raccolta; le trascrizioni circolate successivamente ne hanno reso accessibile il contenuto.</p>
+    <p>Ne emerge una costante: Shannon trova spesso la rappresentazione che rende il problema trattabile prima di cercarne la soluzione.</p>
+  </article>
+  <article class="item guide-section" id="il-contesto-quando-comunicare-diventa-un-problema-matematico">
+    <h2>6. Il contesto: quando comunicare diventa un problema matematico</h2>
+    <p>Il mondo in cui nasce la teoria di Shannon è già saturo di comunicazioni tecniche.</p>
+    <p>Il telegrafo aveva imposto il problema della codifica discreta. Il telefono aveva trasformato la voce in segnale elettrico continuo. La radio aveva moltiplicato distanza e interferenze. Le reti telefoniche dovevano usare in modo efficiente infrastrutture costose. Ogni sistema possedeva proprie tecniche, propri vincoli, proprio lessico.</p>
+    <p>Dentro i Bell Labs, Harry Nyquist aveva studiato la velocità di trasmissione e la relazione fra segnale, banda e interferenza tra simboli. Ralph Hartley aveva proposto nel 1928 una misura logaritmica della quantità d’informazione legata al numero delle possibili selezioni.</p>
+    <p>A questo si aggiungeva un’altra genealogia: la probabilità, la statistica, la meccanica statistica, il lavoro di Wiener sui processi stocastici, sul filtraggio e sulla previsione.</p>
+    <p>Shannon unifica senza cancellare le differenze. Un sistema di comunicazione può essere descritto in termini di sorgente, messaggio, trasmettitore, segnale, canale, rumore, ricevitore e destinazione. La natura fisica dei dispositivi conta per l’ingegneria concreta; la teoria cerca una struttura matematica comune.</p>
+    <p>Scelta fra possibilità, codifica, vincoli del canale e probabilità d’errore diventano così parti di un unico problema formalizzabile.</p>
+  </article>
+  <article class="item guide-section" id="cerchi-disciplinari">
+    <h2>7. Cerchi disciplinari</h2>
+    <h3 id="matematica">Matematica</h3>
+    <p>Probabilità, logaritmi, processi stocastici ed entropia consentono di trattare quantitativamente sorgenti e canali.</p>
+    <h3 id="ingegneria-elettrica-e-telecomunicazioni">Ingegneria elettrica e telecomunicazioni</h3>
+    <p>È il terreno originario della teoria: banda, segnali, rumore, potenza, codifica, trasmissione.</p>
+    <h3 id="logica-e-circuiti">Logica e circuiti</h3>
+    <p>L’algebra booleana applicata ai relè mostra come operazioni astratte possano diventare architetture fisiche.</p>
+    <h3 id="informatica">Informatica</h3>
+    <p>Shannon precede l’informatica come disciplina consolidata, ma il suo lavoro sui circuiti e sulla rappresentazione binaria entra nelle fondamenta concettuali del calcolo digitale.</p>
+    <h3 id="crittografia">Crittografia</h3>
+    <p>L’incertezza dell’avversario, la chiave e la segretezza possono essere trattate matematicamente. Shannon contribuisce a trasformare la crittografia moderna in un campo teorico.</p>
+    <h3 id="teoria-dei-codici">Teoria dei codici</h3>
+    <p>La possibilità di rappresentare efficientemente le sorgenti e proteggere i messaggi dagli errori apre un territorio che verrà sviluppato da Hamming e da molte generazioni successive.</p>
+    <h3 id="cibernetica-e-teoria-dei-sistemi">Cibernetica e teoria dei sistemi</h3>
+    <p>Shannon condivide con Wiener alcuni strumenti e problemi; feedback e controllo occupano però nella cibernetica un ruolo che non definisce il nucleo della teoria dell’informazione.</p>
+    <h3 id="intelligenza-artificiale-automi-e-problem-solving">Intelligenza artificiale, automi e problem solving</h3>
+    <p>Scacchi, Theseus e teoria degli automi mostrano un interesse reale per memoria, scelta, ricerca e macchine. Shannon è inoltre tra i quattro firmatari della proposta del Dartmouth Summer Research Project on Artificial Intelligence del 1955 e co-curatore con John McCarthy di <em>Automata Studies</em> nel 1956. Il rapporto con la nascita storica dell’AI è quindi documentato, senza trasformare Shannon nel padre delle sue forme contemporanee.</p>
+    <h3 id="filosofia-dell-informazione">Filosofia dell’informazione</h3>
+    <p>È soprattutto una storia successiva. Il successo della teoria rende inevitabile la domanda su che cosa “informazione” significhi fuori dal dominio ingegneristico. Proprio qui diventano necessari i confini stabiliti da Shannon.</p>
+  </article>
+  <article class="item guide-section" id="opere-e-contributi-principali">
+    <h2>8. Opere e contributi principali</h2>
+    <h3 id="a-symbolic-analysis-of-relay-and-switching-circuits-1938"><em>A Symbolic Analysis of Relay and Switching Circuits</em> — 1938</h3>
+    <p>Applica l’algebra booleana all’analisi e alla progettazione dei circuiti a relè. Il valore storico del lavoro consiste nell’aver reso sistematico il passaggio tra logica simbolica e reti di commutazione.</p>
+    <h3 id="a-mathematical-theory-of-communication-1948"><em>A Mathematical Theory of Communication</em> — 1948</h3>
+    <p>È il centro dell’opera. Pubblicato in due parti sul <em>Bell System Technical Journal</em>, formalizza sorgenti, informazione, entropia, codifica, canali, rumore, capacità e limiti della trasmissione.</p>
+    <h3 id="communication-in-the-presence-of-noise-1949"><em>Communication in the Presence of Noise</em> — 1949</h3>
+    <p>Sviluppa la rappresentazione geometrica dei segnali, il campionamento e la capacità di canali continui in presenza di rumore. Va letto nel contesto della storia che conduce al teorema oggi associato ai nomi di Nyquist e Shannon.</p>
+    <h3 id="communication-theory-of-secrecy-systems-1949"><em>Communication Theory of Secrecy Systems</em> — 1949</h3>
+    <p>Deriva da un rapporto riservato del periodo bellico. Applica strumenti probabilistici alla crittografia e formalizza, tra l’altro, la nozione di segretezza perfetta.</p>
+    <h3 id="programming-a-computer-for-playing-chess-1950"><em>Programming a Computer for Playing Chess</em> — 1950</h3>
+    <p>Affronta gli scacchi come problema di ricerca in uno spazio enorme di possibilità e discute strategie per renderlo trattabile. Il testo appartiene alla storia iniziale dei problemi che confluiranno nell’intelligenza artificiale, senza contenerne gli sviluppi successivi.</p>
+    <h3 id="prediction-and-entropy-of-printed-english-1951"><em>Prediction and Entropy of Printed English</em> — 1951</h3>
+    <p>Studia la prevedibilità statistica dell’inglese scritto e il problema della ridondanza linguistica. Mostra quanto la teoria dell’informazione possa avvicinarsi al linguaggio senza diventare una teoria del significato.</p>
+    <h3 id="creative-thinking-1952"><em>Creative Thinking</em> — 1952</h3>
+    <p>Dattiloscritto di una conferenza interna ai Bell Labs del 20 marzo 1952. È utile soprattutto per comprendere il metodo di Shannon: semplificare, cambiare prospettiva, scomporre e invertire. La sua natura documentaria richiede una cautela bibliografica maggiore rispetto agli articoli scientifici pubblicati.</p>
+    <h3 id="proposta-di-dartmouth-1955">Proposta di Dartmouth — 1955</h3>
+    <p>Shannon firma con John McCarthy, Marvin Minsky e Nathaniel Rochester la proposta del Dartmouth Summer Research Project on Artificial Intelligence. Il documento colloca Shannon dentro la formazione storica del campo, senza rendere la teoria dell’informazione una teoria dell’AI.</p>
+    <h3 id="the-bandwagon-1956"><em>The Bandwagon</em> — 1956</h3>
+    <p>In questo breve editoriale Shannon mette in guardia contro l’espansione indiscriminata della teoria dell’informazione fuori dal proprio dominio. Le applicazioni in altri campi, sostiene, richiedono ipotesi e verifica: non basta trasferire il vocabolario di informazione, entropia e ridondanza.</p>
+    <h3 id="automata-studies-1956"><em>Automata Studies</em> — 1956</h3>
+    <p>Volume curato da Shannon e John McCarthy, raccoglie lavori su automi, reti nervose, macchine di Turing e problemi di calcolo. Documenta un altro punto di contatto reale con il nascente campo delle macchine intelligenti.</p>
+    <h3 id="coding-theorems-for-a-discrete-source-with-a-fidelity-criterion-1959"><em>Coding Theorems for a Discrete Source with a Fidelity Criterion</em> — 1959</h3>
+    <p>Sviluppa in forma più sistematica il rapporto fra tasso di codifica e distorsione tollerabile. È uno dei testi fondativi della teoria rate–distortion e completa il quadro della codifica di sorgente quando la ricostruzione perfetta non è necessaria.</p>
+  </article>
+  <article class="item guide-section" id="prima-rivoluzione-quando-la-logica-entra-nei-circuiti">
+    <h2>9. Prima rivoluzione: quando la logica entra nei circuiti</h2>
+    <p>Prima della teoria dell’informazione, Shannon aveva già compiuto un passaggio decisivo.</p>
+    <p>Un relè può essere aperto o chiuso; una proposizione logica può assumere due valori. Shannon mostra che le regole dell’algebra booleana possono essere usate sistematicamente per descrivere reti di relè, verificarne le equivalenze, semplificarle e progettarle a partire da condizioni logiche desiderate.</p>
+    <p>Il contributo storico sta nella formalizzazione di un metodo di analisi e sintesi: una struttura logica può diventare una rete fisica di commutazione.</p>
+    <p>La nascita del computer digitale appartiene a una storia molto più ampia. Il lavoro di Shannon fornisce però un linguaggio teorico fondamentale per la progettazione dei circuiti logici.</p>
+    <p>È già visibile qui un tratto del suo pensiero: mettere in relazione domini differenti, identificarne una struttura comune e scegliere una rappresentazione che renda il problema manipolabile.</p>
+    <p>Il circuito può così essere letto come realizzazione fisica di una struttura logica. Metodologicamente, è lo stesso tipo di passaggio che nel 1948 permetterà di riportare tecnologie di comunicazione differenti a una struttura matematica comune.</p>
+  </article>
+  <article class="item guide-section" id="a-mathematical-theory-of-communication">
+    <h2>10. <em>A Mathematical Theory of Communication</em></h2>
+    <p>L’articolo del 1948 parte da un problema apparentemente semplice: un messaggio viene scelto in un punto e deve essere ricostruito, esattamente o approssimativamente, in un altro.</p>
+    <p>La semplicità è ingannevole.</p>
+    <p>Per poter progettare un sistema, il messaggio effettivamente inviato non basta. Occorre considerare l’insieme dei messaggi possibili fra cui la sorgente avrebbe potuto scegliere e le probabilità con cui tali messaggi vengono prodotti.</p>
+    <p>Il modello generale distingue:</p>
+    <ul>
+      <li><strong>sorgente d’informazione</strong>, che genera o seleziona il messaggio;</li>
+      <li><strong>trasmettitore</strong>, che converte il messaggio in un segnale adatto al canale;</li>
+      <li><strong>canale</strong>, cioè il mezzo tecnico attraverso cui il segnale passa;</li>
+      <li><strong>sorgente di rumore</strong>, che introduce perturbazioni;</li>
+      <li><strong>ricevitore</strong>, che ricostruisce il messaggio a partire dal segnale ricevuto;</li>
+      <li><strong>destinazione</strong>, a cui il messaggio è rivolto.</li>
+    </ul>
+    <p>La teoria tratta sistemi discreti, continui e misti. Il problema comune riguarda la rappresentazione e la trasmissione sotto vincoli. Per le sorgenti continue, l’esatta ricostruzione richiederebbe in generale una quantità illimitata di bit; diventa allora necessario esplicitare un <strong>criterio di fedeltà</strong>, cioè quale distorsione della ricostruzione sia accettabile. Questo nucleo verrà sviluppato ulteriormente da Shannon nella teoria rate–distortion.</p>
+    <p>Qui entrano i concetti che renderanno celebre Shannon.</p>
+    <p>L’informazione viene collegata alla probabilità delle possibili selezioni. L’entropia misura l’incertezza media di una sorgente. La capacità stabilisce il massimo tasso d’informazione compatibile con un canale. I teoremi di codifica mostrano i limiti fondamentali della compressione e della trasmissione affidabile.</p>
+    <p>Ciò che colpisce ancora oggi non è soltanto la quantità dei risultati. È il livello al quale Shannon sceglie di porre la domanda.</p>
+    <p>Telegrafo, voce, immagini e dati diventano casi differenti di un problema comune.</p>
+  </article>
+  <article class="item guide-section" id="il-prezzo-dell-astrazione">
+    <h2>11. Il prezzo dell’astrazione</h2>
+    <p>L’universalità tecnica di Shannon nasce da una rinuncia controllata.</p>
+    <p>Per costruire una teoria comune a telegrafo, voce, immagini e dati bisogna ignorare differenze che, in altri contesti, restano decisive. Il formalismo considera struttura statistica, codice, canale e condizioni di ricezione; valore, verità e significato specifico del messaggio non entrano nel calcolo.</p>
+    <p>Questa esclusione è il contratto dell’astrazione shannoniana. Il modello guadagna generalità proprio perché dichiara il piano su cui opera.</p>
+    <p>Il prezzo appare quando quel contratto viene dimenticato. Se “informazione” diventa un nome indifferenziato per dati, significati, conoscenze, decisioni o forme di vita, la precisione tecnica del concetto non si trasferisce automaticamente ai nuovi domini.</p>
+    <p>La lettura proprietaria di Cerchi d’inchiostro sta qui: <strong>un’astrazione resta feconda finché conserva memoria di ciò che ha escluso</strong>.</p>
+  </article>
+  <article class="item guide-section" id="che-cosa-significa-informazione">
+    <h2>12. Che cosa significa “informazione”</h2>
+    <p>Nel linguaggio quotidiano, “informazione” suggerisce contenuto utile: una notizia, una conoscenza, qualcosa che ci rende più consapevoli.</p>
+    <p>In Shannon il termine assume un significato tecnico diverso.</p>
+    <p>Una sorgente produce simboli o messaggi secondo certe probabilità. Quanto maggiore è l’incertezza sulla prossima selezione, tanto maggiore è la quantità media d’informazione associata alla sorgente.</p>
+    <p>In notazione moderna, l’auto-informazione associata a un evento \(x\) di probabilità \(p(x)\) viene espressa come:</p>
+    <p>\[ I(x) = -\log_2 p(x) \]</p>
+    <p>Un evento molto probabile porta poca auto-informazione perché era già atteso; un evento improbabile ne porta di più perché la sua osservazione riduce maggiormente l’incertezza. Questa “sorpresa” è probabilistica, non psicologica.</p>
+    <p>Se una sorgente genera sempre lo stesso simbolo, non c’è incertezza sulla selezione. Se invece due simboli sono equiprobabili, ogni scelta risolve un’alternativa.</p>
+    <p>Da qui segue una conseguenza importante: verità e quantità d’informazione appartengono a piani diversi. Un’affermazione falsa ma improbabile può avere alta auto-informazione rispetto alla distribuzione considerata; una verità ripetuta continuamente può aggiungerne pochissima.</p>
+    <p>La distinzione fra <strong>informazione</strong>, <strong>significato</strong>, <strong>conoscenza</strong> e <strong>verità</strong> non è un dettaglio terminologico: impedisce di chiedere alla misura shannoniana ciò che non è stata costruita per valutare.</p>
+  </article>
+  <article class="item guide-section" id="il-bit-una-misura-non-una-metafisica">
+    <h2>13. Il bit: una misura, non una metafisica</h2>
+    <p>Il bit è diventato una delle unità più familiari del nostro tempo.</p>
+    <p>La parola è una contrazione di <em>binary digit</em>, suggerita da John Tukey e adottata da Shannon nel 1948. Quando si usa il logaritmo in base 2, la quantità d’informazione viene misurata in bit.</p>
+    <p>Un bit corrisponde, nel caso elementare, alla quantità d’informazione risolta da una scelta fra due alternative equiprobabili.</p>
+    <p>Qui conviene distinguere due usi spesso sovrapposti. Una <strong>binary digit</strong> è una cifra 0 o 1 usata in una rappresentazione binaria; il <strong>bit come unità d’informazione</strong> misura una quantità. Una cifra binaria equiprobabile porta un bit d’informazione, mentre una sorgente binaria fortemente sbilanciata produce in media meno di un bit per simbolo.</p>
+    <p>La base 2 è naturale per molti sistemi digitali e rende trasparente il legame con stati come 0/1. La teoria, però, non sostiene che il mondo sia ontologicamente fatto di bit.</p>
+    <p>Circuiti, memoria, codifica e comunicazioni digitali possono essere progettati con rappresentazioni binarie robuste. Trasformare questa efficacia ingegneristica in una tesi sulla sostanza ultima della realtà significa uscire dal dominio dimostrato dalla teoria.</p>
+    <p>Per la stessa ragione, il bit non è l’equivalente moderno dell’atomo lucreziano. L’atomo appartiene a una teoria della costituzione della materia; il bit misura informazione e può partecipare a una rappresentazione.</p>
+    <p>La somiglianza fra “elementi minimi” non cancella la differenza ontologica.</p>
+  </article>
+  <article class="item guide-section" id="entropia-misurare-l-incertezza">
+    <h2>14. Entropia: misurare l’incertezza</h2>
+    <p>Per una sorgente discreta con possibili esiti \(x_i\) e probabilità \(p_i\), l’entropia di Shannon è espressa, usando la base 2, da:</p>
+    <p>\[ H(X) = -\sum_i p_i \log_2 p_i \]</p>
+    <p>L’entropia misura l’incertezza media della sorgente e, nel modello, il valore atteso dell’informazione associata alle sue selezioni.</p>
+    <p>Se un esito è certo, l’entropia è minima. A parità di numero di alternative, raggiunge invece il massimo quando gli esiti sono equiprobabili. Per sorgenti con dipendenze temporali, ciò che conta in molti problemi di codifica è il <strong>tasso di entropia</strong>, che tiene conto anche della struttura fra simboli successivi.</p>
+    <p>Una sorgente regolare contiene prevedibilità sfruttabile; una sorgente meno prevedibile richiede, in media, più informazione per descrivere le sue selezioni.</p>
+    <p>Il termine “entropia” crea uno dei più resistenti equivoci nella ricezione di Shannon. La formula presenta una parentela matematica con l’entropia della meccanica statistica, ma le grandezze appartengono a quadri teorici differenti e non vanno identificate automaticamente.</p>
+    <p>Anche il celebre racconto secondo cui John von Neumann avrebbe suggerito il termine a Shannon va trattato come testimonianza retrospettiva, non come documento coevo. La versione più citata deriva dal resoconto pubblicato da Myron Tribus e Edward McIrvine nel 1971 di una conversazione con Shannon avvenuta anni dopo.</p>
+    <p>Per Shannon l’entropia è una misura definita su una distribuzione di possibilità. Usarla come sinonimo di disordine quotidiano, confusione politica o qualità di un testo richiede un passaggio metaforico ulteriore, che va dichiarato.</p>
+  </article>
+  <article class="item guide-section" id="canale-rumore-e-capacita">
+    <h2>15. Canale, rumore e capacità</h2>
+    <p>Il canale in Shannon è una struttura tecnica di trasmissione.</p>
+    <p>Può essere un filo, una banda di frequenze, un collegamento radio o qualunque sistema capace di portare un segnale dal trasmettitore al ricevitore. Il canale possiede vincoli: larghezza di banda, potenza, caratteristiche del rumore, probabilità di transizione fra simboli.</p>
+    <p>Il rumore introduce incertezza fra ciò che viene trasmesso e ciò che viene ricevuto. Nella teoria non coincide con falsità, propaganda o irrilevanza del contenuto: quelle sono estensioni metaforiche che appartengono ad altri livelli.</p>
+    <p>La nozione di <strong>capacità del canale</strong> stabilisce il massimo tasso compatibile con la trasmissione affidabile secondo il modello considerato.</p>
+    <p>Per un canale discreto senza memoria, una formulazione moderna è:</p>
+    <p>\[ C = \max_{p(x)} I(X;Y) \]</p>
+    <p>dove \(I(X;Y)\) è l’informazione mutua fra ingresso e uscita e il massimo è preso sulle possibili distribuzioni d’ingresso. Nel 1948 Shannon scrive la stessa struttura in termini di entropia ed <strong>equivocazione</strong>; la notazione \(I(X;Y)\) è la forma oggi più comune.</p>
+    <p>Per un canale a banda limitata con rumore gaussiano bianco additivo, banda \(B\), potenza media del segnale \(S\) e potenza del rumore \(N\) <strong>nella banda considerata</strong>, la relazione comunemente chiamata formula di Shannon–Hartley è:</p>
+    <p>\[ C = B \log_2\left(1+\frac{S}{N}\right) \]</p>
+    <p>Con \(B\) in hertz e logaritmo in base 2, \(C\) è espresso in bit al secondo. La formula riguarda questo specifico modello di canale e non sostituisce la definizione generale di capacità.</p>
+    <p>Nyquist aveva studiato i limiti imposti dalla banda alla velocità dei segnali; Hartley aveva collegato la quantità trasmessa al numero di selezioni distinguibili. Shannon incorpora il rumore e mostra che capacità e affidabilità possono essere trattate entro una teoria generale.</p>
+    <p>Il risultato decisivo è un confine quantitativo: sotto la capacità l’errore può essere reso arbitrariamente piccolo in senso asintotico mediante codici adeguati; sopra la capacità non si ottiene la stessa affidabilità arbitraria.</p>
+  </article>
+  <article class="item guide-section" id="la-ridondanza-che-salva-il-messaggio">
+    <h2>16. La ridondanza che salva il messaggio</h2>
+    <p>“Ridondanza” sembra una parola negativa. Nel linguaggio comune suggerisce spreco, ripetizione, inefficienza.</p>
+    <p>In teoria dell’informazione la stessa parola compare in due funzioni che vanno tenute distinte.</p>
+    <p>Una <strong>ridondanza della sorgente</strong> nasce dalla prevedibilità statistica: alcune sequenze sono più probabili di altre. Questa struttura può essere sfruttata per rappresentare il messaggio usando, in media, meno risorse. È il principio che rende possibile la compressione senza perdita.</p>
+    <p>Una <strong>ridondanza di codice</strong>, invece, può essere aggiunta intenzionalmente quando il messaggio deve attraversare un canale rumoroso. Vincoli e simboli aggiuntivi aiutano il ricevitore a rilevare o correggere errori; non aumentano l’informazione prodotta dalla sorgente, ma aumentano la robustezza della rappresentazione trasmessa.</p>
+    <p>Da qui nasce uno dei paradossi più fertili dell’eredità shannoniana:</p>
+    <p><strong>l’efficienza della rappresentazione tende a togliere ridondanza; l’affidabilità della trasmissione può richiedere di aggiungerne.</strong></p>
+    <p>Una sorgente può essere compressa per evitare sprechi e il flusso risultante può poi essere protetto con un codice che reintroduce struttura per resistere agli errori. La parola è la stessa; la funzione nel sistema è diversa.</p>
+  </article>
+  <article class="item guide-section" id="compressione-distorsione-e-correzione-degli-errori">
+    <h2>17. Compressione, distorsione e correzione degli errori</h2>
+    <p>I teoremi di codifica di Shannon disegnano confini differenti a seconda del problema che vogliamo risolvere.</p>
+    <h3 id="codifica-della-sorgente">Codifica della sorgente</h3>
+    <p>Per una sorgente discreta e una ricostruzione senza perdita, la struttura statistica determina quanto sia possibile comprimere in media. L’entropia fornisce il limite fondamentale alla lunghezza media per simbolo, raggiungibile asintoticamente con blocchi sufficientemente lunghi sotto le ipotesi del modello.</p>
+    <p>Non ogni comunicazione, però, richiede una copia esatta.</p>
+    <p>Una voce telefonica, un’immagine o un segnale continuo possono tollerare una certa differenza fra originale e ricostruzione. Già nel 1948 Shannon formula il problema mediante criteri di fedeltà; nel 1959 sviluppa in modo più sistematico la relazione fra <strong>tasso di codifica</strong> e <strong>distorsione ammessa</strong>. La compressione con perdita chiede dunque quanta precisione possiamo sacrificare per ridurre le risorse necessarie.</p>
+    <h3 id="codifica-del-canale">Codifica del canale</h3>
+    <p>Un canale rumoroso pone un problema differente: proteggere la trasmissione dagli errori.</p>
+    <p>Nel 1948 Shannon mostra, con un argomento di esistenza basato su insiemi di codici, che sotto la capacità del canale si possono trovare codifiche per cui la frequenza o probabilità d’errore diventa arbitrariamente piccola al crescere della lunghezza dei blocchi. Il risultato è asintotico e non fornisce una ricetta universale per costruire codici efficienti; inoltre, sopra la capacità non è possibile mantenere la stessa garanzia di affidabilità arbitraria.</p>
+    <p>Una parte enorme della teoria dei codici successiva nasce dentro questo spazio: progettare schemi concretamente implementabili che si avvicinino ai limiti teorici con costi accettabili di complessità, ritardo ed energia.</p>
+    <p>Compressione senza perdita, compressione con distorsione controllata e protezione dagli errori rispondono quindi a tre domande diverse. La teoria stabilisce i limiti entro cui le tecnologie concrete devono operare.</p>
+  </article>
+  <article class="item guide-section" id="il-significato-messo-tra-parentesi">
+    <h2>18. Il significato messo tra parentesi</h2>
+    <p>Nel saggio del 1948 Shannon formula una delle delimitazioni più famose della scienza del Novecento: gli aspetti semantici del messaggio non sono pertinenti al problema ingegneristico che sta formalizzando.</p>
+    <p>La frase è precisa. Shannon riconosce che i messaggi hanno significato; stabilisce poi che il sistema deve essere progettato rispetto all’insieme delle possibili selezioni, indipendentemente dal significato particolare del messaggio effettivamente scelto.</p>
+    <p>La sospensione della semantica rende il modello tecnicamente generale. Una poesia e una tabella meteorologica possono attraversare lo stesso canale; una frase vera e una falsa possono richiedere la stessa quantità di risorse.</p>
+    <p>Appena chiediamo se il destinatario abbia compreso, se l’affermazione corrisponda ai fatti, se la fonte sia affidabile o se il messaggio abbia valore, siamo entrati in problemi differenti da quello formalizzato da Shannon.</p>
+    <p>Il significato è quindi fuori dal modello per scelta metodologica, non per una tesi sulla sua irrilevanza nella comunicazione umana.</p>
+  </article>
+  <article class="item guide-section" id="shannon-e-weaver-una-distinzione-necessaria">
+    <h2>19. Shannon e Weaver: una distinzione necessaria</h2>
+    <p>Nel 1949 l’articolo di Shannon viene ripubblicato in volume con un testo introduttivo di <strong>Warren Weaver</strong>. Il titolo passa da <em>A Mathematical Theory of Communication</em> a <em>The Mathematical Theory of Communication</em>: un volume composto da due testi distinti, che la ricezione successiva ha spesso fuso sotto l’etichetta “modello Shannon–Weaver”.</p>
+    <p>Weaver ha un ruolo decisivo nella diffusione interdisciplinare della teoria. Organizza il problema generale della comunicazione in tre livelli:</p>
+    <ul>
+      <li>problema <strong>tecnico</strong>: con quale accuratezza si trasmettono i simboli;</li>
+      <li>problema <strong>semantico</strong>: con quale precisione i simboli trasmessi veicolano il significato desiderato;</li>
+      <li>problema dell’<strong>efficacia</strong>: con quale successo il significato ricevuto produce l’effetto desiderato.</li>
+    </ul>
+    <p>Questa tripartizione è di Weaver e non va attribuita indistintamente a Shannon.</p>
+    <p>Shannon è pienamente consapevole dell’esistenza del significato, ma costruisce la propria teoria sul problema tecnico. Weaver considera invece la possibilità che il quadro matematico abbia implicazioni più ampie e contribuisce a renderlo attraente per linguistica, psicologia e scienze sociali.</p>
+    <p>La fortuna interdisciplinare della teoria nasce anche da questa estensione. Distinguere i due autori permette di capire dove termina il formalismo shannoniano e dove comincia un programma più generale sulla comunicazione.</p>
+  </article>
+  <article class="item guide-section" id="shannon-e-wiener-informazione-non-significa-cibernetica">
+    <h2>20. Shannon e Wiener: informazione non significa cibernetica</h2>
+    <p>Nel 1948 escono quasi contemporaneamente <em>A Mathematical Theory of Communication</em> di Shannon e <em>Cybernetics</em> di Norbert Wiener.</p>
+    <p>La vicinanza storica ha favorito sovrapposizioni successive. I due campi condividono probabilità, statistica e problemi di comunicazione; Shannon riconosce l’importanza del lavoro di Wiener sul filtraggio e sulla previsione.</p>
+    <p>Gli oggetti centrali restano differenti. Shannon concentra la teoria su rappresentazione e trasmissione dell’informazione, limiti di sorgenti e canali, codifica e rumore. Wiener costruisce la cibernetica intorno a <strong>comunicazione e controllo</strong>, attribuendo al feedback un ruolo decisivo e allargando il quadro a macchine, organismi e sistemi.</p>
+    <p>La teoria dell’informazione diventa una risorsa per la cibernetica, senza coincidere con essa. “Informazione”, “feedback”, “controllo”, “decisione” e “apprendimento” appartengono a famiglie teoriche che si intersecano ma non sono sinonimi.</p>
+  </article>
+  <article class="item guide-section" id="shannon-e-turing-due-traiettorie-che-si-incontrano">
+    <h2>21. Shannon e Turing: due traiettorie che si incontrano</h2>
+    <p>Nel 1943 Alan Turing trascorre un periodo negli Stati Uniti e frequenta i Bell Labs nel quadro delle attività belliche sulla crittografia e sulla comunicazione sicura. Qui incontra Shannon.</p>
+    <p>Entrambi lavorano su temi coperti da segreto, circostanza che limita ciò che possono condividere sui rispettivi progetti. Le testimonianze successive ricordano conversazioni su calcolatori, macchine e possibilità dell’intelligenza meccanica.</p>
+    <p>La convergenza è reale senza richiedere una leggenda fondativa. Turing formalizza la computazione e svilupperà lungo una traiettoria propria la questione delle macchine intelligenti; Shannon lavora su circuiti, comunicazione, informazione, crittografia, automi e problemi di ricerca.</p>
+    <p>Le loro strade mostrano due modi differenti di rendere trattabili problemi prima affidati all’intuizione: Turing attraverso la formalizzazione del calcolo, Shannon attraverso strutture logiche, probabilistiche e comunicative.</p>
+  </article>
+  <article class="item guide-section" id="crittografia-e-segretezza">
+    <h2>22. Crittografia e segretezza</h2>
+    <p>La guerra porta Shannon dentro problemi di comunicazione sicura.</p>
+    <p>Nel 1949 pubblica <em>Communication Theory of Secrecy Systems</em>, basato su un rapporto confidenziale precedente. Il testo applica alla crittografia lo stesso tipo di astrazione probabilistica che caratterizza la teoria della comunicazione.</p>
+    <p>Un sistema di cifratura può essere studiato in termini di messaggi possibili, chiavi, crittogrammi e probabilità.</p>
+    <p>La nozione di <strong>segretezza perfetta</strong> stabilisce una condizione molto forte: osservare il testo cifrato non deve modificare le probabilità attribuite ai possibili messaggi originali.</p>
+    <p>Il one-time pad e il sistema di Vernam precedono Shannon come costruzioni crittografiche. Il contributo di Shannon consiste nel dare una formulazione teorica della segretezza perfetta. Nella costruzione standard del one-time pad la chiave deve essere davvero casuale, mantenuta segreta, usata una sola volta e almeno lunga quanto il messaggio; la teoria chiarisce perché la segretezza perfetta richieda un’incertezza della chiave adeguata a quella del messaggio.</p>
+    <p>La segretezza perfetta non risolve ogni problema della sicurezza. Autenticazione, integrità, gestione delle chiavi e sicurezza operativa richiedono proprietà ulteriori.</p>
+    <p>Anche qui la forza del metodo sta nel definire esattamente quale garanzia si vuole dimostrare.</p>
+  </article>
+  <article class="item guide-section" id="scacchi-automi-e-problemi-trattabili">
+    <h2>23. Scacchi, automi e problemi trattabili</h2>
+    <p>Nel 1950 Shannon pubblica <em>Programming a Computer for Playing Chess</em>.</p>
+    <p>Gli scacchi gli interessano perché rendono visibile un problema generale: lo spazio delle possibilità cresce troppo rapidamente perché una macchina possa esplorarlo integralmente con risorse finite. Bisogna selezionare, valutare posizioni, limitare la ricerca, costruire euristiche.</p>
+    <p>Nello stesso periodo costruisce <strong>Theseus</strong>, un topo elettromeccanico il cui apparato di controllo esplora un labirinto e conserva il percorso trovato. Nel linguaggio dell’epoca il dispositivo poteva essere presentato come una macchina capace di “imparare”; in termini più precisi, realizza memoria, ricerca e riutilizzo di una soluzione semplice.</p>
+    <p>Il rapporto di Shannon con l’intelligenza artificiale diventa più esplicito pochi anni dopo. Nel 1955 firma con John McCarthy, Marvin Minsky e Nathaniel Rochester la proposta del Dartmouth Summer Research Project on Artificial Intelligence; nel 1956 cura con McCarthy <em>Automata Studies</em>. Sono legami storici diretti con la formazione del campo.</p>
+    <p>Questo non rende la teoria dell’informazione una teoria dell’AI contemporanea. Mostra qualcosa di più preciso: Shannon partecipò all’ambiente in cui problemi di calcolo, memoria, automi, ricerca e comportamento delle macchine venivano organizzati come un nuovo territorio di ricerca.</p>
+    <p>Scacchi e labirinto rendono visibile la continuità fra teoria e costruzione: di fronte a un compito che sembra richiedere abilità intelligente, Shannon cerca la struttura che lo renda trattabile da una macchina.</p>
+  </article>
+  <article class="item guide-section" id="la-forma-del-pensiero-di-shannon">
+    <h2>24. La forma del pensiero di Shannon</h2>
+    <p>Il metodo di Shannon emerge con maggiore chiarezza se lo si segue nei problemi concreti.</p>
+    <p>Davanti ai relè del Differential Analyzer cambia rappresentazione: una rete elettrica diventa una struttura logica che può essere manipolata algebricamente. Nella teoria dell’informazione compie un gesto affine su scala maggiore: separa trasmissione, significato e valore, descrive sorgenti e canali con strumenti probabilistici e stabilisce limiti prima di cercare una particolare macchina che li raggiunga.</p>
+    <p>La stessa postura riappare negli oggetti costruiti. Scacchi, labirinti e dispositivi meccanici servono a isolare memoria, ricerca, vincoli, regolarità temporali. L’astrazione non rimane sospesa sopra il mondo fisico: torna negli oggetti e ne verifica la tenuta.</p>
+    <p>Il dattiloscritto <em>Creative Thinking</em> rende esplicite alcune strategie che le opere già mostrano — semplificare, cambiare punto di vista, usare analogie, invertire il problema — ma non va trasformato in un manifesto sistematico. È una testimonianza sul modo di lavorare di uno scienziato che cercava la rappresentazione capace di rendere visibile la struttura essenziale del problema.</p>
+  </article>
+  <article class="item guide-section" id="idee-chiave">
+    <h2>25. Idee chiave</h2>
+    <h3 id="l-informazione-puo-essere-misurata-senza-misurare-il-significato">L’informazione può essere misurata senza misurare il significato</h3>
+    <p>È il centro metodologico della teoria. La quantità d’informazione riguarda probabilità e possibilità, non il valore semantico.</p>
+    <h3 id="l-incertezza-e-parte-della-struttura-dell-informazione">L’incertezza è parte della struttura dell’informazione</h3>
+    <p>Una sorgente completamente prevedibile non produce nuova informazione statistica. La scelta acquista contenuto informativo perché esistono alternative.</p>
+    <h3 id="la-comunicazione-ha-limiti-fondamentali">La comunicazione ha limiti fondamentali</h3>
+    <p>Ogni canale possiede una capacità. Tecnologia e ingegneria possono avvicinarsi al limite; non possono abolirlo.</p>
+    <h3 id="il-rumore-non-rende-impossibile-l-affidabilita">Il rumore non rende impossibile l’affidabilità</h3>
+    <p>Codici adeguati permettono, sotto la capacità e in senso asintotico, di rendere la probabilità d’errore arbitrariamente piccola.</p>
+    <h3 id="la-ridondanza-puo-avere-funzioni-opposte">La ridondanza può avere funzioni opposte</h3>
+    <p>La ridondanza della sorgente può essere sfruttata per comprimere; ridondanza aggiunta al codice può proteggere dagli errori.</p>
+    <h3 id="un-limite-teorico-non-e-una-ricetta-di-progetto">Un limite teorico non è una ricetta di progetto</h3>
+    <p>I teoremi di Shannon dicono che cosa è possibile o impossibile nelle condizioni del modello. Costruire sistemi efficienti che si avvicinino a quei limiti resta un problema ingegneristico ulteriore.</p>
+  </article>
+  <article class="item guide-section" id="concetti-chiave">
+    <h2>26. Concetti chiave</h2>
+    <h3 id="informazione">Informazione</h3>
+    <p>Quantità legata alle probabilità delle possibili selezioni prodotte da una sorgente. Non coincide con significato, verità o conoscenza.</p>
+    <h3 id="sorgente">Sorgente</h3>
+    <p>Processo che produce simboli o messaggi secondo determinate regolarità statistiche.</p>
+    <h3 id="messaggio">Messaggio</h3>
+    <p>La sequenza o configurazione selezionata dalla sorgente e destinata alla trasmissione.</p>
+    <h3 id="segnale">Segnale</h3>
+    <p>Forma fisica con cui il messaggio viene rappresentato per attraversare il canale.</p>
+    <h3 id="bit">Bit</h3>
+    <p>Unità d’informazione associata alla base logaritmica 2. Va distinta dalla semplice presenza di una cifra binaria: un simbolo 0/1 porta un bit soltanto nel caso equiprobabile.</p>
+    <h3 id="entropia">Entropia</h3>
+    <p>Misura dell’incertezza media di una sorgente e della sua informazione media.</p>
+    <h3 id="canale">Canale</h3>
+    <p>Sistema fisico o astratto attraverso cui il segnale viene trasmesso.</p>
+    <h3 id="rumore">Rumore</h3>
+    <p>Perturbazione che introduce incertezza fra ingresso e uscita del canale.</p>
+    <h3 id="capacita-del-canale">Capacità del canale</h3>
+    <p>Massimo tasso al quale l’informazione può essere trasmessa con affidabilità arbitrariamente elevata, date le caratteristiche del modello del canale.</p>
+    <h3 id="codifica">Codifica</h3>
+    <p>Trasformazione del messaggio in una rappresentazione adatta a efficienza, trasmissione o protezione dagli errori.</p>
+    <h3 id="distorsione">Distorsione</h3>
+    <p>Misura della differenza ammessa fra sorgente e ricostruzione quando non è richiesta una copia esatta. Diventa centrale nei problemi di compressione con perdita e nei criteri di fedeltà.</p>
+    <h3 id="ridondanza-della-sorgente">Ridondanza della sorgente</h3>
+    <p>Prevedibilità statistica presente nei dati prodotti dalla sorgente e sfruttabile per una rappresentazione più efficiente.</p>
+    <h3 id="ridondanza-di-codice">Ridondanza di codice</h3>
+    <p>Struttura aggiunta intenzionalmente alla rappresentazione per rilevare o correggere errori durante trasmissione o memoria.</p>
+    <h3 id="informazione-mutua">Informazione mutua</h3>
+    <p>Quantità che misura quanta incertezza su una variabile viene ridotta conoscendone un’altra; è centrale nella formulazione moderna della capacità di un canale discreto senza memoria.</p>
+    <h3 id="segretezza-perfetta">Segretezza perfetta</h3>
+    <p>Condizione in cui l’osservazione del crittogramma non modifica l’informazione disponibile sul messaggio originale.</p>
+  </article>
+  <article class="item guide-section" id="costellazione">
+    <h2>27. Costellazione</h2>
+    <h3 id="prima-di-shannon-cio-che-prepara-il-problema">Prima di Shannon — ciò che prepara il problema</h3>
+    <p><strong>George Boole</strong> fornisce l’algebra logica che Shannon collega ai circuiti di commutazione. La relazione è diretta sul piano formale, ma Boole non sta costruendo una teoria dei computer.</p>
+    <p><strong>Harry Nyquist</strong> studia velocità di trasmissione, banda e segnali telegrafici. Prepara una parte essenziale dell’ingegneria matematica della comunicazione.</p>
+    <p><strong>Ralph Hartley</strong> propone una misura logaritmica dell’informazione in relazione al numero delle possibili selezioni. Shannon estende questa linea introducendo probabilità, entropia, struttura statistica delle sorgenti e rumore.</p>
+    <p><strong>Vannevar Bush</strong> offre a Shannon l’ambiente tecnico del Differential Analyzer e un modello di ricerca capace di attraversare matematica e ingegneria.</p>
+    <p><strong>Bell Laboratories</strong> costituisce il laboratorio storico del problema: reti, voce, telegrafo, banda, rumore, costi e affidabilità.</p>
+    <h3 id="contemporanei-e-interlocutori">Contemporanei e interlocutori</h3>
+    <p><strong>Warren Weaver</strong> amplia la ricezione della teoria verso i problemi semantici e dell’efficacia. È un mediatore decisivo e va distinto da Shannon.</p>
+    <p><strong>Norbert Wiener</strong> condivide il trattamento statistico della comunicazione e influenza Shannon, ma costruisce la cibernetica intorno a comunicazione, feedback e controllo.</p>
+    <p><strong>Alan Turing</strong> lavora sulla computazione, la crittografia e le macchine. L’incontro del 1943 ai Bell Labs unisce due traiettorie senza fonderle.</p>
+    <p><strong>John von Neumann</strong> appartiene allo stesso ambiente matematico e computazionale; la relazione storica è più ampia del celebre e incerto aneddoto sull’entropia.</p>
+    <p><strong>John Tukey</strong> suggerisce il termine “bit”, che Shannon usa nel 1948.</p>
+    <p><strong>Richard Hamming</strong> lavora negli stessi anni sul rilevamento e sulla correzione degli errori. I codici che portano il suo nome rendono concreta una delle grandi domande aperte dalla teoria: come costruire ridondanza utile contro gli errori.</p>
+    <p><strong>John McCarthy</strong> incrocia Shannon sul terreno degli automi e della nascente intelligenza artificiale: insieme curano <em>Automata Studies</em>, e Shannon figura tra i promotori della proposta di Dartmouth.</p>
+    <h3 id="dopo-shannon-cio-che-cambia-scala">Dopo Shannon — ciò che cambia scala</h3>
+    <p><strong>Teoria dei codici</strong>: cerca codici implementabili che si avvicinino ai limiti dimostrati dalla teoria.</p>
+    <p><strong>Compressione dati</strong>: utilizza la struttura statistica delle sorgenti per ridurre la rappresentazione necessaria, con o senza perdita secondo il problema.</p>
+    <p><strong>Telecomunicazioni digitali</strong>: fanno della capacità, del rapporto segnale-rumore e della codifica problemi centrali di progetto.</p>
+    <p><strong>Archiviazione digitale</strong>: tratta memoria e affidabilità come problemi di rappresentazione e correzione dell’errore.</p>
+    <p><strong>Crittografia moderna</strong>: eredita da Shannon un modo informazionale di definire proprietà di sicurezza, pur sviluppandosi poi anche attraverso la complessità computazionale.</p>
+    <p><strong>Informazione algoritmica</strong>: Kolmogorov, Solomonoff e Chaitin aprono una nozione differente, legata alla lunghezza delle descrizioni e alla complessità delle sequenze. Qui l’oggetto non è l’incertezza media di una sorgente probabilistica, ma la descrivibilità di singole sequenze o oggetti.</p>
+    <p><strong>Filosofia dell’informazione</strong>: interroga statuto, significato e portata del concetto una volta uscito dal dominio originario.</p>
+    <h3 id="fenomeni-contemporanei-leggibili-attraverso-shannon">Fenomeni contemporanei leggibili attraverso Shannon</h3>
+    <p>Streaming, reti mobili, comunicazioni satellitari, storage, compressione di immagini e audio, correzione degli errori, trasmissioni in fibra e sistemi wireless appartengono a una storia tecnica profondamente segnata dalla teoria dell’informazione.</p>
+    <p>Big data, piattaforme e intelligenza artificiale aprono invece un secondo livello di domanda: che cosa accade quando il termine “informazione” viene esteso fino a comprendere dati, linguaggio, conoscenza e decisione?</p>
+    <p>Shannon non fornisce una teoria già pronta del presente. Fornisce distinzioni che permettono di porre meglio il problema.</p>
+  </article>
+  <article class="item guide-section" id="eredita">
+    <h2>28. Eredità</h2>
+    <p>L’eredità di Shannon attraversa più genealogie senza esaurirne nessuna.</p>
+    <p>La teoria dell’informazione stabilisce un linguaggio per misurare sorgenti, rappresentazioni, canali, rumore e limiti di trasmissione. Il lavoro sui circuiti collega algebra logica e reti di commutazione. La crittografia riceve una formulazione probabilistica della segretezza. La teoria dei codici trova un orizzonte di prestazioni entro cui cercare costruzioni concrete.</p>
+    <p>Compressione, telecomunicazioni digitali, storage affidabile e molte tecnologie di comunicazione ereditano direttamente questo quadro. Computer, Internet e intelligenza artificiale appartengono a storie più ampie, dentro le quali Shannon resta un nodo fondamentale.</p>
+    <p>La trasformazione decisiva può essere formulata con precisione: <strong>l’informazione diventa una quantità ingegneristica</strong>, dotata di unità, limiti e teoremi.</p>
+  </article>
+  <article class="item guide-section" id="lucrezio-mcluhan-shannon">
+    <h2>29. Lucrezio, McLuhan, Shannon</h2>
+    <p>La triade <strong>Lucrezio — McLuhan — Shannon</strong> non racconta una genealogia della comunicazione. Costruisce tre domande autonome attorno a ciò che dal mondo raggiunge un soggetto, attraversa un mezzo e può essere trasmesso.</p>
+    <h3 id="lucrezio"><a href="../lucrezio-atomi-immagini-poesia-della-natura/">Lucrezio</a></h3>
+    <p>Nel <em>De rerum natura</em> il problema riguarda la materia, i corpi, il vuoto e le immagini sottili che si staccano dalle superfici e raggiungono i sensi. Il veicolo della percezione appartiene alla stessa ontologia materiale del mondo che descrive.</p>
+    <h3 id="mcluhan">McLuhan</h3>
+    <p>Con McLuhan il centro si sposta verso i media come ambienti ed estensioni dei sensi. La forma del medium modifica scala, ritmo, percezione e relazioni; il mezzo non è un semplice condotto neutrale rispetto all’esperienza che rende possibile.</p>
+    <h3 id="shannon">Shannon</h3>
+    <p>Shannon affronta un’altra domanda: quanta informazione può essere rappresentata e trasmessa attraverso un canale sottoposto a vincoli e rumore? Il canale viene caratterizzato attraverso proprietà tecniche — transizioni, banda, potenza, capacità — senza richiedere una teoria del significato o degli effetti culturali del medium.</p>
+    <p>Qui la distanza fra gli autori diventa produttiva.</p>
+    <p><strong>Il medium di McLuhan non è il channel di Shannon.</strong><br /><strong>Il message di McLuhan non coincide con l’information di Shannon.</strong><br /><strong>Il simulacrum di Lucrezio non è un segnale.</strong><br /><strong>L’atomo non conduce al bit.</strong></p>
+    <p>Il punto di maggiore tensione corre fra McLuhan e Shannon. McLuhan interroga la non-neutralità del mezzo rispetto all’ambiente umano; Shannon astrae dal significato e dagli effetti culturali del medium per misurare i vincoli della trasmissione. Le due prospettive non si confutano: selezionano proprietà differenti e rispondono a domande differenti.</p>
+    <p>Lucrezio mantiene aperto un piano ancora diverso: chiede che cosa siano i corpi e come il reale possa raggiungere i sensi.</p>
+    <p><strong>Materia, medium, informazione</strong> non sono tre fasi della stessa storia. Sono tre livelli irriducibili che il presente tende facilmente a sovrapporre: costituzione del reale, ambiente della percezione, formalizzazione della trasmissione.</p>
+  </article>
+  <article class="item guide-section" id="ferita-contemporanea-la-trasmissione-senza-comprensione">
+    <h2>30. Ferita contemporanea: la trasmissione senza comprensione</h2>
+    <p>Il mondo costruito dopo Shannon ha raggiunto un grado di affidabilità tecnica che per gran parte della storia sarebbe apparso quasi inconcepibile.</p>
+    <p>Testi, immagini, voce e video attraversano distanze immense in tempi minimi. Codici correggono errori; segnali deboli vengono ricostruiti; archivi vengono duplicati; reti trasportano quantità crescenti di dati.</p>
+    <p>Questa riuscita rende più visibile ciò che il problema tecnico non comprendeva.</p>
+    <p><strong>Una comunicazione può riuscire tecnicamente e fallire come comprensione.</strong></p>
+    <p>Un file può arrivare integro: questo dice che la trasmissione ha preservato i dati, non che conosciamo l’affidabilità della fonte. Una frase può essere riprodotta fedelmente e restare incompresa. Una proposizione può circolare senza essere vera. Una grande disponibilità di dati può non diventare conoscenza.</p>
+    <p>La ferita contemporanea non coincide con un generico “eccesso di informazione”. È un <strong>errore di trasferimento</strong>: <strong>tendiamo a trasferire sul significato le prestazioni che abbiamo conquistato nella trasmissione</strong>.</p>
+    <p>Velocità, disponibilità e accuratezza tecnica sono qualità reali, ma appartengono al livello per cui sono state misurate. Quando diventano, senza ulteriori prove, indizi di comprensione, verità o valore epistemico, il successo dell’infrastruttura viene scambiato per successo della conoscenza.</p>
+    <p>Weaver distingueva il problema tecnico da quello semantico e da quello dell’efficacia. La lettura contemporanea di Cerchi nasce nel divario fra questi piani: il primo può migliorare enormemente senza risolvere automaticamente gli altri.</p>
+    <p>Shannon non formulò una critica della società digitale. La sua teoria fornisce però il confine necessario per riconoscere l’errore: più informazione trasmissibile, da sola, non implica più conoscenza.</p>
+  </article>
+  <article class="item guide-section" id="limiti-tensioni-e-abusi">
+    <h2>31. Limiti, tensioni e abusi</h2>
+    <h3 id="il-limite-semantico-e-intenzionale">Il limite semantico è intenzionale</h3>
+    <p>La teoria di Shannon è costruita per il problema tecnico della comunicazione. Il significato resta fuori dal formalismo perché non è necessario a quel calcolo, non perché sia privo di importanza.</p>
+    <h3 id="informazione-e-conoscenza-appartengono-a-problemi-diversi">Informazione e conoscenza appartengono a problemi diversi</h3>
+    <p>Una quantità statistica non stabilisce che qualcuno abbia appreso qualcosa di vero, rilevante o utile.</p>
+    <h3 id="entropia-informativa-e-termodinamica-richiedono-distinzione">Entropia informativa e termodinamica richiedono distinzione</h3>
+    <p>La parentela matematica e storica è reale; le grandezze appartengono però a quadri teorici differenti. Le metafore che le trasferiscono da un dominio all’altro devono esplicitare il passaggio.</p>
+    <h3 id="i-teoremi-di-codifica-non-sono-ricette-di-implementazione">I teoremi di codifica non sono ricette di implementazione</h3>
+    <p>Sapere che una prestazione è teoricamente possibile non equivale a possedere immediatamente un algoritmo o un codice pratico. Lunghezze finite, complessità, ritardi, energia e caratteristiche reali del canale restano problemi ingegneristici.</p>
+    <h3 id="le-estensioni-interdisciplinari-richiedono-nuove-prove">Le estensioni interdisciplinari richiedono nuove prove</h3>
+    <p>Nel 1956, in <em>The Bandwagon</em>, Shannon intervenne direttamente contro l’idea che il successo della teoria dell’informazione autorizzasse trasferimenti automatici verso psicologia, economia o altre scienze. Considerava possibili e promettenti alcune applicazioni, ma insisteva sul fatto che andassero fondate attraverso ipotesi e verifica empirica, non attraverso la sola trasposizione del vocabolario.</p>
+    <p>Questa cautela rafforza la lettura della “disciplina del confine”: la potenza di un concetto non elimina l’onere di ridefinirlo quando cambia dominio.</p>
+  </article>
+  <article class="item guide-section" id="curiosita-che-illuminano-il-metodo">
+    <h2>32. Curiosità che illuminano il metodo</h2>
+    <h3 id="theseus-non-e-soltanto-un-giocattolo">Theseus non è soltanto un giocattolo</h3>
+    <p>Il topo elettromeccanico materializza un problema astratto: esplorare un labirinto, memorizzare una soluzione e riutilizzarla quando la configurazione viene riproposta.</p>
+    <h3 id="la-giocoleria-diventa-un-problema-ingegneristico">La giocoleria diventa un problema ingegneristico</h3>
+    <p>Shannon studia e costruisce macchine capaci di eseguire movimenti di giocoleria. L’interesse non sta nella stranezza dell’hobby, ma nella possibilità di isolare regolarità temporali e meccaniche in un gesto apparentemente umano.</p>
+    <h3 id="gli-scacchi-sono-un-laboratorio-della-complessita">Gli scacchi sono un laboratorio della complessità</h3>
+    <p>Il problema consiste nel rendere trattabile uno spazio di possibilità troppo ampio per essere esplorato integralmente: selezionare, valutare e limitare la ricerca.</p>
+    <h3 id="la-creativita-puo-essere-studiata-come-trasformazione-del-problema">La creatività può essere studiata come trasformazione del problema</h3>
+    <p>Nel dattiloscritto del 1952 Shannon ritorna su semplificazione, analogia, inversione e cambiamento di rappresentazione. Le stesse strategie emergono, in forme diverse, nelle sue opere tecniche.</p>
+    <p>Le curiosità biografiche diventano così indizi di metodo: Shannon costruisce per capire e cambia rappresentazione per rendere il problema trattabile.</p>
+  </article>
+  <article class="item guide-section" id="errori-comuni">
+    <h2>33. Errori comuni</h2>
+    <h3 id="shannon-ha-inventato-il-bit">“Shannon ha inventato il bit”</h3>
+    <p>La parola <em>bit</em> fu suggerita da John Tukey. Shannon la utilizzò nel 1948 e la rese centrale come unità della quantità d’informazione.</p>
+    <h3 id="un-bit-e-semplicemente-uno-0-o-un-1">“Un bit è semplicemente uno 0 o un 1”</h3>
+    <p>Una cifra binaria è un simbolo di rappresentazione; il bit come unità misura una quantità d’informazione. Una sorgente binaria non equiprobabile produce in media meno di un bit per simbolo.</p>
+    <h3 id="shannon-ha-inventato-il-computer-digitale">“Shannon ha inventato il computer digitale”</h3>
+    <p>Il suo lavoro sui circuiti a relè è fondamentale per la teoria dei circuiti logici, ma la nascita del computer ha una storia plurale.</p>
+    <h3 id="shannon-ha-inventato-internet">“Shannon ha inventato Internet”</h3>
+    <p>La teoria dell’informazione fornisce principi fondamentali per le comunicazioni digitali. Internet nasce da architetture, protocolli, istituzioni e innovazioni successive.</p>
+    <h3 id="informazione-significa-conoscenza">“Informazione significa conoscenza”</h3>
+    <p>In Shannon è una quantità probabilistica. Una sequenza può essere altamente informativa senza essere vera o utile.</p>
+    <h3 id="un-messaggio-piu-sorprendente-e-piu-importante">“Un messaggio più sorprendente è più importante”</h3>
+    <p>La sorpresa è statistica rispetto a una distribuzione di probabilità. Non è una misura del valore umano.</p>
+    <h3 id="entropia-significa-caos">“Entropia significa caos”</h3>
+    <p>È una semplificazione inaffidabile. In Shannon misura l’incertezza media di una sorgente probabilistica.</p>
+    <h3 id="rumore-significa-disinformazione">“Rumore significa disinformazione”</h3>
+    <p>Il rumore shannoniano è una perturbazione del canale. La disinformazione coinvolge contenuto, intenzione, interpretazione e contesto sociale.</p>
+    <h3 id="ridondanza-e-sempre-inefficienza">“Ridondanza è sempre inefficienza”</h3>
+    <p>La ridondanza della sorgente può essere sfruttata per comprimere; ridondanza aggiunta al codice può servire a rilevare e correggere errori.</p>
+    <h3 id="shannon-spiega-l-intelligenza-artificiale">“Shannon spiega l’intelligenza artificiale”</h3>
+    <p>Shannon partecipò realmente alla storia iniziale del campo — dagli scacchi e dagli automi alla proposta di Dartmouth e ad <em>Automata Studies</em>. La teoria dell’informazione, tuttavia, non coincide con una teoria generale dell’AI e non spiega da sola i sistemi contemporanei.</p>
+    <h3 id="un-token-di-un-modello-linguistico-e-un-bit">“Un token di un modello linguistico è un bit”</h3>
+    <p>Il token è un’unità di segmentazione di un sistema linguistico; il bit è un’unità di quantità d’informazione. In analisi probabilistiche si possono misurare grandezze come bit per token, ma token e bit restano oggetti differenti.</p>
+  </article>
+  <article class="item guide-section" id="glossario">
+    <h2>34. Glossario</h2>
+    <p><strong>Algebra booleana</strong> — sistema algebrico della logica basato su operazioni come AND, OR e NOT. Shannon ne mostra l’applicabilità sistematica ai circuiti di commutazione.</p>
+    <p><strong>Bit</strong> — unità di quantità d’informazione quando si usa il logaritmo in base 2; non coincide automaticamente con una singola cifra binaria.</p>
+    <p><strong>Canale</strong> — mezzo o sistema attraverso cui un segnale viene trasmesso.</p>
+    <p><strong>Capacità del canale</strong> — massimo tasso d’informazione compatibile con trasmissione affidabile secondo il modello del canale.</p>
+    <p><strong>Codice</strong> — regola che associa messaggi o simboli a rappresentazioni utilizzate per trasmissione o memoria.</p>
+    <p><strong>Codifica di canale</strong> — aggiunta di struttura o ridondanza per rendere i dati resistenti agli errori.</p>
+    <p><strong>Codifica di sorgente</strong> — rappresentazione efficiente della sorgente, tipicamente attraverso lo sfruttamento della sua prevedibilità statistica.</p>
+    <p><strong>Compressione lossless</strong> — riduzione della rappresentazione necessaria mantenendo la possibilità di ricostruire esattamente i dati originali.</p>
+    <p><strong>Distorsione</strong> — misura della differenza fra originale e ricostruzione accettata in un sistema che non richiede fedeltà perfetta.</p>
+    <p><strong>Entropia</strong> — misura dell’incertezza media di una sorgente probabilistica.</p>
+    <p><strong>Errore</strong> — differenza fra simbolo o messaggio trasmesso e ciò che viene ricostruito alla ricezione.</p>
+    <p><strong>Informazione</strong> — nel senso shannoniano, quantità definita rispetto alle probabilità delle possibili selezioni.</p>
+    <p><strong>Informazione mutua</strong> — misura della dipendenza informativa fra due variabili; indica quanto conoscere l’una riduca l’incertezza sull’altra.</p>
+    <p><strong>Messaggio</strong> — elemento o sequenza selezionata dalla sorgente.</p>
+    <p><strong>Probabilità</strong> — struttura matematica usata per descrivere l’incertezza delle selezioni.</p>
+    <p><strong>Ridondanza della sorgente</strong> — prevedibilità statistica che può essere sfruttata per comprimere la rappresentazione.</p>
+    <p><strong>Ridondanza di codice</strong> — struttura aggiunta intenzionalmente per rilevare o correggere errori.</p>
+    <p><strong>Rumore</strong> — perturbazione del canale che altera la relazione fra segnale trasmesso e ricevuto.</p>
+    <p><strong>Segnale</strong> — forma fisica o matematica usata per rappresentare il messaggio nel canale.</p>
+    <p><strong>Segretezza perfetta</strong> — condizione in cui osservare il crittogramma non modifica le probabilità attribuite al messaggio originale.</p>
+    <p><strong>Sorgente</strong> — processo che genera messaggi secondo certe probabilità.</p>
+    <p><strong>Trasmettitore</strong> — componente che traduce il messaggio in un segnale adatto al canale.</p>
+  </article>
+  <article class="item guide-section" id="percorsi-di-lettura">
+    <h2>35. Percorsi di lettura</h2>
+    <h3 id="percorso-essenziale-capire-shannon-senza-matematica-avanzata">Percorso essenziale — capire Shannon senza matematica avanzata</h3>
+    <ol>
+      <li>Biografia essenziale</li>
+      <li><em>A Mathematical Theory of Communication</em></li>
+      <li>Informazione</li>
+      <li>Entropia</li>
+      <li>Canale, rumore e capacità</li>
+      <li>Il significato messo tra parentesi</li>
+      <li>Ferita contemporanea</li>
+    </ol>
+    <p>Obiettivo: comprendere il gesto teorico prima delle formule.</p>
+    <h3 id="percorso-tecnico-concettuale-entrare-nella-teoria-dell-informazione">Percorso tecnico-concettuale — entrare nella teoria dell’informazione</h3>
+    <ol>
+      <li>Hartley e Nyquist</li>
+      <li>Entropia</li>
+      <li>Codifica della sorgente</li>
+      <li>Criterio di fedeltà e distorsione</li>
+      <li>Informazione mutua</li>
+      <li>Capacità del canale</li>
+      <li>Teorema di codifica per canali rumorosi</li>
+      <li>Compressione e correzione degli errori</li>
+    </ol>
+    <p>Obiettivo: vedere come probabilità, rappresentazione e trasmissione diventano un unico campo.</p>
+    <h3 id="percorso-digitale-dalle-commutazioni-ai-dati">Percorso digitale — dalle commutazioni ai dati</h3>
+    <ol>
+      <li>Algebra booleana e relè</li>
+      <li>Bit</li>
+      <li>Codifica</li>
+      <li>Teoria dei codici</li>
+      <li>Compressione</li>
+      <li>Crittografia</li>
+      <li>Comunicazioni digitali</li>
+    </ol>
+    <p>Obiettivo: comprendere perché Shannon è fondamentale per il digitale senza trasformarlo nel suo unico inventore.</p>
+    <h3 id="percorso-critico-informazione-significato-presente">Percorso critico — informazione, significato, presente</h3>
+    <ol>
+      <li>Shannon e Weaver</li>
+      <li>Shannon e Wiener</li>
+      <li>Informazione versus conoscenza</li>
+      <li>Limiti della teoria</li>
+      <li>McLuhan e Shannon</li>
+      <li>Ferita contemporanea</li>
+    </ol>
+    <p>Obiettivo: usare Shannon per distinguere ciò che i sistemi trasmettono da ciò che gli esseri umani comprendono.</p>
+  </article>
+  <article class="item guide-section" id="domande-per-orientarsi">
+    <h2>36. Domande per orientarsi</h2>
+    <ol>
+      <li>Che cosa guadagna Shannon separando il problema tecnico dal significato?</li>
+      <li>Perché l’informazione viene collegata all’incertezza?</li>
+      <li>In che senso un evento improbabile può portare più informazione?</li>
+      <li>Perché un messaggio falso può essere informativo in senso shannoniano?</li>
+      <li>Che differenza c’è fra entropia e disordine?</li>
+      <li>Perché un canale possiede una capacità?</li>
+      <li>Come può una comunicazione essere affidabile nonostante il rumore?</li>
+      <li>Perché la ridondanza viene sia eliminata sia aggiunta?</li>
+      <li>Che cosa cambia quando accettiamo una certa distorsione nella ricostruzione?</li>
+      <li>Che cosa distingue Shannon da Weaver?</li>
+      <li>Perché la teoria dell’informazione non coincide con la cibernetica?</li>
+      <li>Che cosa distingue il <em>channel</em> di Shannon dal <em>medium</em> di McLuhan?</li>
+      <li>Che cosa rischiamo di perdere quando trasformiamo “informazione” in una metafora universale?</li>
+    </ol>
+  </article>
+  <article class="item guide-section" id="nodi-da-ricordare">
+    <h2>37. Nodi da ricordare</h2>
+    <ul>
+      <li>Shannon rende l’informazione una quantità matematica legata a probabilità e scelta.</li>
+      <li>La sua teoria riguarda anzitutto il problema tecnico della comunicazione.</li>
+      <li>Il significato viene escluso metodologicamente, non negato.</li>
+      <li>Il bit è un’unità di misura dell’informazione, non un atomo metafisico.</li>
+      <li>L’entropia misura l’incertezza media di una sorgente.</li>
+      <li>La capacità stabilisce un limite fondamentale del canale.</li>
+      <li>Sotto la capacità, codici adeguati possono rendere l’errore arbitrariamente piccolo.</li>
+      <li>La compressione senza perdita, la compressione con distorsione controllata e la protezione dagli errori rispondono a problemi differenti.</li>
+      <li>La compressione tende a sfruttare e rimuovere ridondanza; la correzione degli errori può aggiungerne.</li>
+      <li>Shannon e Weaver devono essere distinti.</li>
+      <li>Shannon e Wiener condividono problemi, ma teoria dell’informazione e cibernetica non coincidono.</li>
+      <li>Il contributo di Shannon al digitale è fondamentale senza equivalere all’invenzione di Internet, computer o AI.</li>
+      <li>La sua lezione contemporanea più forte riguarda il confine fra informazione trasmissibile e comprensione.</li>
+    </ul>
+  </article>
+  <article class="item guide-section" id="faq">
+    <h2>38. FAQ</h2>
+    <h3 id="chi-era-claude-shannon">Chi era Claude Shannon?</h3>
+    <p>Claude Shannon è stato un matematico e ingegnere statunitense, nato nel 1916 e morto nel 2001. Ha fondato la teoria matematica dell’informazione e ha dato contributi fondamentali alla teoria dei circuiti logici, alla comunicazione digitale e alla crittografia.</p>
+    <h3 id="che-cos-e-la-teoria-dell-informazione-di-shannon">Che cos’è la teoria dell’informazione di Shannon?</h3>
+    <p>È una teoria matematica che studia come quantificare, rappresentare e trasmettere informazione attraverso canali soggetti a vincoli e rumore. Introduce concetti come entropia, capacità del canale, codifica e ridondanza.</p>
+    <h3 id="che-cosa-significa-informazione-per-shannon">Che cosa significa “informazione” per Shannon?</h3>
+    <p>Indica una quantità legata alle probabilità delle possibili selezioni prodotte da una sorgente. Non coincide con il significato del messaggio, con la sua verità o con la conoscenza che può produrre.</p>
+    <h3 id="shannon-ha-inventato-il-bit-2">Shannon ha inventato il bit?</h3>
+    <p>Shannon rese il bit centrale come unità della quantità d’informazione usando il logaritmo in base 2. Il termine <em>bit</em>, abbreviazione di <em>binary digit</em>, fu suggerito da John Tukey.</p>
+    <h3 id="che-cos-e-l-entropia-di-shannon">Che cos’è l’entropia di Shannon?</h3>
+    <p>È una misura dell’incertezza media di una sorgente probabilistica. È massima, a parità di alternative, quando gli esiti sono equiprobabili e diminuisce quando la sorgente diventa più prevedibile.</p>
+    <h3 id="l-entropia-di-shannon-e-la-stessa-cosa-dell-entropia-termodinamica">L’entropia di Shannon è la stessa cosa dell’entropia termodinamica?</h3>
+    <p>Le due formulazioni hanno una profonda parentela matematica e una storia concettuale intrecciata, ma appartengono a teorie differenti e non vanno identificate senza precisazioni.</p>
+    <h3 id="che-cos-e-la-capacita-di-un-canale">Che cos’è la capacità di un canale?</h3>
+    <p>È il massimo tasso d’informazione al quale, secondo il modello del canale, è possibile trasmettere con probabilità d’errore arbitrariamente piccola usando codici appropriati.</p>
+    <h3 id="perche-shannon-esclude-il-significato">Perché Shannon esclude il significato?</h3>
+    <p>Perché il suo obiettivo è formalizzare il problema tecnico della trasmissione. Il significato viene messo fuori dal modello perché non è necessario al calcolo di quantità come entropia, capacità ed errore; questo non equivale a negarne l’importanza nella comunicazione umana.</p>
+    <h3 id="che-differenza-c-e-tra-shannon-e-weaver">Che differenza c’è tra Shannon e Weaver?</h3>
+    <p>Shannon formula la teoria matematica del problema tecnico della comunicazione. Weaver, nell’introduzione al volume del 1949, distingue anche un livello semantico e uno dell’efficacia e contribuisce ad ampliare la ricezione interdisciplinare del lavoro. La comune etichetta “modello Shannon–Weaver” può quindi nascondere due contributi diversi.</p>
+    <h3 id="un-messaggio-falso-puo-avere-molta-informazione-secondo-shannon">Un messaggio falso può avere molta informazione secondo Shannon?</h3>
+    <p>Sì. La quantità d’informazione dipende dalla probabilità della selezione, non dalla verità semantica. Un messaggio falso e improbabile può quindi avere alta auto-informazione in senso tecnico.</p>
+    <h3 id="che-rapporto-c-e-tra-shannon-e-internet">Che rapporto c’è tra Shannon e Internet?</h3>
+    <p>La teoria dell’informazione fornisce principi fondamentali per comunicazioni, codifica, compressione e gestione del rumore, tutti decisivi per le reti digitali. Shannon non ha però inventato Internet e la sua teoria non descrive da sola la sua architettura.</p>
+    <h3 id="che-rapporto-c-e-tra-shannon-e-l-intelligenza-artificiale">Che rapporto c’è tra Shannon e l’intelligenza artificiale?</h3>
+    <p>Shannon lavorò su scacchi, automi e macchine e fu tra i firmatari della proposta di Dartmouth del 1955; nel 1956 curò con John McCarthy <em>Automata Studies</em>. Partecipò quindi alla formazione storica del campo, ma l’AI contemporanea deriva da sviluppi successivi e non può essere ridotta alla teoria dell’informazione.</p>
+    <h3 id="claude-ai-prende-il-nome-da-claude-shannon">Claude AI prende il nome da Claude Shannon?</h3>
+    <p>Secondo una ricostruzione del <em>New Yorker</em> del 2026 basata sulla cultura interna di Anthropic, il nome <strong>Claude</strong> è in parte un omaggio a Claude Shannon e in parte la scelta di un nome percepito come amichevole. Non risulta una dichiarazione istituzionale di Anthropic che presenti Shannon come unica origine del nome.</p>
+    <h3 id="qual-e-la-differenza-tra-shannon-e-mcluhan">Qual è la differenza tra Shannon e McLuhan?</h3>
+    <p>Shannon studia le condizioni quantitative della trasmissione attraverso un canale. McLuhan studia come i media trasformano percezione, ambiente e relazioni. Il <em>channel</em> di Shannon e il <em>medium</em> di McLuhan appartengono a problemi differenti.</p>
+    <h3 id="perche-shannon-e-ancora-importante-oggi">Perché Shannon è ancora importante oggi?</h3>
+    <p>Perché il mondo digitale continua a dipendere da codifica, capacità, compressione e correzione degli errori; e perché distinguere informazione, significato, conoscenza e verità è diventato ancora più urgente in una società satura di dati e messaggi.</p>
+  </article>
+  <article class="item guide-section" id="fonti-e-copyright">
+    <h2>39. Fonti e copyright</h2>
+    <h3 id="fonti-primarie-essenziali">Fonti primarie essenziali</h3>
+    <ul>
+      <li>Claude E. Shannon, <em>A Symbolic Analysis of Relay and Switching Circuits</em>, <em>Transactions of the American Institute of Electrical Engineers</em>, vol. 57, n. 12, 1938, pp. 713–723.</li>
+      <li>Claude E. Shannon, <em>A Mathematical Theory of Communication</em>, <em>Bell System Technical Journal</em>, vol. 27, 1948, pp. 379–423 e 623–656.</li>
+      <li>Claude E. Shannon, <em>Communication in the Presence of Noise</em>, <em>Proceedings of the IRE</em>, vol. 37, n. 1, 1949, pp. 10–21.</li>
+      <li>Claude E. Shannon, <em>Communication Theory of Secrecy Systems</em>, <em>Bell System Technical Journal</em>, vol. 28, 1949, pp. 656–715.</li>
+      <li>Claude E. Shannon, <em>Programming a Computer for Playing Chess</em>, <em>Philosophical Magazine</em>, serie 7, vol. 41, n. 314, 1950, pp. 256–275.</li>
+      <li>Claude E. Shannon, <em>Prediction and Entropy of Printed English</em>, <em>Bell System Technical Journal</em>, vol. 30, 1951, pp. 50–64.</li>
+      <li>Claude E. Shannon, <em>Creative Thinking</em>, dattiloscritto Bell Laboratories, 20 marzo 1952, 10 pp.; registrato nella bibliografia dei <em>Collected Papers</em> come materiale non incluso nella raccolta.</li>
+      <li>John McCarthy, Marvin L. Minsky, Nathaniel Rochester, Claude E. Shannon, <em>A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence</em>, 31 agosto 1955.</li>
+      <li>Claude E. Shannon, <em>The Bandwagon</em>, <em>IRE Transactions on Information Theory</em>, vol. IT-2, n. 1, 1956, p. 3.</li>
+      <li>Claude E. Shannon, John McCarthy (a cura di), <em>Automata Studies</em>, Princeton University Press, 1956.</li>
+      <li>Claude E. Shannon, <em>Coding Theorems for a Discrete Source with a Fidelity Criterion</em>, <em>IRE National Convention Record</em>, vol. 7, parte 4, 1959, pp. 142–163.</li>
+      <li>Claude E. Shannon, Warren Weaver, <em>The Mathematical Theory of Communication</em>, University of Illinois Press, 1949. Le parti di Weaver e di Shannon vanno distinte.</li>
+    </ul>
+    <h3 id="precursori-e-contesto">Precursori e contesto</h3>
+    <ul>
+      <li>Harry Nyquist, <em>Certain Topics in Telegraph Transmission Theory</em>, <em>Transactions of the AIEE</em>, vol. 47, n. 2, 1928, pp. 617–644.</li>
+      <li>Ralph V. L. Hartley, <em>Transmission of Information</em>, <em>Bell System Technical Journal</em>, vol. 7, n. 3, 1928, pp. 535–563.</li>
+      <li>Norbert Wiener, <em>Cybernetics: Or Control and Communication in the Animal and the Machine</em>, 1948.</li>
+      <li>Richard W. Hamming, <em>Error Detecting and Error Correcting Codes</em>, <em>Bell System Technical Journal</em>, 1950.</li>
+    </ul>
+    <h3 id="archivi-e-fonti-istituzionali-utili">Archivi e fonti istituzionali utili</h3>
+    <ul>
+      <li>MIT Libraries e MIT News, materiali biografici, tesi e documenti su Shannon.</li>
+      <li>Institute for Advanced Study, archivio dei membri.</li>
+      <li>IEEE / Engineering and Technology History Wiki, storia della teoria dell’informazione e oral history.</li>
+      <li>Computer History Museum, documenti sul computer chess e sulla storia del calcolo.</li>
+      <li>Library of Congress, <em>Claude Elwood Shannon Papers</em>.</li>
+    </ul>
+    <h3 id="studi-e-raccolte">Studi e raccolte</h3>
+    <ul>
+      <li>N. J. A. Sloane, Aaron D. Wyner (a cura di), <em>Claude Elwood Shannon: Collected Papers</em>.</li>
+      <li>Thomas M. Cover, Joy A. Thomas, <em>Elements of Information Theory</em>.</li>
+      <li>Solomon W. Golomb, Elwyn R. Berlekamp, Thomas M. Cover, Robert G. Gallager, James L. Massey, Andrew J. Viterbi, <em>Claude Elwood Shannon (1916–2001)</em>, <em>Notices of the American Mathematical Society</em>, 2002.</li>
+      <li>James Gleick, <em>The Information: A History, a Theory, a Flood</em>.</li>
+      <li>Jimmy Soni, Rob Goodman, <em>A Mind at Play: How Claude Shannon Invented the Information Age</em>.</li>
+      <li>Jon Gertner, <em>The Idea Factory: Bell Labs and the Great Age of American Innovation</em>.</li>
+      <li>Gideon Lewis-Kraus, <em>What Is Claude? Anthropic Doesn’t Know, Either</em>, <em>The New Yorker</em>, 9 febbraio 2026, per la ricostruzione della <em>company lore</em> sull’origine del nome Claude.</li>
+    </ul>
+    <h3 id="cautela-copyright">Cautela copyright</h3>
+    <p>Le opere di Shannon e gran parte degli studi moderni non vanno trattati come testi liberamente riproducibili. Questa guida utilizza concetti, dati storici, formule standard e parafrasi originali. Le citazioni testuali, quando necessarie nella versione finale, dovranno restare brevi e puntualmente attribuite.</p>
+    <p>La presente guida è un contenuto originale di Alessandro Gentili per <strong>Cerchi d’inchiostro</strong>. La struttura, l’interpretazione, i testi, i percorsi di lettura e l’impianto editoriale sono protetti dal diritto d’autore. È possibile citare brevi passaggi o sintetizzare la guida per studio, critica, discussione e segnalazione, indicando autore, titolo del progetto e link alla pagina originale. La riproduzione integrale o sostanziale e il riuso commerciale, formativo, editoriale o in dataset richiedono autorizzazione scritta.</p>
+    <p>© Alessandro Gentili — Cerchi d’inchiostro. Tutti i diritti riservati.</p>
+  </article>
+  <article class="item guide-section" id="prosegui-la-lettura">
+    <h2>40. Prosegui la lettura</h2>
+    <h3 id="tito-lucrezio-caro-atomi-immagini-e-poesia-della-natura">Tito <a href="../lucrezio-atomi-immagini-poesia-della-natura/">Lucrezio</a> Caro — Atomi, immagini e poesia della natura</h3>
+    <p>Per tornare alla domanda più antica della triade: di che cosa è fatto il mondo, come i corpi raggiungono i sensi e perché comprendere la natura può liberarci dalla paura.</p>
+    <h3 id="marshall-mcluhan-media-percezione-e-ambienti-invisibili"><a href="../marshall-mcluhan-media-percezione-ambienti-invisibili/">Marshall McLuhan</a> — Media, percezione e ambienti invisibili</h3>
+    <p>Per passare dalla costituzione materiale del reale al problema dei media come ambienti che riorganizzano percezione, scala e relazioni.</p>
+    <p>Le due guide aprono i poli con cui Shannon entra in tensione. La sua domanda resta autonoma: che cosa può essere formalizzato, codificato e trasmesso entro i vincoli di un canale?</p>
+  </article>
+  <article class="item guide-section" id="chiusura">
+    <h2>41. Chiusura</h2>
+    <p>Claude Shannon ha dato alla parola “informazione” una precisione che la fortuna stessa del termine rischia continuamente di allargare.</p>
+    <p>La sua teoria mostra che una formalizzazione può essere straordinariamente generale senza pretendere di esaurire il fenomeno. Nel 1956 Shannon arrivò a mettere in guardia il proprio campo dall’idea che il vocabolario dell’informazione potesse essere trasferito altrove senza nuove ipotesi e nuove prove.</p>
+    <p>Oggi disponiamo di canali più capienti, archivi più vasti e macchine capaci di produrre e trasformare linguaggio su una scala che Shannon non conobbe. La distinzione fra ciò che un sistema può trasmettere e ciò che una persona può comprendere è diventata, se possibile, ancora più visibile.</p>
+    <p>Resta allora una domanda che appartiene a noi, non alla teoria del 1948:</p>
+    <p><strong>quando tutto può essere trasmesso, che cosa ci permette ancora di distinguere ciò che è arrivato da ciò che abbiamo davvero compreso?</strong></p>
+  </article>
+</section>
+</main>
+<footer class="footer"><div class="wrap footer-wrap"><div class="footer-brand"><a href="../../../">Alessandro Gentili</a></div><nav class="footer-nav" aria-label="Navigazione footer"><section class="footer-group"><h2>Scrittura</h2><ul><li><a href="../../../saggi.html">Saggi</a></li><li><a href="../../../temi/">Temi</a></li><li><a href="../../../poesia.html">Poesia</a></li></ul></section><section class="footer-group"><h2>Cerchi d’inchiostro</h2><ul><li><a href="../../../cerchi/">Hub e guide</a></li><li><a href="../../../cerchi/triadi/">Triadi</a></li><li><a href="../../../archivio.html">Archivio</a></li></ul></section><section class="footer-group"><h2>Autore</h2><ul><li><a href="../../../autore.html">Chi sono</a></li><li><a href="../../../portfolio.html">Scrittura civile</a></li><li><a href="../../../contatti.html">Contatti</a></li></ul></section><section class="footer-group"><h2>International</h2><ul><li><a href="/en/positioning/">Positioning</a></li><li><a href="/en/method/">Method</a></li><li><a href="/en/system/">System</a></li></ul></section></nav><div class="footer-bottom"><span>© Alessandro Gentili</span><span><a href="../../../privacy.html">Privacy</a> · <a href="/en/positioning/">International gateway</a></span></div></div></footer>
+
+<script src="../../../assets/script.js"></script>
+</body>
+</html>
