@@ -84,7 +84,10 @@ const italianOnlyGuides = [
   'cerchi/guide/daniel-kahneman-giudizio-bias-decisione-sotto-incertezza/index.html',
   'cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html',
   'cerchi/guide/marshall-mcluhan-media-percezione-ambienti-invisibili/index.html',
-  'cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/index.html'
+  'cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/index.html',
+  'cerchi/guide/tucidide-guerra-potenza-crisi-della-parola/index.html',
+  'cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/index.html',
+  'cerchi/guide/carl-von-clausewitz-guerra-politica-limiti-della-forza/index.html'
 ];
 const collectHtml = async (directory) => {
   const result = [];

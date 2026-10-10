@@ -15,6 +15,17 @@ BASE = "https://alessandro-gentili.it/"
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 COVER_NAME = re.compile(r"cerchi-guida-(\d+)-[a-z0-9]+(?:-[a-z0-9]+)*-1600x900\.webp\Z")
+MODES = {"DRAFT", "PUBLICATION"}
+
+# These editorial abbreviations have one specific, reviewed destination. All
+# other labels still need to match their heading or be an unambiguous heading
+# prefix; a valid href alone never makes a TOC label acceptable.
+EDITORIAL_TOC_ALIASES = {
+    "il problema umano: ordine, paura e autorità": "il problema umano — Ordine, paura e autorità",
+    "weimar e la crisi dell'ordine": "Weimar — La crisi dell'ordine costituzionale",
+    "faq": "Domande frequenti",
+    "domande frequenti": "FAQ",
+}
 
 
 class Node:
@@ -45,7 +56,7 @@ def visible_text(node):
     if not isinstance(node, Node):
         return node
     value = "".join(visible_text(child) for child in node.children)
-    return f" {value} " if node.tag in {"br", "p", "li", "h1", "h2", "h3", "h4", "blockquote"} else value
+    return f" {value} " if node.tag in {"br", "p", "li", "h1", "h2", "h3", "h4", "blockquote", "td", "th", "tr"} else value
 
 
 def normalized(value):
@@ -123,8 +134,18 @@ def manuscript_blocks(lines):
     for block in re.split(r"\n\s*\n", "\n".join(lines)):
         if block.strip() == "---":
             continue
-        clean = [re.sub(r"^\s*(?:#{3,6}\s+|>\s*|[-*+]\s+|\d+[.)]\s+)", "", line.strip())
-                 for line in block.splitlines() if line.strip() != "---"]
+        clean = []
+        for line in block.splitlines():
+            line = line.strip()
+            if not line or line == "---":
+                continue
+            if "|" in line:
+                cells = [cell.strip() for cell in line.strip("|").split("|")]
+                if cells and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells):
+                    continue
+                line = " ".join(cells)
+            line = re.sub(r"^\s*(?:#{3,6}\s+|>\s*|[-*+]\s+|\d+[.)]\s+)", "", line)
+            clean.append(line)
         value = markdown_plain(" ".join(clean))
         if value:
             blocks.append(value)
@@ -134,7 +155,7 @@ def manuscript_blocks(lines):
 def manuscript_structure(source):
     """Parse the supported H1, opening, numbered index and H2/H3 guide layout."""
     lines = source.read_text(encoding="utf-8").splitlines()
-    if any(re.match(r"^\s*(?:```|~~~|\||<(?!!--)|#{4,6}\s)", line) for line in lines):
+    if any(re.match(r"^\s*(?:```|~~~|<(?!!--)|#{4,6}\s)", line) for line in lines):
         raise ValueError("unsupported Markdown structure; human review is required")
     nonblank = [index for index, line in enumerate(lines) if line.strip()]
     if not nonblank or not re.fullmatch(r"# (?!#).+", lines[nonblank[0]]):
@@ -142,13 +163,25 @@ def manuscript_structure(source):
     first = nonblank[0]
     title = markdown_plain(lines[first][2:])
     subtitle_at = next((i for i in range(first + 1, len(lines)) if lines[i].strip()), None)
-    if subtitle_at is None or not re.fullmatch(r"## (?!#).+", lines[subtitle_at]):
-        raise ValueError("full manuscript needs an H2 subtitle after its H1")
-    subtitle = markdown_plain(lines[subtitle_at][3:])
-    index_at = next((i for i in range(subtitle_at + 1, len(lines)) if lines[i].strip() == "## Indice"), None)
+    if subtitle_at is None:
+        raise ValueError("full manuscript needs a subtitle after its H1")
+    subtitle_line = lines[subtitle_at].strip()
+    if re.fullmatch(r"## (?!#).+", subtitle_line):
+        subtitle = markdown_plain(subtitle_line[3:])
+        intro_start = subtitle_at + 1
+    elif re.fullmatch(r"(?:\*\*.+\*\*|\*.+\*|__.+__|_.+_)", subtitle_line):
+        subtitle = markdown_plain(subtitle_line)
+        intro_heading_at = next((i for i in range(subtitle_at + 1, len(lines))
+                                 if re.fullmatch(r"##\s+Introduzione(?:\s*[—:–-].*)?", lines[i].strip(), re.I)), None)
+        if intro_heading_at is None:
+            raise ValueError("emphasized subtitle needs an explicit Introduzione heading")
+        intro_start = intro_heading_at + 1
+    else:
+        raise ValueError("full manuscript needs an H2 or emphasized subtitle after its H1")
+    index_at = next((i for i in range(intro_start, len(lines)) if lines[i].strip() == "## Indice"), None)
     if index_at is None:
         raise ValueError("full manuscript needs a ## Indice after the introduction")
-    intro = manuscript_blocks(lines[subtitle_at + 1:index_at])
+    intro = manuscript_blocks(lines[intro_start:index_at])
     first_section = next((i for i in range(index_at + 1, len(lines)) if re.match(r"^## (?!#)", lines[i])), None)
     if first_section is None:
         raise ValueError("full manuscript has no guide sections after the index")
@@ -166,14 +199,35 @@ def manuscript_structure(source):
     starts = [i for i in range(first_section, len(lines)) if re.match(r"^## (?!#)", lines[i])]
     for start, end in zip(starts, starts[1:] + [len(lines)]):
         heading = markdown_plain(lines[start][3:])
+        heading = re.sub(r"^\d+[.)]\s*", "", heading)
         body_lines = lines[start + 1:end]
         subheadings = [markdown_plain(line[4:]) for line in body_lines if re.match(r"^### (?!#)", line)]
         sections.append((heading, subheadings, manuscript_blocks(body_lines)))
     return title, subtitle, intro, index, sections
 
 
+def toc_key(value):
+    value = unicodedata.normalize("NFC", unescape(value)).casefold()
+    value = value.replace("’", "'").replace("‘", "'").replace("ʼ", "'")
+    value = re.sub(r"\s*[:—–-]\s*", " — ", value)
+    return " ".join(value.split())
+
+
+def editorial_text_key(value):
+    return normalized(value).replace("’", "'").replace("‘", "'").replace("ʼ", "'")
+
+
 def toc_label_matches(label, heading):
-    return label == heading or (heading.startswith(label + " — ") and bool(heading[len(label) + 3:].strip()))
+    label_key, heading_key = toc_key(label), toc_key(heading)
+    if label_key == heading_key:
+        return True
+    if {label_key, heading_key} == {toc_key("FAQ"), toc_key("Domande frequenti")}:
+        return True
+    alias_heading = next((expected for alias, expected in EDITORIAL_TOC_ALIASES.items()
+                          if toc_key(alias) == label_key), None)
+    if alias_heading is not None:
+        return heading_key == toc_key(alias_heading)
+    return heading_key.startswith(label_key + " — ") and bool(heading_key[len(label_key) + 3:].strip())
 
 
 def final_headings_valid(headings):
@@ -189,14 +243,16 @@ def final_headings_valid(headings):
                  or bool(re.fullmatch(r"Chiusura editoriale — [^—]+", closing))))
 
 
-def validate(page, cover, source, root):
+def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=None):
     errors = []
+    report = report if report is not None else []
 
     def require(ok, message):
         if not ok:
             errors.append(message)
 
     slug = page.parent.name
+    require(mode in MODES, f"mode must be one of {', '.join(sorted(MODES))}")
     require(page.name == "index.html" and page.parent.parent.name == "guide" and bool(SLUG.fullmatch(slug)), "page must be cerchi/guide/<unique-slug>/index.html")
     existing = root / "cerchi/guide" / slug / "index.html"
     require(not existing.exists() or existing.resolve() == page.resolve(), f"slug already published: {slug}")
@@ -215,7 +271,22 @@ def validate(page, cover, source, root):
     canonical = BASE + f"cerchi/guide/{slug}/"
     sitemap = root / "sitemap.xml"
     sitemap_text = sitemap.read_text(encoding="utf-8") if sitemap.is_file() else ""
-    require(canonical not in sitemap_text, "candidate canonical already appears in the public sitemap")
+    sitemap_urls = {normalized(unescape(item)) for item in re.findall(r"<loc>\s*(.*?)\s*</loc>", sitemap_text, re.I | re.S)}
+    if mode == "DRAFT":
+        require(canonical not in sitemap_urls, "DRAFT candidate must remain absent from the public sitemap")
+        report.append(f"PUBLICATION STATUS: NON PUBBLICATA (DRAFT; {canonical} absent from sitemap)")
+    elif mode == "PUBLICATION":
+        require(canonical in sitemap_urls, "PUBLICATION candidate canonical must be included in sitemap")
+
+    release_urls = set()
+    for value in release_guides:
+        url = urljoin(BASE, value)
+        parsed = urlsplit(url)
+        local = root / unquote(parsed.path).lstrip("/")
+        if parsed.path.endswith("/"):
+            local = local / "index.html"
+        require(parsed.netloc == "alessandro-gentili.it" and parsed.path.startswith("/cerchi/guide/") and local.is_file(), f"release guide must be an existing local guide URL: {value}")
+        release_urls.add(url if url.endswith("/") else url + "/")
 
     def one(tag, attr, value):
         found = [node for node in nodes if node.tag == tag and node.attrs.get(attr) == value]
@@ -228,9 +299,32 @@ def validate(page, cover, source, root):
     canonical_node = one("link", "rel", "canonical")
     require(bool(description and normalized(description.attrs.get("content", ""))), "missing meta description")
     require(bool(canonical_node and canonical_node.attrs.get("href") == canonical), "canonical must self-reference the candidate URL")
+    for prop, expected in (("og:url", canonical), ("twitter:url", canonical)):
+        node = one("meta", "property" if prop.startswith("og:") else "name", prop)
+        require(bool(node and node.attrs.get("content") == expected), f"{prop} must match the self-canonical URL")
     require(not any(node.tag == "meta" and node.attrs.get("name") == "robots" and "noindex" in node.attrs.get("content", "").lower() for node in nodes), "public guide must not have noindex")
     require(any(node.tag == "header" and "site-header" in node.attrs.get("class", "").split() for node in nodes), "shared site header missing")
-    require(any(node.tag == "footer" for node in nodes), "shared site footer missing")
+    require(any(node.tag == "footer" and "footer" in node.attrs.get("class", "").split() for node in nodes), "shared site footer missing")
+    header = next((node for node in nodes if node.tag == "header" and "site-header" in node.attrs.get("class", "").split()), None)
+    require(bool(header and any(n.tag == "nav" and "primary-nav" in n.attrs.get("class", "").split() for n in walk(header))
+            and any(n.tag == "ul" and "primary-nav-list" in n.attrs.get("class", "").split() for n in walk(header))), "shared primary navigation structure missing")
+    if header:
+        require(any(n.tag == "a" and "brand" in n.attrs.get("class", "").split() for n in walk(header)), "shared brand link missing from primary navigation")
+        nav_lists = [n for n in walk(header) if n.tag == "ul" and "primary-nav-list" in n.attrs.get("class", "").split()]
+        if nav_lists:
+            nav_items = [n for n in nav_lists[0].children if isinstance(n, Node) and n.tag == "li"]
+            require(bool(nav_items) and all("primary-nav-item" in n.attrs.get("class", "").split() for n in nav_items), "primary navigation items need .primary-nav-item")
+            nav_links = [n for n in walk(nav_lists[0]) if n.tag == "a"]
+            require(bool(nav_links) and all({"primary-nav-link", "primary-nav-dropdown-link"}.intersection(n.attrs.get("class", "").split()) for n in nav_links), "primary navigation links need the established primary-nav link classes")
+    footer = next((node for node in nodes if node.tag == "footer" and "footer" in node.attrs.get("class", "").split()), None)
+    require(bool(footer and any(n.tag == "nav" and "footer-nav" in n.attrs.get("class", "").split() for n in walk(footer))), "shared footer navigation structure missing")
+    stylesheet_path = root / "assets/style.css"
+    stylesheet_text = stylesheet_path.read_text(encoding="utf-8") if stylesheet_path.is_file() else ""
+    for selector in (".guide-page-main .guide-index", ".guide-page-main .guide-body",
+                     ".guide-page-main .guide-section", ".guide-page-main .guide-section h2",
+                     ".guide-page-main .guide-section h3", ".guide-page-main .guide-toc",
+                     ".guide-page-main .guide-toc a", ".actions", ".btn,.btn-secondary"):
+        require(selector in stylesheet_text, f"shared stylesheet is missing required guide selector: {selector}")
     require(any(node.tag == "link" and node.attrs.get("rel") == "stylesheet" and urljoin(canonical, node.attrs.get("href", "")) == BASE + "assets/style.css" for node in nodes), "shared stylesheet missing")
     require(any(node.tag == "script" and urljoin(canonical, node.attrs.get("src", "")) == BASE + "assets/script.js" for node in nodes), "shared script missing")
 
@@ -256,8 +350,10 @@ def validate(page, cover, source, root):
         return errors
     main = mains[0]
     main_nodes = list(walk(main))
+    require({"page", "guide-page-main"}.issubset(set(main.attrs.get("class", "").split())), "main needs .page and .guide-page-main")
     heroes = list(main.find(css_class="hero"))
     require(len(heroes) == 1, "expected one compact hero")
+    require(len(list(main.find(css_class="guide-hero"))) == 1, "hero needs .guide-hero")
     h1s = [node for node in main_nodes if node.tag == "h1"]
     require(len(h1s) == 1 and bool(normalized(content(h1s[0])) if h1s else ""), "expected one nonempty H1")
     number = None
@@ -276,7 +372,13 @@ def validate(page, cover, source, root):
                     break
         leads = [node for node in heroes[0].find("p") if node not in eyebrow and not list(node.find("a"))]
         require(len(leads) == 1 and 1 <= len(normalized(content(leads[0]))) <= 100, "hero needs one short lead (about 90 characters)")
+        require(bool(leads and "lead" in leads[0].attrs.get("class", "").split()), "hero lead needs .lead")
+        actions = [node for node in heroes[0].find(css_class="actions")]
+        require(len(actions) == 1, "hero CTA wrapper needs .actions")
         hero_links = list(heroes[0].find("a"))
+        require(len([link for link in hero_links if "btn" in link.attrs.get("class", "").split()]) == 1
+                and len([link for link in hero_links if "btn-secondary" in link.attrs.get("class", "").split()]) == 1,
+                "hero CTAs need .btn and .btn-secondary")
         require(len(hero_links) == 2 and normalized(content(hero_links[0])) == "Hub Cerchi d’inchiostro" and urljoin(canonical, hero_links[0].attrs.get("href", "")) == BASE + "cerchi/", "hero needs the Hub CTA and one secondary CTA")
         if len(hero_links) == 2:
             second_url = urljoin(canonical, hero_links[1].attrs.get("href", ""))
@@ -309,7 +411,46 @@ def validate(page, cover, source, root):
     article = schemas.get("Article", {})
     breadcrumb = schemas.get("BreadcrumbList", {})
     require(bool(article and article.get("url") == canonical and article.get("mainEntityOfPage") == canonical and normalized(article.get("headline", ""))), "Article JSON-LD missing or inconsistent")
-    require(bool(article.get("@context") == "https://schema.org" and normalized(article.get("description", "")) and article.get("inLanguage") in {"it", "it-IT"}), "Article JSON-LD needs context, description and Italian language")
+    html_languages = [node.attrs.get("lang", "") for node in nodes if node.tag == "html"]
+    html_language = html_languages[0] if len(html_languages) == 1 else ""
+    schema_language = article.get("inLanguage", "") if isinstance(article, dict) else ""
+    require(bool(re.fullmatch(r"[a-z]{2}(?:-[A-Z]{2})?", html_language)), "html element needs a valid lang attribute")
+    require(bool(article.get("@context") == "https://schema.org" and normalized(article.get("description", ""))
+                 and schema_language.split("-")[0].lower() == html_language.split("-")[0].lower()),
+            "Article JSON-LD needs context, description and an inLanguage matching the document language")
+    alternates = [node for node in nodes if node.tag == "link" and node.attrs.get("rel") == "alternate" and node.attrs.get("hreflang")]
+    alternate_by_lang = {node.attrs.get("hreflang"): node.attrs.get("href") for node in alternates}
+    document_language = html_language.split("-")[0].lower()
+    if document_language in {"it", "en"}:
+        require(alternate_by_lang.get(document_language) == canonical,
+                f"{document_language} hreflang must self-reference the guide canonical")
+    for alternate in alternates:
+        hreflang = alternate.attrs.get("hreflang", "").lower()
+        alternate_url = alternate.attrs.get("href", "")
+        if hreflang == "x-default":
+            require(alternate_url == canonical, "x-default must point to the approved self-canonical guide")
+            continue
+        parsed_alternate = urlsplit(alternate_url)
+        require(parsed_alternate.netloc == "alessandro-gentili.it", f"hreflang target must use the canonical site: {alternate_url}")
+        if parsed_alternate.netloc == "alessandro-gentili.it":
+            alternate_path = unquote(parsed_alternate.path)
+            alternate_file = page if alternate_url.rstrip("/") == canonical.rstrip("/") else root / alternate_path.lstrip("/")
+            if alternate_path.endswith("/"):
+                alternate_file = alternate_file / "index.html" if alternate_file != page else page
+            require(alternate_file.is_file(), f"hreflang target does not exist locally: {alternate_url}")
+            if alternate_file.is_file() and alternate_file != page:
+                alternate_tree = Tree(alternate_file.read_text(encoding="utf-8"))
+                alternate_nodes = list(walk(alternate_tree.root))
+                canonical_values = [n.attrs.get("href") for n in alternate_nodes if n.tag == "link" and n.attrs.get("rel") == "canonical"]
+                target_langs = [n.attrs.get("lang", "").split("-")[0].lower() for n in alternate_nodes if n.tag == "html"]
+                require(len(canonical_values) == 1 and canonical_values[0] == alternate_url,
+                        f"hreflang target must self-canonicalize: {alternate_url}")
+                require(len(target_langs) == 1 and target_langs[0] == hreflang.split("-")[0],
+                        f"hreflang target language does not match {hreflang}: {alternate_url}")
+                returned_alternates = {n.attrs.get("hreflang"): n.attrs.get("href") for n in alternate_nodes
+                                       if n.tag == "link" and n.attrs.get("rel") == "alternate" and n.attrs.get("hreflang")}
+                require(returned_alternates.get(document_language) == canonical,
+                        f"hreflang relation is not reciprocal: {alternate_url}")
     require(bool(isinstance(article.get("author"), dict) and article["author"].get("name") == "Alessandro Gentili"), "Article JSON-LD author must be Alessandro Gentili")
     require(bool(isinstance(article.get("publisher"), dict) and normalized(article["publisher"].get("name", ""))), "Article JSON-LD publisher missing")
     article_image = article.get("image") if isinstance(article, dict) else None
@@ -322,8 +463,14 @@ def validate(page, cover, source, root):
     if isinstance(crumbs, list) and len(crumbs) >= 3 and all(isinstance(item, dict) for item in crumbs):
         require([item.get("position") for item in crumbs] == list(range(1, len(crumbs) + 1)) and crumbs[0].get("item") == BASE and crumbs[1].get("item") == BASE + "cerchi/", "BreadcrumbList positions and parent URLs are inconsistent")
 
+    bodies = [node for node in main_nodes if "guide-body" in node.attrs.get("class", "").split()]
+    indexes = [node for node in main_nodes if "guide-index" in node.attrs.get("class", "").split()]
+    require(bool(bodies), "guide body needs .guide-body")
+    require(len(indexes) == 1, "guide needs exactly one .guide-index")
+    require(len(indexes) == 1 and indexes[0].tag == "article", ".guide-index must use the established article card wrapper")
     sections = [node for node in main_nodes if node.tag == "article" and "guide-section" in node.attrs.get("class", "").split()]
     require(len(sections) >= 5, "guide needs opening, body and three final sections")
+    require(bool(sections) and all(any(section in list(walk(body)) for body in bodies) for section in sections), "all .guide-section blocks must be inside .guide-body")
     headings = []
     for section in sections:
         h2 = list(section.find("h2"))
@@ -353,13 +500,15 @@ def validate(page, cover, source, root):
             label = re.sub(r"^\d+[.)]\s*", "", normalized(content(link)))
             require(target in section_by_id and toc_label_matches(label, section_by_id.get(target, "")), f"TOC label/section mismatch: #{target}")
         require(targets == [section.attrs.get("id") for section in sections[1:]], "TOC targets must follow every body section in order after the editorial opening")
+        require(len(indexes) == 1 and toc in list(walk(indexes[0])), ".guide-toc must be inside .guide-index")
         if heroes and images and sections:
             require(main_nodes.index(heroes[0]) < main_nodes.index(images[0]) < main_nodes.index(toc) < main_nodes.index(sections[0]), "required order: hero → cover → TOC → editorial opening")
 
-    faq_visible = "FAQ" in headings
+    faq_headings = {heading for heading in headings if toc_key(heading) in {toc_key("FAQ"), toc_key("Domande frequenti")}}
+    faq_visible = bool(faq_headings)
     require(faq_visible == ("FAQPage" in schemas), "FAQPage JSON-LD is required exactly when visible FAQ exists")
     if faq_visible and "FAQPage" in schemas:
-        faq_section = sections[headings.index("FAQ")]
+        faq_section = sections[next(index for index, heading in enumerate(headings) if heading in faq_headings)]
         questions = {normalized(content(h)) for h in faq_section.find("h3")}
         entries = schemas["FAQPage"].get("mainEntity", [])
         schema_questions = {normalized(item.get("name", "")) for item in entries if isinstance(item, dict)} if isinstance(entries, list) else set()
@@ -388,9 +537,10 @@ def validate(page, cover, source, root):
             continue
         path = unquote(url.path)
         require(not any(part in {"prototipi", "private", "test", "tests"} for part in Path(path).parts) and not path.endswith("delos-reference.html"), f"nonpublic target is forbidden: {value}")
-        if path.startswith("/cerchi/guide/") and path not in {f"/cerchi/guide/{slug}/", f"/cerchi/guide/{slug}/index.html"}:
+        if path.startswith("/cerchi/guide/"):
             guide_url = BASE + path.lstrip("/").removesuffix("index.html")
-            require(guide_url in sitemap_text, f"guide link is not published in sitemap: {value}")
+            if not guide_url.endswith("/"):
+                guide_url += "/"
         if path in {f"/cerchi/guide/{slug}/", f"/cerchi/guide/{slug}/index.html"}:
             target = page
         elif path == f"/assets/img/cerchi/{cover.name}":
@@ -400,9 +550,47 @@ def validate(page, cover, source, root):
             if path.endswith("/"):
                 target = target / "index.html"
         require(target.is_file(), f"missing local target: {value}")
+        if path.startswith("/cerchi/guide/") and target.is_file() and guide_url != canonical:
+            if mode == "DRAFT" and guide_url not in sitemap_urls:
+                report.append(f"LOCAL CANDIDATE LINK: {guide_url} exists locally but is not published")
+            elif mode == "PUBLICATION":
+                require(guide_url in sitemap_urls or guide_url in release_urls, f"PUBLICATION guide link must be published or included in --release-guide: {value}")
         if url.fragment and target.is_file():
             target_ids = ids if target == page else [item.attrs["id"] for item in walk(Tree(target.read_text(encoding="utf-8")).root) if "id" in item.attrs]
             require(unquote(url.fragment) in target_ids, f"missing local fragment: {value}")
+
+    if mode == "PUBLICATION":
+        index_paths = [root / "cerchi/index.html"]
+        triads_referenced = any(urljoin(canonical, node.attrs.get("href", "")) == BASE + "cerchi/triadi/"
+                                for node in main_nodes if node.tag == "a")
+        if triads_referenced:
+            index_paths.append(root / "cerchi/triadi/index.html")
+        for index_path in index_paths:
+            if not index_path.is_file():
+                errors.append(f"PUBLICATION index page missing: {index_path.relative_to(root)}")
+                continue
+            index_tree = Tree(index_path.read_text(encoding="utf-8"))
+            index_links = [node.attrs.get("href", "") for node in walk(index_tree.root) if node.tag == "a"]
+            index_urls = {urljoin(BASE + str(index_path.relative_to(root)), link) for link in index_links}
+            require(canonical in index_urls, f"PUBLICATION candidate must be linked from {index_path.relative_to(root)}")
+        for italian, english, it_url, en_url in (
+            (root / "cerchi/index.html", root / "en/cerchi/index.html", BASE + "cerchi/", BASE + "en/cerchi/"),
+            (root / "cerchi/triadi/index.html", root / "en/cerchi/triads/index.html", BASE + "cerchi/triadi/", BASE + "en/cerchi/triads/"),
+        ):
+            for path in (italian, english):
+                require(path.is_file(), f"PUBLICATION language overview missing: {path.relative_to(root)}")
+            if not italian.is_file() or not english.is_file():
+                continue
+            pages = [(italian, it_url, "it"), (english, en_url, "en")]
+            for path, expected_url, lang in pages:
+                page_tree = Tree(path.read_text(encoding="utf-8"))
+                page_nodes = list(walk(page_tree.root))
+                canonical_values = [n.attrs.get("href") for n in page_nodes if n.tag == "link" and n.attrs.get("rel") == "canonical"]
+                require(canonical_values == [expected_url], f"{path.relative_to(root)} canonical must be {expected_url}")
+                language = next((n.attrs.get("lang", "").split("-")[0].lower() for n in page_nodes if n.tag == "html"), "")
+                require(language == lang, f"{path.relative_to(root)} html lang must be {lang}")
+                alternates = {n.attrs.get("hreflang"): n.attrs.get("href") for n in page_nodes if n.tag == "link" and n.attrs.get("rel") == "alternate" and n.attrs.get("hreflang")}
+                require(alternates.get("it") == it_url and alternates.get("en") == en_url, f"{path.relative_to(root)} IT/EN hreflang pair is inconsistent")
 
     try:
         structure = manuscript_structure(source)
@@ -435,14 +623,15 @@ def validate(page, cover, source, root):
                         cursor = found + len(block)
             if len(tocs) == 1:
                 labels = [re.sub(r"^\d+[.)]\s*", "", normalized(content(link))) for link in tocs[0].find("a")]
-                require(labels == index, "TOC labels differ from the manuscript index or are out of order")
+                require(len(labels) == len(index) and all(toc_key(actual) == toc_key(expected) for actual, expected in zip(labels, index)),
+                        "TOC labels differ from the manuscript index or are out of order")
             require(len(index) == len(source_sections), "manuscript index does not cover every source section")
             for position, (expected, subheadings, blocks) in enumerate(source_sections, 1):
                 if position >= len(sections):
                     break
                 section = sections[position]
                 actual = headings[position]
-                require(actual == expected, f"manuscript H2 {position} missing, altered or out of order: {expected}")
+                require(editorial_text_key(actual) == editorial_text_key(expected), f"manuscript H2 {position} missing, altered or out of order: {expected}")
                 actual_subheadings = [normalized(content(h)) for h in section.find("h3")]
                 require(actual_subheadings == subheadings, f"manuscript H3/FAQ list differs in section {position}: {expected}")
                 section_text = normalized(visible_text(section))
@@ -466,14 +655,19 @@ def main():
     parser.add_argument("--cover", type=Path, required=True, help="supplied WebP cover; may be in a temporary directory")
     parser.add_argument("--source", type=Path, required=True, help="definitive UTF-8 manuscript; full H1/subtitle/index structure is checked when present")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent, help="repository root for existing local links")
+    parser.add_argument("--mode", choices=sorted(MODES), default="DRAFT", help="DRAFT validates a local unpublished candidate; PUBLICATION applies sitemap and index release gates")
+    parser.add_argument("--release-guide", action="append", default=[], help="additional existing guide URL included in the same authorized publication release; repeat as needed")
     args = parser.parse_args()
-    errors = validate(args.page.resolve(), args.cover.resolve(), args.source.resolve(), args.root.resolve())
+    report = []
+    errors = validate(args.page.resolve(), args.cover.resolve(), args.source.resolve(), args.root.resolve(), args.mode, args.release_guide, report)
+    for line in dict.fromkeys(report):
+        print(line)
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print(f"Technical checks passed: {args.page} (source blocks, cover, metadata, structure and links checked)")
-    print("REVIEW REQUIRED: normalized text checks cannot prove identical Markdown emphasis, markup semantics or editorial equivalence; compare the rendered page with the definitive manuscript.")
+    print(f"{args.mode} checks passed: {args.page} (source blocks, cover, metadata, visual structure and links checked)")
+    print("REVIEW REQUIRED: normalized source checks cannot prove identical emphasis, semantic markup or editorial equivalence; compare the rendered guide with the definitive manuscript.")
     return 0
 
 

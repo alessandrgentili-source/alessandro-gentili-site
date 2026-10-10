@@ -107,12 +107,12 @@ The eighth complete English triad localizes the seventh Cerchi d'inchiostro thre
 
 ## Published corpus scope
 
-- Italian author guides: 30
+- Italian author guides: 33
 - English author guides: 24
-- Italian triads: 10
-- English triad reading paths: 10
+- Italian triads: 11
+- English triad reading paths: 11
 
-Italian is the original, deeper archive. English is an autonomous, selective layer, not a complete mirror. Eight triads have English author guides. The ninth, "Desire, relation, judgment", connects Epicurus, Gabriel Tarde and Daniel Kahneman through their published Italian guides. The tenth, "Matter, medium, information", connects Lucretius, Marshall McLuhan and Claude Shannon through their published Italian guides. No English guide is implied for either reading path.
+Italian is the original, deeper archive. English is an autonomous, selective layer, not a complete mirror. The English edition offers 24 author guides covering the first eight triads, the last to be fully available in English. The ninth, "Desire, relation, judgment", connects Epicurus, Gabriel Tarde and Daniel Kahneman through their published Italian guides. The tenth, "Matter, medium, information", connects Lucretius, Marshall McLuhan and Claude Shannon through their published Italian guides. The eleventh, "War, decision, and limits", connects Thucydides, Carl Schmitt and Carl von Clausewitz through their published Italian guides. No English author guide is implied for triads nine through eleven.
 
 The English editorial entrance is https://alessandro-gentili.it/en/ and the professional entrance is https://alessandro-gentili.it/en/positioning/. Positioning, Method and System describe professional practice; Circles of Ink, Triads and Themes serve cultural reading. The general archive represents both at https://alessandro-gentili.it/archivio.html.
 
