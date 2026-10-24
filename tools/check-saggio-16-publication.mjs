@@ -58,10 +58,11 @@ try {
   const size = parseWebpSize(cover);
   assert(size.width === 960 && size.height === 540, `Expected 960x540 cover, got ${size.width}x${size.height}`);
 
-  const home = await readText('index.html');
+  // Home is a rotating editorial selection. This legacy release check must
+  // protect the Saggio 16 cover where the essay remains canonical and indexed,
+  // not pin it to a permanent Home slot.
   const saggi = await readText('saggi.html');
   const essay = await readText('saggi/saggio-16-la-pace-senza-forma.html');
-  assert(home.includes(`src="${coverUrl}"`), 'Homepage latest essays does not include the Saggio 16 cover');
   assert(saggi.includes(`src="${coverUrl}"`), 'saggi.html does not include the Saggio 16 cover');
   assert(essay.includes(`src="${coverUrl}"`), 'Saggio 16 page body does not include the visible cover');
 
