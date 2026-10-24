@@ -104,6 +104,10 @@ In `archivio.html`:
 * when a new public essay or portfolio project is published, keep the archive and sitemap aligned;
 * run `node tools/check-archive-consistency.mjs` after relevant changes.
 
+## Contratto delle pubblicazioni — obbligatorio per ChatGPT, Codex e collaboratori
+
+Prima di **creare o aggiornare** saggi, guide IT/EN, triadi e portfolio, leggere `docs/PUBLICATION_WORKFLOW.md`: è la matrice canonica delle superfici connesse da aggiornare o verificare. Non basta che la nuova pagina esista in sitemap: prima della PR eseguire `node tools/check-publication-connections.mjs --self-test` insieme ai gate già previsti. La homepage resta una selezione editoriale: tre card Saggi, con il saggio numerato più recente nella **prima**, e massimo nove card Cerchi; le altre card non si aggiornano automaticamente. Interventi a Home e pagine protette devono essere dichiarati nello scope autorizzato. Nessun merge/deploy implicito.
+
 
 ## Saggi page card taxonomy
 
