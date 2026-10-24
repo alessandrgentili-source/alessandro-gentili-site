@@ -44,17 +44,43 @@ function check(s, d) {
   const require = (ok, message) => { if (!ok) errors.push(message); };
   const latestLink = 'saggi/' + d.latest.name;
 
-  // A selected Home is not a chronological feed: only its *first* essay slot
-  // is required to be the newest numbered essay; remaining slots are editorial.
+  // "Ultimi saggi" is strictly chronological: the three newest PUBLISHED works,
+  // including micro-saggi. The rest of Home may remain an editorial selection.
+  const indexedCards = [...s.essayIndex.matchAll(/<article class="essay-card"[^>]*>[\s\S]*?<\/article>/g)]
+    .map((match) => match[0]);
+  const months = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+    'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+  const indexed = indexedCards.map((card) => {
+    const href = card.match(/<h3><a href="(saggi\/[^"]+)"/)?.[1] ?? null;
+    const meta = card.match(/<p class="meta">([^<]+)<\/p>/)?.[1] ?? '';
+    const dateMatch = meta.match(/\b(\d{1,2})\s+([a-z]+)\s+(\d{4})\b/i);
+    const month = dateMatch ? months.indexOf(dateMatch[2].toLowerCase()) : -1;
+    const date = dateMatch && month >= 0
+      ? Date.UTC(Number(dateMatch[3]), month, Number(dateMatch[1]))
+      : null;
+    return { href, date };
+  });
   const featuredSection = s.home.match(/<section[^>]*class="[^"]*\blatest-essays\b[^"]*"[\s\S]*?<\/section>/)?.[0] ?? '';
-  const featuredCards = [...featuredSection.matchAll(/<article class="essay-card" data-saggio-(\d+)[\s\S]*?<\/article>/g)];
-  const allFeaturedCards = [...featuredSection.matchAll(/<article class="essay-card"[\s\S]*?<\/article>/g)];
+  const featuredCards = [...featuredSection.matchAll(/<article class="essay-card"[^>]*>[\s\S]*?<\/article>/g)]
+    .map((match) => match[0]);
+  const featuredHrefs = featuredCards.map((card) =>
+    card.match(/<h3><a href="(saggi\/[^"]+)"/)?.[1] ?? null);
+  const expected = indexed.slice(0, 3);
   require(featuredSection.length > 0, 'Home: missing latest-essays section');
-  require(allFeaturedCards.length === 3, 'Home: preserve the three selected essay cards');
-  require(featuredCards.length > 0 && Number(featuredCards[0][1]) === d.latest.number,
-    'Home: first featured card must show latest numbered essay ' + d.latest.number);
-  require(featuredCards.length > 0 && featuredCards[0][0].includes('href="' + latestLink + '"'),
-    'Home: latest essay card must link to ' + latestLink);
+  require(indexed.length >= 3 && indexed.every((entry) => entry.href),
+    'Saggi index: every published essay card must have a link to its proprietary page');
+  require(expected.length === 3 && expected.every((entry) => entry.date !== null),
+    'Saggi index: newest three essays need precise publication dates (day/month/year)');
+  if (expected.length === 3 && expected.every((entry) => entry.date !== null)) {
+    require(expected[0].date >= expected[1].date && expected[1].date >= expected[2].date,
+      'Saggi index: newest three essays are not sorted by descending publication date');
+    require(indexed.slice(3).every((entry) => entry.date === null || entry.date <= expected[2].date),
+      'Saggi index: a newer dated essay appears below the first three cards');
+  }
+  require(featuredCards.length === 3, 'Home: "Ultimi saggi" must contain exactly three cards');
+  require(featuredHrefs.length === 3 && featuredHrefs.every((href, i) => href === expected[i]?.href),
+    'Home: "Ultimi saggi" must match the three most recently published works in Saggi index, including micro/macro, in chronological order. Expected: ' +
+    expected.map((entry) => entry.href).join(', '));
   require(s.essayIndex.includes('href="' + latestLink + '"'),
     'Saggi index: missing latest numbered essay ' + latestLink);
   if (d.previous) {
@@ -118,6 +144,22 @@ if (process.argv.includes('--self-test')) {
     ...state,
     home: state.home.replace(/<article class="essay-card" data-saggio-\d+>[\s\S]*?<\/article>/, '')
   };
+  const homeCards = [...state.home.matchAll(/<article class="essay-card"[^>]*>[\s\S]*?<\/article>/g)];
+  const swapSecondThird = {
+    ...state,
+    home: state.home.replace(homeCards[1][0], '__SECOND_HOME_CARD__')
+      .replace(homeCards[2][0], homeCards[1][0])
+      .replace('__SECOND_HOME_CARD__', homeCards[2][0])
+  };
+  // Regression of the actual risk: a newly published micro-saggio must become
+  // the first item if it is newer than the latest numbered essay.
+  const indexedCards = [...state.essayIndex.matchAll(/<article class="essay-card"[^>]*>[\s\S]*?<\/article>/g)];
+  const newerMicro = indexedCards[2][0].replace('4 settembre 2026', '15 ottobre 2026');
+  const newerMicroIndex = {
+    ...state,
+    essayIndex: state.essayIndex.replace(indexedCards[0][0], newerMicro)
+      .replace(indexedCards[2][0], indexedCards[0][0])
+  };
   const staleGuideCount = {
     ...state,
     itHub: state.itHub.replace('Le ' + itGuideSlugs.length + ' guide restano', 'Le 0 guide restano')
@@ -130,6 +172,8 @@ if (process.argv.includes('--self-test')) {
   };
   for (const [label, mutated] of [
     ['missing newest Home card', omitNewest],
+    ['reordered chronological Home cards', swapSecondThird],
+    ['newer micro-saggio omitted from first position', newerMicroIndex],
     ['stale guide count', staleGuideCount],
     ['stale triad CTA', staleTriadCount]
   ]) {
@@ -137,6 +181,6 @@ if (process.argv.includes('--self-test')) {
   }
   console.log('Mutation tests PASS (home, guide count, triad count)');
 }
-console.log('Publication dependencies PASS: latest essay ' + latest.number +
+console.log('Publication dependencies PASS: chronological latest three essays (micro/macro), latest numbered essay ' + latest.number +
   ', ' + itGuideSlugs.length + ' IT guides, ' + enGuideSlugs.length +
   ' EN guides, IT/EN triads checked.');
