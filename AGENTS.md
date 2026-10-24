@@ -78,7 +78,7 @@ Rules:
 * do not add Medium CTAs to the Home page;
 * do not turn the Home page into a full archive;
 * keep a maximum of 9 visible Cerchi d’inchiostro guide cards;
-* treat the Home page as an editorial selection, not an update feed;
+* preserve the Home page as a curated architectural experience, not a full archive; **its specific 'Ultimi saggi' block is strictly chronological**: the last three published essays in descending publication date, including micro-saggi and macro-saggi;
 * link primarily to proprietary content: essays, Cerchi d’inchiostro, author page, archive and mature tools only.
 
 ## Essay index pages
@@ -103,6 +103,10 @@ In `archivio.html`:
 * do not inject archive entries from `assets/script.js`;
 * when a new public essay or portfolio project is published, keep the archive and sitemap aligned;
 * run `node tools/check-archive-consistency.mjs` after relevant changes.
+
+## Contratto delle pubblicazioni — obbligatorio per ChatGPT, Codex e collaboratori
+
+Prima di **creare o aggiornare** saggi, guide IT/EN, triadi e portfolio, leggere `docs/PUBLICATION_WORKFLOW.md`: è la matrice canonica delle superfici connesse da aggiornare o verificare. Non basta che la nuova pagina esista in sitemap: prima della PR eseguire `node tools/check-publication-connections.mjs --self-test` insieme ai gate già previsti. La homepage conserva esattamente tre card nella sezione **Ultimi saggi**: sono sempre i tre testi pubblicati più recenti in ordine cronologico, senza distinzione micro/macro e senza selezione discrezionale. Le card Cerchi restano una selezione separata, con massimo nove elementi. Le verifiche devono leggere anche la data di pubblicazione. Interventi a Home e pagine protette devono essere dichiarati nello scope autorizzato. Nessun merge/deploy implicito.
 
 
 ## Saggi page card taxonomy
