@@ -70,7 +70,7 @@ function check(s, d) {
       'Italian Cerchi hub: missing published guide ' + slug);
   }
   for (const slug of d.enGuideSlugs) {
-    require(s.enHub.includes('href="guides/' + slug + '/"'),
+    require(s.enHub.includes('href="/en/cerchi/guides/' + slug + '/"'),
       'English Cerchi hub: missing published English guide ' + slug);
   }
 
