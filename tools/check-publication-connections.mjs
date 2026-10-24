@@ -95,7 +95,8 @@ function check(s, d) {
   require(s.itHub.includes('Esplora le ' + itCount + ' triadi'),
     'Italian Cerchi hub: triad CTA must say ' + itCount);
 
-  require(s.enHome.includes(d.enGuideSlugs.length + ' English author guides and ' + enIds.length + ' triad reading paths'),
+  require(s.enHome.includes('data-corpus-count="en-guides">' + d.enGuideSlugs.length + '</span>') &&
+    s.enHome.includes('data-corpus-count="en-triads">' + enIds.length + '</span>'),
     'English Home: guide/triad inventory counts do not match published files');
   require(s.enPositioning.includes('data-corpus-count="en-guides">' + d.enGuideSlugs.length + '</span>'),
     'English Positioning: English guide count does not match published files');
