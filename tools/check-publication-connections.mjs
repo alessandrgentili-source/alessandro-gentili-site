@@ -153,13 +153,43 @@ if (process.argv.includes('--self-test')) {
   };
   // Regression of the actual risk: a newly published micro-saggio must become
   // the first item if it is newer than the latest numbered essay.
-  const indexedCards = [...state.essayIndex.matchAll(/<article class="essay-card"[^>]*>[\s\S]*?<\/article>/g)];
-  const newerMicro = indexedCards[2][0].replace('4 settembre 2026', '15 ottobre 2026');
+  const indexedCardPattern = /<article class="essay-card"[^>]*>[\s\S]*?<\/article>/g;
+  const indexedCards = [...state.essayIndex.matchAll(indexedCardPattern)];
+  const microCard = indexedCards.find(([card]) => /\bdata-micro-saggio-[\w-]+(?=[\s>])/.test(card));
+  if (!microCard) throw Error('Micro-saggio regression fixture: no identified micro-saggio found');
+  const months = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+    'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+  const datePattern = /(<p class="meta">)(\d{1,2})\s+([a-z]+)\s+(\d{4})\b/i;
+  const dates = indexedCards.flatMap(([card]) => {
+    const match = card.match(datePattern);
+    const month = match ? months.indexOf(match[3].toLowerCase()) : -1;
+    return month >= 0 ? [Date.UTC(Number(match[4]), month, Number(match[2]))] : [];
+  });
+  if (!dates.length || !datePattern.test(microCard[0])) {
+    throw Error('Micro-saggio regression fixture: precise publication dates are required');
+  }
+  const nextDate = new Date(Math.max(...dates) + 24 * 60 * 60 * 1000);
+  const nextDateText = `${nextDate.getUTCDate()} ${months[nextDate.getUTCMonth()]} ${nextDate.getUTCFullYear()}`;
+  const newerMicro = microCard[0].replace(datePattern, (_, prefix) => prefix + nextDateText);
+  const remainingCards = indexedCards.filter((card) => card !== microCard).map(([card]) => card);
+  const reorderedCards = [newerMicro, ...remainingCards];
+  let slot = 0;
   const newerMicroIndex = {
     ...state,
-    essayIndex: state.essayIndex.replace(indexedCards[0][0], newerMicro)
-      .replace(indexedCards[2][0], indexedCards[0][0])
+    essayIndex: state.essayIndex.replace(indexedCardPattern, () => reorderedCards[slot++])
   };
+  const simulatedCards = [...newerMicroIndex.essayIndex.matchAll(indexedCardPattern)].map(([card]) => card);
+  if (newerMicro === microCard[0] || newerMicroIndex.essayIndex === state.essayIndex ||
+      newerMicroIndex.home !== state.home || simulatedCards.length !== indexedCards.length ||
+      simulatedCards[0] !== newerMicro ||
+      !remainingCards.every((card, index) => simulatedCards[index + 1] === card)) {
+    throw Error('Micro-saggio regression fixture: mutation must move the newly dated micro-saggio first, preserve all other cards and leave Home unchanged');
+  }
+  const microErrors = check(newerMicroIndex, data);
+  if (microErrors.length !== 1 || !microErrors[0].startsWith('Home: "Ultimi saggi" must match the three most recently published works in Saggi index')) {
+    throw Error('Micro-saggio regression must fail only for the chronological Home/index mismatch: ' + microErrors.join('; '));
+  }
+  console.log('Micro-saggio mutation PASS: index changed, remaining cards ordered, Home unchanged; only the chronological Home/index mismatch detected');
   const staleGuideCount = {
     ...state,
     itHub: state.itHub.replace('Le ' + itGuideSlugs.length + ' guide restano', 'Le 0 guide restano')
