@@ -108,7 +108,7 @@ def verify(path, base):
     check(expected == actual, "Source/HTML text mismatch, expected %s actual %s" %
           (len(expected), len(actual)))
     check(after.count('class="marx-table"') == 2, "Approved tables missing")
-    check('class="marx-receipt"' in after and after.count('class="marx-receipt-stage"') == 4, "Receipt and 4 stages missing")
+    check('class="atlas-figure marx-receipt"' in after and after.count('class="marx-receipt-stage"') == 4, "Receipt and 4 stages missing")
     check("What the reverse does—and does not—show." in after, "Receipt interpretive qualification missing")
     check(len(article_ids) == 21, "Expected 21 manuscript sections")
     check('role="region"' in after and 'tabindex="0"' in after,
