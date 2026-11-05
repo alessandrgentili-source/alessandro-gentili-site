@@ -1,4 +1,20 @@
-# Alessandro Gentili — static editorial website v2.0
+# Alessandro Gentili
+
+**Scrittura, strategia e sistemi di pensiero.**
+
+Uno spazio editoriale indipendente in cui saggistica, filosofia, politica e tecnologia dialogano per interpretare il presente. Il progetto comprende saggi, guide e percorsi di lettura che collegano autori, opere e sistemi di pensiero.
+
+**Esplora le pubblicazioni sul sito ufficiale:**
+
+- **[Saggi](https://alessandro-gentili.it/saggi.html)** — riflessioni sul presente, la cultura, il potere e la responsabilità.
+- **[Cerchi d'inchiostro](https://alessandro-gentili.it/cerchi/)** — un atlante di autori, opere, idee e connessioni tra epoche.
+- **[English edition](https://alessandro-gentili.it/en/)** — accesso ai contenuti e ai percorsi internazionali.
+
+**[alessandro-gentili.it](https://alessandro-gentili.it/)** è la sede di lettura e consultazione; questo repository contiene i file utilizzati per pubblicare il sito.
+
+---
+
+## Note tecniche — documentazione originaria (v2.0)
 
 Versione premium statica HTML/CSS/JS per GitHub Pages.
 
