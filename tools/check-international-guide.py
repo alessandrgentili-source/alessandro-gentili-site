@@ -4,7 +4,6 @@
 Usage: python3 tools/check-international-guide.py --base origin/main [GUIDE ...]
 With no paths, check guides explicitly using international-atlas.css.
 New manuscripts require the separate editorial/publication procedure.
-The pinned Plato v2 revision uses its explicit source contract; no blanket bypass.
 """
 import argparse
 import json
@@ -69,6 +68,11 @@ def verify(path, base):
     before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
     after = path.read_text()
     old, new = Page(before), Page(after)
+    if relative == 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-machiavelli-revision.py'))
+        revision['verify'](path, base)
+        return
     from international_revision import applies, verify as verify_revision
     if applies(relative, before):
         verify_revision(path, base)
