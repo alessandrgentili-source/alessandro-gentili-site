@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Source-locked Aristotle EN 07 revision. Read-only validator, no HTML generation."""
+"""Source-locked Aristotle EN 08 revision. Read-only validator, no HTML generation."""
 import hashlib
 import json
 import re
