@@ -1,0 +1,57 @@
+/* Seneca EN 07 — Platinum grammar, original two-ledger instrument. */
+.atlas-seneca .seneca-guiding-question{max-width:60ch;margin:1rem 0 0;color:#182e3e;font:400 1rem/1.7 Georgia,serif}
+.atlas-seneca .seneca-guiding-question strong{color:#775b2f;letter-spacing:.07em;font:600 .78rem system-ui,sans-serif;text-transform:uppercase}
+.atlas-seneca .seneca-part{margin:1.2rem 0 3rem;padding:1.5rem 0;border-block:1px solid var(--atlas-gold)}
+.atlas-seneca .seneca-part h2{color:var(--atlas-gold);font:600 .8rem/1.7 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;margin:0}
+.atlas-seneca .guide-toc .seneca-toc-part{margin-top:.6rem;color:var(--atlas-gold);font-weight:700}
+.atlas-seneca .guide-section>h3{font:500 clamp(1.35rem,2vw,1.8rem)/1.35 var(--atlas-serif)}
+.atlas-seneca .seneca-ledgers{margin:1.6rem 0;padding:clamp(1rem,3vw,2rem);background:#182e3e;color:#f8f2e7;border:1px solid #53687a}
+.atlas-seneca .seneca-instrument-label{color:#f8f2e7;font:400 clamp(1.45rem,3vw,1.95rem)/1.25 var(--atlas-serif);margin:0 0 1rem}
+.atlas-seneca .seneca-ledger-switch{border:0;margin:0;padding:0;min-width:0}
+.atlas-seneca .seneca-ledger-switch legend{color:#ead7ad;font:400 .82rem/1.5 system-ui,sans-serif;margin-bottom:.8rem}
+.atlas-seneca .seneca-ledger-switch>input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}
+.atlas-seneca .seneca-ledger-switch>label{display:inline-block;margin:0 .3rem .5rem 0;padding:.55rem .7rem;border:1px solid #91a0ab;cursor:pointer;color:#f8f2e7;font:600 .82rem/1.45 system-ui,sans-serif}
+.atlas-seneca .seneca-ledger-switch>input:checked+label{color:#182e3e;background:#e9d7b0;border-color:#e9d7b0}
+.atlas-seneca .seneca-ledger-switch>input:focus-visible+label{outline:3px solid #e9d7b0;outline-offset:3px}
+.atlas-seneca .seneca-ledger-view{display:none;padding:1.1rem 1.2rem;margin:1rem 0 0;border:1px solid #71828d;background:#243b4c}
+.atlas-seneca #seneca-ledger-all:checked~.seneca-ledger-view{display:block}
+.atlas-seneca #seneca-ledger-inner:checked~.seneca-ledger--inner,
+.atlas-seneca #seneca-ledger-outer:checked~.seneca-ledger--outer,
+.atlas-seneca #seneca-ledger-together:checked~.seneca-ledger--together{display:block}
+.atlas-seneca .seneca-ledger-view p{color:#f8f2e7;font:400 1rem/1.75 var(--atlas-serif);margin:.75rem 0}
+.atlas-seneca .seneca-ledger-view p:first-child{margin-top:0}
+.atlas-seneca .seneca-ledger-view p:last-child{margin-bottom:0}
+.atlas-seneca .seneca-ledger-view strong{color:#ecd8ac}
+.atlas-seneca .seneca-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1rem 0 2rem;border-block:1px solid var(--atlas-rule)}
+.atlas-seneca .seneca-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:4px}
+.atlas-seneca .seneca-table{border-collapse:collapse;width:100%;font:400 .88rem/1.65 system-ui,sans-serif;text-align:left}
+.atlas-seneca .seneca-table :is(th,td){padding:.85rem .8rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
+.atlas-seneca .seneca-table thead th{color:var(--atlas-gold);font-weight:700;border-bottom:1px solid var(--atlas-gold)}
+.atlas-seneca .seneca-table tbody th{color:var(--atlas-ink);font-weight:650;width:27%;min-width:7rem}
+.atlas-seneca .seneca-glossary-search{padding:1rem;background:#f8f2e7;border:1px solid var(--atlas-rule);display:grid;gap:.6rem;grid-template-columns:minmax(0,1fr) auto}
+.atlas-seneca .seneca-glossary-search[hidden]{display:none}
+.atlas-seneca .seneca-glossary-search label{grid-column:1/-1;font:600 .85rem/1.5 system-ui,sans-serif;color:#182e3e}
+.atlas-seneca .seneca-glossary-search input{width:100%;min-width:0;padding:.7rem .8rem;border:1px solid #ad9c83;background:#fff;color:#182e3e;font:400 1rem system-ui,sans-serif}
+.atlas-seneca .seneca-glossary-search button{cursor:pointer;background:#182e3e;color:#fff;border:0;padding:.6rem 1rem;font:600 .85rem system-ui,sans-serif}
+.atlas-seneca .seneca-glossary-search [role="status"]{grid-column:1/-1;margin:0;font:400 .8rem/1.4 system-ui,sans-serif;color:#415260}
+.atlas-seneca .seneca-faq{border-top:1px solid var(--atlas-rule);padding:1.15rem 0}
+.atlas-seneca .seneca-faq h4{font:500 clamp(1.1rem,1.8vw,1.4rem)/1.35 var(--atlas-serif);color:var(--atlas-ink);margin:0 0 .55rem}
+.atlas-seneca .seneca-faq-number{font:600 .75rem system-ui,sans-serif;color:var(--atlas-gold);margin-right:.4em}
+.atlas-seneca .seneca-faq p{margin:0}
+@media(max-width:650px){
+ .atlas-seneca .seneca-ledgers{padding:1rem}
+ .atlas-seneca .seneca-ledger-view{padding:.9rem}
+ .atlas-seneca .seneca-ledger-switch>label{font-size:.78rem;padding:.45rem .55rem}
+ .atlas-seneca .seneca-table tbody th{min-width:6rem;width:36%}
+ .atlas-seneca .seneca-table :is(th,td){padding:.6rem .5rem}
+}
+@media print{
+ .atlas-seneca .seneca-ledgers{background:#fff;color:#182e3e;border-color:#775b2f}
+ .atlas-seneca .seneca-instrument-label,.atlas-seneca .seneca-ledger-view p,.atlas-seneca .seneca-ledger-view strong{color:#182e3e}
+ .atlas-seneca .seneca-ledger-switch>input,.atlas-seneca .seneca-ledger-switch>label,.atlas-seneca .seneca-ledger-switch legend{display:none}
+ .atlas-seneca .seneca-ledger-view{display:block!important;background:#fff;color:#182e3e;border-color:#aa9776;margin:.5rem 0;padding:.6rem}
+ .atlas-seneca .seneca-glossary-search{display:none!important}
+ .atlas-seneca .seneca-table tr[hidden]{display:table-row!important}
+ .atlas-seneca .seneca-table-scroll{overflow:visible}
+ .atlas-seneca .seneca-table tr,.atlas-seneca .seneca-faq{break-inside:avoid}
+}
