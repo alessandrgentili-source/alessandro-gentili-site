@@ -1,0 +1,177 @@
+/* First triad — graphic alignment with Plato EN.
+   Imported only by the three author stylesheets. No generated editorial content.
+   Shared International 3.0 typography and layout remain authoritative. */
+
+/* The same editorial question treatment, with each author's wording intact. */
+.international-atlas.atlas-guide .atlas-main .guide-hero .lead {
+  font-style: italic;
+}
+
+/* Structural labels have the same quiet scale, whatever their original markup. */
+.international-atlas.atlas-guide .atlas-main .atlas-reading > :is(.plato-part,.dante-part,.atlas-part) {
+  max-width: 64ch;
+  margin: 1rem auto 3rem;
+  padding: 0;
+  border: 0;
+}
+.international-atlas.atlas-guide .atlas-main .atlas-reading :is(.plato-part > p,.dante-part > h2,.atlas-part > h2) {
+  max-width: none;
+  margin: 0;
+  padding: 1.3rem 0;
+  border-block: 1px solid var(--atlas-gold);
+  color: var(--atlas-gold);
+  font: 600 .8rem/1.6 system-ui,sans-serif;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.international-atlas.atlas-guide .atlas-main .atlas-reading :is(.dante-part,.atlas-part) > p {
+  margin: 2rem 0 0;
+  color: var(--atlas-ink);
+  font: 400 1rem/1.8 var(--atlas-serif);
+}
+.international-atlas.atlas-guide .atlas-main .guide-toc :is([href="#reading-path"],[href="#atlas-desk"]) {
+  margin-top: .8rem;
+  color: var(--atlas-gold);
+  font-weight: 650;
+}
+.international-atlas.atlas-guide .atlas-main .guide-section > hr {
+  display: none;
+}
+
+/* Consultation tables use Plato's typographic scale and restrained gold rules.
+   Dante and Machiavelli retain their native, keyboard-focusable scroll regions;
+   Plato retains the manuscript's labelled mobile cards. */
+.international-atlas.atlas-guide .atlas-main :is(.dante-table,.mach-table) {
+  font: 400 .94rem/1.65 system-ui,sans-serif;
+}
+.international-atlas.atlas-guide .atlas-main :is(.dante-table,.mach-table) :is(th,td) {
+  padding: .85rem .65rem;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+.international-atlas.atlas-guide .atlas-main :is(.dante-table,.mach-table) thead th {
+  color: var(--atlas-gold);
+  font: 650 .8rem/1.5 system-ui,sans-serif;
+  border-bottom-color: var(--atlas-rule);
+}
+.international-atlas.atlas-guide .atlas-main :is(.dante-table-scroll,.mach-table-scroll) {
+  margin: 1.6rem 0;
+  border: 0;
+  scrollbar-color: var(--atlas-gold) transparent;
+  scrollbar-width: auto;
+}
+.international-atlas.atlas-guide .atlas-main :is(.dante-table-scroll,.mach-table-scroll):focus-visible {
+  outline: 3px solid #806333;
+  outline-offset: 5px;
+}
+
+/* One FAQ rhythm across three different sets of questions. */
+.international-atlas.atlas-guide .atlas-main :is(.plato-faq,.dante-faq,.mach-faq) {
+  padding: 1.3rem 0;
+  border-top: 1px solid var(--atlas-rule);
+}
+.international-atlas.atlas-guide .atlas-main :is(.plato-faq,.dante-faq,.mach-faq) h3 {
+  margin: 0 0 .8rem;
+  font: 400 1.5rem/1.35 var(--atlas-serif);
+}
+
+/* Dante's two clocks: the same dark-paper frame as Plato's return problem. */
+.international-atlas.atlas-guide .atlas-main .dante-two-clocks {
+  margin: 2rem 0 0;
+  padding: 1.7rem;
+  border: 0;
+}
+.international-atlas.atlas-guide .atlas-main .dante-two-clocks h3 {
+  margin: 0 0 1rem;
+  font: 400 1.9rem/1.2 var(--atlas-serif);
+}
+.international-atlas.atlas-guide .atlas-main .dante-two-clocks .dante-table thead th {
+  color: #e0c58c;
+  border-color: #687b85;
+}
+.international-atlas.atlas-guide .atlas-main .dante-two-clocks > p {
+  margin-bottom: 0;
+  padding-top: 1.2rem;
+}
+
+/* Machiavelli's existing consecutive blocks form one visual reading desk.
+   The section title and introductory paragraph stay in the essay above it. */
+.international-atlas.atlas-guide .atlas-main #promise > h3 {
+  margin: 2rem 0 0;
+  padding: 1.7rem 1.7rem 0;
+  color: var(--atlas-paper);
+  background: var(--atlas-ink);
+  font: 400 1.9rem/1.2 var(--atlas-serif);
+}
+.international-atlas.atlas-guide .atlas-main #promise > h3 ~ :is(p,blockquote,.mach-table-scroll) {
+  margin: 0;
+  padding: 1.2rem 1.7rem;
+  border: 0;
+  color: var(--atlas-paper);
+  background: var(--atlas-ink);
+  font: 400 .94rem/1.8 system-ui,sans-serif;
+}
+.international-atlas.atlas-guide .atlas-main #promise > h3 ~ blockquote p {
+  margin: 0;
+  padding-block: 1rem;
+  border-block: 1px solid #8d9a9f;
+  color: var(--atlas-paper);
+  font: 400 1.22rem/1.6 var(--atlas-serif);
+}
+.international-atlas.atlas-guide .atlas-main #promise .mach-table {
+  min-width: 620px;
+  color: var(--atlas-paper);
+  font-size: .9rem;
+}
+.international-atlas.atlas-guide .atlas-main #promise .mach-table :is(th,td) {
+  color: var(--atlas-paper);
+  border-color: #687b85;
+}
+.international-atlas.atlas-guide .atlas-main #promise .mach-table thead th {
+  color: #e0c58c;
+}
+.international-atlas.atlas-guide .atlas-main #promise > p:last-child {
+  padding-bottom: 1.7rem;
+}
+
+@media (max-width:760px) {
+  .international-atlas.atlas-guide .atlas-main .dante-two-clocks {
+    padding: 1.15rem;
+  }
+  .international-atlas.atlas-guide .atlas-main :is(.dante-two-clocks h3,#promise > h3) {
+    font-size: 1.65rem;
+  }
+  .international-atlas.atlas-guide .atlas-main #promise > h3 {
+    padding: 1.15rem 1.15rem 0;
+  }
+  .international-atlas.atlas-guide .atlas-main #promise > h3 ~ :is(p,blockquote,.mach-table-scroll) {
+    padding-inline: 1.15rem;
+  }
+  .international-atlas.atlas-guide .atlas-main #promise > p:last-child {
+    padding-bottom: 1.15rem;
+  }
+}
+@media print {
+  .international-atlas.atlas-guide .atlas-main :is(.dante-table,.mach-table),
+  .international-atlas.atlas-guide .atlas-main #promise .mach-table {
+    min-width: 0;
+    font-size: 9pt;
+  }
+  .international-atlas.atlas-guide .atlas-main :is(.dante-table-scroll,.mach-table-scroll) {
+    overflow: visible;
+  }
+  .international-atlas.atlas-guide .atlas-main .dante-two-clocks,
+  .international-atlas.atlas-guide .atlas-main #promise > h3,
+  .international-atlas.atlas-guide .atlas-main #promise > h3 ~ :is(p,blockquote,.mach-table-scroll),
+  .international-atlas.atlas-guide .atlas-main #promise > h3 ~ blockquote p,
+  .international-atlas.atlas-guide .atlas-main #promise .mach-table :is(th,td),
+  .international-atlas.atlas-guide .atlas-main .dante-two-clocks .dante-table thead th {
+    color: #182e3e;
+    background: none;
+  }
+  .international-atlas.atlas-guide .atlas-main :is(.plato-faq,.dante-faq,.mach-faq),
+  .international-atlas.atlas-guide .atlas-main :is(.dante-table,.mach-table) tr {
+    break-inside: avoid;
+  }
+}

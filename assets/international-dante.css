@@ -1,3 +1,5 @@
+@import url("international-triad-01.css");
+
 /* Guide 02 — Dante: distinctive reading hierarchy and a static two-clocks figure.
    Shared International 3.0 palette, masthead, cover and type system remain authoritative. */
 .atlas-dante .dante-part{margin:1rem 0 3rem;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);scroll-margin-top:24px}

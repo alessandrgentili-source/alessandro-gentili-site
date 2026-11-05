@@ -1,3 +1,5 @@
+@import url("international-triad-01.css");
+
 /* Plato EN: structural reading levels and static manuscript tables.
    Shared International typography, opening, header and footer are unchanged. */
 .atlas-plato .plato-part{margin:1rem 0 3rem;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);scroll-margin-top:24px;}
