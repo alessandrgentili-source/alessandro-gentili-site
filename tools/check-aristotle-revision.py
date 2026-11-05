@@ -113,7 +113,7 @@ def verify(path,base):
     def normalized(x):
         return " ".join(unescape(re.sub(r"<[^>]*>","",x)).split())
     qa=[(normalized(q),normalized(ans)) for q,ans in re.findall(
-        r'<section class="aristotle-faq"><h3>(.*?)</h4><p>(.*?)</p></section>',after,re.S)]
+        r'<section class="aristotle-faq"><h3>(.*?)</h3><p>(.*?)</p></section>',after,re.S)]
     faq=[(q["name"],q["acceptedAnswer"]["text"]) for q in new["FAQPage"]["mainEntity"]]
     check(len(qa)==18 and qa==faq,"Visible FAQ and FAQPage must match 18 pairs exactly")
     for label,url in re.findall(r'\[([^\]]+)\]\(([^)]+)\)',source):
