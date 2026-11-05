@@ -14,6 +14,10 @@ on:
       - 'strumenti.html'
       - 'assets/script.js'
       - 'assets/style.css'
+      - 'assets/international-atlas.*'
+      - 'assets/international-pasolini.css'
+      - 'tools/check-international-guide.py'
+      - 'tools/check-international-atlas.mjs'
       - 'sitemap.xml'
       - 'robots.txt'
       - 'llms.txt'
@@ -35,6 +39,10 @@ on:
       - 'strumenti.html'
       - 'assets/script.js'
       - 'assets/style.css'
+      - 'assets/international-atlas.*'
+      - 'assets/international-pasolini.css'
+      - 'tools/check-international-guide.py'
+      - 'tools/check-international-atlas.mjs'
       - 'sitemap.xml'
       - 'robots.txt'
       - 'llms.txt'
@@ -50,8 +58,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Verify bilingual architecture and complete English corpus
         run: node tools/check-i18n-consistency.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Verify shared International behaviour
+        run: |
+          node --check assets/international-atlas.js
+          node tools/check-international-atlas.mjs
+      - name: Preserve existing English guides during migration
+        if: github.event_name == 'pull_request'
+        env:
+          ATLAS_BASE: ${{ github.event.pull_request.base.sha }}
+        run: python3 tools/check-international-guide.py --base "$ATLAS_BASE"
