@@ -67,6 +67,11 @@ def verify(path, base):
     require(relative.startswith('en/cerchi/guides/'), f'Not an existing EN guide: {relative}')
     before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
     after = path.read_text()
+    if before == after:
+        # Byte-identical published pages are outside this PR's migration scope.
+        # Changed guides still pass their pinned editorial preservation contracts.
+        print(f'PASS unchanged {relative}')
+        return
     old, new = Page(before), Page(after)
     if relative == 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html' and before != after:
         from runpy import run_path
@@ -76,6 +81,11 @@ def verify(path, base):
     from international_revision import applies, verify as verify_revision
     if applies(relative, before):
         verify_revision(path, base)
+        return
+    if relative == 'en/cerchi/guides/dante-exile-language-divine-comedy/index.html' and before != after:
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-dante-revision.py'))
+        revision['verify'](path, base)
         return
     blocks = re.findall(BLOCKS, before, re.S)
     require(blocks and blocks == re.findall(BLOCKS, after, re.S), 'Approved articles changed, missing or reordered')
