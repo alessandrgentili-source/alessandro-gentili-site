@@ -25,6 +25,7 @@ const pages = [
   { path: 'en/cerchi/guides/thucydides-war-power-crisis-of-language/index.html', url: `${base}/en/cerchi/guides/thucydides-war-power-crisis-of-language/`, it: `${base}/cerchi/guide/tucidide-guerra-potenza-crisi-della-parola/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/carl-schmitt-decision-exception-political-order/index.html', url: `${base}/en/cerchi/guides/carl-schmitt-decision-exception-political-order/`, it: `${base}/cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/carl-von-clausewitz-war-politics-limits-of-force/index.html', url: `${base}/en/cerchi/guides/carl-von-clausewitz-war-politics-limits-of-force/`, it: `${base}/cerchi/guide/carl-von-clausewitz-guerra-politica-limiti-della-forza/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/epicurus-desire-fear-freedom-before-choice/index.html', url: `${base}/en/cerchi/guides/epicurus-desire-fear-freedom-before-choice/`, it: `${base}/cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/plato-ideas-truth-power/index.html', url: `${base}/en/cerchi/guides/plato-ideas-truth-power/`, it: `${base}/cerchi/guide/platone-vita-opere-pensiero/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/dante-exile-language-divine-comedy/index.html', url: `${base}/en/cerchi/guides/dante-exile-language-divine-comedy/`, it: `${base}/cerchi/guide/dante-vita-opere-commedia-esilio/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html', url: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/`, it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, type: 'Article', breadcrumb: true },
@@ -59,6 +60,7 @@ const italianPairs = [
   { path: 'cerchi/guide/tucidide-guerra-potenza-crisi-della-parola/index.html', it: `${base}/cerchi/guide/tucidide-guerra-potenza-crisi-della-parola/`, en: `${base}/en/cerchi/guides/thucydides-war-power-crisis-of-language/` },
   { path: 'cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/index.html', it: `${base}/cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/`, en: `${base}/en/cerchi/guides/carl-schmitt-decision-exception-political-order/` },
   { path: 'cerchi/guide/carl-von-clausewitz-guerra-politica-limiti-della-forza/index.html', it: `${base}/cerchi/guide/carl-von-clausewitz-guerra-politica-limiti-della-forza/`, en: `${base}/en/cerchi/guides/carl-von-clausewitz-war-politics-limits-of-force/` },
+  { path: 'cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/index.html', it: `${base}/cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/`, en: `${base}/en/cerchi/guides/epicurus-desire-fear-freedom-before-choice/` },
   { path: 'cerchi/guide/platone-vita-opere-pensiero/index.html', it: `${base}/cerchi/guide/platone-vita-opere-pensiero/`, en: `${base}/en/cerchi/guides/plato-ideas-truth-power/` },
   { path: 'cerchi/guide/dante-vita-opere-commedia-esilio/index.html', it: `${base}/cerchi/guide/dante-vita-opere-commedia-esilio/`, en: `${base}/en/cerchi/guides/dante-exile-language-divine-comedy/` },
   { path: 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html', it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, en: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/` },
@@ -85,7 +87,6 @@ const italianPairs = [
 // Every published page must have an explicit language decision; new guides cannot
 // silently fall outside this inventory. IT-only is valid and does not imply a future URL.
 const italianOnlyGuides = [
-  'cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/index.html',
   'cerchi/guide/gabriel-tarde-imitazione-credenza-desiderio/index.html',
   'cerchi/guide/daniel-kahneman-giudizio-bias-decisione-sotto-incertezza/index.html',
   'cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html',
