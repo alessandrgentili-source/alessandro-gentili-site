@@ -68,6 +68,11 @@ def verify(path, base):
     before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
     after = path.read_text()
     old, new = Page(before), Page(after)
+    if relative == 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-machiavelli-revision.py'))
+        revision['verify'](path, base)
+        return
     blocks = re.findall(BLOCKS, before, re.S)
     require(blocks and blocks == re.findall(BLOCKS, after, re.S), 'Approved articles changed, missing or reordered')
     for tag in ('title', 'h1', 'header', 'footer'):
