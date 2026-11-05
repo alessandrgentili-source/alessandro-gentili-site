@@ -73,6 +73,10 @@ def verify(path, base):
         revision = run_path(str(ROOT / 'tools/check-machiavelli-revision.py'))
         revision['verify'](path, base)
         return
+    from international_revision import applies, verify as verify_revision
+    if applies(relative, before):
+        verify_revision(path, base)
+        return
     if relative == 'en/cerchi/guides/dante-exile-language-divine-comedy/index.html' and before != after:
         from runpy import run_path
         revision = run_path(str(ROOT / 'tools/check-dante-revision.py'))
