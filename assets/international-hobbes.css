@@ -1,0 +1,60 @@
+/* Hobbes EN 12 — scoped reading extensions to the Plato/International 3.0 atlas. */
+.atlas-hobbes .hobbes-triad-context{max-width:55rem;color:var(--atlas-muted);font-size:.86rem;line-height:1.55}
+.atlas-hobbes .hobbes-guiding-question{max-width:56rem;line-height:1.5;font-size:clamp(1rem,1.55vw,1.12rem)}
+.atlas-hobbes .guide-toc .hobbes-toc-part{font-weight:700;margin-top:.75rem;color:var(--atlas-gold)}
+.atlas-hobbes .hobbes-part{border-block-start:1px solid var(--atlas-rule);margin-block:2.5rem 1.6rem;padding-block-start:1.25rem}
+.atlas-hobbes .hobbes-part h2{margin-top:0;font-family:var(--atlas-serif);font-size:clamp(1.5rem,2.4vw,2rem);font-weight:500;line-height:1.2}
+.atlas-hobbes .atlas-legacy-anchor{display:block;height:0;scroll-margin-top:5rem}
+/* Four critical questions: a legible original comparison in the navy / parchment system. */
+.atlas-hobbes .hobbes-test-figure{margin:2rem 0;padding:clamp(1.1rem,2.5vw,1.8rem);background:#192d3c;border:1px solid #766341;color:#f8f1e5}
+.atlas-hobbes .hobbes-test-switch{border:0;padding:0;margin:0;min-width:0}
+.atlas-hobbes .hobbes-test-switch legend{font:600 .8rem/1.5 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#e7d6ae;margin-bottom:.85rem}
+.atlas-hobbes .hobbes-test-switch input[type=radio]{position:absolute;opacity:0;width:1px;height:1px}
+.atlas-hobbes .hobbes-test-switch input[type=radio]+label{display:inline-block;cursor:pointer;font:600 .82rem/1.45 system-ui,sans-serif;padding:.54rem .75rem;border:1px solid #748291;color:#f9f2e6;border-radius:2px;margin:0 .45rem .6rem 0;transition:background .15s ease,color .15s ease}
+.atlas-hobbes .hobbes-test-switch input[type=radio]:checked+label{background:#e7d6b0;color:#162b3a;border-color:#e7d6b0}
+.atlas-hobbes .hobbes-test-switch input[type=radio]:focus-visible+label{outline:3px solid #e7d6b0;outline-offset:3px}
+.atlas-hobbes .hobbes-test-switch input[type=radio]+label:hover{border-color:#f1dfb9}
+.atlas-hobbes .hobbes-test-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin-top:.7rem}
+.atlas-hobbes .hobbes-test-step{border:1px solid #6f8391;border-top:3px solid #cfb47d;background:#233d50;color:#f9f3e8;min-width:0;padding:clamp(.9rem,1.75vw,1.35rem);break-inside:avoid}
+.atlas-hobbes .hobbes-test-step p{margin:0;color:#f9f3e8;font:400 .94rem/1.72 system-ui,sans-serif}
+.atlas-hobbes .hobbes-test-step strong{color:#f1dfb9;font-weight:650}
+.atlas-hobbes #hobbes-test-1:checked~.hobbes-test-steps .hobbes-test-step:not(.hobbes-test-step--1),
+.atlas-hobbes #hobbes-test-2:checked~.hobbes-test-steps .hobbes-test-step:not(.hobbes-test-step--2),
+.atlas-hobbes #hobbes-test-3:checked~.hobbes-test-steps .hobbes-test-step:not(.hobbes-test-step--3),
+.atlas-hobbes #hobbes-test-4:checked~.hobbes-test-steps .hobbes-test-step:not(.hobbes-test-step--4){display:none}
+.atlas-hobbes #hobbes-test-1:checked~.hobbes-test-steps,
+.atlas-hobbes #hobbes-test-2:checked~.hobbes-test-steps,
+.atlas-hobbes #hobbes-test-3:checked~.hobbes-test-steps,
+.atlas-hobbes #hobbes-test-4:checked~.hobbes-test-steps{grid-template-columns:minmax(0,1fr)}
+.atlas-hobbes .hobbes-test-figure figcaption{border-top:1px solid #768999;margin-top:1.1rem;padding-top:1rem;color:#e8d9be;font:400 .85rem/1.55 system-ui,sans-serif}
+/* Accessible, JS-optional glossary filter; every term is initially visible. */
+.atlas-hobbes .hobbes-glossary-controls{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem;margin:1rem 0;padding:.85rem;border:1px solid var(--atlas-rule);background:var(--atlas-paper)}
+.atlas-hobbes .hobbes-glossary-controls[hidden]{display:none}
+.atlas-hobbes .hobbes-glossary-controls label{flex-basis:100%;font:600 .82rem/1.5 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-hobbes .hobbes-glossary-controls input[type=search]{flex:1 1 14rem;min-width:0;padding:.65rem .7rem;border:1px solid #817762;background:#fffdfa;color:#1a2f3d;font:400 .9rem system-ui,sans-serif}
+.atlas-hobbes .hobbes-glossary-controls button{padding:.65rem .8rem;border:1px solid #766343;background:transparent;color:#1a2f3d;cursor:pointer;font:600 .86rem system-ui,sans-serif}
+.atlas-hobbes .hobbes-glossary-controls output{font:400 .8rem system-ui,sans-serif;color:var(--atlas-muted)}
+.atlas-hobbes .hobbes-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-block:1px solid var(--atlas-rule);margin:1.15rem 0 2rem}
+.atlas-hobbes .hobbes-glossary-table{border-collapse:collapse;width:100%;min-width:500px;font:400 .89rem/1.62 system-ui,sans-serif}
+.atlas-hobbes .hobbes-glossary-table :is(th,td){padding:.75rem .85rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--atlas-rule)}
+.atlas-hobbes .hobbes-glossary-table thead th{font-weight:700;letter-spacing:.02em;color:var(--atlas-gold);border-bottom:1px solid var(--atlas-gold)}
+.atlas-hobbes .hobbes-glossary-table tbody th{color:var(--atlas-ink);font-weight:600;width:38%}
+.atlas-hobbes .hobbes-glossary-table tbody td{color:var(--atlas-ink)}
+.atlas-hobbes .hobbes-glossary-table tbody tr[hidden]{display:none}
+.atlas-hobbes .hobbes-faq{border-top:1px solid var(--atlas-rule);margin:0;padding:1.1rem 0;break-inside:avoid}
+.atlas-hobbes .hobbes-faq h3{font:500 clamp(1.12rem,1.8vw,1.35rem)/1.4 var(--atlas-serif);margin:0 0 .45rem;color:var(--atlas-ink)}
+.atlas-hobbes .hobbes-faq p{margin:.35rem 0}
+@media(max-width:680px){.atlas-hobbes .hobbes-test-steps{grid-template-columns:minmax(0,1fr)}.atlas-hobbes .hobbes-test-figure{padding:1rem}.atlas-hobbes .hobbes-test-switch input[type=radio]+label{font-size:.79rem;margin-right:.25rem}.atlas-hobbes .hobbes-glossary-table{min-width:450px}}
+@media print{
+ .atlas-hobbes .hobbes-test-figure{background:#fff!important;color:#172f3f!important;border:1px solid #775e36;break-inside:auto}
+ .atlas-hobbes .hobbes-test-figure :is(p,strong,figcaption){color:#172f3f!important}
+ .atlas-hobbes .hobbes-test-step{background:#fff!important;color:#172f3f!important;border:1px solid #b59f79;break-inside:avoid}
+ .atlas-hobbes .hobbes-test-switch input[type=radio]+label,.atlas-hobbes .hobbes-test-switch legend{display:none!important}
+ .atlas-hobbes .hobbes-test-steps{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .atlas-hobbes .hobbes-glossary-table tr[hidden]{display:table-row!important}
+ .atlas-hobbes .hobbes-test-steps .hobbes-test-step{display:block!important}
+ .atlas-hobbes .hobbes-glossary-controls{display:none!important}
+ .atlas-hobbes .hobbes-table-scroll{overflow:visible!important}
+ .atlas-hobbes .hobbes-glossary-table{min-width:0;font-size:9pt}
+ .atlas-hobbes .hobbes-glossary-table tr,.atlas-hobbes .hobbes-faq{break-inside:avoid}
+}
