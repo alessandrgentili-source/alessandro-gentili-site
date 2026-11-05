@@ -1,0 +1,36 @@
+/* International 3.0 — McLuhan: figure and ground.
+   Native radio views without added JS; both views print. */
+.mcluhan-figure .mcluhan-intro{color:#e8e1d5;font:400 .92rem/1.8 system-ui,sans-serif;margin:-.4rem 0 1.6rem;max-width:62ch;}
+.mcluhan-switch{border:0;padding:0;margin:0;min-width:0;}
+.mcluhan-switch legend{color:#e8e1d5;font:400 .8rem/1.5 system-ui,sans-serif;margin:0 0 .8rem;}
+.mcluhan-switch>input{position:absolute;opacity:0;width:1px;height:1px;}
+.mcluhan-switch>label{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.72rem 1rem;margin:0 .45rem .5rem 0;color:#f8f2e7;border:1px solid #8d9a9f;font:500 .8rem/1.4 system-ui,sans-serif;cursor:pointer;}
+.mcluhan-switch>input:focus-visible+label{outline:3px solid #e4c68d;outline-offset:4px;}
+.mcluhan-switch>input:checked+label{color:#182e3e;background:#f8f2e7;border-color:#f8f2e7;}
+#mcluhan-figure:checked~.mcluhan-panel--ground,
+#mcluhan-ground:checked~.mcluhan-panel--figure {display:none;}
+.mcluhan-panel{padding:1.6rem 0 .4rem;}
+.mcluhan-phase{font:600 .67rem/1.5 system-ui,sans-serif;color:#e0c58c;text-transform:uppercase;letter-spacing:.15em;margin:0 0 .65rem;}
+.mcluhan-panel h3{font:400 clamp(1.58rem,2.4vw,2.2rem)/1.24 var(--atlas-serif);color:#f8f2e7;max-width:27ch;margin:0 0 1rem;}
+.mcluhan-path{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin:1.55rem 0 1.2rem;max-width:40rem;}
+.mcluhan-path>span,.mcluhan-path>b{color:#e8d3a8;font:600 .67rem/1.3 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:normal;}
+.mcluhan-path>b{border:1px solid #bea477;padding:.38rem .65rem;color:#fff1d0;}
+.mcluhan-path>i{flex:1 1 22px;min-width:12px;height:1px;background:#cfb57f;position:relative;}
+.mcluhan-path>i::after{content:"";position:absolute;top:-3px;right:0;width:7px;height:7px;border-radius:50%;background:#cfb57f;}
+.mcluhan-panel>p:last-child{max-width:59ch;margin:0;color:#f0e9df;font:400 .94rem/1.8 system-ui,sans-serif;}
+.mcluhan-caveat{color:#efe6d8;padding:1.15rem 0 .3rem;border-top:1px solid #687b85;margin:1.45rem 0 0;font:400 .86rem/1.75 system-ui,sans-serif;}
+.mcluhan-caveat strong{color:#fff8e9;}
+@media(max-width:760px){
+ .mcluhan-panel{padding-top:1.2rem;}
+ .mcluhan-panel h3{font-size:1.65rem;}
+ .mcluhan-switch>label{padding:.65rem .78rem;}
+ .mcluhan-path{gap:.45rem;}
+ .mcluhan-path>span,.mcluhan-path>b{font-size:.6rem;letter-spacing:.04em;}
+}
+@media print{
+ .mcluhan-figure .mcluhan-intro,.mcluhan-switch legend,.mcluhan-phase,.mcluhan-panel>p:last-child,.mcluhan-caveat,.mcluhan-path>span,.mcluhan-path>b{color:#182e3e;}
+ .mcluhan-switch>input,.mcluhan-switch>label{display:none;}
+ .mcluhan-panel,.mcluhan-figure .mcluhan-panel{display:block!important;break-inside:avoid;}
+ .mcluhan-panel h3{color:#182e3e;}
+ .mcluhan-path>i,.mcluhan-path>i::after{background:#806333;}
+}
