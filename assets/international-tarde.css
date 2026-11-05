@@ -1,0 +1,131 @@
+/* International 3.0 — Tarde: imitation, opposition and recombination.
+   Scoped CSS, native radio inputs, no JavaScript. All three perspectives print. */
+.tarde-figure .tarde-intro {
+  color:#e8e1d5;
+  font:400 .92rem/1.8 system-ui,sans-serif;
+  margin:-.4rem 0 1.6rem;
+  max-width:61ch;
+}
+.tarde-switch { border:0; padding:0; margin:0; min-width:0; }
+.tarde-switch legend {
+  color:#e8e1d5;
+  font:400 .79rem/1.5 system-ui,sans-serif;
+  margin:0 0 .8rem;
+}
+.tarde-switch>input {
+  position:absolute;
+  opacity:0;
+  width:1px;
+  height:1px;
+}
+.tarde-switch>label {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:.67rem .95rem;
+  margin:0 .38rem .55rem 0;
+  color:#f8f2e7;
+  border:1px solid #8d9a9f;
+  font:500 .8rem/1.4 system-ui,sans-serif;
+  cursor:pointer;
+}
+.tarde-switch>input:focus-visible+label {
+  outline:3px solid #e4c68d;
+  outline-offset:4px;
+}
+.tarde-switch>input:checked+label {
+  color:#182e3e;
+  background:#f8f2e7;
+  border-color:#f8f2e7;
+}
+#tarde-adopt:checked~.tarde-panel--delight,
+#tarde-adopt:checked~.tarde-panel--empty,
+#tarde-resist:checked~.tarde-panel--need,
+#tarde-resist:checked~.tarde-panel--empty,
+#tarde-recombine:checked~.tarde-panel--need,
+#tarde-recombine:checked~.tarde-panel--delight { display:none; }
+.tarde-panel { padding:1.65rem 0 .4rem; }
+.tarde-phase {
+  font:600 .67rem/1.5 system-ui,sans-serif;
+  color:#e0c58c;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin:0 0 .65rem;
+}
+.tarde-panel h3 {
+  font:400 clamp(1.58rem,2.4vw,2.18rem)/1.24 var(--atlas-serif);
+  color:#f8f2e7;
+  max-width:26ch;
+  margin:0 0 1rem;
+}
+.tarde-path {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.65rem;
+  margin:1.5rem 0 1.15rem;
+  max-width:39rem;
+}
+.tarde-path>span,
+.tarde-path>b {
+  color:#e8d3a8;
+  font:600 .67rem/1.3 system-ui,sans-serif;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.tarde-path>b {
+  border:1px solid #bea477;
+  padding:.38rem .7rem;
+  color:#fff1d0;
+  font-weight:600;
+}
+.tarde-path>i {
+  flex:1 1 24px;
+  min-width:12px;
+  height:1px;
+  background:#cfb57f;
+  position:relative;
+}
+.tarde-path>i::after {
+  content:"";
+  position:absolute;
+  top:-3px;
+  right:0;
+  width:7px;
+  height:7px;
+  background:#cfb57f;
+  border-radius:50%;
+}
+.tarde-path--open>b { border-style:dashed; }
+.tarde-panel>p:last-child {
+  max-width:57ch;
+  margin:0;
+  color:#f0e9df;
+  font:400 .94rem/1.8 system-ui,sans-serif;
+}
+.tarde-caveat {
+  color:#efe6d8;
+  padding:1.15rem 0 .3rem;
+  border-top:1px solid #687b85;
+  margin:1.45rem 0 0;
+  font:400 .86rem/1.75 system-ui,sans-serif;
+}
+.tarde-caveat strong { color:#fff8e9; }
+@media(max-width:760px) {
+  .tarde-panel { padding-top:1.2rem; }
+  .tarde-panel h3 { font-size:1.65rem; }
+  .tarde-switch>label { padding:.6rem .82rem; }
+  .tarde-path { gap:.45rem; }
+  .tarde-path>span,.tarde-path>b { font-size:.6rem;letter-spacing:.04em; }
+}
+@media print {
+  .tarde-figure .tarde-intro,.tarde-switch legend,.tarde-phase,
+  .tarde-panel>p:last-child,.tarde-caveat,
+  .tarde-path>span,.tarde-path>b { color:#182e3e; }
+  .tarde-switch>input,.tarde-switch>label { display:none; }
+  .tarde-panel,.tarde-figure .tarde-panel { display:block!important;break-inside:avoid; }
+  .tarde-panel h3 { color:#182e3e; }
+  .tarde-path>i,.tarde-path>i::after { background:#806333; }
+}
