@@ -110,7 +110,9 @@ def verify(path, base):
     check(after.count('class="mach-table"') == 3, "Approved tables missing")
     check('role="region"' in after and 'tabindex="0"' in after,
           "Responsive tables inaccessible to keyboard")
-    pairs = [(txt(q), txt(a)) for q,a in re.findall(
+    # Preserve punctuation adjacency around inline emphasis in FAQ headings/answers.
+    inline_text = lambda value: " ".join(unescape(re.sub(r"<[^>]*>", "", value)).split())
+    pairs = [(inline_text(q), inline_text(a)) for q,a in re.findall(
         r'<section class="mach-faq"><h3>(.*?)</h3><p>(.*?)</p></section>', after, re.S)]
     faq = [(q["name"], q["acceptedAnswer"]["text"])
            for q in newer["FAQPage"]["mainEntity"]]
