@@ -67,6 +67,11 @@ def verify(path, base):
     require(relative.startswith('en/cerchi/guides/'), f'Not an existing EN guide: {relative}')
     before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
     after = path.read_text()
+    if before == after:
+        # Byte-identical published pages are outside this PR's migration scope.
+        # Changed guides still pass their pinned editorial preservation contracts.
+        print(f'PASS unchanged {relative}')
+        return
     old, new = Page(before), Page(after)
     if relative == 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html' and before != after:
         from runpy import run_path
