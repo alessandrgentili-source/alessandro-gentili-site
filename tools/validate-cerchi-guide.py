@@ -655,9 +655,16 @@ def main():
     parser.add_argument("--cover", type=Path, required=True, help="supplied WebP cover; may be in a temporary directory")
     parser.add_argument("--source", type=Path, required=True, help="definitive UTF-8 manuscript; full H1/subtitle/index structure is checked when present")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent, help="repository root for existing local links")
-    parser.add_argument("--mode", choices=sorted(MODES), default="DRAFT", help="DRAFT validates a local unpublished candidate; PUBLICATION applies sitemap and index release gates")
+    parser.add_argument("--mode", choices=sorted(MODES | {"EN_REVISION"}), default="DRAFT", help="DRAFT/PUBLICATION retain the Italian new-guide policy; EN_REVISION validates the pinned existing Plato EN revision")
     parser.add_argument("--release-guide", action="append", default=[], help="additional existing guide URL included in the same authorized publication release; repeat as needed")
+    parser.add_argument("--base", help="immutable pre-revision ref; required only for EN_REVISION")
     args = parser.parse_args()
+    if args.mode == "EN_REVISION":
+        if not args.base:
+            parser.error("EN_REVISION requires --base")
+        from international_revision import verify
+        verify(args.page, args.base, args.source, args.cover)
+        return 0
     report = []
     errors = validate(args.page.resolve(), args.cover.resolve(), args.source.resolve(), args.root.resolve(), args.mode, args.release_guide, report)
     for line in dict.fromkeys(report):

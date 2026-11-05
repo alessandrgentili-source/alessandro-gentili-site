@@ -4,6 +4,7 @@
 Usage: python3 tools/check-international-guide.py --base origin/main [GUIDE ...]
 With no paths, check guides explicitly using international-atlas.css.
 New manuscripts require the separate editorial/publication procedure.
+The pinned Plato v2 revision uses its explicit source contract; no blanket bypass.
 """
 import argparse
 import json
@@ -68,6 +69,10 @@ def verify(path, base):
     before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
     after = path.read_text()
     old, new = Page(before), Page(after)
+    from international_revision import applies, verify as verify_revision
+    if applies(relative, before):
+        verify_revision(path, base)
+        return
     blocks = re.findall(BLOCKS, before, re.S)
     require(blocks and blocks == re.findall(BLOCKS, after, re.S), 'Approved articles changed, missing or reordered')
     for tag in ('title', 'h1', 'header', 'footer'):
