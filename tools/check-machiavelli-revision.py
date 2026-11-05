@@ -10,7 +10,7 @@ import runpy
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = "en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html"
-SOURCE_COMMIT = "90dfaa07fccda7cd9e3def41a935f88b05573277"
+SOURCE_COMMIT = "e2ed43eafaf0dbd97889ceeb9c98607cf283962f"
 SOURCE = "MACHIAVELLI_EN_GUIDE_03_CANDIDATE_v1.md"
 SOURCE_HASH = "35a21cfd230476624af6c38f1b99e49c6eab51d8e5c1b6e7bc4688c79e92a991"
 ORIGINAL_BLOB = "db0ba6524ff1ab48fd2209f0be14643a218d713c"
