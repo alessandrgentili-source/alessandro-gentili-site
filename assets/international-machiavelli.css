@@ -1,3 +1,5 @@
+@import url("international-triad-01.css");
+
 /* Guide 03 — Machiavelli: scoped editorial tables; International 3.0 shared design remains authoritative. */
 .international-atlas .mach-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-block:1px solid var(--atlas-rule);margin:1.6rem 0 2rem;scrollbar-width:thin}
 .international-atlas .mach-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:2px}
