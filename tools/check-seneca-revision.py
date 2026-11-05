@@ -107,7 +107,9 @@ def verify(path,base):
     items=re.findall(r'<article class="item guide-section[^\"]*" id="([^"]+)"',after)
     check(len(items)==36 and links==items,"TOC article order/count changed")
     expect,actual=signature(markdown_body(source)),signature(html_body(after))
-    check(expect==actual,"Source text sequence not faithful: %s vs %s tokens"%(len(expect),len(actual)))
+    if expect != actual:
+        first=next((i for i,(a,b) in enumerate(zip(expect,actual)) if a!=b),min(len(expect),len(actual)))
+        raise AssertionError("Source/HTML mismatch at %d, counts %d/%d, source=%r html=%r"%(first,len(expect),len(actual),expect[max(0,first-7):first+10],actual[max(0,first-7):first+10]))
     check(after.count("<table ")==1 and after.count("<tbody>")==1,"Glossary table missing or duplicated")
     gloss=re.search(r'<table class="seneca-table"[^>]*>.*?<tbody>(.*?)</tbody>',after,re.S)
     check(gloss is not None and gloss.group(1).count("<tr>")==20,"20 glossary rows not retained")
