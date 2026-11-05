@@ -23,6 +23,7 @@ const pages = [
   { path: 'en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/index.html', url: `${base}/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/`, it: `${base}/cerchi/guide/carlo-collodi-formazione-prova-mondo/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/index.html', url: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/`, it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/thucydides-war-power-crisis-of-language/index.html', url: `${base}/en/cerchi/guides/thucydides-war-power-crisis-of-language/`, it: `${base}/cerchi/guide/tucidide-guerra-potenza-crisi-della-parola/`, type: 'Article', breadcrumb: true },
+  { path: 'en/cerchi/guides/carl-schmitt-decision-exception-political-order/index.html', url: `${base}/en/cerchi/guides/carl-schmitt-decision-exception-political-order/`, it: `${base}/cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/plato-ideas-truth-power/index.html', url: `${base}/en/cerchi/guides/plato-ideas-truth-power/`, it: `${base}/cerchi/guide/platone-vita-opere-pensiero/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/dante-exile-language-divine-comedy/index.html', url: `${base}/en/cerchi/guides/dante-exile-language-divine-comedy/`, it: `${base}/cerchi/guide/dante-vita-opere-commedia-esilio/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html', url: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/`, it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, type: 'Article', breadcrumb: true },
@@ -55,6 +56,7 @@ const italianPairs = [
   { path: 'cerchi/guide/carlo-collodi-formazione-prova-mondo/index.html', it: `${base}/cerchi/guide/carlo-collodi-formazione-prova-mondo/`, en: `${base}/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/` },
   { path: 'cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/index.html', it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, en: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/` },
   { path: 'cerchi/guide/tucidide-guerra-potenza-crisi-della-parola/index.html', it: `${base}/cerchi/guide/tucidide-guerra-potenza-crisi-della-parola/`, en: `${base}/en/cerchi/guides/thucydides-war-power-crisis-of-language/` },
+  { path: 'cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/index.html', it: `${base}/cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/`, en: `${base}/en/cerchi/guides/carl-schmitt-decision-exception-political-order/` },
   { path: 'cerchi/guide/platone-vita-opere-pensiero/index.html', it: `${base}/cerchi/guide/platone-vita-opere-pensiero/`, en: `${base}/en/cerchi/guides/plato-ideas-truth-power/` },
   { path: 'cerchi/guide/dante-vita-opere-commedia-esilio/index.html', it: `${base}/cerchi/guide/dante-vita-opere-commedia-esilio/`, en: `${base}/en/cerchi/guides/dante-exile-language-divine-comedy/` },
   { path: 'cerchi/guide/machiavelli-vita-opere-pensiero-politico/index.html', it: `${base}/cerchi/guide/machiavelli-vita-opere-pensiero-politico/`, en: `${base}/en/cerchi/guides/machiavelli-power-state-effectual-truth/` },
@@ -87,7 +89,6 @@ const italianOnlyGuides = [
   'cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html',
   'cerchi/guide/marshall-mcluhan-media-percezione-ambienti-invisibili/index.html',
   'cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/index.html',
-  'cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/index.html',
   'cerchi/guide/carl-von-clausewitz-guerra-politica-limiti-della-forza/index.html'
 ];
 const collectHtml = async (directory) => {
