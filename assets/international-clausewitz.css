@@ -1,0 +1,128 @@
+/* International 3.0 — Clausewitz's means and purpose. Scoped to this guide.
+   Native radio control; all text is available without JS and both states in print. */
+.clausewitz-figure .clausewitz-intro{
+  font:400 .92rem/1.8 system-ui,sans-serif;
+  color:#e6dfd4;
+  max-width:59ch;
+  margin:-.35rem 0 1.7rem;
+}
+.clausewitz-switch{
+  border:0;
+  padding:0;
+  margin:0;
+  min-width:0;
+}
+.clausewitz-switch legend{
+  color:#e6dfd4;
+  font:400 .8rem/1.5 system-ui,sans-serif;
+  margin:0 0 .8rem;
+}
+.clausewitz-switch>input{
+  position:absolute;
+  opacity:0;
+  width:1px;
+  height:1px;
+}
+.clausewitz-switch>label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  border:1px solid #899aa4;
+  color:#f8f2e7;
+  padding:.7rem 1rem;
+  margin:0 .4rem .6rem 0;
+  cursor:pointer;
+  font:500 .8rem/1.4 system-ui,sans-serif;
+}
+.clausewitz-switch>input:focus-visible+label{
+  outline:3px solid #e4c68d;
+  outline-offset:4px;
+}
+.clausewitz-switch>input:checked+label{
+  background:#f8f2e7;
+  color:#182e3e;
+  border-color:#f8f2e7;
+}
+#clausewitz-plan:checked~.clausewitz-panel--contact,
+#clausewitz-contact:checked~.clausewitz-panel--plan{display:none;}
+.clausewitz-panel{padding:1.65rem 0 .4rem;}
+.clausewitz-phase{
+  color:#e4c991;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font:600 .68rem/1.5 system-ui,sans-serif;
+  margin:0 0 .6rem;
+}
+.clausewitz-panel h3{
+  color:#f8f2e7;
+  font:400 clamp(1.5rem,2.45vw,2.12rem)/1.25 var(--atlas-serif);
+  max-width:26ch;
+  margin:0 0 1rem;
+}
+.clausewitz-line{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  margin:1.5rem 0;
+  width:100%;
+  min-width:0;
+}
+.clausewitz-line span{
+  flex:0 1 auto;
+  font:600 .63rem/1.4 system-ui,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.095em;
+  color:#e0c38b;
+  white-space:nowrap;
+}
+.clausewitz-line i{
+  min-width:9px;
+  flex:1 1 16px;
+  height:1px;
+  background:#ceb17d;
+  position:relative;
+}
+.clausewitz-line i::after{
+  position:absolute;
+  content:"";
+  top:-3px;
+  right:0;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#ceb17d;
+}
+.clausewitz-panel>p:last-child{
+  font:400 .94rem/1.8 system-ui,sans-serif;
+  max-width:56ch;
+  margin:1.05rem 0 0;
+  color:#f0e9df;
+}
+.clausewitz-warning{
+  padding:1.2rem 0 .25rem;
+  border-top:1px solid #687b85;
+  margin:1.6rem 0 0;
+  color:#f0e8da;
+  font:400 .87rem/1.75 system-ui,sans-serif;
+}
+.clausewitz-warning strong{color:#fff8e9;}
+@media(max-width:760px){
+ .clausewitz-panel{padding-top:1.25rem;}
+ .clausewitz-panel h3{font-size:1.67rem;}
+ .clausewitz-line{flex-wrap:wrap;gap:.43rem;}
+ .clausewitz-line span{font-size:.62rem;letter-spacing:.04em;}
+ .clausewitz-switch>label{padding:.64rem .82rem;}
+}
+@media print{
+ .clausewitz-figure .clausewitz-intro,.clausewitz-switch legend,
+ .clausewitz-phase,.clausewitz-panel>p:last-child,.clausewitz-warning,
+ .clausewitz-line span{color:#182e3e;}
+ .clausewitz-switch>input,.clausewitz-switch>label{display:none;}
+ .clausewitz-panel,.clausewitz-figure .clausewitz-panel{
+   display:block!important;
+   break-inside:avoid;
+ }
+ .clausewitz-panel h3{color:#182e3e;}
+ .clausewitz-line i,.clausewitz-line i::after{background:#806333;}
+}
