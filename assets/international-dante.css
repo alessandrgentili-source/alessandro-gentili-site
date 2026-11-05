@@ -1,0 +1,12 @@
+/* Guide 02 — Dante: scoped reading aids, based on International 3.0 common system. */
+.international-atlas .dante-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-block:1px solid var(--atlas-rule);margin:1.6rem 0 2rem;scrollbar-width:thin}
+.international-atlas .dante-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
+.international-atlas .dante-table{border-collapse:collapse;width:100%;min-width:570px;line-height:1.7;font-size:.86rem;text-align:left}
+.international-atlas .dante-table :is(th,td){padding:.85rem .8rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
+.international-atlas .dante-table thead th{font-family:var(--atlas-serif);font-weight:600;border-bottom:1px solid var(--atlas-gold)}
+.international-atlas .dante-table tbody th{min-width:8rem;font-weight:600;color:var(--atlas-ink)}
+.international-atlas .dante-faq{border-top:1px solid var(--atlas-rule);padding:1.15rem 0}
+.international-atlas .dante-faq h3{margin:0 0 .5rem;font-size:1.1rem}
+.international-atlas .dante-faq p{margin:0}
+.international-atlas .dante-part{border-top:2px solid var(--atlas-gold);padding-top:1.6rem}
+@media print{.international-atlas .dante-table-scroll{overflow:visible}.international-atlas .dante-table{min-width:0;font-size:9pt}.international-atlas .dante-table tr{break-inside:avoid}}
