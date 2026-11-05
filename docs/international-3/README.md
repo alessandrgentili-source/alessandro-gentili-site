@@ -1,7 +1,9 @@
 # International 3.0 — sistema approvato e prototipi
 
-**Branch locale:** `design/international-3-atlas`  
-**Base:** `e9df7f0f853e35c0cd70f60b3b4b5011efe1cae4`  
+**Branch locale:** `design/international-3-atlas`
+
+**Base:** `e9df7f0f853e35c0cd70f60b3b4b5011efe1cae4`
+
 **Perimetro finale:** sistema riutilizzabile + hub EN + guida EN di Pier Paolo Pasolini. Direzione artistica approvata; PR per controllo umano, senza merge/deploy o modifica a main. Le altre 23 guide e le nove guide future non sono state lavorate.
 
 **Per estendere il sistema:** leggere [SYSTEM.md](SYSTEM.md), con contratto dei componenti, schema HTML, procedura di migrazione e controlli. È la consegna operativa; l’audit precedente è conservato come documento storico.
