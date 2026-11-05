@@ -1,0 +1,124 @@
+/* International 3.0 — Schmitt guide only. Native radio interaction; no JavaScript. */
+.exception-figure .exception-intro {
+  font:400 .9rem/1.8 system-ui,sans-serif;
+  max-width:60ch;
+  color:#e9e1d7;
+  margin:-.5rem 0 1.7rem;
+}
+.exception-switch {
+  border:0;
+  margin:0;
+  padding:0;
+  min-width:0;
+}
+.exception-switch legend {
+  font:400 .8rem/1.5 system-ui,sans-serif;
+  color:#e9e1d7;
+  margin:0 0 .8rem;
+}
+.exception-switch>input {
+  position:absolute;
+  opacity:0;
+  height:1px;
+  width:1px;
+}
+.exception-switch>label {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  border:1px solid #8d9a9f;
+  color:#f8f2e7;
+  font:500 .8rem/1.4 system-ui,sans-serif;
+  padding:.7rem 1rem;
+  margin:0 .4rem .6rem 0;
+  cursor:pointer;
+}
+.exception-switch>input:checked+label {
+  color:#182e3e;
+  background:#f8f2e7;
+  border-color:#f8f2e7;
+}
+.exception-switch>input:focus-visible+label {
+  outline:3px solid #e4c68d;
+  outline-offset:4px;
+}
+#schmitt-normal:checked~.exception-panel--exception,
+#schmitt-exception:checked~.exception-panel--normal { display:none; }
+.exception-panel { padding:1.7rem 0 .5rem; }
+.exception-phase {
+  font:600 .68rem/1.5 system-ui,sans-serif;
+  color:#e0c58c;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin:0 0 .6rem;
+}
+.exception-panel h3 {
+  color:#f8f2e7;
+  font:400 clamp(1.55rem,2.4vw,2.2rem)/1.25 var(--atlas-serif);
+  margin:0 0 1.2rem;
+  max-width:24ch;
+}
+.exception-path {
+  display:flex;
+  align-items:center;
+  width:100%;
+  gap:.5rem;
+  margin:1.4rem 0;
+  min-width:0;
+}
+.exception-path span:not(.exception-line) {
+  flex:0 1 auto;
+  color:#dfc38e;
+  font:600 .67rem/1.3 system-ui,sans-serif;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.exception-path .exception-line {
+  height:1px;
+  background:#cfb57f;
+  flex:1 1 1rem;
+  min-width:10px;
+  position:relative;
+}
+.exception-path .exception-line::after {
+  content:"";
+  position:absolute;
+  top:-3px;
+  right:0;
+  width:7px;
+  height:7px;
+  background:#cfb57f;
+  border-radius:50%;
+}
+.exception-panel>p:last-child {
+  font:400 .94rem/1.8 system-ui,sans-serif;
+  color:#eee9e0;
+  max-width:56ch;
+  margin:1.2rem 0 0;
+}
+.exception-warning {
+  margin:1.6rem 0 0;
+  padding:1.25rem 0 .25rem;
+  border-top:1px solid #687b85;
+  color:#f1e6d7;
+  font:400 .87rem/1.75 system-ui,sans-serif;
+}
+.exception-warning strong { color:#fff7ea; }
+@media (max-width:760px) {
+  .exception-panel { padding-top:1.25rem; }
+  .exception-panel h3 { font-size:1.65rem; }
+  .exception-path { flex-wrap:wrap;gap:.4rem; }
+  .exception-path span:not(.exception-line) { font-size:.61rem;letter-spacing:.04em; }
+  .exception-switch>label { padding:.65rem .85rem; }
+}
+@media print {
+  .exception-figure .exception-intro,
+  .exception-switch legend,.exception-phase,.exception-panel>p:last-child,
+  .exception-warning,.exception-path span:not(.exception-line) { color:#182e3e; }
+  .exception-switch>input,.exception-switch>label { display:none; }
+  .exception-panel,.exception-figure .exception-panel { display:block !important; break-inside:avoid; }
+  .exception-panel h3 { color:#182e3e; }
+  .exception-path .exception-line,.exception-path .exception-line::after { background:#806333; }
+}
