@@ -47,7 +47,7 @@ def markdown_body(source):
         else:
             result.append(" ".join(re.sub(r"^#{2,3} ", "", l) for l in lines))
     out=" ".join(result)
-    out=re.sub(r"(?<!\w)\*\*\d+\.\s+([^*]+\?)\*\*",r"**\1**",out)
+    out=re.sub(r"\*\*\d+\.\s+(.+?\?)\*\*",r"**\1**",out)
     out=re.sub(r"\[([^\]]+)\]\([^)]+\)",r"\1",out)
     return re.sub(r"\*\*|\*|\x60","",out)
 
