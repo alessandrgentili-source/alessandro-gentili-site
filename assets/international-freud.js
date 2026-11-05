@@ -22,6 +22,7 @@
     status.textContent=term?`${shown} of ${rows.length} glossary entries shown.`:`All ${rows.length} glossary entries shown.`;
     reset.hidden=!term;
   };
+  input.labels.forEach(label=>{label.hidden=false});
   input.hidden=false;
   status.hidden=false;
   reset.hidden=true;

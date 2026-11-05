@@ -1,65 +1,72 @@
+/* Reader-scoped components preserve contrast against shared prose styles. */
 /* Gramsci EN 11: a scoped extension to International 3.0, following Plato's reader hierarchy. */
 .atlas-gramsci .gramsci-triad-name { font-size:.84rem; color:var(--atlas-muted); letter-spacing:.01em; }
 .atlas-gramsci .gramsci-guiding-question { max-width:52rem; font:400 clamp(1rem,1.7vw,1.18rem)/1.55 var(--atlas-serif); }
-.atlas-gramsci .gramsci-part { margin:1rem 0 2.6rem; padding:1.15rem 0; border-block:1px solid var(--atlas-rule); }
-.atlas-gramsci .gramsci-part h2 { margin:0; font:650 .8rem/1.5 system-ui,sans-serif; color:var(--atlas-gold); text-transform:uppercase; letter-spacing:.14em; }
+.atlas-gramsci .atlas-reading .gramsci-part{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-gramsci .atlas-reading .gramsci-part h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
 .atlas-gramsci .guide-toc .gramsci-toc-part { margin-top:.85rem; font-weight:700; color:var(--atlas-gold); }
 .atlas-gramsci .atlas-legacy-anchor { display:block; scroll-margin-top:2rem; }
-.atlas-gramsci .gramsci-frame { margin:2rem 0; border:1px solid #6e8090; padding:clamp(1.2rem,3vw,2rem); background:#192e3f; color:#fffaf0; }
-.atlas-gramsci .gramsci-frame :is(p,h2,h3,legend) { color:#fffaf0; }
-.atlas-gramsci .gramsci-frame-fieldset { margin:0; padding:0; border:0; min-width:0; }
-.atlas-gramsci .gramsci-frame-fieldset legend { margin-bottom:.65rem; padding:0; font:600 .87rem/1.5 system-ui,sans-serif; }
-.atlas-gramsci .gramsci-frame-fieldset > input { width:1.1rem; height:1.1rem; margin:.5rem .35rem .5rem .6rem; accent-color:#ddc795; vertical-align:middle; }
-.atlas-gramsci .gramsci-frame-fieldset > label { display:inline-block; padding:.4rem .68rem; margin:0 .25rem .4rem 0; border:1px solid #738391; border-radius:2px; color:#fffaf0; font:500 .84rem/1.4 system-ui,sans-serif; cursor:pointer; }
-.atlas-gramsci .gramsci-frame-fieldset > input:checked + label { background:#d5be8a; color:#192e3f; border-color:#d5be8a; font-weight:750; }
-.atlas-gramsci .gramsci-frame-fieldset > input:focus-visible + label { outline:3px solid #fffaf0; outline-offset:3px; }
-.atlas-gramsci .gramsci-frame-step { padding:1rem 0; border-top:1px solid #697c8e; }
-.atlas-gramsci .gramsci-frame-step p { margin:0; line-height:1.78; }
-.atlas-gramsci .gramsci-frame-step strong { color:#f4d79b; }
-.atlas-gramsci .gramsci-frame-example { padding-top:.7rem; border-top:2px solid #d2bd92; }
-.atlas-gramsci .gramsci-frame-example p { line-height:1.72; }
+.atlas-gramsci .atlas-reading .gramsci-frame { margin:2rem 0; border:0; padding:1.7rem; background:#192e3f; color:#fffaf0; }
+.atlas-gramsci .atlas-reading .gramsci-frame :is(p,h2,h3,legend) { color:#fffaf0; }
+.atlas-gramsci .atlas-reading .gramsci-frame-fieldset { margin:0; padding:0; border:0; min-width:0; }
+.atlas-gramsci .atlas-reading .gramsci-frame-fieldset legend { margin-bottom:.65rem; padding:0; font:600 .87rem/1.5 system-ui,sans-serif; }
+.atlas-gramsci .atlas-reading .gramsci-frame-fieldset > input { position:absolute; width:1px; height:1px; opacity:0; }
+.atlas-gramsci .atlas-reading .gramsci-frame-fieldset > label { display:inline-flex; align-items:center; min-height:44px; padding:.4rem .68rem; margin:0 .25rem .4rem 0; border:1px solid #738391; border-radius:2px; color:#fffaf0; font:500 .84rem/1.4 system-ui,sans-serif; cursor:pointer; }
+.atlas-gramsci .atlas-reading .gramsci-frame-fieldset > input:checked + label { background:#d5be8a; color:#192e3f; border-color:#d5be8a; font-weight:750; }
+.atlas-gramsci .atlas-reading .gramsci-frame-fieldset > input:focus-visible + label { outline:3px solid #fffaf0; outline-offset:3px; }
+.atlas-gramsci .atlas-reading .gramsci-frame-step { padding:1rem 0; border-top:1px solid #697c8e; }
+.atlas-gramsci .atlas-reading .gramsci-frame-step p { margin:0; line-height:1.78; }
+.atlas-gramsci .atlas-reading .gramsci-frame-step strong { color:#f4d79b; }
+.atlas-gramsci .atlas-reading .gramsci-frame-example { padding-top:.7rem; border-top:2px solid #d2bd92; }
+.atlas-gramsci .atlas-reading .gramsci-frame-example p { line-height:1.72; }
 .atlas-gramsci #gramsci-frame-1:checked ~ .gramsci-frame-step:not(.gramsci-frame-step--1),
 .atlas-gramsci #gramsci-frame-2:checked ~ .gramsci-frame-step:not(.gramsci-frame-step--2),
 .atlas-gramsci #gramsci-frame-3:checked ~ .gramsci-frame-step:not(.gramsci-frame-step--3),
 .atlas-gramsci #gramsci-frame-4:checked ~ .gramsci-frame-step:not(.gramsci-frame-step--4),
 .atlas-gramsci #gramsci-frame-5:checked ~ .gramsci-frame-step:not(.gramsci-frame-step--5) { display:none; }
-.atlas-gramsci .gramsci-era { margin:1.6rem 0; border:0; padding:0; min-width:0; }
-.atlas-gramsci .gramsci-era legend { font:600 .84rem/1.4 system-ui,sans-serif; color:var(--atlas-muted); margin-bottom:.6rem; }
-.atlas-gramsci .gramsci-era > input { width:1rem; height:1rem; margin:0 .25rem .55rem .65rem; accent-color:#775b2f; vertical-align:middle; }
-.atlas-gramsci .gramsci-era > label { display:inline-block; font:550 .82rem/1.4 system-ui,sans-serif; color:var(--atlas-ink); padding:.35rem .55rem; border:1px solid var(--atlas-rule); margin:0 .2rem .55rem 0; cursor:pointer; }
-.atlas-gramsci .gramsci-era > input:checked + label { background:var(--atlas-ink); color:var(--atlas-paper); border-color:var(--atlas-ink); }
-.atlas-gramsci .gramsci-era > input:focus-visible + label { outline:3px solid var(--atlas-gold); outline-offset:3px; }
-.atlas-gramsci #gramsci-era-formation:checked ~ .gramsci-table-region tr:not([data-era="formation"]),
-.atlas-gramsci #gramsci-era-organization:checked ~ .gramsci-table-region tr:not([data-era="organization"]),
-.atlas-gramsci #gramsci-era-prison:checked ~ .gramsci-table-region tr:not([data-era="prison"]) { display:none; }
-.atlas-gramsci .gramsci-table-region { max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; margin:1.2rem 0 2rem; border-block:1px solid var(--atlas-rule); }
-.atlas-gramsci .gramsci-table-region:focus-visible { outline:3px solid var(--atlas-gold); outline-offset:2px; }
-.atlas-gramsci .gramsci-table { width:100%; min-width:520px; border-collapse:collapse; font:400 .86rem/1.63 system-ui,sans-serif; }
-.atlas-gramsci .gramsci-table :is(th,td) { padding:.77rem .84rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--atlas-rule); overflow-wrap:break-word; }
-.atlas-gramsci .gramsci-table thead th { color:var(--atlas-gold); font-weight:720; border-bottom:1px solid var(--atlas-gold); }
-.atlas-gramsci .gramsci-table tbody th { font-weight:700; color:var(--atlas-ink); }
-.atlas-gramsci .gramsci-glossary-controls:not([hidden]) { display:flex; flex-wrap:wrap; gap:.55rem; align-items:center; margin:1.4rem 0 .5rem; }
-.atlas-gramsci .gramsci-glossary-controls label { font:650 .85rem/1.4 system-ui,sans-serif; }
-.atlas-gramsci .gramsci-glossary-controls input { flex:1 1 14rem; min-width:0; padding:.65rem; border:1px solid var(--atlas-rule); border-radius:2px; font:inherit; }
-.atlas-gramsci .gramsci-glossary-controls button { padding:.6rem .8rem; background:var(--atlas-paper); border:1px solid var(--atlas-gold); color:var(--atlas-ink); cursor:pointer; }
-.atlas-gramsci .gramsci-glossary-controls output { flex:1 1 100%; color:var(--atlas-muted); font-size:.81rem; }
-.atlas-gramsci .gramsci-faq { border-top:1px solid var(--atlas-rule); padding:1rem 0; }
-.atlas-gramsci .gramsci-faq h3 { margin:0 0 .4rem; font:450 1.22rem/1.4 var(--atlas-serif); color:var(--atlas-ink); }
-.atlas-gramsci .gramsci-faq p { margin:0; }
+.atlas-gramsci .atlas-reading .gramsci-era { margin:1.6rem 0; border:0; padding:0; min-width:0; }
+.atlas-gramsci .atlas-reading .gramsci-era legend { font:600 .84rem/1.4 system-ui,sans-serif; color:var(--atlas-muted); margin-bottom:.6rem; }
+.atlas-gramsci .atlas-reading .gramsci-era > input { position:absolute; width:1px; height:1px; opacity:0; }
+.atlas-gramsci .atlas-reading .gramsci-era > label { display:inline-flex; align-items:center; min-height:44px; font:550 .82rem/1.4 system-ui,sans-serif; color:var(--atlas-ink); padding:.35rem .55rem; border:1px solid var(--atlas-rule); margin:0 .2rem .55rem 0; cursor:pointer; }
+.atlas-gramsci .atlas-reading .gramsci-era > input:checked + label { background:var(--atlas-ink); color:var(--atlas-paper); border-color:var(--atlas-ink); }
+.atlas-gramsci .atlas-reading .gramsci-era > input:focus-visible + label { outline:3px solid var(--atlas-gold); outline-offset:3px; }
+.atlas-gramsci #gramsci-era-formation:checked ~ .gramsci-table-region tbody tr:not([data-era="formation"]),
+.atlas-gramsci #gramsci-era-organization:checked ~ .gramsci-table-region tbody tr:not([data-era="organization"]),
+.atlas-gramsci #gramsci-era-prison:checked ~ .gramsci-table-region tbody tr:not([data-era="prison"]) { display:none; }
+.atlas-gramsci .atlas-reading .gramsci-table-region { max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; margin:1.2rem 0 2rem; border-block:1px solid var(--atlas-rule); }
+.atlas-gramsci .atlas-reading .gramsci-table-region:focus-visible { outline:3px solid var(--atlas-gold); outline-offset:2px; }
+.atlas-gramsci .atlas-reading .gramsci-table { width:100%; min-width:520px; border-collapse:collapse; font:400 .94rem/1.65 system-ui,sans-serif; }
+.atlas-gramsci .atlas-reading .gramsci-table :is(th,td) { padding:.77rem .84rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--atlas-rule); overflow-wrap:break-word; }
+.atlas-gramsci .atlas-reading .gramsci-table thead th { color:var(--atlas-gold); font-weight:720; border-bottom:1px solid var(--atlas-gold); }
+.atlas-gramsci .atlas-reading .gramsci-table tbody th { font-weight:700; color:var(--atlas-ink); }
+.atlas-gramsci .atlas-reading .gramsci-glossary-controls:not([hidden]) { display:flex; flex-wrap:wrap; gap:.55rem; align-items:center; margin:1.4rem 0 .5rem; }
+.atlas-gramsci .atlas-reading .gramsci-glossary-controls label { font:650 .85rem/1.4 system-ui,sans-serif; }
+.atlas-gramsci .atlas-reading .gramsci-glossary-controls input { flex:1 1 14rem; min-width:0; padding:.65rem; border:1px solid var(--atlas-rule); border-radius:2px; font:inherit; }
+.atlas-gramsci .atlas-reading .gramsci-glossary-controls button { padding:.6rem .8rem; background:var(--atlas-paper); border:1px solid var(--atlas-gold); color:var(--atlas-ink); cursor:pointer; }
+.atlas-gramsci .atlas-reading .gramsci-glossary-controls output { flex:1 1 100%; color:var(--atlas-muted); font-size:.81rem; }
+.atlas-gramsci .atlas-reading .gramsci-faq { border-top:1px solid var(--atlas-rule); padding:1.3rem 0; }
+.atlas-gramsci .atlas-reading .gramsci-faq h3{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif);color:var(--atlas-ink)}
+.atlas-gramsci .atlas-reading .gramsci-faq p { margin:0; }
 @media (max-width:650px) {
- .atlas-gramsci .gramsci-frame { padding:1rem; }
- .atlas-gramsci .gramsci-frame-fieldset > label { margin-bottom:.7rem; }
- .atlas-gramsci .gramsci-table { min-width:460px; }
- .atlas-gramsci .gramsci-era > label { margin-bottom:.65rem; }
+ .atlas-gramsci .atlas-reading .gramsci-frame { padding:1.15rem; }
+ .atlas-gramsci .atlas-reading .gramsci-frame-fieldset > label { margin-bottom:.7rem; }
+ .atlas-gramsci .atlas-reading .gramsci-table { min-width:460px; }
+ .atlas-gramsci .atlas-reading .gramsci-era > label { margin-bottom:.65rem; }
 }
+.atlas-gramsci .atlas-reading .gramsci-frame p{font:400 .94rem/1.8 system-ui,sans-serif;color:#fffaf0}
+.atlas-gramsci .atlas-reading #gramsci-glossary-table{min-width:0;table-layout:fixed}
+.atlas-gramsci .atlas-reading #gramsci-glossary-table th:first-child{width:34%}
+.atlas-gramsci .atlas-reading #gramsci-chronology-table :is(th,td):first-child{white-space:nowrap}
+.atlas-gramsci .atlas-reading .gramsci-glossary-controls :is(input,button){min-height:44px}
+@media(max-width:760px){.atlas-gramsci .atlas-reading #gramsci-glossary-table :is(th,td){padding:.7rem .5rem}}
 @media print {
- .atlas-gramsci .gramsci-frame { background:white !important; color:#192e3f !important; border-color:#775b2f; }
- .atlas-gramsci .gramsci-frame :is(p,h2,h3,legend,strong) { color:#192e3f !important; }
- .atlas-gramsci .gramsci-frame-step { display:block !important; break-inside:avoid; }
- .atlas-gramsci .gramsci-frame-fieldset > :is(input,label), .atlas-gramsci .gramsci-era > :is(input,label), .atlas-gramsci .gramsci-era legend, .atlas-gramsci .gramsci-frame-fieldset legend, .atlas-gramsci .gramsci-glossary-controls { display:none !important; }
- .atlas-gramsci .gramsci-era .gramsci-table-region tr[data-era], .atlas-gramsci #gramsci-glossary-table tbody tr[hidden] { display:table-row !important; }
- .atlas-gramsci .gramsci-table-region { overflow:visible; }
- .atlas-gramsci .gramsci-table { min-width:0; font-size:9pt; }
- .atlas-gramsci .gramsci-table tr, .atlas-gramsci .gramsci-faq { break-inside:avoid; }
+ .atlas-gramsci .atlas-reading .gramsci-frame { background:white !important; color:#192e3f !important; border-color:#775b2f; }
+ .atlas-gramsci .atlas-reading .gramsci-frame :is(p,h2,h3,legend,strong) { color:#192e3f !important; }
+ .atlas-gramsci .atlas-reading .gramsci-frame-step { display:block !important; break-inside:avoid; }
+ .atlas-gramsci .atlas-reading .gramsci-frame-fieldset > :is(input,label), .atlas-gramsci .atlas-reading .gramsci-era > :is(input,label), .atlas-gramsci .atlas-reading .gramsci-era legend, .atlas-gramsci .atlas-reading .gramsci-frame-fieldset legend, .atlas-gramsci .atlas-reading .gramsci-glossary-controls { display:none !important; }
+ .atlas-gramsci .atlas-reading .gramsci-era .gramsci-table-region tr[data-era], .atlas-gramsci #gramsci-glossary-table tbody tr[hidden] { display:table-row !important; }
+ .atlas-gramsci .atlas-reading .gramsci-table-region { overflow:visible; }
+ .atlas-gramsci .atlas-reading .gramsci-table { min-width:0; font-size:9pt; }
+ .atlas-gramsci .atlas-reading .gramsci-table tr, .atlas-gramsci .atlas-reading .gramsci-faq { break-inside:avoid; }
 }
 
