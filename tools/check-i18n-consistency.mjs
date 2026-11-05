@@ -182,6 +182,15 @@ for (const oldUrl of [`${base}/en.html`, `${base}/metodo-ai.html`, `${base}/stru
 
 const script = await read('assets/script.js');
 assert(script.includes('const bilingualPairs ='), 'assets/script.js: bilingual pair map missing');
+
+for (const pair of italianPairs.filter(page => page.path.startsWith('cerchi/guide/'))) {
+  const itPath = new URL(pair.it).pathname;
+  const enPath = new URL(pair.en).pathname;
+  const target = `{ it: "${itPath}", en: "${enPath}" }`;
+  assert(script.includes(`"${itPath}": ${target}`), `Language switcher: missing Italian route to ${enPath}`);
+  assert(script.includes(`"${enPath}": ${target}`), `Language switcher: missing English route to ${itPath}`);
+}
+
 assert(script.includes('data-language-switcher'), 'assets/script.js: language switcher missing');
 assert(!script.includes('navigator.language'), 'assets/script.js: browser-language detection is forbidden');
 assert(!script.includes('navigator.languages'), 'assets/script.js: browser-language detection is forbidden');
