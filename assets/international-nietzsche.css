@@ -1,0 +1,46 @@
+/* Nietzsche EN 05 — Plato-aligned International 3.0 hierarchy, scoped to this guide.
+   The first triad's published visual grammar is reused; no global redesign. */
+@import url("international-triad-01.css");
+.atlas-nietzsche .atlas-reading>.nietzsche-part{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-nietzsche .atlas-reading>.nietzsche-part h2{margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
+.atlas-nietzsche .guide-toc .nietzsche-toc-part{margin-top:.8rem;color:var(--atlas-gold);font-weight:650}
+.atlas-nietzsche .nietzsche-guiding-question{max-width:58ch;margin:1.1rem 0 0;padding-left:1rem;border-left:2px solid var(--atlas-gold);font:400 1.04rem/1.7 var(--atlas-serif);color:var(--atlas-ink)}
+.atlas-nietzsche .nietzsche-shadow-figure{margin:2rem 0 1.8rem;padding:1.7rem;color:var(--atlas-paper);background:var(--atlas-ink);border:0;overflow-wrap:normal}
+.atlas-nietzsche .nietzsche-shadow-figure figcaption{margin:0 0 1.1rem;padding:0}
+.atlas-nietzsche .atlas-reading>.guide-section .nietzsche-shadow-figure p{color:var(--atlas-paper);font:400 .94rem/1.8 system-ui,sans-serif}
+.atlas-nietzsche .nietzsche-shadow-figure figcaption p{font:400 1.3rem/1.48 var(--atlas-serif)!important;color:var(--atlas-paper)}
+.atlas-nietzsche .nietzsche-table{width:100%;border-collapse:collapse;table-layout:fixed;text-align:left;margin:1.5rem 0;font:400 .94rem/1.65 system-ui,sans-serif}
+.atlas-nietzsche .nietzsche-table :is(th,td){padding:.85rem .65rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:break-word}
+.atlas-nietzsche .nietzsche-table thead th{font-size:.8rem;line-height:1.5;font-weight:650;color:var(--atlas-gold)}
+.atlas-nietzsche .nietzsche-table tbody th{font-weight:600}
+.atlas-nietzsche .nietzsche-shadow-table{color:var(--atlas-paper);font-size:.9rem}
+.atlas-nietzsche .nietzsche-shadow-table :is(th,td){border-color:#687b85;color:var(--atlas-paper)}
+.atlas-nietzsche .nietzsche-shadow-table thead th{color:#e0c58c}
+.atlas-nietzsche .nietzsche-cell-label{display:none}
+.atlas-nietzsche .nietzsche-faq{padding:1.3rem 0;border-top:1px solid var(--atlas-rule)}
+.atlas-nietzsche .nietzsche-faq h3{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif)}
+.atlas-nietzsche .nietzsche-faq-number{color:var(--atlas-gold);font-size:.8em;margin-right:.65rem}
+.atlas-nietzsche .nietzsche-faq p{margin:0}
+@media(max-width:1000px){
+ .atlas-nietzsche .nietzsche-table,.atlas-nietzsche .nietzsche-table tbody,.atlas-nietzsche .nietzsche-table tr,.atlas-nietzsche .nietzsche-table tbody th,.atlas-nietzsche .nietzsche-table td{display:block;width:auto;table-layout:auto}
+ .atlas-nietzsche .nietzsche-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .atlas-nietzsche .nietzsche-table tbody tr{margin:0 0 1.3rem;border:1px solid var(--atlas-rule)}
+ .atlas-nietzsche .nietzsche-table tbody th{background:#eee5d4;color:var(--atlas-ink)}
+ .atlas-nietzsche .nietzsche-shadow-table tbody tr{border-color:#687b85}
+ .atlas-nietzsche .nietzsche-shadow-table tbody th{background:#263f50;color:#f8f2e7}
+ .atlas-nietzsche .nietzsche-cell-label{display:block;font:600 .76rem/1.5 system-ui,sans-serif;color:var(--atlas-gold);margin-bottom:.45rem}
+ .atlas-nietzsche .nietzsche-shadow-table .nietzsche-cell-label{color:#e0c58c}
+ .atlas-nietzsche .nietzsche-table tr>:last-child{border-bottom:0}
+}
+@media(max-width:760px){
+ .atlas-nietzsche .nietzsche-shadow-figure{padding:1.15rem}
+ .atlas-nietzsche .nietzsche-shadow-figure figcaption p{font-size:1.15rem!important}
+ .atlas-nietzsche .nietzsche-table :is(th,td){padding:.9rem .7rem}
+}
+@media print{
+ .atlas-nietzsche .nietzsche-part{break-after:avoid}
+ .atlas-nietzsche .nietzsche-shadow-figure{background:transparent;color:var(--atlas-ink);border:1px solid var(--atlas-gold);break-inside:auto}
+ .atlas-nietzsche .atlas-reading>.guide-section .nietzsche-shadow-figure p,.atlas-nietzsche .nietzsche-shadow-figure figcaption p,.atlas-nietzsche .nietzsche-shadow-table :is(th,td),.atlas-nietzsche .nietzsche-shadow-table thead th{color:var(--atlas-ink)}
+ .atlas-nietzsche .nietzsche-table thead{display:table-header-group}
+ .atlas-nietzsche .nietzsche-table tbody tr,.atlas-nietzsche .nietzsche-faq{break-inside:avoid}
+}
