@@ -1,40 +1,47 @@
+/* Reader-scoped components preserve contrast against shared prose styles. */
 /* Freud EN 10: scoped International 3.0 extensions. Plato remains the shared visual benchmark. */
 .atlas-freud .freud-guiding-question{max-width:55rem;margin:1rem 0;padding:1rem 1.3rem;border-left:2px solid var(--atlas-gold);font:400 clamp(1rem,1.5vw,1.14rem)/1.65 var(--atlas-serif);color:var(--atlas-ink)}
 .atlas-freud .freud-guiding-question strong{font:600 .83rem/1.5 system-ui,sans-serif;color:var(--atlas-gold)}
-.atlas-freud .freud-part{padding:1.25rem 0;margin:2.2rem 0 2.6rem;border-block:1px solid var(--atlas-rule)}
-.atlas-freud .freud-part h2{margin:0;color:var(--atlas-gold);font:600 .83rem/1.5 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.12em}
+.atlas-freud .atlas-reading .freud-part{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-freud .atlas-reading .freud-part h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
 .atlas-freud .guide-toc .freud-toc-part{margin-top:.65rem;font-weight:650;color:var(--atlas-gold)}
-.atlas-freud .freud-timeline-widget,.atlas-freud .freud-glossary-widget{margin:1.3rem 0 1.8rem}
-.atlas-freud .freud-table-scroll{max-width:100%;margin:1rem 0;overflow-x:auto;-webkit-overflow-scrolling:touch;border-block:1px solid var(--atlas-rule)}
-.atlas-freud .freud-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
-.atlas-freud .freud-table{width:100%;min-width:620px;border-collapse:collapse;font:400 .87rem/1.65 system-ui,sans-serif;color:var(--atlas-ink)}
-.atlas-freud .freud-table :is(th,td){padding:.85rem 1rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
-.atlas-freud .freud-table thead th{color:var(--atlas-gold);border-bottom:1px solid var(--atlas-gold);font-weight:650}
-.atlas-freud .freud-table tbody td:first-child{font-weight:600;min-width:10rem}
-.atlas-freud :is(.freud-period-switch,.freud-instrument-switch){border:0;padding:0;margin:0;display:flex;gap:.5rem;flex-wrap:wrap;min-width:0}
-.atlas-freud :is(.freud-period-switch,.freud-instrument-switch) legend{padding:0;margin:0 0 .7rem;font:600 .8rem/1.55 system-ui,sans-serif;color:var(--atlas-ink)}
-.atlas-freud :is(.freud-period-switch,.freud-instrument-switch) input{position:absolute;width:1px;height:1px;opacity:0}
-.atlas-freud :is(.freud-period-switch,.freud-instrument-switch) label{cursor:pointer;display:inline-flex;align-items:center;max-width:100%;padding:.55rem .85rem;border:1px solid var(--atlas-rule);border-radius:3px;background:var(--atlas-paper);font:500 .78rem/1.45 system-ui,sans-serif;color:var(--atlas-ink)}
-.atlas-freud :is(.freud-period-switch,.freud-instrument-switch) input:checked+label{background:var(--atlas-ink);color:#fff;border-color:var(--atlas-ink)}
-.atlas-freud :is(.freud-period-switch,.freud-instrument-switch) input:focus-visible+label{outline:3px solid var(--atlas-gold);outline-offset:3px}
-.atlas-freud .freud-timeline-widget:has(#freud-period-early:checked) tbody tr:not([data-era="early"]),.atlas-freud .freud-timeline-widget:has(#freud-period-later:checked) tbody tr:not([data-era="later"]){display:none}
-.atlas-freud .freud-instrument{margin:1.6rem 0;padding:clamp(1.1rem,2.7vw,1.9rem);border:1px solid #64747d;background:#182e3e;color:#f8f2e7}
-.atlas-freud .freud-instrument-switch legend{color:#f8f2e7}
-.atlas-freud .freud-instrument-switch label{background:#f8f2e7;color:#182e3e;border-color:#b5a68a}
-.atlas-freud .freud-instrument-switch input:checked+label{background:#cdb68b;border-color:#cdb68b;color:#182e3e}
-.atlas-freud .freud-instrument-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin-top:1.35rem}
-.atlas-freud .freud-phase{min-width:0;padding:1.1rem;border-top:1px solid #c3ae87;background:#223b4c}
-.atlas-freud .freud-phase p{margin:0;color:#f8f2e7;font-size:.93rem;line-height:1.75}
-.atlas-freud .freud-phase strong{color:#e9d7b7}
-.atlas-freud .freud-instrument:has(#freud-lens-account:checked) .freud-phase:not([data-phase="account"]),.atlas-freud .freud-instrument:has(#freud-lens-interruption:checked) .freud-phase:not([data-phase="interruption"]),.atlas-freud .freud-instrument:has(#freud-lens-reading:checked) .freud-phase:not([data-phase="reading"]),.atlas-freud .freud-instrument:has(#freud-lens-refuse:checked) .freud-phase:not([data-phase="refuse"]),.atlas-freud .freud-instrument:has(#freud-lens-boundary:checked) .freud-phase:not([data-phase="boundary"]){display:none}
-.atlas-freud .freud-instrument:not(:has(#freud-lens-all:checked)) .freud-instrument-panels{grid-template-columns:minmax(0,1fr)}
-.atlas-freud .freud-glossary-controls{display:flex;align-items:center;flex-wrap:wrap;gap:.65rem;margin:.85rem 0}
-.atlas-freud .freud-glossary-controls input[type="search"]{flex:1 1 15rem;min-width:0;padding:.7rem .9rem;background:var(--atlas-paper);border:1px solid var(--atlas-rule);color:var(--atlas-ink);font:400 .9rem/1.5 system-ui,sans-serif}
-.atlas-freud .freud-glossary-controls button{padding:.7rem .9rem;cursor:pointer;background:var(--atlas-paper);border:1px solid var(--atlas-rule);color:var(--atlas-ink);font:600 .82rem/1.5 system-ui,sans-serif}
-.atlas-freud .freud-glossary-controls [role="status"]{flex:1 0 100%;margin:0;font:.8rem/1.5 system-ui,sans-serif;color:var(--atlas-muted)}
-.atlas-freud [hidden]{display:none!important}
-.atlas-freud .freud-faq{padding:1rem 0;border-top:1px solid var(--atlas-rule)}
-.atlas-freud .freud-faq h3{font:400 1.27rem/1.4 var(--atlas-serif);margin:0 0 .5rem;color:var(--atlas-ink)}
-.atlas-freud .freud-faq p{margin:.3rem 0 0}
-@media(max-width:700px){.atlas-freud .freud-instrument-panels{grid-template-columns:minmax(0,1fr)}.atlas-freud .freud-table{min-width:520px}.atlas-freud .freud-guiding-question{padding:.75rem}.atlas-freud :is(.freud-period-switch,.freud-instrument-switch) label{padding:.5rem .65rem;font-size:.74rem}}
-@media print{.atlas-freud .freud-table tbody tr{display:table-row!important}.atlas-freud .freud-phase{display:block!important;background:#fff;border-top:1px solid #775b2f;break-inside:avoid}.atlas-freud :is(.freud-period-switch,.freud-instrument-switch,.freud-glossary-controls){display:none!important}.atlas-freud .freud-instrument{background:#fff;color:#182e3e;border:1px solid #775b2f}.atlas-freud .freud-instrument-panels{display:block!important}.atlas-freud .freud-phase :is(p,strong){color:#182e3e!important}.atlas-freud .freud-table-scroll{overflow:visible}.atlas-freud .freud-table{min-width:0;font-size:9pt}.atlas-freud .freud-faq,.atlas-freud .freud-table tr{break-inside:avoid}}
+.atlas-freud .atlas-reading .freud-timeline-widget,.atlas-freud .atlas-reading .freud-glossary-widget{margin:1.3rem 0 1.8rem}
+.atlas-freud .atlas-reading .freud-table-scroll{max-width:100%;margin:1rem 0;overflow-x:auto;-webkit-overflow-scrolling:touch;border-block:1px solid var(--atlas-rule)}
+.atlas-freud .atlas-reading .freud-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
+.atlas-freud .atlas-reading .freud-table{width:100%;min-width:620px;border-collapse:collapse;font:400 .94rem/1.65 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-freud .atlas-reading .freud-table :is(th,td){padding:.85rem 1rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
+.atlas-freud .atlas-reading .freud-table thead th{color:var(--atlas-gold);border-bottom:1px solid var(--atlas-gold);font-weight:650}
+.atlas-freud .atlas-reading .freud-table tbody td:first-child{font-weight:600;min-width:0;width:32%}
+.atlas-freud .atlas-reading :is(.freud-period-switch,.freud-instrument-switch){border:0;padding:0;margin:0;display:flex;gap:.5rem;flex-wrap:wrap;min-width:0}
+.atlas-freud .atlas-reading :is(.freud-period-switch,.freud-instrument-switch) legend{padding:0;margin:0 0 .7rem;font:600 .8rem/1.55 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-freud .atlas-reading :is(.freud-period-switch,.freud-instrument-switch) input{position:absolute;width:1px;height:1px;opacity:0}
+.atlas-freud .atlas-reading :is(.freud-period-switch,.freud-instrument-switch) label{cursor:pointer;display:inline-flex;align-items:center;min-height:44px;max-width:100%;padding:.55rem .85rem;border:1px solid var(--atlas-rule);border-radius:3px;background:var(--atlas-paper);font:500 .78rem/1.45 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-freud .atlas-reading :is(.freud-period-switch,.freud-instrument-switch) input:checked+label{background:var(--atlas-ink);color:#fff;border-color:var(--atlas-ink)}
+.atlas-freud .atlas-reading :is(.freud-period-switch,.freud-instrument-switch) input:focus-visible+label{outline:3px solid var(--atlas-gold);outline-offset:3px}
+.atlas-freud .atlas-reading .freud-timeline-widget:has(#freud-period-early:checked) tbody tr:not([data-era="early"]),.atlas-freud .atlas-reading .freud-timeline-widget:has(#freud-period-later:checked) tbody tr:not([data-era="later"]){display:none}
+.atlas-freud .atlas-reading .freud-instrument{margin:1.6rem 0;padding:1.7rem;border:0;background:#182e3e;color:#f8f2e7}
+.atlas-freud .atlas-reading .freud-instrument-switch legend{color:#f8f2e7}
+.atlas-freud .atlas-reading .freud-instrument-switch label{background:#f8f2e7;color:#182e3e;border-color:#b5a68a}
+.atlas-freud .atlas-reading .freud-instrument-switch input:checked+label{background:#cdb68b;border-color:#cdb68b;color:#182e3e}
+.atlas-freud .atlas-reading .freud-instrument-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin-top:1.35rem}
+.atlas-freud .atlas-reading .freud-phase{min-width:0;padding:1.1rem;border-top:1px solid #c3ae87;background:#223b4c}
+.atlas-freud .atlas-reading .freud-phase p{margin:0;color:#f8f2e7;font:400 .94rem/1.8 system-ui,sans-serif}
+.atlas-freud .atlas-reading .freud-phase strong{color:#e9d7b7}
+.atlas-freud .atlas-reading .freud-instrument:has(#freud-lens-account:checked) .freud-phase:not([data-phase="account"]),.atlas-freud .atlas-reading .freud-instrument:has(#freud-lens-interruption:checked) .freud-phase:not([data-phase="interruption"]),.atlas-freud .atlas-reading .freud-instrument:has(#freud-lens-reading:checked) .freud-phase:not([data-phase="reading"]),.atlas-freud .atlas-reading .freud-instrument:has(#freud-lens-refuse:checked) .freud-phase:not([data-phase="refuse"]),.atlas-freud .atlas-reading .freud-instrument:has(#freud-lens-boundary:checked) .freud-phase:not([data-phase="boundary"]){display:none}
+.atlas-freud .atlas-reading .freud-instrument:not(:has(#freud-lens-all:checked)) .freud-instrument-panels{grid-template-columns:minmax(0,1fr)}
+.atlas-freud .atlas-reading .freud-glossary-controls{display:flex;align-items:center;flex-wrap:wrap;gap:.65rem;margin:.85rem 0}
+.atlas-freud .atlas-reading .freud-glossary-controls input[type="search"]{flex:1 1 15rem;min-width:0;padding:.7rem .9rem;background:var(--atlas-paper);border:1px solid var(--atlas-rule);color:var(--atlas-ink);font:400 .9rem/1.5 system-ui,sans-serif}
+.atlas-freud .atlas-reading .freud-glossary-controls button{padding:.7rem .9rem;cursor:pointer;background:var(--atlas-paper);border:1px solid var(--atlas-rule);color:var(--atlas-ink);font:600 .82rem/1.5 system-ui,sans-serif}
+.atlas-freud .atlas-reading .freud-glossary-controls [role="status"]{flex:1 0 100%;margin:0;font:.8rem/1.5 system-ui,sans-serif;color:var(--atlas-muted)}
+.atlas-freud .atlas-reading [hidden]{display:none!important}
+.atlas-freud .atlas-reading .freud-faq{padding:1.3rem 0;border-top:1px solid var(--atlas-rule)}
+.atlas-freud .atlas-reading .freud-faq h3{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif);color:var(--atlas-ink)}
+.atlas-freud .atlas-reading .freud-faq p{margin:.3rem 0 0}
+@media(max-width:700px){.atlas-freud .atlas-reading .freud-instrument-panels{grid-template-columns:minmax(0,1fr)}.atlas-freud .atlas-reading .freud-table{min-width:520px}.atlas-freud .freud-guiding-question{padding:.75rem}.atlas-freud .atlas-reading :is(.freud-period-switch,.freud-instrument-switch) label{padding:.5rem .65rem;font-size:.74rem}}
+/* Two-column reference tables fit the reader without a forced horizontal pan. */
+.atlas-freud .atlas-reading .freud-table{min-width:0;table-layout:fixed}
+.atlas-freud .atlas-reading .freud-table th:first-child{width:32%}
+.atlas-freud .atlas-reading .freud-glossary-controls label{flex-basis:100%;font:600 .82rem/1.5 system-ui,sans-serif}
+.atlas-freud .atlas-reading .freud-glossary-controls :is(input,button){min-height:44px}
+@media(max-width:760px){.atlas-freud .atlas-reading .freud-instrument{padding:1.15rem}.atlas-freud .atlas-reading .freud-table :is(th,td){padding:.7rem .5rem}.atlas-freud .atlas-reading .freud-glossary-controls input{font-size:1rem}}
+@media print{.atlas-freud .atlas-reading .freud-table tbody tr{display:table-row!important}.atlas-freud .atlas-reading .freud-phase{display:block!important;background:#fff;border-top:1px solid #775b2f;break-inside:avoid}.atlas-freud .atlas-reading :is(.freud-period-switch,.freud-instrument-switch,.freud-glossary-controls){display:none!important}.atlas-freud .atlas-reading .freud-instrument{background:#fff;color:#182e3e;border:1px solid #775b2f}.atlas-freud .atlas-reading .freud-instrument-panels{display:block!important}.atlas-freud .atlas-reading .freud-phase :is(p,strong){color:#182e3e!important}.atlas-freud .atlas-reading .freud-table-scroll{overflow:visible}.atlas-freud .atlas-reading .freud-table{min-width:0;font-size:9pt}.atlas-freud .atlas-reading .freud-faq,.atlas-freud .atlas-reading .freud-table tr{break-inside:avoid}}
