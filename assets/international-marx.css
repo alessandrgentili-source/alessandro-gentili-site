@@ -1,28 +1,32 @@
-/* Marx EN 04 — scoped International 3.0 elements. Existing shared layout is authoritative. */
-.atlas-marx .marx-part{margin:1rem 0 3rem;padding:1.3rem 0;border-block:1px solid var(--atlas-gold)}
-.atlas-marx .marx-part h2{margin:0;font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
+/* Reader-scoped specificity preserves contrast against shared guide rules.
+   Marx EN 04 — scoped International 3.0 elements. Existing shared layout is authoritative. */
+.atlas-marx .atlas-reading .marx-part{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-marx .atlas-reading .marx-part h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
 .atlas-marx .guide-toc .marx-toc-part{margin-top:.8rem;font-weight:650;color:var(--atlas-gold)}
-.atlas-marx .marx-receipt{margin:2rem 0;padding:clamp(1.1rem,3vw,2rem);border:1px solid #546b79;background:#182e3e;color:#f8f2e7}
-.atlas-marx .marx-receipt h3{font:400 clamp(1.5rem,2.6vw,2rem)/1.22 var(--atlas-serif);color:#f8f2e7;margin:0 0 .8rem}
-.atlas-marx .marx-receipt :is(p,blockquote){font:400 .93rem/1.8 system-ui,sans-serif;color:#f8f2e7}
-.atlas-marx .marx-receipt figcaption{margin-bottom:1.2rem}
-.atlas-marx .marx-receipt-face{border:1px solid #bda777;background:#f8f2e7;color:#182e3e;padding:1.2rem 1.3rem;max-width:36rem;position:relative}
-.atlas-marx .marx-receipt-face :is(p,blockquote){color:#182e3e}
-.atlas-marx .marx-receipt-face>p:first-child{font-weight:650;letter-spacing:.07em;font-size:.82rem;text-transform:uppercase}
-.atlas-marx .marx-receipt-face blockquote{margin:1rem 0 0;padding:.6rem 0 0;border-top:1px dashed #b6a384;border-left:0}
-.atlas-marx .marx-receipt-quote p{margin:0}
-.atlas-marx .marx-receipt-turn{margin:1.3rem 0}
-.atlas-marx .marx-receipt-reverse{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
-.atlas-marx .marx-receipt-stage{margin:0!important;padding:1rem 1.1rem;border-top:1px solid #bda777;background:#203849}
-.atlas-marx .marx-receipt-stage strong{color:#e8d6b0}
-.atlas-marx .marx-receipt-afterword{margin:1.5rem 0 0;padding-top:1.2rem;border-top:1px solid #82909a}
-.atlas-marx .marx-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.5rem 0 2rem;border-block:1px solid var(--atlas-rule)}
-.atlas-marx .marx-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
-.atlas-marx .marx-table{width:100%;min-width:560px;border-collapse:collapse;font:400 .86rem/1.65 system-ui,sans-serif}
-.atlas-marx .marx-table :is(th,td){padding:.85rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere;text-align:left}
-.atlas-marx .marx-table thead th{font-weight:650;color:var(--atlas-gold);border-bottom:1px solid var(--atlas-gold)}
-.atlas-marx .marx-table tbody th{color:var(--atlas-ink);font-weight:650}
-.atlas-marx .marx-faq{border-top:1px solid var(--atlas-rule);padding:1.1rem 0}
-.atlas-marx .marx-faq h3{margin:0 0 .5rem;font:400 1.35rem/1.4 var(--atlas-serif)}
-@media(max-width:700px){.atlas-marx .marx-receipt-reverse{grid-template-columns:minmax(0,1fr)}.atlas-marx .marx-receipt{padding:1.05rem}.atlas-marx .marx-table{min-width:520px}}
-@media print{.atlas-marx .marx-receipt{background:#fff;color:#182e3e;border:1px solid #775b2f}.atlas-marx .marx-receipt :is(p,blockquote,h3){color:#182e3e}.atlas-marx .marx-receipt-stage{background:#fff;color:#182e3e}.atlas-marx .marx-receipt-stage strong{color:#182e3e}.atlas-marx .marx-receipt-face{max-width:none}.atlas-marx .marx-table-scroll{overflow:visible}.atlas-marx .marx-table{min-width:0;font-size:9pt}.atlas-marx .marx-receipt-stage,.atlas-marx .marx-faq,.atlas-marx .marx-table tr{break-inside:avoid}}
+.atlas-marx .atlas-reading .marx-receipt{margin:2rem 0;padding:1.7rem;border:0;background:#182e3e;color:#f8f2e7}
+.atlas-marx .atlas-reading .marx-receipt h3{font:400 1.9rem/1.2 var(--atlas-serif);color:#f8f2e7;margin:0 0 .8rem}
+.atlas-marx .atlas-reading .marx-receipt :is(p,blockquote){font:400 .94rem/1.8 system-ui,sans-serif;color:#f8f2e7}
+.atlas-marx .atlas-reading .marx-receipt figcaption{margin:0 0 1.6rem;padding:0;border:0}
+.atlas-marx .atlas-reading .marx-receipt-face{border:1px solid #bda777;background:#f8f2e7;color:#182e3e;padding:1.2rem 1.3rem;max-width:36rem;position:relative}
+.atlas-marx .atlas-reading .marx-receipt-face :is(p,blockquote){color:#182e3e}
+.atlas-marx .atlas-reading .marx-receipt-face>p:first-child{font-weight:650;letter-spacing:.07em;font-size:.82rem;text-transform:uppercase}
+.atlas-marx .atlas-reading .marx-receipt-face blockquote{margin:1rem 0 0;padding:.6rem 0 0;border:0;border-top:1px dashed #b6a384}
+.atlas-marx .atlas-reading .marx-receipt-quote p{margin:0}
+.atlas-marx .atlas-reading .marx-receipt-turn{margin:1.3rem 0}
+.atlas-marx .atlas-reading .marx-receipt-reverse{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.atlas-marx .atlas-reading .marx-receipt-stage{margin:0!important;padding:1rem 1.1rem;border-top:1px solid #bda777;background:#203849}
+.atlas-marx .atlas-reading .marx-receipt-stage strong{color:#e8d6b0}
+.atlas-marx .atlas-reading .marx-receipt-afterword{margin:1.5rem 0 0;padding-top:1.2rem;border-top:1px solid #82909a}
+.atlas-marx .atlas-reading .marx-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.5rem 0 2rem;border-block:1px solid var(--atlas-rule)}
+.atlas-marx .atlas-reading .marx-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
+.atlas-marx .atlas-reading .marx-table{width:100%;min-width:560px;border-collapse:collapse;font:400 .94rem/1.65 system-ui,sans-serif}
+.atlas-marx .atlas-reading .marx-table :is(th,td){padding:.85rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:break-word;text-align:left}
+.atlas-marx .atlas-reading .marx-table thead th{font:650 .8rem/1.5 system-ui,sans-serif;color:var(--atlas-gold);border-bottom:1px solid var(--atlas-gold)}
+.atlas-marx .atlas-reading .marx-table tbody th{color:var(--atlas-ink);font-weight:650}
+.atlas-marx .atlas-reading .marx-faq{border-top:1px solid var(--atlas-rule);padding:1.3rem 0}
+.atlas-marx .atlas-reading .marx-faq h3{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif);color:var(--atlas-ink)}
+.atlas-marx .atlas-reading .marx-faq p{margin:0}
+.atlas-marx .atlas-reading .marx-part>p{margin:2rem 0 0;font:400 1rem/1.8 var(--atlas-serif)}
+@media(max-width:700px){.atlas-marx .atlas-reading .marx-receipt-reverse{grid-template-columns:minmax(0,1fr)}.atlas-marx .atlas-reading .marx-receipt{padding:1.15rem}.atlas-marx .atlas-reading .marx-table{min-width:520px}}
+@media(max-width:760px){.atlas-marx .atlas-reading .marx-receipt h3{font-size:1.65rem}}
+@media print{.atlas-marx .atlas-reading .marx-receipt{background:#fff;color:#182e3e;border:1px solid #775b2f}.atlas-marx .atlas-reading .marx-receipt :is(p,blockquote,h3){color:#182e3e}.atlas-marx .atlas-reading .marx-receipt-stage{background:#fff;color:#182e3e}.atlas-marx .atlas-reading .marx-receipt-stage strong{color:#182e3e}.atlas-marx .atlas-reading .marx-receipt-face{max-width:none}.atlas-marx .atlas-reading .marx-table-scroll{overflow:visible}.atlas-marx .atlas-reading .marx-table{min-width:0;font-size:9pt}.atlas-marx .atlas-reading .marx-receipt-stage,.atlas-marx .atlas-reading .marx-faq,.atlas-marx .atlas-reading .marx-table tr{break-inside:avoid}}

@@ -1,33 +1,36 @@
-/* Leopardi EN 06 — scoped International 3.0, shared Plato reading layout retained. */
+/* Reader-scoped specificity preserves contrast against shared guide rules.
+   Leopardi EN 06 — scoped International 3.0, shared Plato reading layout retained. */
 .atlas-leopardi .leopardi-guiding-question{max-width:58ch;margin:1.35rem 0 0;color:#273e4c;font:400 1.04rem/1.7 var(--atlas-serif)}
 .atlas-leopardi .leopardi-guiding-question strong{font:650 .74rem/1.5 system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:var(--atlas-gold)}
-.atlas-leopardi .leopardi-part{margin:1rem 0 3rem;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);scroll-margin-top:24px}
-.atlas-leopardi .leopardi-part h2{margin:0;font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
+.atlas-leopardi .atlas-reading .leopardi-part{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0;scroll-margin-top:24px}
+.atlas-leopardi .atlas-reading .leopardi-part h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
 .atlas-leopardi .guide-toc .leopardi-toc-part{margin-top:.8rem;font-weight:650;color:var(--atlas-gold)}
-.atlas-leopardi .leopardi-places{margin:2.1rem 0;padding:clamp(1.1rem,2.4vw,2rem);background:var(--atlas-ink);color:var(--atlas-paper);border:1px solid #536876}
-.atlas-leopardi .leopardi-places h2{font:400 clamp(1.35rem,2.5vw,1.85rem)/1.25 var(--atlas-serif);color:var(--atlas-paper);margin:0 0 1rem}
-.atlas-leopardi .leopardi-places>p{font:400 .95rem/1.8 system-ui,sans-serif;color:var(--atlas-paper)}
-.atlas-leopardi .leopardi-places .leopardi-table-scroll{border-color:#7b8d99}
-.atlas-leopardi .leopardi-places .leopardi-table{min-width:810px}
-.atlas-leopardi .leopardi-places .leopardi-table :is(th,td){color:var(--atlas-paper);border-color:#607382}
-.atlas-leopardi .leopardi-places .leopardi-table thead th{color:#e0c58c;border-color:#a48e66}
-.atlas-leopardi .leopardi-places .leopardi-table tbody th{font-weight:600;color:#e0c58c}
-.atlas-leopardi .leopardi-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.4rem 0 1.8rem;border-block:1px solid var(--atlas-rule);scrollbar-width:thin}
-.atlas-leopardi .leopardi-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
-.atlas-leopardi .leopardi-table{width:100%;min-width:560px;border-collapse:collapse;text-align:left;font:400 .86rem/1.7 system-ui,sans-serif}
-.atlas-leopardi .leopardi-table :is(th,td){padding:.85rem .78rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
-.atlas-leopardi .leopardi-table thead th{font-weight:650;color:var(--atlas-gold);border-bottom:1px solid var(--atlas-gold)}
-.atlas-leopardi .leopardi-table tbody th{font-weight:650;color:var(--atlas-ink);min-width:8rem}
-.atlas-leopardi .leopardi-faq{border-top:1px solid var(--atlas-rule);padding:1.05rem 0}
-.atlas-leopardi .leopardi-faq h3{margin:0 0 .55rem;font:400 1.3rem/1.45 var(--atlas-serif);color:var(--atlas-ink)}
-.atlas-leopardi .leopardi-faq p{margin:0}
-@media(max-width:740px){.atlas-leopardi .leopardi-places{padding:1rem}.atlas-leopardi .leopardi-places .leopardi-table{min-width:750px}.atlas-leopardi .leopardi-table{min-width:510px}}
+.atlas-leopardi .atlas-reading .leopardi-places{margin:2rem auto 2.7rem;padding:1.7rem;background:var(--atlas-ink);color:var(--atlas-paper);border:0}
+.atlas-leopardi .atlas-reading .leopardi-places h2{font:400 1.9rem/1.2 var(--atlas-serif);color:var(--atlas-paper);margin:0 0 1rem}
+.atlas-leopardi .atlas-reading .leopardi-places>p{font:400 .94rem/1.8 system-ui,sans-serif;color:var(--atlas-paper)}
+.atlas-leopardi .atlas-reading .leopardi-places .leopardi-table-scroll{border-color:#7b8d99}
+.atlas-leopardi .atlas-reading .leopardi-places .leopardi-table{min-width:620px;font-size:.9rem}
+.atlas-leopardi .atlas-reading .leopardi-places .leopardi-table :is(th,td){color:var(--atlas-paper);border-color:#607382}
+.atlas-leopardi .atlas-reading .leopardi-places .leopardi-table thead th{color:#e0c58c;border-color:#a48e66}
+.atlas-leopardi .atlas-reading .leopardi-places .leopardi-table tbody th{font-weight:600;color:#e0c58c}
+.atlas-leopardi .atlas-reading .leopardi-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.4rem 0 1.8rem;border-block:1px solid var(--atlas-rule);scrollbar-width:thin}
+.atlas-leopardi .atlas-reading .leopardi-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
+.atlas-leopardi .atlas-reading .leopardi-table{width:100%;min-width:560px;border-collapse:collapse;text-align:left;font:400 .94rem/1.65 system-ui,sans-serif}
+.atlas-leopardi .atlas-reading .leopardi-table :is(th,td){padding:.85rem .78rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:break-word}
+.atlas-leopardi .atlas-reading .leopardi-table thead th{font:650 .8rem/1.5 system-ui,sans-serif;color:var(--atlas-gold);border-bottom:1px solid var(--atlas-gold)}
+.atlas-leopardi .atlas-reading .leopardi-table tbody th{font-weight:650;color:var(--atlas-ink);min-width:8rem}
+.atlas-leopardi .atlas-reading .leopardi-faq{border-top:1px solid var(--atlas-rule);padding:1.3rem 0}
+.atlas-leopardi .atlas-reading .leopardi-faq h3{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif);color:var(--atlas-ink)}
+.atlas-leopardi .atlas-reading .leopardi-faq p{margin:0}
+.atlas-leopardi .atlas-reading .leopardi-part>p{margin:2rem 0 0;font:400 1rem/1.8 var(--atlas-serif)}
+@media(max-width:740px){.atlas-leopardi .atlas-reading .leopardi-places{padding:1.15rem}.atlas-leopardi .atlas-reading .leopardi-table{min-width:510px}}
+@media(max-width:760px){.atlas-leopardi .atlas-reading .leopardi-places h2{font-size:1.65rem}}
 @media print{
-.atlas-leopardi .leopardi-part{break-after:avoid}
-.atlas-leopardi .leopardi-places{color:#182e3e;background:transparent;border:1px solid #775b2f;break-inside:auto}
-.atlas-leopardi .leopardi-places :is(h2,p){color:#182e3e}
-.atlas-leopardi .leopardi-places .leopardi-table :is(th,td){color:#182e3e}
-.atlas-leopardi .leopardi-table-scroll{overflow:visible}
-.atlas-leopardi .leopardi-table,.atlas-leopardi .leopardi-places .leopardi-table{min-width:0;font-size:8.5pt}
-.atlas-leopardi .leopardi-table tr,.atlas-leopardi .leopardi-faq{break-inside:avoid}
+.atlas-leopardi .atlas-reading .leopardi-part{break-after:avoid}
+.atlas-leopardi .atlas-reading .leopardi-places{color:#182e3e;background:transparent;border:1px solid #775b2f;break-inside:auto}
+.atlas-leopardi .atlas-reading .leopardi-places :is(h2,p){color:#182e3e}
+.atlas-leopardi .atlas-reading .leopardi-places .leopardi-table :is(th,td),.atlas-leopardi .atlas-reading .leopardi-places .leopardi-table :is(thead,tbody) th{color:#182e3e}
+.atlas-leopardi .atlas-reading .leopardi-table-scroll{overflow:visible}
+.atlas-leopardi .atlas-reading .leopardi-table,.atlas-leopardi .atlas-reading .leopardi-places .leopardi-table{min-width:0;font-size:8.5pt}
+.atlas-leopardi .atlas-reading .leopardi-table tr,.atlas-leopardi .atlas-reading .leopardi-faq{break-inside:avoid}
 }
