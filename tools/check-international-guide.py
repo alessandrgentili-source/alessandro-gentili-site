@@ -96,6 +96,56 @@ def verify(path, base):
     print(f'PASS {relative}: {len(blocks)} original blocks, metadata, schema facts, cover, links and contents preserved')
 
 
+def verify_new(path):
+    """Validate a first-time English Atlas guide; preservation against base is inapplicable."""
+    relative = path.resolve().relative_to(ROOT).as_posix()
+    require(relative.startswith('en/cerchi/guides/') and relative.endswith('/index.html'),
+            f'Invalid new EN guide path: {relative}')
+    source = path.read_text()
+    page = Page(source)
+    canonical = 'https://alessandro-gentili.it/' + relative.removesuffix('index.html')
+    canonicals = [link.get('href') for link in page.alternates if link.get('rel') == 'canonical']
+    hreflangs = {link.get('hreflang'): link.get('href') for link in page.alternates if link.get('rel') == 'alternate'}
+    require(page.lang == 'en', 'New English guide must declare lang=en')
+    require(canonicals == [canonical], 'New English guide must have one self-referencing canonical')
+    require(hreflangs.get('en') == canonical and bool(hreflangs.get('it')),
+            'New English guide must declare its actual IT/EN counterparts')
+    require(len(re.findall(r'<h1\b', source)) == 1, 'New English guide needs exactly one H1')
+    for tag in ('header', 'main', 'footer'):
+        require(len(re.findall(rf'<{tag}\b', source)) == 1 and len(re.findall(rf'</{tag}>', source)) == 1,
+                f'New English guide needs a single complete {tag}')
+    for token in ('international-atlas.css', 'international-atlas.js', 'atlas-main',
+                  'atlas-guide-opening', 'atlas-reader', 'atlas-contents', 'atlas-reading'):
+        require(token in source, f'New English guide missing shared asset/component: {token}')
+    require(re.search(r'<details\s+open(?:\s|>)', source), 'Guide contents must remain open without JS')
+    require(len(page.ids) == len(set(page.ids)), 'Duplicate IDs in new English guide')
+    blocks = re.findall(BLOCKS, source, re.S)
+    require(blocks, 'New English guide has no static editorial articles')
+    article_ids = [Page(block).ids[0] for block in blocks if Page(block).ids]
+    require('introduction' in article_ids and 'sources' in article_ids,
+            'New English guide must contain opening and sources as static articles')
+    require(page.toc and len(page.toc) == len(set(page.toc)), 'Missing or duplicated contents links')
+    require(all(href and href.startswith('#') and href[1:] in article_ids for href in page.toc),
+            'New guide contents must point to real editorial sections')
+    positions = [article_ids.index(href[1:]) for href in page.toc]
+    require(positions == sorted(positions), 'Contents are out of editorial order')
+    require(page.images and all(src and alt for src, alt in page.images), 'Cover image and alt text required')
+    require(all(not src.startswith('/') or (ROOT / src.lstrip('/')).is_file() for src, _ in page.images),
+            'Referenced cover is absent from the repository')
+    pattern = r'<script\b[^>]*type="application/ld\+json"[^>]*>(.*?)</script>'
+    schemas = [json.loads(raw) for raw in re.findall(pattern, source, re.S)]
+    article = next((obj for obj in schemas if isinstance(obj, dict) and obj.get('@type') == 'Article'), None)
+    breadcrumbs = next((obj for obj in schemas if isinstance(obj, dict) and obj.get('@type') == 'BreadcrumbList'), None)
+    require(article is not None and breadcrumbs is not None, 'Article and BreadcrumbList schema required')
+    require(article.get('url') == canonical and article.get('mainEntityOfPage') == canonical
+            and article.get('inLanguage') == 'en', 'New guide Article facts do not match canonical/language')
+    require(article.get('author', {}).get('name') == 'Alessandro Gentili',
+            'Editorial authorship must identify Alessandro Gentili')
+    require(bool(page.meta) and any(meta.get('name') == 'description' for meta in page.meta),
+            'New guide needs an editorial meta description')
+    print(f'PASS new {relative}: {len(blocks)} static articles, canonical, TOC, schema, cover and assets')
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base', required=True, help='Immutable pre-migration commit or fetched base ref')
@@ -104,4 +154,12 @@ if __name__ == '__main__':
     paths = args.guides or [p for p in ROOT.glob('en/cerchi/guides/*/index.html') if 'international-atlas.css' in p.read_text()]
     require(paths, 'No International guide found')
     for path in paths:
-        verify(path, args.base)
+        relative = path.resolve().relative_to(ROOT).as_posix()
+        exists_in_base = subprocess.run(
+            ['git', 'cat-file', '-e', f'{args.base}:{relative}'],
+            cwd=ROOT, capture_output=True, check=False
+        ).returncode == 0
+        if exists_in_base:
+            verify(path, args.base)
+        else:
+            verify_new(path)
