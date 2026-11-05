@@ -1,12 +1,37 @@
-/* Guide 02 — Dante: scoped reading aids, based on International 3.0 common system. */
-.international-atlas .dante-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-block:1px solid var(--atlas-rule);margin:1.6rem 0 2rem;scrollbar-width:thin}
-.international-atlas .dante-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
-.international-atlas .dante-table{border-collapse:collapse;width:100%;min-width:570px;line-height:1.7;font-size:.86rem;text-align:left}
-.international-atlas .dante-table :is(th,td){padding:.85rem .8rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
-.international-atlas .dante-table thead th{font-family:var(--atlas-serif);font-weight:600;border-bottom:1px solid var(--atlas-gold)}
-.international-atlas .dante-table tbody th{min-width:8rem;font-weight:600;color:var(--atlas-ink)}
-.international-atlas .dante-faq{border-top:1px solid var(--atlas-rule);padding:1.15rem 0}
-.international-atlas .dante-faq h3{margin:0 0 .5rem;font-size:1.1rem}
-.international-atlas .dante-faq p{margin:0}
-.international-atlas .dante-part{border-top:2px solid var(--atlas-gold);padding-top:1.6rem}
-@media print{.international-atlas .dante-table-scroll{overflow:visible}.international-atlas .dante-table{min-width:0;font-size:9pt}.international-atlas .dante-table tr{break-inside:avoid}}
+/* Guide 02 — Dante: distinctive reading hierarchy and a static two-clocks figure.
+   Shared International 3.0 palette, masthead, cover and type system remain authoritative. */
+.atlas-dante .dante-part{margin:1rem 0 3rem;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);scroll-margin-top:24px}
+.atlas-dante .dante-part h2{margin:0;font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
+.atlas-dante .guide-toc .dante-toc-part{margin-top:.8rem;font-weight:650;color:var(--atlas-gold)}
+.atlas-dante .dante-two-clocks{margin:2rem 0;padding:1.7rem;background:var(--atlas-ink);color:var(--atlas-paper);border:1px solid #476073;overflow-wrap:normal}
+.atlas-dante .dante-two-clocks figcaption{margin:0 0 1.45rem;padding:0;border:0}
+.atlas-dante .dante-two-clocks h3{font:400 1.9rem/1.2 var(--atlas-serif);color:var(--atlas-paper);margin:0 0 .85rem}
+.atlas-dante .guide-section .dante-two-clocks p{color:var(--atlas-paper);font:400 .94rem/1.8 system-ui,sans-serif}
+.atlas-dante .dante-two-clocks > p{border-top:1px solid #87949d;margin:1rem 0 0;padding-top:1rem}
+.atlas-dante .dante-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-block:1px solid var(--atlas-rule);margin:1.6rem 0 2rem;scrollbar-width:thin}
+.atlas-dante .dante-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
+.atlas-dante .dante-table{border-collapse:collapse;width:100%;min-width:550px;line-height:1.7;font:400 .88rem/1.65 system-ui,sans-serif;text-align:left}
+.atlas-dante .dante-table :is(th,td){padding:.85rem .8rem;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
+.atlas-dante .dante-table thead th{font-size:.82rem;font-weight:650;color:var(--atlas-gold);border-bottom:1px solid var(--atlas-gold)}
+.atlas-dante .dante-table tbody th{min-width:7rem;font-weight:600;color:var(--atlas-ink)}
+.atlas-dante .dante-two-clocks .dante-table-scroll{border-color:#687b85}
+.atlas-dante .dante-two-clocks .dante-table :is(th,td){border-color:#687b85;color:var(--atlas-paper)}
+.atlas-dante .dante-two-clocks .dante-table thead th{color:#e0c58c}
+.atlas-dante .dante-faq{border-top:1px solid var(--atlas-rule);padding:1.15rem 0}
+.atlas-dante .dante-faq h3{margin:0 0 .65rem;font:400 1.4rem/1.35 var(--atlas-serif)}
+.atlas-dante .dante-faq p{margin:0}
+@media(max-width:760px){
+  .atlas-dante .dante-two-clocks{padding:1.1rem}
+  .atlas-dante .dante-two-clocks h3{font-size:1.6rem}
+  .atlas-dante .dante-table{min-width:520px}
+}
+@media print{
+  .atlas-dante .dante-part{break-after:avoid}
+  .atlas-dante .dante-two-clocks{color:#182e3e;background:transparent;border:1px solid #775b2f;break-inside:auto}
+  .atlas-dante .dante-two-clocks h3,.atlas-dante .guide-section .dante-two-clocks p,
+  .atlas-dante .dante-two-clocks .dante-table :is(th,td),
+  .atlas-dante .dante-two-clocks .dante-table thead th{color:#182e3e}
+  .atlas-dante .dante-table-scroll{overflow:visible}
+  .atlas-dante .dante-table{min-width:0;font-size:9pt}
+  .atlas-dante .dante-table tr,.atlas-dante .dante-faq{break-inside:avoid}
+}
