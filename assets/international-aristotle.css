@@ -1,32 +1,35 @@
-/* Aristotle EN 08: Plato editorial system and Shannon-inspired CSS-only switchable perspectives. */
+/* Reader-scoped rules preserve panel contrast against the shared stylesheet.
+   Aristotle EN 08: Plato editorial system and Shannon-inspired CSS-only switchable perspectives. */
 .atlas-aristotle .aristotle-guiding-question{max-width:54rem;font:400 .98rem/1.65 system-ui,sans-serif;color:var(--atlas-muted)}
-.atlas-aristotle .aristotle-part{margin:1rem 0 3rem;padding:1.3rem 0;border-block:1px solid var(--atlas-gold)}
-.atlas-aristotle .aristotle-part h2{margin:0;font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
+.atlas-aristotle .atlas-reading .aristotle-part{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-aristotle .atlas-reading .aristotle-part h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
 .atlas-aristotle .guide-toc .aristotle-toc-part{margin-top:.8rem;font-weight:650;color:var(--atlas-gold)}
-.atlas-aristotle .aristotle-form-tool{margin:2rem 0;padding:clamp(1.1rem,3vw,2rem);background:#182e3e;color:#f8f2e7;border:1px solid #546b79}
-.atlas-aristotle .aristotle-form-tool p{font:400 .95rem/1.8 system-ui,sans-serif;color:#f8f2e7}
-.atlas-aristotle .aristotle-form-tool strong{color:#e7d4a7}
-.atlas-aristotle .aristotle-switch{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.7rem 0 1.1rem;padding:0;border:0}
-.atlas-aristotle .aristotle-switch legend{font:600 .75rem/1.5 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#e7d4a7;margin-bottom:.7rem}
-.atlas-aristotle .aristotle-switch input{position:absolute;width:1px;height:1px;opacity:0}
-.atlas-aristotle .aristotle-switch label{cursor:pointer;display:inline-flex;align-items:center;min-height:2.5rem;padding:.5rem .85rem;border:1px solid #a9b4b4;border-radius:2px;background:#223e52;color:#f8f2e7;font:600 .83rem/1.25 system-ui,sans-serif}
-.atlas-aristotle .aristotle-switch input:focus-visible+label{outline:3px solid #e6c987;outline-offset:4px}
-.atlas-aristotle .aristotle-switch input:checked+label{background:#e7d4a7;color:#182e3e;border-color:#e7d4a7}
-.atlas-aristotle .aristotle-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin:1.2rem 0}
-.atlas-aristotle .aristotle-stage{padding:1rem 1.1rem;background:#233d50;border-top:2px solid #c7ae7c}
-.atlas-aristotle .aristotle-stage p{margin:0}
-.atlas-aristotle .aristotle-form-tool:has(#ari-view-capacity:checked) .aristotle-stage:not([data-dimension="capacity"]),
-.atlas-aristotle .aristotle-form-tool:has(#ari-view-practice:checked) .aristotle-stage:not([data-dimension="practice"]),
-.atlas-aristotle .aristotle-form-tool:has(#ari-view-relation:checked) .aristotle-stage:not([data-dimension="relation"]),
-.atlas-aristotle .aristotle-form-tool:has(#ari-view-end:checked) .aristotle-stage:not([data-dimension="end"]){display:none}
-.atlas-aristotle .aristotle-form-tool:has(#ari-view-capacity:checked) .aristotle-panels,
-.atlas-aristotle .aristotle-form-tool:has(#ari-view-practice:checked) .aristotle-panels,
-.atlas-aristotle .aristotle-form-tool:has(#ari-view-relation:checked) .aristotle-panels,
-.atlas-aristotle .aristotle-form-tool:has(#ari-view-end:checked) .aristotle-panels{grid-template-columns:minmax(0,1fr)}
-.atlas-aristotle .aristotle-faq{border-top:1px solid var(--atlas-rule);padding:1.1rem 0}
-.atlas-aristotle .aristotle-faq h3{margin:0 0 .5rem;font:400 1.32rem/1.4 var(--atlas-serif)}
-.atlas-aristotle .aristotle-numbered{list-style:none;padding-left:0}
-.atlas-aristotle .aristotle-ordinal{font-weight:650;color:var(--atlas-gold)}
+.atlas-aristotle .atlas-reading .aristotle-form-tool{margin:2rem 0;padding:1.7rem;background:#182e3e;color:#f8f2e7;border:0}
+.atlas-aristotle .atlas-reading .aristotle-form-tool p{font:400 .94rem/1.8 system-ui,sans-serif;color:#f8f2e7}
+.atlas-aristotle .atlas-reading .aristotle-form-tool strong{color:#e7d4a7}
+.atlas-aristotle .atlas-reading .aristotle-switch{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.7rem 0 1.1rem;padding:0;border:0}
+.atlas-aristotle .atlas-reading .aristotle-switch legend{font:600 .75rem/1.5 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#e7d4a7;margin-bottom:.7rem}
+.atlas-aristotle .atlas-reading .aristotle-switch input{position:absolute;width:1px;height:1px;opacity:0}
+.atlas-aristotle .atlas-reading .aristotle-switch label{cursor:pointer;display:inline-flex;align-items:center;min-height:44px;padding:.5rem .85rem;border:1px solid #a9b4b4;border-radius:2px;background:#223e52;color:#f8f2e7;font:600 .83rem/1.25 system-ui,sans-serif}
+.atlas-aristotle .atlas-reading .aristotle-switch input:focus-visible+label{outline:3px solid #e6c987;outline-offset:4px}
+.atlas-aristotle .atlas-reading .aristotle-switch input:checked+label{background:#e7d4a7;color:#182e3e;border-color:#e7d4a7}
+.atlas-aristotle .atlas-reading .aristotle-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin:1.2rem 0}
+.atlas-aristotle .atlas-reading .aristotle-stage{padding:1rem 1.1rem;background:#233d50;border-top:2px solid #c7ae7c}
+.atlas-aristotle .atlas-reading .aristotle-stage p{margin:0}
+.atlas-aristotle .atlas-reading .aristotle-form-tool:has(#ari-view-capacity:checked) .aristotle-stage:not([data-dimension="capacity"]),
+.atlas-aristotle .atlas-reading .aristotle-form-tool:has(#ari-view-practice:checked) .aristotle-stage:not([data-dimension="practice"]),
+.atlas-aristotle .atlas-reading .aristotle-form-tool:has(#ari-view-relation:checked) .aristotle-stage:not([data-dimension="relation"]),
+.atlas-aristotle .atlas-reading .aristotle-form-tool:has(#ari-view-end:checked) .aristotle-stage:not([data-dimension="end"]){display:none}
+.atlas-aristotle .atlas-reading .aristotle-form-tool:has(#ari-view-capacity:checked) .aristotle-panels,
+.atlas-aristotle .atlas-reading .aristotle-form-tool:has(#ari-view-practice:checked) .aristotle-panels,
+.atlas-aristotle .atlas-reading .aristotle-form-tool:has(#ari-view-relation:checked) .aristotle-panels,
+.atlas-aristotle .atlas-reading .aristotle-form-tool:has(#ari-view-end:checked) .aristotle-panels{grid-template-columns:minmax(0,1fr)}
+.atlas-aristotle .atlas-reading .aristotle-faq{border-top:1px solid var(--atlas-rule);padding:1.3rem 0}
+.atlas-aristotle .atlas-reading .aristotle-faq h3{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif);color:var(--atlas-ink)}
+.atlas-aristotle .atlas-reading .aristotle-numbered{list-style:none;padding-left:0}
+.atlas-aristotle .atlas-reading .aristotle-ordinal{font-weight:650;color:var(--atlas-gold)}
 .atlas-aristotle .atlas-anchor{display:block;height:0;scroll-margin-top:24px}
-@media(max-width:710px){.atlas-aristotle .aristotle-panels{grid-template-columns:minmax(0,1fr)}.atlas-aristotle .aristotle-switch label{flex:1 0 auto;justify-content:center}}
-@media print{.atlas-aristotle .aristotle-form-tool{background:transparent!important;color:#182e3e!important;border-color:#775b2f}.atlas-aristotle .aristotle-form-tool :is(p,strong){color:#182e3e!important}.atlas-aristotle .aristotle-switch{display:none!important}.atlas-aristotle .aristotle-stage{display:block!important;background:transparent!important;color:#182e3e!important;break-inside:avoid}.atlas-aristotle .aristotle-panels{display:block!important}.atlas-aristotle .aristotle-stage+.aristotle-stage{margin-top:.7rem}.atlas-aristotle .aristotle-faq{break-inside:avoid}}
+@media(max-width:710px){.atlas-aristotle .atlas-reading .aristotle-panels{grid-template-columns:minmax(0,1fr)}.atlas-aristotle .atlas-reading .aristotle-switch label{flex:1 0 auto;justify-content:center}}
+
+@media(max-width:760px){.atlas-aristotle .atlas-reading .aristotle-form-tool{padding:1.15rem}}
+@media print{.atlas-aristotle .atlas-reading .aristotle-form-tool{background:transparent!important;color:#182e3e!important;border-color:#775b2f}.atlas-aristotle .atlas-reading .aristotle-form-tool :is(p,strong){color:#182e3e!important}.atlas-aristotle .atlas-reading .aristotle-switch{display:none!important}.atlas-aristotle .atlas-reading .aristotle-stage{display:block!important;background:transparent!important;color:#182e3e!important;break-inside:avoid}.atlas-aristotle .atlas-reading .aristotle-panels{display:block!important}.atlas-aristotle .atlas-reading .aristotle-stage+.aristotle-stage{margin-top:.7rem}.atlas-aristotle .atlas-reading .aristotle-faq{break-inside:avoid}}
