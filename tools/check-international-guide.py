@@ -69,9 +69,9 @@ def verify(path, base):
     after = path.read_text()
     old, new = Page(before), Page(after)
     if relative == 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html':
-        from importlib.machinery import SourceFileLoader
-        revision = SourceFileLoader('mach_revision', str(ROOT / 'tools/check-machiavelli-revision.py')).load_module()
-        revision.verify(path, base)
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-machiavelli-revision.py'))
+        revision['verify'](path, base)
         return
     blocks = re.findall(BLOCKS, before, re.S)
     require(blocks and blocks == re.findall(BLOCKS, after, re.S), 'Approved articles changed, missing or reordered')
