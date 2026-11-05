@@ -1,0 +1,12 @@
+/* Guide 03 — Machiavelli: scoped editorial tables; International 3.0 shared design remains authoritative. */
+.international-atlas .mach-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-block:1px solid var(--atlas-rule);margin:1.6rem 0 2rem;scrollbar-width:thin}
+.international-atlas .mach-table-scroll:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:2px}
+.international-atlas .mach-table{width:100%;min-width:580px;border-collapse:collapse;text-align:left;font:inherit;font-size:.85rem;line-height:1.65}
+.international-atlas .mach-table :is(th,td){vertical-align:top;padding:.9rem .8rem;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
+.international-atlas .mach-table thead th{font-family:var(--atlas-serif);font-weight:600;color:var(--atlas-ink);border-bottom:1px solid var(--atlas-gold)}
+.international-atlas .mach-table tbody th{min-width:8rem;color:var(--atlas-ink);font-weight:600}
+.international-atlas .mach-faq{border-top:1px solid var(--atlas-rule);padding:1.15rem 0}
+.international-atlas .mach-faq h3{margin:0 0 .55rem;font-size:1.12rem}
+.international-atlas .mach-faq p{margin:0}
+.international-atlas .atlas-part{border-top:2px solid var(--atlas-gold);padding-top:1.5rem}
+@media print{.international-atlas .mach-table-scroll{overflow:visible}.international-atlas .mach-table{min-width:0;font-size:9pt}.international-atlas .mach-table tr{break-inside:avoid}}
