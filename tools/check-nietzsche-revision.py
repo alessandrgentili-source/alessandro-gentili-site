@@ -100,7 +100,7 @@ def verify(path,base):
     check('role="region"' in after and 'tabindex="0"' in after,"Keyboard-accessible tables missing")
     def visible(t):return " ".join(unescape(re.sub(r"<[^>]*>","",t)).split())
     qas=[(visible(q),visible(a)) for q,a in re.findall(
-        r'<section class="nietzsche-faq"><h3><span aria-hidden="true" class="nietzsche-faq-number">\d+\.</span>(.*?)</h3><p>(.*?)</p></section>',after,re.S)]
+        r'<section class="nietzsche-faq">\s*<h3><span aria-hidden="true" class="nietzsche-faq-number">\d+\.</span>(.*?)</h3>\s*<p>(.*?)</p>\s*</section>',after,re.S)]
     schema=[(x["name"],x["acceptedAnswer"]["text"]) for x in n["FAQPage"]["mainEntity"]]
     check(len(qas)==10 and qas==schema,"FAQPage does not match visible FAQs")
     for label,url in re.findall(r'\[([^\]]+)\]\(([^)]+)\)',source):
