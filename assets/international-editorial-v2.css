@@ -57,37 +57,37 @@
 
 /* International 3.0 · Triad 11: the covers are the primary editorial entrances.
    Scoped selectors leave the earlier ten triads and all other themes unchanged. */
-.triad-block#triad-11 .triad-featured-covers a{
+.triad-block:is(#triad-09,#triad-11) .triad-featured-covers a{
   display:block;
   border-radius:12px;
   text-decoration:none;
   transition:transform .18s ease;
 }
-.triad-block#triad-11 .triad-featured-covers a:hover{
+.triad-block:is(#triad-09,#triad-11) .triad-featured-covers a:hover{
   transform:translateY(-2px);
 }
-.triad-block#triad-11 .triad-featured-covers a:hover img{
+.triad-block:is(#triad-09,#triad-11) .triad-featured-covers a:hover img{
   border-color:var(--gold);
 }
-.triad-block#triad-11 .triad-featured-covers a:focus-visible,
-.triad-block#triad-11 .triad-guide-link a:focus-visible,
-.triad-block#triad-11 .triad-originals a:focus-visible{
+.triad-block:is(#triad-09,#triad-11) .triad-featured-covers a:focus-visible,
+.triad-block:is(#triad-09,#triad-11) .triad-guide-link a:focus-visible,
+.triad-block:is(#triad-09,#triad-11) .triad-originals a:focus-visible{
   outline:2px solid var(--gold);
   outline-offset:4px;
 }
-.triad-block#triad-11 .triad-guide-link{
+.triad-block:is(#triad-09,#triad-11) .triad-guide-link{
   margin-top:.9rem;
   font-size:.84rem;
   line-height:1.5;
 }
-.triad-block#triad-11 .triad-guide-link a{
+.triad-block:is(#triad-09,#triad-11) .triad-guide-link a{
   display:inline-block;
   color:var(--petrol);
   text-decoration:underline;
   text-decoration-color:var(--gold);
   text-underline-offset:.25em;
 }
-.triad-block#triad-11 .triad-originals{
+.triad-block:is(#triad-09,#triad-11) .triad-originals{
   display:flex;
   align-items:baseline;
   flex-wrap:wrap;
@@ -99,7 +99,7 @@
   font-size:.85rem;
   line-height:1.6;
 }
-.triad-block#triad-11 .triad-originals-label{
+.triad-block:is(#triad-09,#triad-11) .triad-originals-label{
   color:var(--gold);
   font-size:.67rem;
   font-weight:700;
@@ -107,7 +107,7 @@
   text-transform:uppercase;
   margin-right:.55rem;
 }
-.triad-block#triad-11 .triad-originals a{
+.triad-block:is(#triad-09,#triad-11) .triad-originals a{
   color:var(--petrol);
   text-decoration:underline;
   text-decoration-color:var(--line);
@@ -120,10 +120,10 @@
   max-width:54ch;
 }
 @media(prefers-reduced-motion:reduce){
-  .triad-block#triad-11 .triad-featured-covers a{
+  .triad-block:is(#triad-09,#triad-11) .triad-featured-covers a{
     transition:none;
   }
-  .triad-block#triad-11 .triad-featured-covers a:hover{
+  .triad-block:is(#triad-09,#triad-11) .triad-featured-covers a:hover{
     transform:none;
   }
 }
