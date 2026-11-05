@@ -39,12 +39,12 @@
   background:#f8f2e7;
   border-color:#f8f2e7;
 }
-#tarde-adopt:checked~.tarde-panel--delight,
-#tarde-adopt:checked~.tarde-panel--empty,
-#tarde-resist:checked~.tarde-panel--need,
-#tarde-resist:checked~.tarde-panel--empty,
-#tarde-recombine:checked~.tarde-panel--need,
-#tarde-recombine:checked~.tarde-panel--delight { display:none; }
+#tarde-adopt:checked~.tarde-panel--resist,
+#tarde-adopt:checked~.tarde-panel--recombine,
+#tarde-resist:checked~.tarde-panel--adopt,
+#tarde-resist:checked~.tarde-panel--recombine,
+#tarde-recombine:checked~.tarde-panel--adopt,
+#tarde-recombine:checked~.tarde-panel--resist { display:none; }
 .tarde-panel { padding:1.65rem 0 .4rem; }
 .tarde-phase {
   font:600 .67rem/1.5 system-ui,sans-serif;
