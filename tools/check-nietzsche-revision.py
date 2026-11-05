@@ -95,7 +95,7 @@ def verify(path,base):
     expected,actual=source_words(source),body_words(content.group(1))
     check(expected==actual,"Manuscript word-order mismatch %s versus %s"%(len(expected),len(actual)))
     check(len(expected)==6486,"Unexpected source token count")
-    check(after.count('class="nietzsche-table')==2,"Two tables not preserved")
+    check(len(re.findall(r'<table class="nietzsche-table(?: [^"]*)?"',after))==2,"Two tables not preserved")
     check('class="atlas-figure nietzsche-shadow-figure"' in after and 'nietzsche-shadow-table' in after,"Shadow test figure missing")
     check('role="region"' in after and 'tabindex="0"' in after,"Keyboard-accessible tables missing")
     def visible(t):return " ".join(unescape(re.sub(r"<[^>]*>","",t)).split())
