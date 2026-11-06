@@ -137,3 +137,66 @@
   .mytilene-figure .mytilene-panel { display:block !important;break-inside:avoid; }
   .mytilene-panel h3 { color:#182e3e; }
 }
+
+
+/* Thucydides EN31 · International 3.0 reader, bounded to this guide.
+   Preserve the original no-JavaScript two-decree radio figure. */
+.atlas-thucydides-v3 .thucydides-v3-reading{min-width:0}
+.atlas-thucydides-v3 .thucydides-part-head{max-width:64ch;margin:2.7rem auto 2rem;padding:1.2rem 0;border-block:1px solid var(--atlas-rule,#cfc2aa)}
+.atlas-thucydides-v3 .thucydides-part-head h2{font:600 .82rem/1.55 system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--atlas-gold,#775b2f);margin:0}
+.atlas-thucydides-v3 .thucydides-section{position:relative;min-width:0}
+.atlas-thucydides-v3 .atlas-reading .thucydides-section>h2{font:400 clamp(1.66rem,2.8vw,2.3rem)/1.27 var(--atlas-serif,Georgia,serif)}
+.atlas-thucydides-v3 .atlas-reading .thucydides-section h3{font:400 clamp(1.2rem,2vw,1.47rem)/1.37 var(--atlas-serif,Georgia,serif);margin:1.7rem 0 .75rem}
+.atlas-thucydides-v3 .thucydides-section :is(p,li,th,td){overflow-wrap:anywhere}
+.atlas-thucydides-v3 .thucydides-section :is(ul,ol){padding-inline-start:1.4rem}
+.atlas-thucydides-v3 .thucydides-section li+li{margin-top:.55rem}
+.atlas-thucydides-v3 .thucydides-rule{border:0;border-top:1px solid var(--atlas-rule,#cfc2aa);margin:2rem 0}
+.atlas-thucydides-v3 .thucydides-toc-group{display:block;padding:.85rem 0 .35rem;border-top:1px solid var(--atlas-rule,#cfc2aa);font:600 .68rem/1.5 system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.atlas-thucydides-v3 .thucydides-legacy-anchor{position:absolute;inset-block-start:-6rem}
+.atlas-thucydides-v3 .thucydides-data-tools[hidden]{display:none!important}
+.atlas-thucydides-v3 .thucydides-data-tools{display:flex;align-items:end;flex-wrap:wrap;gap:.6rem .85rem;padding:1rem;background:#f4ecdf;border:1px solid var(--atlas-rule,#cfc2aa);margin:1.25rem 0 0;font:400 .85rem/1.5 system-ui,sans-serif}
+.atlas-thucydides-v3 .thucydides-data-tools label{font-weight:650;font-size:.78rem;flex-basis:100%;margin:0 0 -.4rem}
+.atlas-thucydides-v3 .thucydides-data-tools :is(input,select,button){min-height:44px;padding:.55rem .75rem;font:400 .82rem/1.5 system-ui,sans-serif;border:1px solid #9c968e;border-radius:2px;max-width:100%;background:#fffdf8;color:#182e3e}
+.atlas-thucydides-v3 .thucydides-data-tools input{width:min(100%,25rem);min-width:0;flex:1 1 13rem}
+.atlas-thucydides-v3 .thucydides-data-tools select{flex:1 1 11rem;min-width:0}
+.atlas-thucydides-v3 .thucydides-data-tools button{cursor:pointer;background:#182e3e;border-color:#182e3e;color:#fff}
+.atlas-thucydides-v3 .thucydides-data-tools :is(input,select,button):focus-visible{outline:3px solid #806333;outline-offset:3px}
+.atlas-thucydides-v3 .thucydides-table-count{flex-basis:100%;font:600 .76rem/1.4 system-ui,sans-serif;margin:.15rem 0 0}
+.atlas-thucydides-v3 .thucydides-table-region{max-width:100%;margin:.8rem 0 2rem}
+.atlas-thucydides-v3 .thucydides-data-table{width:100%;table-layout:fixed;border-collapse:collapse;font:400 .87rem/1.63 system-ui,sans-serif}
+.atlas-thucydides-v3 .thucydides-data-table :is(th,td){min-width:0;text-align:left;vertical-align:top;padding:.8rem .65rem;border-bottom:1px solid #ccc3b4;overflow-wrap:anywhere}
+.atlas-thucydides-v3 .thucydides-data-table thead th{font-size:.74rem;line-height:1.55;font-weight:700;background:#182e3e;color:#f8f2e7}
+.atlas-thucydides-v3 .thucydides-data-table tbody th{font-weight:650}
+.atlas-thucydides-v3 .thucydides-data-table tbody tr:nth-child(even){background:rgba(121,100,62,.06)}
+.atlas-thucydides-v3 .thucydides-data-table tr[hidden]{display:none!important}
+.atlas-thucydides-v3 .thucydides-data-table thead th[aria-sort=ascending],.atlas-thucydides-v3 .thucydides-data-table thead th[aria-sort=descending]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.atlas-thucydides-v3 .atlas-reading .mytilene-figure p{font:400 .94rem/1.8 system-ui,sans-serif;color:#f0e9df}
+.atlas-thucydides-v3 .atlas-reading .mytilene-figure .atlas-label,.atlas-thucydides-v3 .atlas-reading .mytilene-figure .mytilene-phase{color:#e0c58c;font:600 .68rem/1.5 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.atlas-thucydides-v3 .atlas-reading .mytilene-figure .mytilene-intro{font-size:.92rem;margin:0 0 1.6rem}
+.atlas-thucydides-v3 .atlas-reading .mytilene-figure .mytilene-caveat{font-size:.86rem}
+.atlas-thucydides-v3 .atlas-reading .mytilene-panel h3{font:400 clamp(1.58rem,2.4vw,2.18rem)/1.25 var(--atlas-serif);margin:0 0 1rem;color:#f8f2e7}
+.atlas-thucydides-v3 .atlas-reading #faq h3{font:400 1.42rem/1.38 var(--atlas-serif);margin:1.2rem 0 .8rem}
+@media(max-width:700px){
+ .atlas-thucydides-v3 .thucydides-data-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .atlas-thucydides-v3 .thucydides-data-table,.atlas-thucydides-v3 .thucydides-data-table tbody,.atlas-thucydides-v3 .thucydides-data-table tr,.atlas-thucydides-v3 .thucydides-data-table :is(th,td){display:block;width:100%;box-sizing:border-box}
+ .atlas-thucydides-v3 .thucydides-data-table tr{margin:0 0 .75rem;border:1px solid #c7bba6}
+ .atlas-thucydides-v3 .thucydides-data-table :is(th,td){padding:.55rem .75rem;border:0}
+ .atlas-thucydides-v3 .thucydides-data-table :is(th,td)::before{content:attr(data-label);display:block;margin-bottom:.15rem;font:650 .66rem/1.45 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.045em}
+ .atlas-thucydides-v3 .thucydides-data-tools{display:block}
+ .atlas-thucydides-v3 .thucydides-data-tools :is(input,select,button){width:100%;margin:.35rem 0 .8rem}
+ .atlas-thucydides-v3 .thucydides-data-tools label{display:block;margin:.55rem 0 0}
+ .atlas-thucydides-v3 .thucydides-data-tools .thucydides-table-count{margin:0}
+ .atlas-thucydides-v3 .atlas-reading .mytilene-panel h3{font-size:1.65rem}
+}
+@media print{
+ .atlas-thucydides-v3 .thucydides-data-tools{display:none!important}
+ .atlas-thucydides-v3 .thucydides-data-table,.atlas-thucydides-v3 .thucydides-data-table tbody{display:table!important}
+ .atlas-thucydides-v3 .thucydides-data-table thead{display:table-header-group!important;position:static!important;width:auto!important;height:auto!important;overflow:visible!important;clip-path:none!important;white-space:normal!important}
+ .atlas-thucydides-v3 .thucydides-data-table tr,.atlas-thucydides-v3 .thucydides-data-table tr[hidden]{display:table-row!important;break-inside:avoid;margin:0!important;border:0!important}
+ .atlas-thucydides-v3 .thucydides-data-table :is(th,td){display:table-cell!important;width:auto!important;border-bottom:1px solid #999!important;padding:.35rem .45rem}
+ .atlas-thucydides-v3 .thucydides-data-table :is(th,td)::before{display:none!important}
+ .atlas-thucydides-v3 .thucydides-data-table thead th{color:#182e3e;background:#fff;font-size:9pt}
+ .atlas-thucydides-v3 .thucydides-data-table{font-size:9pt}
+ .atlas-thucydides-v3 .atlas-reading .mytilene-figure :is(p,.atlas-label,.mytilene-phase),.atlas-thucydides-v3 .atlas-reading .mytilene-panel h3{color:#182e3e!important}
+ .atlas-thucydides-v3 .thucydides-part-head,.atlas-thucydides-v3 .thucydides-section{break-inside:auto}
+}
