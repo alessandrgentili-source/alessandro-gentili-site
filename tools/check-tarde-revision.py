@@ -21,7 +21,7 @@ SOURCE_FILE = "TARDE_EN_GUIDE_26_MAIN_ESSAY_ATLAS_APPROVED_v3.md"
 SOURCE_BLOB = "81b7d5ac63076282d41823358426d70c8caa3ef5"
 BASE_BLOB = "3d712f6f9d8bc5d1ae6833c8a6c51bee44138996"
 APPROVED_HTML_BLOB = "7a313c4855eb2b9d44cc6646180336a26591cc02"
-APPROVED_CSS_BLOB = "3bda83a75fb3fbff1a1ace40ba922f8ccfa6d2ef"
+APPROVED_CSS_BLOB = "6d38a4f38020b9920ae5d98dd1ad0f0e5a88b8a3"
 APPROVED_JS_BLOB = "0b58f2d4c3bb51e7705de61f5adc85c2b2caccea"
 URL = "https://alessandro-gentili.it/en/cerchi/guides/gabriel-tarde-imitation-belief-desire/"
 
