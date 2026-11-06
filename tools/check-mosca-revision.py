@@ -84,7 +84,7 @@ def verify(path,base=None):
   table=re.search(rf'<table class="mosca-data-table" id="mosca-{kind}-table">.*?</table>',text,re.S)
   check(table is not None and len(re.findall(r'<tr data-original-index="\d+">',table.group()))==n,f'{kind} table rows missing')
   for ctrl in ['query','sort','reset','count']:check(f'id="mosca-{kind}-{ctrl}"' in text,f'{kind} {ctrl} missing')
- check(len(re.findall(r'<input id="mosca-choice-\d+" type="radio"',text))==8,'Seven plus All station selectors missing')
+ check(len(re.findall(r'<input\b[^>]*\bid="mosca-choice-\d+"[^>]*\btype="radio"',text))==8,'Seven plus All station selectors missing')
  check(len(re.findall(r'class="mosca-choice-step mosca-choice-step-\d+"',text))==7,'Seven source reading steps missing')
  check(len(re.findall(r'data-mosca-ui="1" hidden',text))==2,'No-JS tables must have hidden controls')
  # Extract only the source articles; remove interactive UI text by parser, then compare the immutable source's exact token hash.
