@@ -1,0 +1,95 @@
+/* Tocqueville EN17 · International 3.0. Plato-aligned typographic system; Shannon-inspired native comparison. */
+.atlas-tocqueville .tocqueville-triad{max-width:64ch;color:var(--atlas-muted);font:500 .82rem/1.65 system-ui,sans-serif;margin:.75rem 0 0;}
+.atlas-tocqueville .tocqueville-question{max-width:57rem;color:var(--atlas-ink);font:400 clamp(1.03rem,1.55vw,1.22rem)/1.72 var(--atlas-serif);margin:1.02rem 0 1.45rem;}
+.atlas-tocqueville .tocqueville-question strong{font-weight:600;}
+.atlas-tocqueville .atlas-legacy-anchor{display:block;height:0;visibility:hidden;scroll-margin-top:24px;}
+.atlas-tocqueville .guide-toc .tocqueville-toc-main{font-weight:700;color:var(--atlas-ink);margin-top:.85rem;}
+.atlas-tocqueville .guide-toc .tocqueville-toc-nested{padding-left:1rem;}
+.atlas-tocqueville .tocqueville-section{min-width:0;scroll-margin-top:6rem;}
+.atlas-tocqueville .tocqueville-section--major{margin-top:2.3rem;}
+.atlas-tocqueville .tocqueville-section .tocqueville-table-scroll{margin:1.4rem 0 1.8rem;}
+.atlas-tocqueville .tocqueville-table-tools{margin:1.5rem 0 -.4rem;display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;padding:.95rem 1rem;background:var(--atlas-paper);border:1px solid var(--atlas-rule);border-bottom:0;border-radius:10px 10px 0 0;}
+.atlas-tocqueville .tocqueville-table-tools[hidden]{display:none!important;}
+.atlas-tocqueville .tocqueville-table-tools label{font:600 .78rem/1.5 system-ui,sans-serif;color:var(--atlas-ink);margin-right:.25rem;}
+.atlas-tocqueville .tocqueville-table-tools input{flex:1 1 12rem;min-width:8rem;max-width:24rem;background:#fffdf8;color:var(--atlas-ink);border:1px solid #9aa7ab;border-radius:5px;font:400 .86rem/1.4 system-ui,sans-serif;padding:.65rem .85rem;min-height:44px;}
+.atlas-tocqueville .tocqueville-table-tools button{min-height:44px;background:transparent;border:1px solid #87999e;border-radius:5px;padding:.58rem .82rem;color:var(--atlas-ink);font:600 .78rem/1.45 system-ui,sans-serif;cursor:pointer;}
+.atlas-tocqueville .tocqueville-table-tools button:hover,.atlas-tocqueville .tocqueville-table-tools button[aria-pressed="true"]{background:var(--atlas-ink);color:#fffcf4;border-color:var(--atlas-ink);}
+.atlas-tocqueville .tocqueville-table-tools output{font:500 .75rem/1.5 system-ui,sans-serif;color:var(--atlas-muted);margin-left:auto;}
+.atlas-tocqueville .tocqueville-table-tools :is(input,button):focus-visible,.atlas-tocqueville .tocqueville-table-scroll:focus-visible{outline:3px solid #c29a51;outline-offset:3px;}
+.atlas-tocqueville .tocqueville-table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--atlas-rule);border-radius:0 0 10px 10px;background:#fffdf8;overscroll-behavior-inline:contain;}
+.atlas-tocqueville .tocqueville-data-table{width:100%;min-width:38rem;border-collapse:collapse;text-align:left;margin:0;font:400 .88rem/1.72 system-ui,sans-serif;color:var(--atlas-ink);}
+.atlas-tocqueville #tocqueville-life-table{min-width:42rem;}
+.atlas-tocqueville #tocqueville-glossary-table{min-width:30rem;}
+.atlas-tocqueville .tocqueville-data-table thead{background:#ece9e0;}
+.atlas-tocqueville .tocqueville-data-table th,.atlas-tocqueville .tocqueville-data-table td{padding:.9rem 1rem;border-bottom:1px solid #e4e1d8;vertical-align:top;}
+.atlas-tocqueville .tocqueville-data-table thead th{font:700 .73rem/1.5 system-ui,sans-serif;letter-spacing:.04em;color:#283a47;}
+.atlas-tocqueville .tocqueville-data-table tbody th{font-weight:700;white-space:normal;}
+.atlas-tocqueville .tocqueville-data-table tbody tr:nth-child(even){background:#f8f6f1;}
+.atlas-tocqueville .tocqueville-data-table tbody tr:hover{background:#f0eee7;}
+.atlas-tocqueville .tocqueville-data-table tbody tr[hidden]{display:none!important;}
+.atlas-tocqueville .tocqueville-data-table tbody tr:last-child > *{border-bottom:0;}
+.atlas-tocqueville #tocqueville-life-table th:first-child{width:20%;}
+.atlas-tocqueville #tocqueville-life-table td:nth-child(2){width:35%;}
+.atlas-tocqueville #tocqueville-glossary-table th:first-child{width:33%;}
+.atlas-tocqueville #tocqueville-glossary-table tbody th{font-weight:600;}
+.atlas-tocqueville .tocqueville-interval-switch{position:relative;border:1px solid var(--atlas-rule);border-top:2px solid #b59b69;border-radius:9px;background:var(--atlas-paper);margin:1.45rem 0 1.7rem;padding:clamp(.9rem,2vw,1.45rem);display:flex;flex-wrap:wrap;gap:.45rem;}
+.atlas-tocqueville .tocqueville-interval-switch legend{font:650 .79rem/1.5 system-ui,sans-serif;color:var(--atlas-ink);padding:0 .35rem;letter-spacing:.025em;}
+.atlas-tocqueville .tocqueville-interval-switch>input[type=radio]{position:absolute;width:1px;height:1px;opacity:0;}
+.atlas-tocqueville .tocqueville-interval-switch>label{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.55rem .78rem;border:1px solid #97a0a1;border-radius:5px;font:600 .76rem/1.42 system-ui,sans-serif;color:var(--atlas-ink);cursor:pointer;background:#fdfbf6;}
+.atlas-tocqueville .tocqueville-interval-switch>input:checked+label{background:var(--atlas-ink);color:#fffaf0;border-color:var(--atlas-ink);}
+.atlas-tocqueville .tocqueville-interval-switch>input:focus-visible+label{outline:3px solid #c29a51;outline-offset:3px;}
+.atlas-tocqueville .tocqueville-interval-panels{width:100%;margin:.9rem 0 0;border-top:1px solid var(--atlas-rule);}
+.atlas-tocqueville .tocqueville-interval-step{padding:.9rem 0 .25rem;border-bottom:1px solid var(--atlas-rule);}
+.atlas-tocqueville .tocqueville-interval-step:last-child{border-bottom:0;}
+.atlas-tocqueville .tocqueville-interval-step p{margin:.4rem 0 .85rem;}
+.atlas-tocqueville .tocqueville-interval-step strong{color:var(--atlas-ink);}
+.atlas-tocqueville #tocqueville-interval-1:checked ~ .tocqueville-interval-panels .tocqueville-interval-step:not(.tocqueville-interval-step-1){display:none;}
+.atlas-tocqueville #tocqueville-interval-2:checked ~ .tocqueville-interval-panels .tocqueville-interval-step:not(.tocqueville-interval-step-2){display:none;}
+.atlas-tocqueville #tocqueville-interval-3:checked ~ .tocqueville-interval-panels .tocqueville-interval-step:not(.tocqueville-interval-step-3){display:none;}
+.atlas-tocqueville #tocqueville-interval-4:checked ~ .tocqueville-interval-panels .tocqueville-interval-step:not(.tocqueville-interval-step-4){display:none;}
+.atlas-tocqueville #tocqueville-interval-5:checked ~ .tocqueville-interval-panels .tocqueville-interval-step:not(.tocqueville-interval-step-5){display:none;}
+.atlas-tocqueville .tocqueville-faq{border-top:1px solid var(--atlas-rule);padding:1.08rem 0 .9rem;}
+.atlas-tocqueville .tocqueville-faq h4{font:600 clamp(.98rem,1.5vw,1.13rem)/1.54 var(--atlas-serif);color:var(--atlas-ink);margin:0 0 .55rem;}
+.atlas-tocqueville .tocqueville-faq p{margin:0;}
+@media(max-width:680px){
+ .atlas-tocqueville .tocqueville-triad{font-size:.78rem;}
+ .atlas-tocqueville .tocqueville-table-tools{padding:.75rem;gap:.45rem;}
+ .atlas-tocqueville .tocqueville-table-tools label{flex:1 1 100%;}
+ .atlas-tocqueville .tocqueville-table-tools input{flex-basis:100%;max-width:none;}
+ .atlas-tocqueville .tocqueville-table-tools output{margin-right:auto;}
+ .atlas-tocqueville .tocqueville-data-table{font-size:.79rem;}
+ .atlas-tocqueville .tocqueville-data-table th,.atlas-tocqueville .tocqueville-data-table td{padding:.72rem .8rem;}
+ .atlas-tocqueville .tocqueville-interval-switch>label{font-size:.72rem;}
+}
+@media(max-width:560px){
+ /* Source-native table semantics with a comfortable stacked reading layout. */
+ .atlas-tocqueville .tocqueville-table-scroll{overflow:visible;}
+ .atlas-tocqueville .tocqueville-data-table{display:block;min-width:0!important;width:100%;}
+ .atlas-tocqueville .tocqueville-data-table thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;}
+ .atlas-tocqueville .tocqueville-data-table tbody{display:block;}
+ .atlas-tocqueville .tocqueville-data-table tbody tr{display:block;padding:.2rem 0;border-bottom:1px solid var(--atlas-rule);}
+ .atlas-tocqueville .tocqueville-data-table tbody tr:last-child{border-bottom:0;}
+ .atlas-tocqueville .tocqueville-data-table tbody th,.atlas-tocqueville .tocqueville-data-table tbody td{display:block;width:auto!important;padding:.55rem .8rem;border:0;}
+ .atlas-tocqueville .tocqueville-data-table tbody th{font-size:.94rem;padding-top:.75rem;}
+ .atlas-tocqueville .tocqueville-data-table tbody td{font-size:.83rem;line-height:1.65;}
+ .atlas-tocqueville .tocqueville-data-table tbody td::before{display:block;font:700 .64rem/1.45 system-ui,sans-serif;letter-spacing:.09em;color:var(--atlas-muted);margin:0 0 .18rem;}
+ .atlas-tocqueville #tocqueville-life-table tbody td:nth-child(2)::before{content:"EVENT";}
+ .atlas-tocqueville #tocqueville-life-table tbody td:nth-child(3)::before{content:"WHAT THE WRITING REVEALS";}
+ .atlas-tocqueville #tocqueville-glossary-table tbody td::before{content:"WORKING DEFINITION";}
+}
+@media print{
+ .atlas-tocqueville .tocqueville-table-tools,.atlas-tocqueville .tocqueville-interval-switch>input,.atlas-tocqueville .tocqueville-interval-switch>label,.atlas-tocqueville .tocqueville-interval-switch legend{display:none!important;}
+ .atlas-tocqueville .tocqueville-table-scroll{overflow:visible!important;border:0;max-width:none;}
+ .atlas-tocqueville .tocqueville-data-table{min-width:0!important;width:100%!important;font-size:9pt;}
+ .atlas-tocqueville .tocqueville-data-table tbody tr[hidden]{display:table-row!important;}
+ .atlas-tocqueville .tocqueville-interval-step,.atlas-tocqueville #tocqueville-interval-1:checked ~ .tocqueville-interval-panels .tocqueville-interval-step,.atlas-tocqueville #tocqueville-interval-2:checked ~ .tocqueville-interval-panels .tocqueville-interval-step,.atlas-tocqueville #tocqueville-interval-3:checked ~ .tocqueville-interval-panels .tocqueville-interval-step,.atlas-tocqueville #tocqueville-interval-4:checked ~ .tocqueville-interval-panels .tocqueville-interval-step,.atlas-tocqueville #tocqueville-interval-5:checked ~ .tocqueville-interval-panels .tocqueville-interval-step{display:block!important;}
+ .atlas-tocqueville .tocqueville-interval-switch{border:0;background:transparent;padding:0;display:block;}
+ .atlas-tocqueville .tocqueville-interval-panels{margin:0;}
+ .atlas-tocqueville .tocqueville-interval-step{break-inside:avoid;}
+ .atlas-tocqueville .tocqueville-data-table{display:table!important;}
+ .atlas-tocqueville .tocqueville-data-table thead{position:static!important;display:table-header-group!important;width:auto;height:auto;clip-path:none;overflow:visible;white-space:normal;margin:0;}
+ .atlas-tocqueville .tocqueville-data-table tbody{display:table-row-group!important;}
+ .atlas-tocqueville .tocqueville-data-table tbody tr,.atlas-tocqueville .tocqueville-data-table tbody tr[hidden]{display:table-row!important;}
+ .atlas-tocqueville .tocqueville-data-table tbody th,.atlas-tocqueville .tocqueville-data-table tbody td{display:table-cell!important;}
+ .atlas-tocqueville .tocqueville-data-table tbody td::before{display:none!important;}
+}
