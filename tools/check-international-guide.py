@@ -192,6 +192,11 @@ def verify(path, base):
         revision = run_path(str(ROOT / 'tools/check-pasolini-revision.py'))
         revision['verify'](path, base)
         return
+    if relative == 'en/cerchi/guides/thucydides-war-power-crisis-of-language/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-thucydides-revision.py'))
+        revision['verify'](path, base)
+        return
     blocks = re.findall(BLOCKS, before, re.S)
     require(blocks and blocks == re.findall(BLOCKS, after, re.S), 'Approved articles changed, missing or reordered')
     for tag in ('title', 'h1', 'header', 'footer'):
