@@ -40,6 +40,10 @@ class Editorial(HTMLParser):
         if self.skip:
             if tag not in self.VOID:self.skip+=1
         elif dict(attrs).get('data-simmel-ui')=='1':self.skip=1
+    def handle_startendtag(self,tag,attrs):
+        # HTMLParser otherwise calls both callbacks for a self-closing input.
+        # Neither callback should alter the skip depth of UI-only controls.
+        pass
     def handle_endtag(self,tag):
         if self.skip:self.skip-=1
     def handle_data(self,data):
