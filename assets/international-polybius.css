@@ -1,0 +1,88 @@
+/* Polybius EN 19 — Plato's light Atlas grammar and Shannon's native selector discipline.
+   Scoped: no site-wide redesign. The entire essay is readable without JavaScript. */
+.atlas-polybius .polybius-triad{font:500 .82rem/1.65 system-ui,sans-serif;color:var(--atlas-muted);max-width:65ch;margin:.75rem 0 0}
+.atlas-polybius .polybius-question{font:400 clamp(1.03rem,1.55vw,1.2rem)/1.73 var(--atlas-serif);color:var(--atlas-ink);max-width:57rem;margin:1rem 0 1.5rem}
+.atlas-polybius .polybius-question strong{font-weight:600}
+.atlas-polybius .polybius-section{min-width:0;scroll-margin-top:6rem}
+.atlas-polybius .polybius-section--major{margin-top:2rem}
+.atlas-polybius .guide-toc .polybius-toc-main{font-weight:700;color:var(--atlas-ink);margin-top:.85rem}
+.atlas-polybius .guide-toc .polybius-toc-nested{padding-left:.9rem}
+.atlas-polybius .atlas-legacy-anchor{display:block;height:0;visibility:hidden;scroll-margin-top:6rem}
+.atlas-polybius .polybius-table-tools{display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;margin:1.5rem 0 -.35rem;padding:.95rem 1rem;background:var(--atlas-paper);border:1px solid var(--atlas-rule);border-bottom:0;border-radius:10px 10px 0 0}
+.atlas-polybius .polybius-table-tools[hidden]{display:none!important}
+.atlas-polybius .polybius-table-tools label{font:600 .79rem/1.5 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-polybius .polybius-table-tools input{min-height:44px;flex:1 1 12rem;min-width:8rem;max-width:25rem;padding:.65rem .85rem;border:1px solid #83939a;border-radius:5px;background:#fffdf8;color:var(--atlas-ink);font:400 .86rem/1.4 system-ui,sans-serif}
+.atlas-polybius .polybius-table-tools button{min-height:44px;padding:.58rem .85rem;border:1px solid #83939a;border-radius:5px;background:transparent;color:var(--atlas-ink);font:600 .79rem/1.45 system-ui,sans-serif;cursor:pointer}
+.atlas-polybius .polybius-table-tools button:hover,.atlas-polybius .polybius-table-tools button[aria-pressed="true"]{background:var(--atlas-ink);color:#fffaf2;border-color:var(--atlas-ink)}
+.atlas-polybius .polybius-table-tools output{font:500 .75rem/1.5 system-ui,sans-serif;color:var(--atlas-muted);margin-left:auto}
+.atlas-polybius :is(.polybius-table-tools input,.polybius-table-tools button,.polybius-table-region):focus-visible{outline:3px solid #bd914a;outline-offset:3px}
+.atlas-polybius .polybius-table-region{overflow-x:auto;max-width:100%;border:1px solid var(--atlas-rule);border-radius:0 0 10px 10px;background:#fffdf8;overscroll-behavior-inline:contain;margin:.35rem 0 1.75rem}
+.atlas-polybius .polybius-data-table{margin:0;width:100%;min-width:33rem;border-collapse:collapse;text-align:left;color:var(--atlas-ink);font:400 .87rem/1.72 system-ui,sans-serif}
+.atlas-polybius #polybius-life-table{min-width:38rem}
+.atlas-polybius #polybius-glossary-table{min-width:30rem}
+.atlas-polybius .polybius-data-table thead{background:#ece9e0}
+.atlas-polybius .polybius-data-table thead th{font:700 .73rem/1.5 system-ui,sans-serif;letter-spacing:.045em;color:#283a47}
+.atlas-polybius .polybius-data-table :is(th,td){padding:.9rem 1rem;border-bottom:1px solid #e4e1d8;vertical-align:top}
+.atlas-polybius .polybius-data-table tbody th{font-weight:650;width:30%}
+.atlas-polybius .polybius-data-table tbody tr:nth-child(even){background:#f8f6f1}
+.atlas-polybius .polybius-data-table tbody tr:hover{background:#efede6}
+.atlas-polybius .polybius-data-table tbody tr[hidden]{display:none!important}
+.atlas-polybius .polybius-data-table tbody tr:last-child>*{border-bottom:0}
+.atlas-polybius .polybius-switch{position:relative;display:flex;flex-wrap:wrap;gap:.48rem;margin:1.5rem 0 1.75rem;padding:clamp(.95rem,2vw,1.45rem);border:1px solid var(--atlas-rule);border-top:2px solid #b59b69;border-radius:9px;background:var(--atlas-paper)}
+.atlas-polybius .polybius-switch legend{font:650 .8rem/1.5 system-ui,sans-serif;color:var(--atlas-ink);padding:0 .35rem;letter-spacing:.015em}
+.atlas-polybius .polybius-switch>input[type="radio"]{position:absolute;width:1px;height:1px;opacity:0}
+.atlas-polybius .polybius-switch>label{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.55rem .78rem;border:1px solid #929da1;border-radius:5px;background:#fffdf9;color:var(--atlas-ink);font:600 .76rem/1.43 system-ui,sans-serif;cursor:pointer}
+.atlas-polybius .polybius-switch>input:checked+label{background:var(--atlas-ink);border-color:var(--atlas-ink);color:#fffaf1}
+.atlas-polybius .polybius-switch>input:focus-visible+label{outline:3px solid #bd914a;outline-offset:3px}
+.atlas-polybius .polybius-switch-panels{width:100%;margin:.8rem 0 0;border-top:1px solid var(--atlas-rule)}
+.atlas-polybius .polybius-step{padding:.9rem 0 .25rem;border-bottom:1px solid var(--atlas-rule)}
+.atlas-polybius .polybius-step:last-child{border-bottom:0}
+.atlas-polybius .polybius-step p{margin:.35rem 0 .85rem}
+.atlas-polybius .polybius-step strong{color:var(--atlas-ink)}
+.atlas-polybius #polybius-view-1:checked~.polybius-switch-panels .polybius-step:not(.polybius-step-1),
+.atlas-polybius #polybius-view-2:checked~.polybius-switch-panels .polybius-step:not(.polybius-step-2),
+.atlas-polybius #polybius-view-3:checked~.polybius-switch-panels .polybius-step:not(.polybius-step-3),
+.atlas-polybius #polybius-view-4:checked~.polybius-switch-panels .polybius-step:not(.polybius-step-4),
+.atlas-polybius #polybius-view-5:checked~.polybius-switch-panels .polybius-step:not(.polybius-step-5),
+.atlas-polybius #polybius-view-6:checked~.polybius-switch-panels .polybius-step:not(.polybius-step-6),
+.atlas-polybius #polybius-view-7:checked~.polybius-switch-panels .polybius-step:not(.polybius-step-7){display:none}
+.atlas-polybius .polybius-faq{padding:1rem 0;border-top:1px solid var(--atlas-rule)}
+.atlas-polybius .polybius-faq h4{font:600 clamp(1rem,1.5vw,1.13rem)/1.54 var(--atlas-serif);color:var(--atlas-ink);margin:0 0 .55rem}
+.atlas-polybius .polybius-faq p{margin:0}
+@media(max-width:680px){
+ .atlas-polybius .polybius-table-tools{padding:.78rem;gap:.46rem}
+ .atlas-polybius .polybius-table-tools label{flex:1 1 100%}
+ .atlas-polybius .polybius-table-tools input{flex-basis:100%;max-width:none}
+ .atlas-polybius .polybius-table-tools output{margin-right:auto}
+ .atlas-polybius .polybius-triad{font-size:.78rem}
+ .atlas-polybius .polybius-data-table{font-size:.79rem}
+ .atlas-polybius .polybius-data-table :is(th,td){padding:.73rem .82rem}
+}
+@media(max-width:560px){
+ /* The source table remains a semantic table; display each row as a complete reading card. */
+ .atlas-polybius .polybius-table-region{overflow:visible}
+ .atlas-polybius .polybius-data-table{display:block;min-width:0!important;width:100%}
+ .atlas-polybius .polybius-data-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:-1px;padding:0;border:0}
+ .atlas-polybius .polybius-data-table tbody{display:block}
+ .atlas-polybius .polybius-data-table tbody tr{display:block;padding:.18rem 0;border-bottom:1px solid var(--atlas-rule)}
+ .atlas-polybius .polybius-data-table tbody tr:last-child{border-bottom:0}
+ .atlas-polybius .polybius-data-table tbody th,.atlas-polybius .polybius-data-table tbody td{display:block;width:auto!important;padding:.52rem .8rem;border:0;overflow-wrap:anywhere}
+ .atlas-polybius .polybius-data-table tbody th{font-size:.91rem;padding-top:.8rem}
+ .atlas-polybius .polybius-data-table tbody td{font-size:.83rem;line-height:1.65}
+ .atlas-polybius .polybius-data-table tbody td::before{display:block;font:700 .64rem/1.45 system-ui,sans-serif;letter-spacing:.09em;color:var(--atlas-muted);margin:0 0 .2rem}
+ .atlas-polybius #polybius-life-table tbody td::before{content:"HISTORICAL CONTEXT"}
+ .atlas-polybius #polybius-glossary-table tbody td::before{content:"WORKING MEANING"}
+}
+@media print{
+ .atlas-polybius .polybius-table-tools,.atlas-polybius .polybius-switch>input,.atlas-polybius .polybius-switch>label,.atlas-polybius .polybius-switch legend{display:none!important}
+ .atlas-polybius .polybius-table-region{overflow:visible!important;border:0;max-width:none}
+ .atlas-polybius .polybius-data-table{display:table!important;min-width:0!important;width:100%!important;font-size:9pt}
+ .atlas-polybius .polybius-data-table thead{display:table-header-group!important;position:static!important;width:auto;height:auto;clip-path:none;white-space:normal;overflow:visible;margin:0}
+ .atlas-polybius .polybius-data-table tbody{display:table-row-group!important}
+ .atlas-polybius .polybius-data-table tbody tr,.atlas-polybius .polybius-data-table tbody tr[hidden]{display:table-row!important}
+ .atlas-polybius .polybius-data-table tbody th,.atlas-polybius .polybius-data-table tbody td{display:table-cell!important}
+ .atlas-polybius .polybius-data-table tbody td::before{display:none!important}
+ .atlas-polybius .polybius-step,.atlas-polybius .polybius-switch .polybius-step{display:block!important;break-inside:avoid}
+ .atlas-polybius .polybius-switch{border:0;padding:0;background:transparent;display:block}
+ .atlas-polybius .polybius-switch-panels{margin:0}
+}
