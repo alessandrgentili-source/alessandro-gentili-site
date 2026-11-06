@@ -7,7 +7,7 @@
 .atlas-simmel .simmel-switch {border:1px solid var(--atlas-rule);border-radius:12px;background:var(--atlas-paper);padding:clamp(1rem,2vw,1.65rem);margin:1.3rem 0 1.7rem;display:flex;flex-wrap:wrap;gap:.48rem}
 .atlas-simmel .simmel-switch legend {font:700 .82rem/1.45 system-ui,sans-serif;letter-spacing:.02em;color:var(--atlas-ink);padding:0 .3rem}
 .atlas-simmel .simmel-switch input[type="radio"] {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.atlas-simmel .simmel-switch label {display:inline-flex;align-items:center;min-height:40px;padding:.43rem .77rem;border:1px solid #b7a78c;border-radius:5px;background:#fffdf8;color:#233f52;font:600 .84rem/1.35 system-ui,sans-serif;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.atlas-simmel .simmel-switch label {display:inline-flex;align-items:center;min-height:44px;padding:.43rem .77rem;border:1px solid #b7a78c;border-radius:5px;background:#fffdf8;color:#233f52;font:600 .84rem/1.35 system-ui,sans-serif;cursor:pointer;transition:background .15s ease,border-color .15s ease}
 .atlas-simmel .simmel-switch label:hover {border-color:#775b2f;background:#f0e6d4}
 .atlas-simmel .simmel-switch input:checked + label {background:#182e3e;border-color:#182e3e;color:#fffdf5}
 .atlas-simmel .simmel-switch input:focus-visible + label {outline:3px solid #806333;outline-offset:3px}
@@ -21,14 +21,14 @@
 .atlas-simmel #simmel-view-5:checked ~ .simmel-steps .simmel-step:not(.simmel-step-5) {display:none}
 .atlas-simmel .simmel-glossary-controls {display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:1.3rem 0 .7rem;padding:.88rem 1rem;background:var(--atlas-paper);border:1px solid var(--atlas-rule);border-radius:8px}
 .atlas-simmel .simmel-glossary-controls label {font:650 .86rem/1.45 system-ui,sans-serif;color:var(--atlas-ink)}
-.atlas-simmel #simmel-glossary-search {flex:1 1 14rem;width:100%;max-width:100%;min-height:42px;padding:.48rem .7rem;border:1px solid #a8997e;border-radius:5px;background:#fffefb;color:#152d3e;font:400 .95rem/1.4 system-ui,sans-serif}
-.atlas-simmel #simmel-glossary-reset {min-height:42px;padding:.45rem .8rem;border:1px solid #8c7756;background:#eee4d3;color:#213748;border-radius:5px;font-weight:650;cursor:pointer}
+.atlas-simmel #simmel-glossary-search {flex:1 1 14rem;min-width:0;width:100%;max-width:100%;min-height:44px;padding:.48rem .7rem;border:1px solid #a8997e;border-radius:5px;background:#fffefb;color:#152d3e;font:400 1rem/1.4 system-ui,sans-serif}
+.atlas-simmel #simmel-glossary-reset {min-height:44px;padding:.45rem .8rem;border:1px solid #8c7756;background:#eee4d3;color:#213748;border-radius:5px;font-weight:650;cursor:pointer}
 .atlas-simmel #simmel-glossary-status {font:.8rem/1.4 system-ui,sans-serif;color:var(--atlas-muted)}
 .atlas-simmel .simmel-table-region {max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border:1px solid var(--atlas-rule);border-radius:8px;margin:1rem 0 1.4rem;background:#fffefb}
-.atlas-simmel .simmel-glossary-table {width:100%;border-collapse:collapse;table-layout:auto;color:#213748;font:400 .95rem/1.58 system-ui,sans-serif}
+.atlas-simmel .simmel-glossary-table {width:100%;border-collapse:collapse;table-layout:fixed;color:#213748;font:400 .94rem/1.65 system-ui,sans-serif}
 .atlas-simmel .simmel-glossary-table th,.atlas-simmel .simmel-glossary-table td {padding:.75rem .9rem;border-bottom:1px solid #ded3bf;text-align:left;vertical-align:top;overflow-wrap:anywhere}
 .atlas-simmel .simmel-glossary-table thead th {background:#182e3e;color:#fffdf6;font-weight:700}
-.atlas-simmel .simmel-glossary-table tbody th {font-weight:700;width:31%;min-width:9rem}
+.atlas-simmel .simmel-glossary-table tbody th {font-weight:700;width:34%;min-width:0}
 .atlas-simmel .simmel-glossary-table tbody tr:nth-child(even) {background:#f8f2e8}
 .atlas-simmel .simmel-glossary-table tr:last-child :is(th,td) {border-bottom:0}
 .atlas-simmel .simmel-glossary-table tr[hidden] {display:none}
@@ -36,12 +36,12 @@
 .atlas-simmel #faq > p > strong:first-child {color:var(--atlas-ink)}
 @media (max-width:600px) {
  .atlas-simmel .simmel-switch {padding:.75rem;gap:.4rem}
- .atlas-simmel .simmel-switch label {font-size:.77rem;padding:.42rem .58rem;min-height:42px}
+ .atlas-simmel .simmel-switch label {font-size:.77rem;padding:.42rem .58rem;min-height:44px}
  .atlas-simmel .simmel-step {padding:.72rem .82rem}
  .atlas-simmel .simmel-glossary-controls {padding:.75rem}
- .atlas-simmel .simmel-glossary-table {font-size:.88rem}
+ .atlas-simmel .simmel-glossary-table {font-size:.94rem}
  .atlas-simmel .simmel-glossary-table th,.atlas-simmel .simmel-glossary-table td {padding:.6rem .54rem}
- .atlas-simmel .simmel-glossary-table tbody th {min-width:7.3rem;width:36%}
+ .atlas-simmel .simmel-glossary-table tbody th {min-width:0;width:34%}
 }
 @media print {
  .atlas-simmel .simmel-switch {border:1px solid #777;background:#fff;display:block;padding:.4rem;margin:1rem 0;break-inside:auto}
@@ -64,3 +64,15 @@
 .atlas-simmel .simmel-faq {padding:.75rem 0;border-bottom:1px solid var(--atlas-rule)}
 .atlas-simmel .simmel-faq h3 {font:700 1rem/1.55 var(--atlas-serif);color:var(--atlas-ink);margin:0 0 .35rem}
 .atlas-simmel .simmel-faq p {margin:0}
+
+/* Quiet structural labels and compact consultation text, preserving the light instrument. */
+.atlas-simmel .atlas-reading .simmel-part{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-simmel .atlas-reading .simmel-part h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);color:var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.atlas-simmel .atlas-reading .simmel-step p{margin:0;font:400 .94rem/1.8 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-simmel .guide-toc .simmel-toc-part{color:var(--atlas-gold)}
+.atlas-simmel .atlas-reading .simmel-glossary-table thead th:first-child{width:34%}
+.atlas-simmel .atlas-reading .simmel-table-region:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:4px}
+.atlas-simmel .atlas-reading .simmel-faq{padding:1.3rem 0;border:0;border-top:1px solid var(--atlas-rule)}
+.atlas-simmel .atlas-reading .simmel-faq h3{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif)}
+@media print{.atlas-simmel .atlas-reading .simmel-part{break-after:avoid}.atlas-simmel .atlas-reading #faq>p,.atlas-simmel .atlas-reading .simmel-faq{break-inside:avoid}}
+@media(max-width:360px){.atlas-simmel .atlas-reading .simmel-glossary-table thead th:first-child,.atlas-simmel .atlas-reading .simmel-glossary-table tbody th{width:44%}}
