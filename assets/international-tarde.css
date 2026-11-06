@@ -183,7 +183,8 @@
 }
 @media print{
  .atlas-tarde-v3 .tarde-data-tools{display:none!important}
- .atlas-tarde-v3 .tarde-data-table,.atlas-tarde-v3 .tarde-data-table tbody{display:table!important}
+ .atlas-tarde-v3 .tarde-data-table{display:table!important}
+ .atlas-tarde-v3 .tarde-data-table tbody{display:table-row-group!important}
  .atlas-tarde-v3 .tarde-data-table thead{display:table-header-group!important;position:static!important;width:auto!important;height:auto!important;overflow:visible!important;clip-path:none!important;white-space:normal!important}
  .atlas-tarde-v3 .tarde-data-table tr,.atlas-tarde-v3 .tarde-data-table tr[hidden]{display:table-row!important;break-inside:avoid;margin:0!important;border:0!important}
  .atlas-tarde-v3 .tarde-data-table :is(th,td){display:table-cell!important;width:auto!important;border-bottom:1px solid #999!important;padding:.35rem .45rem}
