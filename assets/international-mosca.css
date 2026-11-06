@@ -1,0 +1,87 @@
+/* Mosca EN20 | International 3.0. Plato editorial system, Shannon-style native views.
+   All source content survives with scripting disabled and in print. */
+.atlas-mosca .mosca-triad{max-width:69ch;color:var(--atlas-muted);font:500 .82rem/1.65 system-ui,sans-serif;margin:.75rem 0 0}
+.atlas-mosca .mosca-question{max-width:57rem;color:var(--atlas-ink);font:400 clamp(1.03rem,1.55vw,1.22rem)/1.72 var(--atlas-serif);margin:1.02rem 0 1.45rem}
+.atlas-mosca .mosca-question strong{font-weight:600}
+.atlas-mosca .atlas-legacy-anchor{display:block;visibility:hidden;height:0;scroll-margin-top:6rem}
+.atlas-mosca .guide-toc .mosca-toc-main{font-weight:700;color:var(--atlas-ink);margin-top:.8rem}
+.atlas-mosca .guide-toc .mosca-toc-nested{padding-left:1rem}
+.atlas-mosca .mosca-section{min-width:0;scroll-margin-top:6rem}
+.atlas-mosca .mosca-section--major{margin-top:2.3rem}
+.atlas-mosca .mosca-section :is(ol,ul){padding-left:1.6rem}
+.atlas-mosca .mosca-section :is(ol,ul) li{margin:.65rem 0;overflow-wrap:break-word}
+.atlas-mosca .mosca-table-tools{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap;padding:1rem;margin:1.4rem 0 0;border:1px solid var(--atlas-rule);border-bottom:0;border-radius:9px 9px 0 0;background:var(--atlas-paper)}
+.atlas-mosca .mosca-table-tools[hidden]{display:none!important}
+.atlas-mosca .mosca-table-tools label{font:600 .8rem/1.5 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-mosca .mosca-table-tools input{flex:1 1 11rem;min-width:8rem;max-width:25rem;background:#fffdf8;color:var(--atlas-ink);border:1px solid #98a2a5;border-radius:5px;font:400 .86rem/1.4 system-ui,sans-serif;padding:.6rem .84rem;min-height:44px}
+.atlas-mosca .mosca-table-tools button{min-height:44px;padding:.58rem .85rem;background:transparent;color:var(--atlas-ink);border:1px solid #8a989b;border-radius:5px;font:600 .79rem/1.4 system-ui,sans-serif;cursor:pointer}
+.atlas-mosca .mosca-table-tools button:hover,.atlas-mosca .mosca-table-tools button[aria-pressed="true"]{background:var(--atlas-ink);border-color:var(--atlas-ink);color:#fffaf0}
+.atlas-mosca .mosca-table-tools output{font:500 .75rem/1.5 system-ui,sans-serif;color:var(--atlas-muted);margin-left:auto}
+.atlas-mosca .mosca-table-tools :is(input,button):focus-visible,.atlas-mosca .mosca-table-scroll:focus-visible{outline:3px solid #bd9450;outline-offset:3px}
+.atlas-mosca .mosca-table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--atlas-rule);border-radius:0 0 9px 9px;margin:0 0 1.8rem;background:#fffdf8;overscroll-behavior-inline:contain}
+.atlas-mosca .mosca-data-table{width:100%;min-width:34rem;border-collapse:collapse;margin:0;text-align:left;color:var(--atlas-ink);font:400 .88rem/1.7 system-ui,sans-serif}
+.atlas-mosca #mosca-life-table{min-width:40rem}
+.atlas-mosca #mosca-glossary-table{min-width:33rem}
+.atlas-mosca .mosca-data-table thead{background:#ece9e0}
+.atlas-mosca .mosca-data-table :is(th,td){padding:.88rem .94rem;border-bottom:1px solid #e4e1d8;vertical-align:top;overflow-wrap:break-word}
+.atlas-mosca .mosca-data-table thead th{font:700 .74rem/1.5 system-ui,sans-serif;letter-spacing:.035em;color:#293e49}
+.atlas-mosca .mosca-data-table tbody th{font-weight:650;width:34%}
+.atlas-mosca .mosca-data-table tbody tr:nth-child(even){background:#f8f6f1}
+.atlas-mosca .mosca-data-table tbody tr:hover{background:#f0eee7}
+.atlas-mosca .mosca-data-table tbody tr[hidden]{display:none!important}
+.atlas-mosca .mosca-data-table tbody tr:last-child>*{border-bottom:0}
+.atlas-mosca .mosca-choice-field{position:relative;display:flex;flex-wrap:wrap;gap:.5rem;border:1px solid var(--atlas-rule);border-top:2px solid #b69e72;border-radius:9px;background:var(--atlas-paper);padding:clamp(.9rem,2vw,1.45rem);margin:1.5rem 0 1.6rem;min-width:0}
+.atlas-mosca .mosca-choice-field legend{font:650 .79rem/1.45 system-ui,sans-serif;color:var(--atlas-ink);padding:0 .32rem}
+.atlas-mosca .mosca-choice-field>input[type="radio"]{position:absolute;opacity:0;width:1px;height:1px}
+.atlas-mosca .mosca-choice-field>label{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:.57rem .78rem;background:#fdfbf6;border:1px solid #99a5a9;border-radius:5px;font:600 .75rem/1.4 system-ui,sans-serif;color:var(--atlas-ink);cursor:pointer}
+.atlas-mosca .mosca-choice-field>input:checked+label{color:#fffaf0;background:var(--atlas-ink);border-color:var(--atlas-ink)}
+.atlas-mosca .mosca-choice-field>input:focus-visible+label{outline:3px solid #bd9450;outline-offset:3px}
+.atlas-mosca .mosca-choice-panels{width:100%;border-top:1px solid var(--atlas-rule);margin:.85rem 0 0}
+.atlas-mosca .mosca-choice-step{border-bottom:1px solid var(--atlas-rule);padding:.95rem .25rem .15rem}
+.atlas-mosca .mosca-choice-step:last-child{border-bottom:0}
+.atlas-mosca .mosca-choice-step p{margin:.4rem 0 .86rem}
+.atlas-mosca .mosca-choice-step strong{color:var(--atlas-ink)}
+.atlas-mosca #mosca-choice-1:checked~.mosca-choice-panels .mosca-choice-step:not(.mosca-choice-step-1){display:none}
+.atlas-mosca #mosca-choice-2:checked~.mosca-choice-panels .mosca-choice-step:not(.mosca-choice-step-2){display:none}
+.atlas-mosca #mosca-choice-3:checked~.mosca-choice-panels .mosca-choice-step:not(.mosca-choice-step-3){display:none}
+.atlas-mosca #mosca-choice-4:checked~.mosca-choice-panels .mosca-choice-step:not(.mosca-choice-step-4){display:none}
+.atlas-mosca #mosca-choice-5:checked~.mosca-choice-panels .mosca-choice-step:not(.mosca-choice-step-5){display:none}
+.atlas-mosca #mosca-choice-6:checked~.mosca-choice-panels .mosca-choice-step:not(.mosca-choice-step-6){display:none}
+.atlas-mosca #mosca-choice-7:checked~.mosca-choice-panels .mosca-choice-step:not(.mosca-choice-step-7){display:none}
+.atlas-mosca .mosca-faq{border-top:1px solid var(--atlas-rule);padding:1rem 0 .88rem}
+.atlas-mosca .mosca-faq h4{color:var(--atlas-ink);font:600 clamp(1rem,1.5vw,1.16rem)/1.54 var(--atlas-serif);margin:0 0 .55rem}
+.atlas-mosca .mosca-faq p{margin:0}
+@media(max-width:680px){
+ .atlas-mosca .mosca-table-tools{padding:.78rem;gap:.46rem}
+ .atlas-mosca .mosca-table-tools label{flex:1 1 100%}
+ .atlas-mosca .mosca-table-tools input{flex-basis:100%;max-width:none}
+ .atlas-mosca .mosca-table-tools output{margin-right:auto}
+ .atlas-mosca .mosca-choice-field>label{font-size:.72rem}
+}
+@media(max-width:560px){
+ .atlas-mosca .mosca-table-scroll{overflow:visible}
+ .atlas-mosca .mosca-data-table{display:block;width:100%;min-width:0!important}
+ .atlas-mosca .mosca-data-table thead{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+ .atlas-mosca .mosca-data-table tbody{display:block}
+ .atlas-mosca .mosca-data-table tbody tr{display:block;padding:.25rem 0;border-bottom:1px solid var(--atlas-rule)}
+ .atlas-mosca .mosca-data-table tbody tr:last-child{border-bottom:0}
+ .atlas-mosca .mosca-data-table tbody :is(th,td){display:block;width:auto!important;padding:.56rem .8rem;border:0}
+ .atlas-mosca .mosca-data-table tbody th{font-size:.94rem;line-height:1.55;padding-top:.75rem}
+ .atlas-mosca .mosca-data-table tbody td{font-size:.83rem;line-height:1.65}
+ .atlas-mosca .mosca-data-table tbody td::before{display:block;font:700 .64rem/1.45 system-ui,sans-serif;letter-spacing:.08em;color:var(--atlas-muted);margin:0 0 .18rem}
+ .atlas-mosca #mosca-life-table tbody td::before{content:"WHAT HAPPENED"}
+ .atlas-mosca #mosca-glossary-table tbody td::before{content:"WORKING MEANING"}
+}
+@media print{
+ .atlas-mosca .mosca-table-tools,.atlas-mosca .mosca-choice-field>input,.atlas-mosca .mosca-choice-field>label,.atlas-mosca .mosca-choice-field>legend{display:none!important}
+ .atlas-mosca .mosca-table-scroll{overflow:visible!important;border:0;max-width:none}
+ .atlas-mosca .mosca-data-table{display:table!important;min-width:0!important;width:100%!important;font-size:9pt}
+ .atlas-mosca .mosca-data-table thead{position:static!important;display:table-header-group!important;width:auto!important;height:auto!important;clip-path:none;overflow:visible;white-space:normal;margin:0}
+ .atlas-mosca .mosca-data-table tbody{display:table-row-group!important}
+ .atlas-mosca .mosca-data-table tbody tr,.atlas-mosca .mosca-data-table tbody tr[hidden]{display:table-row!important}
+ .atlas-mosca .mosca-data-table tbody :is(th,td){display:table-cell!important}
+ .atlas-mosca .mosca-data-table tbody td::before{display:none!important}
+ .atlas-mosca .mosca-choice-field{display:block;border:0;background:transparent;padding:0}
+ .atlas-mosca .mosca-choice-panels{margin:0}
+ .atlas-mosca .mosca-choice-step{display:block!important;break-inside:avoid}
+}
