@@ -100,7 +100,10 @@ def verify(path,base):
     ck(part is not None,'Main article body')
     p=Editorial();p.feed(part.group(1))
     expected,actual=source_words(source),tok(' '.join(p.parts))
-    ck(expected==actual,f'Source/HTML drift: {len(expected)} vs {len(actual)} tokens')
+    if expected != actual:
+        import itertools
+        mismatch = next((i for i,(a,b) in enumerate(itertools.zip_longest(expected,actual)) if a != b), -1)
+        raise AssertionError(f'Source/HTML drift: {len(expected)} vs {len(actual)} tokens, at {mismatch}: source={expected[max(0,mismatch-6):mismatch+9]!r} html={actual[max(0,mismatch-6):mismatch+9]!r}')
     ck(len(actual)==12437,'Unexpected manuscript token count')
     ck(html.count('class="simmel-step simmel-step-')==5,'Five selectable steps')
     tab=re.search(r'<table\b[^>]*id="simmel-glossary-table".*?</table>',html,re.S)
