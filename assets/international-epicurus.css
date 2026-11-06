@@ -167,3 +167,23 @@
 .atlas-epicurus-v3 .epicurus-semantic-table :is(th,td)::before{display:none!important}
 .atlas-epicurus-v3 .epicurus-part-head,.atlas-epicurus-v3 .epicurus-section{break-inside:auto}
 }
+
+/* V3 reader: keep the original desire instrument legible within shared prose. */
+.atlas-epicurus-v3 .atlas-reading .epicurus-figure p{color:#f0e9df;font:400 .94rem/1.8 system-ui,sans-serif}
+.atlas-epicurus-v3 .atlas-reading .epicurus-figure .atlas-label{color:#e0c58c;font:600 .7rem/1.5 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.atlas-epicurus-v3 .atlas-reading .epicurus-figure .epicurus-intro{font-size:.92rem;margin:0 0 1.6rem}
+.atlas-epicurus-v3 .atlas-reading .epicurus-figure .epicurus-phase{color:#e0c58c;font:600 .67rem/1.5 system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase;margin:0 0 .65rem}
+.atlas-epicurus-v3 .atlas-reading .epicurus-figure .epicurus-caveat{font-size:.86rem}
+.atlas-epicurus-v3 .atlas-reading .epicurus-panel h3{margin:0 0 1rem;font:400 clamp(1.58rem,2.4vw,2.18rem)/1.24 var(--atlas-serif);color:#f8f2e7}
+.atlas-epicurus-v3 .epicurus-measure>span,.atlas-epicurus-v3 .epicurus-measure>b{white-space:normal}
+.atlas-epicurus-v3 .atlas-reading .epicurus-part-head{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-epicurus-v3 .atlas-reading .epicurus-part-head h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
+.atlas-epicurus-v3 .epicurus-semantic-table{font:400 .94rem/1.65 system-ui,sans-serif}
+.atlas-epicurus-v3 .atlas-reading #faq h3{font:400 1.5rem/1.35 var(--atlas-serif);margin:1.3rem 0 .8rem}
+@media(max-width:760px){.atlas-epicurus-v3 .atlas-reading .epicurus-panel h3{font-size:1.65rem}}
+@media print{
+ .atlas-epicurus-v3 .atlas-reading .epicurus-figure :is(p,.epicurus-phase,.atlas-label),.atlas-epicurus-v3 .atlas-reading .epicurus-panel h3{color:#182e3e}
+ .atlas-epicurus-v3 .epicurus-semantic-table{display:table!important;font-size:9pt}
+ .atlas-epicurus-v3 .epicurus-semantic-table tbody{display:table-row-group!important}
+ .atlas-epicurus-v3 .epicurus-semantic-table thead{width:auto!important;height:auto!important;overflow:visible!important;white-space:normal!important}
+}
