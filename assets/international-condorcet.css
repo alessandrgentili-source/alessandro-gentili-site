@@ -1,0 +1,108 @@
+/* Condorcet EN18 · International 3.0 | Plato reading architecture, Shannon interaction principle.
+   Scoped, progressive, no global layout changes. */
+.atlas-condorcet .condorcet-triad{max-width:65ch;color:var(--atlas-muted);font:500 .82rem/1.65 system-ui,sans-serif;margin:.72rem 0 0}
+.atlas-condorcet .condorcet-question{max-width:57rem;color:var(--atlas-ink);font:400 clamp(1.03rem,1.55vw,1.22rem)/1.72 var(--atlas-serif);margin:1.05rem 0 1.4rem}
+.atlas-condorcet .atlas-legacy-anchor{display:block;height:0;visibility:hidden;scroll-margin-top:24px}
+.atlas-condorcet .guide-toc .condorcet-toc-main{font-weight:700;color:var(--atlas-ink);margin-top:.85rem}
+.atlas-condorcet .guide-toc .condorcet-toc-nested{padding-left:1rem}
+.atlas-condorcet .condorcet-section{min-width:0;scroll-margin-top:6rem}
+.atlas-condorcet .condorcet-section.condorcet-major{margin-top:2.4rem}
+.atlas-condorcet .condorcet-faq{border-top:1px solid var(--atlas-rule);padding:1.15rem 0 .9rem}
+.atlas-condorcet .condorcet-faq h4{font:600 clamp(1rem,1.48vw,1.16rem)/1.5 var(--atlas-serif);margin:0 0 .58rem;color:var(--atlas-ink)}
+.atlas-condorcet .condorcet-faq p{margin:.2rem 0 .3rem}
+/* Source equations are typeset without requiring a third-party math runtime. */
+.atlas-condorcet .condorcet-math{display:block;max-width:100%;overflow-wrap:anywhere;padding:1.2rem 1.05rem;margin:1.4rem 0;border-block:1px solid var(--atlas-gold);color:var(--atlas-ink);font:400 clamp(1.06rem,2vw,1.4rem)/1.55 var(--atlas-serif);text-align:center}
+.atlas-condorcet .condorcet-math i{font-style:italic}
+.atlas-condorcet :is(.condorcet-table-tools,.condorcet-vote-tools,.condorcet-calculator)[hidden]{display:none!important}
+.atlas-condorcet .condorcet-table-tools{margin:1.35rem 0 0;display:flex;flex-wrap:wrap;gap:.58rem;align-items:center;padding:.9rem;background:var(--atlas-paper);border:1px solid var(--atlas-rule);border-bottom:0;border-radius:10px 10px 0 0}
+.atlas-condorcet .condorcet-table-tools label{font:650 .8rem/1.45 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-condorcet .condorcet-table-tools input{flex:1 1 12rem;min-width:8rem;max-width:25rem;padding:.65rem .75rem;background:#fffdf8;color:var(--atlas-ink);border:1px solid #8c979d;border-radius:5px;font:400 .86rem/1.4 system-ui,sans-serif;min-height:44px}
+.atlas-condorcet :is(.condorcet-table-tools,.condorcet-vote-tools) button{background:transparent;border:1px solid #87989e;border-radius:5px;color:var(--atlas-ink);font:650 .78rem/1.4 system-ui,sans-serif;min-height:44px;padding:.55rem .85rem;cursor:pointer}
+.atlas-condorcet :is(.condorcet-table-tools,.condorcet-vote-tools) button:is(:hover,[aria-pressed="true"]){background:var(--atlas-ink);border-color:var(--atlas-ink);color:#fffaf2}
+.atlas-condorcet .condorcet-table-tools output{font:500 .75rem/1.4 system-ui,sans-serif;color:var(--atlas-muted);margin-left:auto}
+.atlas-condorcet :is(input,button,select,.condorcet-table-scroll):focus-visible{outline:3px solid #bb934a;outline-offset:3px}
+.atlas-condorcet .condorcet-table-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;border:1px solid var(--atlas-rule);background:#fffdf8;border-radius:0 0 10px 10px;margin:0 0 1.7rem}
+.atlas-condorcet .condorcet-data-table,.atlas-condorcet .condorcet-vote-table{width:100%;min-width:36rem;border-collapse:collapse;margin:0;color:var(--atlas-ink);font:400 .88rem/1.68 system-ui,sans-serif;text-align:left}
+.atlas-condorcet .condorcet-data-table thead,.atlas-condorcet .condorcet-vote-table thead{background:#edeae2}
+.atlas-condorcet :is(.condorcet-data-table,.condorcet-vote-table) :is(th,td){padding:.85rem .95rem;border-bottom:1px solid #e4e1d8;vertical-align:top}
+.atlas-condorcet :is(.condorcet-data-table,.condorcet-vote-table) thead th{font:700 .73rem/1.5 system-ui,sans-serif;letter-spacing:.035em;color:#293b47}
+.atlas-condorcet :is(.condorcet-data-table,.condorcet-vote-table) tbody th{font-weight:650}
+.atlas-condorcet :is(.condorcet-data-table,.condorcet-vote-table) tbody tr:nth-child(even){background:#f8f6f1}
+.atlas-condorcet :is(.condorcet-data-table,.condorcet-vote-table) tbody tr:hover{background:#efede6}
+.atlas-condorcet .condorcet-data-table tbody tr[hidden]{display:none!important}
+.atlas-condorcet .condorcet-data-table tbody tr:last-child>*{border-bottom:0}
+.atlas-condorcet #condorcet-life-table th:first-child{width:32%}
+.atlas-condorcet #condorcet-glossary-table th:first-child{width:31%}
+.atlas-condorcet .condorcet-vote-scroll{border-radius:10px;margin:1.25rem 0 0}
+.atlas-condorcet .condorcet-vote-table{min-width:23rem;text-align:center}
+.atlas-condorcet .condorcet-vote-table tbody tr[data-supports="first"]{background:#e9eee5}
+.atlas-condorcet .condorcet-vote-table tbody tr[data-supports="second"]{background:#f4eee1}
+.atlas-condorcet .condorcet-vote-tools{padding:.9rem 1rem;margin:0 0 1.6rem;background:var(--atlas-paper);border:1px solid var(--atlas-rule);border-radius:0 0 10px 10px}
+.atlas-condorcet .condorcet-vote-tools p{font:500 .84rem/1.6 system-ui,sans-serif;margin:0 0 .7rem}
+.atlas-condorcet .condorcet-vote-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin:0 0 .8rem}
+.atlas-condorcet .condorcet-vote-tools output{display:block;color:var(--atlas-ink);font:600 .95rem/1.6 var(--atlas-serif)}
+/* A computational counterexample instrument, explicitly model-bound. */
+.atlas-condorcet .condorcet-calculator{margin:1.25rem 0 1.65rem}
+.atlas-condorcet .condorcet-calculator fieldset{min-width:0;background:var(--atlas-paper);border:1px solid var(--atlas-rule);border-top:2px solid var(--atlas-gold);border-radius:8px;padding:1.15rem 1.2rem}
+.atlas-condorcet .condorcet-calculator legend{color:var(--atlas-ink);font:650 .84rem/1.5 system-ui,sans-serif;padding:0 .3rem}
+.atlas-condorcet .condorcet-calc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:.8rem 1.1rem}
+.atlas-condorcet .condorcet-calc-grid label{font:550 .81rem/1.5 system-ui,sans-serif;color:var(--atlas-ink)}
+.atlas-condorcet #condorcet-probability{width:100%;accent-color:#6b5333;min-height:44px}
+.atlas-condorcet #condorcet-jurors{width:100%;max-width:16rem;min-height:44px;padding:.48rem;color:var(--atlas-ink);background:#fffdf8;border:1px solid #87989e;border-radius:5px}
+.atlas-condorcet .condorcet-calculator output{font-weight:700}
+.atlas-condorcet .condorcet-calculator p{margin:.95rem 0 .45rem;font:500 1rem/1.5 var(--atlas-serif)}
+.atlas-condorcet .condorcet-calculator .condorcet-caveat{font:400 .78rem/1.62 system-ui,sans-serif;color:var(--atlas-muted);margin-top:.55rem}
+.atlas-condorcet .condorcet-switch{position:relative;display:flex;flex-wrap:wrap;gap:.45rem;min-width:0;border:1px solid var(--atlas-rule);border-top:2px solid var(--atlas-gold);border-radius:9px;background:var(--atlas-paper);padding:clamp(.9rem,2vw,1.4rem);margin:1.3rem 0 1.7rem}
+.atlas-condorcet .condorcet-switch legend{font:650 .8rem/1.4 system-ui,sans-serif;color:var(--atlas-ink);padding:0 .3rem}
+.atlas-condorcet .condorcet-switch>input[type=radio]{position:absolute;opacity:0;width:1px;height:1px}
+.atlas-condorcet .condorcet-switch>label{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.58rem .85rem;border:1px solid #939da0;border-radius:5px;background:#fffdf8;color:var(--atlas-ink);font:650 .77rem/1.42 system-ui,sans-serif;cursor:pointer}
+.atlas-condorcet .condorcet-switch>input:checked+label{color:#fffaf2;background:var(--atlas-ink);border-color:var(--atlas-ink)}
+.atlas-condorcet .condorcet-switch>input:focus-visible+label{outline:3px solid #bb934a;outline-offset:3px}
+.atlas-condorcet .condorcet-panels{width:100%;margin-top:.85rem;border-top:1px solid var(--atlas-rule)}
+.atlas-condorcet .condorcet-stage{padding:.75rem 0 .3rem;border-bottom:1px solid var(--atlas-rule)}
+.atlas-condorcet .condorcet-stage:last-child{border-bottom:0}
+.atlas-condorcet .condorcet-stage p{margin:.48rem 0 .95rem}
+/* Visibility is activated by JS only. With JS disabled, all six source passages stay visible. */
+.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-1:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-1){display:none}
+.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-2:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-2){display:none}
+.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-3:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-3){display:none}
+.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-4:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-4){display:none}
+.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-5:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-5){display:none}
+.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-6:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-6){display:none}
+@media(max-width:680px){
+ .atlas-condorcet .condorcet-table-tools{gap:.45rem;padding:.75rem}
+ .atlas-condorcet .condorcet-table-tools label,.atlas-condorcet .condorcet-table-tools input{flex:1 1 100%;max-width:none}
+ .atlas-condorcet .condorcet-data-table{font-size:.81rem}
+ .atlas-condorcet .condorcet-calc-grid{grid-template-columns:1fr}
+ .atlas-condorcet .condorcet-vote-table{font-size:.76rem}
+ .atlas-condorcet .condorcet-vote-table :is(th,td){padding:.6rem .4rem}
+}
+@media(max-width:560px){
+ /* Keep table semantics; present large definition rows as full-width reading cards. */
+ .atlas-condorcet .condorcet-table-scroll:not(.condorcet-vote-scroll){overflow:visible}
+ .atlas-condorcet .condorcet-data-table{display:block;width:100%;min-width:0!important}
+ .atlas-condorcet .condorcet-data-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .atlas-condorcet .condorcet-data-table tbody{display:block}
+ .atlas-condorcet .condorcet-data-table tbody tr{display:block;padding:.24rem 0;border-bottom:1px solid var(--atlas-rule)}
+ .atlas-condorcet .condorcet-data-table tbody tr:last-child{border-bottom:0}
+ .atlas-condorcet .condorcet-data-table tbody :is(th,td){display:block;width:auto!important;padding:.5rem .8rem;border:0}
+ .atlas-condorcet .condorcet-data-table tbody th{font-size:.93rem;padding-top:.73rem}
+ .atlas-condorcet .condorcet-data-table tbody td{font-size:.82rem;line-height:1.63}
+ .atlas-condorcet .condorcet-data-table tbody td::before{display:block;font:700 .63rem/1.45 system-ui,sans-serif;letter-spacing:.09em;color:var(--atlas-muted);margin-bottom:.18rem}
+ .atlas-condorcet #condorcet-life-table tbody td::before{content:"CONTEXT AND CONSEQUENCE"}
+ .atlas-condorcet #condorcet-glossary-table tbody td::before{content:"WORKING MEANING"}
+}
+@media print{
+ .atlas-condorcet :is(.condorcet-table-tools,.condorcet-vote-tools,.condorcet-calculator),.atlas-condorcet .condorcet-switch>input,.atlas-condorcet .condorcet-switch>label,.atlas-condorcet .condorcet-switch legend{display:none!important}
+ .atlas-condorcet .condorcet-table-scroll{overflow:visible!important;border:0;max-width:none}
+ .atlas-condorcet :is(.condorcet-data-table,.condorcet-vote-table){display:table!important;min-width:0!important;width:100%!important;font-size:9pt}
+ .atlas-condorcet .condorcet-data-table thead{position:static!important;display:table-header-group!important;width:auto!important;height:auto!important;clip-path:none!important;overflow:visible!important;white-space:normal!important}
+ .atlas-condorcet .condorcet-data-table tbody{display:table-row-group!important}
+ .atlas-condorcet .condorcet-data-table tbody tr,.atlas-condorcet .condorcet-data-table tbody tr[hidden]{display:table-row!important}
+ .atlas-condorcet .condorcet-data-table tbody :is(th,td){display:table-cell!important}
+ .atlas-condorcet .condorcet-data-table tbody td::before{display:none!important}
+ .atlas-condorcet .condorcet-stage,.atlas-condorcet .condorcet-switch[data-enhanced="true"] .condorcet-stage{display:block!important;break-inside:avoid}
+ .atlas-condorcet .condorcet-switch{display:block;border:0;background:transparent;padding:0}
+ .atlas-condorcet .condorcet-panels{border:0;margin:0}
+ .atlas-condorcet .condorcet-math{border-color:#947440}
+}
