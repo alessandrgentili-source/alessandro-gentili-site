@@ -190,7 +190,8 @@
 }
 @media print{
  .atlas-thucydides-v3 .thucydides-data-tools{display:none!important}
- .atlas-thucydides-v3 .thucydides-data-table,.atlas-thucydides-v3 .thucydides-data-table tbody{display:table!important}
+ .atlas-thucydides-v3 .thucydides-data-table{display:table!important}
+ .atlas-thucydides-v3 .thucydides-data-table tbody{display:table-row-group!important}
  .atlas-thucydides-v3 .thucydides-data-table thead{display:table-header-group!important;position:static!important;width:auto!important;height:auto!important;overflow:visible!important;clip-path:none!important;white-space:normal!important}
  .atlas-thucydides-v3 .thucydides-data-table tr,.atlas-thucydides-v3 .thucydides-data-table tr[hidden]{display:table-row!important;break-inside:avoid;margin:0!important;border:0!important}
  .atlas-thucydides-v3 .thucydides-data-table :is(th,td){display:table-cell!important;width:auto!important;border-bottom:1px solid #999!important;padding:.35rem .45rem}
