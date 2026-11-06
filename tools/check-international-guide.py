@@ -182,6 +182,21 @@ def verify(path, base):
         revision = run_path(str(ROOT / 'tools/check-epicurus-revision.py'))
         revision['verify'](path, base)
         return
+    if relative == 'en/cerchi/guides/gabriel-tarde-imitation-belief-desire/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-tarde-revision.py'))
+        revision['verify'](path, base)
+        return
+    if relative == 'en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-pasolini-revision.py'))
+        revision['verify'](path, base)
+        return
+    if relative == 'en/cerchi/guides/thucydides-war-power-crisis-of-language/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-thucydides-revision.py'))
+        revision['verify'](path, base)
+        return
     blocks = re.findall(BLOCKS, before, re.S)
     require(blocks and blocks == re.findall(BLOCKS, after, re.S), 'Approved articles changed, missing or reordered')
     for tag in ('title', 'h1', 'header', 'footer'):
