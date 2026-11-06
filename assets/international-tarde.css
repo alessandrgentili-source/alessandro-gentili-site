@@ -129,3 +129,68 @@
   .tarde-panel h3 { color:#182e3e; }
   .tarde-path>i,.tarde-path>i::after { background:#806333; }
 }
+
+
+/* Gabriel Tarde EN26 v3 — local Atlas Desk and consultation tools.
+   Original native three-state figure remains CSS-driven, including without JS. */
+.atlas-tarde-v3 .tarde-v3-reading{min-width:0}
+.atlas-tarde-v3 .tarde-part-head{max-width:64ch;margin:2.5rem auto 2rem;padding:1.1rem 0;border-block:1px solid var(--atlas-rule,#cfc2aa)}
+.atlas-tarde-v3 .tarde-part-head h2{margin:0;font:600 .82rem/1.55 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--atlas-gold,#775b2f)}
+.atlas-tarde-v3 .tarde-section{position:relative;min-width:0}
+.atlas-tarde-v3 .atlas-reading .tarde-section>h2{font:400 clamp(1.66rem,2.8vw,2.35rem)/1.23 var(--atlas-serif,Georgia,serif);letter-spacing:-.014em}
+.atlas-tarde-v3 .atlas-reading .tarde-section h3{font:400 clamp(1.2rem,2.1vw,1.48rem)/1.38 var(--atlas-serif,Georgia,serif);margin:1.7rem 0 .75rem}
+.atlas-tarde-v3 .tarde-section :is(p,li,th,td){overflow-wrap:anywhere}
+.atlas-tarde-v3 .tarde-section :is(ul,ol){padding-inline-start:1.4rem}
+.atlas-tarde-v3 .tarde-section li+li{margin-top:.55rem}
+.atlas-tarde-v3 .tarde-rule{border:0;border-top:1px solid var(--atlas-rule,#cfc2aa);margin:2rem 0}
+.atlas-tarde-v3 .tarde-toc-group{display:block;padding:.85rem 0 .35rem;border-top:1px solid var(--atlas-rule,#cfc2aa);font:600 .68rem/1.5 system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.atlas-tarde-v3 .tarde-legacy-anchor{position:absolute;inset-block-start:-6rem}
+.atlas-tarde-v3 .tarde-data-tools[hidden]{display:none!important}
+.atlas-tarde-v3 .tarde-data-tools{display:flex;align-items:end;flex-wrap:wrap;gap:.6rem .85rem;padding:1rem;background:#f4ecdf;border:1px solid var(--atlas-rule,#cfc2aa);margin:1.25rem 0 0;font:400 .85rem/1.5 system-ui,sans-serif}
+.atlas-tarde-v3 .tarde-data-tools label{font-weight:600;font-size:.78rem;flex-basis:100%;margin:0 0 -.4rem}
+.atlas-tarde-v3 .tarde-data-tools input,.atlas-tarde-v3 .tarde-data-tools select,.atlas-tarde-v3 .tarde-data-tools button{min-height:44px;padding:.55rem .75rem;font:400 .82rem/1.5 system-ui,sans-serif;border:1px solid #9c968e;border-radius:2px;max-width:100%;background:#fffdf8;color:#182e3e}
+.atlas-tarde-v3 .tarde-data-tools input{width:min(100%,25rem);min-width:0;flex:1 1 13rem}
+.atlas-tarde-v3 .tarde-data-tools select{flex:1 1 11rem;min-width:0}
+.atlas-tarde-v3 .tarde-data-tools button{cursor:pointer;background:#182e3e;border-color:#182e3e;color:#fff}
+.atlas-tarde-v3 .tarde-data-tools :is(input,select,button):focus-visible{outline:3px solid #806333;outline-offset:3px}
+.atlas-tarde-v3 .tarde-table-count{flex-basis:100%;font:600 .76rem/1.4 system-ui,sans-serif;margin:.15rem 0 0}
+.atlas-tarde-v3 .tarde-table-region{max-width:100%;margin:.8rem 0 2rem}
+.atlas-tarde-v3 .tarde-data-table{width:100%;table-layout:fixed;border-collapse:collapse;font:400 .87rem/1.63 system-ui,sans-serif}
+.atlas-tarde-v3 .tarde-data-table :is(th,td){min-width:0;text-align:left;vertical-align:top;padding:.8rem .65rem;border-bottom:1px solid #ccc3b4;overflow-wrap:anywhere}
+.atlas-tarde-v3 .tarde-data-table thead th{font-size:.74rem;line-height:1.55;font-weight:700;background:#182e3e;color:#f8f2e7}
+.atlas-tarde-v3 .tarde-data-table tbody th{font-weight:650}
+.atlas-tarde-v3 .tarde-data-table tbody tr:nth-child(even){background:rgba(121,100,62,.06)}
+.atlas-tarde-v3 .tarde-data-table tr[hidden]{display:none!important}
+.atlas-tarde-v3 .tarde-data-table thead th[aria-sort=ascending],.atlas-tarde-v3 .tarde-data-table thead th[aria-sort=descending]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.atlas-tarde-v3 .atlas-reading .tarde-figure p{font:400 .94rem/1.8 system-ui,sans-serif;color:#f0e9df}
+.atlas-tarde-v3 .atlas-reading .tarde-figure .atlas-label,.atlas-tarde-v3 .atlas-reading .tarde-figure .tarde-phase{color:#e0c58c;font:600 .68rem/1.5 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.atlas-tarde-v3 .atlas-reading .tarde-figure .tarde-intro{font-size:.92rem;margin:0 0 1.6rem}
+.atlas-tarde-v3 .atlas-reading .tarde-figure .tarde-caveat{font-size:.86rem}
+.atlas-tarde-v3 .atlas-reading .tarde-panel h3{font:400 clamp(1.58rem,2.4vw,2.18rem)/1.25 var(--atlas-serif);margin:0 0 1rem;color:#f8f2e7}
+.atlas-tarde-v3 .tarde-path>span,.atlas-tarde-v3 .tarde-path>b{white-space:normal}
+.atlas-tarde-v3 .atlas-reading #faq h3{font:400 1.43rem/1.38 var(--atlas-serif);margin:1.2rem 0 .8rem}
+@media(max-width:700px){
+ .atlas-tarde-v3 .tarde-data-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .atlas-tarde-v3 .tarde-data-table,.atlas-tarde-v3 .tarde-data-table tbody,.atlas-tarde-v3 .tarde-data-table tr,.atlas-tarde-v3 .tarde-data-table :is(th,td){display:block;width:100%;box-sizing:border-box}
+ .atlas-tarde-v3 .tarde-data-table tr{margin:0 0 .75rem;border:1px solid #c7bba6}
+ .atlas-tarde-v3 .tarde-data-table :is(th,td){padding:.55rem .75rem;border:0}
+ .atlas-tarde-v3 .tarde-data-table :is(th,td)::before{content:attr(data-label);display:block;margin-bottom:.15rem;font:650 .66rem/1.45 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.045em}
+ .atlas-tarde-v3 .tarde-data-tools{display:block}
+ .atlas-tarde-v3 .tarde-data-tools :is(input,select,button){width:100%;margin:.35rem 0 .8rem}
+ .atlas-tarde-v3 .tarde-data-tools label{display:block;margin:.55rem 0 0}
+ .atlas-tarde-v3 .tarde-data-tools .tarde-table-count{margin:0}
+ .atlas-tarde-v3 .atlas-reading .tarde-panel h3{font-size:1.65rem}
+}
+@media print{
+ .atlas-tarde-v3 .tarde-data-tools{display:none!important}
+ .atlas-tarde-v3 .tarde-data-table{display:table!important}
+ .atlas-tarde-v3 .tarde-data-table tbody{display:table-row-group!important}
+ .atlas-tarde-v3 .tarde-data-table thead{display:table-header-group!important;position:static!important;width:auto!important;height:auto!important;overflow:visible!important;clip-path:none!important;white-space:normal!important}
+ .atlas-tarde-v3 .tarde-data-table tr,.atlas-tarde-v3 .tarde-data-table tr[hidden]{display:table-row!important;break-inside:avoid;margin:0!important;border:0!important}
+ .atlas-tarde-v3 .tarde-data-table :is(th,td){display:table-cell!important;width:auto!important;border-bottom:1px solid #999!important;padding:.35rem .45rem}
+ .atlas-tarde-v3 .tarde-data-table :is(th,td)::before{display:none!important}
+ .atlas-tarde-v3 .tarde-data-table thead th{color:#182e3e;background:#fff;font-size:9pt}
+ .atlas-tarde-v3 .tarde-data-table{font-size:9pt}
+ .atlas-tarde-v3 .atlas-reading .tarde-figure :is(p,.atlas-label,.tarde-phase),.atlas-tarde-v3 .atlas-reading .tarde-panel h3{color:#182e3e!important}
+ .atlas-tarde-v3 .tarde-part-head,.atlas-tarde-v3 .tarde-section{break-inside:auto}
+}
