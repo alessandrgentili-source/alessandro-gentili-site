@@ -79,7 +79,7 @@ def verify(path,base):
     for tag in ['title','meta','link']:
         oldtags=re.findall(fr'<{tag}\b[^>]*?(?:/>|</{tag}>)',old,re.S)
         newtags=re.findall(fr'<{tag}\b[^>]*?(?:/>|</{tag}>)',page,re.S)
-        if tag=='link':newtags=[x for x in newtags if 'stylesheet' not in x]
+        if tag=='link':newtags=[x for x in newtags if 'international-atlas.css' not in x and 'international-averroes.css' not in x]
         require(oldtags==newtags,f'Protected {tag} changed')
     for pattern in [r'<header class="site-header".*?</header>',r'<footer class="footer".*?</footer>',r'<figure class="editorial-cover-card guide-cover".*?</figure>']:
         before=re.search(pattern,old,re.S)
