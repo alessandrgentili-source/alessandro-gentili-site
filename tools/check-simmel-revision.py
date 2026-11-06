@@ -118,6 +118,53 @@ def verify(path,base):
     ck('controls.hidden = false' in js and 'input.addEventListener' in js,'Live search')
     ck('name="simmel-view"' in html and 'id="simmel-view-0"' in html,'Radio comparison')
     ck('tabindex="0"' in html and 'role="region"' in html,'Keyboard scrollable table')
+    # Exercise the actual browser JavaScript against a minimal DOM fixture.
+    # This is a behaviour test, separate from static markup/stylesheet checks.
+    subprocess.run(['node', '--check', str(ROOT/'assets/international-simmel.js')],
+                   cwd=ROOT, check=True)
+    behaviour = r"""
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const handlers = {};
+const input = {value:'',focused:false,
+  addEventListener(type,fn){handlers['input:'+type]=fn},
+  focus(){this.focused=true}};
+const reset = {addEventListener(type,fn){handlers['reset:'+type]=fn}};
+const status = {textContent:''};
+const rows = [
+  {textContent:'Blasé — metropolitan response',hidden:false},
+  {textContent:'Stranger — nearness and remoteness',hidden:false}
+];
+const controls = {hidden:true,querySelector(s){
+  return s==='#simmel-glossary-search'?input:
+         s==='#simmel-glossary-reset'?reset:
+         s==='#simmel-glossary-status'?status:null}};
+const main = {querySelector(s){return s==='.simmel-glossary-controls'?controls:null},
+  querySelectorAll(s){return s==='#simmel-glossary-table tbody tr'?rows:[]}};
+const document = {querySelector(s){return s==='.atlas-simmel .atlas-main'?main:null}};
+const window = {addEventListener(type,fn){handlers['window:'+type]=fn}};
+const code = fs.readFileSync('assets/international-simmel.js','utf8');
+vm.runInNewContext(code,{document,window});
+assert.equal(controls.hidden,false);
+assert.equal(status.textContent,'2 of 2 terms');
+input.value='blase';
+handlers['input:input']();
+assert.equal(rows[0].hidden,false);
+assert.equal(rows[1].hidden,true);
+assert.equal(status.textContent,'1 of 2 terms');
+handlers['window:beforeprint']();
+assert.equal(rows[1].hidden,false);
+handlers['window:afterprint']();
+assert.equal(rows[1].hidden,true);
+handlers['reset:click']();
+assert.equal(input.value,'');
+assert.equal(input.focused,true);
+assert.equal(rows[0].hidden,false);
+assert.equal(rows[1].hidden,false);
+console.log('PASS Simmel glossary: search, accents, live count, print, reset, focus');
+"""
+    subprocess.run(['node','-e',behaviour],cwd=ROOT,check=True)
     print(f'PASS Simmel EN 14: {len(actual)} source tokens, 37 sections, 20 FAQ, 18 glossary terms, 5 selectable tests')
 
 if __name__=='__main__':
