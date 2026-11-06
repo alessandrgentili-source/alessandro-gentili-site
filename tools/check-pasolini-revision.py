@@ -19,6 +19,8 @@ BASE_BLOB = "dabd5716b790291aa5b3d290f525c870cb520a0b"
 CANDIDATE_BLOB = "3676de050bbde67208ec3d1ccf6374809fd0b870"
 # For traceability only: the external v3 Markdown is NOT a source pinned in Git.
 CANDIDATE_MARKDOWN_SHA256 = "1a21955fdaa6b836ec5931fb51d86606e18209f43d2ee58aba617376b59fb8d2"
+REFINED_BLOB = "16da3a45ee4cf93452ad01ebed76766ce22bd8cc"
+LEGACY_BASE = "2ca56ab7d447e1913df83bc730d86df87b542254"
 URL = "https://alessandro-gentili.it/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/"
 LEGACY_LINKS = {
     "introduction": "essay-1-the-hair-that-ceased-to-dissent",
@@ -175,10 +177,17 @@ def check_contract(before, after):
 def verify(path, base):
     require(path.resolve().relative_to(ROOT).as_posix() == PAGE,
             "Wrong path for Pasolini-specific migration")
+    baseline = git("rev-parse", f"{base}:{PAGE}")
+    if baseline == CANDIDATE_BLOB:
+        # Author-authorized formatting repair on the exact published v3 page.
+        require(git("hash-object", str(path)) == REFINED_BLOB,
+                "Pasolini refinement differs from the reviewed emphasis repair")
+        base = LEGACY_BASE
+    else:
+        require(git("hash-object", str(path)) == CANDIDATE_BLOB,
+                "Pasolini HTML differs from the reviewed v3 technical candidate")
     require(git("rev-parse", f"{base}:{PAGE}") == BASE_BLOB,
             "Pasolini baseline changed: recheck against current main")
-    require(git("hash-object", str(path)) == CANDIDATE_BLOB,
-            "Pasolini HTML differs from the reviewed v3 technical candidate")
     before = subprocess.check_output(
         ["git", "show", f"{base}:{PAGE}"], cwd=ROOT, text=True
     )
