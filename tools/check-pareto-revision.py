@@ -83,7 +83,7 @@ def verify(path,base):
     require(len(a)==2 and len(b)==3,'Structured data count unexpected')
     original_article=dict(a[0]);new_article=dict(b[0]);require(new_article.pop('dateModified')=='2026-11-06','Wrong modified date');original_article.pop('dateModified')
     require(new_article==original_article and b[1]==a[1],'Protected Article/BreadcrumbList modified')
-    questions=[(clean(q),clean(ans)) for q,ans in re.findall(r'<section class="pareto-faq"><h4>(.*?)</h4><p>(.*?)</p></section>',text,re.S)]
+    questions=[(clean(q),clean(ans)) for q,ans in re.findall(r'<section class="pareto-faq"><h4>(.*?)</h4><p>(.*?)</p>\s*</section>',text,re.S)]
     schema=b[2];require(schema.get('@type')=='FAQPage' and len(schema.get('mainEntity',[]))==len(questions)==20,'FAQ mismatch count')
     for n,((q,ans),entry) in enumerate(zip(questions,schema['mainEntity']),1):
         require(q==entry['name'] and ans==entry['acceptedAnswer']['text'],f'FAQ mismatch at {n}')
