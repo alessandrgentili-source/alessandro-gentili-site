@@ -93,3 +93,15 @@
  .atlas-tocqueville .tocqueville-data-table tbody th,.atlas-tocqueville .tocqueville-data-table tbody td{display:table-cell!important;}
  .atlas-tocqueville .tocqueville-data-table tbody td::before{display:none!important;}
 }
+
+/* Reader hierarchy: major divisions, narrative headings and consultation retain distinct scales. */
+.atlas-tocqueville .atlas-reading>.tocqueville-section:is([class*="--major"],.tocqueville-major){max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-tocqueville .atlas-reading>.tocqueville-section>h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);color:var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.atlas-tocqueville .atlas-reading>.tocqueville-section>h3{margin:0 0 1rem;font:400 clamp(1.85rem,2.5vw,2.5rem)/1.16 var(--atlas-serif);letter-spacing:-.018em;max-width:28ch}
+.atlas-tocqueville .atlas-reading .tocqueville-faq{padding:1.3rem 0}
+.atlas-tocqueville .atlas-reading .tocqueville-faq h4{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif)}
+.atlas-tocqueville .atlas-reading .tocqueville-interval-panels p{font:400 .94rem/1.8 system-ui,sans-serif}
+.atlas-tocqueville .atlas-reading .tocqueville-data-table{font-size:.94rem}
+.atlas-tocqueville .atlas-reading .tocqueville-table-tools input{font-size:1rem}
+@media(max-width:560px){.atlas-tocqueville .atlas-reading .tocqueville-data-table tbody td{font-size:.94rem;line-height:1.7}}
+@media print{.atlas-tocqueville .atlas-reading .tocqueville-data-table{font-size:9pt}.atlas-tocqueville .atlas-reading .tocqueville-faq{break-inside:avoid}}

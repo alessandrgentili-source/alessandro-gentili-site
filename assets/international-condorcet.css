@@ -63,12 +63,12 @@
 .atlas-condorcet .condorcet-stage:last-child{border-bottom:0}
 .atlas-condorcet .condorcet-stage p{margin:.48rem 0 .95rem}
 /* Visibility is activated by JS only. With JS disabled, all six source passages stay visible. */
-.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-1:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-1){display:none}
-.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-2:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-2){display:none}
-.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-3:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-3){display:none}
-.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-4:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-4){display:none}
-.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-5:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-5){display:none}
-.atlas-condorcet .condorcet-switch[data-enhanced="true"] #condorcet-view-6:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-6){display:none}
+.atlas-condorcet .condorcet-switch #condorcet-view-1:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-1){display:none}
+.atlas-condorcet .condorcet-switch #condorcet-view-2:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-2){display:none}
+.atlas-condorcet .condorcet-switch #condorcet-view-3:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-3){display:none}
+.atlas-condorcet .condorcet-switch #condorcet-view-4:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-4){display:none}
+.atlas-condorcet .condorcet-switch #condorcet-view-5:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-5){display:none}
+.atlas-condorcet .condorcet-switch #condorcet-view-6:checked ~ .condorcet-panels .condorcet-stage:not(.condorcet-stage-6){display:none}
 @media(max-width:680px){
  .atlas-condorcet .condorcet-table-tools{gap:.45rem;padding:.75rem}
  .atlas-condorcet .condorcet-table-tools label,.atlas-condorcet .condorcet-table-tools input{flex:1 1 100%;max-width:none}
@@ -106,3 +106,15 @@
  .atlas-condorcet .condorcet-panels{border:0;margin:0}
  .atlas-condorcet .condorcet-math{border-color:#947440}
 }
+
+/* Reader hierarchy: major divisions, narrative headings and consultation retain distinct scales. */
+.atlas-condorcet .atlas-reading>.condorcet-section:is([class*="--major"],.condorcet-major){max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-condorcet .atlas-reading>.condorcet-section>h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);color:var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.atlas-condorcet .atlas-reading>.condorcet-section>h3{margin:0 0 1rem;font:400 clamp(1.85rem,2.5vw,2.5rem)/1.16 var(--atlas-serif);letter-spacing:-.018em;max-width:28ch}
+.atlas-condorcet .atlas-reading .condorcet-faq{padding:1.3rem 0}
+.atlas-condorcet .atlas-reading .condorcet-faq h4{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif)}
+.atlas-condorcet .atlas-reading .condorcet-panels p{font:400 .94rem/1.8 system-ui,sans-serif}
+.atlas-condorcet .atlas-reading .condorcet-data-table{font-size:.94rem}
+.atlas-condorcet .atlas-reading .condorcet-table-tools input{font-size:1rem}
+@media(max-width:560px){.atlas-condorcet .atlas-reading .condorcet-data-table tbody td{font-size:.94rem;line-height:1.7}}
+@media print{.atlas-condorcet .atlas-reading .condorcet-data-table{font-size:9pt}.atlas-condorcet .atlas-reading .condorcet-faq{break-inside:avoid}}
