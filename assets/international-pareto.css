@@ -85,3 +85,15 @@
  .atlas-pareto .pareto-ledger-panel,.atlas-pareto .pareto-ledger-switch .pareto-ledger-panel{display:block!important;break-inside:avoid}
  .atlas-pareto .pareto-ledger-switch{border:0;padding:0;background:transparent;display:block}
 }
+
+/* Reader hierarchy: major divisions, narrative headings and consultation retain distinct scales. */
+.atlas-pareto .atlas-reading>.pareto-section:is([class*="--major"],.pareto-major){max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-pareto .atlas-reading>.pareto-section>h2{max-width:none;margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);color:var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.atlas-pareto .atlas-reading>.pareto-section>h3{margin:0 0 1rem;font:400 clamp(1.85rem,2.5vw,2.5rem)/1.16 var(--atlas-serif);letter-spacing:-.018em;max-width:28ch}
+.atlas-pareto .atlas-reading .pareto-faq{padding:1.3rem 0}
+.atlas-pareto .atlas-reading .pareto-faq h4{margin:0 0 .8rem;font:400 1.5rem/1.35 var(--atlas-serif)}
+.atlas-pareto .atlas-reading .pareto-ledger-panels p{font:400 .94rem/1.8 system-ui,sans-serif}
+.atlas-pareto .atlas-reading .pareto-data-table{font-size:.94rem}
+.atlas-pareto .atlas-reading .pareto-table-tools input{font-size:1rem}
+@media(max-width:560px){.atlas-pareto .atlas-reading .pareto-data-table tbody td{font-size:.94rem;line-height:1.7}}
+@media print{.atlas-pareto .atlas-reading .pareto-data-table{font-size:9pt}.atlas-pareto .atlas-reading .pareto-faq{break-inside:avoid}}

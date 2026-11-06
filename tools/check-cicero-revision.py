@@ -15,6 +15,8 @@ SOURCE_COMMIT='87d9a434d3b76a012ad2cf9d301b95ef69e670a3'
 SOURCE_FILE='CICERO_EN_GUIDE_16_CANDIDATE_v1.md'
 SOURCE_BLOB='ca57afcdc6f8b11ca9237f9385f2d1438af1c3ca'
 BASE_BLOB='e4d86e6103b86cdc4c391c927c524dec242b955d'
+PUBLISHED_BLOB='660aa57adc1289bded94285e8be78a81fc0b4230'
+LEGACY_BASE='bd1ead5'
 URL='https://alessandro-gentili.it/en/cerchi/guides/cicero-republic-law-civic-speech/'
 
 def check(cond, message):
@@ -66,7 +68,14 @@ def ld(s):return [json.loads(x) for x in re.findall(r'<script\b[^>]*type="applic
 
 def verify(path,base):
     check(path.resolve().relative_to(ROOT).as_posix()==PAGE,'Wrong path')
-    check(subprocess.check_output(['git','rev-parse',f'{base}:{PAGE}'],cwd=ROOT,text=True).strip()==BASE_BLOB,'Legacy baseline changed')
+    baseline = subprocess.check_output(['git','rev-parse',f'{base}:{PAGE}'],cwd=ROOT,text=True).strip()
+    if baseline == PUBLISHED_BLOB:
+        # Permit only the source-approved emphasis repair on the exact published page.
+        expected = re.sub(r'\*\* (.*?)\*\*', r'<strong>\1</strong>', git(base, PAGE), flags=re.S)
+        check(path.read_text(encoding='utf8') == expected, 'Published Cicero permits only the approved emphasis repair')
+        base = LEGACY_BASE
+        baseline = subprocess.check_output(['git','rev-parse',f'{base}:{PAGE}'],cwd=ROOT,text=True).strip()
+    check(baseline==BASE_BLOB,'Legacy baseline changed')
     source_rev=subprocess.run(['git','rev-parse',f'{SOURCE_COMMIT}:{SOURCE_FILE}'],cwd=ROOT,text=True,capture_output=True)
     if source_rev.returncode:
         subprocess.run(['git','fetch','--no-tags','origin',SOURCE_COMMIT],cwd=ROOT,check=True)
