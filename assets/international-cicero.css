@@ -1,0 +1,95 @@
+/* Cicero EN16 · International 3.0. Plato's editorial reading system; Shannon's native switching. */
+.atlas-cicero .cicero-triad{max-width:64ch;color:var(--atlas-muted);font:500 .82rem/1.65 system-ui,sans-serif;margin:.75rem 0 0;}
+.atlas-cicero .cicero-question{max-width:57rem;color:var(--atlas-ink);font:400 clamp(1.03rem,1.55vw,1.22rem)/1.72 var(--atlas-serif);margin:1.02rem 0 1.45rem;}
+.atlas-cicero .cicero-question strong{font-weight:600;}
+.atlas-cicero .atlas-legacy-anchor{display:block;height:0;visibility:hidden;scroll-margin-top:24px;}
+.atlas-cicero .guide-toc .cicero-toc-main{font-weight:700;color:var(--atlas-ink);margin-top:.85rem;}
+.atlas-cicero .guide-toc .cicero-toc-nested{padding-left:1rem;}
+.atlas-cicero .cicero-section{min-width:0;scroll-margin-top:6rem;}
+.atlas-cicero .cicero-section--major{margin-top:2.3rem;}
+.atlas-cicero .cicero-section .cicero-table-scroll{margin:1.4rem 0 1.8rem;}
+.atlas-cicero .cicero-table-tools{margin:1.5rem 0 -.4rem;display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;padding:.95rem 1rem;background:var(--atlas-paper);border:1px solid var(--atlas-rule);border-bottom:0;border-radius:10px 10px 0 0;}
+.atlas-cicero .cicero-table-tools[hidden]{display:none!important;}
+.atlas-cicero .cicero-table-tools label{font:600 .78rem/1.5 system-ui,sans-serif;color:var(--atlas-ink);margin-right:.25rem;}
+.atlas-cicero .cicero-table-tools input{flex:1 1 12rem;min-width:8rem;max-width:24rem;background:#fffdf8;color:var(--atlas-ink);border:1px solid #9aa7ab;border-radius:5px;font:400 .86rem/1.4 system-ui,sans-serif;padding:.65rem .85rem;min-height:44px;}
+.atlas-cicero .cicero-table-tools button{min-height:44px;background:transparent;border:1px solid #87999e;border-radius:5px;padding:.58rem .82rem;color:var(--atlas-ink);font:600 .78rem/1.45 system-ui,sans-serif;cursor:pointer;}
+.atlas-cicero .cicero-table-tools button:hover,.atlas-cicero .cicero-table-tools button[aria-pressed="true"]{background:var(--atlas-ink);color:#fffcf4;border-color:var(--atlas-ink);}
+.atlas-cicero .cicero-table-tools output{font:500 .75rem/1.5 system-ui,sans-serif;color:var(--atlas-muted);margin-left:auto;}
+.atlas-cicero .cicero-table-tools :is(input,button):focus-visible,.atlas-cicero .cicero-table-scroll:focus-visible{outline:3px solid #c29a51;outline-offset:3px;}
+.atlas-cicero .cicero-table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--atlas-rule);border-radius:0 0 10px 10px;background:#fffdf8;overscroll-behavior-inline:contain;}
+.atlas-cicero .cicero-data-table{width:100%;min-width:38rem;border-collapse:collapse;text-align:left;margin:0;font:400 .88rem/1.72 system-ui,sans-serif;color:var(--atlas-ink);}
+.atlas-cicero #cicero-life-table{min-width:42rem;}
+.atlas-cicero #cicero-glossary-table{min-width:30rem;}
+.atlas-cicero .cicero-data-table thead{background:#ece9e0;}
+.atlas-cicero .cicero-data-table th,.atlas-cicero .cicero-data-table td{padding:.9rem 1rem;border-bottom:1px solid #e4e1d8;vertical-align:top;}
+.atlas-cicero .cicero-data-table thead th{font:700 .73rem/1.5 system-ui,sans-serif;letter-spacing:.04em;color:#283a47;}
+.atlas-cicero .cicero-data-table tbody th{font-weight:700;white-space:normal;}
+.atlas-cicero .cicero-data-table tbody tr:nth-child(even){background:#f8f6f1;}
+.atlas-cicero .cicero-data-table tbody tr:hover{background:#f0eee7;}
+.atlas-cicero .cicero-data-table tbody tr[hidden]{display:none!important;}
+.atlas-cicero .cicero-data-table tbody tr:last-child > *{border-bottom:0;}
+.atlas-cicero #cicero-life-table th:first-child{width:20%;}
+.atlas-cicero #cicero-life-table td:nth-child(2){width:35%;}
+.atlas-cicero #cicero-glossary-table th:first-child{width:33%;}
+.atlas-cicero #cicero-glossary-table tbody th{font-weight:600;}
+.atlas-cicero .cicero-hearing-switch{position:relative;border:1px solid var(--atlas-rule);border-top:2px solid #b59b69;border-radius:9px;background:var(--atlas-paper);margin:1.45rem 0 1.7rem;padding:clamp(.9rem,2vw,1.45rem);display:flex;flex-wrap:wrap;gap:.45rem;}
+.atlas-cicero .cicero-hearing-switch legend{font:650 .79rem/1.5 system-ui,sans-serif;color:var(--atlas-ink);padding:0 .35rem;letter-spacing:.025em;}
+.atlas-cicero .cicero-hearing-switch>input[type=radio]{position:absolute;width:1px;height:1px;opacity:0;}
+.atlas-cicero .cicero-hearing-switch>label{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.55rem .78rem;border:1px solid #97a0a1;border-radius:5px;font:600 .76rem/1.42 system-ui,sans-serif;color:var(--atlas-ink);cursor:pointer;background:#fdfbf6;}
+.atlas-cicero .cicero-hearing-switch>input:checked+label{background:var(--atlas-ink);color:#fffaf0;border-color:var(--atlas-ink);}
+.atlas-cicero .cicero-hearing-switch>input:focus-visible+label{outline:3px solid #c29a51;outline-offset:3px;}
+.atlas-cicero .cicero-hearing-panels{width:100%;margin:.9rem 0 0;border-top:1px solid var(--atlas-rule);}
+.atlas-cicero .cicero-hearing-step{padding:.9rem 0 .25rem;border-bottom:1px solid var(--atlas-rule);}
+.atlas-cicero .cicero-hearing-step:last-child{border-bottom:0;}
+.atlas-cicero .cicero-hearing-step p{margin:.4rem 0 .85rem;}
+.atlas-cicero .cicero-hearing-step strong{color:var(--atlas-ink);}
+.atlas-cicero #cicero-hearing-1:checked ~ .cicero-hearing-panels .cicero-hearing-step:not(.cicero-hearing-step-1){display:none;}
+.atlas-cicero #cicero-hearing-2:checked ~ .cicero-hearing-panels .cicero-hearing-step:not(.cicero-hearing-step-2){display:none;}
+.atlas-cicero #cicero-hearing-3:checked ~ .cicero-hearing-panels .cicero-hearing-step:not(.cicero-hearing-step-3){display:none;}
+.atlas-cicero #cicero-hearing-4:checked ~ .cicero-hearing-panels .cicero-hearing-step:not(.cicero-hearing-step-4){display:none;}
+.atlas-cicero #cicero-hearing-5:checked ~ .cicero-hearing-panels .cicero-hearing-step:not(.cicero-hearing-step-5){display:none;}
+.atlas-cicero .cicero-faq{border-top:1px solid var(--atlas-rule);padding:1.08rem 0 .9rem;}
+.atlas-cicero .cicero-faq h4{font:600 clamp(.98rem,1.5vw,1.13rem)/1.54 var(--atlas-serif);color:var(--atlas-ink);margin:0 0 .55rem;}
+.atlas-cicero .cicero-faq p{margin:0;}
+@media(max-width:680px){
+ .atlas-cicero .cicero-triad{font-size:.78rem;}
+ .atlas-cicero .cicero-table-tools{padding:.75rem;gap:.45rem;}
+ .atlas-cicero .cicero-table-tools label{flex:1 1 100%;}
+ .atlas-cicero .cicero-table-tools input{flex-basis:100%;max-width:none;}
+ .atlas-cicero .cicero-table-tools output{margin-right:auto;}
+ .atlas-cicero .cicero-data-table{font-size:.79rem;}
+ .atlas-cicero .cicero-data-table th,.atlas-cicero .cicero-data-table td{padding:.72rem .8rem;}
+ .atlas-cicero .cicero-hearing-switch>label{font-size:.72rem;}
+}
+@media(max-width:560px){
+ /* Source-native table semantics with a comfortable stacked reading layout. */
+ .atlas-cicero .cicero-table-scroll{overflow:visible;}
+ .atlas-cicero .cicero-data-table{display:block;min-width:0!important;width:100%;}
+ .atlas-cicero .cicero-data-table thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;}
+ .atlas-cicero .cicero-data-table tbody{display:block;}
+ .atlas-cicero .cicero-data-table tbody tr{display:block;padding:.2rem 0;border-bottom:1px solid var(--atlas-rule);}
+ .atlas-cicero .cicero-data-table tbody tr:last-child{border-bottom:0;}
+ .atlas-cicero .cicero-data-table tbody th,.atlas-cicero .cicero-data-table tbody td{display:block;width:auto!important;padding:.55rem .8rem;border:0;}
+ .atlas-cicero .cicero-data-table tbody th{font-size:.94rem;padding-top:.75rem;}
+ .atlas-cicero .cicero-data-table tbody td{font-size:.83rem;line-height:1.65;}
+ .atlas-cicero .cicero-data-table tbody td::before{display:block;font:700 .64rem/1.45 system-ui,sans-serif;letter-spacing:.09em;color:var(--atlas-muted);margin:0 0 .18rem;}
+ .atlas-cicero #cicero-life-table tbody td:nth-child(2)::before{content:"EVENT";}
+ .atlas-cicero #cicero-life-table tbody td:nth-child(3)::before{content:"WHY IT MATTERS";}
+ .atlas-cicero #cicero-glossary-table tbody td::before{content:"READER'S ORIENTATION";}
+}
+@media print{
+ .atlas-cicero .cicero-table-tools,.atlas-cicero .cicero-hearing-switch>input,.atlas-cicero .cicero-hearing-switch>label,.atlas-cicero .cicero-hearing-switch legend{display:none!important;}
+ .atlas-cicero .cicero-table-scroll{overflow:visible!important;border:0;max-width:none;}
+ .atlas-cicero .cicero-data-table{min-width:0!important;width:100%!important;font-size:9pt;}
+ .atlas-cicero .cicero-data-table tbody tr[hidden]{display:table-row!important;}
+ .atlas-cicero .cicero-hearing-step,.atlas-cicero #cicero-hearing-1:checked ~ .cicero-hearing-panels .cicero-hearing-step,.atlas-cicero #cicero-hearing-2:checked ~ .cicero-hearing-panels .cicero-hearing-step,.atlas-cicero #cicero-hearing-3:checked ~ .cicero-hearing-panels .cicero-hearing-step,.atlas-cicero #cicero-hearing-4:checked ~ .cicero-hearing-panels .cicero-hearing-step,.atlas-cicero #cicero-hearing-5:checked ~ .cicero-hearing-panels .cicero-hearing-step{display:block!important;}
+ .atlas-cicero .cicero-hearing-switch{border:0;background:transparent;padding:0;display:block;}
+ .atlas-cicero .cicero-hearing-panels{margin:0;}
+ .atlas-cicero .cicero-hearing-step{break-inside:avoid;}
+ .atlas-cicero .cicero-data-table{display:table!important;}
+ .atlas-cicero .cicero-data-table thead{position:static!important;display:table-header-group!important;width:auto;height:auto;clip-path:none;overflow:visible;white-space:normal;margin:0;}
+ .atlas-cicero .cicero-data-table tbody{display:table-row-group!important;}
+ .atlas-cicero .cicero-data-table tbody tr,.atlas-cicero .cicero-data-table tbody tr[hidden]{display:table-row!important;}
+ .atlas-cicero .cicero-data-table tbody th,.atlas-cicero .cicero-data-table tbody td{display:table-cell!important;}
+ .atlas-cicero .cicero-data-table tbody td::before{display:none!important;}
+}

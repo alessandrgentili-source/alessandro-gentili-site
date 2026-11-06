@@ -147,6 +147,11 @@ def verify(path, base):
         revision = run_path(str(ROOT / 'tools/check-smith-revision.py'))
         revision['verify'](path, base)
         return
+    if relative == 'en/cerchi/guides/cicero-republic-law-civic-speech/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-cicero-revision.py'))
+        revision['verify'](path, base)
+        return
     blocks = re.findall(BLOCKS, before, re.S)
     require(blocks and blocks == re.findall(BLOCKS, after, re.S), 'Approved articles changed, missing or reordered')
     for tag in ('title', 'h1', 'header', 'footer'):
