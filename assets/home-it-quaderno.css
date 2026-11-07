@@ -249,9 +249,18 @@ body > .skip-link + .it-home-skip { display: none; }
 }
 
 .it-close {
-  background: #222224;
+  background: var(--footer-bg);
   color: #f4eee3;
-  border-top: 4px solid #a3383b;
+  border-top: 1px solid #b69a60;
+}
+
+.it-close > .it-chapter {
+  padding-block: clamp(2.5rem, 4vw, 4rem) 1.6rem;
+}
+
+/* Raccordo locale: il footer condiviso conserva struttura e stile. */
+.it-home + .footer {
+  margin-top: 0;
 }
 
 .it-close .it-label,
@@ -263,17 +272,29 @@ body > .skip-link + .it-home-skip { display: none; }
   outline-color: #d6bc83;
 }
 
+.it-close a:hover {
+  color: #f4eee3;
+  text-decoration-color: #e9a39c;
+}
+
+.it-close .it-letter .it-link {
+  border-bottom-color: #e9a39c;
+}
+
 .it-letter {
-  align-items: end;
+  grid-template-columns: minmax(160px, .8fr) minmax(0, 2.2fr);
+  gap: 1.5rem 2rem;
+  align-items: start;
 }
 
 .it-letter h2 {
   margin-top: .7rem;
-  font-size: clamp(2.25rem, 4vw, 3.75rem);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.08;
 }
 
 .it-letter p:not(.it-label) {
-  max-width: 46ch;
+  max-width: 62ch;
   margin: 0 0 .75rem;
   color: #ccc4b7;
   font-size: .92rem;
@@ -284,8 +305,9 @@ body > .skip-link + .it-home-skip { display: none; }
   display: flex;
   flex-wrap: wrap;
   gap: 0 1.5rem;
-  margin-top: clamp(1.75rem, 4vw, 3rem);
-  border-top: 1px solid #716858;
+  margin-top: 1.5rem;
+  padding-top: .5rem;
+  border-top: 0;
 }
 
 .it-close-links a {
