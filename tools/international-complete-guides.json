@@ -1,0 +1,1503 @@
+{
+  "base": "91eeaab213348182cbeb6a910c96806a01bf3203",
+  "guides": [
+    {
+      "author": "Lucretius",
+      "source": "Lucretius_EN.md",
+      "source_sha256": "b4c9ac06f7b78b540365ee5938eb8e0ddef58258b8231eee3741203b042af29b",
+      "italian": "cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html",
+      "italian_blob": "d61c10703c9c5ccc9dcabab552dbaf4b741917df",
+      "page": "en/cerchi/guides/lucretius-atoms-images-poetry-of-nature/index.html",
+      "baseline_blob": "2e42a7b007a4c9636add5ff0b4855ffecbe6d5d3",
+      "faq_count": 21,
+      "toc_aliases": [
+        {
+          "label": "Lucretius at a Glance",
+          "heading": "Lucretius at a Glance",
+          "id": "complete-lucretius-at-a-glance"
+        },
+        {
+          "label": "Why Lucretius Still Matters",
+          "heading": "Why Lucretius Still Matters",
+          "id": "complete-why-lucretius-still-matters"
+        },
+        {
+          "label": "The Human Problem: Living in a World That Does Not Speak to Us",
+          "heading": "The Human Problem: Living in a World That Does Not Speak to Us",
+          "id": "complete-the-human-problem-living-in-a-world-that-does-not-speak-to-us"
+        },
+        {
+          "label": "A Biography in Negative",
+          "heading": "A Biography in Negative",
+          "id": "complete-a-biography-in-negative"
+        },
+        {
+          "label": "Rome, Epicurus, and the Latin Language",
+          "heading": "Rome, Epicurus, and the Latin Language",
+          "id": "complete-rome-epicurus-and-the-latin-language"
+        },
+        {
+          "label": "Lucretius's Disciplinary Circles",
+          "heading": "Lucretius's Disciplinary Circles",
+          "id": "complete-lucretius-s-disciplinary-circles"
+        },
+        {
+          "label": "The Work: *De rerum natura*",
+          "heading": "The Work: *De rerum natura*",
+          "id": "complete-the-work-de-rerum-natura"
+        },
+        {
+          "label": "Six Books to Recreate the Picture of the World",
+          "heading": "Six Books to Recreate the Picture of the World",
+          "id": "complete-six-books-to-recreate-the-picture-of-the-world"
+        },
+        {
+          "label": "Epicurus Without Merely Repeating Epicurus",
+          "heading": "Epicurus Without Merely Repeating Epicurus",
+          "id": "complete-epicurus-without-merely-repeating-epicurus"
+        },
+        {
+          "label": "Matter Before the World",
+          "heading": "Matter Before the World",
+          "id": "complete-matter-before-the-world"
+        },
+        {
+          "label": "Nature Without an Addressee",
+          "heading": "Nature Without an Addressee",
+          "id": "complete-nature-without-an-addressee"
+        },
+        {
+          "label": "The Smallest Deviation",
+          "heading": "The Smallest Deviation",
+          "id": "complete-the-smallest-deviation"
+        },
+        {
+          "label": "Humanity Belongs to Matter",
+          "heading": "Humanity Belongs to Matter",
+          "id": "complete-humanity-belongs-to-matter"
+        },
+        {
+          "label": "When the World Reaches the Senses",
+          "heading": "When the World Reaches the Senses",
+          "id": "complete-when-the-world-reaches-the-senses"
+        },
+        {
+          "label": "The Poem as a Form of Knowledge",
+          "heading": "The Poem as a Form of Knowledge",
+          "id": "complete-the-poem-as-a-form-of-knowledge"
+        },
+        {
+          "label": "Venus Changes as We Learn to Read",
+          "heading": "Venus Changes as We Learn to Read",
+          "id": "complete-venus-changes-as-we-learn-to-read"
+        },
+        {
+          "label": "A Civilisation Without an Inventor",
+          "heading": "A Civilisation Without an Inventor",
+          "id": "complete-a-civilisation-without-an-inventor"
+        },
+        {
+          "label": "*Religio*: When the Invisible Becomes Intention",
+          "heading": "*Religio*: When the Invisible Becomes Intention",
+          "id": "complete-religio-when-the-invisible-becomes-intention"
+        },
+        {
+          "label": "Key Ideas",
+          "heading": "Key Ideas",
+          "id": "complete-key-ideas"
+        },
+        {
+          "label": "Key Concepts",
+          "heading": "Key Concepts",
+          "id": "complete-key-concepts"
+        },
+        {
+          "label": "The Constellation",
+          "heading": "The Constellation",
+          "id": "complete-the-constellation"
+        },
+        {
+          "label": "Lucretius's Legacy",
+          "heading": "Lucretius's Legacy",
+          "id": "complete-lucretius-s-legacy"
+        },
+        {
+          "label": "The Contemporary Wound: The Illusion of the Immaterial",
+          "heading": "The Contemporary Wound",
+          "id": "complete-the-contemporary-wound"
+        },
+        {
+          "label": "Limits and Contradictions",
+          "heading": "Limits and Contradictions",
+          "id": "complete-limits-and-contradictions"
+        },
+        {
+          "label": "Illuminating Details",
+          "heading": "Illuminating Details",
+          "id": "complete-illuminating-details"
+        },
+        {
+          "label": "Common Errors",
+          "heading": "Common Errors",
+          "id": "complete-common-errors"
+        },
+        {
+          "label": "Glossary",
+          "heading": "Glossary",
+          "id": "complete-glossary"
+        },
+        {
+          "label": "Reading Paths",
+          "heading": "Reading Paths",
+          "id": "complete-reading-paths"
+        },
+        {
+          "label": "Questions to Guide the Reader",
+          "heading": "Questions to Guide the Reader",
+          "id": "complete-questions-to-guide-the-reader"
+        },
+        {
+          "label": "Points to Remember",
+          "heading": "Points to Remember",
+          "id": "complete-points-to-remember"
+        },
+        {
+          "label": "FAQ",
+          "heading": "FAQ",
+          "id": "complete-faq"
+        },
+        {
+          "label": "Sources and Copyright",
+          "heading": "Sources and Copyright",
+          "id": "complete-sources-and-copyright"
+        },
+        {
+          "label": "Further Reading",
+          "heading": "Further Reading",
+          "id": "complete-further-reading"
+        },
+        {
+          "label": "Editorial Closing",
+          "heading": "Editorial Closing",
+          "id": "complete-editorial-closing"
+        }
+      ],
+      "legacy_anchors": [
+        "atoms",
+        "civilization",
+        "death",
+        "introduction",
+        "lucretius-figure-title",
+        "lucretius-inferred",
+        "lucretius-inferred-heading",
+        "lucretius-visible",
+        "lucretius-visible-heading",
+        "main-content",
+        "orientation",
+        "plague",
+        "poetry",
+        "simulacra",
+        "sources",
+        "sunbeam",
+        "swerve",
+        "venus",
+        "wound"
+      ],
+      "glossary_count": 15,
+      "block_count": 612,
+      "table_count": 1,
+      "heading_count": 142,
+      "html_blob": "a18ea9bedadf89fe3ae05ff1c87d031c168afcb2",
+      "native_figure": true
+    },
+    {
+      "author": "Carlo Collodi",
+      "source": "Carlo_Collodi_EN.md",
+      "source_sha256": "1287273061edf936b171bfa9fe74b0ea2cc8455706c27fcca60dbb5a5f8daf9e",
+      "italian": "cerchi/guide/carlo-collodi-formazione-prova-mondo/index.html",
+      "italian_blob": "82b1826abea225cf856eabc7299d34b133281c56",
+      "page": "en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/index.html",
+      "baseline_blob": "86c24f2b9aa02d212cd58d8978cf83a8fe8d8e35",
+      "faq_count": 18,
+      "toc_aliases": [
+        {
+          "label": "Carlo Collodi at a Glance",
+          "heading": "Carlo Collodi at a Glance",
+          "id": "complete-carlo-collodi-at-a-glance"
+        },
+        {
+          "label": "Why Collodi Matters",
+          "heading": "Why Collodi Matters",
+          "id": "complete-why-collodi-matters"
+        },
+        {
+          "label": "The Human Problem: Knowing and Knowing How to Live",
+          "heading": "The Human Problem: Knowing and Knowing How to Live",
+          "id": "complete-the-human-problem-knowing-and-knowing-how-to-live"
+        },
+        {
+          "label": "Essential Biography",
+          "heading": "Essential Biography",
+          "id": "complete-essential-biography"
+        },
+        {
+          "label": "The Life That Illuminates the Work",
+          "heading": "The Life That Illuminates the Work",
+          "id": "complete-the-life-that-illuminates-the-work"
+        },
+        {
+          "label": "The Italy Imagined and the Italy Administered",
+          "heading": "The Italy Imagined and the Italy Administered",
+          "id": "complete-the-italy-imagined-and-the-italy-administered"
+        },
+        {
+          "label": "The Disciplinary Circles",
+          "heading": "The Disciplinary Circles",
+          "id": "complete-the-disciplinary-circles"
+        },
+        {
+          "label": "Principal Works",
+          "heading": "Principal Works",
+          "id": "complete-principal-works"
+        },
+        {
+          "label": "Poetics and Style: A Language That Sets the World in Motion",
+          "heading": "Poetics and Style: A Language That Sets the World in Motion",
+          "id": "complete-poetics-and-style-a-language-that-sets-the-world-in-motion"
+        },
+        {
+          "label": "*Pinocchio* Within Collodi's Larger Work",
+          "heading": "*Pinocchio* Within Collodi's Larger Work",
+          "id": "complete-pinocchio-within-collodi-s-larger-work"
+        },
+        {
+          "label": "Lens I — Precept Tested by Experience",
+          "heading": "Lens I — Precept Tested by Experience",
+          "id": "complete-lens-i-precept-tested-by-experience"
+        },
+        {
+          "label": "Lens II — Desire, Credulity, and Promise",
+          "heading": "Lens II — Desire, Credulity, and Promise",
+          "id": "complete-lens-ii-desire-credulity-and-promise"
+        },
+        {
+          "label": "Lens III — Who Educates Authority?",
+          "heading": "Lens III — Who Educates Authority?",
+          "id": "complete-lens-iii-who-educates-authority"
+        },
+        {
+          "label": "Lens IV — Learning to Inhabit a Country",
+          "heading": "Lens IV — Learning to Inhabit a Country",
+          "id": "complete-lens-iv-learning-to-inhabit-a-country"
+        },
+        {
+          "label": "Lens V — Responsibility, Work, and Care",
+          "heading": "Lens V — Responsibility, Work, and Care",
+          "id": "complete-lens-v-responsibility-work-and-care"
+        },
+        {
+          "label": "Key Ideas",
+          "heading": "Key Ideas",
+          "id": "complete-key-ideas"
+        },
+        {
+          "label": "Key Concepts",
+          "heading": "Key Concepts",
+          "id": "complete-key-concepts"
+        },
+        {
+          "label": "The Constellation",
+          "heading": "The Constellation",
+          "id": "complete-the-constellation"
+        },
+        {
+          "label": "Collodi's Legacy",
+          "heading": "Collodi's Legacy",
+          "id": "complete-collodi-s-legacy"
+        },
+        {
+          "label": "The Contemporary Wound",
+          "heading": "The Contemporary Wound",
+          "id": "complete-the-contemporary-wound"
+        },
+        {
+          "label": "Limits and Contradictions",
+          "heading": "Limits and Contradictions",
+          "id": "complete-limits-and-contradictions"
+        },
+        {
+          "label": "Illuminating Details",
+          "heading": "Illuminating Details",
+          "id": "complete-illuminating-details"
+        },
+        {
+          "label": "Common Misreadings to Avoid",
+          "heading": "Common Misreadings to Avoid",
+          "id": "complete-common-misreadings-to-avoid"
+        },
+        {
+          "label": "Short Glossary",
+          "heading": "Short Glossary",
+          "id": "complete-short-glossary"
+        },
+        {
+          "label": "Reading Paths",
+          "heading": "Reading Paths",
+          "id": "complete-reading-paths"
+        },
+        {
+          "label": "Questions to Guide the Reader",
+          "heading": "Questions to Guide the Reader",
+          "id": "complete-questions-to-guide-the-reader"
+        },
+        {
+          "label": "Points to Remember",
+          "heading": "Points to Remember",
+          "id": "complete-points-to-remember"
+        },
+        {
+          "label": "Frequently Asked Questions",
+          "heading": "Frequently Asked Questions",
+          "id": "complete-frequently-asked-questions"
+        },
+        {
+          "label": "Sources",
+          "heading": "Sources",
+          "id": "complete-sources"
+        },
+        {
+          "label": "Copyright Notice",
+          "heading": "Copyright Notice",
+          "id": "complete-copyright-notice"
+        },
+        {
+          "label": "Further Reading",
+          "heading": "Further Reading",
+          "id": "complete-further-reading"
+        },
+        {
+          "label": "Editorial Closing",
+          "heading": "Editorial Closing",
+          "id": "complete-editorial-closing"
+        }
+      ],
+      "legacy_anchors": [
+        "adults",
+        "desire",
+        "formation",
+        "introduction",
+        "orientation",
+        "real-boy",
+        "sources",
+        "work",
+        "wound"
+      ],
+      "glossary_count": 15,
+      "block_count": 441,
+      "table_count": 0,
+      "heading_count": 99,
+      "html_blob": "2857cf9a538301881ccac4356621f1d88a8a5b28"
+    },
+    {
+      "author": "Marshall McLuhan",
+      "source": "Marshall_McLuhan_EN.md",
+      "source_sha256": "1189ae6bb4e2cf5317da340b2cb13ac561912db8059c7fad1e585bef7b01e8a4",
+      "italian": "cerchi/guide/marshall-mcluhan-media-percezione-ambienti-invisibili/index.html",
+      "italian_blob": "a2436f681c9608151d0bfeb8e7b6b41a8fac162d",
+      "page": "en/cerchi/guides/marshall-mcluhan-media-perception-invisible-environments/index.html",
+      "baseline_blob": "1ae92fa300be15a41c9478d965fe451071cbb1df",
+      "faq_count": 22,
+      "toc_aliases": [
+        {
+          "label": "McLuhan at a Glance",
+          "heading": "McLuhan at a Glance",
+          "id": "complete-mcluhan-at-a-glance"
+        },
+        {
+          "label": "Why McLuhan Still Matters",
+          "heading": "Why McLuhan Still Matters",
+          "id": "complete-why-mcluhan-still-matters"
+        },
+        {
+          "label": "The Human Problem: Living Inside Media We Do Not See",
+          "heading": "The Human Problem: Living Inside Media We Do Not See",
+          "id": "complete-the-human-problem-living-inside-media-we-do-not-see"
+        },
+        {
+          "label": "From Literary Critic to Media Theorist",
+          "heading": "From Literary Critic to Media Theorist",
+          "id": "complete-from-literary-critic-to-media-theorist"
+        },
+        {
+          "label": "The Life That Illuminates the Work",
+          "heading": "The Life That Illuminates the Work",
+          "id": "complete-the-life-that-illuminates-the-work"
+        },
+        {
+          "label": "Context: Toronto, Harold Innis, and the Electric Age",
+          "heading": "Context: Toronto, Harold Innis, and the Electric Age",
+          "id": "complete-context-toronto-harold-innis-and-the-electric-age"
+        },
+        {
+          "label": "McLuhan's Disciplinary Circles",
+          "heading": "McLuhan's Disciplinary Circles",
+          "id": "complete-mcluhan-s-disciplinary-circles"
+        },
+        {
+          "label": "Principal Works",
+          "heading": "Principal Works",
+          "id": "complete-principal-works"
+        },
+        {
+          "label": "*The Mechanical Bride*: Learning to Read Mass Culture",
+          "heading": "*The Mechanical Bride*: Learning to Read Mass Culture",
+          "id": "complete-the-mechanical-bride-learning-to-read-mass-culture"
+        },
+        {
+          "label": "*The Gutenberg Galaxy*: When a Technology Reorganises a Civilisation",
+          "heading": "*The Gutenberg Galaxy*: When a Technology Reorganises a Civilisation",
+          "id": "complete-the-gutenberg-galaxy-when-a-technology-reorganises-a-civilisation"
+        },
+        {
+          "label": "*Understanding Media*: Expanding What Counts as a Medium",
+          "heading": "*Understanding Media*: Expanding What Counts as a Medium",
+          "id": "complete-understanding-media-expanding-what-counts-as-a-medium"
+        },
+        {
+          "label": "'The Medium Is the Message'",
+          "heading": "'The Medium Is the Message'",
+          "id": "complete-the-medium-is-the-message"
+        },
+        {
+          "label": "The Content That Conceals the Medium",
+          "heading": "The Content That Conceals the Medium",
+          "id": "complete-the-content-that-conceals-the-medium"
+        },
+        {
+          "label": "To Extend Is Also to Become Numb",
+          "heading": "To Extend Is Also to Become Numb",
+          "id": "complete-to-extend-is-also-to-become-numb"
+        },
+        {
+          "label": "When Scale Changes",
+          "heading": "When Scale Changes",
+          "id": "complete-when-scale-changes"
+        },
+        {
+          "label": "The Medium That Disappears into the Environment",
+          "heading": "The Medium That Disappears into the Environment",
+          "id": "complete-the-medium-that-disappears-into-the-environment"
+        },
+        {
+          "label": "The Typographic Sensorium",
+          "heading": "The Typographic Sensorium",
+          "id": "complete-the-typographic-sensorium"
+        },
+        {
+          "label": "Electricity and Simultaneous Time",
+          "heading": "Electricity and Simultaneous Time",
+          "id": "complete-electricity-and-simultaneous-time"
+        },
+        {
+          "label": "The Global Village Is Not a Happy Community",
+          "heading": "The Global Village Is Not a Happy Community",
+          "id": "complete-the-global-village-is-not-a-happy-community"
+        },
+        {
+          "label": "Hot and Cool Media",
+          "heading": "Hot and Cool Media",
+          "id": "complete-hot-and-cool-media"
+        },
+        {
+          "label": "Figure, Ground, and Anti-Environment",
+          "heading": "Figure, Ground, and Anti-Environment",
+          "id": "complete-figure-ground-and-anti-environment"
+        },
+        {
+          "label": "The Tetrads: Four Questions to Ask of a Technology",
+          "heading": "The Tetrads: Four Questions to Ask of a Technology",
+          "id": "complete-the-tetrads-four-questions-to-ask-of-a-technology"
+        },
+        {
+          "label": "The Form of Thought: Mosaic, Probe, Montage",
+          "heading": "The Form of Thought: Mosaic, Probe, Montage",
+          "id": "complete-the-form-of-thought-mosaic-probe-montage"
+        },
+        {
+          "label": "Key Ideas",
+          "heading": "Key Ideas",
+          "id": "complete-key-ideas"
+        },
+        {
+          "label": "Key Concepts",
+          "heading": "Key Concepts",
+          "id": "complete-key-concepts"
+        },
+        {
+          "label": "The Constellation",
+          "heading": "The Constellation",
+          "id": "complete-the-constellation"
+        },
+        {
+          "label": "McLuhan's Legacy",
+          "heading": "McLuhan's Legacy",
+          "id": "complete-mcluhan-s-legacy"
+        },
+        {
+          "label": "Between Lucretius and Shannon",
+          "heading": "Between Lucretius and Shannon",
+          "id": "complete-between-lucretius-and-shannon"
+        },
+        {
+          "label": "The Contemporary Wound: When the Environment Stops Feeling Like a Choice",
+          "heading": "The Contemporary Wound",
+          "id": "complete-the-contemporary-wound"
+        },
+        {
+          "label": "Limits and Contradictions",
+          "heading": "Limits and Contradictions",
+          "id": "complete-limits-and-contradictions"
+        },
+        {
+          "label": "Illuminating Details",
+          "heading": "Illuminating Details",
+          "id": "complete-illuminating-details"
+        },
+        {
+          "label": "Common Errors",
+          "heading": "Common Errors",
+          "id": "complete-common-errors"
+        },
+        {
+          "label": "Glossary",
+          "heading": "Glossary",
+          "id": "complete-glossary"
+        },
+        {
+          "label": "Reading Paths",
+          "heading": "Reading Paths",
+          "id": "complete-reading-paths"
+        },
+        {
+          "label": "Questions to Guide the Reader",
+          "heading": "Questions to Guide the Reader",
+          "id": "complete-questions-to-guide-the-reader"
+        },
+        {
+          "label": "Points to Remember",
+          "heading": "Points to Remember",
+          "id": "complete-points-to-remember"
+        },
+        {
+          "label": "FAQ",
+          "heading": "FAQ",
+          "id": "complete-faq"
+        },
+        {
+          "label": "Sources and Copyright",
+          "heading": "Sources and Copyright",
+          "id": "complete-sources-and-copyright"
+        },
+        {
+          "label": "Further Reading",
+          "heading": "Further Reading",
+          "id": "complete-further-reading"
+        },
+        {
+          "label": "Editorial Closing",
+          "heading": "Editorial Closing",
+          "id": "complete-editorial-closing"
+        }
+      ],
+      "legacy_anchors": [
+        "books",
+        "criticism",
+        "extensions",
+        "figure-ground",
+        "introduction",
+        "literature",
+        "main-content",
+        "mcluhan-figure",
+        "mcluhan-figure-heading",
+        "mcluhan-figure-title",
+        "mcluhan-ground",
+        "mcluhan-ground-heading",
+        "message",
+        "orientation",
+        "rhythms",
+        "sources",
+        "tetrads",
+        "village",
+        "wound"
+      ],
+      "glossary_count": 26,
+      "block_count": 505,
+      "table_count": 1,
+      "heading_count": 158,
+      "html_blob": "de4a4cb069abe961751b1e02999f9b9c3d4949d5",
+      "native_figure": true
+    },
+    {
+      "author": "Alessandro Manzoni",
+      "source": "Alessandro_Manzoni_EN.md",
+      "source_sha256": "279dd7dc9dca51d3ee7a5f9b3792b5885f745d0c1fdf27adbb2fcf8165307e3d",
+      "italian": "cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/index.html",
+      "italian_blob": "9cd8cecc174e747244a92b574e9b254782e81fb5",
+      "page": "en/cerchi/guides/alessandro-manzoni-language-history-responsibility/index.html",
+      "baseline_blob": "71eb24a1deebc785bf7f8841f8323c83f32f51f4",
+      "faq_count": 16,
+      "toc_aliases": [
+        {
+          "label": "Alessandro Manzoni in Five Minutes",
+          "heading": "Alessandro Manzoni in Five Minutes",
+          "id": "complete-alessandro-manzoni-in-five-minutes"
+        },
+        {
+          "label": "Why Manzoni Matters",
+          "heading": "Why Manzoni Matters",
+          "id": "complete-why-manzoni-matters"
+        },
+        {
+          "label": "The Human Problem: Answering for One's Actions Within History",
+          "heading": "The Human Problem: Answering for One's Actions Within History",
+          "id": "complete-the-human-problem-answering-for-one-s-actions-within-history"
+        },
+        {
+          "label": "Essential Biography",
+          "heading": "Essential Biography",
+          "id": "complete-essential-biography"
+        },
+        {
+          "label": "The Life That Illuminates the Work",
+          "heading": "The Life That Illuminates the Work",
+          "id": "complete-the-life-that-illuminates-the-work"
+        },
+        {
+          "label": "Historical Context: Revolution, Restoration, Romanticism, and the Risorgimento",
+          "heading": "Historical Context: Revolution, Restoration, Romanticism, and the Risorgimento",
+          "id": "complete-historical-context-revolution-restoration-romanticism-and-the-risorgimento"
+        },
+        {
+          "label": "Manzoni's Disciplinary Circles",
+          "heading": "Manzoni's Disciplinary Circles",
+          "id": "complete-manzoni-s-disciplinary-circles"
+        },
+        {
+          "label": "Principal Works",
+          "heading": "Principal Works",
+          "id": "complete-principal-works"
+        },
+        {
+          "label": "Manzoni's Poetics and Style: Irony, Distance, and Characters",
+          "heading": "Manzoni's Poetics and Style: Irony, Distance, and Characters",
+          "id": "complete-manzoni-s-poetics-and-style-irony-distance-and-characters"
+        },
+        {
+          "label": "The Cerchi d'inchiostro Key — Building a Common World",
+          "heading": "The Cerchi d'inchiostro Key — Building a Common World",
+          "id": "complete-the-cerchi-d-inchiostro-key-building-a-common-world"
+        },
+        {
+          "label": "Original Module I — Judgment Under Pressure",
+          "heading": "Original Module I — Judgment Under Pressure",
+          "id": "complete-original-module-i-judgment-under-pressure"
+        },
+        {
+          "label": "Original Module II — The Many, the Crowd, the People",
+          "heading": "Original Module II — The Many, the Crowd, the People",
+          "id": "complete-original-module-ii-the-many-the-crowd-the-people"
+        },
+        {
+          "label": "Original Module III — When the Law Is Weak; When the Law Becomes Unjust",
+          "heading": "Original Module III — When the Law Is Weak; When the Law Becomes Unjust",
+          "id": "complete-original-module-iii-when-the-law-is-weak-when-the-law-becomes-unjust"
+        },
+        {
+          "label": "Original Module IV — Language as Civic Infrastructure",
+          "heading": "Original Module IV — Language as Civic Infrastructure",
+          "id": "complete-original-module-iv-language-as-civic-infrastructure"
+        },
+        {
+          "label": "Original Module V — History and the Responsibility of Telling It",
+          "heading": "Original Module V — History and the Responsibility of Telling It",
+          "id": "complete-original-module-v-history-and-the-responsibility-of-telling-it"
+        },
+        {
+          "label": "Providence and the Irreducibility of Evil",
+          "heading": "Providence and the Irreducibility of Evil",
+          "id": "complete-providence-and-the-irreducibility-of-evil"
+        },
+        {
+          "label": "Key Ideas",
+          "heading": "Key Ideas",
+          "id": "complete-key-ideas"
+        },
+        {
+          "label": "Key Concepts",
+          "heading": "Key Concepts",
+          "id": "complete-key-concepts"
+        },
+        {
+          "label": "The Constellation",
+          "heading": "The Constellation",
+          "id": "complete-the-constellation"
+        },
+        {
+          "label": "Manzoni's Legacy",
+          "heading": "Manzoni's Legacy",
+          "id": "complete-manzoni-s-legacy"
+        },
+        {
+          "label": "The Contemporary Wound — When the Common World Loses the Conditions for Judgment",
+          "heading": "The Contemporary Wound — When the Common World Loses the Conditions for Judgment",
+          "id": "complete-the-contemporary-wound-when-the-common-world-loses-the-conditions-for-judgment"
+        },
+        {
+          "label": "Limits and Contradictions",
+          "heading": "Limits and Contradictions",
+          "id": "complete-limits-and-contradictions"
+        },
+        {
+          "label": "Illuminating Details",
+          "heading": "Illuminating Details",
+          "id": "complete-illuminating-details"
+        },
+        {
+          "label": "Common Misreadings to Avoid",
+          "heading": "Common Misreadings to Avoid",
+          "id": "complete-common-misreadings-to-avoid"
+        },
+        {
+          "label": "Short Glossary",
+          "heading": "Short Glossary",
+          "id": "complete-short-glossary"
+        },
+        {
+          "label": "Reading Paths",
+          "heading": "Reading Paths",
+          "id": "complete-reading-paths"
+        },
+        {
+          "label": "Questions to Guide the Reader",
+          "heading": "Questions to Guide the Reader",
+          "id": "complete-questions-to-guide-the-reader"
+        },
+        {
+          "label": "Points to Remember",
+          "heading": "Points to Remember",
+          "id": "complete-points-to-remember"
+        },
+        {
+          "label": "Frequently Asked Questions",
+          "heading": "Frequently Asked Questions",
+          "id": "complete-frequently-asked-questions"
+        },
+        {
+          "label": "Sources",
+          "heading": "Sources",
+          "id": "complete-sources"
+        },
+        {
+          "label": "Copyright Notice",
+          "heading": "Copyright Notice",
+          "id": "complete-copyright-notice"
+        },
+        {
+          "label": "Further Reading",
+          "heading": "Further Reading",
+          "id": "complete-further-reading"
+        },
+        {
+          "label": "Editorial Closing",
+          "heading": "Editorial Closing",
+          "id": "complete-editorial-closing"
+        }
+      ],
+      "legacy_anchors": [
+        "common-world",
+        "history",
+        "introduction",
+        "judgment",
+        "language",
+        "law",
+        "orientation",
+        "sources",
+        "wound"
+      ],
+      "glossary_count": 18,
+      "block_count": 634,
+      "table_count": 0,
+      "heading_count": 109,
+      "html_blob": "8e7738a639ac6a820682a09fb340459a43ca9fc5"
+    },
+    {
+      "author": "Carl Schmitt",
+      "source": "Carl_Schmitt_EN.md",
+      "source_sha256": "643fbda92b9092b089bfadb5b30464549c19f9dffef515150ecd32eeb994e221",
+      "italian": "cerchi/guide/carl-schmitt-decisione-eccezione-ordine-politico/index.html",
+      "italian_blob": "86feac947f3074e0fac28e130a83893cab3b55a6",
+      "page": "en/cerchi/guides/carl-schmitt-decision-exception-political-order/index.html",
+      "baseline_blob": "d6856db707001ac1b704d3896f4da2ff77c5ea28",
+      "faq_count": 14,
+      "toc_aliases": [
+        {
+          "label": "Carl Schmitt at a Glance",
+          "heading": "Carl Schmitt at a Glance",
+          "id": "complete-carl-schmitt-at-a-glance"
+        },
+        {
+          "label": "Why Schmitt Matters",
+          "heading": "Why Schmitt Matters",
+          "id": "complete-why-schmitt-matters"
+        },
+        {
+          "label": "The Human Problem: Order, Fear, and Authority",
+          "heading": "The Human Problem — Order, Fear, and Authority",
+          "id": "complete-the-human-problem-order-fear-and-authority"
+        },
+        {
+          "label": "Essential Biography",
+          "heading": "Essential Biography",
+          "id": "complete-essential-biography"
+        },
+        {
+          "label": "The Life That Illuminates the Work",
+          "heading": "The Life That Illuminates the Work — Three Ruptures",
+          "id": "complete-the-life-that-illuminates-the-work-three-ruptures"
+        },
+        {
+          "label": "Weimar and the Crisis of Order",
+          "heading": "Weimar — The Crisis of Constitutional Order",
+          "id": "complete-weimar-the-crisis-of-constitutional-order"
+        },
+        {
+          "label": "Disciplinary Circles",
+          "heading": "Disciplinary Circles",
+          "id": "complete-disciplinary-circles"
+        },
+        {
+          "label": "Principal Works",
+          "heading": "Principal Works — An Intellectual Itinerary, Not a Catalogue",
+          "id": "complete-principal-works-an-intellectual-itinerary-not-a-catalogue"
+        },
+        {
+          "label": "The Threshold of Order — Norm, Normality, Decision",
+          "heading": "The Threshold of Order — Norm, Normality, Decision",
+          "id": "complete-the-threshold-of-order-norm-normality-decision"
+        },
+        {
+          "label": "Sovereignty and Political Theology",
+          "heading": "Sovereignty and Political Theology",
+          "id": "complete-sovereignty-and-political-theology"
+        },
+        {
+          "label": "Commissarial and Sovereign Dictatorship",
+          "heading": "Commissarial and Sovereign Dictatorship",
+          "id": "complete-commissarial-and-sovereign-dictatorship"
+        },
+        {
+          "label": "The Concept of the Political",
+          "heading": "The Concept of the Political — Friend and Enemy",
+          "id": "complete-the-concept-of-the-political-friend-and-enemy"
+        },
+        {
+          "label": "The Power to Name the Enemy",
+          "heading": "The Power to Name the Enemy",
+          "id": "complete-the-power-to-name-the-enemy"
+        },
+        {
+          "label": "Constitution, Legality, and Legitimacy",
+          "heading": "Constitution, Legality, and Legitimacy",
+          "id": "complete-constitution-legality-and-legitimacy"
+        },
+        {
+          "label": "Legally Against the Order",
+          "heading": "Legally Against the Order",
+          "id": "complete-legally-against-the-order"
+        },
+        {
+          "label": "Schmitt, Kelsen, and Heller",
+          "heading": "Schmitt, Kelsen, and Heller — Three Responses to Weimar",
+          "id": "complete-schmitt-kelsen-and-heller-three-responses-to-weimar"
+        },
+        {
+          "label": "Democracy, Liberalism, and Parliamentarism",
+          "heading": "Democracy, Liberalism, and Parliamentarism",
+          "id": "complete-democracy-liberalism-and-parliamentarism"
+        },
+        {
+          "label": "Representation and Political Form",
+          "heading": "Representation and Political Form",
+          "id": "complete-representation-and-political-form"
+        },
+        {
+          "label": "Schmitt and National Socialism",
+          "heading": "Schmitt and National Socialism — The Historical Test of His Categories",
+          "id": "complete-schmitt-and-national-socialism-the-historical-test-of-his-categories"
+        },
+        {
+          "label": "Hobbes and Leviathan",
+          "heading": "Hobbes and Leviathan",
+          "id": "complete-hobbes-and-leviathan"
+        },
+        {
+          "label": "Where Does Law Begin? Nomos, Land, and Sea",
+          "heading": "Where Does Law Begin? Nomos, Land, and Sea",
+          "id": "complete-where-does-law-begin-nomos-land-and-sea"
+        },
+        {
+          "label": "The Partisan and the Transformation of the Enemy",
+          "heading": "The Partisan and the Transformation of the Enemy",
+          "id": "complete-the-partisan-and-the-transformation-of-the-enemy"
+        },
+        {
+          "label": "The Transition to Clausewitz",
+          "heading": "The Transition to Clausewitz — Conflict, Decision, Force",
+          "id": "complete-the-transition-to-clausewitz-conflict-decision-force"
+        },
+        {
+          "label": "Key Ideas",
+          "heading": "Key Ideas",
+          "id": "complete-key-ideas"
+        },
+        {
+          "label": "Key Concepts",
+          "heading": "Key Concepts",
+          "id": "complete-key-concepts"
+        },
+        {
+          "label": "Constellation",
+          "heading": "Constellation — Genealogies, Oppositions, Receptions",
+          "id": "complete-constellation-genealogies-oppositions-receptions"
+        },
+        {
+          "label": "Legacy and Reception",
+          "heading": "Legacy and Reception",
+          "id": "complete-legacy-and-reception"
+        },
+        {
+          "label": "The Contemporary Wound",
+          "heading": "The Contemporary Wound — When Exception Claims to Become Order",
+          "id": "complete-the-contemporary-wound-when-exception-claims-to-become-order"
+        },
+        {
+          "label": "Limits and Contradictions",
+          "heading": "Limits and Contradictions",
+          "id": "complete-limits-and-contradictions"
+        },
+        {
+          "label": "Details That Illuminate the Work",
+          "heading": "Details That Illuminate the Work",
+          "id": "complete-details-that-illuminate-the-work"
+        },
+        {
+          "label": "Common Errors",
+          "heading": "Common Errors",
+          "id": "complete-common-errors"
+        },
+        {
+          "label": "Glossary",
+          "heading": "Glossary",
+          "id": "complete-glossary"
+        },
+        {
+          "label": "Reading Paths",
+          "heading": "Reading Paths",
+          "id": "complete-reading-paths"
+        },
+        {
+          "label": "Questions to Guide the Reader",
+          "heading": "Questions to Guide the Reader",
+          "id": "complete-questions-to-guide-the-reader"
+        },
+        {
+          "label": "Points to Remember",
+          "heading": "Points to Remember",
+          "id": "complete-points-to-remember"
+        },
+        {
+          "label": "FAQ",
+          "heading": "Frequently Asked Questions",
+          "id": "complete-frequently-asked-questions"
+        },
+        {
+          "label": "Sources and Copyright",
+          "heading": "Sources and Copyright",
+          "id": "complete-sources-and-copyright"
+        },
+        {
+          "label": "Further Reading",
+          "heading": "Further Reading",
+          "id": "complete-further-reading"
+        },
+        {
+          "label": "Editorial Closing",
+          "heading": "Editorial Closing — Order and Its Price",
+          "id": "complete-editorial-closing-order-and-its-price"
+        }
+      ],
+      "legacy_anchors": [
+        "constitutional",
+        "democracy",
+        "dictatorship",
+        "enemy",
+        "exception",
+        "introduction",
+        "main-content",
+        "nazism",
+        "nomos",
+        "orientation",
+        "schmitt-exception",
+        "schmitt-exception-title",
+        "schmitt-exception-title-panel",
+        "schmitt-normal",
+        "schmitt-normal-title",
+        "sources",
+        "weimar",
+        "wound"
+      ],
+      "glossary_count": 19,
+      "block_count": 357,
+      "table_count": 1,
+      "heading_count": 77,
+      "html_blob": "46608f4811144c9d1026621a05d57f7d4bb01501",
+      "native_figure": true
+    },
+    {
+      "author": "Claude Shannon",
+      "source": "Claude_Shannon_EN.md",
+      "source_sha256": "46aac20ea936133b9875c69dc51f8b9192b8807835333445df5eecff47097171",
+      "italian": "cerchi/guide/claude-shannon-informazione-rumore-limiti-della-trasmissione/index.html",
+      "italian_blob": "bc652ca45e659939c44c25cc0b975a22f8194305",
+      "page": "en/cerchi/guides/claude-shannon-information-noise-limits-of-transmission/index.html",
+      "baseline_blob": "f823f92a9661cad4e852a5ad37dc265f27002b2f",
+      "faq_count": 15,
+      "toc_aliases": [
+        {
+          "label": "Claude Shannon at a Glance",
+          "heading": "Claude Shannon at a Glance",
+          "id": "complete-claude-shannon-at-a-glance"
+        },
+        {
+          "label": "Why Shannon Matters",
+          "heading": "Why Shannon Matters",
+          "id": "complete-why-shannon-matters"
+        },
+        {
+          "label": "The Human Problem: What We Choose to Leave Out",
+          "heading": "The Human Problem: What We Choose to Leave Out",
+          "id": "complete-the-human-problem-what-we-choose-to-leave-out"
+        },
+        {
+          "label": "Essential Biography",
+          "heading": "Essential Biography",
+          "id": "complete-essential-biography"
+        },
+        {
+          "label": "The Life That Illuminates the Work",
+          "heading": "The Life That Illuminates the Work",
+          "id": "complete-the-life-that-illuminates-the-work"
+        },
+        {
+          "label": "Context: When Communication Becomes a Mathematical Problem",
+          "heading": "Context: When Communication Becomes a Mathematical Problem",
+          "id": "complete-context-when-communication-becomes-a-mathematical-problem"
+        },
+        {
+          "label": "Disciplinary Circles",
+          "heading": "Disciplinary Circles",
+          "id": "complete-disciplinary-circles"
+        },
+        {
+          "label": "Major Works and Contributions",
+          "heading": "Major Works and Contributions",
+          "id": "complete-major-works-and-contributions"
+        },
+        {
+          "label": "The First Revolution: When Logic Enters Circuits",
+          "heading": "The First Revolution: When Logic Enters Circuits",
+          "id": "complete-the-first-revolution-when-logic-enters-circuits"
+        },
+        {
+          "label": "*A Mathematical Theory of Communication*",
+          "heading": "*A Mathematical Theory of Communication*",
+          "id": "complete-a-mathematical-theory-of-communication"
+        },
+        {
+          "label": "The Price of Abstraction",
+          "heading": "The Price of Abstraction",
+          "id": "complete-the-price-of-abstraction"
+        },
+        {
+          "label": "What 'Information' Means",
+          "heading": "What 'Information' Means",
+          "id": "complete-what-information-means"
+        },
+        {
+          "label": "The Bit: A Measure, Not a Metaphysics",
+          "heading": "The Bit: A Measure, Not a Metaphysics",
+          "id": "complete-the-bit-a-measure-not-a-metaphysics"
+        },
+        {
+          "label": "Entropy: Measuring Uncertainty",
+          "heading": "Entropy: Measuring Uncertainty",
+          "id": "complete-entropy-measuring-uncertainty"
+        },
+        {
+          "label": "Channel, Noise, and Capacity",
+          "heading": "Channel, Noise, and Capacity",
+          "id": "complete-channel-noise-and-capacity"
+        },
+        {
+          "label": "The Redundancy That Saves the Message",
+          "heading": "The Redundancy That Saves the Message",
+          "id": "complete-the-redundancy-that-saves-the-message"
+        },
+        {
+          "label": "Compression, Distortion, and Error Correction",
+          "heading": "Compression, Distortion, and Error Correction",
+          "id": "complete-compression-distortion-and-error-correction"
+        },
+        {
+          "label": "Meaning Placed in Brackets",
+          "heading": "Meaning Placed in Brackets",
+          "id": "complete-meaning-placed-in-brackets"
+        },
+        {
+          "label": "Shannon and Weaver",
+          "heading": "Shannon and Weaver: A Necessary Distinction",
+          "id": "complete-shannon-and-weaver-a-necessary-distinction"
+        },
+        {
+          "label": "Shannon and Wiener",
+          "heading": "Shannon and Wiener: Information Is Not Cybernetics",
+          "id": "complete-shannon-and-wiener-information-is-not-cybernetics"
+        },
+        {
+          "label": "Shannon and Turing",
+          "heading": "Shannon and Turing: Two Paths That Meet",
+          "id": "complete-shannon-and-turing-two-paths-that-meet"
+        },
+        {
+          "label": "Cryptography and Secrecy",
+          "heading": "Cryptography and Secrecy",
+          "id": "complete-cryptography-and-secrecy"
+        },
+        {
+          "label": "Chess, Automata, and Tractable Problems",
+          "heading": "Chess, Automata, and Tractable Problems",
+          "id": "complete-chess-automata-and-tractable-problems"
+        },
+        {
+          "label": "The Form of Shannon's Thought",
+          "heading": "The Form of Shannon's Thought",
+          "id": "complete-the-form-of-shannon-s-thought"
+        },
+        {
+          "label": "Key Ideas",
+          "heading": "Key Ideas",
+          "id": "complete-key-ideas"
+        },
+        {
+          "label": "Key Concepts",
+          "heading": "Key Concepts",
+          "id": "complete-key-concepts"
+        },
+        {
+          "label": "Constellation",
+          "heading": "Constellation",
+          "id": "complete-constellation"
+        },
+        {
+          "label": "Legacy",
+          "heading": "Legacy",
+          "id": "complete-legacy"
+        },
+        {
+          "label": "Lucretius, McLuhan, Shannon",
+          "heading": "Lucretius, McLuhan, Shannon",
+          "id": "complete-lucretius-mcluhan-shannon"
+        },
+        {
+          "label": "The Contemporary Wound: Transmission Without Understanding",
+          "heading": "The Contemporary Wound: Transmission Without Understanding",
+          "id": "complete-the-contemporary-wound-transmission-without-understanding"
+        },
+        {
+          "label": "Limits, Tensions, and Misuses",
+          "heading": "Limits, Tensions, and Misuses",
+          "id": "complete-limits-tensions-and-misuses"
+        },
+        {
+          "label": "Details That Illuminate the Method",
+          "heading": "Details That Illuminate the Method",
+          "id": "complete-details-that-illuminate-the-method"
+        },
+        {
+          "label": "Common Errors",
+          "heading": "Common Errors",
+          "id": "complete-common-errors"
+        },
+        {
+          "label": "Glossary",
+          "heading": "Glossary",
+          "id": "complete-glossary"
+        },
+        {
+          "label": "Reading Paths",
+          "heading": "Reading Paths",
+          "id": "complete-reading-paths"
+        },
+        {
+          "label": "Questions to Guide the Reader",
+          "heading": "Questions to Guide the Reader",
+          "id": "complete-questions-to-guide-the-reader"
+        },
+        {
+          "label": "Points to Remember",
+          "heading": "Points to Remember",
+          "id": "complete-points-to-remember"
+        },
+        {
+          "label": "FAQ",
+          "heading": "FAQ",
+          "id": "complete-faq"
+        },
+        {
+          "label": "Sources and Copyright",
+          "heading": "Sources and Copyright",
+          "id": "complete-sources-and-copyright"
+        },
+        {
+          "label": "Further Reading",
+          "heading": "Further Reading",
+          "id": "complete-further-reading"
+        },
+        {
+          "label": "Closing",
+          "heading": "Closing",
+          "id": "complete-closing"
+        }
+      ],
+      "legacy_anchors": [
+        "bandwagon",
+        "capacity",
+        "communication",
+        "entropy",
+        "fidelity",
+        "introduction",
+        "inventions",
+        "main-content",
+        "orientation",
+        "redundancy",
+        "semantics",
+        "shannon-clear",
+        "shannon-clear-heading",
+        "shannon-coded",
+        "shannon-coded-heading",
+        "shannon-figure-title",
+        "shannon-flip",
+        "shannon-flip-heading",
+        "sources",
+        "switching",
+        "wound"
+      ],
+      "glossary_count": 22,
+      "block_count": 469,
+      "table_count": 0,
+      "heading_count": 140,
+      "html_blob": "de2c6fcc13793fa081a435322bbea1fc7e075d40",
+      "native_figure": true
+    },
+    {
+      "author": "Daniel Kahneman",
+      "source": "Daniel_Kahneman_EN.md",
+      "source_sha256": "090cd2692a90b8d2bdd500caf10e78bee0a8f51a1c4dfa1a17fde879a9ffdd25",
+      "italian": "cerchi/guide/daniel-kahneman-giudizio-bias-decisione-sotto-incertezza/index.html",
+      "italian_blob": "c221e398f7b871e72ef477f604d10e54c5132bbd",
+      "page": "en/cerchi/guides/daniel-kahneman-judgment-bias-decision-under-uncertainty/index.html",
+      "baseline_blob": "0fdf7231a8d77a6bc1d23d7a24a5ea393e6b386f",
+      "faq_count": 17,
+      "toc_aliases": [
+        {
+          "label": "Daniel Kahneman at a Glance",
+          "heading": "Daniel Kahneman at a Glance",
+          "id": "complete-daniel-kahneman-at-a-glance"
+        },
+        {
+          "label": "Why Kahneman Matters",
+          "heading": "Why Kahneman Matters",
+          "id": "complete-why-kahneman-matters"
+        },
+        {
+          "label": "The Human Problem: Who Decides Before the Decision?",
+          "heading": "The Human Problem: Who Decides Before the Decision?",
+          "id": "complete-the-human-problem-who-decides-before-the-decision"
+        },
+        {
+          "label": "Essential Biography",
+          "heading": "Essential Biography",
+          "id": "complete-essential-biography"
+        },
+        {
+          "label": "The Life That Illuminates the Work",
+          "heading": "The Life That Illuminates the Work",
+          "id": "complete-the-life-that-illuminates-the-work"
+        },
+        {
+          "label": "Context: From the Rational Decision-Maker to the Real Mind",
+          "heading": "Context: From the Rational Decision-Maker to the Real Mind",
+          "id": "complete-context-from-the-rational-decision-maker-to-the-real-mind"
+        },
+        {
+          "label": "Disciplinary Circles",
+          "heading": "Disciplinary Circles",
+          "id": "complete-disciplinary-circles"
+        },
+        {
+          "label": "Works and Major Research Programmes",
+          "heading": "Works and Major Research Programmes",
+          "id": "complete-works-and-major-research-programmes"
+        },
+        {
+          "label": "Module I — Judgment Before Choice",
+          "heading": "Module I — Judgment Before Choice",
+          "id": "complete-module-i-judgment-before-choice"
+        },
+        {
+          "label": "Module II — The Reference Point from Which the World Acquires Value",
+          "heading": "Module II — The Reference Point from Which the World Acquires Value",
+          "id": "complete-module-ii-the-reference-point-from-which-the-world-acquires-value"
+        },
+        {
+          "label": "Module III — The Shape of the Problem",
+          "heading": "Module III — The Shape of the Problem",
+          "id": "complete-module-iii-the-shape-of-the-problem"
+        },
+        {
+          "label": "Module IV — When Error Enters the System",
+          "heading": "Module IV — When Error Enters the System",
+          "id": "complete-module-iv-when-error-enters-the-system"
+        },
+        {
+          "label": "Experience and Memory: Which Life Do We Evaluate?",
+          "heading": "Experience and Memory: Which Life Do We Evaluate?",
+          "id": "complete-experience-and-memory-which-life-do-we-evaluate"
+        },
+        {
+          "label": "Key Ideas",
+          "heading": "Key Ideas",
+          "id": "complete-key-ideas"
+        },
+        {
+          "label": "Key Concepts",
+          "heading": "Key Concepts",
+          "id": "complete-key-concepts"
+        },
+        {
+          "label": "The Constellation",
+          "heading": "The Constellation",
+          "id": "complete-the-constellation"
+        },
+        {
+          "label": "Kahneman's Legacy",
+          "heading": "Kahneman's Legacy",
+          "id": "complete-kahneman-s-legacy"
+        },
+        {
+          "label": "The Contemporary Wound — The Prepared Choice",
+          "heading": "The Contemporary Wound",
+          "id": "complete-the-contemporary-wound"
+        },
+        {
+          "label": "Limits, Criticisms, and Open Questions",
+          "heading": "Limits, Criticisms, and Open Questions",
+          "id": "complete-limits-criticisms-and-open-questions"
+        },
+        {
+          "label": "Illuminating Details",
+          "heading": "Illuminating Details",
+          "id": "complete-illuminating-details"
+        },
+        {
+          "label": "Common Errors to Avoid",
+          "heading": "Common Errors to Avoid",
+          "id": "complete-common-errors-to-avoid"
+        },
+        {
+          "label": "Short Glossary",
+          "heading": "Short Glossary",
+          "id": "complete-short-glossary"
+        },
+        {
+          "label": "Study and Reading Paths",
+          "heading": "Study and Reading Paths",
+          "id": "complete-study-and-reading-paths"
+        },
+        {
+          "label": "Questions to Guide the Reader",
+          "heading": "Questions to Guide the Reader",
+          "id": "complete-questions-to-guide-the-reader"
+        },
+        {
+          "label": "Points to Remember",
+          "heading": "Points to Remember",
+          "id": "complete-points-to-remember"
+        },
+        {
+          "label": "Frequently Asked Questions",
+          "heading": "Frequently Asked Questions",
+          "id": "complete-frequently-asked-questions"
+        },
+        {
+          "label": "Sources and Copyright",
+          "heading": "Sources and Copyright",
+          "id": "complete-sources-and-copyright"
+        },
+        {
+          "label": "Further Reading",
+          "heading": "Further Reading",
+          "id": "complete-further-reading"
+        },
+        {
+          "label": "Editorial Closing",
+          "heading": "Editorial Closing",
+          "id": "complete-editorial-closing"
+        }
+      ],
+      "legacy_anchors": [
+        "attention",
+        "criticism",
+        "framing",
+        "heuristics",
+        "introduction",
+        "intuition",
+        "kahneman-context",
+        "kahneman-context-heading",
+        "kahneman-failure",
+        "kahneman-failure-heading",
+        "kahneman-figure-title",
+        "kahneman-success",
+        "kahneman-success-heading",
+        "main-content",
+        "memory",
+        "noise",
+        "orientation",
+        "prospect",
+        "sources",
+        "wound"
+      ],
+      "glossary_count": 26,
+      "block_count": 533,
+      "table_count": 0,
+      "heading_count": 163,
+      "html_blob": "af345837592c23e6594781963249e60ab4f3f195",
+      "native_figure": true
+    }
+  ],
+  "source_commit": "604872f49f1f7e7b3202f9b57d7b077e7a5775e4",
+  "asset_sha256": {
+    "assets/international-complete-guides.css": "27eb1c995754ac70f274db04b066988e13f8018ff94d16ffef0b53683c6a5817",
+    "assets/international-complete-guides.js": "9a210ad4e641c00ed94d483d1b795f6ac8bd6f5554eb3a1e129b435f69959ce3"
+  }
+}

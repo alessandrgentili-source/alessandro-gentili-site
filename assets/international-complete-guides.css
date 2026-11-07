@@ -1,0 +1,79 @@
+/* Complete approved manuscripts: seven ordinary English guides only. */
+.international-complete-guide{--complete-ink:#1d2f3e;--complete-gold:#806333;--complete-paper:#f8f4eb;--complete-rule:#d7cebd}
+.international-complete-guide .complete-reader{max-width:1080px;padding-block:2rem 5rem}
+.international-complete-guide .complete-body{display:block;max-width:70ch;margin-inline:auto;min-width:0;color:var(--complete-ink);font:400 clamp(1.1rem,1.5vw,1.25rem)/1.85 Georgia,"Times New Roman",serif}
+.international-complete-guide .complete-body .complete-section{display:block;border:0;border-top:1px solid var(--complete-rule);border-radius:0;background:transparent;box-shadow:none;margin:0;padding:2.8rem 0;min-width:0}
+.international-complete-guide .complete-body h2{font:400 clamp(1.8rem,3vw,2.5rem)/1.23 Georgia,"Times New Roman",serif;color:var(--complete-ink);margin:0 0 1.6rem;max-width:32ch;overflow-wrap:break-word}
+.international-complete-guide .complete-body h3{font:400 clamp(1.4rem,2vw,1.7rem)/1.35 Georgia,"Times New Roman",serif;margin:2.2rem 0 .9rem;color:var(--complete-ink)}
+.international-complete-guide .complete-body h4{font:600 1.05rem/1.5 system-ui,sans-serif;margin:1.8rem 0 .6rem;color:var(--complete-ink)}
+.international-complete-guide .complete-body p{font:inherit;line-height:inherit;margin:0 0 1.1rem;color:inherit;max-width:none}
+.international-complete-guide .complete-body :is(ul,ol){font:inherit;line-height:inherit;margin:1rem 0 1.6rem;padding-left:1.5rem}
+.international-complete-guide .complete-body li{margin:.55rem 0;padding-left:.15rem}
+.international-complete-guide .complete-body :is(strong,b){font-weight:700}
+.international-complete-guide .complete-body a{color:inherit;text-decoration:underline;text-underline-offset:.2em;text-decoration-color:var(--complete-gold);overflow-wrap:anywhere}
+.international-complete-guide .complete-body blockquote{margin:1.8rem 0;padding:.6rem 0 .6rem 1.4rem;border-left:3px solid var(--complete-gold);color:var(--complete-ink);background:transparent;font:inherit}
+.international-complete-guide .complete-body blockquote p{margin:0}
+.international-complete-guide .complete-subtitle{font:500 .82rem/1.6 system-ui,sans-serif;letter-spacing:.06em;margin:1.2rem 0;color:var(--complete-gold)}
+.international-complete-guide .guide-hero h1{overflow-wrap:break-word;font-size:clamp(2.2rem,4.5vw,3.7rem)}
+.international-complete-guide .guide-hero .lead{max-width:42ch;font:400 clamp(1.12rem,1.7vw,1.4rem)/1.55 Georgia,"Times New Roman",serif}
+.international-complete-guide .guide-hero .lead strong{font-weight:400}
+.international-complete-guide .complete-body .guide-toc{display:block;padding:1rem 1.3rem;background:#eee7d9;border:1px solid var(--complete-rule);border-radius:0;max-height:none;overflow:visible}
+.international-complete-guide .complete-body .guide-toc ol{display:block;margin:0;padding-left:1.3rem;font:400 .9rem/1.6 system-ui,sans-serif}
+.international-complete-guide .complete-body .guide-toc li{margin:.55rem 0;padding:0}
+.international-complete-guide .complete-body .guide-toc a{display:inline;padding:0;border:0;background:transparent;color:var(--complete-ink);font:inherit;text-decoration:none;min-height:0}
+.international-complete-guide .complete-body .guide-toc a:hover{text-decoration:underline;text-underline-offset:.2em}
+.international-complete-guide .complete-anchor{display:block;scroll-margin-top:4rem}
+.international-complete-guide .complete-body :is(article,h2,h3,h4){scroll-margin-top:4rem}
+.international-complete-guide .complete-body [data-consult="glossary"] .consult-entries>p{padding:1rem 0;border-bottom:1px solid var(--complete-rule);font:400 1rem/1.75 system-ui,sans-serif}
+.international-complete-guide .complete-body .consult-tools{margin:1.5rem 0;padding:1rem 1.1rem;border:1px solid var(--complete-rule);background:#eee7d9;font:400 .88rem/1.6 system-ui,sans-serif}
+.international-complete-guide .consult-tools label{display:block;font-weight:600;margin:0 0 .45rem}
+.international-complete-guide .consult-inputs{display:flex;gap:.6rem;min-width:0}
+.international-complete-guide .consult-inputs input{min-width:0;flex:1;width:100%;border:1px solid #8a7b66;background:#fffdf7;color:var(--complete-ink);border-radius:0;font:inherit;padding:.55rem .7rem;min-height:44px}
+.international-complete-guide .consult-inputs button{border:1px solid #8a7b66;background:var(--complete-ink);color:#fff8e9;border-radius:0;font:600 .85rem/1.4 system-ui,sans-serif;padding:.6rem .9rem;min-height:44px;cursor:pointer}
+.international-complete-guide .complete-body .consult-tools p{font:inherit;margin:.5rem 0 0}
+.international-complete-guide :is(input,button,a,summary,[tabindex]):focus-visible{outline:3px solid #806333;outline-offset:4px}
+.international-complete-guide .complete-table{margin:1.6rem 0}
+.international-complete-guide .complete-table-region{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
+.international-complete-guide .complete-body table{width:100%;border-collapse:collapse;table-layout:fixed;font:400 .95rem/1.7 system-ui,sans-serif}
+.international-complete-guide .complete-body :is(th,td){text-align:left;vertical-align:top;padding:.85rem .75rem;border:1px solid var(--complete-rule);overflow-wrap:anywhere;white-space:normal;color:var(--complete-ink);background:transparent}
+.international-complete-guide .complete-body thead th{background:#eee7d9;font-weight:600}
+.international-complete-guide .complete-body th:first-child{width:30%}
+.international-complete-guide .complete-body th button{font:inherit;text-align:left;color:inherit;background:transparent;border:0;padding:.25rem 0;min-height:44px;width:100%;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}
+.international-complete-guide .complete-body th[aria-sort="ascending"] button::after{content:" ↑"}
+.international-complete-guide .complete-body th[aria-sort="descending"] button::after{content:" ↓"}
+.international-complete-guide .complete-equation{overflow-x:auto;padding:1.2rem 0;margin:1.3rem 0}
+.international-complete-guide math{font-size:1.1em}
+.international-complete-guide .complete-body .atlas-figure{margin:2rem 0;max-width:100%;box-sizing:border-box}
+.international-complete-guide .complete-body .atlas-figure p{color:#f0e9df;font:400 .94rem/1.8 system-ui,sans-serif}
+.international-complete-guide .complete-body .atlas-figure :is(h2,h3){color:#f8f2e7;font:400 clamp(1.55rem,2.5vw,2.2rem)/1.25 Georgia,"Times New Roman",serif;max-width:28ch;margin:0 0 1rem}
+.international-complete-guide .complete-body .atlas-figure :is(.atlas-label,[class$="-phase"]){color:#e0c58c;font:600 .68rem/1.5 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.international-complete-guide .complete-body .atlas-figure label{max-width:100%;box-sizing:border-box;white-space:normal}
+.international-complete-guide .complete-jump{position:sticky;top:var(--site-header-height,70px);z-index:20;display:flex;justify-content:space-between;gap:1px;max-width:70ch;margin:0 auto;border:1px solid var(--complete-rule);box-shadow:0 3px 12px #1d2f3e18;background:var(--complete-paper);font:600 .78rem/1.4 system-ui,sans-serif}
+.international-complete-guide .complete-jump a{display:flex;align-items:center;min-height:44px;padding:.5rem .8rem;color:var(--complete-ink);background:var(--complete-paper);text-decoration:none}
+@media(max-width:700px){
+ .international-complete-guide .complete-reader{padding-block:1rem 3rem}
+ .international-complete-guide .complete-body{font-size:1.09rem;line-height:1.82}
+ .international-complete-guide .complete-body .complete-section{padding:2rem 0}
+ .international-complete-guide .complete-body .guide-toc{padding:.8rem 1rem}
+ .international-complete-guide .complete-body h2{font-size:1.85rem}
+ .international-complete-guide .complete-body table{font-size:.88rem}
+ .international-complete-guide .complete-body :is(th,td){padding:.7rem .5rem}
+ .international-complete-guide .complete-jump{top:var(--site-header-height,170px);margin-inline:1rem}
+}
+@media print{
+ .international-complete-guide .complete-body{max-width:none;font-size:11pt;line-height:1.55;color:#000}
+ .international-complete-guide .complete-body .complete-section{padding:1.3rem 0;break-inside:auto}
+ .international-complete-guide :is(.consult-tools,.complete-jump){display:none!important}
+ .international-complete-guide .complete-body h2,.international-complete-guide .complete-body h3,.international-complete-guide .complete-body h4{break-after:avoid}
+ .international-complete-guide .complete-body [data-consult-row][hidden]{display:block!important}
+ .international-complete-guide .complete-body table tr[data-consult-row][hidden]{display:table-row!important}
+ .international-complete-guide .complete-body table{table-layout:auto;font-size:9pt}
+ .international-complete-guide .complete-body th button{text-decoration:none;min-height:0;padding:0}
+ .international-complete-guide .complete-body th button::after{content:none!important}
+ .international-complete-guide .complete-body thead{display:table-header-group}
+ .international-complete-guide .complete-body tbody{display:table-row-group}
+ .international-complete-guide .complete-body tr{break-inside:avoid}
+ .international-complete-guide .complete-body :is(th,td){padding:.4rem;border-color:#999;color:#000}
+ .international-complete-guide .complete-equation,.international-complete-guide .complete-table-region{overflow:visible}
+ .international-complete-guide .complete-body .atlas-figure :is(p,h2,h3,.atlas-label,[class$="-phase"]){color:#182e3e}
+}

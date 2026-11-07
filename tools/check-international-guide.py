@@ -202,6 +202,19 @@ def verify(path, base):
         revision = run_path(str(ROOT / 'tools/check-clausewitz-revision.py'))
         revision['verify'](path, base)
         return
+    if relative in (
+        'en/cerchi/guides/alessandro-manzoni-language-history-responsibility/index.html',
+        'en/cerchi/guides/carl-schmitt-decision-exception-political-order/index.html',
+        'en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/index.html',
+        'en/cerchi/guides/claude-shannon-information-noise-limits-of-transmission/index.html',
+        'en/cerchi/guides/daniel-kahneman-judgment-bias-decision-under-uncertainty/index.html',
+        'en/cerchi/guides/lucretius-atoms-images-poetry-of-nature/index.html',
+        'en/cerchi/guides/marshall-mcluhan-media-perception-invisible-environments/index.html',
+    ):
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-international-complete-guides.py'))
+        revision['verify'](path, base)
+        return
     blocks = re.findall(BLOCKS, before, re.S)
     require(blocks and blocks == re.findall(BLOCKS, after, re.S), 'Approved articles changed, missing or reordered')
     for tag in ('title', 'h1', 'header', 'footer'):
