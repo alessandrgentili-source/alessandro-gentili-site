@@ -12,7 +12,7 @@ body > .skip-link + .it-home-skip { display: none; }
   background: var(--it-paper);
   color: var(--it-ink);
 }
-.it-home :where([id]) { scroll-margin-top: .75rem; }
+.it-home :where([id]) { scroll-margin-top: 6rem; }
 .it-home :where(a):focus-visible { outline: 2px solid var(--it-rust); outline-offset: 4px; }
 .it-home .it-label { margin: 0; color: var(--it-rust); font: 650 .68rem/1.5 system-ui,sans-serif; letter-spacing: .15em; text-transform: uppercase; }
 .it-home .it-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 1.25rem; min-height: 44px; padding-block: .55rem; border-bottom: 1px solid currentColor; color: inherit; text-decoration: none; font-size: .84rem; }
@@ -328,3 +328,40 @@ body > .skip-link + .it-home-skip { display: none; }
 /* Testo dell’orientamento sulla carta della Home; la mappa e i suoi nodi restano invariati. */
 .it-home .home-system-footer p span { color: var(--it-rust); }
 .it-home .home-system-footer p { color: var(--it-muted); }
+
+/* Orientamento e lettura ravvicinata, disponibili anche senza JavaScript. */
+.it-orientation { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 0 2rem; padding-block: 1.5rem; border-bottom: 1px solid var(--it-rule); }
+.it-orientation > p { grid-column: 1/-1; padding-bottom: .7rem; }
+.it-orientation a { display: grid; gap: .35rem; padding-block: .5rem; color: inherit; text-decoration: none; }
+.it-orientation strong { font: 400 1.2rem/1.3 var(--it-serif); }
+.it-orientation a span { font-size: .75rem; line-height: 1.5; color: var(--it-muted); }
+.it-orientation a:hover strong { text-decoration: underline; }
+.it-guide-cover { display: block; width: 100%; height: auto; margin-block: 1rem; }
+.it-guide-stops { padding: 0; }
+.it-guide-stops details { border-bottom: 1px solid var(--it-rule); }
+.it-guide-stops summary { padding: .9rem .25rem; cursor: pointer; font: 400 1.2rem/1.4 var(--it-serif); }
+.it-guide-stops summary span { display: inline-block; margin-right: .6rem; color: var(--it-rust); font: 600 .65rem/1.7 system-ui,sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.it-guide-stops summary:focus-visible { outline: 2px solid var(--it-rust); outline-offset: 3px; }
+.it-guide-stops summary:hover { color: var(--it-rust); }
+.it-guide-stops details > div { padding: 0 .25rem 1rem; }
+.it-guide-stops p { margin: 0; color: var(--it-muted); font-size: .85rem; line-height: 1.7; }
+.it-author-list a { display: grid; grid-template-columns: 6.5rem minmax(0,1fr) auto; align-items: center; gap: 1rem; padding-block: 1.2rem; }
+.it-author-list img { display: block; width: 100%; height: auto; }
+.it-reading-thread { display: grid; grid-template-columns: minmax(0,1fr); gap: .6rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--it-rule); }
+.it-reading-thread p:not(.it-label) { margin: 0; font: 400 1.05rem/1.7 var(--it-serif); }
+.it-reading-thread a,.it-forms-spread p a,.it-home .home-system-footer p a { text-decoration: underline; text-underline-offset: .2em; }
+.it-method-steps { list-style: none; padding: 0; margin: 1.5rem 0 0; counter-reset: method; }
+.it-method-steps li { position: relative; padding: 0 0 1.4rem 2.5rem; border-left: 1px solid var(--it-rule); margin-left: .7rem; counter-increment: method; }
+.it-method-steps li:last-child { border-left-color: transparent; padding-bottom: .4rem; }
+.it-method-steps li::before { content: counter(method,decimal-leading-zero); position: absolute; left: -.8rem; top: 0; background: var(--it-paper); color: var(--it-rust); padding-block: .25rem; font: 600 .7rem/1 system-ui,sans-serif; }
+.it-method-steps strong { font: 400 1.3rem/1.2 var(--it-serif); }
+.it-method-steps p { margin: .4rem 0 0; color: var(--it-muted); font-size: .86rem; line-height: 1.65; max-width: 44ch; }
+.it-map-entry { display: flex; justify-content: space-between; gap: 2rem; border-top: 1px solid var(--it-rule); padding-block: 1rem; }
+.it-map-entry p { margin: 0; max-width: 60ch; font-size: .8rem; line-height: 1.65; color: var(--it-muted); }
+.it-forms-spread h3 { margin-top: .6rem; }
+@media (max-width: 700px) {
+  .it-orientation,.it-reading-thread { grid-template-columns: minmax(0,1fr); }
+  .it-orientation a + a { border-top: 1px solid var(--it-rule); }
+  .it-map-entry { flex-direction: column; gap: .6rem; }
+  .it-author-list a { grid-template-columns: 4.5rem minmax(0,1fr) auto; gap: .6rem; }
+}
