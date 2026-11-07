@@ -1,5 +1,6 @@
 /* Exclusive to /en/. Paper, ink and brass extend the approved EN grammar.
    The question selector uses native radios and CSS: no runtime dependency. */
+.site-header [data-language-switcher] .language-switcher-link[lang="it"]:not(:hover, :focus-visible) { color: var(--ink-2); }
 .international-home {
   --home-paper: #f8f2e7;
   --home-ink: #182e3e;
