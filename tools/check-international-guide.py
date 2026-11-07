@@ -197,6 +197,11 @@ def verify(path, base):
         revision = run_path(str(ROOT / 'tools/check-thucydides-revision.py'))
         revision['verify'](path, base)
         return
+    if relative == 'en/cerchi/guides/carl-von-clausewitz-war-politics-limits-of-force/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-clausewitz-revision.py'))
+        revision['verify'](path, base)
+        return
     if relative in (
         'en/cerchi/guides/alessandro-manzoni-language-history-responsibility/index.html',
         'en/cerchi/guides/carl-schmitt-decision-exception-political-order/index.html',

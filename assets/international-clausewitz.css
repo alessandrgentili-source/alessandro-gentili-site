@@ -126,3 +126,36 @@
  .clausewitz-panel h3{color:#182e3e;}
  .clausewitz-line i,.clausewitz-line i::after{background:#806333;}
 }
+
+/* Approved EN33 v3: editorial desk and native instrument within shared prose. */
+.atlas-clausewitz-v3 .clausewitz-part-head{max-width:64ch;margin:1rem auto 3rem;padding:0;border:0}
+.atlas-clausewitz-v3 .clausewitz-part-head h2{margin:0;padding:1.3rem 0;border-block:1px solid var(--atlas-gold);font:600 .8rem/1.6 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--atlas-gold)}
+.atlas-clausewitz-v3 .atlas-reading .clausewitz-figure p{color:#f0e9df;font:400 .94rem/1.8 system-ui,sans-serif}
+.atlas-clausewitz-v3 .atlas-reading .clausewitz-figure :is(.atlas-label,.clausewitz-phase){color:#e0c58c;font:600 .68rem/1.5 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.atlas-clausewitz-v3 .atlas-reading .clausewitz-figure .clausewitz-intro{font-size:.92rem;margin:0 0 1.6rem}
+.atlas-clausewitz-v3 .atlas-reading .clausewitz-panel h3{font:400 clamp(1.58rem,2.4vw,2.18rem)/1.25 var(--atlas-serif);color:#f8f2e7;margin:0 0 1rem}
+.atlas-clausewitz-v3 .clausewitz-line span{white-space:normal}
+.atlas-clausewitz-v3 .clausewitz-faq{padding:1.3rem 0;border-top:1px solid var(--atlas-rule)}
+.atlas-clausewitz-v3 .atlas-reading .clausewitz-faq h3{font:400 1.5rem/1.35 var(--atlas-serif);margin:0 0 .8rem}
+.atlas-clausewitz-v3 .clausewitz-table-region{max-width:100%;margin:1.2rem 0}
+.atlas-clausewitz-v3 .clausewitz-table-region:focus-visible{outline:3px solid var(--atlas-gold);outline-offset:3px}
+.atlas-clausewitz-v3 .clausewitz-data-table{width:100%;table-layout:fixed;border-collapse:collapse;font:400 .94rem/1.7 system-ui,sans-serif}
+.atlas-clausewitz-v3 .clausewitz-data-table :is(th,td){padding:.8rem .65rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--atlas-rule);overflow-wrap:anywhere}
+.atlas-clausewitz-v3 .clausewitz-data-table thead{background:#eee5d4}
+.atlas-clausewitz-v3 .clausewitz-data-table th:first-child{width:30%}
+@media(max-width:700px){
+ .atlas-clausewitz-v3 .clausewitz-data-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .atlas-clausewitz-v3 .clausewitz-data-table,.atlas-clausewitz-v3 .clausewitz-data-table :is(tbody,tr,tbody th,td){display:block;width:100%;box-sizing:border-box}
+ .atlas-clausewitz-v3 .clausewitz-data-table tr{margin:0 0 1rem;border:1px solid var(--atlas-rule)}
+ .atlas-clausewitz-v3 .clausewitz-data-table :is(th,td){border:0}
+ .atlas-clausewitz-v3 .clausewitz-data-table tbody th:first-child{width:100%;background:#eee5d4}
+}
+@media print{
+ .atlas-clausewitz-v3 .atlas-reading .clausewitz-figure :is(p,.atlas-label,.clausewitz-phase),.atlas-clausewitz-v3 .atlas-reading .clausewitz-panel h3{color:#182e3e}
+ .atlas-clausewitz-v3 .clausewitz-data-table{display:table!important;font-size:9pt}
+ .atlas-clausewitz-v3 .clausewitz-data-table thead{display:table-header-group!important;position:static;width:auto;height:auto;overflow:visible;clip-path:none;white-space:normal}
+ .atlas-clausewitz-v3 .clausewitz-data-table tbody{display:table-row-group!important}
+ .atlas-clausewitz-v3 .clausewitz-data-table tr{display:table-row!important;break-inside:avoid;border:0;margin:0}
+ .atlas-clausewitz-v3 .clausewitz-data-table :is(th,td){display:table-cell!important;width:auto;padding:.35rem .45rem}
+ .atlas-clausewitz-v3 .clausewitz-faq{break-inside:avoid}
+}
