@@ -34,9 +34,10 @@
 }
   </script>
   <link rel="stylesheet" href="/assets/style.css" />
-  <link rel="stylesheet" href="/assets/international-core-v2.css" />
+  <link rel="stylesheet" href="/assets/international-home-editorial.css" />
 </head>
 <body>
+<a class="skip-link" data-home-skip href="#main-content">Skip to content</a>
 <header class="site-header"><div class="wrap topbar"><a class="brand" href="/en/" aria-label="English home">Alessandro Gentili</a><nav class="primary-nav" aria-label="Primary navigation"><ul class="primary-nav-list">
 <li class="primary-nav-item"><a class="primary-nav-link active" href="/en/">Home</a></li>
 <li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="/en/cerchi/" aria-haspopup="true">Cerchi <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Cerchi"><li><a class="primary-nav-dropdown-link" href="/en/cerchi/">Circles of Ink</a></li><li><a class="primary-nav-dropdown-link" href="/en/cerchi/triads/">Triads</a></li></ul></li>
@@ -44,40 +45,90 @@
 <li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="/en/positioning/" aria-haspopup="true">International <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="International"><li><a class="primary-nav-dropdown-link" href="/en/positioning/">Positioning</a></li><li><a class="primary-nav-dropdown-link" href="/en/method/">Method</a></li><li><a class="primary-nav-dropdown-link" href="/en/system/">System</a></li></ul></li>
 <li class="primary-nav-item"><a class="primary-nav-link nav-link-letter" href="/en/contact/">Contact</a></li>
 </ul></nav></div></header>
-<main class="page international-core-v2 international-home-v2">
-<section class="wrap hero"><div class="hero-copy"><p class="eyebrow">English edition <span class="international-marker">04 · Apertura</span></p><h1>Writing, strategy, systems.</h1><p class="lead">A public architecture for reading the present: essays, cultural guides, thematic paths and an operating method that connects interpretation, positioning and AI-supported work.</p><div class="actions"><a class="btn" href="/en/cerchi/">Explore Cerchi d’inchiostro</a><a class="btn-secondary" href="/en/positioning/">Read Positioning</a></div></div><aside class="hero-panel"><p class="panel-label">A bilingual architecture</p><h3>Italian remains the original archive. English becomes an autonomous reading layer.</h3><p>No browser-language redirects, no machine-translated mirror: each English page is edited for an international reader while remaining tied to its Italian source when one exists.</p></aside></section>
-<figure class="wrap theme-editorial-image"><img src="/assets/img/cerchi/macro-04-international-master.webp" width="1672" height="941" loading="lazy" decoding="async" alt="A trajectory crosses a large circular threshold, representing International as a second entrance into the same system." /></figure>
+<main id="main-content" tabindex="-1" class="international-home">
+  <div class="wrap home-masthead"><span>English edition</span><span>Writing, strategy, systems</span></div>
+  <section class="wrap home-opening" aria-labelledby="home-title">
+    <div class="home-opening-title">
+      <p class="home-label">An atlas for reading the present</p>
+      <h1 id="home-title">The present is<br><em>not self-evident.</em></h1>
+    </div>
+    <div class="home-opening-note">
+      <p>What we accept as normal has a history. So do our desires, our institutions and the words we use to understand them.</p>
+      <p>This editorial project by Alessandro Gentili brings cultural reading and strategic thinking into the same inquiry.</p>
+      <a class="home-link" href="#questions">Begin with a question <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="home-colophon"><p><span data-corpus-count="en-guides">33</span> author guides <span aria-hidden="true">/</span> <span data-corpus-count="en-triads">11</span> reading triads <span aria-hidden="true">/</span> In English</p><a href="/en/cerchi/">Explore Circles of Ink <span aria-hidden="true">↗</span></a></div>
+  </section>
 
-<section class="wrap section international-section" aria-labelledby="entry-title">
-  <div class="section-head"><div><p class="kicker">Four entry points</p><h2 id="entry-title">Read the system from where you are.</h2></div><p>Four routes into one body of work: authors, recurring problems, professional method and public writing.</p></div>
-  <div class="international-entry-grid">
-    <article class="international-entry"><p class="international-entry-label">Authors & systems</p><h3>Circles of Ink</h3><p><span data-corpus-count="en-guides">33</span> English author guides and <span data-corpus-count="en-triads">11</span> triad reading paths connect systems of thought. All eleven triads now have three published English author guides. The English edition offers complete navigation across its 33 authors.</p><a class="btn-secondary" href="/en/cerchi/">Open the project</a></article>
-    <article class="international-entry"><p class="international-entry-label">Problems & relations</p><h3>Themes</h3><p>Eleven thematic paths connect power, territory, language, formation, judgment and institutional life across the corpus.</p><a class="btn-secondary" href="/en/themes/">Explore Themes</a></article>
-    <article class="international-entry"><p class="international-entry-label">Professional layer</p><h3>International</h3><p>Positioning, Method and System translate the same discipline into professional value, operating logic and accountable execution.</p><a class="btn-secondary" href="/en/positioning/">Enter International</a></article>
-    <article class="international-entry"><p class="international-entry-label">Contemporary diagnosis</p><h3>Public writing</h3><p>Essays test the same questions against the present. Selected Italian pieces include English notes for international readers.</p><a class="btn-secondary" href="/saggi.html#english-notes">Read the English notes</a></article>
-  </div>
-</section>
+  <section class="home-questions" id="questions" aria-labelledby="questions-title">
+    <div class="wrap">
+      <div class="home-section-intro"><p class="home-label">01 / Ways into the work</p><h2 id="questions-title">A question changes<br>what comes into view.</h2><p>Choose a question. See what three different thinkers bring to it, then follow a thread into the guides.</p></div>
+      <fieldset class="home-lenses" aria-describedby="lens-note">
+        <legend>Choose your starting question</legend>
+        <input type="radio" name="home-lens" id="lens-formation" value="formation" checked aria-controls="reading-formation" />
+        <label for="lens-formation"><span class="home-lens-no" aria-hidden="true">01</span> Formation</label>
+        <input type="radio" name="home-lens" id="lens-power" value="power" aria-controls="reading-power" />
+        <label for="lens-power"><span class="home-lens-no" aria-hidden="true">02</span> Power</label>
+        <input type="radio" name="home-lens" id="lens-judgment" value="judgment" aria-controls="reading-judgment" />
+        <label for="lens-judgment"><span class="home-lens-no" aria-hidden="true">03</span> Judgment</label>
+        <div class="home-readings">
+          <article class="home-reading home-reading-formation" id="reading-formation" aria-labelledby="formation-title">
+            <div class="home-reading-heading"><p class="home-label">Formation / Triad 08</p><h3 id="formation-title">Who teaches us<br>how to belong?</h3><p>A language, a story, a way of consuming: education continues long after we leave the classroom.</p></div>
+            <ol class="home-threads">
+              <li><span class="home-thread-concept">Language &amp; responsibility</span><h4><a href="/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/">Manzoni <span aria-hidden="true">↗</span></a></h4><p>How fear and institutional weakness put collective judgment under strain.</p></li>
+              <li><span class="home-thread-concept">Experience &amp; desire</span><h4><a href="/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/">Collodi <span aria-hidden="true">↗</span></a></h4><p>How temptation, work and care become an education in the world.</p></li>
+              <li><span class="home-thread-concept">Culture &amp; environment</span><h4><a href="/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/">Pasolini <span aria-hidden="true">↗</span></a></h4><p>How a consumer environment can teach without declaring itself a teacher.</p></li>
+            </ol>
+            <a class="home-link" href="/en/cerchi/triads/#triad-08">Read the relation between them <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="home-reading home-reading-power" id="reading-power" aria-labelledby="power-title">
+            <div class="home-reading-heading"><p class="home-label">Power / Triad 04</p><h3 id="power-title">Why does authority<br>feel necessary?</h3><p>Obedience has an inner life, a cultural setting and a promise of protection. Each asks for a different lens.</p></div>
+            <ol class="home-threads">
+              <li><span class="home-thread-concept">The divided subject</span><h4><a href="/en/cerchi/guides/sigmund-freud-unconscious-desire-civilization/">Freud <span aria-hidden="true">↗</span></a></h4><p>How desire and internal authority exceed our conscious account of ourselves.</p></li>
+              <li><span class="home-thread-concept">The making of common sense</span><h4><a href="/en/cerchi/guides/antonio-gramsci-hegemony-culture-common-sense/">Gramsci <span aria-hidden="true">↗</span></a></h4><p>How institutions and cultural practices shape what comes to seem natural.</p></li>
+              <li><span class="home-thread-concept">The promise of protection</span><h4><a href="/en/cerchi/guides/thomas-hobbes-fear-sovereignty-political-order/">Hobbes <span aria-hidden="true">↗</span></a></h4><p>How vulnerability and fear of disorder make common authority compelling.</p></li>
+            </ol>
+            <a class="home-link" href="/en/cerchi/triads/#triad-04">Read the relation between them <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="home-reading home-reading-judgment" id="reading-judgment" aria-labelledby="judgment-title">
+            <div class="home-reading-heading"><p class="home-label">Judgment / Triad 09</p><h3 id="judgment-title">What happens<br>before we choose?</h3><p>Desire, other people and the framing of a problem help shape the decision we experience as our own.</p></div>
+            <ol class="home-threads">
+              <li><span class="home-thread-concept">Desire &amp; freedom</span><h4><a href="/en/cerchi/guides/epicurus-desire-fear-freedom-before-choice/">Epicurus <span aria-hidden="true">↗</span></a></h4><p>Which needs sustain us, and which fears make us dependent?</p></li>
+              <li><span class="home-thread-concept">Belief &amp; imitation</span><h4><a href="/en/cerchi/guides/gabriel-tarde-imitation-belief-desire/">Tarde <span aria-hidden="true">↗</span></a></h4><p>How beliefs and desires travel between people before feeling personal.</p></li>
+              <li><span class="home-thread-concept">Framing &amp; uncertainty</span><h4><a href="/en/cerchi/guides/daniel-kahneman-judgment-bias-decision-under-uncertainty/">Kahneman <span aria-hidden="true">↗</span></a></h4><p>How anchors, heuristics and reference points give a choice its shape.</p></li>
+            </ol>
+            <a class="home-link" href="/en/cerchi/triads/#triad-09">Read the relation between them <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </fieldset>
+      <p class="home-reading-note" id="lens-note">These are editorial relations, not claims of historical influence. Each guide preserves the thinker’s distinct argument and context.</p>
+    </div>
+  </section>
 
-<section class="wrap section international-section" aria-labelledby="triads-title">
-  <div class="section-head"><div><p class="kicker">English triads</p><h2 id="triads-title">Eleven tensions inside the corpus.</h2></div><p>Each triad places three authors around one shared question. The relation is the fourth space.</p></div>
-  <div class="international-triad-index">
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-01"><span class="international-triad-no">01</span><span><strong>Truth, language, power.</strong><small>Plato · Dante · Machiavelli</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-02"><span class="international-triad-no">02</span><span><strong>Capital, values, desire.</strong><small>Marx · Nietzsche · Leopardi</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-03"><span class="international-triad-no">03</span><span><strong>Time, form, disenchantment.</strong><small>Seneca · Aristotle · Weber</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-04"><span class="international-triad-no">04</span><span><strong>Unconscious, hegemony, sovereignty.</strong><small>Freud · Gramsci · Hobbes</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-05"><span class="international-triad-no">05</span><span><strong>Interpretation, money, exchange.</strong><small>Averroes · Simmel · Smith</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-06"><span class="international-triad-no">06</span><span><strong>Republic, opinion, decision.</strong><small>Cicero · Tocqueville · Condorcet</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-07"><span class="international-triad-no">07</span><span><strong>Elite, mass, government.</strong><small>Polybius · Mosca · Pareto</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-08"><span class="international-triad-no">08</span><span><strong>Who — and what — forms a people?</strong><small>Manzoni · Collodi · Pasolini</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-09"><span class="international-triad-no">09</span><span><strong>Desire, relation, judgment.</strong><small>Epicurus · Gabriel Tarde · Daniel Kahneman</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-10"><span class="international-triad-no">10</span><span><strong>Matter, medium, information.</strong><small>Lucretius · Marshall McLuhan · Claude Shannon</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-    <a class="international-triad-row" href="/en/cerchi/triads/#triad-11"><span class="international-triad-no">11</span><span><strong>War, decision, and limits.</strong><small>Thucydides · Carl Schmitt · Carl von Clausewitz</small></span><span class="international-triad-arrow" aria-hidden="true">↗</span></a>
-  </div>
-  <div class="international-home-cta"><a class="btn" href="/en/cerchi/triads/">Explore all eleven triads</a></div>
-</section>
+  <section class="wrap home-atlas" aria-labelledby="atlas-title">
+    <div><p class="home-label">02 / The wider atlas</p><h2 id="atlas-title">Follow a thread.<br>Discover a different scale.</h2><p class="home-atlas-deck">Cerchi d’inchiostro — Circles of Ink — reads authors in relation. A guide opens one body of thought; a triad brings three perspectives to a shared question; a theme crosses between them.</p></div>
+    <nav class="home-atlas-paths" aria-label="Explore the English reading atlas">
+      <a href="/en/cerchi/"><span class="home-path-number">33</span><span><strong>Author guides</strong><small>Enter through a thinker and stay with the argument.</small></span><span aria-hidden="true">↗</span></a>
+      <a href="/en/cerchi/triads/"><span class="home-path-number">11</span><span><strong>Reading triads</strong><small>Find the tension that appears between three authors.</small></span><span aria-hidden="true">↗</span></a>
+      <a href="/en/themes/"><span class="home-path-number" aria-hidden="true">↔</span><span><strong>Thematic paths</strong><small>Move across power, territory, language and judgment.</small></span><span aria-hidden="true">↗</span></a>
+    </nav>
+  </section>
 
-<section class="wrap section international-section"><article class="item feature"><div><p class="kicker">Editorial principle</p><h2>Localization, not flattening.</h2></div><div><p>The English edition preserves arguments, sources and conceptual structure while adapting syntax, titles and terminology for international readers. European authors remain situated in their histories rather than being repackaged as generic self-help or SEO content.</p></div></article></section>
+  <section class="home-practice" aria-labelledby="practice-title"><div class="wrap">
+    <div class="home-section-intro"><p class="home-label">03 / From reading to practice</p><h2 id="practice-title">Interpretation carries<br>responsibility.</h2><p>The same attention to context, relations and consequences informs the professional work: making a position clear, giving work a method and building systems that remain accountable.</p></div>
+    <ol class="home-practice-paths">
+      <li><span class="home-label">Positioning</span><h3>Know where<br>you stand.</h3><p>The connection between an intellectual position and the value it can bring to a real context.</p><a class="home-link" href="/en/positioning/">Read Positioning <span aria-hidden="true">↗</span></a></li>
+      <li><span class="home-label">Method</span><h3>Give the work<br>a structure.</h3><p>How interpretation becomes a sequence of choices, checks and deliberate execution.</p><a class="home-link" href="/en/method/">Explore the Method <span aria-hidden="true">↗</span></a></li>
+      <li><span class="home-label">System</span><h3>Keep judgment<br>in the loop.</h3><p>How AI-supported work connects knowledge, tools and human responsibility.</p><a class="home-link" href="/en/system/">Read the System <span aria-hidden="true">↗</span></a></li>
+    </ol>
+  </div></section>
+
+  <section class="wrap home-closing" aria-labelledby="closing-title">
+    <div><p class="home-label">An open conversation</p><h2 id="closing-title">A question worth<br>working on together?</h2><a class="home-link" href="/en/contact/">Contact Alessandro Gentili <span aria-hidden="true">↗</span></a></div>
+    <div class="home-edition-note"><p class="home-label">About this edition</p><p>English is an edited entrance into the project, with 33 author guides and eleven complete triads. The wider essay archive is in Italian.</p><p><a href="/saggi.html#english-notes" hreflang="it">Essays with English notes <span class="home-language-note">(Italian index)</span> <span aria-hidden="true">↗</span></a></p></div>
+  </section>
 </main>
 <footer class="footer"><div class="wrap footer-wrap"><div class="footer-brand"><a href="/en/">Alessandro Gentili</a></div><nav class="footer-nav" aria-label="Footer navigation"><section class="footer-group"><h2>English</h2><ul><li><a href="/en/">Home</a></li><li><a href="/en/themes/">Themes</a></li></ul></section><section class="footer-group"><h2>Cerchi d’inchiostro</h2><ul><li><a href="/en/cerchi/">Circles of Ink</a></li><li><a href="/en/cerchi/triads/">Triads</a></li></ul></section><section class="footer-group"><h2>International</h2><ul><li><a href="/en/positioning/">Positioning</a></li><li><a href="/en/method/">Method</a></li><li><a href="/en/system/">System</a></li><li><a href="/en/contact/">Contact</a></li></ul></section><section class="footer-group"><h2>Italian site</h2><ul><li><a href="/">Italian home</a></li><li><a href="/autore.html">Author</a></li></ul></section></nav><div class="footer-bottom"><span>© Alessandro Gentili</span><span><a href="/privacy.html">Privacy</a></span></div></div></footer>
 <script src="/assets/script.js"></script>
+<script src="/assets/international-home-editorial.js"></script>
 </body></html>
