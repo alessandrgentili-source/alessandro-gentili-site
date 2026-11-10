@@ -189,6 +189,20 @@ Final report must confirm:
 * whether only `AGENTS.md` was changed;
 * no protected SEO files were touched.
 
+## Decisione approvata — lettura letteraria e apparati (11 novembre 2026)
+
+Il **Saggio 21**, `saggi/saggio-21-da-che-parte-sta-chi-guarda.html`, è la prima applicazione approvata del formato letterario di lettura. Costituisce un'**eccezione esplicita** alle regole storiche sottostanti che impongono `hero side panel`, `Coordinate editoriali`, `Pubblicazione` e sidebar informativa a tutti i saggi: non ripristinarli nel Saggio 21 per uniformità.
+
+Per questo formato, nel Saggio 21:
+
+* mantenere **le sei sezioni originali**, senza numerazioni o riscritture, e un indice discreto desktop più `<details>` accessibile su mobile;
+* distinguere nell'indice il gruppo delle sei sezioni dagli **«Apparati»**, con intestazione separata e i collegamenti, nell'ordine: **English note** (`#english-note`), **Nota editoriale** (`#nota-editoriale`);
+* preservare titolo, contenuto integrale, ordine, English note, nota editoriale, copertina, canonical, metadata e JSON-LD; nessuna sezione enciclopedica, FAQ o nuova bibliografia;
+* limitare gli stili specifici a `assets/essay-reading.css`, senza importare il template Cerchi né modificare gli stili globali;
+* verificare l'esistenza delle ancore, l'uso da tastiera dell'indice desktop/mobile, la leggibilità e l'assenza di regressioni.
+
+Questa decisione **non** autorizza la migrazione automatica degli altri saggi al formato letterario: ogni estensione richiede una scelta editoriale e uno scope approvati. La registrazione in `AGENTS.md` è vincolante per le future sessioni Codex che lavorano sul repository aggiornato. Nessun merge o deploy implicito.
+
 ## Single essay page structure
 
 Each single essay page must preserve:
