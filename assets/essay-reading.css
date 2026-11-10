@@ -58,3 +58,6 @@
  .essay-literary-page .literary-section h2{break-after:avoid}
  .essay-literary-page .literary-section p{orphans:3;widows:3}
 }
+/* Saggio 21: separate the six literary sections from the approved closing apparatus links. */
+.essay-literary-page .literary-toc-desktop .literary-toc-apparatus-label{border-top:1px solid #cbbda5;margin:.8rem 0 .5rem;padding:.9rem .8rem 0}
+.essay-literary-page .literary-toc-mobile .literary-toc-apparatus-label{font:700 .69rem/1.5 system-ui,sans-serif;color:#725626;text-transform:uppercase;letter-spacing:.13em;border-top:1px solid #cbbda5;margin:.7rem .8rem .2rem;padding:.75rem 0 0}
