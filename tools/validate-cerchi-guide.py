@@ -25,6 +25,16 @@ EDITORIAL_TOC_ALIASES = {
     "weimar e la crisi dell'ordine": "Weimar — La crisi dell'ordine costituzionale",
     "faq": "Domande frequenti",
     "domande frequenti": "FAQ",
+    # Mattei v3 (31 October 2026): exact manuscript index abbreviations.
+    "Perché Mattei è importante": "Perché Enrico Mattei è importante",
+    "Scritti, discorsi e documenti": "Scritti, discorsi e documenti principali",
+    "Modulo I — La risorsa e la libertà": "Modulo proprietario I — La risorsa e la libertà",
+    "Modulo II — Autonomia operativa e responsabilità": "Modulo proprietario II — Autonomia operativa e responsabilità",
+    "L'accordo con l'Iran": "L'accordo con l'Iran (1957)",
+    "Modulo III — Autonomia negoziale": "Modulo proprietario III — Autonomia negoziale",
+    "Modulo IV — Il potere che deve rispondere": "Modulo proprietario IV — Il potere che deve rispondere",
+    "Curiosità": "Curiosità e dettagli che illuminano Mattei",
+    "Fonti e copyright": "Fonti, metodo e copyright",
 }
 
 
@@ -172,13 +182,13 @@ def manuscript_structure(source):
     elif re.fullmatch(r"(?:\*\*.+\*\*|\*.+\*|__.+__|_.+_)", subtitle_line):
         subtitle = markdown_plain(subtitle_line)
         intro_heading_at = next((i for i in range(subtitle_at + 1, len(lines))
-                                 if re.fullmatch(r"##\s+Introduzione(?:\s*[—:–-].*)?", lines[i].strip(), re.I)), None)
+                                 if re.fullmatch(r"##\s+(?:Introduzione|Introduction)(?:\s*[—:–-].*)?", lines[i].strip(), re.I)), None)
         if intro_heading_at is None:
             raise ValueError("emphasized subtitle needs an explicit Introduzione heading")
         intro_start = intro_heading_at + 1
     else:
         raise ValueError("full manuscript needs an H2 or emphasized subtitle after its H1")
-    index_at = next((i for i in range(intro_start, len(lines)) if lines[i].strip() == "## Indice"), None)
+    index_at = next((i for i in range(intro_start, len(lines)) if lines[i].strip() in {"## Indice", "## Indice della guida", "## Contents", "## Guide contents"}), None)
     if index_at is None:
         raise ValueError("full manuscript needs a ## Indice after the introduction")
     intro = manuscript_blocks(lines[intro_start:index_at])
@@ -221,7 +231,7 @@ def toc_label_matches(label, heading):
     label_key, heading_key = toc_key(label), toc_key(heading)
     if label_key == heading_key:
         return True
-    if {label_key, heading_key} == {toc_key("FAQ"), toc_key("Domande frequenti")}:
+    if label_key in {toc_key("FAQ"), toc_key("Domande frequenti"), toc_key("Frequently asked questions")} and heading_key in {toc_key("FAQ"), toc_key("Domande frequenti"), toc_key("Frequently asked questions")}:
         return True
     alias_heading = next((expected for alias, expected in EDITORIAL_TOC_ALIASES.items()
                           if toc_key(alias) == label_key), None)
@@ -230,14 +240,16 @@ def toc_label_matches(label, heading):
     return heading_key.startswith(label_key + " — ") and bool(heading_key[len(label_key) + 3:].strip())
 
 
-def final_headings_valid(headings):
+def final_headings_valid(headings, language="it"):
+    if language == "en":
+        headings = [{"Sources": "Fonti", "Sources and copyright": "Fonti e copyright", "Sources, method and copyright": "Fonti, metodo e copyright", "Continue reading": "Prosegui la lettura"}.get(h, h.replace("Editorial closing", "Chiusura editoriale", 1)) for h in headings]
     if len(headings) < 3:
         return False
     fonts, progress, closing = headings[-3:]
-    return (not any(heading in {"Fonti", "Fonti e copyright", "Prosegui la lettura"}
+    return (not any(heading in {"Fonti", "Fonti e copyright", "Fonti, metodo e copyright", "Prosegui la lettura"}
                     or heading == "Chiusura editoriale"
                     or heading.startswith("Chiusura editoriale — ") for heading in headings[:-3])
-            and fonts in {"Fonti", "Fonti e copyright"}
+            and fonts in {"Fonti", "Fonti e copyright", "Fonti, metodo e copyright"}
             and progress == "Prosegui la lettura"
             and (closing == "Chiusura editoriale"
                  or bool(re.fullmatch(r"Chiusura editoriale — [^—]+", closing))))
@@ -252,9 +264,16 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
             errors.append(message)
 
     slug = page.parent.name
+    is_english = page.parent.parent.name == "guides" and page.parent.parent.parent.name == "cerchi" and page.parent.parent.parent.parent.name == "en"
+    language = "en" if is_english else "it"
+    guide_directory = "en/cerchi/guides" if is_english else "cerchi/guide"
+    hub_path = "en/cerchi/" if is_english else "cerchi/"
+    triads_path = "en/cerchi/triads/" if is_english else "cerchi/triadi/"
+    hub_label = "Circles of Ink hub" if is_english else "Hub Cerchi d’inchiostro"
+    toc_title = "In this guide" if is_english else "Indice della guida"
     require(mode in MODES, f"mode must be one of {', '.join(sorted(MODES))}")
-    require(page.name == "index.html" and page.parent.parent.name == "guide" and bool(SLUG.fullmatch(slug)), "page must be cerchi/guide/<unique-slug>/index.html")
-    existing = root / "cerchi/guide" / slug / "index.html"
+    require(page.name == "index.html" and page.parent.parent.parent.name == "cerchi" and page.parent.parent.name == ("guides" if is_english else "guide") and bool(SLUG.fullmatch(slug)), "page must be cerchi/guide/<unique-slug>/index.html")
+    existing = root / guide_directory / slug / "index.html"
     require(not existing.exists() or existing.resolve() == page.resolve(), f"slug already published: {slug}")
     for label, path in (("page", page), ("cover", cover), ("source", source)):
         require(path.is_file(), f"{label} not found: {path}")
@@ -264,11 +283,12 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
     html = page.read_text(encoding="utf-8")
     tree = Tree(html)
     nodes = list(walk(tree.root))
+    atlas = any(node.tag == "body" and {"international-atlas", "atlas-guide"}.issubset(node.attrs.get("class", "").split()) for node in nodes)
     require(not tree.malformed, "malformed HTML: " + ", ".join(tree.malformed))
     ids = [node.attrs["id"] for node in nodes if "id" in node.attrs]
     require(len(ids) == len(set(ids)), "duplicate HTML IDs")
     require(not tree.comments and not re.search(r"\b(?:TODO|PLACEHOLDER|NOME AUTORE|Guida NN|Lorem ipsum|sezione-uno)\b", html, re.I), "template placeholder or HTML comment remains")
-    canonical = BASE + f"cerchi/guide/{slug}/"
+    canonical = BASE + f"{guide_directory}/{slug}/"
     sitemap = root / "sitemap.xml"
     sitemap_text = sitemap.read_text(encoding="utf-8") if sitemap.is_file() else ""
     sitemap_urls = {normalized(unescape(item)) for item in re.findall(r"<loc>\s*(.*?)\s*</loc>", sitemap_text, re.I | re.S)}
@@ -285,7 +305,7 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
         local = root / unquote(parsed.path).lstrip("/")
         if parsed.path.endswith("/"):
             local = local / "index.html"
-        require(parsed.netloc == "alessandro-gentili.it" and parsed.path.startswith("/cerchi/guide/") and local.is_file(), f"release guide must be an existing local guide URL: {value}")
+        require(parsed.netloc == "alessandro-gentili.it" and parsed.path.startswith(("/cerchi/guide/", "/en/cerchi/guides/")) and local.is_file(), f"release guide must be an existing local guide URL: {value}")
         release_urls.add(url if url.endswith("/") else url + "/")
 
     def one(tag, attr, value):
@@ -359,30 +379,34 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
     number = None
     if len(heroes) == 1:
         eyebrow = list(heroes[0].find(css_class="eyebrow"))
-        match = re.fullmatch(r"Guida (\d+) · Cerchi d’inchiostro", normalized(content(eyebrow[0]))) if len(eyebrow) == 1 else None
+        match = re.fullmatch(r"Guide (\d+) · Circles of Ink" if is_english else r"Guida (\d+) · Cerchi d’inchiostro", normalized(content(eyebrow[0]))) if len(eyebrow) == 1 else None
         require(bool(match), "hero eyebrow must be 'Guida NN · Cerchi d’inchiostro'")
         number = int(match.group(1)) if match else None
         if number is not None:
-            for published in (root / "cerchi/guide").glob("*/index.html"):
+            for published in (root / guide_directory).glob("*/index.html"):
                 if published.resolve() == page:
                     continue
-                published_number = re.search(r"Guida\s+(\d+)\s*·\s*Cerchi d.inchiostro", published.read_text(encoding="utf-8"))
+                published_number = re.search(r"Guide\s+(\d+)\s*·\s*Circles of Ink" if is_english else r"Guida\s+(\d+)\s*·\s*Cerchi d.inchiostro", published.read_text(encoding="utf-8"))
                 if published_number and int(published_number.group(1)) == number:
                     errors.append(f"guide number already published: {number}")
                     break
         leads = [node for node in heroes[0].find("p") if node not in eyebrow and not list(node.find("a"))]
-        require(len(leads) == 1 and 1 <= len(normalized(content(leads[0]))) <= 100, "hero needs one short lead (about 90 characters)")
-        require(bool(leads and "lead" in leads[0].attrs.get("class", "").split()), "hero lead needs .lead")
+        title_only = atlas and heroes[0].attrs.get("data-atlas-hero") == "title-only"
+        if title_only:
+            require(not leads, "title-only Atlas hero must not duplicate the title with a lead")
+        else:
+            require(len(leads) == 1 and 1 <= len(normalized(content(leads[0]))) <= 100, "hero needs one short lead (about 90 characters)")
+            require(bool(leads and "lead" in leads[0].attrs.get("class", "").split()), "hero lead needs .lead")
         actions = [node for node in heroes[0].find(css_class="actions")]
         require(len(actions) == 1, "hero CTA wrapper needs .actions")
         hero_links = list(heroes[0].find("a"))
         require(len([link for link in hero_links if "btn" in link.attrs.get("class", "").split()]) == 1
                 and len([link for link in hero_links if "btn-secondary" in link.attrs.get("class", "").split()]) == 1,
                 "hero CTAs need .btn and .btn-secondary")
-        require(len(hero_links) == 2 and normalized(content(hero_links[0])) == "Hub Cerchi d’inchiostro" and urljoin(canonical, hero_links[0].attrs.get("href", "")) == BASE + "cerchi/", "hero needs the Hub CTA and one secondary CTA")
+        require(len(hero_links) == 2 and normalized(content(hero_links[0])) == hub_label and urljoin(canonical, hero_links[0].attrs.get("href", "")) == BASE + hub_path, "hero needs the Hub CTA and one secondary CTA")
         if len(hero_links) == 2:
             second_url = urljoin(canonical, hero_links[1].attrs.get("href", ""))
-            require(second_url == BASE + "cerchi/triadi/" or second_url.startswith(BASE + "cerchi/guide/"), "secondary hero CTA must point to Triadi or an existing guide")
+            require(second_url == BASE + triads_path or second_url.startswith(BASE + guide_directory + "/"), "secondary hero CTA must point to Triadi or an existing guide")
 
     name_match = COVER_NAME.fullmatch(cover.name)
     require(bool(name_match and number is not None and int(name_match.group(1)) == number), "cover filename must use the standard guide number and 1600x900 WebP naming")
@@ -421,14 +445,15 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
     alternates = [node for node in nodes if node.tag == "link" and node.attrs.get("rel") == "alternate" and node.attrs.get("hreflang")]
     alternate_by_lang = {node.attrs.get("hreflang"): node.attrs.get("href") for node in alternates}
     document_language = html_language.split("-")[0].lower()
-    if document_language in {"it", "en"}:
+    require(document_language == language, "document language must match its IT/EN guide path")
+    if alternates and document_language in {"it", "en"}:
         require(alternate_by_lang.get(document_language) == canonical,
                 f"{document_language} hreflang must self-reference the guide canonical")
     for alternate in alternates:
         hreflang = alternate.attrs.get("hreflang", "").lower()
         alternate_url = alternate.attrs.get("href", "")
         if hreflang == "x-default":
-            require(alternate_url == canonical, "x-default must point to the approved self-canonical guide")
+            require(alternate_url in {canonical, alternate_by_lang.get("it")}, "x-default must point to the self-canonical or actual Italian counterpart")
             continue
         parsed_alternate = urlsplit(alternate_url)
         require(parsed_alternate.netloc == "alessandro-gentili.it", f"hreflang target must use the canonical site: {alternate_url}")
@@ -461,16 +486,36 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
     crumbs = breadcrumb.get("itemListElement", []) if isinstance(breadcrumb, dict) else []
     require(isinstance(crumbs, list) and len(crumbs) >= 3 and isinstance(crumbs[-1], dict) and crumbs[-1].get("item") == canonical, "BreadcrumbList JSON-LD missing or inconsistent")
     if isinstance(crumbs, list) and len(crumbs) >= 3 and all(isinstance(item, dict) for item in crumbs):
-        require([item.get("position") for item in crumbs] == list(range(1, len(crumbs) + 1)) and crumbs[0].get("item") == BASE and crumbs[1].get("item") == BASE + "cerchi/", "BreadcrumbList positions and parent URLs are inconsistent")
+        require([item.get("position") for item in crumbs] == list(range(1, len(crumbs) + 1)) and crumbs[0].get("item") == BASE + ("en/" if is_english else "") and crumbs[1].get("item") == BASE + hub_path, "BreadcrumbList positions and parent URLs are inconsistent")
 
     bodies = [node for node in main_nodes if "guide-body" in node.attrs.get("class", "").split()]
     indexes = [node for node in main_nodes if "guide-index" in node.attrs.get("class", "").split()]
-    require(bool(bodies), "guide body needs .guide-body")
-    require(len(indexes) == 1, "guide needs exactly one .guide-index")
-    require(len(indexes) == 1 and indexes[0].tag == "article", ".guide-index must use the established article card wrapper")
+    require(len(bodies) == 1, "guide needs exactly one .guide-body")
+    atlas_contents = list(main.find("aside", "atlas-contents"))
+    if atlas:
+        require(not indexes, "Atlas uses .atlas-contents, not a legacy .guide-index card")
+        require(len(bodies) == 1 and "atlas-reading" in bodies[0].attrs.get("class", "").split(), "Atlas reading class must be on the single guide body")
+        for css in ("atlas-main", "atlas-guide-opening", "atlas-reader", "atlas-reading"):
+            require(len(list(main.find(css_class=css))) == 1, f"Atlas needs exactly one .{css}")
+        require(len(atlas_contents) == 1, "Atlas needs one aside.atlas-contents")
+        details = list(atlas_contents[0].find("details")) if atlas_contents else []
+        require(len(details) == 1 and "open" in details[0].attrs, "Atlas contents must stay open without JS")
+        summaries = list(details[0].find("summary")) if len(details) == 1 else []
+        require(len(summaries) == 1 and normalized(content(summaries[0])) == toc_title, "Atlas needs a localized contents summary")
+        styles = [urljoin(canonical, n.attrs.get("href", "")) for n in nodes if n.tag == "link" and n.attrs.get("rel") == "stylesheet"]
+        require(BASE + "assets/international-atlas.css" in styles and BASE + "assets/style.css" in styles and styles.index(BASE + "assets/style.css") < styles.index(BASE + "assets/international-atlas.css"), "Atlas CSS must follow the shared stylesheet")
+        scripts = [n for n in nodes if n.tag == "script" and n.attrs.get("src")]
+        atlas_scripts = [n for n in scripts if urljoin(canonical, n.attrs["src"]) == BASE + "assets/international-atlas.js"]
+        require(len(atlas_scripts) == 1 and "defer" in atlas_scripts[0].attrs and any(urljoin(canonical, n.attrs["src"]) == BASE + "assets/script.js" for n in scripts[:scripts.index(atlas_scripts[0])]), "Atlas JS must be deferred after the shared script")
+        require(any(n.tag == "a" and n.attrs.get("href") == "#" + main.attrs.get("id", "") for n in nodes), "Atlas needs a static skip link")
+    else:
+        require(len(indexes) == 1, "guide needs exactly one .guide-index")
+        require(len(indexes) == 1 and indexes[0].tag == "article", ".guide-index must use the established article card wrapper")
     sections = [node for node in main_nodes if node.tag == "article" and "guide-section" in node.attrs.get("class", "").split()]
     require(len(sections) >= 5, "guide needs opening, body and three final sections")
     require(bool(sections) and all(any(section in list(walk(body)) for body in bodies) for section in sections), "all .guide-section blocks must be inside .guide-body")
+    if atlas and len(bodies) == 1:
+        require(all(section in bodies[0].children for section in sections), "Atlas sections must be direct children of the reading column")
     headings = []
     for section in sections:
         h2 = list(section.find("h2"))
@@ -478,18 +523,18 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
         heading = normalized(content(h2[0])) if h2 else ""
         require(not re.match(r"\d+[.)]\s", heading), f"numbered body H2: {heading}")
         headings.append(heading)
-    require(final_headings_valid(headings), "final sections must be Fonti → Prosegui la lettura → Chiusura editoriale")
+    require(final_headings_valid(headings, language), "final sections must be Fonti → Prosegui la lettura → Chiusura editoriale")
     if len(sections) >= 3:
         progress_links = list(sections[-2].find("a"))
-        require(any(urljoin(canonical, link.attrs.get("href", "")) == BASE + "cerchi/" for link in progress_links), "Prosegui la lettura needs the Cerchi hub link")
+        require(any(urljoin(canonical, link.attrs.get("href", "")) == BASE + hub_path for link in progress_links), "Prosegui la lettura needs the Cerchi hub link")
         require(not any("lettera-periodica" in link.attrs.get("href", "") for link in progress_links), "newsletter link belongs outside Prosegui la lettura")
 
     tocs = list(main.find("nav", "guide-toc"))
     require(len(tocs) == 1, "expected one .guide-toc")
     if len(tocs) == 1:
         toc = tocs[0]
-        require(toc.attrs.get("aria-label", "").startswith("Indice della guida "), "TOC needs author-specific aria-label")
-        require(any(normalized(content(h)) == "Indice della guida" for h in toc.find("h2")), "TOC needs visible title 'Indice della guida'")
+        require((toc.attrs.get("aria-label", "").endswith(" guide contents") if is_english else toc.attrs.get("aria-label", "").startswith("Indice della guida ")), "TOC needs author-specific aria-label")
+        require(atlas or any(normalized(content(h)) == toc_title for h in toc.find("h2")), "TOC needs visible title 'Indice della guida'")
         require(not any(normalized(content(h)) == "Indice" for h in main.find("h2")), "remove separate 'Indice' heading")
         toc_links = list(toc.find("a"))
         targets = [link.attrs.get("href", "")[1:] for link in toc_links if link.attrs.get("href", "").startswith("#")]
@@ -499,12 +544,15 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
             target = link.attrs.get("href", "").removeprefix("#")
             label = re.sub(r"^\d+[.)]\s*", "", normalized(content(link)))
             require(target in section_by_id and toc_label_matches(label, section_by_id.get(target, "")), f"TOC label/section mismatch: #{target}")
-        require(targets == [section.attrs.get("id") for section in sections[1:]], "TOC targets must follow every body section in order after the editorial opening")
-        require(len(indexes) == 1 and toc in list(walk(indexes[0])), ".guide-toc must be inside .guide-index")
+        opening_links = [link for link in toc_links if "data-atlas-opening" in link.attrs]
+        require(not opening_links or (atlas and len(opening_links) == 1 and toc_links[0] is opening_links[0] and bool(sections) and opening_links[0].attrs.get("href") == "#" + sections[0].attrs.get("id", "")), "supplementary TOC opening must uniquely target the actual introduction first")
+        numbered_targets = targets[len(opening_links):]
+        require(numbered_targets == [section.attrs.get("id") for section in sections[1:]], "TOC targets must follow every body section in order after the editorial opening")
+        require((len(atlas_contents) == 1 and toc in list(walk(atlas_contents[0]))) if atlas else (len(indexes) == 1 and toc in list(walk(indexes[0]))), ".guide-toc must be inside .guide-index")
         if heroes and images and sections:
             require(main_nodes.index(heroes[0]) < main_nodes.index(images[0]) < main_nodes.index(toc) < main_nodes.index(sections[0]), "required order: hero → cover → TOC → editorial opening")
 
-    faq_headings = {heading for heading in headings if toc_key(heading) in {toc_key("FAQ"), toc_key("Domande frequenti")}}
+    faq_headings = {heading for heading in headings if toc_key(heading) in {toc_key("FAQ"), toc_key("Domande frequenti"), toc_key("Frequently asked questions")}}
     faq_visible = bool(faq_headings)
     require(faq_visible == ("FAQPage" in schemas), "FAQPage JSON-LD is required exactly when visible FAQ exists")
     if faq_visible and "FAQPage" in schemas:
@@ -519,6 +567,34 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
                 and item["acceptedAnswer"].get("@type") == "Answer"
                 and bool(normalized(item["acceptedAnswer"].get("text", "")))
                 and normalized(item["acceptedAnswer"].get("text", "")) in visible_faq for item in entries), "FAQPage needs a visible answer for each question")
+
+    if atlas and faq_visible and "FAQPage" in schemas:
+        visible_answers = {}
+        question = None
+        for node in faq_section.children:
+            if not isinstance(node, Node):
+                continue
+            if node.tag == "h3":
+                question = normalized(content(node))
+                visible_answers[question] = []
+            elif question:
+                visible_answers[question].append(visible_text(node))
+        require(isinstance(entries, list) and len(entries) == len(visible_answers), "Atlas FAQ entries must be unique and complete")
+        if isinstance(entries, list):
+            for entry in entries:
+                if isinstance(entry, dict) and isinstance(entry.get("acceptedAnswer"), dict):
+                    question = normalized(entry.get("name", ""))
+                    require(normalized(entry["acceptedAnswer"].get("text", "")) == normalized(" ".join(visible_answers.get(question, []))),
+                            f"Atlas FAQ answer does not match its visible question: {question}")
+
+    for figure in [n for n in nodes if n.tag == "figure" and "data-editorial-figure" in n.attrs]:
+        require(atlas and "atlas-figure" in figure.attrs.get("class", "").split(), "editorial figure needs the Atlas semantic shell")
+        require(bool(figure.attrs.get("id")) and figure.attrs.get("data-editorial-figure") == figure.attrs.get("id"), "editorial figure needs an explicit stable ID")
+        local_ids = {n.attrs.get("id") for n in walk(figure) if n.attrs.get("id")}
+        require(bool(figure.attrs.get("aria-labelledby")) and figure.attrs.get("aria-labelledby") in local_ids, "editorial figure needs an internal accessible title")
+        captions = list(figure.find("figcaption"))
+        require(len(captions) == 1 and bool(normalized(content(captions[0]))) and captions[0].attrs.get("id") == figure.attrs.get("aria-describedby"), "editorial figure needs a visible linked caption")
+        require(not list(figure.find("script")), "editorial figures must remain static")
 
     for node in nodes:
         attribute = "href" if node.tag == "a" or (node.tag == "link" and node.attrs.get("rel") == "stylesheet") else "src" if node.tag in {"img", "script", "source"} else None
@@ -537,20 +613,22 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
             continue
         path = unquote(url.path)
         require(not any(part in {"prototipi", "private", "test", "tests"} for part in Path(path).parts) and not path.endswith("delos-reference.html"), f"nonpublic target is forbidden: {value}")
-        if path.startswith("/cerchi/guide/"):
+        if path.startswith(("/cerchi/guide/", "/en/cerchi/guides/")):
             guide_url = BASE + path.lstrip("/").removesuffix("index.html")
             if not guide_url.endswith("/"):
                 guide_url += "/"
-        if path in {f"/cerchi/guide/{slug}/", f"/cerchi/guide/{slug}/index.html"}:
+        if path in {f"/{guide_directory}/{slug}/", f"/{guide_directory}/{slug}/index.html"}:
             target = page
         elif path == f"/assets/img/cerchi/{cover.name}":
             target = cover
+        elif path.startswith("/assets/") and path.endswith(".css") and not (root / path.lstrip("/")).exists():
+            target = page.parents[4 if is_english else 3] / path.lstrip("/")
         else:
             target = root / path.lstrip("/")
             if path.endswith("/"):
                 target = target / "index.html"
         require(target.is_file(), f"missing local target: {value}")
-        if path.startswith("/cerchi/guide/") and target.is_file() and guide_url != canonical:
+        if path.startswith(("/cerchi/guide/", "/en/cerchi/guides/")) and target.is_file() and guide_url != canonical:
             if mode == "DRAFT" and guide_url not in sitemap_urls:
                 report.append(f"LOCAL CANDIDATE LINK: {guide_url} exists locally but is not published")
             elif mode == "PUBLICATION":
@@ -560,11 +638,11 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
             require(unquote(url.fragment) in target_ids, f"missing local fragment: {value}")
 
     if mode == "PUBLICATION":
-        index_paths = [root / "cerchi/index.html"]
-        triads_referenced = any(urljoin(canonical, node.attrs.get("href", "")) == BASE + "cerchi/triadi/"
+        index_paths = [root / hub_path / "index.html"]
+        triads_referenced = any(urljoin(canonical, node.attrs.get("href", "")) == BASE + triads_path
                                 for node in main_nodes if node.tag == "a")
         if triads_referenced:
-            index_paths.append(root / "cerchi/triadi/index.html")
+            index_paths.append(root / triads_path / "index.html")
         for index_path in index_paths:
             if not index_path.is_file():
                 errors.append(f"PUBLICATION index page missing: {index_path.relative_to(root)}")
@@ -595,6 +673,7 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
     try:
         structure = manuscript_structure(source)
         if structure is None:
+            require(not atlas, "Atlas drafts require a full structured definitive manuscript")
             legacy_lines = [re.sub(r"^\s*#{1,6}\s+", "", line) for line in source.read_text(encoding="utf-8").splitlines()]
             source_blocks = manuscript_blocks(legacy_lines)
             require(bool(source_blocks), "definitive source is empty")
@@ -622,7 +701,7 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
                     else:
                         cursor = found + len(block)
             if len(tocs) == 1:
-                labels = [re.sub(r"^\d+[.)]\s*", "", normalized(content(link))) for link in tocs[0].find("a")]
+                labels = [re.sub(r"^\d+[.)]\s*", "", normalized(content(link))) for link in tocs[0].find("a") if "data-atlas-opening" not in link.attrs]
                 require(len(labels) == len(index) and all(toc_key(actual) == toc_key(expected) for actual, expected in zip(labels, index)),
                         "TOC labels differ from the manuscript index or are out of order")
             require(len(index) == len(source_sections), "manuscript index does not cover every source section")
@@ -642,6 +721,21 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
                         errors.append(f"source block {position}.{block_number} missing, altered or out of order: {block[:72]}")
                     else:
                         cursor = found + len(block)
+            if atlas:
+                opening_heading = next((markdown_plain(line[3:]) for line in source.read_text(encoding="utf-8").splitlines() if line.startswith("## ")), "")
+                require(bool(headings) and editorial_text_key(headings[0]) == editorial_text_key(opening_heading),
+                        "Atlas introduction heading differs from the manuscript")
+                def editorial_only(section):
+                    return normalized(" ".join(visible_text(n) for n in section.children
+                        if isinstance(n, Node) and n.tag != "h2" and "actions" not in n.attrs.get("class", "").split()
+                        and not (n.tag == "figure" and n.attrs.get("data-editorial-figure"))))
+                if sections:
+                    require(editorial_only(sections[0]) == normalized(" ".join([subtitle, *intro])),
+                            "Atlas opening has missing, added or altered editorial text")
+                for position, (_, _, blocks) in enumerate(source_sections, 1):
+                    if position < len(sections):
+                        require(editorial_only(sections[position]) == normalized(" ".join(blocks)),
+                                f"Atlas section {position} has missing, added or altered editorial text")
             for position, (label, (heading, _, _)) in enumerate(zip(index, source_sections), 1):
                 require(toc_label_matches(label, heading), f"manuscript index item {position} does not match its source H2: {label}")
     except (UnicodeError, ValueError) as error:
@@ -655,7 +749,7 @@ def main():
     parser.add_argument("--cover", type=Path, required=True, help="supplied WebP cover; may be in a temporary directory")
     parser.add_argument("--source", type=Path, required=True, help="definitive UTF-8 manuscript; full H1/subtitle/index structure is checked when present")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent, help="repository root for existing local links")
-    parser.add_argument("--mode", choices=sorted(MODES | {"EN_REVISION"}), default="DRAFT", help="DRAFT/PUBLICATION retain the Italian new-guide policy; EN_REVISION validates the pinned existing Plato EN revision")
+    parser.add_argument("--mode", choices=sorted(MODES | {"EN_REVISION"}), default="DRAFT", help="DRAFT/PUBLICATION validate new IT/EN guides; EN_REVISION validates the pinned existing Plato EN revision")
     parser.add_argument("--release-guide", action="append", default=[], help="additional existing guide URL included in the same authorized publication release; repeat as needed")
     parser.add_argument("--base", help="immutable pre-revision ref; required only for EN_REVISION")
     args = parser.parse_args()

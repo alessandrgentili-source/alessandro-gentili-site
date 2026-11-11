@@ -102,3 +102,21 @@ La CI International esegue le regressioni JS e, nelle PR, la conservazione delle
 Solo per il perimetro originario a due pagine, `python3 tools/check-international-prototype.py` verifica anche lo scope contro `e9df7f0`. È una prova della presente PR, non il gate delle future estensioni.
 
 Aprire `python3 tools/preview-international.py` → `http://127.0.0.1:8766/__review/`. La vista `/__before/` resta intenzionalmente il confronto storico del prototipo; per future migrazioni usare un checkout della propria base. Testare: 320/390/1280 px; cambio mobile↔desktop; TOC su prima, centrale e ultima voce; scroll avanti/indietro; URL con frammento; Tab/Invio; cambio pannelli; fonti/citazione; assenza di overflow; `/__nojs/` con indice aperto e tutti gli articoli presenti. Nessun audit completo screen reader o risultato Core Web Vitals è implicito in questi test.
+
+
+## Nuove guide IT/EN — estensione Publisher (pilota Mattei 34)
+
+Per le nuove guide approvate, Atlas è il layout condiviso IT/EN. La governance resta in `AGENTS.md` e `docs/PUBLICATION_WORKFLOW.md`; il procedimento è in `.agents/skills/cerchi-publisher/SKILL.md`. Questo amplia il contratto di composizione alle nuove guide italiane senza migrare le guide esistenti, cambiare il CSS/JS condiviso o copiare la struttura saggistica specifica di un'edizione EN.
+
+Riutilizzare apertura, byline/cover, `.atlas-reader`, `aside.atlas-contents > details[open] > summary + nav.guide-toc` e `.guide-body.atlas-reading`. Non usare anche la card `.guide-index` legacy. Localizzare summary (`Indice della guida` / `In this guide`), skip link, aria-label, CTA e breadcrumb. Le sezioni, il sottotitolo integrale, l'indice e le FAQ derivano dal master definitivo, non dai moduli dei prototipi. Conservare gli ID forniti; in loro assenza fissarli dai titoli, senza tradurli per ottenere trattamenti CSS. Il numero delle sezioni resta quello del nuovo master.
+
+Il validatore `tools/validate-cerchi-guide.py` riconosce entrambi i percorsi canonici IT/EN e distingue Atlas dal formato legacy, mantenendo i controlli di quest'ultimo. Per Atlas richiede il master strutturato completo e verifica anche assenza di testo aggiunto nel corpo, apertura/chiusura, ordine indice, risorse condivise, disclosure aperto senza JS e corrispondenza esatta fra ciascuna FAQ e la sua risposta. Gli alias di indice restano espliciti e con destinazione unica. Un testo non tradotto non richiede hreflang: una coppia reale mantiene invece reciprocità e destinazioni locali canoniche.
+
+I candidati DRAFT restano nell'area interna `pilots/<nome>/site/` della skill, con master e hash della cover. Non entrano negli inventari pubblici, non sostituiscono hub o sitemap e non sono bundle `.staging`. Per Mattei:
+
+```sh
+python3 tools/check-cerchi-atlas-pilot.py --self-test
+python3 tools/preview-cerchi-draft.py --candidate .agents/skills/cerchi-publisher/pilots/mattei/site --port 8767
+```
+
+L'anteprima risponde al percorso canonico locale; aggiungere `?nojs` per il blocco CSP degli script. Non attribuire la data editoriale del master a `datePublished`. Il gate PUBLICATION conserva sitemap, hub/triadi nella lingua pertinente e panoramiche bilingui; l'inventario i18n resta un gate separato obbligatorio al rilascio. La CI verifica il pilota e le mutazioni del validatore; i gate pubblici e quelli di conservazione delle guide esistenti restano invariati. Una bozza validata non è una pubblicazione autorizzata.

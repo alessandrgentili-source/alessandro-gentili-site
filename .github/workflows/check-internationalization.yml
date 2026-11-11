@@ -19,6 +19,9 @@ on:
       - 'assets/international-plato.css'
       - 'tools/international_revision.py'
       - 'tools/validate-cerchi-guide.py'
+      - 'tools/check-cerchi-atlas-pilot.py'
+      - '.agents/skills/cerchi-publisher/**'
+      - 'docs/international-3/SYSTEM.md'
       - 'tools/check-international-guide.py'
       - 'tools/check-international-atlas.mjs'
       - 'sitemap.xml'
@@ -47,6 +50,9 @@ on:
       - 'assets/international-plato.css'
       - 'tools/international_revision.py'
       - 'tools/validate-cerchi-guide.py'
+      - 'tools/check-cerchi-atlas-pilot.py'
+      - '.agents/skills/cerchi-publisher/**'
+      - 'docs/international-3/SYSTEM.md'
       - 'tools/check-international-guide.py'
       - 'tools/check-international-atlas.mjs'
       - 'sitemap.xml'
@@ -84,6 +90,8 @@ jobs:
           python3 tools/international_revision.py --base c3c6936268a02b3b43474cb4aba7bfb42890530e --self-test
           git show f36e2f29a7ea9ec6e691244c851ad3b877ed236a:PLATO_EN_GUIDE_01_CANDIDATE_v2.md > "$RUNNER_TEMP/plato-v2.md"
           python3 tools/validate-cerchi-guide.py en/cerchi/guides/plato-ideas-truth-power/index.html --cover assets/img/cerchi/cerchi-platone-idee-verita-potere-1600x900.jpg --source "$RUNNER_TEMP/plato-v2.md" --mode EN_REVISION --base c3c6936268a02b3b43474cb4aba7bfb42890530e
+      - name: Validate new IT/EN Atlas drafts and immutable Mattei pilot
+        run: python3 tools/check-cerchi-atlas-pilot.py --self-test
       - name: Preserve existing English guides during migration
         if: github.event_name == 'pull_request'
         env:

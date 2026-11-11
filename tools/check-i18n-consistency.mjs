@@ -97,6 +97,7 @@ const italianPairs = [
 // Every published page must have an explicit language decision; new guides cannot
 // silently fall outside this inventory. IT-only is valid and does not imply a future URL.
 const italianOnlyGuides = [
+  'cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/index.html',
 ];
 const collectHtml = async (directory) => {
   const result = [];

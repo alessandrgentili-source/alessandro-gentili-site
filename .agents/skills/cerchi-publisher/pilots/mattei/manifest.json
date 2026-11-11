@@ -1,0 +1,24 @@
+{
+  "base": "785525b33b38b6aabe5244f0e0ac8c30e8b620d8",
+  "mode": "DRAFT",
+  "language": "it",
+  "canonical": "https://alessandro-gentili.it/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/",
+  "page": "site/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/index.html",
+  "master": {
+    "path": "master-v3-2026-10-31.md",
+    "sha256": "631f47c16143f1716f44a74cfbdea429ac82d9e1a78452593e9bbdd0e2078b66"
+  },
+  "cover": {
+    "path": "site/assets/img/cerchi/cerchi-guida-34-enrico-mattei-energia-impresa-pubblica-autonomia-1600x900.webp",
+    "sha256": "3465bb1c205175ded358c540fa377f733dbce1e4d098bc9684a0dc2448f9ea05"
+  },
+  "editorial_html_sha256": "dc748b264ed147a0253b477999e2f24d81d5ecb8f2f60c35b647ad962b5b71e2",
+  "approved_metadata_sha256": "c64b5fa666c5047d75296bd710686090d12ba5a0d6f24907ee7a5a1183377244",
+  "release": {
+    "page": "cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/index.html",
+    "cover": "assets/img/cerchi/cerchi-guida-34-enrico-mattei-energia-impresa-pubblica-autonomia-1600x900.webp",
+    "css": "assets/cerchi-mattei.css",
+    "status": "PR_PROPOSAL",
+    "language_status": "IT_ONLY"
+  }
+}

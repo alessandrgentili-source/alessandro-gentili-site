@@ -1,0 +1,54 @@
+/* Mattei DRAFT: static editorial figures, confined to this guide. */
+.mattei-guide .atlas-reading .mattei-figure {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  break-inside: avoid;
+  scroll-margin-top: 24px;
+}
+.mattei-guide .atlas-reading .mattei-figure p { color: #f8f2e7; margin: 0 0 1rem; }
+.mattei-guide .atlas-reading .mattei-figure .atlas-label {
+  color: #dfc38e; font: 600 .68rem/1.5 system-ui, sans-serif;
+}
+.mattei-guide .atlas-reading .mattei-figure .mattei-figure-title {
+  font: 400 clamp(1.5rem, 3vw, 2rem)/1.2 var(--atlas-serif); margin-bottom: 1.6rem;
+}
+.mattei-guide .mattei-figure-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.mattei-guide .mattei-figure table { width: 100%; border-collapse: collapse; table-layout: fixed; color: inherit; font: 400 .83rem/1.5 system-ui, sans-serif; }
+.mattei-guide .mattei-figure caption { text-align: left; font-weight: 650; font-size: 1rem; line-height: 1.4; padding-bottom: .8rem; }
+.mattei-guide .mattei-figure caption span { display: block; font-weight: 400; font-size: .76rem; margin-top: .25rem; }
+.mattei-guide .mattei-figure th, .mattei-guide .mattei-figure td { padding: .6rem .2rem; text-align: left; vertical-align: top; border-bottom: 1px solid #687b85; overflow-wrap: anywhere; }
+.mattei-guide .mattei-figure th { font-weight: 500; }
+.mattei-guide .mattei-figure thead th { font-size: .7rem; }
+.mattei-guide .mattei-figure th:first-child { width: 61%; }
+.mattei-guide #mattei-gas-rete th:first-child { width: 32%; }
+.mattei-guide .mattei-figure td { font-variant-numeric: tabular-nums; }
+.mattei-guide .mattei-bar { display: block; height: .45rem; margin: .4rem 0 .1rem; background: #435969; }
+.mattei-guide .mattei-bar > span { display: block; height: 100%; background: #dfc38e; }
+.mattei-guide .mattei-gas-1946 { width: 6.557377%; }
+.mattei-guide .mattei-rete-1949 { width: 27.962085%; }
+.mattei-guide .mattei-full { width: 100%; }
+.mattei-guide .mattei-share { display: flex; min-height: 2.1rem; margin-top: 1rem; font: 650 .8rem/2.1rem system-ui, sans-serif; text-align: center; }
+.mattei-guide .mattei-iran { background: #dfc38e; color: #182e3e; }
+.mattei-guide .mattei-italia { background: #f8f2e7; color: #182e3e; border-left: 2px solid #182e3e; }
+.mattei-guide .mattei-half { flex: 0 0 50%; }
+.mattei-guide .mattei-three-quarters { flex: 0 0 75%; }
+.mattei-guide .mattei-quarter { flex: 0 0 25%; }
+.mattei-guide .mattei-figure figcaption { color: #f8f2e7; text-align: left; }
+.mattei-guide .atlas-main .guide-toc [data-atlas-opening] { margin-bottom: .65rem; font-style: italic; }
+@media (max-width: 760px) {
+  .mattei-guide .mattei-figure-panels { grid-template-columns: 1fr; gap: 1.5rem; }
+  .mattei-guide .atlas-reading .mattei-figure { padding: 1.15rem; }
+}
+@media print {
+  .mattei-guide { background: #fff; color: #182e3e; }
+  .mattei-guide .site-header, .mattei-guide .footer { display: none; }
+  .mattei-guide .atlas-main { padding-top: 0; }
+  .mattei-guide .mattei-figure-panels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mattei-guide .atlas-reading .mattei-figure { padding: 1rem; background: none; color: #182e3e; }
+  .mattei-guide .atlas-reading .mattei-figure p,
+  .mattei-guide .atlas-reading .mattei-figure .atlas-label,
+  .mattei-guide .mattei-figure figcaption { color: #182e3e; }
+  .mattei-guide .mattei-bar, .mattei-guide .mattei-share { display: none; }
+  .mattei-guide .mattei-figure table { color: #182e3e; }
+  .mattei-guide .mattei-figure tr { break-inside: avoid; }
+}
