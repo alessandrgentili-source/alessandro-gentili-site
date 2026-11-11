@@ -196,12 +196,27 @@ Il **Saggio 21**, `saggi/saggio-21-da-che-parte-sta-chi-guarda.html`, è la prim
 Per questo formato, nel Saggio 21:
 
 * mantenere **le sei sezioni originali**, senza numerazioni o riscritture, e un indice discreto desktop più `<details>` accessibile su mobile;
-* distinguere nell'indice il gruppo delle sei sezioni dagli **«Apparati»**, con intestazione separata e i collegamenti, nell'ordine: **English note** (`#english-note`), **Nota editoriale** (`#nota-editoriale`);
-* preservare titolo, contenuto integrale, ordine, English note, nota editoriale, copertina, canonical, metadata e JSON-LD; nessuna sezione enciclopedica, FAQ o nuova bibliografia;
+* distinguere nell'indice il gruppo delle sei sezioni dagli **«Apparati»**, con intestazione separata e i collegamenti, nell'ordine attuale: **Studi** (`#studi`), **Riferimenti** (`#riferimenti`), **English note** (`#english-note`), **Nota editoriale** (`#nota-editoriale`);
+* preservare titolo, contenuto integrale, ordine, Studi/Riferimenti approvati, English note, nota editoriale, copertina, canonical, metadata e JSON-LD; non introdurre nuove fonti non documentate né sezioni enciclopediche o FAQ;
 * limitare gli stili specifici a `assets/essay-reading.css`, senza importare il template Cerchi né modificare gli stili globali;
 * verificare l'esistenza delle ancore, l'uso da tastiera dell'indice desktop/mobile, la leggibilità e l'assenza di regressioni.
 
 Questa decisione **non** autorizza la migrazione automatica degli altri saggi al formato letterario: ogni estensione richiede una scelta editoriale e uno scope approvati. La registrazione in `AGENTS.md` è vincolante per le future sessioni Codex che lavorano sul repository aggiornato. Nessun merge o deploy implicito.
+
+## Standard prospettico per i saggi successivi (decisione 11 novembre 2026)
+
+L'autore ha approvato il **nuovo formato di lettura del Saggio 21 come riferimento editoriale e tecnico per i saggi futuri**, non come invito a modificare retroattivamente i saggi già pubblicati. In caso di conflitto con le regole storiche per le pagine singole riportate più avanti, per i **nuovi saggi approvati** prevale questa decisione.
+
+* Apertura sobria con numero del saggio, titolo, sottotitolo, autore, data reale di pubblicazione e cover approvata; nessun pannello commerciale, ripetizione promozionale o duplicazione del manoscritto.
+* Corpo letterario in serif, colonna di lettura calibrata su circa 60–65 caratteri, gerarchia e spaziatura del Saggio 21; navigazione discreta desktop e indice accessibile richiudibile mobile. Il **numero e i titoli delle sezioni** sono quelli del master del nuovo saggio, non necessariamente sei.
+* Nell'indice, dopo le sezioni del testo, raggruppare sotto **«Apparati»** le sezioni effettivamente approvate, secondo l'ordine editoriale consolidato: **Studi → Riferimenti → English note → Nota editoriale**. Ancore stabili e destinazioni esistenti; non creare collegamenti inattivi.
+* Il master definitivo e l'identità dell'autore prevalgono su template e SEO. **Studi e Riferimenti sono apparati critici, non liste SEO**: usare esclusivamente fonti verificabili e pertinenti, esplicitando se si tratta di letture suggerite per confronto anziché di opere effettivamente consultate. Non attribuire all'autore letture non documentate. Eventuali assenze o variazioni richiedono decisione editoriale esplicita.
+* Separare rigorosamente contenuto del saggio e apparati; niente FAQ, glossari, schede concettuali o altri moduli presi dalle guide Cerchi senza approvazione.
+* Riutilizzare/estendere in modo circoscritto il CSS `assets/essay-reading.css` evitando modifiche globali. Verificare desktop/mobile, contrasto, focus, overflow, ancore, integrità dei paragrafi, metadati e collegamenti alla serie.
+* Quando un saggio viene ripubblicato su Medium, il sito proprietario è l'originale; verificare il **canonical di Medium verso l'esatto URL del saggio** e non soltanto verso la homepage. La data originaria va conservata; pubblicazione, indicizzazione e risultati di traffico sono distinti.
+* Per ogni nuovo saggio restano obbligatori preflight, scope autorizzato, QA, PR e approvazioni distinte di merge/deploy secondo `docs/PUBLICATION_WORKFLOW.md`.
+
+**Limite della decisione:** questo standard vale **prospetticamente**. Nessuna migrazione automatica dei saggi precedenti, nessuna nuova fonte o modifica editoriale autonoma per uniformità.
 
 ## Single essay page structure
 
