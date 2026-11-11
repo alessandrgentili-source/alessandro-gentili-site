@@ -61,3 +61,11 @@
 /* Saggio 21: separate the six literary sections from the approved closing apparatus links. */
 .essay-literary-page .literary-toc-desktop .literary-toc-apparatus-label{border-top:1px solid #cbbda5;margin:.8rem 0 .5rem;padding:.9rem .8rem 0}
 .essay-literary-page .literary-toc-mobile .literary-toc-apparatus-label{font:700 .69rem/1.5 system-ui,sans-serif;color:#725626;text-transform:uppercase;letter-spacing:.13em;border-top:1px solid #cbbda5;margin:.7rem .8rem .2rem;padding:.75rem 0 0}
+
+/* Saggio 21 — approved bibliography, scoped to the literary page. */
+.essay-literary-page .literary-bibliography ul{list-style:none;margin:0;padding:0}
+.essay-literary-page .literary-bibliography li{font:400 1.03rem/1.72 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color:#333b34;margin:0 0 1.15rem;padding:0 0 1rem;border-bottom:1px solid rgba(141,109,55,.18);overflow-wrap:break-word}
+.essay-literary-page .literary-bibliography li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.essay-literary-page .literary-bibliography li a{color:#284b5a;text-decoration:underline;text-underline-offset:3px}
+.essay-literary-page .literary-bibliography li a:focus-visible{outline:3px solid #806333;outline-offset:4px}
+.essay-literary-page .literary-bibliography .literary-sources-note{font:400 .88rem/1.65 system-ui,sans-serif;color:#48524b;margin:0 0 1.45rem}
