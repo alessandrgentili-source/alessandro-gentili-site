@@ -107,7 +107,7 @@ The eighth complete English triad localizes the seventh Cerchi d'inchiostro thre
 
 ## Published corpus scope
 
-- Italian author guides: 34
+- Italian author guides: 35
 - English author guides: 33
 - Italian triads: 11
 - English triad reading paths: 11
@@ -118,4 +118,4 @@ The English editorial entrance is https://alessandro-gentili.it/en/ and the prof
 
 Privacy information is available in Italian at https://alessandro-gentili.it/privacy.html. No separate English privacy policy is published.
 
-Enrico Mattei — Guide 34 is available in Italian at https://alessandro-gentili.it/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/. It opens the twelfth Italian reading path, “Stato, impresa e comunità”; the completed Italian triads remain eleven. No English edition of this guide is published yet.
+Enrico Mattei — Guide 34 is available in Italian at https://alessandro-gentili.it/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/. It opens the twelfth Italian reading path, “Stato, impresa e comunità”, now continued by Aristide Merloni — Guide 35 at https://alessandro-gentili.it/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/. Adriano Olivetti is not yet published: the twelfth triad remains incomplete and the completed Italian triads remain eleven. Neither Mattei nor Merloni has a published English edition.
