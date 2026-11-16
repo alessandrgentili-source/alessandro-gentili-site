@@ -73,6 +73,11 @@ def verify(path, base):
         print(f'PASS unchanged {relative}')
         return
     old, new = Page(before), Page(after)
+    if relative == 'en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/index.html':
+        from runpy import run_path
+        revision = run_path(str(ROOT / 'tools/check-merloni-en35.py'))
+        revision['verify_caption_revision'](path, base)
+        return
     if relative == 'en/cerchi/guides/machiavelli-power-state-effectual-truth/index.html' and before != after:
         from runpy import run_path
         revision = run_path(str(ROOT / 'tools/check-machiavelli-revision.py'))

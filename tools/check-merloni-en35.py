@@ -14,6 +14,8 @@ IT = Path('cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/index.htm
 COVER = ROOT / 'assets/img/cerchi/cerchi-guida-35-aristide-merloni-impresa-lavoro-destino-luoghi-1600x900.webp'
 SOURCE_SHA = '553d12922a28b9239cf2a3c83d3e56b2dc0ce11a684e518d5b616f85b74d67ef'
 BASE = 'a53ebeda88bb701cf354cbbf77627ac830f3bea8'
+OLD_CAPTION = b'The 2026 ownership milestone records the completion announced on 23 June, not a dated closing.'
+NEW_CAPTION = 'Arçelik announced completion of the acquisition of the remaining 25% on 23 June 2026; the KAP disclosure also records that date as the transaction completion date.'.encode('utf-8')
 spec = importlib.util.spec_from_file_location('publisher', ROOT / 'tools/validate-cerchi-guide.py')
 v = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(v)
@@ -22,6 +24,26 @@ spec.loader.exec_module(v)
 def require(ok, message):
     if not ok:
         raise AssertionError(message)
+
+
+def verify_caption_replacement(before, after):
+    """Permit this one approved substitution; preserve every other HTML byte."""
+    require(before.count(OLD_CAPTION) == 1 and before.count(NEW_CAPTION) == 0,
+            'Previous page must contain exactly one original caption')
+    caption = re.findall(rb'<figcaption id="path-help">(.*?)</figcaption>', before, re.S)
+    require(len(caption) == 1 and caption[0].count(OLD_CAPTION) == 1,
+            'Approved replacement must occur in the timeline caption')
+    require(after.count(NEW_CAPTION) == 1 and after.count(OLD_CAPTION) == 0,
+            'Corrected page must contain exactly one replacement caption')
+    require(after.replace(NEW_CAPTION, OLD_CAPTION, 1) == before,
+            'Inverse caption substitution must restore the entire previous HTML byte for byte')
+
+
+def verify_caption_revision(path, base):
+    require(path.resolve().relative_to(ROOT) == PAGE, 'Caption exception is exclusive to Merloni EN35')
+    before = subprocess.check_output(['git', 'show', f'{base}:{PAGE}'], cwd=ROOT)
+    verify_caption_replacement(before, path.read_bytes())
+    print('PASS Merloni EN35: single approved caption replacement; all other HTML bytes unchanged')
 
 
 def emphasis(text):
@@ -72,7 +94,7 @@ def comparisons(html, source):
     css = (ROOT / 'assets/international-merloni.css').read_text()
     require('.merloni-change-1 { width:43%; }' in css and '.merloni-change-2 { width:8%; }' in css, 'Employment bars need the same percentage scale')
     require('prefers-reduced-motion:reduce' in css and '@media print' in css, 'Motion/print handling required')
-    require('not a dated closing' in v.content(figures[1]), 'Announcement and closing must stay distinct')
+    require('Arçelik announced completion of the acquisition of the remaining 25% on 23 June 2026; the KAP disclosure also records that date as the transaction completion date.' in v.content(figures[1]), 'KAP completion date must be accurately stated as 23 June 2026')
     require(not any('merloni' in n.attrs.get('src', '') for n in tree.root.find('script')), 'No local JavaScript necessary')
 
 
@@ -108,6 +130,63 @@ def check(source, self_test=False):
     print('PASS EN35: frozen source/cover, 29 sections + opening, 21 FAQ, emphasis, five complete comparisons, native explorations, links/metadata and immutable IT prose')
     if not self_test:
         return
+    # The disclosure explicitly dates completion, not only its announcement.
+    corrected_caption = NEW_CAPTION.decode('utf-8')
+    for label, replacement in [
+        ('superseded completion disclaimer', 'The 2026 ownership milestone records the completion announced on 23 June, not a dated closing.'),
+        ('wrong completion date', corrected_caption.replace('23 June 2026', '19 June 2026')),
+    ]:
+        changed = html.replace(corrected_caption, replacement, 1)
+        require(changed != html, 'Inactive caption mutation')
+        try:
+            comparisons(changed, source)
+        except AssertionError:
+            print('PASS rejected ' + label)
+        else:
+            raise AssertionError('Caption regression escaped: ' + label)
+    before = html.encode('utf-8').replace(NEW_CAPTION, OLD_CAPTION, 1)
+    verify_caption_replacement(before, html.encode('utf-8'))
+    print('PASS exact caption substitution and inverse restoration')
+    caption_cases = [
+        ('unchanged old caption', before, before),
+        ('missing original', before.replace(OLD_CAPTION, b''), html.encode('utf-8')),
+        ('duplicate original', before + OLD_CAPTION, html.encode('utf-8')),
+        ('duplicate replacement', before, html.encode('utf-8') + NEW_CAPTION),
+        ('wrong date', before, html.encode('utf-8').replace(b'23 June 2026; the KAP', b'19 June 2026; the KAP', 1)),
+        ('extra editorial change', before, html.encode('utf-8').replace(b'About 2,000</td>', b'About 3,000</td>', 1)),
+        ('extra metadata change', before, html.encode('utf-8').replace(b'<title>', b'<title>Changed ', 1)),
+        ('extra markup change', before, html.encode('utf-8') + b'\n'),
+    ]
+    for label, previous, changed in caption_cases:
+        require(previous != before or changed != html.encode('utf-8'), 'Inactive preservation mutation')
+        try:
+            verify_caption_replacement(previous, changed)
+        except AssertionError:
+            print('PASS rejected caption exception: ' + label)
+        else:
+            raise AssertionError('Caption exception escaped: ' + label)
+    # Exercise the real dispatcher for EN35 and an unrelated existing guide.
+    from unittest.mock import patch
+    gate_spec = importlib.util.spec_from_file_location('international_gate', ROOT / 'tools/check-international-guide.py')
+    gate = importlib.util.module_from_spec(gate_spec)
+    gate_spec.loader.exec_module(gate)
+    gate.verify(ROOT / PAGE, '39267b044059b7b6318386d553e4c3efd415e8ec')
+    with tempfile.TemporaryDirectory(prefix='merloni-caption-dispatch-') as d:
+        fixture = Path(d).resolve()
+        other = Path('en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/index.html')
+        original = (ROOT / other).read_text()
+        candidate = fixture / other
+        candidate.parent.mkdir(parents=True)
+        candidate.write_text(original.replace('Mattei wanted a public company able to produce, compete and negotiate.', 'Changed.', 1))
+        require(candidate.read_text() != original, 'Inactive other-guide mutation')
+        with patch.object(gate, 'ROOT', fixture), patch.object(gate.subprocess, 'check_output', return_value=original):
+            try:
+                gate.verify(candidate, 'fixture-base')
+            except AssertionError as error:
+                require(str(error) == 'Approved articles changed, missing or reordered', 'Unexpected other-guide rejection')
+                print('PASS general integrity gate still rejects changes to another guide')
+            else:
+                raise AssertionError('Other guide escaped the general integrity gate')
     with tempfile.TemporaryDirectory(prefix='merloni-en35-') as d:
         root = Path(d).resolve()
         # Mirror dependencies without editing any original file.
