@@ -69,6 +69,23 @@ def verify_enrichment(html, manifest=None):
     print('PASS enrichment: original article HTML and approved metadata byte-preserved; 2 static figures with exact source data/units; introduction in TOC; no duplicate lead')
 
 
+def verify_public_copy(actual, approved):
+    if actual == approved:
+        return
+    # EN34 release authorizes only these exact reciprocal language additions.
+    # The archived IT pilot, its editorial bytes and metadata facts stay pinned.
+    it = v.BASE + 'cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/'
+    en_path = '/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/'
+    canonical = '<link rel="canonical" href="' + it + '">'
+    alternates = '\n'.join('<link rel="alternate" hreflang="' + lang + '" href="' + url + '" />'
+                           for lang, url in [('it', it), ('en', v.BASE.rstrip('/') + en_path), ('x-default', it)])
+    navigation = '<nav class="wrap atlas-breadcrumb" aria-label="Edizioni linguistiche"><a href="' + en_path + '" lang="en" hreflang="en">English edition</a></nav>\n'
+    expected = approved.replace(canonical, canonical + '\n' + alternates, 1)
+    expected = expected.replace('<div class="wrap atlas-reader">', navigation + '<div class="wrap atlas-reader">', 1)
+    require((ROOT / en_path.lstrip('/') / 'index.html').is_file(), 'Reciprocal English edition is missing')
+    require(actual == expected, 'Public proposal differs from approved DRAFT outside exact EN34 language additions')
+
+
 def verify():
     manifest = json.loads((PILOT / 'manifest.json').read_text())
     page, source, cover = (PILOT / manifest['page'], PILOT / manifest['master']['path'], PILOT / manifest['cover']['path'])
@@ -79,7 +96,7 @@ def verify():
     release = manifest.get('release')
     if release:
         released_page = ROOT / release['page']
-        require(released_page.read_bytes() == page.read_bytes(), 'Public proposal differs from approved DRAFT')
+        verify_public_copy(released_page.read_text(), page.read_text())
         require((ROOT / release['cover']).read_bytes() == cover.read_bytes(), 'Public cover differs from approved DRAFT')
         require((ROOT / release['css']).read_bytes() == (PILOT / 'site/assets/cerchi-mattei.css').read_bytes(), 'Public figure CSS differs from approved DRAFT')
         errors = v.validate(released_page, ROOT / release['cover'], source, ROOT, mode='PUBLICATION', report=report)
@@ -124,6 +141,22 @@ def verify():
 
 def self_test(page, cover, source):
     original = page.read_text()
+    released = json.loads((PILOT / 'manifest.json').read_text()).get('release')
+    if released:
+        public = (ROOT / released['page']).read_text()
+        verify_public_copy(public, original)
+        for label, changed in [
+            ('IT editorial change', public.replace('<p>Mattei ne diventa presidente.</p>', '<p>Testo alterato.</p>', 1)),
+            ('IT canonical change', public.replace('rel="canonical" href="' + v.BASE, 'rel="canonical" href="https://example.com/', 1)),
+            ('extra IT language navigation', public.replace('</main>', '<a href="/en/">Extra</a></main>', 1)),
+        ]:
+            require(changed != public, 'Inactive IT preservation mutation')
+            try:
+                verify_public_copy(changed, original)
+            except AssertionError:
+                print('PASS rejected:', label)
+            else:
+                raise AssertionError('IT preservation regression escaped: ' + label)
     with tempfile.TemporaryDirectory(prefix='cerchi-atlas-') as temporary:
         temp = Path(temporary)
         candidate = temp / 'cerchi/guide' / page.parent.name / 'index.html'
@@ -246,9 +279,23 @@ def self_test(page, cover, source):
             pattern = rf'<{tag} class="{css}".*?</{tag}>'
             en_html = re.sub(pattern, lambda _: re.search(pattern, shell, re.S)[0], en_html, count=1, flags=re.S)
         en_page.write_text(en_html)
-        errors = v.validate(en_page, cover, en_source, ROOT)
+        # The synthetic Guide 34 must not collide with the real EN34 release.
+        # Keep publication indexes/sitemap intact, but isolate its guide catalog.
+        en_fixture_root = temp / 'en-root'
+        en_fixture_root.mkdir()
+        for child in ROOT.iterdir():
+            if not child.name.startswith('.') and child.name != 'en':
+                (en_fixture_root / child.name).symlink_to(child, target_is_directory=child.is_dir())
+        (en_fixture_root / 'en/cerchi/guides').mkdir(parents=True)
+        for child in (ROOT / 'en').iterdir():
+            if child.name != 'cerchi':
+                (en_fixture_root / 'en' / child.name).symlink_to(child, target_is_directory=child.is_dir())
+        for child in (ROOT / 'en/cerchi').iterdir():
+            if child.name != 'guides':
+                (en_fixture_root / 'en/cerchi' / child.name).symlink_to(child, target_is_directory=child.is_dir())
+        errors = v.validate(en_page, cover, en_source, en_fixture_root)
         require(not errors, 'EN fixture failed: '+ '\n'.join(errors))
-        errors = v.validate(en_page, cover, en_source, ROOT, 'PUBLICATION')
+        errors = v.validate(en_page, cover, en_source, en_fixture_root, 'PUBLICATION')
         for expected in ('included in sitemap', 'linked from en/cerchi/index.html', 'linked from en/cerchi/triads/index.html'):
             require(any(expected in e for e in errors), f'EN PUBLICATION gate lost: {expected}')
         print('PASS synthetic EN DRAFT and localized PUBLICATION barriers')
