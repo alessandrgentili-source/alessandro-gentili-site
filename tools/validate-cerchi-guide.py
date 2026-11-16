@@ -227,7 +227,10 @@ def manuscript_structure(source):
                 if (not re.match(r"^(?:\*\*|__)\d+[.)]\s", stripped)
                         or not re.search(r"\?(?:\*\*|__)$", stripped)):
                     continue
-                match = re.fullmatch(r"(\*\*|__)([1-9]\d*)\. ([^*_\n]+\?)\1", stripped)
+                # Merloni EN35 uses a single emphasis span inside one bold
+                # question. Accept balanced inline emphasis, never a partial
+                # outer marker, nested strong text or a multiline question.
+                match = re.fullmatch(r"(\*\*|__)([1-9]\d*)\. ((?:[^*_\n]|\*[^*_\n]+\*|_[^*_\n]+_)+\?)\1", stripped)
                 if (not match or not match.group(3).strip(" ?")
                         or (offset and body_lines[offset - 1].strip())
                         or (offset + 1 < len(body_lines) and body_lines[offset + 1].strip())):

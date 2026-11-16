@@ -1,0 +1,97 @@
+/* EN35 only: five source comparisons, with native, non-filtering exploration. */
+.merloni-en-guide .merloni-visual { margin:1.8rem 0; min-width:0; }
+.merloni-en-guide .merloni-visual table { width:100%; border-collapse:collapse; color:var(--atlas-ink); font:400 1rem/1.65 system-ui,sans-serif; table-layout:fixed; }
+.merloni-en-guide .merloni-visual :is(th,td) { text-align:left; vertical-align:top; overflow-wrap:anywhere; padding:1rem .65rem; border-bottom:1px solid var(--atlas-rule); }
+.merloni-en-guide .merloni-visual th { font-weight:650; }
+.merloni-en-guide .merloni-visual td { font-variant-numeric:tabular-nums; }
+/* A is an un-interpolated ledger. Approximation labels stay beside each value. */
+.merloni-en-guide .merloni-growth { border-block:2px solid var(--atlas-ink); }
+.merloni-growth th:first-child { width:24%; }
+.merloni-growth tbody td { font-size:1.4rem; }
+/* B: one conceptual management spine, four distributed production units. */
+.merloni-en-guide #the-nearby-factory-and-the-cost-of-proximity p:has(+ .merloni-plants) { border-block:2px solid var(--atlas-ink); padding:1rem; margin-bottom:0; text-align:center; }
+.merloni-en-guide .merloni-plants { border-left:3px solid var(--atlas-ink); padding-left:1.5rem; }
+.merloni-en-guide #the-nearby-factory-and-the-cost-of-proximity:has(input[name="plant"]:checked:not([value="0"])) p:has(+ .merloni-plants) { border-width:3px; background:#eee0c4; }
+.merloni-plants tbody tr { position:relative; }
+.merloni-plants tbody th::before { content:""; position:absolute; width:1.5rem; height:2px; background:var(--atlas-ink); left:-1.5rem; top:1.7rem; }
+.merloni-en-guide .merloni-plants tbody tr:nth-child(even) { background:rgba(128,99,51,.06); }
+.merloni-en-guide .merloni-controls { margin:1.8rem 0 1rem; padding:0; background:none; color:#182e3e; }
+.merloni-controls fieldset { border:0; padding:0; margin:0; min-width:0; }
+.merloni-controls legend { font:650 .88rem/1.5 system-ui,sans-serif; padding:0; margin-bottom:.8rem; }
+.merloni-options { display:flex; flex-wrap:wrap; gap:.5rem; }
+.merloni-options label { display:flex; align-items:center; gap:.3rem; padding:.65rem .75rem; min-height:44px; box-sizing:border-box; border:1px solid #806333; color:#182e3e; cursor:pointer; font:500 .82rem/1.5 system-ui,sans-serif; }
+.merloni-options label:has(:checked) { background:#182e3e; color:#f8f2e7; border-color:#182e3e; }
+.merloni-options label:has(:focus-visible) { outline:3px solid #806333; outline-offset:3px; }
+.merloni-options input { appearance:auto; accent-color:#806333; width:1rem; height:1rem; margin:0; flex-shrink:0; }
+.merloni-controls figcaption { margin-top:.8rem; font:400 .8rem/1.65 system-ui,sans-serif; color:#364751; }
+/* Selection adds an outline and weight. No unit is hidden or faded. */
+#the-nearby-factory-and-the-cost-of-proximity:has(#plant-1:checked) [data-unit="1"],
+#the-nearby-factory-and-the-cost-of-proximity:has(#plant-2:checked) [data-unit="2"],
+#the-nearby-factory-and-the-cost-of-proximity:has(#plant-3:checked) [data-unit="3"],
+#the-nearby-factory-and-the-cost-of-proximity:has(#plant-4:checked) [data-unit="4"] { outline:3px solid #806333; outline-offset:-3px; background:#eee0c4; }
+/* C: equal-width documentary columns, never bars of alleged sales. */
+.merloni-en-guide .merloni-accounts table,.merloni-accounts tbody { display:block; }
+.merloni-en-guide :is(.merloni-accounts,.merloni-paths) thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.merloni-accounts tbody { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.4rem; }
+.merloni-en-guide .merloni-accounts tr { display:block; border-top:3px solid #806333; }
+.merloni-en-guide .merloni-accounts :is(th,td) { display:block; padding:1rem 0; border:0; }
+.merloni-en-guide .merloni-accounts th { border-bottom:1px solid var(--atlas-rule); }
+/* D: three simultaneous, ordered lanes; spacing is not elapsed time. */
+.merloni-en-guide .merloni-paths table { display:block; }
+.merloni-paths tbody { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.merloni-en-guide .merloni-paths tr { display:block; padding:.8rem; border-top:3px solid var(--atlas-ink); }
+.merloni-en-guide .merloni-paths :is(th,td) { display:block; padding:.8rem 0; border:0; }
+.merloni-en-guide .merloni-paths th { border-bottom:1px solid var(--atlas-rule); }
+.merloni-milestone { display:block; position:relative; margin:0 0 1.2rem .3rem; border-left:2px solid #806333; padding-left:.8rem; }
+.merloni-milestone::before { content:""; width:.45rem; height:.45rem; background:#182e3e; border:2px solid var(--atlas-paper); position:absolute; left:-.36rem; top:.35rem; border-radius:50%; }
+.merloni-milestone strong { display:inline; }
+#three-industrial-legacies:has(#path-1:checked) .merloni-paths [data-unit="1"],
+#three-industrial-legacies:has(#path-2:checked) .merloni-paths [data-unit="2"],
+#three-industrial-legacies:has(#path-3:checked) .merloni-paths [data-unit="3"] { outline:3px solid #806333; outline-offset:-3px; background:#eee0c4; }
+/* E: absolute magnitude of two decreases, same 100% visual scale,
+   different denominators. Values and qualifications remain in source prose. */
+.merloni-employment td { position:relative; }
+.merloni-change { display:block; height:.7rem; margin-top:1rem; background:#806333; }
+.merloni-change-1 { width:43%; }
+.merloni-change-2 { width:8%; }
+@media(max-width:760px) {
+ .merloni-en-guide .merloni-visual table { font-size:.88rem; }
+ .merloni-en-guide .merloni-visual :is(th,td) { padding:.8rem .4rem; }
+ .merloni-en-guide .merloni-plants { padding-left:1rem; }
+ .merloni-plants tbody th::before { width:1rem; left:-1rem; }
+ .merloni-en-guide .merloni-accounts :is(th,td),.merloni-en-guide .merloni-paths :is(th,td) { padding:.8rem 0; }
+ .merloni-paths tbody { grid-template-columns:1fr; gap:1rem; }
+ .merloni-paths tr { min-width:0; }
+ .merloni-en-guide .merloni-paths td { display:flex; flex-direction:column; }
+ .merloni-milestone { margin-bottom:.8rem; }
+}
+@media(max-width:360px) {
+ .merloni-accounts tbody { grid-template-columns:1fr; gap:1rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .merloni-en-guide .merloni-visual,.merloni-en-guide .merloni-controls { scroll-behavior:auto; transition:none; animation:none; }
+}
+@media print {
+ .merloni-en-guide :is(.site-header,.footer,.skip-link,.atlas-breadcrumb,.atlas-back),.merloni-en-guide .atlas-reading .actions { display:none!important; }
+ .merloni-en-guide,.merloni-en-guide .atlas-main { background:#fff; }
+ .merloni-en-guide .atlas-main { padding-top:0; }
+ .merloni-en-guide .atlas-reader { padding-bottom:0; }
+ .merloni-en-guide .atlas-reading>.guide-section:last-child { margin-bottom:0; padding-bottom:0; border-bottom:0; }
+ .merloni-en-guide .guide-section :is(h2,h3) { break-after:avoid; }
+ .merloni-controls fieldset { display:none; }
+ .merloni-controls figcaption { color:#182e3e; }
+ .merloni-en-guide .merloni-visual table { font-size:9pt; }
+ .merloni-en-guide .merloni-visual tr { break-inside:avoid; outline:none!important; background:none!important; }
+ .merloni-paths tbody { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ .merloni-accounts tbody { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ /* Linear print fallback exposes the original column headings as well. */
+ .merloni-en-guide :is(.merloni-accounts,.merloni-paths) table { display:table; }
+ .merloni-en-guide :is(.merloni-accounts,.merloni-paths) thead { display:table-header-group; position:static; width:auto; height:auto; overflow:visible; clip-path:none; white-space:normal; }
+ .merloni-en-guide :is(.merloni-accounts,.merloni-paths) tbody { display:table-row-group; }
+ .merloni-en-guide :is(.merloni-accounts,.merloni-paths) tr { display:table-row; }
+ .merloni-en-guide :is(.merloni-accounts,.merloni-paths) :is(th,td) { display:table-cell; padding:.7rem; border-bottom:1px solid #806333; }
+ .merloni-en-guide :is(.merloni-accounts,.merloni-paths) th:first-child { width:26%; }
+ .merloni-en-guide .guide-section p:has(+ :is(.merloni-plants,.merloni-employment)) { break-after:avoid; }
+ .merloni-change { display:none; }
+ .merloni-visual { break-inside:avoid; }
+}
