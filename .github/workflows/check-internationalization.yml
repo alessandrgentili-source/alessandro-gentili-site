@@ -18,6 +18,8 @@ on:
       - 'assets/international-pasolini.css'
       - 'assets/international-plato.css'
       - 'assets/international-mattei.css'
+      - 'assets/international-merloni.css'
+      - 'tools/check-merloni-en35.py'
       - 'tools/check-mattei-en34.py'
       - 'tools/international_revision.py'
       - 'tools/validate-cerchi-guide.py'
@@ -51,6 +53,8 @@ on:
       - 'assets/international-pasolini.css'
       - 'assets/international-plato.css'
       - 'assets/international-mattei.css'
+      - 'assets/international-merloni.css'
+      - 'tools/check-merloni-en35.py'
       - 'tools/check-mattei-en34.py'
       - 'tools/international_revision.py'
       - 'tools/validate-cerchi-guide.py'
@@ -101,6 +105,11 @@ jobs:
           git fetch --no-tags origin 456fd03610c36a69b211dd8d8b31ac2502729cbd
           git show 456fd03610c36a69b211dd8d8b31ac2502729cbd:MATTEI_EN34_TESTO_FINALE_APPROVATO_2026-11-16.md > "$RUNNER_TEMP/mattei-en34.md"
           python3 tools/check-mattei-en34.py --source "$RUNNER_TEMP/mattei-en34.md" --self-test
+      - name: Verify frozen Merloni EN35, five comparisons and strict FAQ regressions
+        run: |
+          git fetch --no-tags origin e47e86e1dc6d06d6338e3dacd908a2195b0a5548
+          git show e47e86e1dc6d06d6338e3dacd908a2195b0a5548:MERLONI_EN35_TESTO_FINALE_APPROVATO_2026-11-16.md > "$RUNNER_TEMP/merloni-en35.md"
+          python3 tools/check-merloni-en35.py --source "$RUNNER_TEMP/merloni-en35.md" --self-test
       - name: Preserve existing English guides during migration
         if: github.event_name == 'pull_request'
         env:
