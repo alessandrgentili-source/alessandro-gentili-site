@@ -1,0 +1,39 @@
+/* Static figures for Olivetti IT36; the shared Atlas layout is unchanged. */
+.olivetti-figure { min-width:0; }
+.olivetti-figure p,.olivetti-figure li,.olivetti-figure dd { font-size:1rem;line-height:1.65; }
+.olivetti-figure :is(strong,dt) { color:inherit; }
+.olivetti-figure p { margin:.4rem 0 .8rem; }
+.olivetti-figure dl { margin:0; }
+.olivetti-documenti > div { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:1.5rem;padding:1.2rem 0;border-top:1px solid #687b85; }
+.olivetti-documenti dt span,.olivetti-documenti dt strong { display:block; }
+.olivetti-documenti dt span { margin-bottom:.5rem;font-size:.85rem;color:#dfc38e; }
+.olivetti-figure dd { margin:0; }
+.olivetti-figure .olivetti-cautela { font-size:.9rem; }
+.olivetti-luoghi > div { padding:1.2rem 0;border-top:1px solid #687b85; }
+.olivetti-luoghi dt { font-size:1.3rem;font-weight:700; }
+.olivetti-table-scroll { overflow-x:auto; }
+.olivetti-table-scroll:focus-visible { outline:3px solid #dfc38e;outline-offset:4px; }
+.olivetti-figure table { width:100%;min-width:29rem;border-collapse:collapse;font-size:.95rem;line-height:1.65;color:inherit; }
+.olivetti-figure caption { text-align:left;font-size:.85rem;margin-bottom:1rem; }
+.olivetti-figure :is(th,td) { text-align:left;vertical-align:top;padding:.8rem .5rem;border-bottom:1px solid #687b85; }
+.olivetti-figure th { font-weight:700; }
+.olivetti-figure .olivetti-soglia { border-block:1px solid #dfc38e;padding:1rem 0;margin:1.5rem 0;font-weight:700; }
+.olivetti-criteri { padding-left:1.4rem; }
+.olivetti-criteri li { padding:.3rem 0; }
+.olivetti-timeline { list-style:none;margin:0;padding:0 0 0 1rem;border-left:2px solid #dfc38e; }
+.olivetti-timeline li { display:grid;grid-template-columns:9rem minmax(0,1fr);gap:1rem;padding:1rem 0; }
+.olivetti-timeline .olivetti-cesura { border-block:1px dashed #dfc38e; }
+.olivetti-esiti > div { padding:.8rem 0; }
+.olivetti-esiti dt { font-weight:700; }
+@media(max-width:760px) {
+ .olivetti-documenti > div,.olivetti-timeline li { grid-template-columns:1fr;gap:.4rem; }
+}
+@media print {
+ .olivetti-figure { break-inside:auto; }
+ .olivetti-figure :is(strong,dt),.olivetti-documenti dt span { color:#182e3e; }
+ .olivetti-table-scroll { overflow:visible; }
+ .olivetti-figure table { min-width:0; }
+ .olivetti-figure :is(th,td),.olivetti-documenti > div,.olivetti-luoghi > div { border-color:#806333; }
+ .olivetti-documenti > div,.olivetti-luoghi > div,.olivetti-timeline li,.olivetti-figure tr { break-inside:avoid; }
+ .olivetti-timeline,.olivetti-timeline .olivetti-cesura,.olivetti-figure .olivetti-soglia { border-color:#806333; }
+}
