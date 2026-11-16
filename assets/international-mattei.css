@@ -1,0 +1,55 @@
+/* Mattei EN34: static comparisons; all values remain in semantic tables. */
+.mattei-en-guide .mattei-en-figure { min-width:0; break-inside:auto; }
+.mattei-en-guide .mattei-en-figure :is(p,li) { color:#f8f2e7; font:400 1rem/1.7 system-ui,sans-serif; }
+.mattei-en-guide .mattei-en-figure .atlas-label { color:#dfc38e; font-size:.68rem; }
+.mattei-en-guide .mattei-en-figure h2 { color:#f8f2e7; }
+.mattei-en-table-region { max-width:100%; overflow-x:auto; margin:1.4rem 0; }
+.mattei-en-table-region:focus-visible { outline:3px solid #dfc38e; outline-offset:4px; }
+.mattei-en-figure table { width:100%; border-collapse:collapse; table-layout:fixed; color:inherit; font:400 .95rem/1.65 system-ui,sans-serif; }
+.mattei-en-figure caption { text-align:left; font-weight:650; padding-bottom:.85rem; }
+.mattei-en-figure :is(th,td) { text-align:left; vertical-align:top; padding:.75rem .45rem; border-bottom:1px solid #87969d; overflow-wrap:anywhere; }
+.mattei-en-figure th { font-weight:650; }
+.mattei-en-figure th:first-child { width:54%; }
+.mattei-en-figure td { font-variant-numeric:tabular-nums; }
+.mattei-en-guide .mattei-en-boundary { padding:1.1rem 0; border-block:1px solid #dfc38e; }
+.mattei-en-output { margin:1.5rem 0; }
+.mattei-en-guide .mattei-en-output p { font-size:.8rem; }
+.mattei-en-key-total,.mattei-en-key-eni { display:inline-block; width:1rem; height:.6rem; background:#d8e5e8; border:1px solid #d8e5e8; }
+.mattei-en-key-eni { background:#dfc38e; border-color:#dfc38e; }
+.mattei-en-row { display:grid; grid-template-columns:3rem minmax(0,1fr); align-items:center; gap:.8rem; margin:.9rem 0; font:400 .85rem/1.5 system-ui,sans-serif; }
+.mattei-en-track { width:100%; min-width:0; }
+.mattei-en-total { height:1.2rem; background:#d8e5e8; }
+.mattei-en-component { display:block; height:100%; background:#dfc38e; border-right:2px solid #182e3e; box-sizing:border-box; }
+/* Common production scale: 509.6 million m³; ENI is nested within each total. */
+.mattei-en-total-1946 { width:12.5588697%; }
+.mattei-en-total-1950 { width:100%; }
+.mattei-en-component-1946 { width:19.6875%; }
+.mattei-en-component-1950 { width:59.9882261%; }
+.mattei-en-share { display:flex; margin:1.2rem 0 2rem; font:650 .82rem/1.5 system-ui,sans-serif; color:#182e3e; }
+.mattei-en-share span { display:block; padding:.6rem; box-sizing:border-box; overflow-wrap:anywhere; }
+.mattei-en-share span:first-child { background:#dfc38e; }
+.mattei-en-share span:last-child { background:#f8f2e7; border-left:2px solid #182e3e; }
+.mattei-en-equity span { width:50%; }
+.mattei-en-benefits span:first-child { width:75%; }
+.mattei-en-benefits span:last-child { width:25%; }
+@media(max-width:760px) {
+ .mattei-en-guide .mattei-en-figure { padding:1.15rem; }
+ .mattei-en-figure table { font-size:.88rem; }
+ .mattei-en-figure :is(th,td) { padding:.7rem .3rem; }
+ .mattei-en-figure th:first-child { width:48%; }
+ .mattei-en-share span { font-size:.75rem; padding:.5rem .35rem; }
+}
+@media print {
+ .mattei-en-guide :is(.site-header,.footer,.skip-link,.atlas-breadcrumb,.atlas-back),.mattei-en-guide .atlas-reading .actions { display:none!important; }
+ .mattei-en-guide,.mattei-en-guide .atlas-main { background:#fff; }
+ .mattei-en-guide .atlas-main { padding-top:0; }
+ .mattei-en-guide .guide-section :is(h2,h3) { break-after:avoid; }
+ .mattei-en-guide .mattei-en-figure { break-inside:avoid; }
+ .mattei-en-guide .mattei-en-figure :is(p,h2,figcaption,.atlas-label) { color:#182e3e; }
+ .mattei-en-table-region { overflow:visible; }
+ .mattei-en-figure table { font-size:9pt; }
+ .mattei-en-figure tr { break-inside:avoid; }
+ .mattei-en-figure thead { display:table-header-group; }
+ .mattei-en-figure :is(th,td),.mattei-en-guide .mattei-en-boundary { border-color:#806333; }
+ .mattei-en-output,.mattei-en-share { display:none; }
+}

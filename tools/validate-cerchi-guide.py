@@ -35,6 +35,11 @@ EDITORIAL_TOC_ALIASES = {
     "Modulo IV — Il potere che deve rispondere": "Modulo proprietario IV — Il potere che deve rispondere",
     "Curiosità": "Curiosità e dettagli che illuminano Mattei",
     "Fonti e copyright": "Fonti, metodo e copyright",
+    # Mattei EN34 approved source (16 November 2026): exact index aliases.
+    "Why Mattei matters": "Why Enrico Mattei matters",
+    "Writings, speeches and documents": "Principal writings, speeches and documents",
+    "Sources and copyright": "Sources, method and copyright",
+    "The agreement with Iran": "The agreement with Iran (1957)",
 }
 
 
@@ -267,7 +272,7 @@ def toc_label_matches(label, heading):
 
 def final_headings_valid(headings, language="it"):
     if language == "en":
-        headings = [{"Sources": "Fonti", "Sources and copyright": "Fonti e copyright", "Sources, method and copyright": "Fonti, metodo e copyright", "Continue reading": "Prosegui la lettura"}.get(h, h.replace("Editorial closing", "Chiusura editoriale", 1)) for h in headings]
+        headings = [{"Sources": "Fonti", "Sources and copyright": "Fonti e copyright", "Sources, method and copyright": "Fonti, metodo e copyright", "Continue reading": "Prosegui la lettura"}.get(h, re.sub(r"^(?:Editorial closing|Closing)(?=$| — )", "Chiusura editoriale", h)) for h in headings]
     if len(headings) < 3:
         return False
     fonts, progress, closing = headings[-3:]

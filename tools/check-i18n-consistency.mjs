@@ -11,6 +11,7 @@ const assert = (condition, message) => {
 const read = (path) => readFile(join(root, path), 'utf8');
 
 const pages = [
+  { path: 'en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/index.html', url: `${base}/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/`, it: `${base}/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/`, type: 'Article', breadcrumb: true },
   { path: 'en/contact/index.html', url: `${base}/en/contact/` },
   { path: 'en/index.html', url: `${base}/en/`, it: `${base}/`, type: 'WebSite' },
   { path: 'en/cerchi/index.html', url: `${base}/en/cerchi/`, it: `${base}/cerchi/`, type: 'CollectionPage' },
@@ -55,6 +56,7 @@ const pages = [
 ];
 
 const italianPairs = [
+  { path: 'cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/index.html', it: `${base}/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/`, en: `${base}/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/` },
   { path: 'index.html', it: `${base}/`, en: `${base}/en/` },
   { path: 'cerchi/index.html', it: `${base}/cerchi/`, en: `${base}/en/cerchi/` },
   { path: 'cerchi/triadi/index.html', it: `${base}/cerchi/triadi/`, en: `${base}/en/cerchi/triads/` },
@@ -99,7 +101,6 @@ const italianPairs = [
 const italianOnlyGuides = [
   'cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/index.html',
   'cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/index.html',
-  'cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/index.html',
 ];
 const collectHtml = async (directory) => {
   const result = [];
@@ -163,7 +164,8 @@ for (const page of pages) {
 for (const pair of italianPairs) {
   const html = await read(pair.path);
   assert(/<html\s+lang="it"/.test(html), `${pair.path}: Italian pair must keep lang=it`);
-  assert(html.includes(`<link rel="canonical" href="${pair.it}" />`), `${pair.path}: Italian canonical changed unexpectedly`);
+  const canonicals = [...html.matchAll(/<link\b[^>]*\brel="canonical"[^>]*\bhref="([^"]+)"[^>]*>/g)].map(match => match[1]);
+  assert(canonicals.length === 1 && canonicals[0] === pair.it, `${pair.path}: Italian canonical changed unexpectedly`);
   assert(html.includes(`hreflang="it" href="${pair.it}"`), `${pair.path}: missing self Italian hreflang`);
   assert(html.includes(`hreflang="en" href="${pair.en}"`), `${pair.path}: missing reciprocal English hreflang`);
   assert(html.includes(`hreflang="x-default" href="${pair.it}"`), `${pair.path}: missing x-default`);

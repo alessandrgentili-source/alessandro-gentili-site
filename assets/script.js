@@ -227,6 +227,8 @@ if (cookieStatisticsPreference === 'accepted') {
 
 
 const bilingualPairs = {
+  "/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/": { it: "/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/", en: "/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/" },
+  "/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/": { it: "/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/", en: "/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/" },
   "/": { it: "/", en: "/en/" },
   "/cerchi/": { it: "/cerchi/", en: "/en/cerchi/" },
   "/cerchi/triadi/": { it: "/cerchi/triadi/", en: "/en/cerchi/triads/" },

@@ -17,6 +17,8 @@ on:
       - 'assets/international-atlas.*'
       - 'assets/international-pasolini.css'
       - 'assets/international-plato.css'
+      - 'assets/international-mattei.css'
+      - 'tools/check-mattei-en34.py'
       - 'tools/international_revision.py'
       - 'tools/validate-cerchi-guide.py'
       - 'tools/check-cerchi-atlas-pilot.py'
@@ -48,6 +50,8 @@ on:
       - 'assets/international-atlas.*'
       - 'assets/international-pasolini.css'
       - 'assets/international-plato.css'
+      - 'assets/international-mattei.css'
+      - 'tools/check-mattei-en34.py'
       - 'tools/international_revision.py'
       - 'tools/validate-cerchi-guide.py'
       - 'tools/check-cerchi-atlas-pilot.py'
@@ -92,6 +96,11 @@ jobs:
           python3 tools/validate-cerchi-guide.py en/cerchi/guides/plato-ideas-truth-power/index.html --cover assets/img/cerchi/cerchi-platone-idee-verita-potere-1600x900.jpg --source "$RUNNER_TEMP/plato-v2.md" --mode EN_REVISION --base c3c6936268a02b3b43474cb4aba7bfb42890530e
       - name: Validate new IT/EN Atlas drafts and immutable Mattei pilot
         run: python3 tools/check-cerchi-atlas-pilot.py --self-test
+      - name: Verify approved Mattei EN34 source, figures and rejection regressions
+        run: |
+          git fetch --no-tags origin 456fd03610c36a69b211dd8d8b31ac2502729cbd
+          git show 456fd03610c36a69b211dd8d8b31ac2502729cbd:MATTEI_EN34_TESTO_FINALE_APPROVATO_2026-11-16.md > "$RUNNER_TEMP/mattei-en34.md"
+          python3 tools/check-mattei-en34.py --source "$RUNNER_TEMP/mattei-en34.md" --self-test
       - name: Preserve existing English guides during migration
         if: github.event_name == 'pull_request'
         env:
