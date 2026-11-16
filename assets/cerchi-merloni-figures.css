@@ -1,0 +1,38 @@
+/* Local static editorial figures; shared Atlas layout remains authoritative. */
+.merloni-figure { min-width:0; }
+.merloni-figure :is(h3,dt,strong) { color:inherit; }
+.merloni-figure h3 { margin:0 0 1rem;font-size:1.4rem; }
+.merloni-figure p { font-size:1rem;line-height:1.7; }
+.merloni-figure .merloni-centro { padding:.8rem 0;border-block:1px solid #bfa77b;font-weight:700;text-align:center; }
+.merloni-figure .merloni-luoghi { list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 1.5rem; }
+.merloni-luoghi li { padding:1.1rem 0;border-top:1px solid #687b85; }
+.merloni-luoghi span,.merloni-luoghi strong { display:block; }
+.merloni-luoghi span { margin-top:.4rem;font-size:.95rem; }
+.merloni-fonti { margin:0; }
+.merloni-fonti > div { padding:1.2rem 0;border-top:1px solid #687b85; }
+.merloni-fonti dt { font-weight:700;font-size:1.2rem; }
+.merloni-fonti dd { margin:.5rem 0 0;font-size:1rem;line-height:1.7; }
+.merloni-figure .merloni-limite { border-left:3px solid #dfc38e;padding-left:1rem; }
+.merloni-rami { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.3rem; }
+.merloni-rami section { border-top:2px solid #dfc38e;padding-top:1rem; }
+.merloni-rami p { font-size:.95rem; }
+.merloni-bars { margin:1.5rem 0; }
+.merloni-bars > div { display:grid;grid-template-columns:minmax(0,1fr) 5ch;gap:.4rem 1rem;margin-bottom:1.2rem; }
+.merloni-bars span { font-size:.95rem; }
+.merloni-track { grid-column:1;grid-row:2;height:1rem;background:#3f5460; }
+.merloni-track i { display:block;height:100%;background:#dfc38e; }
+.merloni-bars strong { grid-column:2;grid-row:2;line-height:1rem;white-space:nowrap; }
+.merloni-figure table { width:100%;border-collapse:collapse;table-layout:fixed;font-size:.9rem;color:inherit; }
+.merloni-figure :is(th,td) { text-align:left;vertical-align:top;padding:.7rem .35rem;border-bottom:1px solid #687b85;overflow-wrap:anywhere; }
+.merloni-figure caption { text-align:left;font-size:.8rem;margin-bottom:.8rem;line-height:1.6; }
+@media(max-width:760px) {
+ .merloni-figure .merloni-luoghi,.merloni-rami { grid-template-columns:1fr; }
+}
+@media print {
+ .merloni-figure { break-inside:auto; }
+ .merloni-figure :is(h3,dt,strong) { color:#182e3e; }
+ .merloni-figure :is(th,td) { border-color:#806333; }
+ .merloni-track { background:#eee;border:1px solid #806333; }
+ .merloni-track i { background:#806333;print-color-adjust:exact; }
+ .merloni-luoghi li,.merloni-fonti > div,.merloni-rami section { break-inside:avoid; }
+}

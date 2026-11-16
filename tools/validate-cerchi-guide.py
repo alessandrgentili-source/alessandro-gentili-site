@@ -212,6 +212,31 @@ def manuscript_structure(source):
         heading = re.sub(r"^\d+[.)]\s*", "", heading)
         body_lines = lines[start + 1:end]
         subheadings = [markdown_plain(line[4:]) for line in body_lines if re.match(r"^### (?!#)", line)]
+        if toc_key(heading) in {toc_key("FAQ"), toc_key("Domande frequenti"), toc_key("Frequently asked questions")}:
+            # Some definitive manuscripts use isolated, fully bold numbered
+            # questions. Interpret those as semantic H3 without altering any
+            # source block, and never infer headings outside the FAQ section.
+            bold_questions = []
+            for offset, line in enumerate(body_lines):
+                stripped = line.strip()
+                if (not re.match(r"^(?:\*\*|__)\d+[.)]\s", stripped)
+                        or not re.search(r"\?(?:\*\*|__)$", stripped)):
+                    continue
+                match = re.fullmatch(r"(\*\*|__)([1-9]\d*)\. ([^*_\n]+\?)\1", stripped)
+                if (not match or not match.group(3).strip(" ?")
+                        or (offset and body_lines[offset - 1].strip())
+                        or (offset + 1 < len(body_lines) and body_lines[offset + 1].strip())):
+                    raise ValueError("FAQ bold question must be a complete isolated numbered question")
+                if int(match.group(2)) != len(bold_questions) + 1:
+                    raise ValueError("FAQ bold questions must be numbered consecutively from 1")
+                bold_questions.append((offset, markdown_plain(stripped)))
+            if bold_questions:
+                if subheadings:
+                    raise ValueError("mixed H3 and bold FAQ questions require human review")
+                for (offset, _), boundary in zip(bold_questions, [p for p, _ in bold_questions[1:]] + [len(body_lines)]):
+                    if not manuscript_blocks(body_lines[offset + 1:boundary]):
+                        raise ValueError("FAQ bold question needs a nonempty answer")
+                subheadings = [question for _, question in bold_questions]
         sections.append((heading, subheadings, manuscript_blocks(body_lines)))
     return title, subtitle, intro, index, sections
 
