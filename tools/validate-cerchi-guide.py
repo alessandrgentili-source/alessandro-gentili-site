@@ -296,6 +296,19 @@ def toc_label_matches(label, heading):
 
 
 def final_headings_valid(headings, language="it"):
+    if language == "it" and any(heading in {"Fonti e note di metodo", "Copyright"} for heading in headings):
+        if len(headings) < 4:
+            return False
+        fonts, copyright_heading, progress, closing = headings[-4:]
+        return (not any(heading in {"Fonti", "Fonti e copyright", "Fonti, metodo e copyright",
+                                   "Fonti e note di metodo", "Copyright", "Prosegui la lettura"}
+                        or heading == "Chiusura editoriale"
+                        or heading.startswith("Chiusura editoriale — ") for heading in headings[:-4])
+                and fonts == "Fonti e note di metodo"
+                and copyright_heading == "Copyright"
+                and progress == "Prosegui la lettura"
+                and (closing == "Chiusura editoriale"
+                     or bool(re.fullmatch(r"Chiusura editoriale — [^—]+", closing))))
     if language == "en":
         headings = [{"Sources": "Fonti", "Sources and copyright": "Fonti e copyright", "Sources, method and copyright": "Fonti, metodo e copyright", "Continue reading": "Prosegui la lettura"}.get(h, re.sub(r"^(?:Editorial closing|Editorial close|Closing)(?=$| — )", "Chiusura editoriale", h)) for h in headings]
     if len(headings) < 3:
