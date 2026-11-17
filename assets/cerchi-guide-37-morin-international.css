@@ -1,0 +1,32 @@
+/* Guide 37 EN: frame, relation and revision. All editorial prose remains static. */
+.morin-international .morin-planes { margin:2rem 0 2.5rem; padding:1.3rem 0; border-block:1px solid var(--atlas-rule); background:none; color:var(--atlas-ink); }
+.morin-international .morin-planes .atlas-label { color:var(--atlas-gold); font:600 .72rem/1.6 system-ui,sans-serif; }
+.morin-international .morin-planes ol { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.2rem; list-style:none; padding:0; counter-reset:plane; }
+.morin-international .morin-planes li { counter-increment:plane; padding:.8rem .15rem .7rem; border-top:2px solid var(--atlas-gold); font:400 1.1rem/1.6 var(--atlas-serif); }
+.morin-international .morin-planes li::before { content:counter(plane,decimal-leading-zero); display:block; margin-bottom:.75rem; font:600 .75rem/1.5 system-ui,sans-serif; color:var(--atlas-gold); }
+.morin-international .morin-planes li:nth-child(2) { margin-top:1.4rem; }
+.morin-international .morin-planes li:nth-child(3) { margin-top:2.8rem; }
+.morin-international .morin-planes figcaption { font:400 .9rem/1.6 system-ui,sans-serif; color:var(--atlas-muted); border-top-color:var(--atlas-rule); }
+.morin-international .morin-inquiry { counter-reset:question; }
+.morin-international .morin-inquiry .morin-question { position:relative; margin:1.8rem 0; padding:.3rem 0 .8rem 2.7rem; border-left:1px solid var(--atlas-gold); counter-increment:question; }
+.morin-international .morin-question::before { content:counter(question,decimal-leading-zero); position:absolute; left:.65rem; top:.4rem; color:var(--atlas-gold); font:600 .75rem/1.6 system-ui,sans-serif; }
+.morin-international .morin-question strong { display:block; margin-bottom:.45rem; font:500 1.4rem/1.35 var(--atlas-serif); }
+.morin-international .morin-action > p { margin-block:1.9rem; }
+.morin-international .morin-action > p:nth-of-type(2) { position:relative; padding-left:2.1rem; }
+.morin-international .morin-action > p:nth-of-type(2)::before { content:""; position:absolute; left:0; top:.3rem; bottom:.3rem; border-left:1px solid var(--atlas-gold); }
+.morin-international .morin-action > p:nth-of-type(2)::after { content:""; position:absolute; left:.6rem; width:.55rem; top:.3rem; bottom:.3rem; border-left:1px dashed var(--atlas-ink); border-bottom:1px dashed var(--atlas-ink); border-bottom-left-radius:70%; }
+.morin-international .morin-action > p:nth-of-type(3) { border-top:1px solid var(--atlas-rule); padding-top:1.4rem; }
+.morin-international .morin-volumes ol { padding-left:1.7rem; border-left:1px solid var(--atlas-rule); }
+.morin-international .morin-volumes li { padding-left:.35rem; margin-bottom:1.1rem; }
+.morin-international .morin-volumes li::marker { color:var(--atlas-gold); }
+.morin-international .morin-year { white-space:nowrap; color:var(--atlas-muted); font:500 .85em/1.5 system-ui,sans-serif; }
+@media(max-width:760px) {
+ .morin-international .morin-planes ol { display:block; }
+ .morin-international .morin-planes li:nth-child(n) { margin-top:1.1rem; }
+ .morin-international .morin-question strong { font-size:1.25rem; }
+}
+@media print {
+ .morin-international .morin-planes { break-inside:avoid; }
+ .morin-international .morin-planes ol { display:block; }
+ .morin-international .morin-planes li:nth-child(n) { margin-top:.5rem; }
+}
