@@ -23,7 +23,7 @@ His most difficult question follows: how can a society organise work, investment
 3. The human problem: planning a life in an uncertain economy
 4. A life in brief
 5. The life that illuminates the work
-6. Historical and intellectual context
+6. Historical, political and cultural context
 7. The disciplinary circles
 8. Major works
 9. Module I — The confidence on which the future depends
@@ -44,7 +44,7 @@ His most difficult question follows: how can a society organise work, investment
 24. Points to remember
 25. FAQ
 26. Sources and copyright
-27. Further reading within the project
+27. Continue reading
 28. Editorial conclusion
 
 ## Keynes at a glance
