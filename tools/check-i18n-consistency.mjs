@@ -104,7 +104,8 @@ const italianPairs = [
 // silently fall outside this inventory. IT-only is valid and does not imply a future URL.
 const italianOnlyGuides = [
   'cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/index.html',
-  'cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/index.html'
+  'cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/index.html',
+  'cerchi/guide/john-maynard-keynes-economia-futuro-incerto/index.html'
 ];
 const collectHtml = async (directory) => {
   const result = [];
