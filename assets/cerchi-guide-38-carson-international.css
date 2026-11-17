@@ -1,0 +1,66 @@
+/* Carson only: four stages of inquiry, three timescales and readable evidence tables. */
+.carson-international .carson-stages {
+  margin: 2rem 0;
+  padding: 1.25rem 0 1.25rem 1.25rem;
+  border-left: 2px solid #8b713e;
+}
+.carson-international .carson-stages p { margin: 0 0 1.25rem; }
+.carson-international .carson-stages p:last-child { margin-bottom: 0; }
+.carson-international .carson-stages strong { display: block; }
+.carson-international .carson-time {
+  padding: 1rem 0 1rem 1.25rem;
+  border-left: 2px solid #8b713e;
+}
+.carson-international .carson-time strong { display: block; margin-bottom: .35rem; }
+.carson-international .atlas-reading table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.75rem 0;
+  font-size: .95em;
+  line-height: 1.6;
+}
+.carson-international .atlas-reading th,
+.carson-international .atlas-reading td {
+  padding: .75rem .65rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #c9c0ac;
+}
+.carson-international .atlas-reading thead th { border-bottom: 2px solid #8b713e; }
+@media (max-width: 600px) {
+  .carson-international .atlas-reading table,
+  .carson-international .atlas-reading tbody,
+  .carson-international .atlas-reading tr,
+  .carson-international .atlas-reading th,
+  .carson-international .atlas-reading td { display: block; }
+  .carson-international .atlas-reading thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .carson-international .atlas-reading tbody tr {
+    margin: 1rem 0;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid #8b713e;
+  }
+  .carson-international .atlas-reading th,
+  .carson-international .atlas-reading td {
+    width: auto;
+    padding: .5rem 0;
+    border: 0;
+  }
+  .carson-international .atlas-reading [data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: .8em;
+    font-weight: 700;
+    letter-spacing: .02em;
+    margin-bottom: .2rem;
+  }
+}
+@media print {
+  .carson-international .carson-stages,
+  .carson-international .carson-time { break-inside: avoid; }
+}
