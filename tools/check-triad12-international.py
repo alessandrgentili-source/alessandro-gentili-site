@@ -63,6 +63,41 @@ def cards(markup):
     return re.findall(r'<article class="essay-card"[^>]*>.*?</article>', markup, re.S)
 
 
+def preserve_carson_markup(data):
+    """Permit only the authorized stylesheet and accurate responsive cell labels."""
+    path = 'cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/index.html'
+    expected = frozen(path).decode()
+    if data == expected:
+        return
+    stylesheet = '<link rel="stylesheet" href="/assets/cerchi-guide-38-carson-it.css" />\n'
+    require(data.count(stylesheet) == 1, 'Carson table stylesheet missing or duplicated')
+    tables = re.findall(r'<table\b.*?</table>', data, re.S)
+    require(len(tables) == 3, 'Carson must retain three complete tables')
+    for table in tables:
+        headers = [v.content(n) for n in v.Tree(table).root.find('th') if n.attrs.get('scope') == 'col']
+        rows = list(v.Tree(table).root.find('tr'))[1:]
+        for row in rows:
+            cells = [n for n in row.children if isinstance(n, v.Node)]
+            require([n.attrs.get('data-label') for n in cells] == headers, 'Carson responsive labels differ from headers')
+    restored = data.replace(stylesheet, '', 1)
+    for table in tables:
+        restored = restored.replace(table, re.sub(r' data-label="[^"]*"', '', table), 1)
+    require(restored == expected, 'Carson editorial content or other markup changed')
+
+
+def restore_triad12_layout(block):
+    """Invert only the approved cover-first, 3+4 paragraph column composition."""
+    layout = re.search(r'<div class="triad12-prose"><div class="triad12-column">(.*?)</div><div class="triad12-column">(.*?)</div></div>', block, re.S)
+    if not layout:
+        return block
+    require(block.index('<div class="triad-featured-covers">') < layout.start(), 'Triad 12 covers must precede the reading columns')
+    columns = [re.findall(r'<p>.*?</p>', x, re.S) for x in layout.groups()]
+    require([len(c) for c in columns] == [3, 4], 'Triad 12 columns must preserve all seven paragraphs')
+    require(all(''.join(c) == raw for c, raw in zip(columns, layout.groups())), 'Unexpected Triad 12 column markup')
+    prose = '<div class="triad12-prose">\n' + '\n'.join(columns[0] + columns[1]) + '\n</div>\n'
+    return block.replace(layout[0], '', 1).replace('<div class="triad-featured-covers">', prose + '<div class="triad-featured-covers">', 1)
+
+
 def verify_triad13(node, language):
     approved = source13(language)
     require(v.content(next(node.find('h2'))) == approved[0], 'Triad 13 title changed: ' + language)
@@ -92,7 +127,10 @@ def verify_triad13(node, language):
         require(image.attrs.get('width') == '1600' and image.attrs.get('height') == '900', 'Triad 13 cover dimensions missing')
         asset = image.attrs['src'].lstrip('/')
         require((ROOT / asset).read_bytes() == frozen(asset), 'Triad 13 cover bytes changed')
-        require((ROOT / guide_path).read_bytes() == frozen(guide_path), 'A published Triad 13 guide changed')
+        if guide_path == 'cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/index.html':
+            preserve_carson_markup((ROOT / guide_path).read_text())
+        else:
+            require((ROOT / guide_path).read_bytes() == frozen(guide_path), 'A published Triad 13 guide changed')
 
 
 def verify_it(markup):
@@ -148,7 +186,7 @@ def verify(markup, before, blocks):
     old_sections, new_sections = sections(before), sections(markup)
     require(len(old_sections) == 11 and len(new_sections) == 13, 'Exactly thirteen triad sections required')
     require(new_sections[:11] == old_sections, 'Existing eleven triads changed or reordered')
-    require(new_sections[:12] == sections(frozen(PAGE).decode()), 'The twelve frozen English triads changed or reordered')
+    require(new_sections[:11] + [restore_triad12_layout(new_sections[11])] == sections(frozen(PAGE).decode()), 'The twelve frozen English triads changed or reordered')
     require([re.search(r'id="([^"]+)"', x)[1] for x in new_sections] == [f'triad-{i:02}' for i in range(1, 14)], 'Triad section order changed')
     old_index, new_index = index(before), index(markup)
     require(len(new_index) == 13 and new_index[:11] == old_index, 'Existing index entries changed or twelfth missing')
@@ -164,7 +202,7 @@ def verify(markup, before, blocks):
     prose = next(triad.find('div', 'triad12-prose'))
     paragraphs = list(prose.find('p'))
     require([v.content(p) for p in paragraphs] == blocks[2:], 'Approved paragraphs changed, omitted, added or reordered')
-    require([n.tag for n in prose.children if isinstance(n, v.Node)] == ['p'] * 7, 'Essay must remain seven complete paragraphs')
+    require([n.tag for n in prose.children if isinstance(n, v.Node)] in (['p'] * 7, ['div', 'div']), 'Essay must remain seven complete paragraphs in its approved reading layout')
     require(len(list(triad.find('p'))) == 10, 'Additional editorial paragraphs not permitted')
     links = list(triad.find('a'))
     expected = [f'/en/cerchi/guides/{en}/' for en, _ in SLUGS] + [f'/cerchi/guide/{it}/' for _, it in SLUGS]
@@ -224,7 +262,7 @@ def check(source, self_test):
         mutations = [
             ('paragraph altered', markup.replace('Their interests met', 'Their interests converged', 1)),
             ('paragraph missing', markup.replace('<p>' + html.escape(blocks[7]) + '</p>', '', 1)),
-            ('paragraph added', markup.replace('</div>\n<div class="triad-featured-covers"><a href="/en/cerchi/guides/enrico-mattei', '<p>Additional interpretation.</p></div>\n<div class="triad-featured-covers"><a href="/en/cerchi/guides/enrico-mattei', 1)),
+            ('paragraph added', markup.replace('<div class="triad12-column">', '<div class="triad12-column"><p>Additional interpretation.</p>', 1)),
             ('paragraph reordered', markup.replace(html.escape(blocks[2]), '__FIRST__').replace(html.escape(blocks[3]), html.escape(blocks[2])).replace('__FIRST__', html.escape(blocks[3]))),
             ('question altered', markup.replace('Who builds the future — and who decides what it becomes?', 'Who builds the future?', 1)),
             ('old triad altered', markup.replace(sections(markup)[0], sections(markup)[0].replace('Truth', 'Certainty', 1), 1)),
@@ -247,6 +285,14 @@ def check(source, self_test):
             ('Triad 13 question altered', markup.replace('Who can afford to wait', 'Who can wait', 1)),
             ('Triad 13 prose altered', markup.replace('Morin examines the limits', 'Morin studies the limits', 1)),
             ('Triad 13 emphasis missing', markup.replace('<strong>who has the freedom to wait, and who must live with the consequences while others decide?</strong>', 'who has the freedom to wait, and who must live with the consequences while others decide?', 1)),
+        ]
+        current12 = sections(markup)[11]
+        column_layout = re.search(r'<div class="triad12-prose"><div class="triad12-column">(.*?)</div><div class="triad12-column">(.*?)</div></div>', current12, re.S)
+        swapped = '<div class="triad12-prose"><div class="triad12-column">' + column_layout[2] + '</div><div class="triad12-column">' + column_layout[1] + '</div></div>'
+        mutations += [
+            ('reading columns inverted', markup.replace(column_layout[0], swapped, 1)),
+            ('reading column missing', markup.replace('<div class="triad12-column">' + column_layout[1] + '</div>', '', 1)),
+            ('covers after reading columns', markup.replace(column_layout[0], '', 1).replace('<div class="triad-featured-covers"><a href="/en/cerchi/guides/enrico-mattei', column_layout[0] + '<div class="triad-featured-covers"><a href="/en/cerchi/guides/enrico-mattei', 1)),
         ]
         for label, candidate in mutations:
             require(candidate != markup, 'Ineffective regression: ' + label)
@@ -277,6 +323,20 @@ def check(source, self_test):
             else:
                 raise AssertionError('Invalid Italian mutation accepted: ' + label)
         verify_it(italian)
+        carson = (ROOT / 'cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/index.html').read_text()
+        preserve_carson_markup(carson)
+        for label, candidate in [
+            ('table text changed', carson.replace('Racconta l&#x27;ambiente', 'Riscrive l&#x27;ambiente', 1)),
+            ('responsive label changed', carson.replace('data-label="Opera"', 'data-label="Wrong label"', 1)),
+            ('stylesheet missing', carson.replace('/assets/cerchi-guide-38-carson-it.css', '/assets/missing.css', 1)),
+        ]:
+            require(candidate != carson, 'Ineffective Carson mutation: ' + label)
+            try:
+                preserve_carson_markup(candidate)
+            except AssertionError:
+                tests += 1
+            else:
+                raise AssertionError('Invalid Carson mutation accepted: ' + label)
         verify(markup, before, blocks)
     print(f'PASS: frozen SHA, title/question/seven paragraphs, thirteen native anchors, frozen twelve IT/EN triads, approved bilingual Triad 13, original covers and guide links; {tests} rejection regressions and intact positive fixture.')
 
