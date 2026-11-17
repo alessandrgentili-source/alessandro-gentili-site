@@ -31,6 +31,14 @@ def original(path):
     return subprocess.check_output(['git', 'show', f'{BASE}:{path}'], cwd=ROOT)
 
 
+def verify_protected(protected, read_bytes):
+    for path, expected in protected.items():
+        # Release indexes evolve; frozen guides, triads and assets do not.
+        if path in {'cerchi/index.html', 'sitemap.xml'}:
+            continue
+        require(read_bytes(path) == expected, 'Protected file changed: ' + path)
+
+
 def sections(markup):
     return re.findall(r'<section class="wrap triad-block" id="triad-\d+">.*?</section>', markup, re.S)
 
@@ -85,10 +93,10 @@ def check(source, self_test):
     require(len(blocks) == 9 and blocks[0].startswith('## ') and blocks[1].startswith('### '), 'Frozen source structure changed')
     markup, before = (ROOT / PAGE).read_text(), original(PAGE).decode()
     verify(markup, before, blocks)
-    # All author guides, Italian pages, sitemap and existing assets stay byte-identical.
-    protected = subprocess.check_output(['git', 'ls-tree', '-r', '--name-only', BASE, 'en/cerchi/guides', 'cerchi', 'sitemap.xml', 'assets/img'], cwd=ROOT, text=True).splitlines()
-    for path in protected:
-        require((ROOT / path).read_bytes() == original(path), 'Protected file changed: ' + path)
+    # Keep the baseline inventory; only the hub and sitemap may evolve.
+    paths = subprocess.check_output(['git', 'ls-tree', '-r', '--name-only', BASE, 'en/cerchi/guides', 'cerchi', 'sitemap.xml', 'assets/img'], cwd=ROOT, text=True).splitlines()
+    protected = {path: original(path) for path in paths}
+    verify_protected(protected, lambda path: (ROOT / path).read_bytes())
     for path in ['en/cerchi/index.html', 'en/index.html', 'en/positioning/index.html', 'archivio.html']:
         text = (ROOT / path).read_text()
         require(re.findall(r'data-corpus-count="en-triads">(\d+)', text) and set(re.findall(r'data-corpus-count="en-triads">(\d+)', text)) == {'12'}, 'Triad count stale: ' + path)
@@ -97,6 +105,24 @@ def check(source, self_test):
     require('English triad reading paths: 12' in (ROOT / 'llms.txt').read_text(), 'Machine-readable inventory stale')
     tests = 0
     if self_test:
+        for path in ['cerchi/index.html', 'sitemap.xml']:
+            require(path in protected, 'Release surface absent from baseline: ' + path)
+            verify_protected(protected, lambda candidate: protected[candidate] + b'\n<!-- Release update -->'
+                             if candidate == path else protected[candidate])
+        print('PASS accepted: evolving Italian hub and sitemap; baseline protection unchanged elsewhere')
+        for label, path in [
+            ('historical guide', next(path for path in paths if path.startswith('cerchi/guide/'))),
+            ('historical cover', next(path for path in paths if path.startswith('assets/img/cerchi/'))),
+        ]:
+            try:
+                verify_protected(protected, lambda candidate: protected[candidate] + b'altered'
+                                 if candidate == path else protected[candidate])
+            except AssertionError as error:
+                require(str(error) == 'Protected file changed: ' + path, 'Unexpected protection failure')
+                tests += 1
+                print('PASS rejected: ' + label + ' mutation')
+            else:
+                raise AssertionError('Invalid protected mutation accepted: ' + label)
         mutations = [
             ('paragraph altered', markup.replace('Their interests met', 'Their interests converged', 1)),
             ('paragraph missing', markup.replace('<p>' + html.escape(blocks[7]) + '</p>', '', 1)),
