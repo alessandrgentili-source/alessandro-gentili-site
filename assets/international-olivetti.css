@@ -1,0 +1,91 @@
+/* EN36 only. Source tables and chronology stay complete in every state. */
+.olivetti-en-guide .olivetti-visual { min-width:0; margin:1.7rem 0; }
+.olivetti-en-guide .olivetti-visual table { width:100%; table-layout:fixed; border-collapse:collapse; font:400 .95rem/1.65 system-ui,sans-serif; color:#182e3e; }
+.olivetti-en-guide .olivetti-visual :is(th,td) { padding:.9rem .65rem; text-align:left; vertical-align:top; border-bottom:1px solid #b7a482; overflow-wrap:anywhere; }
+.olivetti-en-guide .olivetti-visual th { font-weight:650; }
+/* A: the consultation status gets a full column, never a hidden footnote. */
+.olivetti-table-scroll { max-width:100%; overflow-x:auto; margin:1.7rem 0; }
+.olivetti-table-scroll:focus-visible { outline:3px solid #806333; outline-offset:4px; }
+.olivetti-en-guide .olivetti-works { margin:0; }
+.olivetti-en-guide .olivetti-works table { min-width:42rem; border-top:2px solid #182e3e; }
+.olivetti-works th:nth-child(1) { width:14%; }
+.olivetti-works th:nth-child(2) { width:23%; }
+.olivetti-works th:nth-child(3) { width:27%; }
+.olivetti-works td:last-child { border-left:1px solid #b7a482; background:rgba(128,99,51,.07); }
+/* Native selection controls: checked state, border and text all convey state. */
+.olivetti-en-guide .olivetti-controls { padding:0; margin:1.6rem 0; background:none; color:#182e3e; }
+.olivetti-controls fieldset { margin:0; padding:0; border:0; min-width:0; }
+.olivetti-controls legend { padding:0; margin-bottom:.8rem; font:650 .88rem/1.5 system-ui,sans-serif; }
+.olivetti-options { display:flex; flex-wrap:wrap; gap:.5rem; }
+.olivetti-options label { display:flex; align-items:center; gap:.35rem; box-sizing:border-box; padding:.65rem .75rem; min-height:44px; border:1px solid #806333; cursor:pointer; font:500 .82rem/1.5 system-ui,sans-serif; }
+.olivetti-options input { appearance:auto; width:1rem; height:1rem; flex-shrink:0; accent-color:#806333; margin:0; }
+.olivetti-options label:has(:checked) { color:#f8f2e7; background:#182e3e; border-color:#182e3e; }
+.olivetti-options label:has(:focus-visible) { outline:3px solid #806333; outline-offset:3px; }
+.olivetti-controls figcaption { color:#364751; font:400 .8rem/1.65 system-ui,sans-serif; margin-top:.8rem; }
+/* B: a legal distinction between powers, not a quantitative chart. */
+.olivetti-en-guide .olivetti-powers { padding:1rem; background:#182e3e; }
+.olivetti-en-guide .olivetti-powers table { color:#f8f2e7; }
+.olivetti-en-guide .olivetti-powers :is(th,td) { border-color:#87969d; }
+.olivetti-powers th:first-child { width:29%; }
+.olivetti-powers th:nth-child(2) { width:24%; }
+.olivetti-powers td:first-of-type { font-weight:650; }
+#interpretive-module-iii-participation-and-its-boundaries:has(#powers-1:checked) [data-unit="1"],
+#interpretive-module-iii-participation-and-its-boundaries:has(#powers-2:checked) [data-unit="2"],
+#interpretive-module-iii-participation-and-its-boundaries:has(#powers-3:checked) [data-unit="3"] { outline:3px solid #dfc38e; outline-offset:-3px; background:#304a59; }
+/* C: typological rows with the nature and evidentiary limit side by side. */
+.olivetti-places table { border-top:2px solid #806333; }
+.olivetti-places th:first-child { width:20%; }
+.olivetti-places tr:nth-child(even) { background:rgba(128,99,51,.07); }
+.olivetti-places td:last-child { border-left:1px solid #b7a482; }
+/* D: ordered events, not proportional time. The founder's death is a threshold. */
+.olivetti-en-guide .olivetti-timeline { padding:0 0 0 2rem; margin:2rem 0; border-left:2px solid #806333; }
+.olivetti-en-guide .olivetti-timeline li { position:relative; padding:.9rem .75rem; margin:0 0 .6rem; font:400 1rem/1.7 system-ui,sans-serif; }
+.olivetti-timeline li::marker { font-weight:700; }
+.olivetti-timeline strong { display:block; }
+.olivetti-en-guide .olivetti-timeline [data-event="3"] { border-block:3px double #182e3e; font-weight:600; }
+.olivetti-en-guide .olivetti-unfinished { padding:1.2rem; border-left:3px dashed #806333; font-size:1.05rem; }
+#interpretive-module-iv-after-the-founder-the-test-of-institutions:has(#endurance-1:checked) :is([data-event="1"],[data-event="2"]),
+#interpretive-module-iv-after-the-founder-the-test-of-institutions:has(#endurance-2:checked) [data-event="3"],
+#interpretive-module-iv-after-the-founder-the-test-of-institutions:has(#endurance-3:checked) :is([data-event="4"],[data-event="5"]),
+#interpretive-module-iv-after-the-founder-the-test-of-institutions:has(#endurance-4:checked) .olivetti-unfinished { outline:3px solid #806333; outline-offset:-3px; background:#eee0c4; }
+@media(max-width:760px) {
+ .olivetti-table-scroll::before { content:"Scroll horizontally to read all four columns →"; display:block; padding:.65rem 0; font:500 .8rem/1.6 system-ui,sans-serif; color:#182e3e; }
+ .olivetti-en-guide .olivetti-visual table { font-size:.9rem; }
+ .olivetti-en-guide .olivetti-powers { padding:.75rem; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) :is(table,tbody,tr,th,td) { display:block; width:auto; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) tbody tr { padding:.65rem; margin-bottom:1rem; border-bottom:2px solid #806333; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) :is(th,td) { border:0; padding:.6rem .25rem; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) td::before { content:attr(data-label) " · "; display:block; font-size:.76rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; }
+ .olivetti-en-guide .olivetti-timeline { padding-left:1.6rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .olivetti-en-guide :is(.olivetti-visual,.olivetti-timeline,.olivetti-controls) { animation:none; transition:none; scroll-behavior:auto; }
+}
+@media print {
+ .olivetti-en-guide :is(.site-header,.footer,.skip-link,.atlas-breadcrumb,.atlas-back),.olivetti-en-guide .atlas-reading .actions { display:none!important; }
+ .olivetti-en-guide,.olivetti-en-guide .atlas-main { background:#fff; }
+ .olivetti-en-guide .atlas-main { padding-top:0; }
+ .olivetti-en-guide .atlas-reader { padding-bottom:0; }
+ .olivetti-en-guide .atlas-reading>.guide-section:last-child { padding-bottom:0; margin-bottom:0; border-bottom:0; }
+ .olivetti-en-guide .guide-section :is(h2,h3) { break-after:avoid; break-inside:avoid; }
+ .olivetti-controls fieldset { display:none; }
+ .olivetti-controls figcaption { color:#182e3e; }
+ .olivetti-table-scroll { overflow:visible; }
+ .olivetti-table-scroll::before { display:none; }
+ .olivetti-en-guide .olivetti-works table { min-width:0; }
+ .olivetti-en-guide .olivetti-visual table { font-size:8.5pt; }
+ .olivetti-en-guide .olivetti-powers { padding:0; background:none; }
+ .olivetti-en-guide .olivetti-powers table { color:#182e3e; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) table { display:table; width:100%; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) thead { display:table-header-group; position:static; width:auto; height:auto; overflow:visible; clip-path:none; white-space:normal; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) tbody { display:table-row-group; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) tr { display:table-row; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) :is(th,td) { display:table-cell; }
+ .olivetti-en-guide :is(.olivetti-powers,.olivetti-places) td::before { display:none; }
+ .olivetti-en-guide .olivetti-visual tr,.olivetti-en-guide .olivetti-timeline li,.olivetti-en-guide .olivetti-unfinished { break-inside:avoid; outline:none!important; background:none!important; }
+ .olivetti-en-guide .olivetti-visual :is(th,td) { padding:.5rem .4rem; border-color:#806333; }
+ .olivetti-visual thead { display:table-header-group; }
+ .olivetti-en-guide .olivetti-timeline li { font-size:10pt; }
+ .olivetti-en-guide .olivetti-visual,.olivetti-en-guide .olivetti-timeline { break-inside:avoid; }
+}
