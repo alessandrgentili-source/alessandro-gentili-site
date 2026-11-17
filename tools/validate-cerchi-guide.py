@@ -296,6 +296,37 @@ def toc_label_matches(label, heading):
 
 
 def final_headings_valid(headings, language="it"):
+    """Check final sections without accepting omissions or premature endings.
+
+    >>> close = "Editorial conclusion — The future enters the accounts"
+    >>> end = ["Sources and copyright", "Continue reading", close]
+    >>> final_headings_valid(end, "en")
+    True
+    >>> final_headings_valid(["Sources", "Continue reading", "Editorial conclusion"], "en")
+    True
+    >>> final_headings_valid(["Sources and methodological notes", "Copyright", "Continue reading", close], "en")
+    True
+    >>> final_headings_valid(["Sources and copyright", "Continue reading", "Editorial close — Test"], "en")
+    True
+    >>> final_headings_valid(["Fonti", "Prosegui la lettura", "Chiusura editoriale"], "it")
+    True
+    >>> final_headings_valid(end[1:], "en")
+    False
+    >>> final_headings_valid([end[1], end[0], end[2]], "en")
+    False
+    >>> final_headings_valid([end[0], end[0], *end[1:]], "en")
+    False
+    >>> final_headings_valid([close, "Main argument", *end], "en")
+    False
+    >>> final_headings_valid(["Sources and methodological notes", "Continue reading", close], "en")
+    False
+    >>> final_headings_valid(["Sources", "Continue reading", "Editorial conclusion —   "], "en")
+    False
+    """
+    if language == "en":
+        # Normalize the approved English title before every final-order check.
+        headings = ["Closing" if re.fullmatch(r"Editorial conclusion(?: — \S(?:.*\S)?)?", h)
+                    else h for h in headings]
     if language == "en" and any(heading in {"Sources and methodological notes", "Copyright"} for heading in headings):
         if len(headings) < 4:
             return False

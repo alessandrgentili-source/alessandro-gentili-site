@@ -227,6 +227,8 @@ if (cookieStatisticsPreference === 'accepted') {
 
 
 const bilingualPairs = {
+  "/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/": { it: "/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/", en: "/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/" },
+  "/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/": { it: "/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/", en: "/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/" },
   "/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/": { it: "/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/", en: "/en/cerchi/guides/rachel-carson-life-after-the-intervention/" },
   "/en/cerchi/guides/rachel-carson-life-after-the-intervention/": { it: "/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/", en: "/en/cerchi/guides/rachel-carson-life-after-the-intervention/" },
   "/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/": { it: "/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/", en: "/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/" },
