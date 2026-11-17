@@ -107,7 +107,7 @@ The eighth complete English triad localizes the seventh Cerchi d'inchiostro thre
 
 ## Published corpus scope
 
-- Italian author guides: 36
+- Italian author guides: 37
 - English author guides: 36
 - Italian triads: 12
 - English triad reading paths: 12
@@ -118,4 +118,4 @@ The English editorial entrance is https://alessandro-gentili.it/en/ and the prof
 
 Privacy information is available in Italian at https://alessandro-gentili.it/privacy.html. No separate English privacy policy is published.
 
-The twelfth Italian triad, “Stato, impresa e comunità”, is complete: Enrico Mattei — Guide 34 (https://alessandro-gentili.it/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/), Aristide Merloni — Guide 35 (https://alessandro-gentili.it/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/) and Adriano Olivetti — Guide 36 (https://alessandro-gentili.it/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/). The Italian archive has 36 author guides and twelve complete triads. Mattei is also available in English at https://alessandro-gentili.it/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/. Merloni is also available in English at https://alessandro-gentili.it/en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/. Olivetti is also available in English at https://alessandro-gentili.it/en/cerchi/guides/adriano-olivetti-community-power/. The English edition has 36 author guides and twelve complete triad reading paths. The complete twelfth International triad, State, enterprise and community, is available at https://alessandro-gentili.it/en/cerchi/triads/#triad-12.
+The twelfth Italian triad, “Stato, impresa e comunità”, is complete: Enrico Mattei — Guide 34 (https://alessandro-gentili.it/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/), Aristide Merloni — Guide 35 (https://alessandro-gentili.it/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/) and Adriano Olivetti — Guide 36 (https://alessandro-gentili.it/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/). The Italian archive has 37 author guides and twelve complete triads. Mattei is also available in English at https://alessandro-gentili.it/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/. Merloni is also available in English at https://alessandro-gentili.it/en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/. Olivetti is also available in English at https://alessandro-gentili.it/en/cerchi/guides/adriano-olivetti-community-power/. The English edition has 36 author guides and twelve complete triad reading paths. The complete twelfth International triad, State, enterprise and community, is available at https://alessandro-gentili.it/en/cerchi/triads/#triad-12.
