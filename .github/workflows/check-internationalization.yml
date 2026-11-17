@@ -20,6 +20,8 @@ on:
       - 'assets/international-mattei.css'
       - 'assets/international-merloni.css'
       - 'assets/international-olivetti.css'
+      - 'assets/international-triad12.css'
+      - 'tools/check-triad12-international.py'
       - 'tools/check-olivetti-en36.py'
       - 'tools/check-merloni-en35.py'
       - 'tools/check-mattei-en34.py'
@@ -57,6 +59,8 @@ on:
       - 'assets/international-mattei.css'
       - 'assets/international-merloni.css'
       - 'assets/international-olivetti.css'
+      - 'assets/international-triad12.css'
+      - 'tools/check-triad12-international.py'
       - 'tools/check-olivetti-en36.py'
       - 'tools/check-merloni-en35.py'
       - 'tools/check-mattei-en34.py'
@@ -119,6 +123,11 @@ jobs:
           git fetch --no-tags origin 4a1bb79448b4c28414ec4b9d2f87c1e07a4501c6
           git show 4a1bb79448b4c28414ec4b9d2f87c1e07a4501c6:OLIVETTI_EN36_TESTO_FINALE_APPROVATO_v2_2026-11-16.md > "$RUNNER_TEMP/olivetti-en36.md"
           python3 tools/check-olivetti-en36.py --source "$RUNNER_TEMP/olivetti-en36.md" --self-test
+      - name: Verify frozen Triad 12 and preserve eleven existing triads
+        run: |
+          git fetch --no-tags origin 4e4ac06e1373566b02b0f59a8d2d8072245e04f1
+          git show 4e4ac06e1373566b02b0f59a8d2d8072245e04f1:CERCHI_TRIADE12_INTERNATIONAL_TESTO_APPROVATO_2026-11-17.md > "$RUNNER_TEMP/triad12-international.md"
+          python3 tools/check-triad12-international.py --source "$RUNNER_TEMP/triad12-international.md" --self-test
       - name: Preserve existing English guides during migration
         if: github.event_name == 'pull_request'
         env:
