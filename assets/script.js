@@ -227,6 +227,8 @@ if (cookieStatisticsPreference === 'accepted') {
 
 
 const bilingualPairs = {
+  "/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/": { it: "/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/", en: "/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/" },
+  "/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/": { it: "/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/", en: "/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/" },
   "/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/": { it: "/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/", en: "/en/cerchi/guides/adriano-olivetti-community-power/" },
   "/en/cerchi/guides/adriano-olivetti-community-power/": { it: "/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/", en: "/en/cerchi/guides/adriano-olivetti-community-power/" },
   "/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/": { it: "/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/", en: "/en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/" },

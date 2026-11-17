@@ -296,6 +296,19 @@ def toc_label_matches(label, heading):
 
 
 def final_headings_valid(headings, language="it"):
+    if language == "en" and any(heading in {"Sources and methodological notes", "Copyright"} for heading in headings):
+        if len(headings) < 4:
+            return False
+        sources, copyright_heading, progress, closing = headings[-4:]
+        return (not any(heading in {"Sources", "Sources and copyright", "Sources, method and copyright",
+                                   "Sources and methodological notes", "Copyright", "Continue reading"}
+                        or re.match(r"^(?:Editorial closing|Editorial close|Closing)(?=$| — )", heading)
+                        for heading in headings[:-4])
+                and sources == "Sources and methodological notes"
+                and copyright_heading == "Copyright"
+                and progress == "Continue reading"
+                and (closing == "Closing"
+                     or bool(re.fullmatch(r"Closing — [^—]+", closing))))
     if language == "it" and any(heading in {"Fonti e note di metodo", "Copyright"} for heading in headings):
         if len(headings) < 4:
             return False
