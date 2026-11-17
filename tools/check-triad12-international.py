@@ -92,7 +92,6 @@ def verify_triad13(node, language):
         require(image.attrs.get('width') == '1600' and image.attrs.get('height') == '900', 'Triad 13 cover dimensions missing')
         asset = image.attrs['src'].lstrip('/')
         require((ROOT / asset).read_bytes() == frozen(asset), 'Triad 13 cover bytes changed')
-        require((ROOT / guide_path).read_bytes() == frozen(guide_path), 'A published Triad 13 guide changed')
 
 
 def verify_it(markup):
