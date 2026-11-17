@@ -1,0 +1,54 @@
+/* Keynes EN only: chronology, bibliographic dates and three distinct prose modules. */
+.keynes-international .keynes-chronology ul {
+  list-style: none;
+  padding-left: 0;
+  border-left: 1px solid var(--atlas-rule);
+}
+.keynes-international .keynes-chronology li {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: .7rem 0 .7rem 1.15rem;
+}
+.keynes-international .keynes-chronology li > strong {
+  font: 600 .85rem/1.7 system-ui, sans-serif;
+  color: var(--atlas-ink);
+}
+.keynes-international .keynes-works h3 { margin-top: 2rem; }
+.keynes-international .keynes-year {
+  display: inline-block;
+  margin-left: .35rem;
+  font: 500 .8em/1.6 system-ui, sans-serif;
+  color: var(--atlas-muted);
+}
+.keynes-international .keynes-reading {
+  padding-left: 1.15rem;
+  border-left: 1px solid var(--atlas-gold);
+}
+.keynes-international .keynes-confidence > p:first-of-type {
+  position: relative;
+  padding-left: 1.15rem;
+  border-left: 1px solid var(--atlas-rule);
+}
+.keynes-international .keynes-confidence > p:first-of-type::before,
+.keynes-international .keynes-confidence > p:first-of-type::after {
+  content: "";
+  position: absolute;
+  left: -.2rem;
+  width: .35rem;
+  height: .35rem;
+  border-radius: 50%;
+  background: var(--atlas-gold);
+}
+.keynes-international .keynes-confidence > p:first-of-type::before { top: .5rem; }
+.keynes-international .keynes-confidence > p:first-of-type::after { bottom: .5rem; }
+.keynes-international .keynes-waiting > p { margin-block: 2rem; }
+.keynes-international .keynes-stability > p:nth-of-type(2) {
+  padding-left: 1.15rem;
+  border-left: 1px solid var(--atlas-rule);
+}
+@media (max-width: 760px) {
+  .keynes-international .keynes-chronology li { display: block; }
+  .keynes-international .keynes-chronology li > strong { display: block; margin-bottom: .3rem; }
+  .keynes-international .keynes-year { margin-left: 0; }
+}
