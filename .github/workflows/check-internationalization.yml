@@ -19,6 +19,8 @@ on:
       - 'assets/international-plato.css'
       - 'assets/international-mattei.css'
       - 'assets/international-merloni.css'
+      - 'assets/international-olivetti.css'
+      - 'tools/check-olivetti-en36.py'
       - 'tools/check-merloni-en35.py'
       - 'tools/check-mattei-en34.py'
       - 'tools/international_revision.py'
@@ -54,6 +56,8 @@ on:
       - 'assets/international-plato.css'
       - 'assets/international-mattei.css'
       - 'assets/international-merloni.css'
+      - 'assets/international-olivetti.css'
+      - 'tools/check-olivetti-en36.py'
       - 'tools/check-merloni-en35.py'
       - 'tools/check-mattei-en34.py'
       - 'tools/international_revision.py'
@@ -110,6 +114,11 @@ jobs:
           git fetch --no-tags origin e47e86e1dc6d06d6338e3dacd908a2195b0a5548
           git show e47e86e1dc6d06d6338e3dacd908a2195b0a5548:MERLONI_EN35_TESTO_FINALE_APPROVATO_2026-11-16.md > "$RUNNER_TEMP/merloni-en35.md"
           python3 tools/check-merloni-en35.py --source "$RUNNER_TEMP/merloni-en35.md" --self-test
+      - name: Verify approved Olivetti EN36, institutional distinctions and both source layouts
+        run: |
+          git fetch --no-tags origin 4a1bb79448b4c28414ec4b9d2f87c1e07a4501c6
+          git show 4a1bb79448b4c28414ec4b9d2f87c1e07a4501c6:OLIVETTI_EN36_TESTO_FINALE_APPROVATO_v2_2026-11-16.md > "$RUNNER_TEMP/olivetti-en36.md"
+          python3 tools/check-olivetti-en36.py --source "$RUNNER_TEMP/olivetti-en36.md" --self-test
       - name: Preserve existing English guides during migration
         if: github.event_name == 'pull_request'
         env:

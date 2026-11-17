@@ -11,6 +11,7 @@ const assert = (condition, message) => {
 const read = (path) => readFile(join(root, path), 'utf8');
 
 const pages = [
+  { path: 'en/cerchi/guides/adriano-olivetti-community-power/index.html', url: `${base}/en/cerchi/guides/adriano-olivetti-community-power/`, it: `${base}/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/index.html', url: `${base}/en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/`, it: `${base}/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/index.html', url: `${base}/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/`, it: `${base}/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/`, type: 'Article', breadcrumb: true },
   { path: 'en/contact/index.html', url: `${base}/en/contact/` },
@@ -57,6 +58,7 @@ const pages = [
 ];
 
 const italianPairs = [
+  { path: 'cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/index.html', it: `${base}/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/`, en: `${base}/en/cerchi/guides/adriano-olivetti-community-power/` },
   { path: 'cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/index.html', it: `${base}/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/`, en: `${base}/en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/` },
   { path: 'cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/index.html', it: `${base}/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/`, en: `${base}/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/` },
   { path: 'index.html', it: `${base}/`, en: `${base}/en/` },
@@ -101,7 +103,6 @@ const italianPairs = [
 // Every published page must have an explicit language decision; new guides cannot
 // silently fall outside this inventory. IT-only is valid and does not imply a future URL.
 const italianOnlyGuides = [
-  'cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/index.html',
 ];
 const collectHtml = async (directory) => {
   const result = [];

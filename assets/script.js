@@ -227,6 +227,8 @@ if (cookieStatisticsPreference === 'accepted') {
 
 
 const bilingualPairs = {
+  "/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/": { it: "/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/", en: "/en/cerchi/guides/adriano-olivetti-community-power/" },
+  "/en/cerchi/guides/adriano-olivetti-community-power/": { it: "/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/", en: "/en/cerchi/guides/adriano-olivetti-community-power/" },
   "/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/": { it: "/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/", en: "/en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/" },
   "/en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/": { it: "/cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/", en: "/en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/" },
   "/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/": { it: "/cerchi/guide/enrico-mattei-energia-impresa-pubblica-autonomia/", en: "/en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/" },

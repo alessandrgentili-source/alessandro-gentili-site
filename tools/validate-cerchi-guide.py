@@ -193,15 +193,37 @@ def manuscript_structure(source):
         intro_start = intro_heading_at + 1
     else:
         raise ValueError("full manuscript needs an H2 or emphasized subtitle after its H1")
-    index_at = next((i for i in range(intro_start, len(lines)) if lines[i].strip() in {"## Indice", "## Indice della guida", "## Contents", "## Guide contents"}), None)
-    if index_at is None:
-        raise ValueError("full manuscript needs a ## Indice after the introduction")
-    intro = manuscript_blocks(lines[intro_start:index_at])
-    first_section = next((i for i in range(index_at + 1, len(lines)) if re.match(r"^## (?!#)", lines[i])), None)
+    indexes = [i for i in range(subtitle_at + 1, len(lines)) if lines[i].strip() in {"## Indice", "## Indice della guida", "## Contents", "## Guide contents"}]
+    if len(indexes) != 1:
+        raise ValueError("full manuscript needs exactly one numbered contents section")
+    index_at = indexes[0]
+    contents_first = index_at < intro_start
+    if contents_first:
+        # Olivetti EN36: Contents → explicit Introduction → numbered body.
+        # Recognise the two boundaries without moving or consuming prose.
+        h2_before_opening = [i for i in range(subtitle_at + 1, intro_start) if re.match(r"^## (?!#)", lines[i])]
+        if h2_before_opening != [index_at, intro_start - 1]:
+            raise ValueError("contents-first layout needs Contents immediately followed by Introduction")
+        if not re.fullmatch(r"##\s+(?:Introduzione|Introduction)(?:\s*[—:–-].*)?", lines[intro_start - 1], re.I):
+            raise ValueError("contents-first layout needs an explicit Introduction")
+        first_section = next((i for i in range(intro_start, len(lines)) if re.match(r"^## (?!#)", lines[i])), None)
+        index_lines = lines[index_at + 1:intro_start - 1]
+        intro = manuscript_blocks(lines[intro_start:first_section])
+    else:
+        intro = manuscript_blocks(lines[intro_start:index_at])
+        first_section = next((i for i in range(index_at + 1, len(lines)) if re.match(r"^## (?!#)", lines[i])), None)
+        index_lines = lines[index_at + 1:first_section]
     if first_section is None:
         raise ValueError("full manuscript has no guide sections after the index")
+    # An explicit opening subtitle repeats the H1 subtitle field. Recognise it
+    # in either legitimate layout and require the remaining prose unchanged.
+    opening_lines = [line.strip() for line in lines[intro_start:first_section if contents_first else index_at] if line.strip()]
+    if opening_lines and re.fullmatch(r"(?:\*[^*]+\*|_[^_]+_)", opening_lines[0]) and markdown_plain(opening_lines[0]) == subtitle:
+        intro = intro[1:]
+    if contents_first and not intro:
+        raise ValueError("contents-first layout needs nonempty introductory prose")
     index = []
-    for line in lines[index_at + 1:first_section]:
+    for line in index_lines:
         if not line.strip() or line.strip() == "---":
             continue
         match = re.fullmatch(r"\s*(\d+)\.\s+(.+?)\s*", line)
@@ -275,7 +297,7 @@ def toc_label_matches(label, heading):
 
 def final_headings_valid(headings, language="it"):
     if language == "en":
-        headings = [{"Sources": "Fonti", "Sources and copyright": "Fonti e copyright", "Sources, method and copyright": "Fonti, metodo e copyright", "Continue reading": "Prosegui la lettura"}.get(h, re.sub(r"^(?:Editorial closing|Closing)(?=$| — )", "Chiusura editoriale", h)) for h in headings]
+        headings = [{"Sources": "Fonti", "Sources and copyright": "Fonti e copyright", "Sources, method and copyright": "Fonti, metodo e copyright", "Continue reading": "Prosegui la lettura"}.get(h, re.sub(r"^(?:Editorial closing|Editorial close|Closing)(?=$| — )", "Chiusura editoriale", h)) for h in headings]
     if len(headings) < 3:
         return False
     fonts, progress, closing = headings[-3:]
@@ -755,7 +777,9 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
                     else:
                         cursor = found + len(block)
             if atlas:
-                opening_heading = next((markdown_plain(line[3:]) for line in source.read_text(encoding="utf-8").splitlines() if line.startswith("## ")), "")
+                source_lines = source.read_text(encoding="utf-8").splitlines()
+                opening_heading = next((markdown_plain(line[3:]) for line in source_lines if re.fullmatch(r"##\s+(?:Introduzione|Introduction)(?:\s*[—:–-].*)?", line, re.I)),
+                                       next((markdown_plain(line[3:]) for line in source_lines if line.startswith("## ")), ""))
                 require(bool(headings) and editorial_text_key(headings[0]) == editorial_text_key(opening_heading),
                         "Atlas introduction heading differs from the manuscript")
                 def editorial_only(section):
