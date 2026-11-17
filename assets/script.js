@@ -227,6 +227,8 @@ if (cookieStatisticsPreference === 'accepted') {
 
 
 const bilingualPairs = {
+  "/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/": { it: "/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/", en: "/en/cerchi/guides/rachel-carson-life-after-the-intervention/" },
+  "/en/cerchi/guides/rachel-carson-life-after-the-intervention/": { it: "/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/", en: "/en/cerchi/guides/rachel-carson-life-after-the-intervention/" },
   "/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/": { it: "/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/", en: "/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/" },
   "/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/": { it: "/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/", en: "/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/" },
   "/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/": { it: "/cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/", en: "/en/cerchi/guides/adriano-olivetti-community-power/" },
