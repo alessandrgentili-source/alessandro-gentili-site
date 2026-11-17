@@ -1,0 +1,8 @@
+/* Keep the Italian essay-card grammar; only the new card has cover thumbnails. */
+#tredicesima-triade .triad-authors { color:var(--muted); font-size:.9rem; }
+#tredicesima-triade .triad-featured-covers {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.4rem; margin:1rem 0;
+}
+#tredicesima-triade .triad-featured-covers a { display:block; min-width:0; }
+#tredicesima-triade .triad-featured-covers img { display:block; width:100%; height:auto; }
+#tredicesima-triade a:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }

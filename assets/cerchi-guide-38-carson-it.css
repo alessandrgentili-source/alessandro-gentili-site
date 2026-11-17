@@ -1,0 +1,32 @@
+/* Italian Carson guide only: complete, aligned comparison tables. */
+.guide-page .atlas-reading table {
+  width:100%; table-layout:fixed; border-collapse:collapse;
+  margin:1.8rem 0; font-size:1rem; line-height:1.65;
+}
+.guide-page .atlas-reading table th,
+.guide-page .atlas-reading table td {
+  padding:.8rem .75rem; text-align:left; vertical-align:top;
+  border-bottom:1px solid #cfc2aa;
+  overflow-wrap:normal; word-break:normal; hyphens:none;
+}
+.guide-page .atlas-reading table thead th { border-bottom:2px solid #8b713e; }
+.guide-page .atlas-reading table th:first-child { width:30%; }
+.guide-page .atlas-reading #le-opere-principali th:first-child { width:30%; }
+.guide-page .atlas-reading #le-opere-principali th:nth-child(2) { width:17%; }
+@media(max-width:700px) {
+  .guide-page .atlas-reading table,
+  .guide-page .atlas-reading tbody,
+  .guide-page .atlas-reading tr,
+  .guide-page .atlas-reading table th,
+  .guide-page .atlas-reading table td { display:block; }
+  .guide-page .atlas-reading thead {
+    position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%);
+  }
+  .guide-page .atlas-reading tbody tr { margin:1rem 0; padding-bottom:.7rem; border-bottom:1px solid #8b713e; }
+  .guide-page .atlas-reading table th,
+  .guide-page .atlas-reading table td { width:auto !important; padding:.45rem 0; border:0; }
+  .guide-page .atlas-reading [data-label]::before {
+    content:attr(data-label); display:block; margin-bottom:.2rem;
+    font-size:.8em; font-weight:700; letter-spacing:.02em;
+  }
+}
