@@ -25,7 +25,7 @@ Qui comincia la sua domanda più difficile: come può una società organizzare l
 3. Il problema umano: progettare una vita in un'economia incerta
 4. Vita essenziale
 5. La vita che illumina l'opera
-6. Il contesto storico e intellettuale
+6. Il contesto storico, politico e culturale
 7. I Cerchi disciplinari
 8. Le opere fondamentali
 9. Modulo I — La fiducia che sostiene il futuro
