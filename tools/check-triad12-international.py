@@ -1,4 +1,4 @@
-"""Preserve frozen Triads 01–12 and verify the approved bilingual Triad 13 append."""
+"""Preserve Triads 01–13 and verify the approved Italian-only Triad 14 pilot."""
 import argparse
 from functools import lru_cache
 import hashlib
@@ -24,6 +24,20 @@ PAIRS13 = [
     ('edgar-morin-knowledge-and-its-blind-spots', 'edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi'),
     ('rachel-carson-life-after-the-intervention', 'rachel-carson-la-vita-dopo-l-intervento'),
     ('john-maynard-keynes-economy-of-an-uncertain-future', 'john-maynard-keynes-economia-futuro-incerto'),
+]
+# Author-authorized Italian-only release, 18 November 2026. The private master
+# stays outside the public repository. Its complete ordered HTML block/inline
+# signature was independently derived with markdown-it from these exact bytes;
+# the digest covers every word, heading, emphasis boundary and link destination.
+TRIAD14_BASE = '54f6b560f3c8cdce472c95469af4009e09647d38'
+TRIAD14_SOURCE_SHA = '9be74bb40dd08229157a91e0867a6880fe250b256a4f1885e5a7e6e90d853600'
+TRIAD14_EDITORIAL_SHA = '9664a45e24f5ea216931258ea23798c5b5fac5349dcf059b62285101930112e5'
+TRIAD14_PAGE = 'cerchi/triadi/legge-colpa-punizione/index.html'
+TRIAD14_URL = 'https://alessandro-gentili.it/cerchi/triadi/legge-colpa-punizione/'
+GUIDES14 = [
+    'sofocle-legge-colpa-limite-citta',
+    'michel-foucault-la-vita-sotto-esame',
+    'cesare-beccaria-limite-diritto-punire',
 ]
 SLUGS = [
  ('enrico-mattei-energy-public-enterprise-autonomy', 'enrico-mattei-energia-impresa-pubblica-autonomia'),
@@ -137,25 +151,109 @@ def verify_it(markup):
     tree = v.Tree(markup)
     require(not tree.malformed, str(tree.malformed))
     previous, current = cards(frozen(IT_PAGE).decode()), cards(markup)
-    require(len(previous) == 12 and len(current) == 13, 'Exactly thirteen Italian triad cards required')
+    require(len(previous) == 12 and len(current) == 14, 'Exactly fourteen Italian triad cards required')
     require(current[:12] == previous, 'The twelve historical Italian triads changed or reordered')
+    require(current[:13] == cards(frozen(IT_PAGE, TRIAD14_BASE).decode()), 'The thirteen historical Italian triads changed or reordered')
     require('id="tredicesima-triade"' in current[12], 'Italian Triad 13 anchor missing')
-    require(len(list(tree.root.find('article', 'essay-card'))) == 13, 'Unexpected Italian triad card')
+    require(len(list(tree.root.find('article', 'essay-card'))) == 14, 'Unexpected Italian triad card')
     node = next(n for n in tree.root.find('article') if n.attrs.get('id') == 'tredicesima-triade')
     verify_triad13(node, 'it')
+    card14 = v.Tree(current[13]).root
+    require(next(card14.find('article')).attrs.get('id') == 'quattordicesima-triade', 'Italian Triad 14 anchor/order changed')
+    require(v.content(next(card14.find('h2'))) == 'Legge, colpa, punizione', 'Triad 14 card title changed')
+    require([v.normalized(v.content(n)) for n in card14.find('p')] == [
+        'Quattordicesima triade', 'Sofocle · Michel Foucault · Cesare Beccaria',
+        'Domanda di lettura: Chi può trasformare un atto in colpa, e fino a dove arriva il diritto di punire?',
+    ], 'Triad 14 card question/authors changed or prose added')
+    require([n.attrs.get('href') for n in card14.find('a')] == [
+        '/cerchi/triadi/legge-colpa-punizione/', *[f'/cerchi/guide/{slug}/' for slug in GUIDES14],
+    ], 'Triad 14 reading/guide links changed or reordered')
     before = v.Tree(frozen(IT_PAGE).decode())
     require([n.attrs for n in tree.root.find('link') if n.attrs.get('rel') in {'canonical', 'alternate'}] == [n.attrs for n in before.root.find('link') if n.attrs.get('rel') in {'canonical', 'alternate'}], 'Italian canonical/hreflang changed')
     metas = {n.attrs.get('name', n.attrs.get('property')): n.attrs.get('content') for n in tree.root.find('meta')}
-    require(metas['description'] == metas['og:description'] == metas['twitter:description'] and metas['description'].startswith('Le tredici triadi'), 'Italian triad metadata stale')
+    require(metas['description'] == metas['og:description'] == metas['twitter:description'] and metas['description'].startswith('Le quattordici triadi'), 'Italian triad metadata stale')
     schema = next(json.loads(v.content(n)) for n in tree.root.find('script') if n.attrs.get('type') == 'application/ld+json')
     require(schema['@type'] == 'CollectionPage' and schema['description'] == metas['description'] and schema['url'] == 'https://alessandro-gentili.it/cerchi/triadi/', 'Italian CollectionPage inconsistent')
-    require(len(schema['hasPart']) == 39, 'Italian CollectionPage must connect all 39 guides')
+    require(len(schema['hasPart']) == 42, 'Italian CollectionPage must connect exactly 42 guides')
     previous_schema = next(json.loads(v.content(n)) for n in before.root.find('script') if n.attrs.get('type') == 'application/ld+json')
     additions = []
     for _, it in PAIRS13:
         guide = v.Tree(frozen(f'cerchi/guide/{it}/index.html').decode())
         additions.append({'@type': 'CreativeWork', 'name': v.content(next(guide.root.find('h1'))), 'url': f'https://alessandro-gentili.it/cerchi/guide/{it}/'})
+    for slug in GUIDES14:
+        guide = v.Tree(frozen(f'cerchi/guide/{slug}/index.html', TRIAD14_BASE).decode())
+        additions.append({'@type': 'CreativeWork', 'name': v.content(next(guide.root.find('h1'))), 'url': f'https://alessandro-gentili.it/cerchi/guide/{slug}/'})
     require(schema['hasPart'] == previous_schema['hasPart'] + additions, 'Italian CollectionPage historical entries or new guide links changed')
+
+
+def editorial_signature(nodes):
+    """Canonical editorial structure; transparent spans may support typography."""
+    def inline(children):
+        result = []
+        for child in children:
+            if isinstance(child, str):
+                parts = [child]
+            elif child.tag == 'span':
+                parts = inline(child.children)
+            else:
+                require(child.tag in {'em', 'strong', 'a'}, 'Unapproved Triad 14 inline element')
+                parts = [[child.tag, child.attrs.get('href') if child.tag == 'a' else None, inline(child.children)]]
+            for part in parts:
+                if isinstance(part, str) and result and isinstance(result[-1], str):
+                    result[-1] += part
+                else:
+                    result.append(part)
+        return [re.sub(r'\s+', ' ', part) if isinstance(part, str) else part for part in result]
+    result = []
+    for node in nodes:
+        if isinstance(node, str):
+            require(not node.strip(), 'Text outside approved Triad 14 blocks')
+            continue
+        require(node.tag in {'h1', 'h2', 'p'}, 'Unapproved Triad 14 editorial block')
+        result.append([node.tag, inline(node.children)])
+    return result
+
+
+def verify_triad14(markup):
+    tree = v.Tree(markup)
+    require(not tree.malformed, str(tree.malformed))
+    require(next(tree.root.find('html')).attrs.get('lang') == 'it', 'Triad 14 must remain Italian')
+    articles = list(tree.root.find('article'))
+    require(len(articles) == 1 and articles[0].attrs.get('id') == 'lettura-triade-14', 'Triad 14 reading missing/duplicated')
+    article = articles[0]
+    children = [n for n in article.children if isinstance(n, v.Node)]
+    require([n.tag for n in children] == ['header', 'nav', 'div'], 'Unapproved content outside Triad 14 source')
+    opening, covers, grid = children
+    require('data-source-opening' in opening.attrs and covers.attrs.get('class') == 'reading-covers', 'Triad 14 source/cover structure changed')
+    grid_children = [n for n in grid.children if isinstance(n, v.Node)]
+    require([n.tag for n in grid_children] == ['nav', 'div'] and grid_children[0].attrs.get('class') == 'reading-contents' and 'data-source-body' in grid_children[1].attrs, 'Triad 14 contents/body structure changed')
+    body = grid_children[1]
+    require(not any(isinstance(n, str) and n.strip() for n in article.children + grid.children), 'Unapproved text outside Triad 14 source')
+    signature = editorial_signature(opening.children + body.children)
+    digest = hashlib.sha256(json.dumps(signature, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+    require(digest == TRIAD14_EDITORIAL_SHA, 'Triad 14 differs from approved Markdown ' + TRIAD14_SOURCE_SHA)
+    require(len(list(tree.root.find('h1'))) == 1, 'Triad 14 needs one H1')
+    question = v.content(list(opening.find('p'))[1]).removeprefix('Domanda di lettura: ')
+    metas = {n.attrs.get('name', n.attrs.get('property')): n.attrs.get('content') for n in tree.root.find('meta')}
+    require(metas['description'] == metas['og:description'] == metas['twitter:description'] == question, 'Triad 14 metadata question changed')
+    toc = grid_children[0]
+    targets = [n.attrs.get('id') for n in body.find('h2')] + ['le-tre-guide']
+    require([n.attrs.get('href') for n in toc.find('a')] == ['#' + target for target in targets] and all(len([n for n in tree.root.find() if n.attrs.get('id') == target]) == 1 for target in targets), 'Triad 14 contents targets changed')
+    require(not [n for n in tree.root.find('link') if n.attrs.get('hreflang')], 'Triad 14 has no approved English alternate')
+    require([n.attrs.get('href') for n in tree.root.find('link') if n.attrs.get('rel') == 'canonical'] == [TRIAD14_URL], 'Triad 14 canonical changed')
+    schemas = [json.loads(v.content(n)) for n in tree.root.find('script') if n.attrs.get('type') == 'application/ld+json']
+    require([s['@type'] for s in schemas] == ['Article', 'BreadcrumbList'] and schemas[0]['inLanguage'] == 'it' and schemas[0]['url'] == TRIAD14_URL, 'Triad 14 Article/Breadcrumb schema changed')
+    require([n.attrs.get('href') for n in covers.find('a')] == [f'/cerchi/guide/{slug}/' for slug in GUIDES14], 'Triad 14 cover links changed')
+    images = list(covers.find('img'))
+    require(len(images) == 3, 'Triad 14 needs exactly three approved covers')
+    for image, slug in zip(images, GUIDES14):
+        guide_path = f'cerchi/guide/{slug}/index.html'
+        guide = v.Tree(frozen(guide_path, TRIAD14_BASE).decode())
+        cover = next(n for n in guide.root.find('img') if '1600x900' in n.attrs.get('src', ''))
+        require(all(image.attrs.get(k) == cover.attrs.get(k) for k in ['src', 'alt', 'width', 'height']), 'Triad 14 approved cover/alt changed')
+        asset = image.attrs['src'].lstrip('/')
+        require((ROOT / asset).read_bytes() == frozen(asset, TRIAD14_BASE), 'Triad 14 approved cover bytes changed')
+        require((ROOT / guide_path).read_bytes() == frozen(guide_path, TRIAD14_BASE), 'A published Triad 14 guide changed')
 
 
 def verify_protected(protected, read_bytes):
@@ -228,7 +326,10 @@ def check(source, self_test):
     require(len(blocks) == 9 and blocks[0].startswith('## ') and blocks[1].startswith('### '), 'Frozen source structure changed')
     markup, before = (ROOT / PAGE).read_text(), original(PAGE).decode()
     verify(markup, before, blocks)
+    require(sections(markup) == sections(frozen(PAGE, TRIAD14_BASE).decode()), 'The thirteen published English triads changed')
     verify_it((ROOT / IT_PAGE).read_text())
+    verify_triad14((ROOT / TRIAD14_PAGE).read_text())
+    require(not (ROOT / 'en/cerchi/triads/legge-colpa-punizione/index.html').exists(), 'English Triad 14 is not authorized')
     # Keep the baseline inventory; only the hub and sitemap may evolve.
     paths = subprocess.check_output(['git', 'ls-tree', '-r', '--name-only', BASE, 'en/cerchi/guides', 'cerchi', 'sitemap.xml', 'assets/img'], cwd=ROOT, text=True).splitlines()
     protected = {path: original(path) for path in paths}
@@ -323,6 +424,84 @@ def check(source, self_test):
             else:
                 raise AssertionError('Invalid Italian mutation accepted: ' + label)
         verify_it(italian)
+        # Extend the existing positive/negative suite; no historical mutation
+        # or source/guide protection above is removed or made conditional.
+        fourteenth = cards(italian)[13]
+        italian14_mutations = [
+            ('missing', italian.replace(fourteenth, '', 1)),
+            ('duplicated', italian.replace(fourteenth, fourteenth + fourteenth, 1)),
+            ('premature', italian.replace(fourteenth, '', 1).replace(last_it, fourteenth + last_it, 1)),
+            ('anchor', italian.replace('id="quattordicesima-triade"', 'id="missing"', 1)),
+            ('title', italian.replace(fourteenth, fourteenth.replace('Legge, colpa, punizione', 'Legge e punizione', 1), 1)),
+            ('question', italian.replace(fourteenth, fourteenth.replace('Chi può trasformare', 'Chi deve trasformare', 1), 1)),
+            ('authors', italian.replace(fourteenth, fourteenth.replace('Cesare Beccaria', 'Beccaria', 1), 1)),
+            ('reading link', italian.replace(fourteenth, fourteenth.replace('/cerchi/triadi/legge-colpa-punizione/', '/cerchi/triadi/missing/', 1), 1)),
+            ('guide link', italian.replace(fourteenth, fourteenth.replace('/cerchi/guide/' + GUIDES14[0] + '/', '/cerchi/guide/missing/', 1), 1)),
+            ('metadata count', italian.replace('Le quattordici triadi', 'Le tredici triadi', 1)),
+            ('historical order', italian.replace(cards(italian)[0], '__FIRST__', 1).replace(cards(italian)[1], cards(italian)[0], 1).replace('__FIRST__', cards(italian)[1], 1)),
+        ]
+        schema_node = next(n for n in v.Tree(italian).root.find('script') if n.attrs.get('type') == 'application/ld+json')
+        schema_text = v.content(schema_node)
+        for label, mutate in [
+            ('schema guide missing', lambda parts: parts[:-1]),
+            ('schema guide duplicate', lambda parts: parts[:-1] + [parts[-2]]),
+            ('schema guides reordered', lambda parts: parts[:-3] + list(reversed(parts[-3:]))),
+            ('schema reading instead of guide', lambda parts: parts[:-1] + [{'@type': 'Article', 'name': 'Triade 14', 'url': TRIAD14_URL}]),
+            ('schema extra reading', lambda parts: parts + [{'@type': 'Article', 'name': 'Triade 14', 'url': TRIAD14_URL}]),
+        ]:
+            schema = json.loads(schema_text)
+            schema['hasPart'] = mutate(schema['hasPart'])
+            italian14_mutations.append((label, italian.replace(schema_text, json.dumps(schema, ensure_ascii=False), 1)))
+        for i, historical in enumerate(cards(italian)[:13], 1):
+            italian14_mutations += [
+                (f'historical {i} text', italian.replace(historical, historical.replace('</h2>', ' altered</h2>', 1), 1)),
+                (f'historical {i} link', italian.replace(historical, historical.replace('href="', 'href="/missing', 1), 1)),
+            ]
+        for label, candidate in italian14_mutations:
+            require(candidate != italian, 'Ineffective Triad 14 index regression: ' + label)
+            try:
+                verify_it(candidate)
+            except (AssertionError, StopIteration):
+                tests += 1
+                print('PASS rejected: Triad 14 index ' + label)
+            else:
+                raise AssertionError('Invalid Triad 14 index mutation accepted: ' + label)
+        reading = (ROOT / TRIAD14_PAGE).read_text()
+        body = re.search(r'(<div class="reading-prose" data-source-body>)(.*?)(</div>)', reading, re.S)
+        paragraphs = re.findall(r'<p\b.*?</p>', body[2], re.S)
+        reading_mutations = [
+            ('title', reading.replace(' Legge, colpa, punizione</h1>', ' Legge e punizione</h1>', 1)),
+            ('question', reading.replace('Chi può trasformare un atto', 'Chi deve trasformare un atto', 1)),
+            ('body question', reading.replace('<strong>Domanda di lettura:</strong> Chi può trasformare', '<strong>Domanda di lettura:</strong> Chi deve trasformare', 1)),
+            ('heading', reading.replace('Le ferite che arrivano fino a noi</h2>', 'Le ferite di oggi</h2>', 1)),
+            ('paragraph removed', reading.replace(paragraphs[0], '', 1)),
+            ('paragraph added', reading.replace(paragraphs[0], paragraphs[0] + '<p>Additional interpretation.</p>', 1)),
+            ('paragraph order', reading.replace(paragraphs[0], '__FIRST__', 1).replace(paragraphs[1], paragraphs[0], 1).replace('__FIRST__', paragraphs[1], 1)),
+            ('closing', reading.replace('Il confine del potere si misura anche qui:', 'Il confine si misura qui:', 1)),
+            ('literal text', reading.replace('Sul corpo di Polinice', 'Sul corpo di un uomo', 1)),
+            ('emphasis removed', reading.replace('<strong>Sofocle · Michel Foucault · Cesare Beccaria</strong>', 'Sofocle · Michel Foucault · Cesare Beccaria', 1)),
+            ('essay link', reading.replace('/saggi/saggio-3-governi-senza-firma.html', '/saggi/missing.html', 1)),
+            ('guide link', reading.replace('https://alessandro-gentili.it/cerchi/guide/' + GUIDES14[0] + '/', 'https://alessandro-gentili.it/cerchi/guide/missing/', 1)),
+            ('cover', reading.replace('src="/assets/img/cerchi/cerchi-guida-40', 'src="/assets/img/cerchi/missing-40', 1)),
+            ('alt', reading.replace('alt="', 'alt="altered ', 1)),
+            ('unapproved extra source', reading.replace(paragraphs[-1], paragraphs[-1] + '<p><a href="https://example.org/">New source</a></p>', 1)),
+            ('unmarked extra text', reading.replace('</article>', '<p>Additional interpretation.</p></article>', 1)),
+            ('English alternate', reading.replace('</head>', '<link rel="alternate" hreflang="en" href="https://alessandro-gentili.it/en/cerchi/triads/law/">\n</head>', 1)),
+            ('canonical', reading.replace('rel="canonical" href="' + TRIAD14_URL, 'rel="canonical" href="https://example.org/', 1)),
+            ('contents target', reading.replace('href="#le-ferite-che-arrivano-fino-a-noi"', 'href="#missing"', 1)),
+        ]
+        for label, candidate in reading_mutations:
+            require(candidate != reading, 'Ineffective Triad 14 reading regression: ' + label)
+            try:
+                verify_triad14(candidate)
+            except (AssertionError, StopIteration):
+                tests += 1
+                print('PASS rejected: Triad 14 reading ' + label)
+            else:
+                raise AssertionError('Invalid Triad 14 reading mutation accepted: ' + label)
+        verify_triad14(reading)
+        verify_it(italian)
+        print('PASS accepted: approved complete Italian Triad 14, exact 42-guide schema, thirteen byte-identical historical cards; English remains thirteen')
         carson = (ROOT / 'cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/index.html').read_text()
         preserve_carson_markup(carson)
         for label, candidate in [
@@ -338,7 +517,7 @@ def check(source, self_test):
             else:
                 raise AssertionError('Invalid Carson mutation accepted: ' + label)
         verify(markup, before, blocks)
-    print(f'PASS: frozen SHA, title/question/seven paragraphs, thirteen native anchors, frozen twelve IT/EN triads, approved bilingual Triad 13, original covers and guide links; {tests} rejection regressions and intact positive fixture.')
+    print(f'PASS: frozen SHA, title/question/seven paragraphs, thirteen English native anchors, frozen twelve IT/EN triads, approved bilingual Triad 13, approved Italian-only Triad 14, original covers and exact 42 Italian guide links; {tests} rejection regressions and intact positive fixtures.')
 
 
 if __name__ == '__main__':
