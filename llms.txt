@@ -107,7 +107,7 @@ The eighth complete English triad localizes the seventh Cerchi d'inchiostro thre
 
 ## Published corpus scope
 
-- Italian author guides: 39
+- Italian author guides: 40
 - English author guides: 39
 - Italian triads: 13
 - English triad reading paths: 13
