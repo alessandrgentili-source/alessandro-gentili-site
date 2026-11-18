@@ -48,3 +48,12 @@
   .triad12-it-reading .triad12-it-prose { column-count:1; font-size:11pt; line-height:1.6; }
   .triad12-it-reading h2,.triad12-it-reading h3 { break-after:avoid; }
 }
+
+/* Triad 14 index: reuse the recent cover/lens grammar without changing XIII. */
+#quattordicesima-triade .triad-featured-covers { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.4rem; margin:1rem 0; }
+#quattordicesima-triade .triad-featured-covers a { display:block; min-width:0; }
+#quattordicesima-triade .triad-featured-covers img { display:block; width:100%; height:auto; }
+#quattordicesima-triade .triad-cover-name { display:block; margin-top:.35rem; font-size:.7rem; line-height:1.45; }
+#quattordicesima-triade > .meta { color:var(--muted); font-size:.9rem; }
+#quattordicesima-triade > .meta strong { font-weight:400; }
+#quattordicesima-triade a:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }

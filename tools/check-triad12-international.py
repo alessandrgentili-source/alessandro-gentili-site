@@ -159,7 +159,28 @@ def verify_triad13(node, language):
             require((ROOT / guide_path).read_bytes() == frozen(guide_path), 'A published Triad 13 guide changed')
 
 
+# Exact index-only presentation proposed for Triad 14. Like restore_triad12_layout,
+# invert only the approved structural delta before applying every frozen check.
+# Both new cards are checked byte-for-byte FIRST: wrong copy, assets, links,
+# order or extra content can never be hidden by the inverse presentation mapping.
+INDEX14_ALIGNMENT_BASE = 'f5aa5f2525f5bae45ed39f907fa419d7f005a597'
+INDEX14_ALIGNMENT_SHA = {'it': '46140ff1c91f3d8aa41b1a428ee78db1308e5870649f0425fc2d71adfca765c2', 'en': 'bc57bb309ddb2d68c8d34ddc7ecdb221de1b62969e3b0b7893da183b5327c3d3'}
+
+
+def restore_index14_alignment(markup, language):
+    require(language in {'it', 'en'}, 'Unsupported index alignment language')
+    path = IT_PAGE if language == 'it' else PAGE
+    blocks = cards(markup) if language == 'it' else sections(markup)
+    require(len(blocks) == 14, 'Exactly fourteen index cards required for alignment')
+    current = blocks[13]
+    require(hashlib.sha256(current.encode()).hexdigest() == INDEX14_ALIGNMENT_SHA[language], 'Triad 14 index differs from the reviewed presentation: ' + language)
+    baseline = frozen(path, INDEX14_ALIGNMENT_BASE).decode()
+    previous = cards(baseline)[13] if language == 'it' else sections(baseline)[13]
+    return markup.replace(current, previous, 1)
+
+
 def verify_it(markup):
+    markup = restore_index14_alignment(markup, 'it')
     tree = v.Tree(markup)
     require(not tree.malformed, str(tree.malformed))
     previous, current = cards(frozen(IT_PAGE).decode()), cards(markup)
@@ -330,6 +351,7 @@ def verify_en14_section(node):
 
 
 def verify(markup, before, blocks):
+    markup = restore_index14_alignment(markup, 'en')
     tree = v.Tree(markup)
     require(not tree.malformed, str(tree.malformed))
     old_sections, new_sections = sections(before), sections(markup)
@@ -376,6 +398,7 @@ def verify(markup, before, blocks):
 
 def verify_triad12_it_reading(markup):
     """Add only the exact approved v0.5; preserve every pre-existing index byte."""
+    markup = restore_index14_alignment(markup, 'it')
     baseline = frozen(IT_PAGE, TRIAD12_IT_BASE).decode()
     matches = re.findall(r'\n<section class="triad12-it-reading" id="lettura-triade-12"[^>]*>.*?</section>', markup, re.S)
     require(len(matches) == 1, 'Exactly one approved Italian Triad 12 reading required')
@@ -429,6 +452,35 @@ def check(source, self_test):
     require('English triad reading paths: 14' in (ROOT / 'llms.txt').read_text(), 'Machine-readable inventory stale')
     tests = 0
     if self_test:
+        for alignment_language, alignment_path in [('it', IT_PAGE), ('en', PAGE)]:
+            current_alignment = (ROOT / alignment_path).read_text()
+            require(restore_index14_alignment(current_alignment, alignment_language) == frozen(alignment_path, INDEX14_ALIGNMENT_BASE).decode(), 'Alignment changed a pre-existing index byte outside XIV')
+            alignment_card = (cards(current_alignment) if alignment_language == 'it' else sections(current_alignment))[13]
+            alignment_images = re.findall(r'<img\b[^>]*>', alignment_card)
+            alignment_teaser = re.search(r'<div class="triad-lens"><p>(.*?)</p></div>', alignment_card, re.S)[1]
+            alignment_cases = [
+                ('missing cover', alignment_card.replace(alignment_images[0], '', 1)),
+                ('cover source', alignment_card.replace('src="', 'src="/unapproved', 1)),
+                ('cover alt', alignment_card.replace('alt="', 'alt="altered ', 1)),
+                ('cover order', alignment_card.replace(alignment_images[0], '__FIRST__', 1).replace(alignment_images[1], alignment_images[0], 1).replace('__FIRST__', alignment_images[1], 1)),
+                ('teaser changed', alignment_card.replace(alignment_teaser, alignment_teaser + ' Altered.', 1)),
+                ('teaser missing', alignment_card.replace('<div class="triad-lens"><p>' + alignment_teaser + '</p></div>', '', 1)),
+                ('question changed', alignment_card.replace('Chi può trasformare' if alignment_language == 'it' else 'Who gets to decide', 'Changed question', 1)),
+                ('reading link', alignment_card.replace('/cerchi/triadi/legge-colpa-punizione/' if alignment_language == 'it' else '/en/cerchi/triads/law-guilt-punishment/', '/missing/', 1)),
+                ('guide link', alignment_card.replace('/cerchi/guide/' if alignment_language == 'it' else '/en/cerchi/guides/', '/missing/', 1)),
+                ('extra paragraph', alignment_card.replace('</article>' if alignment_language == 'it' else '</section>', '<p>Additional interpretation.</p>' + ('</article>' if alignment_language == 'it' else '</section>'), 1)),
+            ]
+            if alignment_language == 'en':
+                alignment_cases += [('Italian original link', alignment_card.replace('/cerchi/guide/sofocle-legge-colpa-limite-citta/', '/missing/', 1)), ('Italian reading link', alignment_card.replace('/cerchi/triadi/legge-colpa-punizione/', '/missing/', 1))]
+            for label, candidate_card in alignment_cases:
+                require(candidate_card != alignment_card, 'Ineffective index alignment mutation: ' + label)
+                try:
+                    restore_index14_alignment(current_alignment.replace(alignment_card, candidate_card, 1), alignment_language)
+                except AssertionError:
+                    tests += 1
+                else:
+                    raise AssertionError('Invalid index alignment mutation accepted: ' + label)
+        print('PASS accepted: exact XIV cover/lens/reading/originals layout, all earlier index bytes restored; all historical assertions retained')
         italian12 = (ROOT / IT_PAGE).read_text()
         reading12 = re.search(r'\n<section class="triad12-it-reading" id="lettura-triade-12"[^>]*>.*?</section>', italian12, re.S)[0]
         source12 = re.search(r'<div class="triad12-it-prose">(.*?)</div>', reading12, re.S)[1]
