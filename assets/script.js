@@ -227,6 +227,8 @@ if (cookieStatisticsPreference === 'accepted') {
 
 
 const bilingualPairs = {
+  "/cerchi/guide/michel-foucault-la-vita-sotto-esame/": { it: "/cerchi/guide/michel-foucault-la-vita-sotto-esame/", en: "/en/cerchi/guides/michel-foucault-life-under-examination/" },
+  "/en/cerchi/guides/michel-foucault-life-under-examination/": { it: "/cerchi/guide/michel-foucault-la-vita-sotto-esame/", en: "/en/cerchi/guides/michel-foucault-life-under-examination/" },
   "/cerchi/guide/sofocle-legge-colpa-limite-citta/": { it: "/cerchi/guide/sofocle-legge-colpa-limite-citta/", en: "/en/cerchi/guides/sophocles-law-guilt-limits-city/" },
   "/en/cerchi/guides/sophocles-law-guilt-limits-city/": { it: "/cerchi/guide/sofocle-legge-colpa-limite-citta/", en: "/en/cerchi/guides/sophocles-law-guilt-limits-city/" },
   "/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/": { it: "/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/", en: "/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/" },
