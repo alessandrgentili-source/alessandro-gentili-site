@@ -1,6 +1,7 @@
 """Validate one proposed Cerchi guide without changing published pages."""
 
 import argparse
+import hashlib
 from html import unescape
 from html.parser import HTMLParser
 import json
@@ -41,6 +42,114 @@ EDITORIAL_TOC_ALIASES = {
     "Sources and copyright": "Sources, method and copyright",
     "The agreement with Iran": "The agreement with Iran (1957)",
 }
+
+
+# Author-authorized Triad 14 compatibility, 18 November 2026.
+# These exceptions are selected ONLY by the immutable original master bytes.
+# General matching and all existing guide checks retain their original defaults.
+TRIAD14_APPROVED = {
+    "73e6baf15a751ae493af496620d0ea72a2c2ad25488520be3e1cf68d682dd3e7": {
+        "number": 40,
+        "language": "it",
+        "toc_aliases": {
+            "Eredità e ricezione": "Eredità — Le molte vite di Sofocle",
+            "Percorsi di lettura": "Percorsi di studio e lettura"
+        },
+        "final_headings": [
+            "Fonti e copyright",
+            "Prosegui la lettura",
+            "Chiusura editoriale — Il tempo che resta per cambiare"
+        ],
+        "cover_name": "cerchi-guida-40-sofocle-legge-colpa-limite-citta-1600x900.webp",
+        "cover_sha256": "37bf2878d924b5f8b29153653bfb85553dec7fc4b875d6ea1798010ad5b26511"
+    },
+    "b6be9d78a700b2a3b12cd9f541447b3765190f9694a0b9d74d9f896cc1417610": {
+        "number": 40,
+        "language": "en",
+        "toc_aliases": {
+            "Legacy and reception": "Legacy — The many lives of Sophocles"
+        },
+        "final_headings": [
+            "Sources and copyright",
+            "Further reading",
+            "Editorial conclusion — The time left to change"
+        ],
+        "cover_name": "cerchi-guida-40-sofocle-legge-colpa-limite-citta-1600x900.webp",
+        "cover_sha256": "37bf2878d924b5f8b29153653bfb85553dec7fc4b875d6ea1798010ad5b26511"
+    },
+    "a4f362e0bf4d72b6e7296c974398ac636044bd0177373850b990921ba38f0ee3": {
+        "number": 41,
+        "language": "it",
+        "toc_aliases": {
+            "Errori comuni": "Errori comuni da evitare",
+            "Glossario": "Glossario di orientamento",
+            "Chiusura editoriale": "Chiusura — Quel che un fascicolo non può decidere"
+        },
+        "final_headings": [
+            "Fonti, edizioni e copyright",
+            "Prosegui la lettura",
+            "Chiusura — Quel che un fascicolo non può decidere"
+        ],
+        "cover_name": "CERCHI_GUIDA_41_MICHEL_FOUCAULT_COVER_1600x900.webp",
+        "cover_sha256": "f16cc60ab9909f72fd55b61e58fe86bd0690d5e76ca9e00b5177c5ad02ec5462"
+    },
+    "11adc46a70e33bfb66085d9486d9452590d025b48a1a0d8695631853eb322750": {
+        "number": 41,
+        "language": "en",
+        "toc_aliases": {},
+        "final_headings": [
+            "Sources, editions and copyright",
+            "Further reading",
+            "Closing reflection — What a File Cannot Decide"
+        ],
+        "cover_name": "CERCHI_GUIDA_41_MICHEL_FOUCAULT_COVER_1600x900.webp",
+        "cover_sha256": "f16cc60ab9909f72fd55b61e58fe86bd0690d5e76ca9e00b5177c5ad02ec5462"
+    },
+    "15db288984edc44fa98adf7d404488646789bffed45e958aa68468646b0e0ebc": {
+        "number": 42,
+        "language": "it",
+        "toc_aliases": {},
+        "final_headings": [
+            "Fonti e copyright",
+            "Prosegui la lettura",
+            "Chiusura editoriale — Il tempo di rimediare"
+        ],
+        "cover_name": "cerchi-guida-42-cesare-beccaria-limite-diritto-punire-1600x900.webp",
+        "cover_sha256": "f68dff74c4767eb629ee311e1707f2ed800c8192f6aa39b794581cc5dc490e58"
+    },
+    "d27a9d2da9c6b554b6508100b3a5194ca68f61559fff1fe6e68b7800016c63d3": {
+        "number": 42,
+        "language": "en",
+        "toc_aliases": {},
+        "final_headings": [
+            "Sources and copyright",
+            "Continue reading",
+            "Closing reflection — The time to put things right"
+        ],
+        "cover_name": "cerchi-guida-42-cesare-beccaria-limite-diritto-punire-1600x900.webp",
+        "cover_sha256": "f68dff74c4767eb629ee311e1707f2ed800c8192f6aa39b794581cc5dc490e58"
+    }
+}
+
+
+def approved_source_profile(source):
+    return TRIAD14_APPROVED.get(hashlib.sha256(source.read_bytes()).hexdigest())
+
+
+def source_text(source):
+    text = source.read_text(encoding="utf-8")
+    # Only these hash-pinned masters may exclude their original YAML workflow
+    # frontmatter. No derived or changed manuscript acquires an exception.
+    if approved_source_profile(source) and text.startswith("---\n"):
+        text = re.sub(r"\A---\n.*?\n---\n", "", text, count=1, flags=re.S)
+    return text
+
+
+def approved_cover_matches(profile, cover, number, language):
+    return bool(profile and profile["number"] == number
+                and profile["language"] == language
+                and cover.name == profile["cover_name"]
+                and hashlib.sha256(cover.read_bytes()).hexdigest() == profile["cover_sha256"])
 
 
 class Node:
@@ -169,7 +278,7 @@ def manuscript_blocks(lines):
 
 def manuscript_structure(source):
     """Parse the supported H1, opening, numbered index and H2/H3 guide layout."""
-    lines = source.read_text(encoding="utf-8").splitlines()
+    lines = source_text(source).splitlines()
     if any(re.match(r"^\s*(?:```|~~~|<(?!!--)|#{4,6}\s)", line) for line in lines):
         raise ValueError("unsupported Markdown structure; human review is required")
     nonblank = [index for index, line in enumerate(lines) if line.strip()]
@@ -282,7 +391,9 @@ def editorial_text_key(value):
     return normalized(value).replace("’", "'").replace("‘", "'").replace("ʼ", "'")
 
 
-def toc_label_matches(label, heading):
+def toc_label_matches(label, heading, approved_profile=None):
+    if approved_profile and approved_profile["toc_aliases"].get(normalized(label)) == normalized(heading):
+        return True
     label_key, heading_key = toc_key(label), toc_key(heading)
     if label_key == heading_key:
         return True
@@ -295,7 +406,7 @@ def toc_label_matches(label, heading):
     return heading_key.startswith(label_key + " — ") and bool(heading_key[len(label_key) + 3:].strip())
 
 
-def final_headings_valid(headings, language="it"):
+def final_headings_valid(headings, language="it", approved_profile=None):
     """Check final sections without accepting omissions or premature endings.
 
     >>> close = "Editorial conclusion — The future enters the accounts"
@@ -323,6 +434,9 @@ def final_headings_valid(headings, language="it"):
     >>> final_headings_valid(["Sources", "Continue reading", "Editorial conclusion —   "], "en")
     False
     """
+    if (approved_profile and approved_profile["language"] == language
+            and list(headings[-3:]) == approved_profile["final_headings"]):
+        return True
     if language == "en":
         # Normalize the approved English title before every final-order check.
         headings = ["Closing" if re.fullmatch(r"Editorial conclusion(?: — \S(?:.*\S)?)?", h)
@@ -392,6 +506,7 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
     if not all(path.is_file() for path in (page, cover, source)):
         return errors
 
+    approved_profile = approved_source_profile(source)
     html = page.read_text(encoding="utf-8")
     tree = Tree(html)
     nodes = list(walk(tree.root))
@@ -520,8 +635,15 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
             second_url = urljoin(canonical, hero_links[1].attrs.get("href", ""))
             require(second_url == BASE + triads_path or second_url.startswith(BASE + guide_directory + "/"), "secondary hero CTA must point to Triadi or an existing guide")
 
+    if number in {40, 41, 42}:
+        require(bool(approved_profile and approved_profile["number"] == number
+                     and approved_profile["language"] == language),
+                "Triad 14 requires the hash-pinned original approved master")
+        require(approved_cover_matches(approved_profile, cover, number, language),
+                "Triad 14 cover must match the approved original filename and SHA-256")
     name_match = COVER_NAME.fullmatch(cover.name)
-    require(bool(name_match and number is not None and int(name_match.group(1)) == number), "cover filename must use the standard guide number and 1600x900 WebP naming")
+    require(bool(name_match and number is not None and int(name_match.group(1)) == number)
+            or (number == 41 and approved_cover_matches(approved_profile, cover, number, language)), "cover filename must use the standard guide number and 1600x900 WebP naming")
     try:
         require(webp_size(cover) == (1600, 900), "cover must be a genuine 1600x900 WebP")
     except ValueError as error:
@@ -635,7 +757,7 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
         heading = normalized(content(h2[0])) if h2 else ""
         require(not re.match(r"\d+[.)]\s", heading), f"numbered body H2: {heading}")
         headings.append(heading)
-    require(final_headings_valid(headings, language), "final sections must be Fonti → Prosegui la lettura → Chiusura editoriale")
+    require(final_headings_valid(headings, language, approved_profile), "final sections must be Fonti → Prosegui la lettura → Chiusura editoriale")
     if len(sections) >= 3:
         progress_links = list(sections[-2].find("a"))
         require(any(urljoin(canonical, link.attrs.get("href", "")) == BASE + hub_path for link in progress_links), "Prosegui la lettura needs the Cerchi hub link")
@@ -655,7 +777,7 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
         for link in toc_links:
             target = link.attrs.get("href", "").removeprefix("#")
             label = re.sub(r"^\d+[.)]\s*", "", normalized(content(link)))
-            require(target in section_by_id and toc_label_matches(label, section_by_id.get(target, "")), f"TOC label/section mismatch: #{target}")
+            require(target in section_by_id and toc_label_matches(label, section_by_id.get(target, ""), approved_profile), f"TOC label/section mismatch: #{target}")
         opening_links = [link for link in toc_links if "data-atlas-opening" in link.attrs]
         require(not opening_links or (atlas and len(opening_links) == 1 and toc_links[0] is opening_links[0] and bool(sections) and opening_links[0].attrs.get("href") == "#" + sections[0].attrs.get("id", "")), "supplementary TOC opening must uniquely target the actual introduction first")
         numbered_targets = targets[len(opening_links):]
@@ -851,10 +973,76 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
                         require(editorial_only(sections[position]) == normalized(" ".join(blocks)),
                                 f"Atlas section {position} has missing, added or altered editorial text")
             for position, (label, (heading, _, _)) in enumerate(zip(index, source_sections), 1):
-                require(toc_label_matches(label, heading), f"manuscript index item {position} does not match its source H2: {label}")
+                require(toc_label_matches(label, heading, approved_profile), f"manuscript index item {position} does not match its source H2: {label}")
     except (UnicodeError, ValueError) as error:
         errors.append(f"source cannot be fully checked: {error}")
     return errors
+
+
+def triad14_self_test(bundle, candidates, root):
+    """Exercise all six original masters and rejection mutations without writes to the site.
+
+    The author-approved ZIP and generated candidate tree stay outside the public
+    repository. Call this function with their paths; no fixture weakens a gate.
+    """
+    import tempfile
+    tests = []
+    for source in sorted(Path(bundle).glob("*/*/*.md")):
+        profile = approved_source_profile(source)
+        if not profile:
+            continue
+        language, number = profile["language"], profile["number"]
+        directory = "cerchi/guide" if language == "it" else "en/cerchi/guides"
+        matching = [p for p in (Path(candidates) / directory).glob("*/index.html")
+                    if f"{'Guida' if language == 'it' else 'Guide'} {number} ·" in p.read_text(encoding="utf-8")]
+        assert len(matching) == 1, (number, language, "candidate missing or ambiguous")
+        original = matching[0]
+        cover = Path(bundle) / str(number) / "cover" / profile["cover_name"]
+        original_html = original.read_text(encoding="utf-8")
+        def check(page, asset=cover, master=source):
+            return validate(page.resolve(), asset.resolve(), master.resolve(), Path(root).resolve())
+        assert not check(original), (number, language, check(original))
+        tests.append((number, language, "original master and HTML", True))
+        # A pin grants only its declared aliases; ordinary callers retain the
+        # old matching behavior. The final-order exception is an exact tuple.
+        for label, heading in profile["toc_aliases"].items():
+            assert not toc_label_matches(label, heading)
+            assert toc_label_matches(label, heading, profile)
+            assert not toc_label_matches(label, heading + " ALTERED", profile)
+        with tempfile.TemporaryDirectory(prefix="triad14-rejection-") as temp:
+            temp = Path(temp)
+            page = temp / directory / original.parent.name / "index.html"
+            page.parent.mkdir(parents=True)
+            def reject(label, html):
+                assert html != original_html, label
+                page.write_text(html, encoding="utf-8")
+                assert check(page), (number, language, "mutation escaped", label)
+                tests.append((number, language, label, True))
+            reject("altered H1", original_html.replace("<h1>", "<h1>ALTERED ", 1))
+            sections = re.findall(r'<article class="item guide-section[^"\n]*"[^>]*>.*?</article>', original_html, re.S)
+            assert len(sections) >= 3
+            reject("section order", original_html.replace(sections[1], "SWAP-TEMP", 1).replace(sections[2], sections[1], 1).replace("SWAP-TEMP", sections[2], 1))
+            reject("missing section", original_html.replace(sections[2], "", 1))
+            reject("altered closing heading", original_html.replace(sections[-1], sections[-1].replace("<h2>", "<h2>ALTERED ", 1), 1))
+            faq = next(x for x in sections if 't14-faq' in x)
+            reject("altered FAQ", original_html.replace(faq, faq.replace("<h3>", "<h3>ALTERED ", 1), 1))
+            reject("missing FAQ answer", original_html.replace(faq, re.sub(r'<p>.*?</p>', '', faq, count=1, flags=re.S), 1))
+            reject("table cell", re.sub(r'(<td\b[^>]*>)', r'\1ALTERED ', original_html, count=1))
+            page.write_text(original_html, encoding="utf-8")
+            master = temp / source.name
+            master.write_bytes(source.read_bytes() + b"\n")
+            assert approved_source_profile(master) is None
+            assert any("hash-pinned original" in e for e in check(page, master=master))
+            tests.append((number, language, "unapproved source bytes", True))
+            image = temp / cover.name
+            raw = bytearray(cover.read_bytes()); raw[-1] ^= 1; image.write_bytes(raw)
+            assert any("approved original filename and SHA-256" in e for e in check(page, asset=image))
+            tests.append((number, language, "altered original image", True))
+            renamed = temp / ("renamed-" + cover.name); renamed.write_bytes(cover.read_bytes())
+            assert any("approved original filename and SHA-256" in e for e in check(page, asset=renamed))
+            tests.append((number, language, "renamed image", True))
+    assert len([t for t in tests if t[2] == "original master and HTML"]) == 6
+    return tests
 
 
 def main():
