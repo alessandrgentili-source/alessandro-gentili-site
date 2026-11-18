@@ -6,3 +6,28 @@
 #tredicesima-triade .triad-featured-covers a { display:block; min-width:0; }
 #tredicesima-triade .triad-featured-covers img { display:block; width:100%; height:auto; }
 #tredicesima-triade a:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+
+/* Approved Italian Triad 12 reading: confined to the added non-card section. */
+.triad12-it-reading {
+  grid-column:1 / -1; min-width:0; margin:1.5rem 0 2.5rem;
+  padding:clamp(1.5rem,4vw,3.5rem) clamp(.8rem,3vw,3rem);
+  border-block:1px solid var(--gold); scroll-margin-top:8rem;
+}
+.triad12-it-reading .triad12-it-prose { max-width:70ch; margin-inline:auto; font:1.2rem/1.85 Georgia,serif; color:var(--ink); }
+.triad12-it-reading h2 { max-width:24ch; margin:0 0 1.2rem; font:400 clamp(2rem,3.5vw,3.2rem)/1.2 Georgia,serif; letter-spacing:-.025em; }
+.triad12-it-reading h3 { margin:2.4em 0 1em; font:400 clamp(1.65rem,2.5vw,2.2rem)/1.3 Georgia,serif; }
+.triad12-it-reading p { margin:0 0 1.5em; overflow-wrap:anywhere; }
+.triad12-it-reading .triad12-it-authors { font:.93rem/1.7 system-ui,sans-serif; margin-bottom:1.6rem; }
+.triad12-it-reading .triad12-it-question { font:1.35rem/1.65 Georgia,serif; margin-bottom:2rem; }
+.triad12-it-reading a { text-decoration:underline; text-underline-offset:.18em; overflow-wrap:anywhere; }
+.triad12-it-reading a:focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
+@media(max-width:600px) {
+  .triad12-it-reading { padding-inline:.5rem; }
+  .triad12-it-reading .triad12-it-prose { font-size:1.1rem; line-height:1.8; }
+  .triad12-it-reading .triad12-it-question { font-size:1.2rem; }
+}
+@media print {
+  .triad12-it-reading { display:block; grid-column:1 / -1; padding:1rem 0; border-color:#666; }
+  .triad12-it-reading .triad12-it-prose { font-size:11pt; line-height:1.6; max-width:none; }
+  .triad12-it-reading h2,.triad12-it-reading h3 { break-after:avoid; }
+}
