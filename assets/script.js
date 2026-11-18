@@ -227,6 +227,8 @@ if (cookieStatisticsPreference === 'accepted') {
 
 
 const bilingualPairs = {
+  "/cerchi/guide/sofocle-legge-colpa-limite-citta/": { it: "/cerchi/guide/sofocle-legge-colpa-limite-citta/", en: "/en/cerchi/guides/sophocles-law-guilt-limits-city/" },
+  "/en/cerchi/guides/sophocles-law-guilt-limits-city/": { it: "/cerchi/guide/sofocle-legge-colpa-limite-citta/", en: "/en/cerchi/guides/sophocles-law-guilt-limits-city/" },
   "/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/": { it: "/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/", en: "/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/" },
   "/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/": { it: "/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/", en: "/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/" },
   "/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/": { it: "/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/", en: "/en/cerchi/guides/rachel-carson-life-after-the-intervention/" },

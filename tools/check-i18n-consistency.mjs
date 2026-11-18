@@ -11,6 +11,7 @@ const assert = (condition, message) => {
 const read = (path) => readFile(join(root, path), 'utf8');
 
 const pages = [
+  { path: 'en/cerchi/guides/sophocles-law-guilt-limits-city/index.html', url: `${base}/en/cerchi/guides/sophocles-law-guilt-limits-city/`, it: `${base}/cerchi/guide/sofocle-legge-colpa-limite-citta/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/index.html', url: `${base}/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/`, it: `${base}/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/rachel-carson-life-after-the-intervention/index.html', url: `${base}/en/cerchi/guides/rachel-carson-life-after-the-intervention/`, it: `${base}/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/index.html', url: `${base}/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/`, it: `${base}/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/`, type: 'Article', breadcrumb: true },
@@ -61,6 +62,7 @@ const pages = [
 ];
 
 const italianPairs = [
+  { path: 'cerchi/guide/sofocle-legge-colpa-limite-citta/index.html', it: `${base}/cerchi/guide/sofocle-legge-colpa-limite-citta/`, en: `${base}/en/cerchi/guides/sophocles-law-guilt-limits-city/` },
   { path: 'cerchi/guide/john-maynard-keynes-economia-futuro-incerto/index.html', it: `${base}/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/`, en: `${base}/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/` },
   { path: 'cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/index.html', it: `${base}/cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/`, en: `${base}/en/cerchi/guides/rachel-carson-life-after-the-intervention/` },
   { path: 'cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/index.html', it: `${base}/cerchi/guide/edgar-morin-la-conoscenza-e-i-suoi-punti-ciechi/`, en: `${base}/en/cerchi/guides/edgar-morin-knowledge-and-its-blind-spots/` },
@@ -109,7 +111,6 @@ const italianPairs = [
 // Every published page must have an explicit language decision; new guides cannot
 // silently fall outside this inventory. IT-only is valid and does not imply a future URL.
 const italianOnlyGuides = [
-  "cerchi/guide/sofocle-legge-colpa-limite-citta/index.html",
 ];
 const collectHtml = async (directory) => {
   const result = [];
