@@ -11,6 +11,7 @@ const assert = (condition, message) => {
 const read = (path) => readFile(join(root, path), 'utf8');
 
 const pages = [
+  { path: 'en/cerchi/triads/law-guilt-punishment/index.html', url: `${base}/en/cerchi/triads/law-guilt-punishment/`, it: `${base}/cerchi/triadi/legge-colpa-punizione/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/cesare-beccaria-limits-right-to-punish/index.html', url: `${base}/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/`, it: `${base}/cerchi/guide/cesare-beccaria-limite-diritto-punire/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/michel-foucault-life-under-examination/index.html', url: `${base}/en/cerchi/guides/michel-foucault-life-under-examination/`, it: `${base}/cerchi/guide/michel-foucault-la-vita-sotto-esame/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/sophocles-law-guilt-limits-city/index.html', url: `${base}/en/cerchi/guides/sophocles-law-guilt-limits-city/`, it: `${base}/cerchi/guide/sofocle-legge-colpa-limite-citta/`, type: 'Article', breadcrumb: true },
@@ -64,6 +65,7 @@ const pages = [
 ];
 
 const italianPairs = [
+  { path: 'cerchi/triadi/legge-colpa-punizione/index.html', it: `${base}/cerchi/triadi/legge-colpa-punizione/`, en: `${base}/en/cerchi/triads/law-guilt-punishment/` },
   { path: 'cerchi/guide/cesare-beccaria-limite-diritto-punire/index.html', it: `${base}/cerchi/guide/cesare-beccaria-limite-diritto-punire/`, en: `${base}/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/` },
   { path: 'cerchi/guide/michel-foucault-la-vita-sotto-esame/index.html', it: `${base}/cerchi/guide/michel-foucault-la-vita-sotto-esame/`, en: `${base}/en/cerchi/guides/michel-foucault-life-under-examination/` },
   { path: 'cerchi/guide/sofocle-legge-colpa-limite-citta/index.html', it: `${base}/cerchi/guide/sofocle-legge-colpa-limite-citta/`, en: `${base}/en/cerchi/guides/sophocles-law-guilt-limits-city/` },

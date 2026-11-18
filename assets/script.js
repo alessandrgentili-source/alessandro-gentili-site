@@ -227,6 +227,8 @@ if (cookieStatisticsPreference === 'accepted') {
 
 
 const bilingualPairs = {
+  "/cerchi/triadi/legge-colpa-punizione/": { it: "/cerchi/triadi/legge-colpa-punizione/", en: "/en/cerchi/triads/law-guilt-punishment/" },
+  "/en/cerchi/triads/law-guilt-punishment/": { it: "/cerchi/triadi/legge-colpa-punizione/", en: "/en/cerchi/triads/law-guilt-punishment/" },
   "/cerchi/guide/cesare-beccaria-limite-diritto-punire/": { it: "/cerchi/guide/cesare-beccaria-limite-diritto-punire/", en: "/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/" },
   "/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/": { it: "/cerchi/guide/cesare-beccaria-limite-diritto-punire/", en: "/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/" },
   "/cerchi/guide/michel-foucault-la-vita-sotto-esame/": { it: "/cerchi/guide/michel-foucault-la-vita-sotto-esame/", en: "/en/cerchi/guides/michel-foucault-life-under-examination/" },
