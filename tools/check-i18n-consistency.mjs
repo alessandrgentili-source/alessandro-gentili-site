@@ -11,6 +11,7 @@ const assert = (condition, message) => {
 const read = (path) => readFile(join(root, path), 'utf8');
 
 const pages = [
+  { path: 'en/cerchi/guides/cesare-beccaria-limits-right-to-punish/index.html', url: `${base}/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/`, it: `${base}/cerchi/guide/cesare-beccaria-limite-diritto-punire/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/michel-foucault-life-under-examination/index.html', url: `${base}/en/cerchi/guides/michel-foucault-life-under-examination/`, it: `${base}/cerchi/guide/michel-foucault-la-vita-sotto-esame/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/sophocles-law-guilt-limits-city/index.html', url: `${base}/en/cerchi/guides/sophocles-law-guilt-limits-city/`, it: `${base}/cerchi/guide/sofocle-legge-colpa-limite-citta/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/index.html', url: `${base}/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/`, it: `${base}/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/`, type: 'Article', breadcrumb: true },
@@ -63,6 +64,7 @@ const pages = [
 ];
 
 const italianPairs = [
+  { path: 'cerchi/guide/cesare-beccaria-limite-diritto-punire/index.html', it: `${base}/cerchi/guide/cesare-beccaria-limite-diritto-punire/`, en: `${base}/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/` },
   { path: 'cerchi/guide/michel-foucault-la-vita-sotto-esame/index.html', it: `${base}/cerchi/guide/michel-foucault-la-vita-sotto-esame/`, en: `${base}/en/cerchi/guides/michel-foucault-life-under-examination/` },
   { path: 'cerchi/guide/sofocle-legge-colpa-limite-citta/index.html', it: `${base}/cerchi/guide/sofocle-legge-colpa-limite-citta/`, en: `${base}/en/cerchi/guides/sophocles-law-guilt-limits-city/` },
   { path: 'cerchi/guide/john-maynard-keynes-economia-futuro-incerto/index.html', it: `${base}/cerchi/guide/john-maynard-keynes-economia-futuro-incerto/`, en: `${base}/en/cerchi/guides/john-maynard-keynes-economy-of-an-uncertain-future/` },
@@ -113,7 +115,6 @@ const italianPairs = [
 // Every published page must have an explicit language decision; new guides cannot
 // silently fall outside this inventory. IT-only is valid and does not imply a future URL.
 const italianOnlyGuides = [
-  "cerchi/guide/cesare-beccaria-limite-diritto-punire/index.html",
 ];
 const collectHtml = async (directory) => {
   const result = [];
