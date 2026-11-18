@@ -45,6 +45,12 @@ GUIDES14 = [
     'michel-foucault-la-vita-sotto-esame',
     'cesare-beccaria-limite-diritto-punire',
 ]
+
+# Approved Italian v0.5 reading under card XII; private master remains outside the site.
+TRIAD12_IT_BASE = 'd675643a3e172024951b7de22af287ee7ce1638e'
+TRIAD12_IT_SOURCE_SHA = 'be0062cae051cf81d1a3e3e96bcf085d315c875bb2dc2b8aab15e2bb1bb51d8f'
+TRIAD12_IT_EDITORIAL_SHA = '01463ebb8585a20da4f102b60dda7d08a8bdf67032a02178e0b1999f880caea8'
+
 SLUGS = [
  ('enrico-mattei-energy-public-enterprise-autonomy', 'enrico-mattei-energia-impresa-pubblica-autonomia'),
  ('aristide-merloni-enterprise-fate-of-places', 'aristide-merloni-impresa-lavoro-destino-luoghi'),
@@ -368,6 +374,37 @@ def verify(markup, before, blocks):
     require(schema.get('hasPart') == english_guide_parts(), 'English CollectionPage must link exactly the 42 approved guides in order')
 
 
+def verify_triad12_it_reading(markup):
+    """Add only the exact approved v0.5; preserve every pre-existing index byte."""
+    baseline = frozen(IT_PAGE, TRIAD12_IT_BASE).decode()
+    matches = re.findall(r'\n<section class="triad12-it-reading" id="lettura-triade-12"[^>]*>.*?</section>', markup, re.S)
+    require(len(matches) == 1, 'Exactly one approved Italian Triad 12 reading required')
+    added = matches[0]
+    require(markup.replace(added, '', 1) == baseline, 'Pre-existing Italian index/card bytes changed')
+    twelfth = cards(baseline)[11]
+    require(markup.index(added) == markup.index(twelfth) + len(twelfth), 'Italian Triad 12 reading must immediately follow card XII')
+    tree = v.Tree(added)
+    require(not tree.malformed, str(tree.malformed))
+    section = next(tree.root.find('section'))
+    children = [n for n in section.children if isinstance(n, v.Node)]
+    require(len(children) == 1 and children[0].tag == 'div' and children[0].attrs.get('class') == 'triad12-it-prose', 'Italian Triad 12 source container changed')
+    require(not any(isinstance(n, str) and n.strip() for n in section.children), 'Unapproved Italian Triad 12 text outside source')
+    normalized = []
+    for node in children[0].children:
+        if isinstance(node, str):
+            normalized.append(node)
+            continue
+        require(node.tag in {'h2', 'h3', 'p'}, 'Unapproved Italian Triad 12 editorial block')
+        # Contextual nesting inside the existing index: H1 -> H2, H2 -> H3.
+        source_node = v.Node({'h2': 'h1', 'h3': 'h2', 'p': 'p'}[node.tag])
+        source_node.children = node.children
+        normalized.append(source_node)
+    signature = editorial_signature(normalized)
+    digest = hashlib.sha256(json.dumps(signature, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+    require(digest == TRIAD12_IT_EDITORIAL_SHA, 'Italian Triad 12 differs from approved Markdown ' + TRIAD12_IT_SOURCE_SHA)
+    require(section.attrs.get('aria-labelledby') == 'lettura-triade-12-titolo' and len([n for n in section.find('h2') if n.attrs.get('id') == 'lettura-triade-12-titolo']) == 1, 'Italian Triad 12 accessible heading changed')
+
+
 def check(source, self_test):
     require(hashlib.sha256(source.read_bytes()).hexdigest() == SHA, 'Approved source SHA-256 mismatch')
     raw = source.read_text().strip().split('\n\n')
@@ -377,6 +414,7 @@ def check(source, self_test):
     verify(markup, before, blocks)
     require(sections(markup)[:13] == sections(frozen(PAGE, TRIAD14_BASE).decode()), 'The thirteen published English triads changed')
     verify_it((ROOT / IT_PAGE).read_text())
+    verify_triad12_it_reading((ROOT / IT_PAGE).read_text())
     verify_triad14((ROOT / TRIAD14_PAGE).read_text())
     verify_triad14((ROOT / TRIAD14_EN_PAGE).read_text(), 'en')
     # Keep the baseline inventory; only the hub and sitemap may evolve.
@@ -391,6 +429,39 @@ def check(source, self_test):
     require('English triad reading paths: 14' in (ROOT / 'llms.txt').read_text(), 'Machine-readable inventory stale')
     tests = 0
     if self_test:
+        italian12 = (ROOT / IT_PAGE).read_text()
+        reading12 = re.search(r'\n<section class="triad12-it-reading" id="lettura-triade-12"[^>]*>.*?</section>', italian12, re.S)[0]
+        source12 = re.search(r'<div class="triad12-it-prose">(.*?)</div>', reading12, re.S)[1]
+        paragraphs12 = re.findall(r'<p\b.*?</p>', source12, re.S)
+        mutations12 = [
+            ('missing', italian12.replace(reading12, '', 1)),
+            ('duplicated', italian12.replace(reading12, reading12 + reading12, 1)),
+            ('position', italian12.replace(reading12, '', 1).replace(cards(italian12)[12], cards(italian12)[12] + reading12, 1)),
+            ('title', italian12.replace(reading12, reading12.replace('Triade 12 — Stato, impresa e comunità', 'Triade 12 — Impresa e comunità', 1), 1)),
+            ('section heading', italian12.replace(reading12, reading12.replace('La prova del presente</h3>', 'La prova odierna</h3>', 1), 1)),
+            ('question', italian12.replace(reading12, reading12.replace('Quando cambia chi guida', 'Quando cambia chi dirige', 1), 1)),
+            ('authorial first person', italian12.replace(reading12, reading12.replace('Ho voluto riunire', 'Abbiamo voluto riunire', 1), 1)),
+            ('temporal note', italian12.replace(reading12, reading12.replace('18 novembre 2026', '19 novembre 2026', 1), 1)),
+            ('emphasis', italian12.replace(reading12, reading12.replace('<em>Riferimenti contemporanei', 'Riferimenti contemporanei', 1).replace('</em>', '', 1), 1)),
+        ]
+        for i, paragraph in enumerate(paragraphs12, 1):
+            mutations12.append((f'paragraph {i} removed', italian12.replace(reading12, reading12.replace(paragraph, '', 1), 1)))
+        mutations12.append(('paragraph order', italian12.replace(reading12, reading12.replace(paragraphs12[2], '__FIRST__', 1).replace(paragraphs12[3], paragraphs12[2], 1).replace('__FIRST__', paragraphs12[3], 1), 1)))
+        mutations12.append(('paragraph added', italian12.replace(reading12, reading12.replace('</div>', '<p>New interpretation.</p></div>', 1), 1)))
+        for _, slug in SLUGS:
+            mutations12.append(('guide link ' + slug, italian12.replace(reading12, reading12.replace('/cerchi/guide/' + slug + '/', '/cerchi/guide/missing/', 1), 1)))
+        for i, historical in enumerate(cards(italian12), 1):
+            mutations12.append((f'card {i} changed', italian12.replace(historical, historical.replace('</h2>', ' changed</h2>', 1), 1)))
+        for label, candidate in mutations12:
+            require(candidate != italian12, 'Ineffective Italian Triad 12 regression: ' + label)
+            try:
+                verify_triad12_it_reading(candidate)
+            except (AssertionError, StopIteration):
+                tests += 1
+            else:
+                raise AssertionError('Invalid Italian Triad 12 mutation accepted: ' + label)
+        verify_triad12_it_reading(italian12)
+        print('PASS accepted: complete approved Italian Triad 12 v0.5 below XII; fourteen card bytes and all prior index bytes intact')
         for path in ['cerchi/index.html', 'sitemap.xml']:
             require(path in protected, 'Release surface absent from baseline: ' + path)
             verify_protected(protected, lambda candidate: protected[candidate] + b'\n<!-- Release update -->'
