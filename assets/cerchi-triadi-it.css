@@ -1,3 +1,8 @@
+.cerchi-intro > .item {
+  max-width:48rem;
+  margin-inline:auto;
+}
+
 /* Keep the site card styles and give the two illustrated triads a full row. */
 #soglie-pubblicate .essay-card {
   gap:.8rem;
