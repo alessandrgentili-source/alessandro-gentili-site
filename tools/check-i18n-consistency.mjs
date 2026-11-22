@@ -28,6 +28,7 @@ const pages = [
   { path: 'en/themes/index.html', url: `${base}/en/themes/`, it: `${base}/temi/`, type: 'CollectionPage' },
   { path: 'en/positioning/index.html', url: `${base}/en/positioning/`, type: 'ProfilePage' },
   { path: 'en/method/index.html', url: `${base}/en/method/`, type: 'WebPage' },
+  { path: 'en/method/the-separation-of-cognitive-powers/index.html', url: `${base}/en/method/the-separation-of-cognitive-powers/`, type: 'Article' },
   { path: 'en/system/index.html', url: `${base}/en/system/`, type: 'WebPage' },
   { path: 'en/cerchi/guides/alessandro-manzoni-language-history-responsibility/index.html', url: `${base}/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/`, it: `${base}/cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/index.html', url: `${base}/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/`, it: `${base}/cerchi/guide/carlo-collodi-formazione-prova-mondo/`, type: 'Article', breadcrumb: true },
