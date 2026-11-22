@@ -1,3 +1,13 @@
+// Pages without an explicit icon can still pick up the new URL after a cached ICO.
+if (!document.head.querySelector('link[rel~="icon"]')) {
+  const favicon = document.createElement('link');
+  favicon.rel = 'icon';
+  favicon.type = 'image/png';
+  favicon.sizes.add('48x48');
+  favicon.href = '/favicon-avorio-48.png';
+  document.head.appendChild(favicon);
+}
+
 const mobileNavQuery = window.matchMedia('(max-width: 760px)');
 const dropdownNavItems = document.querySelectorAll('.primary-nav-item--dropdown');
 document.documentElement.classList.add('nav-enhanced');
