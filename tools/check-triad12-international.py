@@ -443,6 +443,11 @@ def check(source, self_test):
     # Keep the baseline inventory; only the hub and sitemap may evolve.
     paths = subprocess.check_output(['git', 'ls-tree', '-r', '--name-only', BASE, 'en/cerchi/guides', 'cerchi', 'sitemap.xml', 'assets/img'], cwd=ROOT, text=True).splitlines()
     protected = {path: original(path) for path in paths}
+    # The Tarde FAQ answer must match the visible paragraph, without a Markdown separator.
+    tarde = 'cerchi/guide/gabriel-tarde-imitazione-credenza-desiderio/index.html'
+    approved_suffix = b'anticipatore diretto. ---"'
+    require(protected[tarde].count(approved_suffix) == 1, 'Unexpected frozen Tarde FAQ answer')
+    protected[tarde] = protected[tarde].replace(approved_suffix, b'anticipatore diretto."', 1)
     verify_protected(protected, lambda path: (ROOT / path).read_bytes())
     for path in ['en/cerchi/index.html', 'en/index.html', 'en/positioning/index.html', 'archivio.html']:
         text = (ROOT / path).read_text()
