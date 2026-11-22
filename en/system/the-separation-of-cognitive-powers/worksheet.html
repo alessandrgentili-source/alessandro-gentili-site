@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Worksheet · INAIL 2026</title>
+  <link rel="stylesheet" href="lettura.css">
+  <meta name="robots" content="noindex">
+</head>
+<body><main>
+  <p class="meta">ALESSANDRO GENTILI · INAIL 2026 · REUSABLE WORKSHEET</p>
+  <h1>Starting tomorrow, a better process.</h1>
+  <p>Prepare a reliable summary from public, authorised documentation. This is an illustrative case and has no status as an INAIL procedure.</p>
+  <p class="no-print"><a href="index.html#8">Return to scene 8</a> · <a href="https://www.garanteprivacy.it/web/guest/home/principi-fondamentali-del-trattamento" target="_blank" rel="noopener">Public source for the case (in Italian) ↗</a></p>
+  <p class="notice">Replace the examples with your own case. Your entries stay in this page and are never submitted or saved automatically. To keep them, download the text before closing.</p>
+  <form>
+    <fieldset><label for="case">Task / Person responsible for the trial</label><input id="case" placeholder="Identify for your own context"></fieldset>
+    <div class="fields">
+      <fieldset><label for="field-0">01 · Objective</label><textarea id="field-0">One page for a colleague distinguishing data minimisation, accuracy and storage limitation. Identify the intended reader and success criterion.</textarea></fieldset>
+      <fieldset><label for="field-1">02 · Sources</label><textarea id="field-1">Public guidance from the Italian Data Protection Authority on processing principles, and Art. 5 GDPR. Record the URL, access date and scope of use.</textarea></fieldset>
+      <fieldset><label for="field-2">03 · AI proposal</label><textarea id="field-2">If the tool is permitted, ask for three entries, precise references and explicit uncertainties. Treat the response as a proposal to verify.</textarea></fieldset>
+      <fieldset><label for="field-3">04 · Checks</label><textarea id="field-3">Check quantity, accuracy and duration against the source. Record the claim, original passage, outcome and correction.</textarea></fieldset>
+      <fieldset><label for="field-4">05 · Professional approval</label><textarea id="field-4">Identify the qualified professional. Record the decision, rationale and date. Correct, authorise or reject.</textarea></fieldset>
+      <fieldset><label for="field-5">06 · Evaluation and improvement</label><textarea id="field-5">Measure quality, total time and corrections. Compare with the usual workflow. Revise the process or stop.</textarea></fieldset>
+    </div>
+  </form>
+  <p><b>Expected criteria to measure:</b> accurate concepts, traceable sources and a manageable review. No outcomes have been verified yet.</p>
+  <p><b>STOP</b> if authorisation, a source or an adequate check is missing. The organisation’s rules take precedence.</p>
+  <div class="toolbar"><button type="button" id="save">Download the completed text</button><button type="button" id="print">Print / Save PDF</button></div>
+  <p id="status" role="status"></p>
+  <blockquote>Value comes from the knowledge, judgment and responsibility we can organise through AI, regardless of how much of it we use.</blockquote>
+  <small>Source: Italian Data Protection Authority, fundamental processing principles · https://www.garanteprivacy.it/web/guest/home/principi-fondamentali-del-trattamento</small>
+</main>
+<script>
+document.querySelector('#print').onclick = () => window.print();
+document.querySelector('#save').onclick = () => {
+  const form = document.querySelector('form');
+  const fields = Array.from(form.querySelectorAll('textarea'), field => `${field.labels[0].textContent}\n${field.value}`);
+  const text = [
+    'INAIL 2026 — Worksheet',
+    form.querySelector('#case').value,
+    ...fields,
+    'Expected criteria still to be measured. STOP if authorisation, a source or an adequate check is missing.\nSource: https://www.garanteprivacy.it/web/guest/home/principi-fondamentali-del-trattamento'
+  ].join('\n\n');
+  const url = URL.createObjectURL(new Blob([text], {type: 'text/plain;charset=utf-8'}));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'INAIL-worksheet.txt';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  document.querySelector('#status').textContent = 'Download requested. Keep the file before closing this page.';
+};
+</script>
+</body></html>

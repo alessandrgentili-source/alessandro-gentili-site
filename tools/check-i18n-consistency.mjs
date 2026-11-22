@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const base = 'https://alessandro-gentili.it';
+const presentation = 'en/system/the-separation-of-cognitive-powers/';
+const presentationUrl = `${base}/${presentation}`;
 
 const assert = (condition, message) => {
   if (!condition) throw new Error(message);
@@ -30,6 +32,7 @@ const pages = [
   { path: 'en/method/index.html', url: `${base}/en/method/`, type: 'WebPage' },
   { path: 'en/method/the-separation-of-cognitive-powers/index.html', url: `${base}/en/method/the-separation-of-cognitive-powers/`, type: 'Article' },
   { path: 'en/system/index.html', url: `${base}/en/system/`, type: 'WebPage' },
+  { path: `${presentation}index.html`, url: presentationUrl, it: `${presentationUrl}it.html`, defaultUrl: presentationUrl, type: 'CreativeWork' },
   { path: 'en/cerchi/guides/alessandro-manzoni-language-history-responsibility/index.html', url: `${base}/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/`, it: `${base}/cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/index.html', url: `${base}/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/`, it: `${base}/cerchi/guide/carlo-collodi-formazione-prova-mondo/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/index.html', url: `${base}/en/cerchi/guides/pier-paolo-pasolini-anthropological-mutation-consumer-culture/`, it: `${base}/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/`, type: 'Article', breadcrumb: true },
@@ -66,6 +69,7 @@ const pages = [
 ];
 
 const italianPairs = [
+  { path: `${presentation}it.html`, it: `${presentationUrl}it.html`, en: presentationUrl, defaultUrl: presentationUrl },
   { path: 'cerchi/triadi/legge-colpa-punizione/index.html', it: `${base}/cerchi/triadi/legge-colpa-punizione/`, en: `${base}/en/cerchi/triads/law-guilt-punishment/` },
   { path: 'cerchi/guide/cesare-beccaria-limite-diritto-punire/index.html', it: `${base}/cerchi/guide/cesare-beccaria-limite-diritto-punire/`, en: `${base}/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/` },
   { path: 'cerchi/guide/michel-foucault-la-vita-sotto-esame/index.html', it: `${base}/cerchi/guide/michel-foucault-la-vita-sotto-esame/`, en: `${base}/en/cerchi/guides/michel-foucault-life-under-examination/` },
@@ -132,7 +136,13 @@ const sameInventory = (actual, expected, label) => {
   assert(new Set(expected).size === expected.length, `${label}: duplicate inventory entries`);
   assert(actual.join('\n') === [...expected].sort().join('\n'), `${label}: publication inventory changed; declare an IT/EN pair or an explicit Italian-only guide. Found: ${actual.join(', ')}`);
 };
-sameInventory(await collectHtml('en'), pages.map(page => page.path), 'English pages');
+const presentationMaterials = ['reading', 'preview', 'worksheet', 'lettura', 'anteprima', 'scheda']
+  .map(name => `${presentation}${name}.html`);
+sameInventory(await collectHtml('en'), [
+  ...pages.map(page => page.path),
+  ...italianPairs.filter(pair => pair.path.startsWith('en/')).map(pair => pair.path),
+  ...presentationMaterials,
+], 'International pages');
 sameInventory(await collectHtml('cerchi/guide'), [
   ...italianPairs.filter(page => page.path.startsWith('cerchi/guide/')).map(page => page.path),
   ...italianOnlyGuides
@@ -150,12 +160,15 @@ const extractJsonLd = (html, path) => {
     }
   });
 };
+const extractCanonicals = html => [...html.matchAll(/<link\b[^>]*\brel="canonical"[^>]*\bhref="([^"]+)"[^>]*>/g)]
+  .map(match => match[1]);
 
 for (const page of pages) {
   await access(join(root, page.path));
   const html = await read(page.path);
   assert(/<html\s+lang="en"/.test(html), `${page.path}: html lang must be en`);
-  assert(html.includes(`<link rel="canonical" href="${page.url}" />`), `${page.path}: wrong or missing self canonical`);
+  const canonicals = extractCanonicals(html);
+  assert(canonicals.length === 1 && canonicals[0] === page.url, `${page.path}: wrong or missing self canonical`);
   assert(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html), `${page.path}: canonical English page must be indexable`);
   assert(html.includes('<meta name="description"'), `${page.path}: missing meta description`);
   assert(html.includes('<meta property="og:title"'), `${page.path}: missing Open Graph title`);
@@ -165,7 +178,7 @@ for (const page of pages) {
   if (page.it) {
     assert(html.includes(`hreflang="it" href="${page.it}"`), `${page.path}: missing Italian hreflang`);
     assert(html.includes(`hreflang="en" href="${page.url}"`), `${page.path}: missing English hreflang`);
-    assert(html.includes(`hreflang="x-default" href="${page.it}"`), `${page.path}: x-default must point to Italian canonical`);
+    assert(html.includes(`hreflang="x-default" href="${page.defaultUrl ?? page.it}"`), `${page.path}: incorrect x-default`);
   }
 
   if (page.type) {
@@ -181,11 +194,11 @@ for (const page of pages) {
 for (const pair of italianPairs) {
   const html = await read(pair.path);
   assert(/<html\s+lang="it"/.test(html), `${pair.path}: Italian pair must keep lang=it`);
-  const canonicals = [...html.matchAll(/<link\b[^>]*\brel="canonical"[^>]*\bhref="([^"]+)"[^>]*>/g)].map(match => match[1]);
+  const canonicals = extractCanonicals(html);
   assert(canonicals.length === 1 && canonicals[0] === pair.it, `${pair.path}: Italian canonical changed unexpectedly`);
   assert(html.includes(`hreflang="it" href="${pair.it}"`), `${pair.path}: missing self Italian hreflang`);
   assert(html.includes(`hreflang="en" href="${pair.en}"`), `${pair.path}: missing reciprocal English hreflang`);
-  assert(html.includes(`hreflang="x-default" href="${pair.it}"`), `${pair.path}: missing x-default`);
+  assert(html.includes(`hreflang="x-default" href="${pair.defaultUrl ?? pair.it}"`), `${pair.path}: incorrect x-default`);
 }
 
 const legacy = [
