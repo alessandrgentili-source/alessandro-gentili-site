@@ -14,6 +14,8 @@ BASE = 'b28cb6845ea48c83ff3f51bd3b97f18ac2364631'
 SHA = '022349195e2cfbfee0e0e7af7d98ca101112c3f364d7efabc07fbfd8a00fcdb0'
 PAGE = 'en/cerchi/triads/index.html'
 IT_PAGE = 'cerchi/triadi/index.html'
+GATEWAY_POSITIONING = b'<a href="/en/positioning/">International gateway</a>'
+GATEWAY_HOME = b'<a href="/en/">International gateway</a>'
 FROZEN_RELEASE = '36e45bc8b1af40593e25df7092311475e03062f5'
 SOURCE13 = 'd5a16500948e533e11a121c3fc5e6226517d80ce'
 SOURCES13 = {
@@ -302,6 +304,21 @@ def verify_triad14(markup, language="it"):
         require((ROOT / guide_path).read_bytes() == frozen(guide_path, TRIAD14_BASE), 'A published Triad 14 guide changed')
 
 
+def canonical_international_links(markup):
+    """Apply the approved static navigation migration to a frozen Italian guide."""
+    routes = {
+        b'en.html': b'/en/positioning/',
+        b'metodo-ai.html': b'/en/method/',
+        b'strumenti.html': b'/en/system/',
+    }
+    migrated = re.sub(
+        rb'(<a\b[^<>]*?\shref=")\.\./\.\./\.\./(en\.html|metodo-ai\.html|strumenti\.html)"',
+        lambda match: match[1] + routes[match[2]] + b'"',
+        markup,
+    )
+    return migrated.replace(GATEWAY_POSITIONING, GATEWAY_HOME)
+
+
 def verify_protected(protected, read_bytes):
     for path, expected in protected.items():
         # Release indexes evolve; frozen guides, triads and assets do not.
@@ -311,7 +328,9 @@ def verify_protected(protected, read_bytes):
         if path == IT_PAGE and actual != expected:
             verify_it(actual.decode())
             continue
-        require(actual == expected, 'Protected file changed: ' + path)
+        canonical_guide = path.startswith('cerchi/guide/') and path.endswith('/index.html')
+        require(actual == expected or (canonical_guide and actual == canonical_international_links(expected)),
+                'Protected file changed: ' + path)
 
 
 def sections(markup):
@@ -396,10 +415,16 @@ def verify(markup, before, blocks):
     require(schema.get('hasPart') == english_guide_parts(), 'English CollectionPage must link exactly the 42 approved guides in order')
 
 
+def italian_index_baseline(ref):
+    baseline = frozen(IT_PAGE, ref)
+    require(baseline.count(GATEWAY_POSITIONING) == 1, 'Unexpected frozen International gateway link')
+    return baseline.replace(GATEWAY_POSITIONING, GATEWAY_HOME, 1).decode()
+
+
 def verify_triad12_it_reading(markup):
     """Add only the exact approved v0.5; preserve every pre-existing index byte."""
     markup = restore_index14_alignment(markup, 'it')
-    baseline = frozen(IT_PAGE, TRIAD12_IT_BASE).decode()
+    baseline = italian_index_baseline(TRIAD12_IT_BASE)
     matches = re.findall(r'\n<section class="triad12-it-reading" id="lettura-triade-12"[^>]*>.*?</section>', markup, re.S)
     require(len(matches) == 1, 'Exactly one approved Italian Triad 12 reading required')
     added = matches[0]
@@ -459,7 +484,11 @@ def check(source, self_test):
     if self_test:
         for alignment_language, alignment_path in [('it', IT_PAGE), ('en', PAGE)]:
             current_alignment = (ROOT / alignment_path).read_text()
-            require(restore_index14_alignment(current_alignment, alignment_language) == frozen(alignment_path, INDEX14_ALIGNMENT_BASE).decode(), 'Alignment changed a pre-existing index byte outside XIV')
+            alignment_baseline = (
+                italian_index_baseline(INDEX14_ALIGNMENT_BASE) if alignment_language == 'it'
+                else frozen(alignment_path, INDEX14_ALIGNMENT_BASE).decode()
+            )
+            require(restore_index14_alignment(current_alignment, alignment_language) == alignment_baseline, 'Alignment changed a pre-existing index byte outside XIV')
             alignment_card = (cards(current_alignment) if alignment_language == 'it' else sections(current_alignment))[13]
             alignment_images = re.findall(r'<img\b[^>]*>', alignment_card)
             alignment_teaser = re.search(r'<div class="triad-lens"><p>(.*?)</p></div>', alignment_card, re.S)[1]
@@ -491,6 +520,7 @@ def check(source, self_test):
         source12 = re.search(r'<div class="triad12-it-prose">(.*?)</div>', reading12, re.S)[1]
         paragraphs12 = re.findall(r'<p\b.*?</p>', source12, re.S)
         mutations12 = [
+            ('gateway destination', italian12.replace(GATEWAY_HOME.decode(), GATEWAY_POSITIONING.decode(), 1)),
             ('missing', italian12.replace(reading12, '', 1)),
             ('duplicated', italian12.replace(reading12, reading12 + reading12, 1)),
             ('position', italian12.replace(reading12, '', 1).replace(cards(italian12)[12], cards(italian12)[12] + reading12, 1)),
