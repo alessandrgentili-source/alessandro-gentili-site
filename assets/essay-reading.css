@@ -69,3 +69,7 @@
 .essay-literary-page .literary-bibliography li a{color:#284b5a;text-decoration:underline;text-underline-offset:3px}
 .essay-literary-page .literary-bibliography li a:focus-visible{outline:3px solid #806333;outline-offset:4px}
 .essay-literary-page .literary-bibliography .literary-sources-note{font:400 .88rem/1.65 system-ui,sans-serif;color:#48524b;margin:0 0 1.45rem}
+
+.method-essay-page .literary-cover img{aspect-ratio:16 / 9}
+.method-essay-page #essay-contents > hr{border:0;border-top:1px solid #cbbda5;margin:0}
+.method-essay-page #references-section{border-top:0;margin-top:0}
