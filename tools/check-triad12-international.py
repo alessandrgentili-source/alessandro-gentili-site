@@ -302,6 +302,20 @@ def verify_triad14(markup, language="it"):
         require((ROOT / guide_path).read_bytes() == frozen(guide_path, TRIAD14_BASE), 'A published Triad 14 guide changed')
 
 
+def canonical_international_links(markup):
+    """Apply the approved static navigation migration to a frozen Italian guide."""
+    routes = {
+        b'en.html': b'/en/positioning/',
+        b'metodo-ai.html': b'/en/method/',
+        b'strumenti.html': b'/en/system/',
+    }
+    return re.sub(
+        rb'(<a\b[^<>]*?\shref=")\.\./\.\./\.\./(en\.html|metodo-ai\.html|strumenti\.html)"',
+        lambda match: match[1] + routes[match[2]] + b'"',
+        markup,
+    )
+
+
 def verify_protected(protected, read_bytes):
     for path, expected in protected.items():
         # Release indexes evolve; frozen guides, triads and assets do not.
@@ -311,7 +325,9 @@ def verify_protected(protected, read_bytes):
         if path == IT_PAGE and actual != expected:
             verify_it(actual.decode())
             continue
-        require(actual == expected, 'Protected file changed: ' + path)
+        canonical_guide = path.startswith('cerchi/guide/') and path.endswith('/index.html')
+        require(actual == expected or (canonical_guide and actual == canonical_international_links(expected)),
+                'Protected file changed: ' + path)
 
 
 def sections(markup):
