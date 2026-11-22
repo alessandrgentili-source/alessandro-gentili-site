@@ -1,0 +1,276 @@
+.international-method {
+  --method-ink: #182e3e;
+  --method-brass: #785c30;
+  --method-rule: #cfc2aa;
+  --method-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  color: var(--method-ink);
+}
+
+.international-method :is(h1, h2, h3) {
+  color: inherit;
+  font-family: var(--method-serif);
+  font-weight: 400;
+  letter-spacing: -.03em;
+}
+
+.international-method h2 {
+  font-size: clamp(2.1rem, 4vw, 3.65rem);
+  line-height: 1.06;
+}
+
+.international-method .method-label,
+.international-method .method-step-number,
+.international-method .method-arc {
+  color: var(--method-brass);
+  font-size: .7rem;
+  font-weight: 720;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.international-method .method-label {
+  margin: 0 0 .9rem;
+}
+
+.international-method :is(.method-opening-grid, .method-principle, .method-translation-head, .method-closing-grid) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(1.3rem, 5vw, 5.5rem);
+  align-items: end;
+}
+
+.international-method .method-opening {
+  padding-block: clamp(2rem, 4.5vw, 4.25rem) clamp(2rem, 4vw, 3.3rem);
+}
+
+.international-method .method-opening .method-label {
+  border-bottom: 1px solid var(--method-rule);
+  padding-bottom: .8rem;
+  margin-bottom: clamp(1.2rem, 2.5vw, 2.25rem);
+}
+
+.international-method .method-opening h1 {
+  font-size: clamp(2.65rem, 4.5vw, 4.25rem);
+  line-height: 1.02;
+}
+
+.international-method .method-opening .lead {
+  margin: 0;
+  max-width: 39ch;
+}
+
+.international-method .method-essay {
+  display: grid;
+  grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr);
+  align-items: center;
+  background: #21201c;
+  color: #f8efdd;
+}
+
+.international-method .method-essay-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.international-method .method-essay-copy {
+  min-width: 0;
+  padding: clamp(1.5rem, 3.25vw, 3rem);
+}
+
+.international-method .method-essay .method-label {
+  color: #e0c48d;
+}
+
+.international-method .method-essay h2 {
+  font-size: clamp(1.95rem, 3.4vw, 3.2rem);
+  text-wrap: pretty;
+}
+
+.international-method .method-essay-copy > p:not(.method-label) {
+  margin: 1rem 0 1.25rem;
+  color: #ede0c9;
+  line-height: 1.55;
+  max-width: 33ch;
+}
+
+.international-method .method-essay-link {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  gap: 1.5rem;
+  border-bottom: 1px solid #e0c48d;
+  color: inherit;
+  font-size: .88rem;
+  font-weight: 680;
+  text-decoration: none;
+}
+
+.international-method .method-essay-link:hover {
+  color: #e0c48d;
+}
+
+.international-method .method-essay-link:focus-visible {
+  outline-color: #e0c48d;
+}
+
+.international-method .method-essay-link span {
+  font-size: 1.25rem;
+}
+
+.international-method .method-principle {
+  padding-block: clamp(2.1rem, 4.5vw, 3.9rem);
+  border-bottom: 1px solid var(--method-rule);
+}
+
+.international-method .method-principle h2 {
+  font-size: clamp(1.85rem, 3.15vw, 2.9rem);
+  text-wrap: pretty;
+}
+
+.international-method :is(.method-principle, .method-translation-head) > p,
+.international-method :is(.method-intro, .method-closing-grid) p:not(.method-label) {
+  margin: 0;
+  max-width: 47ch;
+  color: var(--ink-2);
+}
+
+.international-method .method-process {
+  display: grid;
+  grid-template-columns: minmax(0, .68fr) minmax(0, 1.45fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem) clamp(2rem, 6vw, 6rem);
+  padding-block: clamp(3rem, 6.5vw, 6rem) clamp(2.6rem, 5vw, 4.5rem);
+  border-bottom: 1px solid var(--method-rule);
+}
+
+.international-method .method-intro h2 {
+  margin-bottom: 1.1rem;
+  text-wrap: pretty;
+}
+
+.international-method .method-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--method-rule);
+}
+
+.international-method .method-step {
+  display: grid;
+  grid-template-columns: 2.3rem minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: .5rem 1.1rem;
+  align-items: start;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--method-rule);
+}
+
+.international-method .method-step-number {
+  padding-top: .25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.international-method :is(.method-step, .method-outputs) h3 {
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  text-wrap: pretty;
+}
+
+.international-method :is(.method-step, .method-outputs) p:not(.method-label) {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: .94rem;
+  line-height: 1.62;
+}
+
+.international-method .method-arc {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--method-rule);
+  padding-top: .75rem;
+}
+
+.international-method .method-arc span:nth-child(2) {
+  text-align: center;
+}
+
+.international-method .method-translation {
+  padding-block: clamp(2.8rem, 6.5vw, 5.7rem);
+}
+
+.international-method .method-translation-head h2 {
+  max-width: 18ch;
+  text-wrap: pretty;
+}
+
+.international-method .method-outputs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3.25vw, 3rem);
+  margin-top: clamp(1.65rem, 4vw, 2.8rem);
+}
+
+.international-method .method-outputs article {
+  border-top: 2px solid var(--method-rule);
+  padding-top: 1rem;
+}
+
+.international-method .method-outputs h3 {
+  margin-bottom: .7rem;
+}
+
+.international-method .method-closing {
+  border-top: 1px solid var(--method-rule);
+  padding-block: clamp(2.8rem, 6vw, 5.25rem);
+  background: #eae1cf;
+}
+
+.international-method .method-closing h2 {
+  text-wrap: pretty;
+}
+
+@media (max-width: 920px) {
+  .international-method .method-process {
+    grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr);
+    column-gap: 2rem;
+  }
+
+  .international-method .method-step {
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+  }
+
+  .international-method .method-step p {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .international-method :is(.method-opening-grid, .method-essay, .method-principle, .method-process, .method-translation-head, .method-outputs, .method-closing-grid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .international-method .method-opening h1 {
+    max-width: 20ch;
+    font-size: clamp(2.25rem, 7.7vw, 3.5rem);
+  }
+
+  .international-method .method-essay-copy {
+    padding: 1.35rem clamp(1rem, 5vw, 2.15rem) 1.65rem;
+  }
+
+  .international-method .method-arc {
+    flex-wrap: wrap;
+    gap: .5rem 1rem;
+  }
+
+  .international-method .method-arc span:nth-child(2) {
+    text-align: left;
+  }
+}
+
+@media (max-width: 450px) {
+  .international-method .method-arc {
+    flex-direction: column;
+  }
+}
