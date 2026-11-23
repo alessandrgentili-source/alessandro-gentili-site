@@ -485,11 +485,12 @@ def check(source, self_test):
     require(protected[shannon].count(old_title) == 1, 'Unexpected frozen Shannon EN title')
     protected[shannon] = protected[shannon].replace(old_title, approved_title, 1)
     verify_protected(protected, lambda path: (ROOT / path).read_bytes())
-    for path in ['en/cerchi/index.html', 'en/index.html', 'en/positioning/index.html', 'archivio.html']:
+    for path in ['en/cerchi/index.html', 'en/index.html', 'archivio.html']:
         text = (ROOT / path).read_text()
         require(re.findall(r'data-corpus-count="en-triads">(\d+)', text) and set(re.findall(r'data-corpus-count="en-triads">(\d+)', text)) == {'14'}, 'Triad count stale: ' + path)
         require('italian-path-in-progress' not in text, 'Provisional reference remains: ' + path)
-    require('<strong>11</strong><span>Thematic paths</span>' in (ROOT / 'en/positioning/index.html').read_text(), 'Thematic path count must remain eleven')
+    themes = (ROOT / 'en/themes/index.html').read_text()
+    require(len(re.findall(r'<article class="theme-(?:foundation|bridge)\b', themes)) == 11, 'Thematic path count must remain eleven')
     require('English triad reading paths: 14' in (ROOT / 'llms.txt').read_text(), 'Machine-readable inventory stale')
     tests = 0
     if self_test:
