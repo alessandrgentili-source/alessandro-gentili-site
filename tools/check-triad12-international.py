@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+from urllib.parse import urljoin, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'b28cb6845ea48c83ff3f51bd3b97f18ac2364631'
@@ -49,7 +50,6 @@ GUIDES14 = [
 ]
 
 # Approved Italian v0.5 reading under card XII; private master remains outside the site.
-TRIAD12_IT_BASE = 'd675643a3e172024951b7de22af287ee7ce1638e'
 TRIAD12_IT_SOURCE_SHA = 'be0062cae051cf81d1a3e3e96bcf085d315c875bb2dc2b8aab15e2bb1bb51d8f'
 TRIAD12_IT_EDITORIAL_SHA = '01463ebb8585a20da4f102b60dda7d08a8bdf67032a02178e0b1999f880caea8'
 
@@ -161,48 +161,64 @@ def verify_triad13(node, language):
             require((ROOT / guide_path).read_bytes() == frozen(guide_path), 'A published Triad 13 guide changed')
 
 
-# Exact index-only presentation proposed for Triad 14. Like restore_triad12_layout,
-# invert only the approved structural delta before applying every frozen check.
-# Both new cards are checked byte-for-byte FIRST: wrong copy, assets, links,
-# order or extra content can never be hidden by the inverse presentation mapping.
+# The English index retains the reviewed XIV presentation.
 INDEX14_ALIGNMENT_BASE = 'f5aa5f2525f5bae45ed39f907fa419d7f005a597'
-INDEX14_ALIGNMENT_SHA = {'it': '46140ff1c91f3d8aa41b1a428ee78db1308e5870649f0425fc2d71adfca765c2', 'en': 'bc57bb309ddb2d68c8d34ddc7ecdb221de1b62969e3b0b7893da183b5327c3d3'}
+INDEX14_EN_SHA = 'bc57bb309ddb2d68c8d34ddc7ecdb221de1b62969e3b0b7893da183b5327c3d3'
 
 
-def restore_index14_alignment(markup, language):
-    require(language in {'it', 'en'}, 'Unsupported index alignment language')
-    path = IT_PAGE if language == 'it' else PAGE
-    blocks = cards(markup) if language == 'it' else sections(markup)
-    require(len(blocks) == 14, 'Exactly fourteen index cards required for alignment')
+def restore_index14_alignment(markup):
+    blocks = sections(markup)
+    require(len(blocks) == 14, 'Exactly fourteen English index entries required')
     current = blocks[13]
-    require(hashlib.sha256(current.encode()).hexdigest() == INDEX14_ALIGNMENT_SHA[language], 'Triad 14 index differs from the reviewed presentation: ' + language)
-    baseline = frozen(path, INDEX14_ALIGNMENT_BASE).decode()
-    previous = cards(baseline)[13] if language == 'it' else sections(baseline)[13]
+    require(hashlib.sha256(current.encode()).hexdigest() == INDEX14_EN_SHA, 'English Triad XIV presentation changed')
+    previous = sections(frozen(PAGE, INDEX14_ALIGNMENT_BASE).decode())[13]
     return markup.replace(current, previous, 1)
 
 
 def verify_it(markup):
-    markup = restore_index14_alignment(markup, 'it')
+    verify_triad12_it_reading(markup)
+    require(markup.count(GATEWAY_HOME.decode()) == 1, "International gateway destination changed")
     tree = v.Tree(markup)
     require(not tree.malformed, str(tree.malformed))
-    previous, current = cards(frozen(IT_PAGE).decode()), cards(markup)
-    require(len(previous) == 12 and len(current) == 14, 'Exactly fourteen Italian triad cards required')
-    require(current[:12] == previous, 'The twelve historical Italian triads changed or reordered')
-    require(current[:13] == cards(frozen(IT_PAGE, TRIAD14_BASE).decode()), 'The thirteen historical Italian triads changed or reordered')
-    require('id="tredicesima-triade"' in current[12], 'Italian Triad 13 anchor missing')
-    require(len(list(tree.root.find('article', 'essay-card'))) == 14, 'Unexpected Italian triad card')
-    node = next(n for n in tree.root.find('article') if n.attrs.get('id') == 'tredicesima-triade')
-    verify_triad13(node, 'it')
-    card14 = v.Tree(current[13]).root
-    require(next(card14.find('article')).attrs.get('id') == 'quattordicesima-triade', 'Italian Triad 14 anchor/order changed')
-    require(v.content(next(card14.find('h2'))) == 'Legge, colpa, punizione', 'Triad 14 card title changed')
-    require([v.normalized(v.content(n)) for n in card14.find('p')] == [
-        'Quattordicesima triade', 'Sofocle · Michel Foucault · Cesare Beccaria',
-        'Domanda di lettura: Chi può trasformare un atto in colpa, e fino a dove arriva il diritto di punire?',
-    ], 'Triad 14 card question/authors changed or prose added')
-    require([n.attrs.get('href') for n in card14.find('a')] == [
-        '/cerchi/triadi/legge-colpa-punizione/', *[f'/cerchi/guide/{slug}/' for slug in GUIDES14],
-    ], 'Triad 14 reading/guide links changed or reordered')
+    baseline = frozen(IT_PAGE, '621de5d08ff65eaabda4ff3cd7956eedb9cfb1e7').decode()
+    historical = cards(baseline)
+    entries = list(tree.root.find('details', 'triad-entry'))
+    require(len(entries) == len(historical) == 14, 'Exactly fourteen Italian entries required')
+    for number, (old, entry) in enumerate(zip(historical, reversed(entries)), 1):
+        original_card = next(v.Tree(old).root.find('article'))
+        require(entry.attrs.get('id') == original_card.attrs.get('id', f'triade-{number}'), 'Triad order or anchor changed')
+        summary = next(entry.find('summary'))
+        title = next(summary.find('strong'))
+        require(v.content(title) == v.content(next(original_card.find('h2'))), 'Triad title changed')
+        authors = next(summary.find('span', 'triad-heading'))
+        links = list(next(entry.find('div', 'triad-guides')).find('a'))
+        expected = [urljoin('/cerchi/triadi/', a.attrs['href']) for a in original_card.find('a') if '/guide/' in a.attrs['href']]
+        require(len(expected) == 3 and [a.attrs['href'] for a in links] == expected, 'Guide order or destination changed')
+        old_meta = next(original_card.find('p', 'meta'), None)
+        if number <= 12:
+            names = [v.content(n) for n in old_meta.find('strong')]
+        else:
+            names = v.content(old_meta or next(original_card.find('p', 'triad-authors'))).split(' · ')
+        require(v.content(list(authors.find('span'))[-1]) == ' · '.join(names), 'Authors changed')
+        question = v.content(next(summary.find('span', 'triad-question')))
+        require(question.endswith('?') and (number < 11 or question in html.unescape(baseline)), 'Reading question changed')
+        paragraphs = re.findall(r'<p>(.*?)</p>', old, re.S)
+        if number in {11, 14}:
+            paragraphs.pop(0)  # The published question now appears in the summary.
+        body = next(entry.find('div', 'triad-body'))
+        actual = [node for node in body.children if isinstance(node, v.Node) and node.tag == 'p']
+        expected_prose = v.Tree(''.join('<p>' + paragraph + '</p>' for paragraph in paragraphs))
+        require(editorial_signature(actual) == editorial_signature(expected_prose.root.children), 'Editorial comparison changed')
+        for name, link in zip(names, links):
+            require(v.content(next(link.find('strong'))) == name, 'Guide attribution changed')
+            guide = v.Tree((ROOT / link.attrs['href'].strip('/') / 'index.html').read_text())
+            cover = next(n for n in guide.root.find('meta') if n.attrs.get('property') == 'og:image')
+            image = next(link.find('img'))
+            src = urlparse(cover.attrs['content']).path
+            require(image.attrs.get('src') == src, 'Guide cover changed')
+            matching = next(n for n in guide.root.find('img') if n.attrs.get('src', '').endswith(src.split('/')[-1]))
+            require(image.attrs.get('alt') == matching.attrs.get('alt'), 'Cover description changed')
+    require([a.attrs['href'] for a in entries[0].find('a', 'reading-link')] == ['/cerchi/triadi/legge-colpa-punizione/'], 'Triad XIV integral link changed')
     before = v.Tree(frozen(IT_PAGE).decode())
     require([n.attrs for n in tree.root.find('link') if n.attrs.get('rel') in {'canonical', 'alternate'}] == [n.attrs for n in before.root.find('link') if n.attrs.get('rel') in {'canonical', 'alternate'}], 'Italian canonical/hreflang changed')
     metas = {n.attrs.get('name', n.attrs.get('property')): n.attrs.get('content') for n in tree.root.find('meta')}
@@ -370,7 +386,7 @@ def verify_en14_section(node):
 
 
 def verify(markup, before, blocks):
-    markup = restore_index14_alignment(markup, 'en')
+    markup = restore_index14_alignment(markup)
     tree = v.Tree(markup)
     require(not tree.malformed, str(tree.malformed))
     old_sections, new_sections = sections(before), sections(markup)
@@ -415,22 +431,13 @@ def verify(markup, before, blocks):
     require(schema.get('hasPart') == english_guide_parts(), 'English CollectionPage must link exactly the 42 approved guides in order')
 
 
-def italian_index_baseline(ref):
-    baseline = frozen(IT_PAGE, ref)
-    require(baseline.count(GATEWAY_POSITIONING) == 1, 'Unexpected frozen International gateway link')
-    return baseline.replace(GATEWAY_POSITIONING, GATEWAY_HOME, 1).decode()
-
-
 def verify_triad12_it_reading(markup):
-    """Add only the exact approved v0.5; preserve every pre-existing index byte."""
-    markup = restore_index14_alignment(markup, 'it')
-    baseline = italian_index_baseline(TRIAD12_IT_BASE)
     matches = re.findall(r'\n<section class="triad12-it-reading" id="lettura-triade-12"[^>]*>.*?</section>', markup, re.S)
     require(len(matches) == 1, 'Exactly one approved Italian Triad 12 reading required')
     added = matches[0]
-    require(markup.replace(added, '', 1) == baseline, 'Pre-existing Italian index/card bytes changed')
-    twelfth = cards(baseline)[11]
-    require(markup.index(added) == markup.index(twelfth) + len(twelfth), 'Italian Triad 12 reading must immediately follow card XII')
+    entry = next(node for node in v.Tree(markup).root.find('details', 'triad-entry') if node.attrs.get('id') == 'stato-impresa-comunita')
+    full = next(entry.find('details', 'full-reading'))
+    require(any(n.attrs.get('id') == 'lettura-triade-12' for n in full.find('section')), 'Reading must open from XII')
     tree = v.Tree(added)
     require(not tree.malformed, str(tree.malformed))
     section = next(tree.root.find('section'))
@@ -462,7 +469,6 @@ def check(source, self_test):
     verify(markup, before, blocks)
     require(sections(markup)[:13] == sections(frozen(PAGE, TRIAD14_BASE).decode()), 'The thirteen published English triads changed')
     verify_it((ROOT / IT_PAGE).read_text())
-    verify_triad12_it_reading((ROOT / IT_PAGE).read_text())
     verify_triad14((ROOT / TRIAD14_PAGE).read_text())
     verify_triad14((ROOT / TRIAD14_EN_PAGE).read_text(), 'en')
     # Keep the baseline inventory; only the hub and sitemap may evolve.
@@ -487,48 +493,42 @@ def check(source, self_test):
     require('English triad reading paths: 14' in (ROOT / 'llms.txt').read_text(), 'Machine-readable inventory stale')
     tests = 0
     if self_test:
-        for alignment_language, alignment_path in [('it', IT_PAGE), ('en', PAGE)]:
-            current_alignment = (ROOT / alignment_path).read_text()
-            alignment_baseline = (
-                italian_index_baseline(INDEX14_ALIGNMENT_BASE) if alignment_language == 'it'
-                else frozen(alignment_path, INDEX14_ALIGNMENT_BASE).decode()
-            )
-            require(restore_index14_alignment(current_alignment, alignment_language) == alignment_baseline, 'Alignment changed a pre-existing index byte outside XIV')
-            alignment_card = (cards(current_alignment) if alignment_language == 'it' else sections(current_alignment))[13]
-            alignment_images = re.findall(r'<img\b[^>]*>', alignment_card)
-            alignment_teaser = re.search(r'<div class="triad-lens"><p>(.*?)</p></div>', alignment_card, re.S)[1]
-            alignment_cases = [
-                ('missing cover', alignment_card.replace(alignment_images[0], '', 1)),
-                ('cover source', alignment_card.replace('src="', 'src="/unapproved', 1)),
-                ('cover alt', alignment_card.replace('alt="', 'alt="altered ', 1)),
-                ('cover order', alignment_card.replace(alignment_images[0], '__FIRST__', 1).replace(alignment_images[1], alignment_images[0], 1).replace('__FIRST__', alignment_images[1], 1)),
-                ('teaser changed', alignment_card.replace(alignment_teaser, alignment_teaser + ' Altered.', 1)),
-                ('teaser missing', alignment_card.replace('<div class="triad-lens"><p>' + alignment_teaser + '</p></div>', '', 1)),
-                ('question changed', alignment_card.replace('Chi può trasformare' if alignment_language == 'it' else 'Who gets to decide', 'Changed question', 1)),
-                ('reading link', alignment_card.replace('/cerchi/triadi/legge-colpa-punizione/' if alignment_language == 'it' else '/en/cerchi/triads/law-guilt-punishment/', '/missing/', 1)),
-                ('guide link', alignment_card.replace('/cerchi/guide/' if alignment_language == 'it' else '/en/cerchi/guides/', '/missing/', 1)),
-                ('extra paragraph', alignment_card.replace('</article>' if alignment_language == 'it' else '</section>', '<p>Additional interpretation.</p>' + ('</article>' if alignment_language == 'it' else '</section>'), 1)),
-            ]
-            if alignment_language == 'en':
-                alignment_cases += [('Italian original link', alignment_card.replace('/cerchi/guide/sofocle-legge-colpa-limite-citta/', '/missing/', 1)), ('Italian reading link', alignment_card.replace('/cerchi/triadi/legge-colpa-punizione/', '/missing/', 1))]
-            for label, candidate_card in alignment_cases:
-                require(candidate_card != alignment_card, 'Ineffective index alignment mutation: ' + label)
-                try:
-                    restore_index14_alignment(current_alignment.replace(alignment_card, candidate_card, 1), alignment_language)
-                except AssertionError:
-                    tests += 1
-                else:
-                    raise AssertionError('Invalid index alignment mutation accepted: ' + label)
+        current_alignment = (ROOT / PAGE).read_text()
+        alignment_baseline = frozen(PAGE, INDEX14_ALIGNMENT_BASE).decode()
+        require(restore_index14_alignment(current_alignment) == alignment_baseline, 'Alignment changed a pre-existing index byte outside XIV')
+        alignment_card = sections(current_alignment)[13]
+        alignment_images = re.findall(r'<img\b[^>]*>', alignment_card)
+        alignment_teaser = re.search(r'<div class="triad-lens"><p>(.*?)</p></div>', alignment_card, re.S)[1]
+        alignment_cases = [
+            ('missing cover', alignment_card.replace(alignment_images[0], '', 1)),
+            ('cover source', alignment_card.replace('src="', 'src="/unapproved', 1)),
+            ('cover alt', alignment_card.replace('alt="', 'alt="altered ', 1)),
+            ('cover order', alignment_card.replace(alignment_images[0], '__FIRST__', 1).replace(alignment_images[1], alignment_images[0], 1).replace('__FIRST__', alignment_images[1], 1)),
+            ('teaser changed', alignment_card.replace(alignment_teaser, alignment_teaser + ' Altered.', 1)),
+            ('teaser missing', alignment_card.replace('<div class="triad-lens"><p>' + alignment_teaser + '</p></div>', '', 1)),
+            ('question changed', alignment_card.replace('Who gets to decide', 'Changed question', 1)),
+            ('reading link', alignment_card.replace('/en/cerchi/triads/law-guilt-punishment/', '/missing/', 1)),
+            ('guide link', alignment_card.replace('/en/cerchi/guides/', '/missing/', 1)),
+            ('extra paragraph', alignment_card.replace('</section>', '<p>Additional interpretation.</p>' + ('</section>'), 1)),
+        ]
+        alignment_cases += [('Italian original link', alignment_card.replace('/cerchi/guide/sofocle-legge-colpa-limite-citta/', '/missing/', 1)), ('Italian reading link', alignment_card.replace('/cerchi/triadi/legge-colpa-punizione/', '/missing/', 1))]
+        for label, candidate_card in alignment_cases:
+            require(candidate_card != alignment_card, 'Ineffective index alignment mutation: ' + label)
+            try:
+                restore_index14_alignment(current_alignment.replace(alignment_card, candidate_card, 1))
+            except AssertionError:
+                tests += 1
+            else:
+                raise AssertionError('Invalid index alignment mutation accepted: ' + label)
         print('PASS accepted: exact XIV cover/lens/reading/originals layout, all earlier index bytes restored; all historical assertions retained')
         italian12 = (ROOT / IT_PAGE).read_text()
         reading12 = re.search(r'\n<section class="triad12-it-reading" id="lettura-triade-12"[^>]*>.*?</section>', italian12, re.S)[0]
         source12 = re.search(r'<div class="triad12-it-prose">(.*?)</div>', reading12, re.S)[1]
         paragraphs12 = re.findall(r'<p\b.*?</p>', source12, re.S)
         mutations12 = [
-            ('gateway destination', italian12.replace(GATEWAY_HOME.decode(), GATEWAY_POSITIONING.decode(), 1)),
             ('missing', italian12.replace(reading12, '', 1)),
             ('duplicated', italian12.replace(reading12, reading12 + reading12, 1)),
-            ('position', italian12.replace(reading12, '', 1).replace(cards(italian12)[12], cards(italian12)[12] + reading12, 1)),
+            ('position', italian12.replace(reading12, '', 1).replace('</main>', reading12 + '</main>', 1)),
             ('title', italian12.replace(reading12, reading12.replace('Triade 12 — Stato, impresa e comunità', 'Triade 12 — Impresa e comunità', 1), 1)),
             ('section heading', italian12.replace(reading12, reading12.replace('La prova del presente</h3>', 'La prova odierna</h3>', 1), 1)),
             ('question', italian12.replace(reading12, reading12.replace('Quando cambia chi guida', 'Quando cambia chi dirige', 1), 1)),
@@ -542,8 +542,6 @@ def check(source, self_test):
         mutations12.append(('paragraph added', italian12.replace(reading12, reading12.replace('</div>', '<p>New interpretation.</p></div>', 1), 1)))
         for _, slug in SLUGS:
             mutations12.append(('guide link ' + slug, italian12.replace(reading12, reading12.replace('/cerchi/guide/' + slug + '/', '/cerchi/guide/missing/', 1), 1)))
-        for i, historical in enumerate(cards(italian12), 1):
-            mutations12.append((f'card {i} changed', italian12.replace(historical, historical.replace('</h2>', ' changed</h2>', 1), 1)))
         for label, candidate in mutations12:
             require(candidate != italian12, 'Ineffective Italian Triad 12 regression: ' + label)
             try:
@@ -553,7 +551,7 @@ def check(source, self_test):
             else:
                 raise AssertionError('Invalid Italian Triad 12 mutation accepted: ' + label)
         verify_triad12_it_reading(italian12)
-        print('PASS accepted: complete approved Italian Triad 12 v0.5 below XII; fourteen card bytes and all prior index bytes intact')
+        print('PASS accepted: complete approved Italian Triad 12 v0.5 below XII; source text and links intact')
         for path in ['cerchi/index.html', 'sitemap.xml']:
             require(path in protected, 'Release surface absent from baseline: ' + path)
             verify_protected(protected, lambda candidate: protected[candidate] + b'\n<!-- Release update -->'
@@ -628,16 +626,18 @@ def check(source, self_test):
             else:
                 raise AssertionError('Invalid mutation accepted: ' + label)
         italian = (ROOT / IT_PAGE).read_text()
-        last_it = cards(italian)[12]
+        entries = list(reversed(re.findall(r'      <details class="triad-entry".*?^      </details>', italian, re.S | re.M)))
+        last_it = entries[12]
         italian_mutations = [
+            ('gateway destination', italian.replace(GATEWAY_HOME.decode(), GATEWAY_POSITIONING.decode(), 1)),
             ('missing', italian.replace(last_it, '', 1)),
             ('duplicated', italian.replace(last_it, last_it + last_it, 1)),
-            ('premature', italian.replace(last_it, '', 1).replace(cards(italian)[11], last_it + cards(italian)[11], 1)),
+            ('premature', italian.replace(last_it, '', 1).replace(entries[11], entries[11] + last_it, 1)),
             ('wrong guide', italian.replace(last_it, last_it.replace('/cerchi/guide/' + PAIRS13[0][1] + '/', '/cerchi/guide/missing/', 1), 1)),
             ('schema link altered', italian.replace('/cerchi/guide/' + PAIRS13[0][1] + '/', '/cerchi/guide/missing/', 1)),
             ('anchor missing', italian.replace('id="tredicesima-triade"', 'id="missing"', 1)),
             ('text altered', italian.replace('Morin interroga i limiti', 'Morin studia i limiti', 1)),
-            ('historic card altered', italian.replace('Stato, impresa e comunità</h2>', 'Stato e comunità</h2>', 1)),
+            ('historic card altered', italian.replace('Stato, impresa e comunità</strong>', 'Stato e comunità</strong>', 1)),
         ]
         for label, candidate in italian_mutations:
             require(candidate != italian, 'Ineffective Italian regression: ' + label)
@@ -650,11 +650,11 @@ def check(source, self_test):
         verify_it(italian)
         # Extend the existing positive/negative suite; no historical mutation
         # or source/guide protection above is removed or made conditional.
-        fourteenth = cards(italian)[13]
+        fourteenth = entries[13]
         italian14_mutations = [
             ('missing', italian.replace(fourteenth, '', 1)),
             ('duplicated', italian.replace(fourteenth, fourteenth + fourteenth, 1)),
-            ('premature', italian.replace(fourteenth, '', 1).replace(last_it, fourteenth + last_it, 1)),
+            ('premature', italian.replace(fourteenth, '', 1).replace(last_it, last_it + fourteenth, 1)),
             ('anchor', italian.replace('id="quattordicesima-triade"', 'id="missing"', 1)),
             ('title', italian.replace(fourteenth, fourteenth.replace('Legge, colpa, punizione', 'Legge e punizione', 1), 1)),
             ('question', italian.replace(fourteenth, fourteenth.replace('Chi può trasformare', 'Chi deve trasformare', 1), 1)),
@@ -662,7 +662,7 @@ def check(source, self_test):
             ('reading link', italian.replace(fourteenth, fourteenth.replace('/cerchi/triadi/legge-colpa-punizione/', '/cerchi/triadi/missing/', 1), 1)),
             ('guide link', italian.replace(fourteenth, fourteenth.replace('/cerchi/guide/' + GUIDES14[0] + '/', '/cerchi/guide/missing/', 1), 1)),
             ('metadata count', italian.replace('Le quattordici triadi', 'Le tredici triadi', 1)),
-            ('historical order', italian.replace(cards(italian)[0], '__FIRST__', 1).replace(cards(italian)[1], cards(italian)[0], 1).replace('__FIRST__', cards(italian)[1], 1)),
+            ('historical order', italian.replace(entries[0], '__FIRST__', 1).replace(entries[1], entries[0], 1).replace('__FIRST__', entries[1], 1)),
         ]
         schema_node = next(n for n in v.Tree(italian).root.find('script') if n.attrs.get('type') == 'application/ld+json')
         schema_text = v.content(schema_node)
@@ -676,9 +676,9 @@ def check(source, self_test):
             schema = json.loads(schema_text)
             schema['hasPart'] = mutate(schema['hasPart'])
             italian14_mutations.append((label, italian.replace(schema_text, json.dumps(schema, ensure_ascii=False), 1)))
-        for i, historical in enumerate(cards(italian)[:13], 1):
+        for i, historical in enumerate(entries[:13], 1):
             italian14_mutations += [
-                (f'historical {i} text', italian.replace(historical, historical.replace('</h2>', ' altered</h2>', 1), 1)),
+                (f'historical {i} text', italian.replace(historical, historical.replace('</strong>', ' altered</strong>', 1), 1)),
                 (f'historical {i} link', italian.replace(historical, historical.replace('href="', 'href="/missing', 1), 1)),
             ]
         for label, candidate in italian14_mutations:
@@ -725,7 +725,7 @@ def check(source, self_test):
                 raise AssertionError('Invalid Triad 14 reading mutation accepted: ' + label)
         verify_triad14(reading)
         verify_it(italian)
-        print('PASS accepted: approved complete Italian Triad 14, exact 42-guide schema, thirteen byte-identical historical cards; English now fourteen')
+        print('PASS accepted: approved complete Italian Triad 14, exact 42-guide schema, fourteen original editorial comparisons; English now fourteen')
 
         en14 = sections(markup)[13]
         en14_entry = index(markup)[13]

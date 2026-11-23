@@ -256,7 +256,7 @@ const enTriads = await read('en/cerchi/triads/index.html');
 const counts = {
   'it-guides': itGuides.length,
   'en-guides': enGuides.length,
-  'it-triads': [...itTriads.matchAll(/<article\b[^>]*class="essay-card"/g)].length,
+  'it-triads': [...itTriads.matchAll(/<details class="triad-entry"/g)].length,
   'en-triads': [...enTriads.matchAll(/<section\b[^>]*id="triad-\d+"/g)].length
 };
 assert(Object.values(counts).every(value => value > 0), 'Corpus inventory must not be empty');

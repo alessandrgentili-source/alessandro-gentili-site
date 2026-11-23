@@ -102,7 +102,7 @@ function check(s, d) {
 
   // Triads are editorially completed groups, NOT floor(guideCount/3);
   // a guide may be published while a new triad is still being built.
-  const itCount = [...s.itTriads.matchAll(/<p class="essay-number">[^<]*triade<\/p>/gi)].length;
+  const itCount = [...s.itTriads.matchAll(/<details class="triad-entry"/gi)].length;
   const enIds = [...s.enTriads.matchAll(/<section class="wrap triad-block" id="triad-(\d+)"/g)]
     .map((match) => match[1]);
   const enLinks = [...s.enTriads.matchAll(/<a href="#triad-(\d+)"/g)]
@@ -197,7 +197,7 @@ if (process.argv.includes('--self-test')) {
   const staleTriadCount = {
     ...state,
     itHub: state.itHub.replace('Esplora le ' +
-      [...state.itTriads.matchAll(/<p class="essay-number">[^<]*triade<\/p>/gi)].length +
+      [...state.itTriads.matchAll(/<details class="triad-entry"/gi)].length +
       ' triadi', 'Esplora le 0 triadi')
   };
   for (const [label, mutated] of [
