@@ -5,9 +5,36 @@
   --reading-face: "Iowan Old Style", Palatino, Georgia, serif;
 }
 .triadi-page .wrap { max-width: 68rem; }
-.triadi-opening { padding-block: clamp(2rem, 5vw, 4.6rem) 2rem; }
-.triadi-opening h1 { font-size: clamp(2.65rem, 5.6vw, 5rem); }
-.triadi-opening .lead { max-width: 50ch; margin: .85rem 0 0; }
+.triadi-opening {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, .95fr);
+  grid-template-rows: auto auto auto;
+  align-content: center;
+  column-gap: clamp(1.5rem, 5vw, 5rem);
+  margin-block: clamp(1.5rem, 3.5vw, 3rem) 2rem;
+}
+.triadi-opening .eyebrow { align-self: end; margin: 0; }
+.triadi-opening h1 { font: 500 clamp(4rem, 8vw, 7rem)/1 var(--reading-face); align-self: center; }
+.triadi-opening .lead { align-self: start; max-width: 39ch; margin: 0; }
+.triadi-orbits {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 1.65;
+  align-self: center;
+}
+.triadi-orbits img {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 188%;
+  max-width: none;
+  height: auto;
+}
 #triadi-indice, .triad-body > h3 {
   font: 650 .8rem/1.4 system-ui, sans-serif;
   text-transform: uppercase;
@@ -19,22 +46,38 @@
 .triadi-page summary { cursor: pointer; }
 .triad-entry > summary {
   display: grid;
-  grid-template-columns: 2.8rem minmax(0, 1fr) minmax(0, .9fr) 1rem;
+  grid-template-columns: 2.8rem minmax(0, 1fr) minmax(0, .9fr) 5.2rem;
   gap: clamp(.75rem, 2vw, 2rem);
   align-items: baseline;
   padding: 1.25rem .25rem;
   list-style: none;
 }
 .triad-entry > summary::-webkit-details-marker { display: none; }
-.triad-entry > summary::after {
-  content: "";
-  width: .58rem;
-  height: .58rem;
-  border: solid var(--brass);
-  border-width: 0 1.5px 1.5px 0;
-  transform: translateY(-.2rem) rotate(45deg);
+.triad-toggle {
+  display: grid;
+  grid-template: "mark label" auto / .65rem auto;
+  justify-self: end;
+  align-items: center;
+  gap: .45rem;
+  padding: .25rem .65rem;
+  border: 1px solid var(--rule);
+  border-radius: 2rem;
+  font: 600 .82rem/1.5 system-ui, sans-serif;
+  color: var(--brass);
 }
-.triad-entry[open] > summary::after { transform: rotate(225deg); }
+.triad-toggle::before, .triad-toggle::after {
+  content: "";
+  grid-area: mark;
+}
+.triad-toggle::before, .triad-toggle::after { height: 1.5px; width: .65rem; background: currentColor; }
+.triad-toggle::after { transform: rotate(90deg); }
+.triad-toggle span { grid-area: label; }
+.triad-toggle span:last-child, .triad-entry[open] > summary .triad-toggle :first-child,
+.triad-entry[open] > summary .triad-toggle::after { display: none; }
+.triad-entry[open] > summary .triad-toggle :last-child { display: inline; }
+.triad-entry > summary:is(:hover,:focus-visible) { background: var(--paper-2); }
+.triad-entry > summary:is(:hover,:focus-visible) .triad-toggle,
+.triad-entry[open] > summary .triad-toggle { color: var(--paper-3); background: var(--ink); }
 .triadi-page summary:focus-visible { outline: 2px solid var(--brass); outline-offset: -2px; }
 .triad-number { font: 1rem var(--reading-face); color: var(--brass); }
 .triad-heading strong { display: block; font: 500 clamp(1.45rem, 2.5vw, 2.1rem)/1.12 var(--reading-face); }
@@ -56,16 +99,31 @@
 .triad-guides a span span { font-size: .9rem; color: var(--ink-2); }
 .full-reading > summary, .reading-link, .triadi-method > a { padding-block: .65rem; color: var(--brass); }
 .reading-link, .triadi-method > a { display: inline-block; text-decoration: underline; text-underline-offset: .2em; }
-.triad12-it-prose, .method-prose { max-width: 65ch; margin: 1.5rem auto; }
-.triad12-it-prose :is(h2,h3), .method-prose :is(h2,h3) { margin: 1.45em 0 .5em; }
-.triadi-method { padding-block: 1.5rem 3rem; border-top: 1px solid var(--rule); }
-.triadi-method summary { font: 1.65rem/1.4 var(--reading-face); padding-block: .5rem; }
-.method-image { margin: 0 0 1.5rem; }
-.method-image img { display: block; width: 100%; height: auto; }
+.triad12-it-prose { max-width: 65ch; margin: 1.5rem auto; }
+.triad12-it-prose :is(h2,h3) { margin: 1.45em 0 .5em; }
+.triadi-method { padding-block: clamp(2rem, 5vw, 4rem) 3rem; border-top: 2px solid var(--brass); }
+.method-title { font-size: clamp(2rem, 4vw, 3.7rem); }
+.triadi-method > .lead { margin: 1rem 0 2rem; max-width: 64ch; }
+.method-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, .55fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 5vw, 4.5rem);
+  padding-block: clamp(1.4rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+.method-chapter .kicker { color: var(--brass); }
+.method-chapter h3 { font-size: clamp(1.55rem, 2.5vw, 2.25rem); line-height: 1.15; }
+.method-prose { max-width: 68ch; }
+.method-prose p { max-width: none; }
+.method-prose h4 { font: 500 1.6rem/1.15 var(--reading-face); margin: 1.5rem 0 .5rem; }
 @media (max-width: 45rem) {
-  .triad-entry > summary { grid-template-columns: 2rem 1fr 1rem; gap: .4rem .6rem; }
-  .triad-question { grid-column: 2; }
-  .triad-entry > summary::after { grid-column: 3; grid-row: 1; }
+  .triadi-opening { grid-template-columns: minmax(0, 1fr) 40%; gap: .5rem 1rem; }
+  .triadi-orbits { grid-row: 1 / 3; aspect-ratio: 1.32; }
+  .triadi-opening .lead { grid-column: 1 / -1; margin-top: .35rem; }
+  .method-chapter { grid-template-columns: 1fr; gap: 1rem; }
+  .triad-entry > summary { grid-template-columns: 2rem 1fr auto; gap: .4rem .6rem; }
+  .triad-question { grid-column: 2 / -1; }
+  .triad-toggle { grid-column: 3; grid-row: 1; }
   .triad-body { margin-left: 0; }
   .triad-guides { grid-template-columns: 1fr; gap: .85rem; }
   .triad-guides a { display: grid; grid-template-columns: minmax(5rem, 28%) 1fr; align-items: center; gap: .8rem; }
