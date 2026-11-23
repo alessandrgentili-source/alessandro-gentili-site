@@ -235,6 +235,33 @@ if (cookieStatisticsPreference === 'accepted') {
   showCookieBanner();
 }
 
+const contactPage = window.location.pathname === '/en/contact/index.html'
+  ? '/en/contact/'
+  : window.location.pathname;
+
+if (['/contatti.html', '/en/contact/'].includes(contactPage)) {
+  document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || window[`ga-disable-${googleAnalyticsId}`] || !window.gtag) return;
+
+    const href = event.target?.closest?.('a[href]')?.getAttribute('href') ?? '';
+    let eventName;
+    if (/^mailto:contatti@alessandro-gentili\.it(?:\?|$)/i.test(href)) {
+      eventName = 'contact_email_click';
+    } else if (href.startsWith('https://12110d84.sibforms.com/serve/')) {
+      eventName = 'newsletter_brevo_click';
+    } else {
+      return;
+    }
+
+    // Measure activation without sending the destination, subject or URL query.
+    window.gtag('event', eventName, {
+      send_to: googleAnalyticsId,
+      page_location: window.location.origin + contactPage,
+      page_referrer: '',
+    });
+  });
+}
+
 
 const bilingualPairs = {
   "/cerchi/triadi/legge-colpa-punizione/": { it: "/cerchi/triadi/legge-colpa-punizione/", en: "/en/cerchi/triads/law-guilt-punishment/" },
