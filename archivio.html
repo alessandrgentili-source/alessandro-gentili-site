@@ -19,229 +19,272 @@
   <meta name="twitter:title" content="Archivio ragionato | Alessandro Gentili" />
   <meta name="twitter:description" content="Archivio ragionato di saggi, testi internazionali, poesia, scrittura civile e sistemi." />
   <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/archivio.css" />
+  <script type="module" src="assets/archivio.js"></script>
 </head>
 <body>
 <header class="site-header"><div class="wrap topbar"><a class="brand" href="/" aria-label="Home">Alessandro Gentili</a><nav class="primary-nav" aria-label="Navigazione principale"><ul class="primary-nav-list"><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="saggi.html" aria-haspopup="true">Saggi <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Saggi"><li><a class="primary-nav-dropdown-link" href="saggi.html">Saggi</a></li><li><a class="primary-nav-dropdown-link" href="temi/">Temi</a></li><li><a class="primary-nav-dropdown-link" href="poesia.html">Poesia</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link active" href="cerchi/" aria-haspopup="true">Cerchi <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Cerchi"><li><a class="primary-nav-dropdown-link" href="cerchi/">Cerchi d’inchiostro</a></li><li><a class="primary-nav-dropdown-link" href="cerchi/triadi/">Triadi</a></li><li><a class="primary-nav-dropdown-link" href="archivio.html">Archivio</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="autore.html" aria-haspopup="true">Autore <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="Autore"><li><a class="primary-nav-dropdown-link" href="autore.html">Chi sono</a></li><li><a class="primary-nav-dropdown-link" href="portfolio.html">Scrittura civile</a></li><li><a class="primary-nav-dropdown-link" href="contatti.html">Contatti</a></li></ul></li><li class="primary-nav-item primary-nav-item--dropdown"><a class="primary-nav-link" href="/en/positioning/" aria-haspopup="true">International <span aria-hidden="true">▾</span></a><ul class="primary-nav-dropdown" aria-label="International"><li><a class="primary-nav-dropdown-link" href="/en/positioning/">Positioning</a></li><li><a class="primary-nav-dropdown-link" href="/en/method/">Method</a></li><li><a class="primary-nav-dropdown-link" href="/en/system/">System</a></li></ul></li><li class="primary-nav-item"><a class="primary-nav-link nav-link-letter" href="contatti.html#lettera-periodica">Lettera periodica</a></li></ul></nav></div></header>
-<main class="page">
-<section class="wrap hero"><div class="hero-copy"><p class="eyebrow">Archivio ragionato</p><h1>Mappa completa del lavoro pubblico.</h1><p class="lead">Saggi, testi internazionali, poesia, scrittura civile e sistemi. È la parte viva del sito: qui vengono aggiunti nel tempo nuovi materiali, senza trasformare la homepage in una bacheca di aggiornamenti.</p></div><aside class="hero-panel"><p class="panel-label">Uso</p><h3>Filtra, leggi, collega nel tempo.</h3><p>Gli elementi esterni e i documenti si aprono in nuova scheda; le pagine interne restano nello stesso percorso. L’archivio è pensato come mappa in progress, non come deposito indistinto.</p></aside></section><section class="wrap section">
-  <div class="filters" aria-label="Filtri archivio">
-    <button type="button" data-filter="all" aria-pressed="true">Tutti</button>
-    <button type="button" data-filter="saggi" aria-pressed="false">Saggi</button>
-    <button type="button" data-filter="cerchi" aria-pressed="false">Cerchi</button>
-    <button type="button" data-filter="international" aria-pressed="false">International</button>
-    <button type="button" data-filter="poesia" aria-pressed="false">Poesia</button>
-    <button type="button" data-filter="eventi" aria-pressed="false">Eventi</button>
-    <button type="button" data-filter="strumenti" aria-pressed="false">System</button>
+<main class="wrap archive-index">
+  <header class="archive-opening">
+    <p class="archive-kicker">Archivio ragionato</p>
+    <h1>Le forme di una ricerca.</h1>
+    <p class="archive-lead">Saggi, libri, guide d’autore, scrittura civile e strumenti di lavoro. Un percorso tra idee, luoghi e responsabilità, in cui le diverse esperienze si incontrano e aprono nuove domande sul presente.</p>
+  </header>
+
+  <div class="archive-layout">
+    <aside class="archive-directory" aria-label="Consultazione dell’archivio">
+      <div class="archive-controls" hidden>
+        <label for="archive-query">Cerca nell’archivio</label>
+        <input type="search" id="archive-query" placeholder="Titolo o parola" />
+        <label class="compact-sections" for="archive-section">Sezione</label>
+        <select class="compact-sections" id="archive-section"></select>
+        <div class="archive-filters" role="group" aria-label="Sezioni dell’archivio">
+          <button type="button" data-filter="all" aria-pressed="true">Tutte le sezioni</button>
+          <button type="button" data-filter="saggi" aria-pressed="false">Saggi</button>
+          <button type="button" data-filter="cerchi" aria-pressed="false">Cerchi d’inchiostro</button>
+          <button type="button" data-filter="international" aria-pressed="false">In inglese</button>
+          <button type="button" data-filter="poesia" aria-pressed="false">Poesia e musica</button>
+          <button type="button" data-filter="eventi" aria-pressed="false">Scrittura civile</button>
+          <button type="button" data-filter="strumenti" aria-pressed="false">Strumenti e metodo</button>
+        </div>
+        <p class="archive-count" role="status" aria-live="polite"></p>
+      </div>
+      <noscript>
+        <nav aria-label="Sezioni dell’archivio">
+          <a href="#saggi">Saggi</a>
+          <a href="#cerchi">Cerchi d’inchiostro</a>
+          <a href="#international">In inglese</a>
+          <a href="#poesia">Poesia e musica</a>
+          <a href="#eventi">Scrittura civile</a>
+          <a href="#strumenti">Strumenti e metodo</a>
+        </nav>
+      </noscript>
+    </aside>
+    <div class="archive-results">
+      <section class="archive-group" aria-labelledby="saggi">
+        <h2 id="saggi">Saggi</h2>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="21">
+          <div><h3><span class="entry-number" aria-label="Saggio 21">21</span> <a href="saggi/saggio-21-da-che-parte-sta-chi-guarda.html">Da che parte sta chi guarda</a></h3><p class="meta">10 novembre 2026 · Testo integrale · English note</p></div>
+          <a class="entry-link" href="saggi/saggio-21-da-che-parte-sta-chi-guarda.html">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="20">
+          <div><h3><span class="entry-number" aria-label="Saggio 20">20</span> <a href="saggi/saggio-20-il-futuro-degli-altri.html">Il futuro degli altri</a></h3><p class="meta">29 ottobre 2026 · Testo integrale · English note</p></div>
+          <a class="entry-link" href="saggi/saggio-20-il-futuro-degli-altri.html">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="19">
+          <div><h3><span class="entry-number" aria-label="Saggio 19">19</span> <a href="saggi/saggio-19-abbastanza-disoccupati.html">Abbastanza disoccupati</a></h3><p class="meta">14 ottobre 2026 · Testo integrale</p></div>
+          <a class="entry-link" href="saggi/saggio-19-abbastanza-disoccupati.html">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="18">
+          <div><h3><span class="entry-number" aria-label="Saggio 18">18</span> <a href="saggi/saggio-18-il-futuro-che-sapevamo.html">Il futuro che sapevamo</a></h3><p class="meta">30 settembre 2026 · Testo integrale</p></div>
+          <a class="entry-link" href="saggi/saggio-18-il-futuro-che-sapevamo.html">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi">
+          <div><h3><a href="saggi/il-giorno-in-cui-un-paese-torna/">Micro-saggio — Il giorno in cui un paese torna</a></h3><p class="meta">4 settembre 2026 · Testo integrale · Territorio e comunità</p></div>
+          <a class="entry-link" href="saggi/il-giorno-in-cui-un-paese-torna/">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="16">
+          <div><h3><span class="entry-number" aria-label="Saggio 16">16</span> <a href="saggi/saggio-16-la-pace-senza-forma.html">La pace senza forma</a></h3><p class="meta">4 agosto 2026 · Testo integrale</p></div>
+          <a class="entry-link" href="saggi/saggio-16-la-pace-senza-forma.html">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="15">
+          <div><h3><span class="entry-number" aria-label="Saggio 15">15</span> <a href="saggi/saggio-15-il-mondo-senza-apprendisti.html">Il mondo senza apprendisti</a></h3><p class="meta">20 luglio 2026 · Testo integrale</p></div>
+          <a class="entry-link" href="saggi/saggio-15-il-mondo-senza-apprendisti.html">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="14">
+          <div><h3><span class="entry-number" aria-label="Saggio 14">14</span> <a href="saggi/saggio-14-metafisica-dell-amore.html">Metafisica dell’amore</a></h3><p class="meta">4 luglio 2026 · Testo integrale</p></div>
+          <a class="entry-link" href="saggi/saggio-14-metafisica-dell-amore.html">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="13">
+          <div><h3><span class="entry-number" aria-label="Saggio 13">13</span> <a href="saggi/saggio-13-la-periferia-intelligente.html">La periferia intelligente</a></h3><p class="meta">19 giugno 2026 · Testo integrale</p></div>
+          <a class="entry-link" href="saggi/saggio-13-la-periferia-intelligente.html">Leggi il saggio</a>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="12">
+          <div><h3><span class="entry-number" aria-label="Saggio 12">12</span> <a href="saggi/saggio-12-le-periferie-del-potere.html">Le periferie del potere</a></h3><p class="meta">2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-12-le-periferie-del-potere.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/le-periferie-del-potere-b9e686db9d7d" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="11">
+          <div><h3><span class="entry-number" aria-label="Saggio 11">11</span> <a href="saggi/saggio-11-chi-decide-il-sole.html">Chi decide il Sole?</a></h3><p class="meta">28 maggio 2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-11-chi-decide-il-sole.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/chi-decide-il-sole-a850acc9a0b1" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="10">
+          <div><h3><span class="entry-number" aria-label="Saggio 10">10</span> <a href="saggi/saggio-10-giovani-senilita-potere.html">Giovani e senilità del potere</a></h3><p class="meta">14 maggio 2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-10-giovani-senilita-potere.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/giovani-e-senilit%C3%A0-del-potere-e6d01cf9dc43" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="9">
+          <div><h3><span class="entry-number" aria-label="Saggio 9">9</span> <a href="saggi/saggio-9-promessa-ritorno.html">La promessa del ritorno</a></h3><p class="meta">2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-9-promessa-ritorno.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/la-promessa-del-ritorno-3ee487c8c341" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="8">
+          <div><h3><span class="entry-number" aria-label="Saggio 8">8</span> <a href="saggi/saggio-8-costo-complessita.html">Il costo della complessità</a></h3><p class="meta">2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-8-costo-complessita.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/il-costo-della-complessit%C3%A0-a8744050005d" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="7">
+          <div><h3><span class="entry-number" aria-label="Saggio 7">7</span> <a href="saggi/saggio-7-il-cerchio-e-aperto.html">Il cerchio è aperto</a></h3><p class="meta">2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-7-il-cerchio-e-aperto.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/il-cerchio-%C3%A8-aperto-48e6f649b423" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="6">
+          <div><h3><span class="entry-number" aria-label="Saggio 6">6</span> <a href="saggi/saggio-6-fenomenologia-del-potere.html">Fenomenologia del potere</a></h3><p class="meta">2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-6-fenomenologia-del-potere.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/fenomenologia-del-potere-c9155873d72d" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="5">
+          <div><h3><span class="entry-number" aria-label="Saggio 5">5</span> <a href="saggi/saggio-5-il-reale-in-modalita-scorrimento.html">Il reale in modalità scorrimento</a></h3><p class="meta">2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-5-il-reale-in-modalita-scorrimento.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/il-reale-in-modalit%C3%A0-scorrimento-b8455b74fef6" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="4">
+          <div><h3><span class="entry-number" aria-label="Saggio 4">4</span> <a href="saggi/saggio-4-metafisica-del-sesso.html">Metafisica del sesso</a></h3><p class="meta">2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-4-metafisica-del-sesso.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/metafisica-del-sesso-desiderio-potere-solitudine-dal-68-a-san-valentino-acfef3745841" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="3">
+          <div><h3><span class="entry-number" aria-label="Saggio 3">3</span> <a href="saggi/saggio-3-governi-senza-firma.html">Governi senza firma</a></h3><p class="meta">2026 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-3-governi-senza-firma.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/governi-senza-firma-rapsodicit%C3%A0-politico-culturale-europea-78820996d01b" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="2">
+          <div><h3><span class="entry-number" aria-label="Saggio 2">2</span> <a href="saggi/saggio-2-il-primo-cerchio.html">Il Primo Cerchio</a></h3><p class="meta">2025 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-2-il-primo-cerchio.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/il-primo-cerchio-bbd211a7a587" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="1">
+          <div><h3><span class="entry-number" aria-label="Saggio 1">1</span> <a href="saggi/saggio-1-1999-paura-diventare-uguali.html">1999: non temevamo la fine del mondo. Temevamo di diventare uguali</a></h3><p class="meta">2025 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-1-1999-paura-diventare-uguali.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/1999-non-temevamo-la-fine-del-mondo-temevamo-di-diventare-uguali-fe2614307441" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry" data-archive-item data-category="saggi" data-essay-number="0">
+          <div><h3><span class="entry-number" aria-label="Saggio 0">0</span> <a href="saggi/saggio-0-potere-leggere-segni.html">Il potere di leggere i segni</a></h3><p class="meta">24 settembre 2025 · Testo integrale</p></div>
+          <div class="actions"><a class="entry-link" href="saggi/saggio-0-potere-leggere-segni.html">Leggi il saggio</a><a class="entry-link" href="https://medium.com/@alessandrgentili/dal-cosmo-vivo-allalgoritmo-chi-ha-il-potere-di-leggere-i-segni-844c79e1c056" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="saggi">
+          <div><h3><a href="temi/">Temi e percorsi</a></h3><p class="meta">Mappa selettiva · Percorsi trasversali tra saggi e guide</p></div>
+          <span class="entry-hint">Percorsi tematici</span>
+        </article>
+      </section>
+      <section class="archive-group" aria-labelledby="cerchi">
+        <h2 id="cerchi">Cerchi d’inchiostro</h2>
+        <article class="archive-entry single-destination" data-archive-item data-category="cerchi">
+          <div><h3><a href="cerchi/">Cerchi d’inchiostro</a></h3><p class="meta"><span data-corpus-count="it-guides">42</span> guide · Autori, idee e sistemi</p></div>
+          <span class="entry-hint">Apri hub</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="cerchi">
+          <div><h3><a href="cerchi/triadi/">Triadi — <span data-corpus-count="it-triads">14</span> soglie di lettura</a></h3><p class="meta">42 autori messi in relazione intorno a domande comuni</p></div>
+          <span class="entry-hint">Esplora le triadi</span>
+        </article>
+      </section>
+      <section class="archive-group" aria-labelledby="international">
+        <h2 id="international">In inglese</h2>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="en/">English edition — ingresso editoriale</a></h3><p class="meta">Produzione culturale in inglese · Edizione autonoma e selettiva</p></div>
+          <span class="entry-hint">Apri English edition</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="en/cerchi/">Circles of Ink — guide in inglese</a></h3><p class="meta"><span data-corpus-count="en-guides">42</span> guide autore · Letture internazionali di Cerchi d’inchiostro</p></div>
+          <span class="entry-hint">Esplora le guide EN</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="en/cerchi/triads/">Triads — percorsi in inglese</a></h3><p class="meta"><span data-corpus-count="en-triads">14</span> triadi per leggere insieme 42 guide in inglese e ritrovare gli originali italiani</p></div>
+          <span class="entry-hint">Esplora le triadi EN</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="en/themes/">Themes — percorsi tematici in inglese</a></h3><p class="meta">Domande e relazioni trasversali al corpus</p></div>
+          <span class="entry-hint">Esplora i temi EN</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="en/positioning/">International — Positioning</a></h3><p class="meta">Presenza professionale · Marketing strategico e comunicazione</p></div>
+          <span class="entry-hint">Apri Positioning</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="en/method/">International — Method</a></h3><p class="meta">Metodo professionale · Dal contesto alle decisioni</p></div>
+          <span class="entry-hint">Apri Method</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="en/system/">International — System</a></h3><p class="meta">Sistemi professionali · Conoscenza, workflow e responsabilità</p></div>
+          <span class="entry-hint">Apri System</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="https://medium.com/@alessandrgentili/the-price-of-attention-b392a908ec0a" target="_blank" rel="noopener noreferrer">The Price of Attention</a></h3><p class="meta">English article</p></div>
+          <span class="entry-hint">Read on Medium</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="international">
+          <div><h3><a href="https://medium.com/@alessandrgentili/my-first-writers-circle-why-im-coming-back-895ae9de5b2b" target="_blank" rel="noopener noreferrer">My First Writers Circle: Why I’m Coming Back</a></h3><p class="meta">English article</p></div>
+          <span class="entry-hint">Read on Medium</span>
+        </article>
+      </section>
+      <section class="archive-group" aria-labelledby="poesia">
+        <h2 id="poesia">Poesia e musica</h2>
+        <article class="archive-entry single-destination" data-archive-item data-category="poesia">
+          <div><h3><a href="https://www.lafeltrinelli.it/imperfetto-libro-alessandro-gentili/e/9788892368439" target="_blank" rel="noopener noreferrer">Im|perfetto</a></h3><p class="meta">Libro · 2020 · ISBN 9788892368439</p></div>
+          <span class="entry-hint">Scheda del libro ↗</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="poesia">
+          <div><h3><a href="https://medium.com/@alessandrgentili/una-lunga-attesa-e-una-promessa-d1b4d91663de" target="_blank" rel="noopener noreferrer">Una lunga attesa e una promessa</a></h3></div>
+          <span class="entry-hint">Leggi su Medium ↗</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="poesia">
+          <div><h3><a href="https://medium.com/@alessandrgentili/come-ho-scelto-la-copertina-del-libro-im-perfetto-aa72f9d9e538" target="_blank" rel="noopener noreferrer">Come ho scelto la copertina del libro Im|perfetto?</a></h3></div>
+          <span class="entry-hint">Leggi su Medium ↗</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="poesia">
+          <div><h3><a href="https://medium.com/@alessandrgentili/la-linea-e-la-struttura-di-un-libro-3080ed3d22b4" target="_blank" rel="noopener noreferrer">La linea e la struttura di un libro</a></h3></div>
+          <span class="entry-hint">Leggi su Medium ↗</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="poesia">
+          <div><h3><a href="https://open.spotify.com/intl-it/track/5vTqzA4gzkJXj8E6sRASnX?si=3a6893d9fe83458a" target="_blank" rel="noopener noreferrer">Romansìa</a></h3><p class="meta">2020 · Brano musicale · Spotify</p></div>
+          <span class="entry-hint">Ascolta</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="poesia">
+          <div><h3><a href="https://www.viverepesaro.it/2020/10/08/imperfetto-romanzo-e-poesia-nel-libro-di-alessandro-gentili/840852/" target="_blank" rel="noopener noreferrer">Presentazione Im|perfetto — Pesaro</a></h3><p class="meta">Rassegna stampa</p></div>
+          <span class="entry-hint">Leggi l’articolo ↗</span>
+        </article>
+      </section>
+      <section class="archive-group" aria-labelledby="eventi">
+        <h2 id="eventi">Scrittura civile</h2>
+        <article class="archive-entry single-destination" data-archive-item data-category="eventi">
+          <div><h3><a href="portfolio.html">Scrittura civile</a></h3><p class="meta">Progetti culturali, territorio e tracce pubbliche</p></div>
+          <span class="entry-hint">Apri Scrittura civile</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="eventi">
+          <div><h3><a href="portfolio/un-paese-dentro-la-storia/">Un paese dentro la storia — Festa della Madonna della Speranza</a></h3><p class="meta">Castelletta · settembre 2026 · Dossier e progetto culturale</p></div>
+          <span class="entry-hint">Apri il progetto</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="eventi">
+          <div><h3><a href="portfolio/le-figure-di-pinocchio/">Le figure di Pinocchio</a></h3><p class="meta">Castelletta · 19 agosto 2026 · Incontro e portfolio</p></div>
+          <span class="entry-hint">Apri il portfolio</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="eventi">
+          <div><h3><a href="https://medium.com/@alessandrgentili/anteprima-di-un-libro-mai-scritto-cfac35b0b25e" target="_blank" rel="noopener noreferrer">Anteprima di un libro mai scritto</a></h3><p class="meta">Castelletta · agosto 2025 · Lettura corale e itinerante</p></div>
+          <span class="entry-hint">Leggi l’articolo ↗</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="eventi">
+          <div><h3><a href="assets/docs/manifesto-il-circolo-aps.pdf" target="_blank" rel="noopener noreferrer">Il Circolo APS</a></h3><p class="meta">Carta fondativa e manifesto</p></div>
+          <span class="entry-hint">Documento PDF</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="eventi">
+          <div><h3><a href="poesia.html#rassegna-stampa">Press e citazioni</a></h3><p class="meta">Materiali pubblici e rassegna</p></div>
+          <span class="entry-hint">Apri rassegna</span>
+        </article>
+      </section>
+      <section class="archive-group" aria-labelledby="strumenti">
+        <h2 id="strumenti">Strumenti e metodo</h2>
+        <article class="archive-entry single-destination" data-archive-item data-category="strumenti">
+          <div><h3><a href="/en/system/">Scaffale Strategico</a></h3><p class="meta">GPT curatoriale · supporto a letture, idee e priorità operative</p></div>
+          <span class="entry-hint">Il sistema di lavoro</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="strumenti">
+          <div><h3><a href="/en/system/">Obsidian / Knowledge Base</a></h3><p class="meta">Architettura di conoscenza interna</p></div>
+          <span class="entry-hint">Apri System</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="strumenti">
+          <div><h3><a href="/en/system/">Workflow di pubblicazione</a></h3><p class="meta">Pipeline editoriale</p></div>
+          <span class="entry-hint">Apri System</span>
+        </article>
+        <article class="archive-entry single-destination" data-archive-item data-category="strumenti">
+          <div><h3><a href="/en/system/">Misurazione editoriale</a></h3><p class="meta">Qualità, distribuzione e feedback</p></div>
+          <span class="entry-hint">Apri System</span>
+        </article>
+      </section>
+      <div class="archive-empty" hidden>
+        <p>Nessuna voce corrisponde alla ricerca.</p>
+        <button type="button">Mostra tutto l’archivio</button>
+      </div>
+    </div>
   </div>
-  <div class="archive-list">
-    <article class="item" data-archive-item data-category="saggi">
-      <div><h3>Temi e percorsi</h3><p class="meta">Mappa selettiva · Percorsi trasversali tra saggi e guide</p></div>
-      <a class="btn-secondary" href="temi/">Percorsi tematici</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="21">
-      <div><h3>21 — Da che parte sta chi guarda</h3><p class="meta">10 novembre 2026 · Testo integrale · English note</p></div>
-      <a class="btn-secondary" href="saggi/saggio-21-da-che-parte-sta-chi-guarda.html">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="20">
-      <div><h3>20 — Il futuro degli altri</h3><p class="meta">29 ottobre 2026 · Testo integrale · English note</p></div>
-      <a class="btn-secondary" href="saggi/saggio-20-il-futuro-degli-altri.html">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="19">
-      <div><h3>19 — Abbastanza disoccupati</h3><p class="meta">14 ottobre 2026 · Testo integrale</p></div>
-      <a class="btn-secondary" href="saggi/saggio-19-abbastanza-disoccupati.html">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="18">
-      <div><h3>18 — Il futuro che sapevamo</h3><p class="meta">30 settembre 2026 · Testo integrale</p></div>
-      <a class="btn-secondary" href="saggi/saggio-18-il-futuro-che-sapevamo.html">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi">
-      <div><h3>Micro-saggio — Il giorno in cui un paese torna</h3><p class="meta">4 settembre 2026 · Testo integrale · Territorio e comunità</p></div>
-      <a class="btn-secondary" href="saggi/il-giorno-in-cui-un-paese-torna/">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="16">
-      <div><h3>16 — La pace senza forma</h3><p class="meta">4 agosto 2026 · Testo integrale</p></div>
-      <a class="btn-secondary" href="saggi/saggio-16-la-pace-senza-forma.html">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="15">
-      <div><h3>15 — Il mondo senza apprendisti</h3><p class="meta">20 luglio 2026 · Testo integrale</p></div>
-      <a class="btn-secondary" href="saggi/saggio-15-il-mondo-senza-apprendisti.html">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="14">
-      <div><h3>14 — Metafisica dell’amore</h3><p class="meta">4 luglio 2026 · Testo integrale</p></div>
-      <a class="btn-secondary" href="saggi/saggio-14-metafisica-dell-amore.html">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="13">
-      <div><h3>13 — La periferia intelligente</h3><p class="meta">19 giugno 2026 · Testo integrale</p></div>
-      <a class="btn-secondary" href="saggi/saggio-13-la-periferia-intelligente.html">Leggi il saggio</a>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="12">
-      <div><h3>12 — Le periferie del potere</h3><p class="meta">2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-12-le-periferie-del-potere.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/le-periferie-del-potere-b9e686db9d7d" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="11">
-      <div><h3>11 — Chi decide il Sole?</h3><p class="meta">28 maggio 2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-11-chi-decide-il-sole.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/chi-decide-il-sole-a850acc9a0b1" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="10">
-      <div><h3>10 — Giovani e senilità del potere</h3><p class="meta">14 maggio 2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-10-giovani-senilita-potere.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/giovani-e-senilit%C3%A0-del-potere-e6d01cf9dc43" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="9">
-      <div><h3>9 — La promessa del ritorno</h3><p class="meta">2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-9-promessa-ritorno.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/la-promessa-del-ritorno-3ee487c8c341" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="8">
-      <div><h3>8 — Il costo della complessità</h3><p class="meta">2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-8-costo-complessita.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/il-costo-della-complessit%C3%A0-a8744050005d" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="7">
-      <div><h3>7 — Il cerchio è aperto</h3><p class="meta">2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-7-il-cerchio-e-aperto.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/il-cerchio-%C3%A8-aperto-48e6f649b423" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="6">
-      <div><h3>6 — Fenomenologia del potere</h3><p class="meta">2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-6-fenomenologia-del-potere.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/fenomenologia-del-potere-c9155873d72d" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="5">
-      <div><h3>5 — Il reale in modalità scorrimento</h3><p class="meta">2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-5-il-reale-in-modalita-scorrimento.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/il-reale-in-modalit%C3%A0-scorrimento-b8455b74fef6" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="4">
-      <div><h3>4 — Metafisica del sesso</h3><p class="meta">2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-4-metafisica-del-sesso.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/metafisica-del-sesso-desiderio-potere-solitudine-dal-68-a-san-valentino-acfef3745841" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="3">
-      <div><h3>3 — Governi senza firma</h3><p class="meta">2026 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-3-governi-senza-firma.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/governi-senza-firma-rapsodicit%C3%A0-politico-culturale-europea-78820996d01b" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="2">
-      <div><h3>2 — Il Primo Cerchio</h3><p class="meta">2025 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-2-il-primo-cerchio.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/il-primo-cerchio-bbd211a7a587" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="1">
-      <div><h3>1 — 1999: non temevamo la fine del mondo. Temevamo di diventare uguali</h3><p class="meta">2025 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-1-1999-paura-diventare-uguali.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/1999-non-temevamo-la-fine-del-mondo-temevamo-di-diventare-uguali-fe2614307441" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-    <article class="item" data-archive-item data-category="saggi" data-essay-number="0">
-      <div><h3>0 — Il potere di leggere i segni</h3><p class="meta">24 settembre 2025 · Testo integrale · Medium</p></div>
-      <div class="actions"><a class="btn-secondary" href="saggi/saggio-0-potere-leggere-segni.html">Leggi il saggio</a><a class="btn-secondary" href="https://medium.com/@alessandrgentili/dal-cosmo-vivo-allalgoritmo-chi-ha-il-potere-di-leggere-i-segni-844c79e1c056" target="_blank" rel="noopener noreferrer">Medium ↗</a></div>
-    </article>
-
-    <article class="item" data-archive-item data-category="cerchi">
-      <div><h3>Cerchi d'inchiostro — Hub</h3><p class="meta"><span data-corpus-count="it-guides">42</span> guide · Autori, idee e sistemi</p></div>
-      <a class="btn-secondary" href="cerchi/">Apri hub</a>
-    </article>
-    <article class="item" data-archive-item data-category="cerchi">
-      <div><h3>Triadi — <span data-corpus-count="it-triads">14</span> soglie di lettura</h3><p class="meta">42 autori messi in relazione intorno a domande comuni</p></div>
-      <a class="btn-secondary" href="cerchi/triadi/">Esplora le triadi</a>
-    </article>
-
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>English edition — ingresso editoriale</h3><p class="meta">Produzione culturale in inglese · Edizione autonoma e selettiva</p></div>
-      <a class="btn-secondary" href="en/">Apri English edition</a>
-    </article>
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>Circles of Ink — guide in inglese</h3><p class="meta"><span data-corpus-count="en-guides">42</span> guide autore · Letture internazionali di Cerchi d’inchiostro</p></div>
-      <a class="btn-secondary" href="en/cerchi/">Esplora le guide EN</a>
-    </article>
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>Triads — percorsi in inglese</h3><p class="meta"><span data-corpus-count="en-triads">14</span> triadi · Le quattordici triadi collegano 42 guide autore in inglese, con collegamenti agli originali italiani</p></div>
-      <a class="btn-secondary" href="en/cerchi/triads/">Esplora le triadi EN</a>
-    </article>
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>Themes — percorsi tematici in inglese</h3><p class="meta">Domande e relazioni trasversali al corpus</p></div>
-      <a class="btn-secondary" href="en/themes/">Esplora i temi EN</a>
-    </article>
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>International — Positioning</h3><p class="meta">Presenza professionale · Marketing strategico e comunicazione</p></div>
-      <a class="btn-secondary" href="en/positioning/">Apri Positioning</a>
-    </article>
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>International — Method</h3><p class="meta">Metodo professionale · Dal contesto alle decisioni</p></div>
-      <a class="btn-secondary" href="en/method/">Apri Method</a>
-    </article>
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>International — System</h3><p class="meta">Sistemi professionali · Conoscenza, workflow e responsabilità</p></div>
-      <a class="btn-secondary" href="en/system/">Apri System</a>
-    </article>
-
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>The Price of Attention</h3><p class="meta">English article</p></div>
-      <a class="btn-secondary" href="https://medium.com/@alessandrgentili/the-price-of-attention-b392a908ec0a" target="_blank" rel="noopener noreferrer">Read on Medium</a>
-    </article>
-    <article class="item" data-archive-item data-category="international">
-      <div><h3>My First Writers Circle: Why I’m Coming Back</h3><p class="meta">English article</p></div>
-      <a class="btn-secondary" href="https://medium.com/@alessandrgentili/my-first-writers-circle-why-im-coming-back-895ae9de5b2b" target="_blank" rel="noopener noreferrer">Read on Medium</a>
-    </article>
-
-    <article class="item" data-archive-item data-category="poesia">
-      <div><h3>Im|perfetto</h3><p class="meta">Libro · 2020 · ISBN 9788892368439</p></div>
-      <a class="btn-secondary" href="https://www.lafeltrinelli.it/imperfetto-libro-alessandro-gentili/e/9788892368439" target="_blank" rel="noopener noreferrer">Approfondisci</a>
-    </article>
-    <article class="item" data-archive-item data-category="poesia">
-      <div><h3>Una lunga attesa e una promessa</h3></div>
-      <a class="btn-secondary" href="https://medium.com/@alessandrgentili/una-lunga-attesa-e-una-promessa-d1b4d91663de" target="_blank" rel="noopener noreferrer">Leggi su Medium ↗</a>
-    </article>
-    <article class="item" data-archive-item data-category="poesia">
-      <div><h3>Come ho scelto la copertina del libro Im|perfetto?</h3></div>
-      <a class="btn-secondary" href="https://medium.com/@alessandrgentili/come-ho-scelto-la-copertina-del-libro-im-perfetto-aa72f9d9e538" target="_blank" rel="noopener noreferrer">Leggi su Medium ↗</a>
-    </article>
-    <article class="item" data-archive-item data-category="poesia">
-      <div><h3>La linea e la struttura di un libro</h3></div>
-      <a class="btn-secondary" href="https://medium.com/@alessandrgentili/la-linea-e-la-struttura-di-un-libro-3080ed3d22b4" target="_blank" rel="noopener noreferrer">Leggi su Medium ↗</a>
-    </article>
-    <article class="item" data-archive-item data-category="poesia">
-      <div><h3>Romansìa</h3><p class="meta">2020 · Brano musicale · Spotify</p></div>
-      <a class="btn-secondary" href="https://open.spotify.com/intl-it/track/5vTqzA4gzkJXj8E6sRASnX?si=3a6893d9fe83458a" target="_blank" rel="noopener noreferrer">Ascolta</a>
-    </article>
-    <article class="item" data-archive-item data-category="poesia">
-      <div><h3>Presentazione Im|perfetto — Pesaro</h3><p class="meta">Rassegna stampa</p></div>
-      <a class="btn-secondary" href="https://www.viverepesaro.it/2020/10/08/imperfetto-romanzo-e-poesia-nel-libro-di-alessandro-gentili/840852/" target="_blank" rel="noopener noreferrer">Approfondisci</a>
-    </article>
-
-    <article class="item" data-archive-item data-category="eventi">
-      <div><h3>Scrittura civile — Hub</h3><p class="meta">Progetti culturali, territorio e tracce pubbliche</p></div>
-      <a class="btn-secondary" href="portfolio.html">Apri Scrittura civile</a>
-    </article>
-    <article class="item" data-archive-item data-category="eventi">
-      <div><h3>Un paese dentro la storia — Festa della Madonna della Speranza</h3><p class="meta">Castelletta · settembre 2026 · Dossier e progetto culturale</p></div>
-      <a class="btn-secondary" href="portfolio/un-paese-dentro-la-storia/">Apri il progetto</a>
-    </article>
-    <article class="item" data-archive-item data-category="eventi">
-      <div><h3>Le figure di Pinocchio</h3><p class="meta">Castelletta · 19 agosto 2026 · Incontro e portfolio</p></div>
-      <a class="btn-secondary" href="portfolio/le-figure-di-pinocchio/">Apri il portfolio</a>
-    </article>
-    <article class="item" data-archive-item data-category="eventi">
-      <div><h3>Anteprima di un libro mai scritto</h3><p class="meta">Castelletta · agosto 2025 · Lettura corale e itinerante</p></div>
-      <a class="btn-secondary" href="https://medium.com/@alessandrgentili/anteprima-di-un-libro-mai-scritto-cfac35b0b25e" target="_blank" rel="noopener noreferrer">Approfondisci</a>
-    </article>
-    <article class="item" data-archive-item data-category="eventi">
-      <div><h3>Il Circolo APS</h3><p class="meta">Carta fondativa e manifesto</p></div>
-      <a class="btn-secondary" href="assets/docs/manifesto-il-circolo-aps.pdf" target="_blank" rel="noopener noreferrer">Documento PDF</a>
-    </article>
-    <article class="item" data-archive-item data-category="eventi">
-      <div><h3>Press e citazioni</h3><p class="meta">Materiali pubblici e rassegna</p></div>
-      <a class="btn-secondary" href="poesia.html#rassegna-stampa">Apri rassegna</a>
-    </article>
-
-    <article class="item" data-archive-item data-category="strumenti">
-      <div><h3>Scaffale Strategico</h3><p class="meta">GPT curatoriale · supporto a letture, idee e priorità operative</p></div>
-      <a class="btn-secondary" href="/en/system/">Apri System</a>
-    </article>
-    <article class="item" data-archive-item data-category="strumenti">
-      <div><h3>Obsidian / Knowledge Base</h3><p class="meta">Architettura di conoscenza interna</p></div>
-      <a class="btn-secondary" href="/en/system/">Apri System</a>
-    </article>
-    <article class="item" data-archive-item data-category="strumenti">
-      <div><h3>Workflow di pubblicazione</h3><p class="meta">Pipeline editoriale</p></div>
-      <a class="btn-secondary" href="/en/system/">Apri System</a>
-    </article>
-    <article class="item" data-archive-item data-category="strumenti">
-      <div><h3>Misurazione editoriale</h3><p class="meta">Qualità, distribuzione e feedback</p></div>
-      <a class="btn-secondary" href="/en/system/">Apri System</a>
-    </article>
-  </div>
-</section>
 </main>
 <footer class="footer"><div class="wrap footer-wrap"><div class="footer-brand"><a href="/">Alessandro Gentili</a></div><nav class="footer-nav" aria-label="Navigazione footer"><section class="footer-group"><h2>Scrittura</h2><ul><li><a href="saggi.html">Saggi</a></li><li><a href="temi/">Temi</a></li><li><a href="poesia.html">Poesia</a></li></ul></section><section class="footer-group"><h2>Cerchi d’inchiostro</h2><ul><li><a href="cerchi/">Hub e guide</a></li><li><a href="cerchi/triadi/">Triadi</a></li><li><a href="archivio.html">Archivio</a></li></ul></section><section class="footer-group"><h2>Autore</h2><ul><li><a href="autore.html">Chi sono</a></li><li><a href="portfolio.html">Scrittura civile</a></li><li><a href="contatti.html">Contatti</a></li></ul></section><section class="footer-group"><h2>International</h2><ul><li><a href="/en/positioning/">Positioning</a></li><li><a href="/en/method/">Method</a></li><li><a href="/en/system/">System</a></li></ul></section></nav><div class="footer-bottom"><span>© Alessandro Gentili</span><span><a href="privacy.html">Privacy</a> · <a href="/en/">International gateway</a></span></div></div></footer>
 <script src="assets/script.js"></script>

@@ -81,17 +81,6 @@ if (siteHeader) {
   if ('ResizeObserver' in window) new ResizeObserver(measureHeader).observe(siteHeader);
   else window.addEventListener('resize', measureHeader);
 }
-document.querySelectorAll('[data-filter]').forEach((button) => {
-  button.addEventListener('click', () => {
-    const filter = button.dataset.filter;
-    document.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
-    button.setAttribute('aria-pressed', 'true');
-    document.querySelectorAll('[data-archive-item]').forEach((item) => {
-      item.hidden = filter !== 'all' && item.dataset.category !== filter;
-    });
-  });
-});
-
 document.querySelectorAll('[data-newsletter-form]').forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
