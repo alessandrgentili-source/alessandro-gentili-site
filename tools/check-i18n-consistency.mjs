@@ -260,7 +260,7 @@ const counts = {
   'en-triads': [...enTriads.matchAll(/<section\b[^>]*id="triad-\d+"/g)].length
 };
 assert(Object.values(counts).every(value => value > 0), 'Corpus inventory must not be empty');
-for (const path of ['en/index.html', 'en/cerchi/index.html', 'en/positioning/index.html', 'archivio.html']) {
+for (const path of ['en/index.html', 'en/cerchi/index.html', 'archivio.html']) {
   const html = await read(path);
   const claims = [...html.matchAll(/data-corpus-count="([^"]+)">(\d+)</g)];
   assert(claims.length > 0, `${path}: missing corpus count declarations`);

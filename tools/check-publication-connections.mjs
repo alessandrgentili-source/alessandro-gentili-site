@@ -124,10 +124,10 @@ function check(s, d) {
   require(s.enHome.includes('data-corpus-count="en-guides">' + d.enGuideSlugs.length + '</span>') &&
     s.enHome.includes('data-corpus-count="en-triads">' + enIds.length + '</span>'),
     'English Home: guide/triad inventory counts do not match published files');
-  require(s.enPositioning.includes('data-corpus-count="en-guides">' + d.enGuideSlugs.length + '</span>'),
-    'English Positioning: English guide count does not match published files');
-  require(s.enPositioning.includes('data-corpus-count="en-triads">' + enIds.length + '</span>'),
-    'English Positioning: English triad count does not match reading paths');
+  // Positioning illustrates the work through a published triad.
+  const featuredTriads = [...s.enPositioning.matchAll(/href="\/en\/cerchi\/triads\/#triad-([^"]+)"/g)];
+  require(featuredTriads.length > 0 && featuredTriads.every(([, id]) => enIds.includes(id)),
+    'English Positioning: the featured triad must link to a published reading path');
   require(s.enTriads.includes(englishNumber(enIds.length) + ' triads'),
     'English Triads: spelled-out triad count is stale');
   return errors;
@@ -205,7 +205,11 @@ if (process.argv.includes('--self-test')) {
     ['reordered chronological Home cards', swapSecondThird],
     ['newer micro-saggio omitted from first position', newerMicroIndex],
     ['stale guide count', staleGuideCount],
-    ['stale triad CTA', staleTriadCount]
+    ['stale triad CTA', staleTriadCount],
+    ['unpublished triad on Positioning', {
+      ...state,
+      enPositioning: state.enPositioning.replace(/href="\/en\/cerchi\/triads\/#triad-\d+"/, 'href="/en/cerchi/triads/#triad-missing"')
+    }]
   ]) {
     if (check(mutated, data).length === 0) throw Error('Regression escaped publication gate: ' + label);
   }
