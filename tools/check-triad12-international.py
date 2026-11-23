@@ -473,6 +473,11 @@ def check(source, self_test):
     approved_suffix = b'anticipatore diretto. ---"'
     require(protected[tarde].count(approved_suffix) == 1, 'Unexpected frozen Tarde FAQ answer')
     protected[tarde] = protected[tarde].replace(approved_suffix, b'anticipatore diretto."', 1)
+    shannon = 'en/cerchi/guides/claude-shannon-information-noise-limits-of-transmission/index.html'
+    old_title = b'<title>Claude Shannon: information, noise and the limits of transmission | Circles of Ink</title>'
+    approved_title = b'<title>Claude Shannon: information theory, noise and transmission | Circles of Ink</title>'
+    require(protected[shannon].count(old_title) == 1, 'Unexpected frozen Shannon EN title')
+    protected[shannon] = protected[shannon].replace(old_title, approved_title, 1)
     verify_protected(protected, lambda path: (ROOT / path).read_bytes())
     for path in ['en/cerchi/index.html', 'en/index.html', 'en/positioning/index.html', 'archivio.html']:
         text = (ROOT / path).read_text()
@@ -554,12 +559,24 @@ def check(source, self_test):
             verify_protected(protected, lambda candidate: protected[candidate] + b'\n<!-- Release update -->'
                              if candidate == path else protected[candidate])
         print('PASS accepted: evolving Italian hub and sitemap; baseline protection unchanged elsewhere')
-        for label, path in [
-            ('historical guide', next(path for path in paths if path.startswith('cerchi/guide/'))),
-            ('historical cover', next(path for path in paths if path.startswith('assets/img/cerchi/'))),
+        shannon_html = protected[shannon]
+        other_english_guide = next(path for path in paths if path.startswith('en/cerchi/guides/') and path != shannon)
+        italian_guide = next(path for path in paths if path.startswith('cerchi/guide/'))
+        cover = next(path for path in paths if path.startswith('assets/img/cerchi/'))
+        for label, path, changed in [
+            ('Shannon title reverted', shannon, shannon_html.replace(approved_title, old_title, 1)),
+            ('Shannon unapproved title', shannon, shannon_html.replace(approved_title, b'<title>Other</title>', 1)),
+            ('Shannon duplicate title', shannon, shannon_html.replace(approved_title, approved_title * 2, 1)),
+            ('Shannon description', shannon, shannon_html.replace(b'name="description"', b'name="other"', 1)),
+            ('Shannon editorial text', shannon, shannon_html.replace(b'>Claude Shannon</h1>', b'>Other</h1>', 1)),
+            ('Shannon extra byte', shannon, shannon_html + b'\n'),
+            ('other English guide', other_english_guide, protected[other_english_guide] + b'altered'),
+            ('historical guide', italian_guide, protected[italian_guide] + b'altered'),
+            ('historical cover', cover, protected[cover] + b'altered'),
         ]:
+            require(changed != protected[path], 'Invalid protected mutation fixture: ' + label)
             try:
-                verify_protected(protected, lambda candidate: protected[candidate] + b'altered'
+                verify_protected(protected, lambda candidate: changed
                                  if candidate == path else protected[candidate])
             except AssertionError as error:
                 require(str(error) == 'Protected file changed: ' + path, 'Unexpected protection failure')
