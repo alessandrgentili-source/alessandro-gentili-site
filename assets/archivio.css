@@ -1,0 +1,86 @@
+.archive-index {
+  --archive-rule: #c5bba8;
+  --archive-blue: #192e3c;
+  --archive-bronze: #72532b;
+  padding-block: clamp(1.75rem, 4vw, 4rem);
+}
+.archive-opening {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  align-items: end;
+  gap: .65rem clamp(2rem, 6vw, 6rem);
+  padding-bottom: clamp(1.4rem, 3vw, 2.6rem);
+  border-bottom: 2px solid var(--archive-blue);
+}
+.archive-kicker, .archive-controls label {
+  font: 700 .78rem/1.4 system-ui, sans-serif;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.archive-kicker { grid-column: 1 / -1; margin: 0; color: var(--archive-bronze); }
+.archive-opening h1 { max-width: 19ch; font-size: clamp(2.4rem, 5vw, 4.75rem); line-height: 1.02; }
+.archive-lead { margin: 0; font: 1.18rem/1.48 Georgia, serif; max-width: 42ch; }
+.archive-layout {
+  display: grid;
+  grid-template-columns: minmax(12rem, 1fr) minmax(0, 3fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-block: 1.75rem;
+}
+.archive-directory { align-self: start; }
+@media (min-width: 761px) and (min-height: 740px) {
+  .archive-directory { position: sticky; top: calc(var(--site-header-height, 5rem) + 1rem); }
+}
+.archive-controls label, .archive-directory nav a { display: block; }
+.archive-controls input, .archive-controls select {
+  width: 100%; min-height: 44px; padding: .55rem .75rem; margin: .55rem 0 1rem;
+  border: 1px solid #8e8370; border-radius: 2px; background: #fffaf0;
+  color: var(--archive-blue); font: inherit;
+}
+.archive-controls .compact-sections { display: none; }
+.archive-filters { display: grid; }
+.archive-filters button, .archive-empty button {
+  padding: .55rem .75rem; min-height: 44px;
+  border: 0; border-bottom: 1px solid var(--archive-rule);
+  background: transparent; color: var(--archive-blue);
+  font: inherit; text-align: left; cursor: pointer;
+}
+.archive-filters button:hover, .archive-empty button:hover { text-decoration: underline; }
+.archive-filters button[aria-pressed="true"] { background: var(--archive-blue); color: #fffaf0; font-weight: 700; }
+.archive-count { margin: .75rem 0 0; color: #545044; font-size: .86rem; }
+.archive-group:not([hidden]) ~ .archive-group:not([hidden]) { margin-top: 3rem; }
+.archive-group h2 {
+  padding-bottom: .55rem; border-bottom: 1px solid var(--archive-blue);
+  font-size: clamp(2rem, 3.2vw, 3rem); scroll-margin-top: calc(var(--site-header-height, 7rem) + 1rem);
+}
+.archive-entry {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center; gap: .6rem 1.25rem;
+  padding: 1.05rem 0; border-bottom: 1px solid var(--archive-rule);
+}
+.archive-entry h3 { font-size: clamp(1.3rem, 1.8vw, 1.68rem); line-height: 1.18; }
+.entry-number { color: var(--archive-bronze); font: 600 .8rem/1.3 system-ui, sans-serif; font-variant-numeric: tabular-nums; margin-right: .45rem; }
+.archive-entry h3 a { color: inherit; text-decoration: none; }
+.archive-entry h3 a:hover { text-decoration: underline; text-underline-offset: .13em; }
+.single-destination { position: relative; }
+.single-destination h3 a::after { content: ""; position: absolute; inset: 0; }
+.single-destination:hover h3 { text-decoration: underline; }
+.entry-hint { color: #695436; font-size: .86rem; }
+.archive-entry .meta { margin: .3rem 0 0; }
+.archive-entry .actions { display: flex; flex-wrap: wrap; gap: .25rem .9rem; margin: 0; }
+.entry-link, .archive-empty button { font-size: .91rem; text-decoration: underline; text-underline-offset: .22em; }
+.entry-link { color: var(--archive-blue); padding-block: .4rem; }
+.entry-link[href*="medium.com"] { color: #695436; }
+.archive-index :focus-visible { outline: 3px solid #235d79; outline-offset: 2px; }
+@media (max-width: 760px) {
+  .archive-opening, .archive-layout { grid-template-columns: 1fr; gap: .75rem; }
+  .archive-layout { padding-top: 1rem; gap: 1.25rem; }
+  .archive-filters { display: none; }
+  .archive-controls .compact-sections { display: block; }
+  .archive-controls select { margin-bottom: 0; }
+  .archive-controls input { margin-bottom: .5rem; }
+}
+@media (max-width: 560px) {
+  .archive-entry { grid-template-columns: 1fr; justify-items: start; gap: .25rem; }
+  .archive-opening h1 { max-width: 17ch; }
+  .archive-lead { font-size: 1.04rem; }
+}
