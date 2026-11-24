@@ -1,6 +1,7 @@
 """Preserve Triads 01–13 and verify the exact approved bilingual Triad 14 pilot."""
 import argparse
 from functools import lru_cache
+from itertools import combinations
 import hashlib
 import html
 import importlib.util
@@ -335,18 +336,126 @@ def canonical_international_links(markup):
     return migrated.replace(GATEWAY_POSITIONING, GATEWAY_HOME)
 
 
+# P1 hero exception, approved for PR #379: one named summary link after the
+# exact lead in each of these three Italian guides. All other hero rules stand.
+P1_SUMMARIES = {
+    'cerchi/guide/aristotele-forma-fine-realta/index.html': (
+        '    <p class="lead"><strong>Il filosofo che vide nella forma il compimento possibile delle cose</strong></p>\n'.encode('utf-8'),
+        b'    <p><a href="#aristotele-in-5-minuti" style="display:inline-block;">Aristotele in 5 minuti</a></p>\n',
+    ),
+    'cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/index.html': (
+        '    <p class="lead"><strong>Desiderio, paura e libertà prima della scelta</strong></p>\n'.encode('utf-8'),
+        b'    <p><a href="#epicuro-in-breve" style="display:inline-block;">Epicuro in breve</a></p>\n',
+    ),
+    'cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html': (
+        '    <p class="lead"><strong>Materia, percezione e poesia in un mondo che non ha più bisogno della provvidenza per essere spiegato</strong></p>\n'.encode('utf-8'),
+        b'    <p><a href="#lucrezio-in-breve" style="display:inline-block;">Lucrezio in breve</a></p>\n',
+    ),
+}
+
+
+def p1_document(path, historical):
+    lead, link = P1_SUMMARIES[path]
+    lines = canonical_international_links(historical).splitlines(keepends=True)
+    require(lines.count(lead) == 1, 'Expected one frozen P1 lead: ' + path)
+    require(link not in lines, 'Summary already in frozen P1 guide: ' + path)
+    lines.insert(lines.index(lead) + 1, link)
+    return b''.join(lines)
+
+
 def verify_protected(protected, read_bytes):
     for path, expected in protected.items():
         # Release indexes evolve; frozen guides, triads and assets do not.
         if path in {'cerchi/index.html', 'sitemap.xml'}:
             continue
         actual = read_bytes(path)
+        if path in P1_SUMMARIES:
+            require(actual == p1_document(path, expected), 'Protected file changed: ' + path)
+            continue
         if path == IT_PAGE and actual != expected:
             verify_it(actual.decode())
             continue
         canonical_guide = path.startswith('cerchi/guide/') and path.endswith('/index.html')
         require(actual == expected or (canonical_guide and actual == canonical_international_links(expected)),
                 'Protected file changed: ' + path)
+
+
+def test_p1(protected, release):
+    # Independent digests of the approved HTML blobs at 36aa7cb.
+    digests = {
+        'cerchi/guide/aristotele-forma-fine-realta/index.html': 'c92eb88d62a8317ee84f3a5cca7a6c69f39208d7ab72e2c8c971200528b71ced',
+        'cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/index.html': 'ecfad876d02d6b31195a091dcc1b398cb98643440fea6094676e7ca8c5cbf578',
+        'cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html': '0786444fa34181a730ea09a7f114e16851ea9aa579a35e174a9778264fbc0621',
+    }
+    require(digests.keys() == P1_SUMMARIES.keys(), 'Unexpected P1 inventory')
+    expected = {path: protected[path] for path in digests}
+    approved = {path: release[path] for path in digests}
+    verify_protected(expected, approved.__getitem__)
+    tests = 0
+
+    def reject(label, check, error):
+        try:
+            check()
+        except AssertionError as exc:
+            require(str(exc) == error, 'Unexpected P1 failure: ' + label)
+        else:
+            raise AssertionError('Invalid P1 fixture accepted: ' + label)
+        print('PASS rejected: P1 ' + label)
+        return 1
+
+    for path, digest in digests.items():
+        page = approved[path]
+        require(hashlib.sha256(page).hexdigest() == digest, 'P1 reference mismatch: ' + path)
+        lead, link = P1_SUMMARIES[path]
+        for label, source in [('missing lead', expected[path].replace(lead, b'', 1)),
+                              ('duplicate lead', expected[path].replace(lead, lead * 2, 1))]:
+            tests += reject(label, lambda: p1_document(path, source), 'Expected one frozen P1 lead: ' + path)
+        tests += reject('pre-existing link', lambda: p1_document(path, expected[path] + link),
+                        'Summary already in frozen P1 guide: ' + path)
+        without = page.replace(link, b'', 1)
+        next_line = without.partition(lead)[2].splitlines(keepends=True)[0]
+        other_link = next(row for _, row in P1_SUMMARIES.values() if row != link)
+        candidates = [
+            ('index link only', without),
+            ('duplicate link', page.replace(link, link * 2, 1)),
+            ('before lead', without.replace(lead, link + lead, 1)),
+            ('after following line', without.replace(lead + next_line, lead + next_line + link, 1)),
+            ('swapped guide', page.replace(link, other_link, 1)),
+            ('wrong existing target', page.replace(link, re.sub(rb'href="[^"]+"', b'href="#chiusura-editoriale"', link), 1)),
+            ('label', page.replace(link, link.replace(b'</a>', b'!</a>'), 1)),
+            ('attribute', page.replace(link, link.replace(b'inline-block', b'block'), 1)),
+            ('whitespace', page.replace(link, b' ' + link, 1)),
+            ('old navigation with P1', expected[path].replace(lead, lead + link, 1)),
+        ]
+        for token in [b'<h1>', b'<title>', b'name="description"', b'rel="canonical"', b'hreflang="en"',
+                      b'application/ld+json', b'La presente guida', b'>Fonti', b'class="actions"',
+                      b'href="/en/method/"', b'href="/cerchi/"']:
+            candidates.append((token.decode(), page.replace(token, token + b'!', 1)))
+        for label, candidate in candidates:
+            require(candidate != page, 'Ineffective P1 fixture: ' + label)
+            changed = approved | {path: candidate}
+            tests += reject(label + ' in ' + path, lambda: verify_protected(expected, changed.__getitem__),
+                            'Protected file changed: ' + path)
+
+    # Exercise all seven incomplete combinations, including the old main.
+    for count in range(1, len(approved) + 1):
+        for missing in combinations(approved, count):
+            partial = approved.copy()
+            for path in missing:
+                partial[path] = canonical_international_links(expected[path])
+            tests += reject('missing ' + ', '.join(missing), lambda: verify_protected(expected, partial.__getitem__),
+                            'Protected file changed: ' + missing[0])
+    for path in ['cerchi/guide/seneca-dominio-tempo-morte/index.html',
+                 'en/cerchi/guides/aristotle-form-purpose-actuality/index.html']:
+        historical = protected[path]
+        _, link = next(iter(P1_SUMMARIES.values()))
+        current = (ROOT / path).read_bytes()
+        verify_protected({path: historical}, lambda _: current)
+        end_lead = current.index(b'</p>', current.index(b'class="lead"')) + len(b'</p>')
+        misplaced = current[:end_lead] + b'\n' + link + current[end_lead:]
+        tests += reject('out-of-scope ' + path, lambda: verify_protected({path: historical}, lambda _: misplaced),
+                        'Protected file changed: ' + path)
+    return tests
 
 
 def sections(markup):
@@ -484,6 +593,7 @@ def check(source, self_test):
     approved_title = b'<title>Claude Shannon: information theory, noise and transmission | Circles of Ink</title>'
     require(protected[shannon].count(old_title) == 1, 'Unexpected frozen Shannon EN title')
     protected[shannon] = protected[shannon].replace(old_title, approved_title, 1)
+    require(P1_SUMMARIES.keys() <= protected.keys(), 'Missing historical P1 guide')
     verify_protected(protected, lambda path: (ROOT / path).read_bytes())
     for path in ['en/cerchi/index.html', 'en/index.html', 'archivio.html']:
         text = (ROOT / path).read_text()
@@ -494,6 +604,10 @@ def check(source, self_test):
     require('English triad reading paths: 14' in (ROOT / 'llms.txt').read_text(), 'Machine-readable inventory stale')
     tests = 0
     if self_test:
+        release = protected.copy()
+        for path in P1_SUMMARIES:
+            release[path] = p1_document(path, protected[path])
+        tests += test_p1(protected, release)
         current_alignment = (ROOT / PAGE).read_text()
         alignment_baseline = frozen(PAGE, INDEX14_ALIGNMENT_BASE).decode()
         require(restore_index14_alignment(current_alignment) == alignment_baseline, 'Alignment changed a pre-existing index byte outside XIV')
@@ -556,7 +670,7 @@ def check(source, self_test):
         for path in ['cerchi/index.html', 'sitemap.xml']:
             require(path in protected, 'Release surface absent from baseline: ' + path)
             verify_protected(protected, lambda candidate: protected[candidate] + b'\n<!-- Release update -->'
-                             if candidate == path else protected[candidate])
+                             if candidate == path else release[candidate])
         print('PASS accepted: evolving Italian hub and sitemap; baseline protection unchanged elsewhere')
         shannon_html = protected[shannon]
         other_english_guide = next(path for path in paths if path.startswith('en/cerchi/guides/') and path != shannon)
@@ -576,7 +690,7 @@ def check(source, self_test):
             require(changed != protected[path], 'Invalid protected mutation fixture: ' + label)
             try:
                 verify_protected(protected, lambda candidate: changed
-                                 if candidate == path else protected[candidate])
+                                 if candidate == path else release[candidate])
             except AssertionError as error:
                 require(str(error) == 'Protected file changed: ' + path, 'Unexpected protection failure')
                 tests += 1
