@@ -62,7 +62,7 @@ def preserves(old, new):
     return old == new
 
 
-def verify(path, base):
+def verify(path, base, atlas_records=None):
     relative = path.resolve().relative_to(ROOT).as_posix()
     require(relative.startswith('en/cerchi/guides/'), f'Not an existing EN guide: {relative}')
     before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
@@ -72,6 +72,12 @@ def verify(path, base):
         # Changed guides still pass their pinned editorial preservation contracts.
         print(f'PASS unchanged {relative}')
         return
+    record = (atlas_records or {}).get(relative)
+    if record is not None:
+        # The full document has passed the common Atlas contract. Re-run any
+        # original EN manuscript gate against its original predecessor.
+        base = record['revisioneEN']
+        before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
     old, new = Page(before), Page(after)
     if relative == 'en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/index.html':
         from runpy import run_path
@@ -305,6 +311,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
     paths = args.guides or [p for p in ROOT.glob('en/cerchi/guides/*/index.html') if 'international-atlas.css' in p.read_text()]
     require(paths, 'No International guide found')
+    from atlas_it_migration import verified_sources
+    _, atlas_records = verified_sources(base=args.base)
     for path in paths:
         relative = path.resolve().relative_to(ROOT).as_posix()
         exists_in_base = subprocess.run(
@@ -312,6 +320,6 @@ if __name__ == '__main__':
             cwd=ROOT, capture_output=True, check=False
         ).returncode == 0
         if exists_in_base:
-            verify(path, args.base)
+            verify(path, args.base, atlas_records)
         else:
             verify_new(path)

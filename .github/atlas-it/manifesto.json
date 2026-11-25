@@ -1,0 +1,54 @@
+{
+  "versione": 1,
+  "baseline": "0a6af23767200526f84c41c355a6553ed389cf7a",
+  "guide": [
+    {
+      "pagina": "cerchi/guide/aristotele-forma-fine-realta/index.html",
+      "profilo": "legacy-it-v1",
+      "sorgenteSha256": "c92eb88d62a8317ee84f3a5cca7a6c69f39208d7ab72e2c8c971200528b71ced",
+      "articoliSha256": "94d252d2b3f148788ca03ee33e3e3087303df35a022d13e08f40030d996b5ef0",
+      "figura": {
+        "tipo": "figura-radio-nativi-v1",
+        "dopoArticolo": "la-ferita-contemporanea-aristotele-e-la-perdita-della-forma",
+        "sha256": "571db7c60ad648b3400e3d6fc67a681295cb61282583184a3162f5230b990144"
+      },
+      "dialogo": {
+        "saggi": [
+          {
+            "numero": 15,
+            "titolo": "Il mondo senza apprendisti",
+            "href": "/saggi/saggio-15-il-mondo-senza-apprendisti.html",
+            "rapporto": "diretto",
+            "motivazione": "Nel §7 Gentili richiama il costruttore di Aristotele. Una prima bozza, la correzione di chi ha esperienza e il tentativo successivo mostrano come si formi il giudizio di un apprendista. Il saggio segue ciò che accade a questa pratica quando una parte del lavoro passa all’intelligenza artificiale.",
+            "riscontro": "Saggio 15, §7. Il saggio cita Aristotele e rinvia già alla guida."
+          },
+          {
+            "numero": 18,
+            "titolo": "Il futuro che sapevamo",
+            "href": "/saggi/saggio-18-il-futuro-che-sapevamo.html#il-futuro-non-vota",
+            "rapporto": "interpretativo",
+            "motivazione": "Nella guida Aristotele invita a giudicare la città dal bene verso cui tende. In «Il futuro non vota» Gentili chiede chi possa rappresentare le persone su cui ricadranno domani i costi delle decisioni di oggi. Accostare i due passi permette di chiedersi chi venga incluso nel bene comune.",
+            "riscontro": "Saggio 18, Il futuro non vota. Accostamento editoriale alla domanda sul fine della città."
+          }
+        ],
+        "triade": {
+          "numero": 3,
+          "titolo": "Tempo, forma, disincanto",
+          "href": "/cerchi/triadi/#triade-3",
+          "motivazione": "Seneca interroga l’uso del tempo, Aristotele la forma che può assumere una vita, Weber la razionalizzazione dei mezzi. La triade raccoglie le tre prospettive intorno alla domanda «Quale forma dare al tempo che ci è concesso?»."
+        }
+      },
+      "outputSha256": "a0aab6b83ed2b7326f4c14285ef05bd3c8d2348fab0b7eee1f7fc94024420012",
+      "modifiche": ".github/atlas-it/aristotele-it.json"
+    },
+    {
+      "pagina": "en/cerchi/guides/aristotle-form-purpose-actuality/index.html",
+      "profilo": "apparato-en-v1",
+      "sorgenteSha256": "0ec89ea47c09288b2c528522c7d6fd1e1ef13b056402454bf5fc50fe2000209e",
+      "articoliSha256": "33a83fe4c69122fcb8bb9119fb6d982c36b656b6bcf5b1fbb59c22481d5d4c55",
+      "revisioneEN": "63f6a49a0b1c37e0b9bed3090de05bbdb3002c26",
+      "modifiche": ".github/atlas-it/aristotele-en.json",
+      "outputSha256": "b2618aa462bb1c95f96df01533841323c74627b550316a866a4b75f0b214e21e"
+    }
+  ]
+}
