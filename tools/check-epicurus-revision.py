@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Epicurus EN25 v3: source-locked, baseline-locked revision authorization.
 
-This permits only the specific, author-approved International 3.0 conversion.
-No global preservation invariant is weakened. It does not certify visual quality.
+Validate the approved International 3.0 revision and its reviewed Atlas additions.
 """
 import argparse
 from html import unescape
@@ -10,6 +9,8 @@ import json
 from pathlib import Path
 import re
 import subprocess
+
+from atlas_it_migration import verified_sources
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = "en/cerchi/guides/epicurus-desire-fear-freedom-before-choice/index.html"
@@ -20,6 +21,10 @@ SOURCE_BLOB = "174ba814a08de72243d4ee171e5d7c0611999ab5"
 BASE_BLOB = "c214e6f198d927f9c9524565f02a80015b90894b"
 APPROVED_HTML_BLOB = "833282f7d19d4c5feec51dbed39b42cfefb92b07"
 APPROVED_CSS_BLOB = "e69206e11ddcff4fe1149d75438ba620815fa1c3"
+APPROVED_ATLAS_ENTRIES = {
+    "cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/index.html": "48658698e407289b8724a4d013e8b9d8cb9d46ed50738b9d3fea4e98a0990311",
+    PAGE: "602bd1ba205da055607b635f8da6400fde85e787df232252158188a80787bdd9",
+}
 CANONICAL = "https://alessandro-gentili.it/en/cerchi/guides/epicurus-desire-fear-freedom-before-choice/"
 
 
@@ -74,8 +79,12 @@ def verify(path, base):
           "Wrong guide: Epicurus-only validator")
     check(git_blob(base, PAGE) == BASE_BLOB,
           "Epicurus baseline changed: STOP; review and reauthorize")
-    check(git("hash-object", PAGE) == APPROVED_HTML_BLOB,
-          "Epicurus HTML differs from the reviewed revision snapshot")
+    frozen, _ = verified_sources(approved_entries=APPROVED_ATLAS_ENTRIES)
+    historical_blob = subprocess.check_output(
+        ["git", "hash-object", "--stdin"], cwd=ROOT, input=frozen[PAGE],
+    ).decode("ascii").strip()
+    check(historical_blob == APPROVED_HTML_BLOB,
+          "Epicurus Atlas source differs from the reviewed revision snapshot")
     check(git("hash-object", CSS) == APPROVED_CSS_BLOB,
           "Epicurus scoped CSS differs from the reviewed snapshot")
     source = pinned_source()
@@ -200,7 +209,7 @@ def verify(path, base):
                    "The distinction is practical, not a moral label."):
         check(phrase in html, "Original interactive content omitted: " + phrase)
 
-    print(f"PASS Epicurus EN25 v3: pinned source and HTML/CSS blobs, {n} "
+    print(f"PASS Epicurus EN25 v3: verified Atlas candidate, pinned approved source/HTML/CSS, {n} "
           "exact content blocks, 34 source TOC entries, 20 FAQ pairs, "
           "4 semantic tables, 3 original native radio states, "
           "protected meta/schema/cover and print constraints")
