@@ -38,9 +38,15 @@ def unique_keys(pairs):
     return result
 
 
-def read_json(path):
+def read_json_bytes(path):
     require(path.is_file() and not path.is_symlink(), f'Invalid Atlas data file: {path}')
-    return json.loads(path.read_bytes(), object_pairs_hook=unique_keys)
+    return path.read_bytes()
+
+
+def entry_digest(baseline, record, recipe):
+    """Bind the reviewed record, its baseline, and the exact recipe bytes."""
+    entry = json.dumps([baseline, record], sort_keys=True, separators=(',', ':')).encode()
+    return digest(entry + b'\0' + recipe)
 
 
 def reconstruct(source, edits, additions_only=False):
@@ -81,9 +87,10 @@ def validate(source, expected, actual, record):
         require(actual.count(block) == 1, 'P1 lead and link must remain adjacent byte for byte')
 
 
-def verified_sources(protected=None, base=None, self_test=False):
-    """Return historical bytes only after the actual files pass the Atlas contract."""
-    manifest = read_json(CONFIG / 'manifesto.json')
+def verified_sources(protected=None, base=None, self_test=False, approved_entries=None):
+    """Return historical bytes after full validation, with optional reviewed-entry pins."""
+    approved_entries = approved_entries or {}
+    manifest = json.loads(read_json_bytes(CONFIG / 'manifesto.json'), object_pairs_hook=unique_keys)
     baseline = manifest['baseline']
     require(manifest['versione'] == 1 and re.fullmatch(r'[0-9a-f]{40}', baseline),
             'Unsupported Atlas manifest')
@@ -112,7 +119,11 @@ def verified_sources(protected=None, base=None, self_test=False):
         recipe = record['modifiche']
         require(re.fullmatch(r'\.github/atlas-it/[a-z0-9-]+\.json', recipe)
                 and ROOT / recipe != CONFIG / 'manifesto.json', 'Invalid Atlas transformation path')
-        edits = read_json(ROOT / recipe)
+        recipe_bytes = read_json_bytes(ROOT / recipe)
+        if path in approved_entries:
+            require(entry_digest(baseline, record, recipe_bytes) == approved_entries[path],
+                    'Atlas manifest record or recipe differs from the reviewed entry: ' + path)
+        edits = json.loads(recipe_bytes, object_pairs_hook=unique_keys)
         require(edits, 'Empty Atlas transformation')
         target = ROOT / path
         require(target.is_file() and not target.is_symlink() and target.resolve() == target,
@@ -153,6 +164,7 @@ def verified_sources(protected=None, base=None, self_test=False):
                 raise AssertionError('Atlas migration accepted an unapproved document')
         sources[path], records[path] = source, record
     require(sources, 'Empty Atlas migration inventory')
+    require(approved_entries.keys() <= sources.keys(), 'A reviewed Atlas entry is missing')
     for path, source in sources.items():
         peer_lang = b'it' if path.startswith('en/') else b'en'
         peer = re.search(rb'<link rel="alternate" hreflang="' + peer_lang +

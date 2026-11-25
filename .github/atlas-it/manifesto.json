@@ -49,6 +49,54 @@
       "revisioneEN": "63f6a49a0b1c37e0b9bed3090de05bbdb3002c26",
       "modifiche": ".github/atlas-it/aristotele-en.json",
       "outputSha256": "b2618aa462bb1c95f96df01533841323c74627b550316a866a4b75f0b214e21e"
+    },
+    {
+      "pagina": "cerchi/guide/epicuro-desiderio-paura-liberta-prima-della-scelta/index.html",
+      "profilo": "legacy-it-v1",
+      "sorgenteSha256": "ecfad876d02d6b31195a091dcc1b398cb98643440fea6094676e7ca8c5cbf578",
+      "articoliSha256": "9e77632c2ba9b18e6a56df858cd916ab277f25a958066d93b49e72106402e2cf",
+      "figura": {
+        "tipo": "figura-radio-nativi-v1",
+        "dopoArticolo": "modulo-i-anatomia-del-desiderio",
+        "sha256": "5cc9fc4fe7eda35cc6e942d776ed5d9f4b48d8c9dd6bb05c667c5f65bd703513"
+      },
+      "dialogo": {
+        "saggi": [
+          {
+            "numero": 1,
+            "titolo": "1999: la paura di diventare uguali",
+            "href": "/saggi/saggio-1-1999-paura-diventare-uguali.html#la-soglia-che-ritorna",
+            "rapporto": "interpretativo",
+            "motivazione": "Il consumo educa a confondere desiderio e bisogno e a misurare la libertà sulle alternative disponibili. Epicuro offre un criterio per interrogare ciò che abbiamo imparato a considerare necessario.",
+            "riscontro": "Saggio 01, La soglia che ritorna."
+          },
+          {
+            "numero": 21,
+            "titolo": "Da che parte sta chi guarda",
+            "href": "/saggi/saggio-21-da-che-parte-sta-chi-guarda.html#la-fatica-di-scriversi",
+            "rapporto": "interpretativo",
+            "motivazione": "Le ore di studio senza pubblico accostano la formazione del giudizio alla domanda epicurea sulla misura del riconoscimento.",
+            "riscontro": "Saggio 21, La fatica di scriversi."
+          }
+        ],
+        "triade": {
+          "numero": 9,
+          "titolo": "Desiderio, relazione e giudizio",
+          "href": "/cerchi/triadi/#nona-triade",
+          "motivazione": "La misura del desiderio in Epicuro, la sua formazione sociale in Tarde e il giudizio sotto incertezza in Kahneman illuminano ciò che precede la scelta."
+        }
+      },
+      "modifiche": ".github/atlas-it/epicuro-it.json",
+      "outputSha256": "fef7db27620b922c7aaea6febe12c1486336f622f9b0740950f77afcf3fa6bb6"
+    },
+    {
+      "pagina": "en/cerchi/guides/epicurus-desire-fear-freedom-before-choice/index.html",
+      "profilo": "apparato-en-v1",
+      "sorgenteSha256": "6f1e324d3ca08763f80099c29ca5a6310c08a724ed9473ee40071971a820cd27",
+      "articoliSha256": "1ec6998b46ebdfbc74e9ec2202181b768346501b71b572783f87b828f5122226",
+      "revisioneEN": "c3266600845b30dc009efcbcf2b7d7a575a4f854",
+      "modifiche": ".github/atlas-it/epicuro-en.json",
+      "outputSha256": "7c82feffb7dafc1ee28e6b8774c6c82e3ef81be29852faab0920330d428be292"
     }
   ]
 }
