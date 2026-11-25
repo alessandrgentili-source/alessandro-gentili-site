@@ -380,7 +380,7 @@ def verify_protected(protected, read_bytes):
                 'Protected file changed: ' + path)
 
 
-def test_p1(protected, release):
+def test_p1(protected, release, read_bytes):
     # Independent digests of the approved HTML blobs at 36aa7cb.
     digests = {
         'cerchi/guide/aristotele-forma-fine-realta/index.html': 'c92eb88d62a8317ee84f3a5cca7a6c69f39208d7ab72e2c8c971200528b71ced',
@@ -449,7 +449,7 @@ def test_p1(protected, release):
                  'en/cerchi/guides/aristotle-form-purpose-actuality/index.html']:
         historical = protected[path]
         _, link = next(iter(P1_SUMMARIES.values()))
-        current = (ROOT / path).read_bytes()
+        current = read_bytes(path)
         verify_protected({path: historical}, lambda _: current)
         end_lead = current.index(b'</p>', current.index(b'class="lead"')) + len(b'</p>')
         misplaced = current[:end_lead] + b'\n' + link + current[end_lead:]
@@ -594,7 +594,13 @@ def check(source, self_test):
     require(protected[shannon].count(old_title) == 1, 'Unexpected frozen Shannon EN title')
     protected[shannon] = protected[shannon].replace(old_title, approved_title, 1)
     require(P1_SUMMARIES.keys() <= protected.keys(), 'Missing historical P1 guide')
-    verify_protected(protected, lambda path: (ROOT / path).read_bytes())
+    from atlas_it_migration import verified_sources
+    sources, _ = verified_sources(protected=protected, self_test=self_test)
+
+    def read_protected(path):
+        return sources[path] if path in sources else (ROOT / path).read_bytes()
+
+    verify_protected(protected, read_protected)
     for path in ['en/cerchi/index.html', 'en/index.html', 'archivio.html']:
         text = (ROOT / path).read_text()
         require(re.findall(r'data-corpus-count="en-triads">(\d+)', text) and set(re.findall(r'data-corpus-count="en-triads">(\d+)', text)) == {'14'}, 'Triad count stale: ' + path)
@@ -607,7 +613,7 @@ def check(source, self_test):
         release = protected.copy()
         for path in P1_SUMMARIES:
             release[path] = p1_document(path, protected[path])
-        tests += test_p1(protected, release)
+        tests += test_p1(protected, release, read_protected)
         current_alignment = (ROOT / PAGE).read_text()
         alignment_baseline = frozen(PAGE, INDEX14_ALIGNMENT_BASE).decode()
         require(restore_index14_alignment(current_alignment) == alignment_baseline, 'Alignment changed a pre-existing index byte outside XIV')
