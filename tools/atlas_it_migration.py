@@ -57,6 +57,16 @@ EI02_TARDE_TITLES = (
     'Pubblico, opinione, economia',
 )
 EI02_TARDE_EMPHASIS = ('Believing', 'liking', 'seeing')
+
+# EI03 removes only the manual prefixes from Weber IT's existing ordered list.
+EI03_WEBER_IT = 'cerchi/guide/weber-razionalizzazione-potere-disincanto/index.html'
+EI03_WEBER_ATLAS_SHA = 'f3f3b3bcab0c4925fb25785a7585349db8b7c8a0572db3ebbc4979e39ca061ac'
+EI03_WEBER_REVISED_SHA = '211ba0ab4ecbb1233aa954279d539eb4f35985c04f9c5928a988878745ccd6e6'
+EI03_WEBER_LIST = re.compile(
+    rb'<article class="item guide-section" id="idee-chiave">\n'
+    rb'  <h2>Idee chiave</h2>\n  <ol>\n(.*?)\n</ol>\n</article>',
+    re.S,
+)
 FRAGMENTS = rb'<nav class="guide-toc"[^>]*>.*?</nav>'
 PROTECTED = (
     ARTICLES, FRAGMENTS, rb'<(?:title|h1|header|footer)\b[^>]*>.*?</(?:title|h1|header|footer)>',
@@ -286,6 +296,52 @@ def test_ei02_tarde(path, revised):
     return len(mutations)
 
 
+def ei03_weber_document(atlas_output):
+    require(digest(atlas_output) == EI03_WEBER_ATLAS_SHA, 'EI03 Weber IT Atlas preimage changed')
+    match = EI03_WEBER_LIST.search(atlas_output)
+    require(match is not None, 'EI03 Weber IT ordered list missing')
+    items = match[1].split(b'\n')
+    require(len(items) == 12, 'EI03 Weber IT requires twelve entries')
+    revised = []
+    for number, item in enumerate(items, 1):
+        prefix = f'    <li>{number}. '.encode()
+        require(item.startswith(prefix + b'<strong>'), f'EI03 Weber IT prefix {number} changed')
+        revised.append(b'    <li>' + item[len(prefix):])
+    result = atlas_output[:match.start(1)] + b'\n'.join(revised) + atlas_output[match.end(1):]
+    require(digest(result) == EI03_WEBER_REVISED_SHA, 'EI03 Weber IT revised document digest differs')
+    return result
+
+
+def verify_ei03_weber(revised, actual):
+    require(actual == revised, 'EI03 Weber IT differs from the exact revised document')
+
+
+def test_ei03_weber(revised):
+    match = EI03_WEBER_LIST.search(revised)
+    items = match[1].split(b'\n')
+    mutations = [
+        (f'manual prefix {number}',
+         revised.replace(item, item.replace(b'<li>', f'<li>{number}. '.encode(), 1), 1))
+        for number, item in enumerate(items, 1)
+    ]
+    mutations.extend((
+        ('missing entry', revised.replace(items[0] + b'\n', b'', 1)),
+        ('lexical change', revised.replace(items[0], items[0].replace(b'razionalizzazione.', b'razionalismo.', 1), 1)),
+        ('reordered entries', revised.replace(match[1], b'\n'.join([items[1], items[0], *items[2:]]), 1)),
+        ('byte outside the list', revised + b'\n'),
+    ))
+    for label, candidate in mutations:
+        require(candidate != revised, 'Ineffective EI03 mutation: ' + label)
+        try:
+            verify_ei03_weber(revised, candidate)
+        except AssertionError as exc:
+            require(str(exc) == 'EI03 Weber IT differs from the exact revised document',
+                    'Unexpected EI03 mutation failure')
+        else:
+            raise AssertionError('EI03 accepted a mutation: ' + label)
+    return len(mutations)
+
+
 def verified_sources(protected=None, base=None, self_test=False, approved_entries=None):
     """Return historical bytes after full validation, with optional reviewed-entry pins."""
     approved_entries = {**(approved_entries or {}), **LUCRETIUS_ENTRIES}
@@ -305,6 +361,7 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
     sources, records = {}, {}
     mutations = 0
     ei02_mutations = 0
+    ei03_mutations = 0
     for record in manifest['guide']:
         path, profile = record['pagina'], record['profilo']
         editorial = profile == EDITORIAL_PROFILE
@@ -343,6 +400,13 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
             verify_ei02_tarde(path, published, actual)
             if self_test:
                 ei02_mutations += test_ei02_tarde(path, published)
+        elif path == EI03_WEBER_IT:
+            require(editorial, 'EI03 requires the reviewed additive Weber IT Atlas profile')
+            validate(source, expected, expected, record)
+            published = ei03_weber_document(expected)
+            verify_ei03_weber(published, actual)
+            if self_test:
+                ei03_mutations += test_ei03_weber(published)
         else:
             validate(source, expected, actual, record)
         if not is_en and not editorial:
@@ -414,4 +478,5 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
     if self_test:
         print(f'PASS Atlas: {len(sources)} complete documents and {mutations} rejected mutations')
         print(f'PASS EI02: exact Tarde IT/EN revisions and {ei02_mutations} rejected mutations')
+        print(f'PASS EI03: exact Weber IT revision and {ei03_mutations} rejected mutations')
     return sources, records
