@@ -363,6 +363,61 @@ def p1_document(path, historical):
     return b''.join(lines)
 
 
+# EI01: exact author-approved Gramsci IT revision. No bypass of historical protection.
+EI01_GRAMSCI = 'cerchi/guide/gramsci-egemonia-cultura-senso-comune/index.html'
+EI01_GRAMSCI_BASE_SHA = '29e03bd4f2f2ce910b16ba4abe633fd59ca600bc3c3579f332e2c5354d2aa68d'
+EI01_GRAMSCI_APPROVED_SHA = 'ef8e27450f20348623e818efaa29eab0bc8816ddc344fa61d30eed16c410b9cf'
+EI01_GRAMSCI_MASTER_SHA = '0c2ce8e85f53f2488e37be29f6eaa7395b71279d4d754c9722efd35587351467'
+EI01_GRAMSCI_CHANGES = [(306, 307, ['  <p>Machiavelli interroga la fondazione e la conservazione del potere nella realtà effettuale. Gramsci porta questa domanda nella politica di massa: attraverso il consenso e la cultura, una forza storica può esercitare una funzione dirigente. Hobbes muove invece dall’insicurezza del conflitto e dalla necessità di autorizzare un potere comune.</p>', '  <p>Il confronto con Hobbes appartiene al percorso della quarta triade di Cerchi d’inchiostro, insieme a Freud. È un accostamento interpretativo fra problemi distinti, non una genealogia.</p>']), (378, 378, ['  <p>Dopo Gramsci si aprono molti sviluppi: studi culturali, teoria dei media, studi subalterni, pedagogia critica, riflessioni su potere e linguaggio. Nella Costellazione di Cerchi d’inchiostro, il dialogo con <a href="/cerchi/guide/michel-foucault-la-vita-sotto-esame/">Michel Foucault</a> mette a confronto la formazione del consenso con le pratiche disciplinari che modellano i comportamenti; quello con <a href="/cerchi/guide/pier-paolo-pasolini-mutazione-antropologica-omologazione/">Pier Paolo Pasolini</a> interroga il ruolo del consumo e dei media nella trasformazione della cultura e dei desideri. Sono confronti fra prospettive distinte, non affermazioni di una discendenza teorica diretta.</p>']), (497, 497, ['  <p>L’edizione critica dei Quaderni del carcere curata da Valentino Gerratana per Einaudi nel 1975 resta un riferimento centrale per l’ordinamento dei testi e la consultazione dell’apparato critico.</p>']), (499, 500, ['  <h3>Letture critiche e strumenti di consultazione</h3>', '  <p>La letteratura critica su Gramsci offre percorsi di approfondimento intorno a questi nuclei:</p>']), (513, 513, ['  </ul>', '  <p>Per orientarsi nella storia dei testi e nel lessico politico e filosofico gramsciano, si segnalano:</p>', '  <ul>', '    <li>Gianni Francioni, <em>L’officina gramsciana. Ipotesi sulla struttura dei «Quaderni del carcere»</em>, Bibliopolis, 1984.</li>', '    <li>Guido Liguori e Pasquale Voza (a cura di), <em>Dizionario gramsciano 1926-1937</em>, Carocci, 2009.</li>', '    <li>Giuseppe Vacca, <em>Vita e pensieri di Antonio Gramsci (1926-1937)</em>, Einaudi, 2012.</li>', '    <li>Peter D. Thomas, <em>The Gramscian Moment: Philosophy, Hegemony and Marxism</em>, Brill, 2009.</li>', '    <li>Stanford Encyclopedia of Philosophy, voce <em>Antonio Gramsci</em>.</li>', '    <li>Edizione nazionale degli scritti di Antonio Gramsci; Digital Library Antonio Gramsci (DiLAG) e risorse archivistiche e bibliografiche della Fondazione Gramsci.</li>', '  </ul>', '  <p>Queste indicazioni costituiscono una bibliografia di orientamento e non attestano la lettura integrale delle opere elencate.</p>']), (515, 515, ['  <p>Le citazioni online dei Quaderni possono riferirsi a edizioni, ordinamenti o raccolte differenti. Per ricondurre un passo al suo contesto occorre risalire al quaderno e all’edizione di riferimento, distinguendo le parole di Gramsci dalle scelte dei curatori e dalle interpretazioni successive.</p>']), (520, 520, ['  <p>Questa guida usa parafrasi proprietaria, definizioni originali, sintesi interpretative e citazioni brevi solo se necessarie. Le eventuali citazioni devono essere verificate su edizioni affidabili e attribuite con precisione.</p>'])]
+
+
+def ei01_gramsci_document(historical):
+    base = canonical_international_links(historical)
+    require(hashlib.sha256(base).hexdigest() == EI01_GRAMSCI_BASE_SHA,
+            'EI01 historical baseline mismatch')
+    lines = base.decode('utf-8').split('\n')
+    for start, end, new in reversed(EI01_GRAMSCI_CHANGES):
+        lines[start-1:end] = new
+    result = '\n'.join(lines).encode('utf-8')
+    require(hashlib.sha256(result).hexdigest() == EI01_GRAMSCI_APPROVED_SHA,
+            'EI01 approved revision mismatch')
+    require(canonical_international_links(result) == result, 'EI01 navigation not canonical')
+    return result
+
+
+def test_ei01_gramsci(protected, read_bytes):
+    path = EI01_GRAMSCI
+    approved = protected[path]
+    verify_protected({path: approved}, read_bytes)
+    historical = original(path)
+    require(ei01_gramsci_document(historical) == approved, 'EI01 reconstruction differs')
+    try:
+        ei01_gramsci_document(historical + b'!')
+    except AssertionError as exc:
+        require(str(exc) == 'EI01 historical baseline mismatch', 'Unexpected EI01 baseline failure')
+    else:
+        raise AssertionError('EI01 changed historical baseline accepted')
+    tests = 1
+    mutations = [('unrevised page', canonical_international_links(historical)),
+                 ('extra byte', approved + b'!')]
+    for token in [b'<title>', b'<h1>', b'application/ld+json', b'id="fonti"',
+                  b'id="ferita-contemporanea"', b'Pasolini</a>', b'Bibliopolis, 1984',
+                  b'<img', b'hreflang="en"']:
+        require(token in approved, 'EI01 missing mutation token: ' + repr(token))
+        mutations.append((repr(token), approved.replace(token, token+b'!', 1)))
+    for label, changed in mutations:
+        require(changed != approved, 'Ineffective EI01 fixture: ' + label)
+        try:
+            verify_protected({path: approved}, lambda _: changed)
+        except AssertionError as exc:
+            require(str(exc) == 'Protected file changed: ' + path, 'Unexpected EI01 protection failure')
+        else:
+            raise AssertionError('EI01 mutation accepted: ' + label)
+        tests += 1
+    print('PASS EI01 exact revision and rejection regressions')
+    return tests
+
+
 def verify_protected(protected, read_bytes):
     for path, expected in protected.items():
         # Release indexes evolve; frozen guides, triads and assets do not.
@@ -593,6 +648,8 @@ def check(source, self_test):
     approved_title = b'<title>Claude Shannon: information theory, noise and transmission | Circles of Ink</title>'
     require(protected[shannon].count(old_title) == 1, 'Unexpected frozen Shannon EN title')
     protected[shannon] = protected[shannon].replace(old_title, approved_title, 1)
+    require(EI01_GRAMSCI in protected, 'Missing EI01 historical guide')
+    protected[EI01_GRAMSCI] = ei01_gramsci_document(protected[EI01_GRAMSCI])
     require(P1_SUMMARIES.keys() <= protected.keys(), 'Missing historical P1 guide')
     from atlas_it_migration import verified_sources
     sources, _ = verified_sources(protected=protected, self_test=self_test)
@@ -614,6 +671,7 @@ def check(source, self_test):
         for path in P1_SUMMARIES:
             release[path] = p1_document(path, protected[path])
         tests += test_p1(protected, release, read_protected)
+        tests += test_ei01_gramsci(protected, read_protected)
         current_alignment = (ROOT / PAGE).read_text()
         alignment_baseline = frozen(PAGE, INDEX14_ALIGNMENT_BASE).decode()
         require(restore_index14_alignment(current_alignment) == alignment_baseline, 'Alignment changed a pre-existing index byte outside XIV')
