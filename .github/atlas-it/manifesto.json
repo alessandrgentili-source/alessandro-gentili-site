@@ -97,6 +97,52 @@
       "revisioneEN": "c3266600845b30dc009efcbcf2b7d7a575a4f854",
       "modifiche": ".github/atlas-it/epicuro-en.json",
       "outputSha256": "7c82feffb7dafc1ee28e6b8774c6c82e3ef81be29852faab0920330d428be292"
+    },
+    {
+      "pagina": "cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html",
+      "profilo": "legacy-it-v1",
+      "sorgenteSha256": "0786444fa34181a730ea09a7f114e16851ea9aa579a35e174a9778264fbc0621",
+      "articoliSha256": "44f6ca7e36c71f69e62e828933e5a2895fe6a8e54006f6a4090b487667c4925d",
+      "figura": {
+        "tipo": "figura-radio-nativi-v1",
+        "dopoArticolo": "la-materia-prima-del-mondo",
+        "sha256": "992af1deaa07e1b42b049238a38a0a2983e01709c215055876cf4bd08fe0d8fd"
+      },
+      "dialogo": {
+        "saggi": [
+          {
+            "numero": 20,
+            "titolo": "Il futuro degli altri",
+            "href": "/saggi/saggio-20-il-futuro-degli-altri.html#le-frontiere-del-potere",
+            "rapporto": "interpretativo",
+            "motivazione": "In «Le frontiere del potere», Gentili segue cavi, centri di calcolo e reti elettriche fino alla questione di chi li controlla. La ferita contemporanea della guida parte dalla stessa distanza fra un servizio che appare immateriale e i luoghi e il lavoro che lo rendono possibile."
+          },
+          {
+            "numero": 21,
+            "titolo": "Da che parte sta chi guarda",
+            "href": "/saggi/saggio-21-da-che-parte-sta-chi-guarda.html#quando-linterprete-entra-nel-quadro",
+            "rapporto": "interpretativo",
+            "motivazione": "In «Quando l’interprete entra nel quadro», una graduatoria e una piattaforma traducono esperienze in punteggi. La distinzione lucreziana fra ciò che esiste, ciò che ci raggiunge e il giudizio che formuliamo aiuta a interrogare il passaggio dalla persona alla categoria con cui la leggiamo."
+          }
+        ],
+        "triade": {
+          "numero": 10,
+          "titolo": "Materia, medium e informazione",
+          "href": "/cerchi/triadi/#decima-triade",
+          "motivazione": "Lucrezio indaga come la realtà materiale raggiunga i sensi, McLuhan come i media configurino l’esperienza e Shannon che cosa possa essere trasmesso attraverso un canale. Il percorso distingue i tre problemi a partire dalla domanda su come il mondo ci raggiunge."
+        }
+      },
+      "modifiche": ".github/atlas-it/lucrezio-it.json",
+      "outputSha256": "f464a81549dc52c9bb856a6c46f738d76300727e9af7bc0fa3d72a44a07502eb"
+    },
+    {
+      "pagina": "en/cerchi/guides/lucretius-atoms-images-poetry-of-nature/index.html",
+      "profilo": "apparato-en-v1",
+      "sorgenteSha256": "e459274cb726d22bffbf7aef5e36db825ff5763e28a8cd112fc37c78af4e6a74",
+      "articoliSha256": "145a71438028852810a1176cb2eb771ba9674deb1943dd2e3dc8a8c052bea734",
+      "revisioneEN": "91eeaab213348182cbeb6a910c96806a01bf3203",
+      "modifiche": ".github/atlas-it/lucrezio-en.json",
+      "outputSha256": "fd6ed27be4ba38e0bce687fd7471ba2a391f9249bcb0ffe6256bf66a86bb0c51"
     }
   ]
 }

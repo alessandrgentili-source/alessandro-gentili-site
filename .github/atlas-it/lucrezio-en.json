@@ -1,0 +1,37 @@
+[
+  [
+    13537,
+    "",
+    " lucretius-guide"
+  ],
+  [
+    15713,
+    "",
+    "<p><a href=\"#orientation\">Lucretius at a glance</a></p>"
+  ],
+  [
+    16885,
+    "",
+    " atlas-reader lucretius-reader"
+  ],
+  [
+    16923,
+    "",
+    " atlas-reading"
+  ],
+  [
+    19825,
+    "",
+    "</div>\n<aside class=\"atlas-contents\" aria-label=\"Guide navigation\">\n<details open><summary>In this guide</summary>\n<nav class=\"lucretius-paths\" aria-labelledby=\"lucretius-paths-title\">\n  <p id=\"lucretius-paths-title\" class=\"atlas-byline\">Quick routes</p>\n  <a href=\"#orientation\">Lucretius at a glance</a>\n  <a href=\"#lucretius-figure-title\">From sunbeam to inference</a>\n  <a href=\"#complete-key-concepts\">Key concepts table</a>\n  <a href=\"#wound\">The contemporary wound</a>\n  <a href=\"#complete-glossary\">Glossary</a>\n  <a href=\"#thought-in-dialogue\">Thought in dialogue</a>\n  <a href=\"#complete-sources-and-copyright\">Sources and copyright</a>\n</nav>\n"
+  ],
+  [
+    22965,
+    "",
+    "</details>\n</aside>\n<div class=\"guide-body complete-body atlas-reading\">\n"
+  ],
+  [
+    117063,
+    "",
+    "<aside class=\"atlas-relation\" id=\"thought-in-dialogue\" aria-labelledby=\"lucretius-dialogue-title\">\n  <h2 id=\"lucretius-dialogue-title\">Thought in dialogue</h2>\n  <p class=\"atlas-byline\"><em>Essays by Alessandro Gentili</em></p>\n  <h3><a href=\"/saggi/saggio-20-il-futuro-degli-altri.html#le-frontiere-del-potere\" hreflang=\"it\">Essay 20 · <span lang=\"it\">Il futuro degli altri</span> (in Italian)</a></h3>\n  <p><strong>Interpretive connection.</strong> In the section on the frontiers of power, Gentili traces cables, data centres and electricity grids back to the question of who controls them. The guide’s contemporary wound begins with the same distance between an apparently immaterial service and the places and labour that make it possible.</p>\n  <h3><a href=\"/saggi/saggio-21-da-che-parte-sta-chi-guarda.html#quando-linterprete-entra-nel-quadro\" hreflang=\"it\">Essay 21 · <span lang=\"it\">Da che parte sta chi guarda</span> (in Italian)</a></h3>\n  <p><strong>Interpretive connection.</strong> In the section on the interpreter entering the picture, a ranking and a platform turn experience into scores. Lucretius’s distinction between what exists, what reaches us and the judgment we form helps us examine how a person comes to be read through a category.</p>\n  <section aria-labelledby=\"lucretius-dialogue-triad\">\n    <hr />\n    <h3 id=\"lucretius-dialogue-triad\">The guide’s reading triad</h3>\n    <p><a href=\"/en/cerchi/triads/#triad-10\"><strong>Triad 10 · Matter, medium, information</strong></a></p>\n    <p>Lucretius asks how material reality reaches the senses, McLuhan how media shape experience, and Shannon what can be transmitted through a channel. The reading path keeps these three questions distinct as it asks how the world reaches us.</p>\n  </section>\n</aside>\n"
+  ]
+]

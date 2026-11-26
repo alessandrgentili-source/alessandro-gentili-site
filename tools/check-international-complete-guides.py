@@ -11,9 +11,22 @@ import runpy
 import subprocess
 from pathlib import Path
 
+from atlas_it_migration import LUCRETIUS_EN, LUCRETIUS_IT, verified_sources
+
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = '604872f49f1f7e7b3202f9b57d7b077e7a5775e4'
 MANIFEST = ROOT / 'tools/international-complete-guides.json'
+COMPLETE_RELEASE = '04df66ca0b738ef5e0caa164be12aae8e07590b9'
+CONSULTATION_JS = 'assets/international-complete-guides.js'
+LOCALIZED_CONSULTATION_SHA = '8ca3c3059d9c67f421e667c2b1e4c946f82d6f0c55ec34ffeb417f0eac9a791c'
+LUCRETIUS_CSS = 'assets/international-lucretius.css'
+LUCRETIUS_ORIGINAL_CSS_SHA = 'c73212af0cc9259b701d9701cfe51cc2d4cc6a867ff7cabf1433f8ffd77bf194'
+LUCRETIUS_ATLAS_CSS_SHA = '9bd55e4c271344778143a5f3cd768f50e6cd25ca5adfd211d6ca1ac1231d2343'
+# The complete EN release predates the approved International navigation and P1 edits.
+LUCRETIUS_ITALIAN_REVISIONS = (
+    ('bf6187b8e84c1cfbb7985cb564afc3fdd5377bc6', '15ae9aad3f533fb4a9ed15c715532cbb0d2b8751'),
+    ('0a6af23767200526f84c41c355a6553ed389cf7a', 'd93a12c8fe04df1493da9877ec04183f6536ea43'),
+)
 SHANNON_PAGE = 'en/cerchi/guides/claude-shannon-information-noise-limits-of-transmission/index.html'
 SHANNON_OLD_TITLE = b'<title>Claude Shannon: information, noise and the limits of transmission | Circles of Ink</title>'
 SHANNON_APPROVED_TITLE = b'<title>Claude Shannon: information theory, noise and transmission | Circles of Ink</title>'
@@ -297,6 +310,41 @@ def test_shannon_title(published, approved):
     print(f'PASS {len(mutations)} Shannon EN title-only rejection regressions')
 
 
+def verify_lucretius_history(guide):
+    frozen, _ = verified_sources()
+    published = guide['italian_blob']
+    require(git('rev-parse', COMPLETE_RELEASE + ':' + LUCRETIUS_IT) == published
+            and git('rev-parse', COMPLETE_RELEASE + ':' + LUCRETIUS_EN) == guide['html_blob'],
+            'Unexpected Lucretius complete-release snapshots')
+    ancestor = COMPLETE_RELEASE
+    for revision, blob in LUCRETIUS_ITALIAN_REVISIONS:
+        git('merge-base', '--is-ancestor', ancestor, revision)
+        require(git('rev-parse', revision + '^:' + LUCRETIUS_IT) == published
+                and git('rev-parse', revision + ':' + LUCRETIUS_IT) == blob,
+                'Unexpected Lucretius IT navigation or P1 revision: ' + revision)
+        ancestor, published = revision, blob
+    for page, blob in ((LUCRETIUS_IT, published), (LUCRETIUS_EN, guide['html_blob'])):
+        actual = subprocess.check_output(['git', 'cat-file', 'blob', blob], cwd=ROOT)
+        require(frozen[page] == actual, 'Atlas source differs from the approved Lucretius history: ' + page)
+
+    original_css = subprocess.check_output(['git', 'show', COMPLETE_RELEASE + ':' + LUCRETIUS_CSS], cwd=ROOT)
+    css = (ROOT / LUCRETIUS_CSS).read_bytes()
+    require(hashlib.sha256(original_css).hexdigest() == LUCRETIUS_ORIGINAL_CSS_SHA
+            and css.startswith(original_css) and hashlib.sha256(css).hexdigest() == LUCRETIUS_ATLAS_CSS_SHA,
+            'Unreviewed Lucretius figure or Atlas CSS')
+    print('PASS Lucretius Atlas: original EN snapshot and IT International navigation/P1 chain')
+
+
+def verify_assets(manifest):
+    for asset, expected in manifest['asset_sha256'].items():
+        if asset == CONSULTATION_JS:
+            original = subprocess.check_output(['git', 'show', COMPLETE_RELEASE + ':' + asset], cwd=ROOT)
+            require(hashlib.sha256(original).hexdigest() == expected, 'Historical consultation script changed')
+            expected = LOCALIZED_CONSULTATION_SHA
+        require(hashlib.sha256((ROOT / asset).read_bytes()).hexdigest() == expected,
+                'Unreviewed scoped asset: ' + asset)
+
+
 def verify(path, base):
     manifest = json.loads(MANIFEST.read_text())
     relative = path.resolve().relative_to(ROOT).as_posix()
@@ -305,16 +353,18 @@ def verify(path, base):
     base_blob = git('rev-parse', base + ':' + relative)
     shannon_title_revision = relative == SHANNON_PAGE and base_blob == guide['html_blob']
     require(shannon_title_revision or base_blob == guide['baseline_blob'], 'Published baseline changed')
-    if not shannon_title_revision:
-        require(git('hash-object', relative) == guide['html_blob'], 'Unreviewed guide snapshot')
-    italian_blob = guide['italian_blob']
-    if shannon_title_revision:
-        italian_blob = git('rev-parse', base + ':' + guide['italian'])
-        require(italian_blob in (guide['italian_blob'], SHANNON_ITALIAN_NAVIGATION_BLOB),
-                'Unreviewed Shannon IT baseline')
-    require(git('hash-object', guide['italian']) == italian_blob, 'Italian guide changed')
-    for asset, expected in manifest['asset_sha256'].items():
-        require(hashlib.sha256((ROOT / asset).read_bytes()).hexdigest() == expected, 'Unreviewed scoped asset: ' + asset)
+    if relative == LUCRETIUS_EN:
+        verify_lucretius_history(guide)
+    else:
+        if not shannon_title_revision:
+            require(git('hash-object', relative) == guide['html_blob'], 'Unreviewed guide snapshot')
+        italian_blob = guide['italian_blob']
+        if shannon_title_revision:
+            italian_blob = git('rev-parse', base + ':' + guide['italian'])
+            require(italian_blob in (guide['italian_blob'], SHANNON_ITALIAN_NAVIGATION_BLOB),
+                    'Unreviewed Shannon IT baseline')
+        require(git('hash-object', guide['italian']) == italian_blob, 'Italian guide changed')
+    verify_assets(manifest)
     if relative == manifest['guides'][0]['page']:
         self_test()
         subprocess.run(['node', '--check', str(ROOT / 'assets/international-complete-guides.js')], check=True)

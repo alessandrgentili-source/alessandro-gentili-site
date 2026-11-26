@@ -11,6 +11,12 @@ CONFIG = ROOT / '.github/atlas-it'
 IT_PATH = r'cerchi/guide/[a-z0-9-]+/index\.html'
 EN_PATH = r'en/cerchi/guides/[a-z0-9-]+/index\.html'
 ARTICLES = rb'<article\b[^>]*>.*?</article>'
+LUCRETIUS_IT = 'cerchi/guide/lucrezio-atomi-immagini-poesia-della-natura/index.html'
+LUCRETIUS_EN = 'en/cerchi/guides/lucretius-atoms-images-poetry-of-nature/index.html'
+LUCRETIUS_ENTRIES = {
+    LUCRETIUS_IT: 'ff2bd3b75817b20b23f377207436dd517d115b4098ab8a37a2f264409061da38',
+    LUCRETIUS_EN: 'e1e2a14d63548a1dc02922b8613ebc189225b6ff0eaf5645a8bc7cd1acf9ab31',
+}
 FRAGMENTS = rb'<nav class="guide-toc"[^>]*>.*?</nav>'
 PROTECTED = (
     ARTICLES, FRAGMENTS, rb'<(?:title|h1|header|footer)\b[^>]*>.*?</(?:title|h1|header|footer)>',
@@ -65,14 +71,84 @@ def reconstruct(source, edits, additions_only=False):
     return b''.join([*pieces, source[cursor:]])
 
 
+def lucretius_consultation(source):
+    """Convert only the two legacy Lucretius IT apparatuses, retaining exact inline HTML."""
+    def controls(key, label):
+        return (
+            f'<div class="consult-tools" hidden data-consult-controls>'
+            f'<label for="{key}-search">{label}</label>'
+            f'<div class="consult-inputs"><input id="{key}-search" type="search"'
+            f' autocomplete="off" aria-controls="{key}-entries">'
+            '<button type="button" data-consult-reset>Azzera</button></div>'
+            '<p role="status" aria-atomic="true"></p></div>'
+        ).encode()
+
+    def concepts(heading, body):
+        columns = body[0]
+        require(columns == b'    <p class="meta"><strong>Concetto</strong><br />Funzione nel pensiero lucreziano</p>',
+                'Unexpected Lucretius concept columns')
+        entries = []
+        for line in body[1:]:
+            row = re.fullmatch(rb'    <p>(<strong>.+?</strong>)<br />(.+)</p>', line)
+            require(row is not None, 'Unexpected Lucretius concept row')
+            term, definition = row.groups()
+            entries.append(b'<tr data-consult-row><th scope="row">' + term + b'</th><td>' + definition + b'</td></tr>')
+        require(len(entries) == 11, 'Lucretius requires 11 concept rows')
+        return b'\n'.join([
+            heading,
+            b'    <div class="complete-table" data-consult="table">',
+            b'      ' + controls('concetti-chiave', 'Cerca nella tabella'),
+            b'      <div class="complete-table-region"><table aria-labelledby="lucrezio-concetti-title">',
+            b'        <thead><tr><th scope="col"><strong>Concetto</strong></th>'
+            b'<th scope="col">Funzione nel pensiero lucreziano</th></tr></thead>',
+            b'        <tbody id="concetti-chiave-entries">',
+            *(b'          ' + entry for entry in entries),
+            b'        </tbody>',
+            b'      </table></div>',
+            b'    </div>',
+        ])
+
+    def glossary(heading, body):
+        require(len(body) == 15 and all(
+            re.fullmatch(rb'    <p><strong>.+?</strong><br /> .+</p>', line) for line in body),
+            'Unexpected Lucretius glossary entries')
+        return b'\n'.join([
+            b'    <div data-consult="glossary">',
+            b'  ' + heading,
+            b'      ' + controls('glossario', 'Cerca nel glossario'),
+            b'      <div class="consult-entries" id="glossario-entries">',
+            *(b'    ' + line.replace(b'<p>', b'<p data-consult-row>', 1) for line in body),
+            b'      </div>',
+            b'    </div>',
+        ])
+
+    for section_id, heading, transform in (
+        (b'concetti-chiave', b'Concetti chiave', concepts),
+        (b'glossario', b'Glossario', glossary),
+    ):
+        opening = b'<article class="item guide-section" id="' + section_id + b'">\n'
+        pattern = re.escape(opening) + rb'(.*?)\n  </article>'
+        matches = list(re.finditer(pattern, source, re.S))
+        require(len(matches) == 1, 'Expected exactly one Lucretius consultation section')
+        match = matches[0]
+        title, *body = match[1].split(b'\n')
+        require(title == b'    <h2>' + heading + b'</h2>', 'Unexpected Lucretius consultation heading')
+        if section_id == b'concetti-chiave':
+            title = title.replace(b'<h2>', b'<h2 id="lucrezio-concetti-title">')
+        source = source[:match.start(1)] + transform(title, body) + source[match.end(1):]
+    return source
+
+
 def validate(source, expected, actual, record):
     require(actual == expected and digest(actual) == record['outputSha256'],
             'Atlas output differs from the approved full document: ' + record['pagina'])
     blocks = re.findall(ARTICLES, source, re.S)
     framing = b''.join(len(block).to_bytes(8, 'big') + block for block in blocks)
     require(blocks and digest(framing) == record['articoliSha256'], 'Unexpected source article inventory')
+    articles = lucretius_consultation(source) if record['pagina'] == LUCRETIUS_IT else source
     for pattern in PROTECTED:
-        require(re.findall(pattern, source, re.S) == re.findall(pattern, actual, re.S),
+        reference = articles if pattern == ARTICLES else source
+        require(re.findall(pattern, reference, re.S) == re.findall(pattern, actual, re.S),
                 f'Protected Atlas content changed: {pattern!r}')
     links = rb'<a\b[^>]*\bhref="([^"]+)"'
     require(Counter(re.findall(links, source)) <= Counter(re.findall(links, actual)),
@@ -89,7 +165,7 @@ def validate(source, expected, actual, record):
 
 def verified_sources(protected=None, base=None, self_test=False, approved_entries=None):
     """Return historical bytes after full validation, with optional reviewed-entry pins."""
-    approved_entries = approved_entries or {}
+    approved_entries = {**(approved_entries or {}), **LUCRETIUS_ENTRIES}
     manifest = json.loads(read_json_bytes(CONFIG / 'manifesto.json'), object_pairs_hook=unique_keys)
     baseline = manifest['baseline']
     require(manifest['versione'] == 1 and re.fullmatch(r'[0-9a-f]{40}', baseline),
@@ -128,7 +204,8 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
         target = ROOT / path
         require(target.is_file() and not target.is_symlink() and target.resolve() == target,
                 'Invalid Atlas page file: ' + path)
-        expected = reconstruct(source, edits, additions_only=is_en)
+        recipe_source = lucretius_consultation(source) if path == LUCRETIUS_IT else source
+        expected = reconstruct(recipe_source, edits, additions_only=is_en)
         validate(source, expected, target.read_bytes(), record)
         if not is_en:
             figure = record['figura']
@@ -146,7 +223,7 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
                 require(before in (source, expected), 'Atlas EN PR base differs from the frozen source')
         if self_test:
             edits_to_reject = [source, expected + b'\n',
-                               expected.replace(b'<h1>', b'<h1 hidden>', 1)]
+                               re.sub(rb'<h1(?=[\s>])', b'<h1 hidden', expected, count=1)]
             for marker in (b'<article ', b'<aside class="atlas-relation', b'hreflang="'):
                 require(marker in expected, 'Ineffective Atlas mutation fixture')
                 edits_to_reject.append(expected.replace(marker, b'<!-- changed -->' + marker, 1))

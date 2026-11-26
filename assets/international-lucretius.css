@@ -78,3 +78,69 @@
  .lucretius-panel h3{color:#182e3e;}
  .lucretius-path>i,.lucretius-path>i::after{background:#806333;}
 }
+
+/* Lucretius IT/EN — the Atlas reading rail and the complete-edition apparatus. */
+.lucretius-guide .lucretius-reader{max-width:1120px}
+.lucretius-guide .lucretius-reader>.complete-body{width:100%;max-width:none}
+.lucretius-guide .atlas-contents :is(.guide-index,.complete-section){
+ margin:0;padding:0;border:0;box-shadow:none;background:transparent;
+}
+.lucretius-guide .atlas-contents :is(.guide-index,.complete-section)>h2{
+ font:600 .75rem/1.5 system-ui,sans-serif;margin:1rem 0 .3rem;color:var(--atlas-muted);
+}
+.lucretius-guide .atlas-contents .guide-toc ol{margin:0;padding:0;list-style:none}
+.lucretius-guide .atlas-contents .guide-toc a{background:transparent;text-decoration:none}
+.lucretius-guide .atlas-contents :is(.guide-toc,.lucretius-paths) a:hover{text-decoration:underline}
+.lucretius-guide .atlas-contents .guide-toc a[aria-current="location"]{background:#eae0cc}
+.lucretius-paths{display:grid;gap:.12rem;margin:.25rem 0 .65rem}
+.lucretius-paths a{
+ display:flex;align-items:center;min-height:44px;padding:.3rem .65rem;
+ border-inline-start:1px solid var(--atlas-gold);font:600 .78rem/1.45 system-ui,sans-serif;
+}
+.lucretius-guide .atlas-reading.complete-body>.guide-section{
+ padding:0 0 2.3rem;margin:0 auto 2.3rem;border:0;border-bottom:1px solid var(--complete-rule);
+}
+.lucretius-guide .atlas-reading.complete-body>.guide-section h2{margin-bottom:1.2rem}
+.lucretius-guide .atlas-reading.complete-body>.guide-section h4{font-family:system-ui,sans-serif}
+.lucretius-guide .atlas-reading.complete-body>.guide-section h3{margin-top:1.65rem}
+.lucretius-guide .atlas-reading.complete-body .lucretius-figure{max-width:64ch;margin:1.6rem auto 2.8rem}
+.lucretius-guide .atlas-reading.complete-body .lucretius-figure :is(h2,h3){color:#f8f2e7}
+.lucretius-guide .atlas-reading.complete-body .lucretius-figure h3{margin-top:0}
+.lucretius-guide .atlas-reading.complete-body [data-consult="glossary"] .consult-entries>p{
+ font:400 1rem/1.75 system-ui,sans-serif;
+}
+.lucretius-guide .atlas-reading.complete-body .consult-tools p{font:inherit}
+.lucretius-guide .atlas-reading.complete-body>.atlas-relation{max-width:64ch;margin-inline:auto}
+.lucretius-guide .atlas-reading.complete-body>.atlas-relation h2{margin-bottom:1rem}
+.lucretius-guide .atlas-reading.complete-body>.atlas-relation h3{margin-top:1.45rem}
+.lucretius-guide .atlas-reading.complete-body>.atlas-relation hr{border:0;border-top:1px solid var(--atlas-rule);margin-top:1.5rem}
+.lucretius-guide .atlas-reading.complete-body>:is(#fonti-e-copyright,#complete-sources-and-copyright){
+ padding:clamp(1rem,3vw,1.65rem);background:#eee7d9;
+}
+.lucretius-guide .atlas-reading.complete-body>:is(#fonti-e-copyright,#complete-sources-and-copyright) h3{
+ border-top:1px solid var(--atlas-rule);padding-top:1rem;
+}
+.lucretius-guide .atlas-reading.complete-body>:is(#fonti-e-copyright,#complete-sources-and-copyright) :is(p,li){
+ font:400 .95rem/1.75 system-ui,sans-serif;
+}
+.lucretius-guide .complete-subtitle{margin-top:.7rem}
+@media(min-width:761px){
+ .lucretius-guide .lucretius-reader.atlas-reader{row-gap:0;padding-top:2.4rem}
+ .lucretius-guide .lucretius-reader>.atlas-contents{grid-column:1;grid-row:1 / span 2}
+ .lucretius-guide .lucretius-reader>.atlas-reading{grid-column:2}
+ .lucretius-guide .lucretius-reader>.atlas-reading:first-child{grid-row:1}
+ .lucretius-guide.international-complete-guide .complete-jump{display:none}
+}
+@media(max-width:760px){
+ .lucretius-guide.international-complete-guide .complete-jump{margin-inline:auto;width:min(100% - 2rem,70ch)}
+ .lucretius-guide .atlas-contents summary{min-height:44px}
+ .lucretius-guide .atlas-reading.complete-body .lucretius-figure{padding:1.25rem}
+ .lucretius-guide .atlas-reading.complete-body .consult-inputs{flex-wrap:wrap}
+ .lucretius-guide .complete-body :is(article,h2,h3,h4,.complete-anchor,.atlas-relation){scroll-margin-top:3.5rem}
+ .lucretius-guide .atlas-contents :is(.guide-index,.complete-section){scroll-margin-top:3.5rem}
+}
+@media print{
+ .lucretius-guide .lucretius-reader>.complete-body{max-width:none}
+ .lucretius-guide .atlas-reading.complete-body .lucretius-figure :is(h2,h3){color:#182e3e}
+ .lucretius-guide .atlas-reading.complete-body>:is(#fonti-e-copyright,#complete-sources-and-copyright){background:none}
+}
