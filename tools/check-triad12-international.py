@@ -461,6 +461,173 @@ def test_ei01b_gramsci(path, historical, approved, reconstruct):
     return tests
 
 
+# EI06-A pins the two published Italian guides after the approved navigation migration.
+EI06A_BASE = '89868bd83d7dc1c993ff8354640f254018bc6959'
+EI06A_MOSCA = 'cerchi/guide/gaetano-mosca-classe-politica-organizzazione-governo-reale/index.html'
+EI06A_TOCQUEVILLE = 'cerchi/guide/alexis-de-tocqueville-democrazia-opinione-liberta/index.html'
+EI06A_PINS = {
+    EI06A_MOSCA: (
+        '9b9292c495a9e6b98819875cfd3132a029176478f174d1739c7a40b7cbad1fc6',
+        '170edb6450e5055bc522384a5d60a6ea5fc3ab0f8c5796346674214ebd1d0e0d',
+    ),
+    EI06A_TOCQUEVILLE: (
+        '0dc091fb5e336bf2b99147f6a6ddd95e13b08a35f9c4d676e29eb0e5796b034e',
+        '971b6cc85ffb5033945fea35e5186dccd9699b727f6ab60856a0d0b791a852e3',
+    ),
+}
+EI06A_MOSCA_TABLE = b'    <div class="table-wrap"><table>'
+EI06A_MOSCA_REGION = (
+    b'    <p class="table-scroll-hint">Scorri orizzontalmente per leggere tutte le colonne.</p>\n'
+    b'    <div class="table-wrap" role="region" aria-label="Concetti chiave" tabindex="0"><table>'
+)
+EI06A_MOSCA_STYLE = b"""  <style>
+    #concetti-chiave > .table-scroll-hint { display: none; }
+    @media screen {
+      #concetti-chiave { container: mosca-key-table / inline-size; }
+      #concetti-chiave > .table-wrap { overflow-x: auto; }
+      #concetti-chiave > .table-wrap:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+      }
+      @container mosca-key-table (width < 26rem) {
+        #concetti-chiave > .table-scroll-hint {
+          display: block;
+          font-size: .875rem;
+          line-height: 1.4;
+        }
+        #concetti-chiave > .table-wrap > table { min-inline-size: 26rem; }
+      }
+    }
+  </style>
+"""
+EI06A_LISTS = (
+    (b'percorsi-di-studio-e-lettura', (5, 7)),
+    (b'domande-per-orientarsi', (16,)),
+)
+
+
+def ei06a_lists(markup, *, restore=False):
+    for section, counts in EI06A_LISTS:
+        articles = re.findall(rb'<article class="item guide-section" id="' + section +
+                              rb'">.*?</article>', markup, re.S)
+        require(len(articles) == 1, 'EI06-A Tocqueville section is ambiguous')
+        article = articles[0]
+        lists = list(re.finditer(rb'<ol>\n(.*?)\n    </ol>', article, re.S))
+        require(len(lists) == len(counts), 'EI06-A Tocqueville ordered list count changed')
+        revised = article
+        for ordered, count in reversed(list(zip(lists, counts))):
+            items = list(re.finditer(rb'^(      <li>)(.*)(</li>)$', ordered[1], re.M))
+            require(len(items) == count, 'EI06-A Tocqueville list length changed')
+            body = ordered[1]
+            for number, item in reversed(list(enumerate(items, 1))):
+                prefix = f'{number}. '.encode()
+                text = item[2]
+                if restore:
+                    require(not re.match(rb'\d+\. ', text), 'EI06-A Tocqueville retains a manual prefix')
+                    text = prefix + text
+                else:
+                    require(text.startswith(prefix), 'EI06-A Tocqueville prefix differs from native order')
+                    text = text[len(prefix):]
+                body = body[:item.start(2)] + text + body[item.end(2):]
+            revised = revised[:ordered.start(1)] + body + revised[ordered.end(1):]
+        markup = markup.replace(article, revised, 1)
+    return markup
+
+
+def ei06a_document(path, historical):
+    baseline = canonical_international_links(historical)
+    source_sha, approved_sha = EI06A_PINS[path]
+    require(hashlib.sha256(baseline).hexdigest() == source_sha
+            and baseline == frozen(path, EI06A_BASE),
+            'EI06-A historical baseline mismatch: ' + path)
+    if path == EI06A_MOSCA:
+        heading = b'    <h2>Concetti chiave</h2>\n'
+        end_head = b'</head>\n'
+        require(baseline.count(end_head) == 1 and baseline.count(heading + EI06A_MOSCA_TABLE) == 1,
+                'EI06-A Mosca insertion point changed')
+        revised = baseline.replace(end_head, EI06A_MOSCA_STYLE + end_head, 1)
+        revised = revised.replace(heading + EI06A_MOSCA_TABLE, heading + EI06A_MOSCA_REGION, 1)
+    else:
+        revised = ei06a_lists(baseline)
+    require(hashlib.sha256(revised).hexdigest() == approved_sha
+            and revised == canonical_international_links(revised),
+            'EI06-A approved revision mismatch: ' + path)
+    return revised
+
+
+def test_ei06a(protected):
+    mosca = protected[EI06A_MOSCA]
+    tocqueville = protected[EI06A_TOCQUEVILLE]
+    require(mosca.replace(EI06A_MOSCA_STYLE, b'', 1)
+            .replace(EI06A_MOSCA_REGION, EI06A_MOSCA_TABLE, 1) == frozen(EI06A_MOSCA, EI06A_BASE),
+            'EI06-A Mosca changes extend beyond the approved style and wrapper')
+    require(ei06a_lists(tocqueville, restore=True) == frozen(EI06A_TOCQUEVILLE, EI06A_BASE),
+            'EI06-A Tocqueville list correction is not reversible')
+
+    mutations = [
+        (path, frozen(path, EI06A_BASE)) for path in EI06A_PINS
+    ]
+    for token, replacement in (
+        (b'overflow-x: auto', b'overflow-x: hidden'),
+        (b'tabindex="0"><table>', b'><table>'),
+        (b'aria-label="Concetti chiave"', b'aria-label=""'),
+        (b'role="region"', b'role="presentation"'),
+        (b'outline: 2px solid', b'outline: 0 solid'),
+        (b'display: block;\n          font-size', b'display: none;\n          font-size'),
+        (b'<th>Da non confondere con</th>', b''),
+        (b'<tr><td><strong>Classe politica</strong></td>', b'<tr><td>Classe politica</td>'),
+        (b'La totalit\xc3\xa0 dei gruppi ricchi, colti o prestigiosi.', b'Testo alterato.'),
+    ):
+        mutations.append((EI06A_MOSCA, mosca.replace(token, replacement, 1)))
+    table_rows = re.findall(rb'^      <tr>.*</tr>\n', mosca, re.M)
+    require(len(table_rows) == 14, 'EI06-A Mosca must preserve 14 data rows')
+    mutations.extend((
+        (EI06A_MOSCA, mosca.replace(table_rows[-1], b'', 1)),
+        (EI06A_MOSCA, mosca.replace(b''.join(table_rows[:2]), b''.join(reversed(table_rows[:2])), 1)),
+    ))
+
+    for section, counts in EI06A_LISTS:
+        article = re.search(rb'<article class="item guide-section" id="' + section +
+                            rb'">.*?</article>', tocqueville, re.S)
+        lists = list(re.finditer(rb'<ol>.*?</ol>', article[0], re.S))
+        for ordered, count in zip(lists, counts):
+            start = article.start() + ordered.start()
+            mutations.append((EI06A_TOCQUEVILLE, tocqueville[:start] + b'<ol start="2">' +
+                              tocqueville[start + len(b'<ol>'):]))
+            items = list(re.finditer(rb'<li>', ordered[0]))
+            require(len(items) == count, 'Ineffective EI06-A Tocqueville fixture')
+            for number, item in enumerate(items, 1):
+                pos = start + item.end()
+                mutations.append((EI06A_TOCQUEVILLE, tocqueville[:pos] + f'{number}. '.encode() +
+                                  tocqueville[pos:]))
+    mutations.extend((
+        (EI06A_TOCQUEVILLE, tocqueville.replace(b'Individualismo', b'Individualismo!', 1)),
+        (EI06A_TOCQUEVILLE, tocqueville.replace(b'<em>De la d\xc3\xa9mocratie en Am\xc3\xa9rique</em>',
+                                               b'De la d\xc3\xa9mocratie en Am\xc3\xa9rique', 1)),
+        (EI06A_TOCQUEVILLE, tocqueville.replace(b'<li>Municipi e libert\xc3\xa0 locale.</li>', b'', 1)),
+    ))
+    for path, candidate in mutations + [(path, protected[path] + b'!') for path in EI06A_PINS]:
+        require(candidate != protected[path], 'Ineffective EI06-A mutation: ' + path)
+        try:
+            verify_protected({path: protected[path]}, lambda _: candidate)
+        except AssertionError as error:
+            require(str(error) == 'Protected file changed: ' + path, 'Unexpected EI06-A rejection')
+        else:
+            raise AssertionError('EI06-A accepted an unapproved document: ' + path)
+
+    for path in EI06A_PINS:
+        try:
+            ei06a_document(path, original(path) + b'!')
+        except AssertionError as error:
+            require(str(error) == 'EI06-A historical baseline mismatch: ' + path,
+                    'Unexpected EI06-A baseline rejection')
+        else:
+            raise AssertionError('EI06-A accepted an unapproved baseline: ' + path)
+    tests = len(mutations) + 2 * len(EI06A_PINS)
+    print(f'PASS EI06-A: exact Mosca and Tocqueville revisions, {tests} rejected mutations')
+    return tests
+
+
 def verify_protected(protected, read_bytes):
     for path, expected in protected.items():
         # Release indexes evolve; frozen guides, triads and assets do not.
@@ -698,9 +865,13 @@ def check(source, self_test):
     require(gramsci_en in protected, 'Missing EI01-B historical guide')
     gramsci_en_historical = protected[gramsci_en]
     protected[gramsci_en] = gramsci['ei01b_document'](gramsci_en_historical)
+    require(EI06A_PINS.keys() <= protected.keys(), 'Missing EI06-A historical guide')
+    for path in EI06A_PINS:
+        protected[path] = ei06a_document(path, protected[path])
     require(P1_SUMMARIES.keys() <= protected.keys(), 'Missing historical P1 guide')
     from atlas_it_migration import verified_sources
     sources, _ = verified_sources(protected=protected, self_test=self_test)
+    require(not EI06A_PINS.keys() & sources.keys(), 'EI06-A guides must stay outside Atlas migrations')
 
     def read_protected(path):
         return sources[path] if path in sources else (ROOT / path).read_bytes()
@@ -722,6 +893,7 @@ def check(source, self_test):
         tests += test_ei01_gramsci(protected, read_protected)
         tests += test_ei01b_gramsci(gramsci_en, gramsci_en_historical,
                                     protected[gramsci_en], gramsci['ei01b_document'])
+        tests += test_ei06a(protected)
         current_alignment = (ROOT / PAGE).read_text()
         alignment_baseline = frozen(PAGE, INDEX14_ALIGNMENT_BASE).decode()
         require(restore_index14_alignment(current_alignment) == alignment_baseline, 'Alignment changed a pre-existing index byte outside XIV')

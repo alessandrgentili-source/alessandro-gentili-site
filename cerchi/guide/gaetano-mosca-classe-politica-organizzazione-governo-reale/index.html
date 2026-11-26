@@ -194,6 +194,25 @@
 }
   </script>
   <link rel="stylesheet" href="../../../assets/style.css" />
+  <style>
+    #concetti-chiave > .table-scroll-hint { display: none; }
+    @media screen {
+      #concetti-chiave { container: mosca-key-table / inline-size; }
+      #concetti-chiave > .table-wrap { overflow-x: auto; }
+      #concetti-chiave > .table-wrap:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+      }
+      @container mosca-key-table (width < 26rem) {
+        #concetti-chiave > .table-scroll-hint {
+          display: block;
+          font-size: .875rem;
+          line-height: 1.4;
+        }
+        #concetti-chiave > .table-wrap > table { min-inline-size: 26rem; }
+      }
+    }
+  </style>
 </head>
 <body class="guide-page">
 <header class="site-header">
@@ -511,7 +530,8 @@
   </article>
   <article class="item guide-section" id="concetti-chiave">
     <h2>Concetti chiave</h2>
-    <div class="table-wrap"><table><thead><tr><th>Concetto</th><th>Relazione decisiva</th><th>Da non confondere con</th></tr></thead><tbody>
+    <p class="table-scroll-hint">Scorri orizzontalmente per leggere tutte le colonne.</p>
+    <div class="table-wrap" role="region" aria-label="Concetti chiave" tabindex="0"><table><thead><tr><th>Concetto</th><th>Relazione decisiva</th><th>Da non confondere con</th></tr></thead><tbody>
       <tr><td><strong>Classe politica</strong></td><td>Esercizio delle funzioni direttive e controllo dell’organizzazione statale.</td><td>La totalità dei gruppi ricchi, colti o prestigiosi.</td></tr>
       <tr><td><strong>Minoranza organizzata</strong></td><td>Coordinamento stabile che trasforma risorse disperse in capacità di governo.</td><td>Una cospirazione unitaria o un gruppo onnipotente.</td></tr>
       <tr><td><strong>Maggioranza disorganizzata</strong></td><td>Superiorità numerica priva di continuità politica comune.</td><td>Inferiorità intellettuale o morale dei molti.</td></tr>
