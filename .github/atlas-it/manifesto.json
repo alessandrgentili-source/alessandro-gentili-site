@@ -211,6 +211,40 @@
       "modifiche": ".github/atlas-it/weber-en-editorial.json",
       "outputSha256": "a94f857eed8c19d72cf16e42ca73c02816825584f2484a57f103e5d123532a95",
       "revisioneEN": "baa6896370b8e2b54204a60e24782f62139160f9"
+    },
+    {
+      "pagina": "cerchi/guide/seneca-dominio-tempo-morte/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "981664ea02bda4d07534b4141016cc1565bc235b50859d176bac6b618e4de421",
+      "articoliSha256": "59567270bb86b8d336ae073df28512cec8eb7649dc72844a151e121fef26aed2",
+      "modifiche": ".github/atlas-it/seneca-it-editorial.json",
+      "outputSha256": "26bb46257f50f714a40ee47ce760623b6ec7723878e2151d88d2d10978be0693"
+    },
+    {
+      "pagina": "en/cerchi/guides/seneca-time-self-mastery-death/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "e54637128a93ed1a7dda6f16d3b1800453209b27804f28cc0e8b47126df56905",
+      "articoliSha256": "01d9b390bd1cb2547be0e29332e600b55935b0f3b2da9cbe29cdb1ff46a7f70d",
+      "modifiche": ".github/atlas-it/seneca-en-editorial.json",
+      "outputSha256": "b88a9289d57d19b2d8d3dd1f166deeaf68ed03d5ea0b2ebb87f91e35e0e9d89c",
+      "revisioneEN": "e84eb783f645aa63b6161a9493101d6274a6f5c8"
+    },
+    {
+      "pagina": "cerchi/guide/cicerone-repubblica-legge-parola-civile/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "8006ffea05641e3906206743a8667510b3ae6e267fcd9ccbbeae402d593c8b59",
+      "articoliSha256": "91d925589422fe6239b53baea0aa8e72ef8366d98022de04530106442d397281",
+      "modifiche": ".github/atlas-it/cicerone-it-editorial.json",
+      "outputSha256": "83b6318792558e5ae87e777141fb924b416deb6448f6fd0638b113d82e202ce5"
+    },
+    {
+      "pagina": "en/cerchi/guides/cicero-republic-law-civic-speech/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "87733508fc409cd933eca2f9e8ef00f0d3ea61d7c0ebf249660ffd53f53adecc",
+      "articoliSha256": "6d786d2e0d709525fe4d79148311f4cf3035069b68d65b84899362847b07f1ff",
+      "modifiche": ".github/atlas-it/cicerone-en-editorial.json",
+      "outputSha256": "a00eac3909c3e6d513d333bd34df689339eccdcd10a51a4b116ca3cbf00054a8",
+      "revisioneEN": "bd1ead5b7f12adddba35adf280594dfa5fdae29f"
     }
   ]
 }

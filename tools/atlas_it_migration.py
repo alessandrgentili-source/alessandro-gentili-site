@@ -26,6 +26,10 @@ EDITORIAL_ENTRIES = {
     'en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/index.html': 'ee053e537ab3d8e90e1f894fece078e0d9b95dc1b7820db32c8705e23d5fe3b0',
     'cerchi/guide/weber-razionalizzazione-potere-disincanto/index.html': '452e590307dac3a8244b46fe8677c7eeb2cc41ba6dbdefa8c78a7f128a55b30a',
     'en/cerchi/guides/max-weber-rationalization-power-disenchantment/index.html': 'a00eb31fa55e278e97c4f79cecc5bc33e56a64cbc995e786d8a384ef930934b1',
+    'cerchi/guide/seneca-dominio-tempo-morte/index.html': 'e3d556682ae0b9cc4ca5f4416f3221bf267e6a945aa639fe653e2f20a2c13a26',
+    'en/cerchi/guides/seneca-time-self-mastery-death/index.html': 'db40807f08d30b2184e45bf5e487d8430615d79b3544658b43ea3af5ff53d5ac',
+    'cerchi/guide/cicerone-repubblica-legge-parola-civile/index.html': 'eacb2085a54a1e1a416ef1373ede065bd25964aad2dde56d5f656120d736dae2',
+    'en/cerchi/guides/cicero-republic-law-civic-speech/index.html': '71839714c6efb9733b31c583bdd6b420cdd0ec04808f64fda58d2c975803adb6',
 }
 EDITORIAL_PROFILE = 'editorial-additions-v1'
 FRAGMENTS = rb'<nav class="guide-toc"[^>]*>.*?</nav>'
