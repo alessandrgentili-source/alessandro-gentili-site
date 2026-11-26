@@ -36,6 +36,27 @@ EDITORIAL_ENTRIES = {
     'en/cerchi/guides/marshall-mcluhan-media-perception-invisible-environments/index.html': 'eae63ac801f7bc8b75d2ec563c6ad15329f8393c9075e6cd3e7dbc363b885f05',
 }
 EDITORIAL_PROFILE = 'editorial-additions-v1'
+
+# EI02 applies only to the reviewed, fully reconstructed Tarde Atlas outputs.
+EI02_TARDE_IT = 'cerchi/guide/gabriel-tarde-imitazione-credenza-desiderio/index.html'
+EI02_TARDE_EN = 'en/cerchi/guides/gabriel-tarde-imitation-belief-desire/index.html'
+EI02_TARDE_PINS = {
+    EI02_TARDE_IT: (
+        'bf262394e0676f89506106fdfa35ee080381f2e5f7e4683e5a17277b40e6dd2c',
+        '2493133d809a57a0ff32d00d713eda7f5261fbbae502310356464f3e020b1d4a',
+    ),
+    EI02_TARDE_EN: (
+        '58fce6568d73e060210a30ea34e726c388822e67b39af419fab5dfdacff8f8cb',
+        '8d59e1096871a2cd0422a99bd57e8250a07f6e4ab69d2a924cdb36b07bff30cc',
+    ),
+}
+EI02_TARDE_TITLES = (
+    'Crimine, responsabilità, diritto',
+    'Imitazione e organizzazione del sociale',
+    'Differenza e molteplicità',
+    'Pubblico, opinione, economia',
+)
+EI02_TARDE_EMPHASIS = ('Believing', 'liking', 'seeing')
 FRAGMENTS = rb'<nav class="guide-toc"[^>]*>.*?</nav>'
 PROTECTED = (
     ARTICLES, FRAGMENTS, rb'<(?:title|h1|header|footer)\b[^>]*>.*?</(?:title|h1|header|footer)>',
@@ -211,6 +232,60 @@ def validate(source, expected, actual, record):
         require(actual.count(block) == 1, 'P1 lead and link must remain adjacent byte for byte')
 
 
+def ei02_tarde_document(path, atlas_output):
+    historical_sha, revised_sha = EI02_TARDE_PINS[path]
+    require(digest(atlas_output) == historical_sha, 'EI02 Atlas preimage changed: ' + path)
+    if path == EI02_TARDE_IT:
+        section_id = b'le-opere'
+        changes = [(f'<p>### {title}</p>', f'<h4>{title}</h4>') for title in EI02_TARDE_TITLES]
+    else:
+        section_id = b'wound'
+        changes = [(f'&lt;em&gt;{word}&lt;/em&gt;', f'<em>{word}</em>')
+                   for word in EI02_TARDE_EMPHASIS]
+    section = re.search(rb'<article\b[^>]*\bid="' + section_id
+                        + rb'">.*?</article>', atlas_output, re.S)
+    require(section is not None, 'EI02 target article missing: ' + path)
+    original = revised = section[0]
+    for old, new in changes:
+        old, new = old.encode(), new.encode()
+        require(revised.count(old) == 1, 'EI02 conversion marker changed: ' + path)
+        revised = revised.replace(old, new, 1)
+    result = atlas_output[:section.start()] + revised + atlas_output[section.end():]
+    require(digest(result) == revised_sha and original != revised,
+            'EI02 revised document digest differs: ' + path)
+    return result
+
+
+def verify_ei02_tarde(path, revised, actual):
+    require(actual == revised, 'EI02 output differs from the exact revised document: ' + path)
+
+
+def test_ei02_tarde(path, revised):
+    if path == EI02_TARDE_IT:
+        mutations = [(f'<h4>{title}</h4>', f'<p>### {title}</p>') for title in EI02_TARDE_TITLES]
+        mutations += [('<h4>Crimine, responsabilità, diritto</h4>',
+                       '<h3>Crimine, responsabilità, diritto</h3>'),
+                      ('Imitazione e organizzazione del sociale', 'Imitazione e struttura del sociale')]
+    else:
+        mutations = [(f'<em>{word}</em>', f'&lt;em&gt;{word}&lt;/em&gt;')
+                     for word in EI02_TARDE_EMPHASIS]
+        mutations.append(('<em>Believing</em>', '<em>Thinking</em>'))
+    mutations.extend((('id="editorial-dialogue"', 'id="editorial-dialogue" hidden'),
+                      ('id="editorial-reading-routes"', 'id="editorial-reading-routes" hidden'),
+                      ('<!doctype html>', '<!doctype html> ')))
+    for old, new in mutations:
+        candidate = revised.replace(old.encode(), new.encode(), 1)
+        require(candidate != revised, 'Ineffective EI02 mutation: ' + old)
+        try:
+            verify_ei02_tarde(path, revised, candidate)
+        except AssertionError as exc:
+            require(str(exc) == 'EI02 output differs from the exact revised document: ' + path,
+                    'Unexpected EI02 mutation failure')
+        else:
+            raise AssertionError('EI02 accepted a mutation: ' + old)
+    return len(mutations)
+
+
 def verified_sources(protected=None, base=None, self_test=False, approved_entries=None):
     """Return historical bytes after full validation, with optional reviewed-entry pins."""
     approved_entries = {**(approved_entries or {}), **LUCRETIUS_ENTRIES}
@@ -229,6 +304,7 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
                     'Published Atlas records and baseline must remain intact')
     sources, records = {}, {}
     mutations = 0
+    ei02_mutations = 0
     for record in manifest['guide']:
         path, profile = record['pagina'], record['profilo']
         editorial = profile == EDITORIAL_PROFILE
@@ -258,7 +334,17 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
         if editorial:
             editorial_recipe(source, edits, is_en)
         expected = reconstruct(recipe_source, edits, additions_only=is_en or editorial)
-        validate(source, expected, target.read_bytes(), record)
+        actual = target.read_bytes()
+        published = expected
+        if path in EI02_TARDE_PINS:
+            require(editorial, 'EI02 requires the reviewed additive Atlas profile: ' + path)
+            validate(source, expected, expected, record)
+            published = ei02_tarde_document(path, expected)
+            verify_ei02_tarde(path, published, actual)
+            if self_test:
+                ei02_mutations += test_ei02_tarde(path, published)
+        else:
+            validate(source, expected, actual, record)
         if not is_en and not editorial:
             figure = record['figura']
             anchor = re.escape(figure['dopoArticolo'].encode())
@@ -272,7 +358,7 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
             git('merge-base', '--is-ancestor', revision_base, baseline)
             if base is not None:
                 before = git('show', f'{base}:{path}')
-                require(before in (source, expected), 'Atlas EN PR base differs from the frozen source')
+                require(before in (source, expected, published), 'Atlas EN PR base differs from the frozen source')
         if self_test:
             edits_to_reject = [source, expected + b'\n',
                                re.sub(rb'<h1(?=[\s>])', b'<h1 hidden', expected, count=1)]
@@ -327,4 +413,5 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
                 'Atlas migration must include both published editions: ' + path)
     if self_test:
         print(f'PASS Atlas: {len(sources)} complete documents and {mutations} rejected mutations')
+        print(f'PASS EI02: exact Tarde IT/EN revisions and {ei02_mutations} rejected mutations')
     return sources, records
