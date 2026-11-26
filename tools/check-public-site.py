@@ -14,6 +14,8 @@ MATERIALS = {PRESENTATION + file for file in (
     'reading.html', 'preview.html', 'worksheet.html',
     'lettura.html', 'anteprima.html', 'scheda.html',
 )}
+EXPERIMENT = 'en/system/reidentification/'
+EXPERIMENT_PAGES = {EXPERIMENT + 'index.html': 'en', EXPERIMENT + 'it.html': 'it'}
 SCENES = tuple(str(number) for number in range(1, 9))
 
 
@@ -125,7 +127,7 @@ def check(pages, exceptions):
         noindex = is_noindex(page)
         if path in MATERIALS:
             require(noindex, 'presentation material must be noindex')
-        elif path in VIEWERS:
+        elif path in VIEWERS or path in EXPERIMENT_PAGES:
             require(not noindex, 'viewer must be indexable')
         elif noindex:
             continue
@@ -134,6 +136,17 @@ def check(pages, exceptions):
         require(len(page.ids) == len(set(page.ids)), 'duplicate IDs')
         if path in VIEWERS:
             check_viewer(path, page, require)
+        elif path in EXPERIMENT_PAGES:
+            language = EXPERIMENT_PAGES[path]
+            require(any(t == 'html' and a.get('lang') == language for t, a, _ in tags), 'incorrect experiment language')
+            require([a.get('id') for t, a, _ in tags if t == 'section'] == ['s1', 's2', 's3', 's4'],
+                    'expected four experiment sections')
+            links = [a for t, a, _ in tags if t == 'a']
+            require(any(a.get('href') == '/en/system/' for a in links), 'missing return to System')
+            alternate = 'it.html' if language == 'en' else './'
+            require(any(a.get('href') == alternate for a in links), 'missing experiment language switch')
+            require(any(a.get('id') == 'answer' and 'hidden' in a for _, a, _ in tags), 'quiz answer must start hidden')
+            require(any(t == 'footer' for t, _, _ in tags), 'missing author credit footer')
         elif path not in MATERIALS:
             require(any(t == 'nav' and 'primary-nav' in a.get('class', '').split() for t, a, _ in tags), 'missing primary navigation')
             missing = []

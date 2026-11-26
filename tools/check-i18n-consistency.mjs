@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const base = 'https://alessandro-gentili.it';
 const presentation = 'en/system/the-separation-of-cognitive-powers/';
+const experiment = 'en/system/reidentification/';
+const experimentUrl = `${base}/${experiment}`;
 const presentationUrl = `${base}/${presentation}`;
 
 const assert = (condition, message) => {
@@ -32,6 +34,7 @@ const pages = [
   { path: 'en/method/index.html', url: `${base}/en/method/`, type: 'WebPage' },
   { path: 'en/method/the-separation-of-cognitive-powers/index.html', url: `${base}/en/method/the-separation-of-cognitive-powers/`, type: 'Article' },
   { path: 'en/system/index.html', url: `${base}/en/system/`, type: 'WebPage' },
+  { path: `${experiment}index.html`, url: experimentUrl, it: `${experimentUrl}it.html`, defaultUrl: experimentUrl, type: 'CreativeWork' },
   { path: `${presentation}index.html`, url: presentationUrl, it: `${presentationUrl}it.html`, defaultUrl: presentationUrl, type: 'CreativeWork' },
   { path: 'en/cerchi/guides/alessandro-manzoni-language-history-responsibility/index.html', url: `${base}/en/cerchi/guides/alessandro-manzoni-language-history-responsibility/`, it: `${base}/cerchi/guide/alessandro-manzoni-lingua-storia-responsabilita/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/index.html', url: `${base}/en/cerchi/guides/carlo-collodi-pinocchio-education-desire-judgment/`, it: `${base}/cerchi/guide/carlo-collodi-formazione-prova-mondo/`, type: 'Article', breadcrumb: true },
@@ -69,6 +72,7 @@ const pages = [
 ];
 
 const italianPairs = [
+  { path: `${experiment}it.html`, it: `${experimentUrl}it.html`, en: experimentUrl, defaultUrl: experimentUrl },
   { path: `${presentation}it.html`, it: `${presentationUrl}it.html`, en: presentationUrl, defaultUrl: presentationUrl },
   { path: 'cerchi/triadi/legge-colpa-punizione/index.html', it: `${base}/cerchi/triadi/legge-colpa-punizione/`, en: `${base}/en/cerchi/triads/law-guilt-punishment/` },
   { path: 'cerchi/guide/cesare-beccaria-limite-diritto-punire/index.html', it: `${base}/cerchi/guide/cesare-beccaria-limite-diritto-punire/`, en: `${base}/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/` },
