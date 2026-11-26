@@ -3,7 +3,8 @@
   'use strict';
   if (!document.body.classList.contains('international-complete-guide')) return;
   const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
+  const isItalian = document.documentElement.lang.toLowerCase().split('-')[0] === 'it';
+  const collator = new Intl.Collator(isItalian ? 'it' : 'en', { numeric: true, sensitivity: 'base' });
   document.querySelectorAll('[data-consult]').forEach(region => {
     const controls = region.querySelector('[data-consult-controls]');
     const input = controls?.querySelector('input');
@@ -22,14 +23,14 @@
         row.hidden = !match;
         if (match) shown++;
       });
-      status.textContent = `${shown} of ${rows.length} entries`;
+      status.textContent = isItalian ? `${shown} di ${rows.length} voci` : `${shown} of ${rows.length} entries`;
     };
     const clearSort = () => headers.forEach(th => th.setAttribute('aria-sort', 'none'));
     if (table) {
       headers.forEach((th, column) => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.title = 'Sort by this column';
+        button.title = isItalian ? 'Ordina per questa colonna' : 'Sort by this column';
         while (th.firstChild) button.append(th.firstChild);
         th.append(button);
         th.setAttribute('aria-sort', 'none');

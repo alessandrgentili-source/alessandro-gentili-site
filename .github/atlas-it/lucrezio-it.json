@@ -1,0 +1,57 @@
+[
+  [
+    13503,
+    "",
+    "  <link rel=\"stylesheet\" href=\"/assets/international-atlas.css\" />\n  <link rel=\"stylesheet\" href=\"/assets/international-lucretius.css\" />\n  <link rel=\"stylesheet\" href=\"/assets/international-complete-guides.css\" />\n"
+  ],
+  [
+    13511,
+    "<body class=\"guide-page\">\n",
+    "<body class=\"guide-page international-atlas atlas-guide international-complete-guide lucretius-guide\">\n<a data-atlas-skip class=\"skip-link\" href=\"#main-content\">Salta al contenuto</a>\n"
+  ],
+  [
+    15941,
+    "<main class=\"page guide-page-main\">\n<section class=\"wrap hero guide-hero\" style=\"grid-template-columns:minmax(0,1fr);\">\n  <div class=\"hero-copy guide-hero-copy\" style=\"padding-inline:clamp(1.08rem,1.8vw,1.72rem);\">\n",
+    "<main class=\"page guide-page-main atlas-main\" id=\"main-content\" tabindex=\"-1\">\n<nav class=\"wrap atlas-breadcrumb\" aria-label=\"Percorso di navigazione\"><a href=\"/cerchi/\">Cerchi d’inchiostro</a><span aria-hidden=\"true\">/</span><a href=\"/cerchi/triadi/#decima-triade\">Triade X</a><span aria-hidden=\"true\">/</span><span>Lucrezio</span></nav>\n<div class=\"atlas-guide-opening\">\n<section class=\"wrap hero guide-hero\">\n  <div class=\"hero-copy guide-hero-copy\">\n"
+  ],
+  [
+    16475,
+    "    <p class=\"meta\"><strong>Atomi, immagini e poesia della natura</strong></p>\n",
+    "    <p class=\"complete-subtitle\"><strong>Atomi, immagini e poesia della natura</strong></p>\n"
+  ],
+  [
+    16858,
+    "<section class=\"wrap section\"><figure class=\"editorial-cover-card guide-cover\"><img src=\"../../../assets/img/cerchi/lucrezio-atomi-immagini-poesia-della-natura-cerchi-d-inchiostro-alessandro-gentili-italia-cover-sito-1600x900.webp\" alt=\"Copertina illustrata della guida a Lucrezio, dedicata ad atomi, immagini e poesia della natura.\" loading=\"lazy\" decoding=\"async\" width=\"1600\" height=\"900\" /></figure></section>\n<section class=\"wrap section guide-body\">\n",
+    "<div class=\"wrap\"><p class=\"atlas-byline\">Alessandro Gentili · Cerchi d’inchiostro</p>\n<figure class=\"editorial-cover-card guide-cover\"><img src=\"../../../assets/img/cerchi/lucrezio-atomi-immagini-poesia-della-natura-cerchi-d-inchiostro-alessandro-gentili-italia-cover-sito-1600x900.webp\" alt=\"Copertina illustrata della guida a Lucrezio, dedicata ad atomi, immagini e poesia della natura.\" loading=\"lazy\" decoding=\"async\" width=\"1600\" height=\"900\" /></figure></div>\n</div>\n<nav class=\"complete-jump\" aria-label=\"Navigazione di lettura\"><a href=\"#indice-della-guida\">Indice</a><a href=\"#main-content\">Inizio ↑</a></nav>\n<div class=\"wrap complete-reader atlas-reader lucretius-reader\">\n<div class=\"guide-body complete-body atlas-reading\">\n"
+  ],
+  [
+    20011,
+    "</section>\n<section class=\"wrap section guide-body\">\n",
+    "</div>\n<aside class=\"atlas-contents\" aria-label=\"Navigazione nella guida\">\n<details open><summary>Indice della guida</summary>\n<nav class=\"lucretius-paths\" aria-labelledby=\"lucretius-paths-title\">\n  <p id=\"lucretius-paths-title\" class=\"atlas-byline\">Accessi rapidi</p>\n  <a href=\"#lucrezio-in-breve\">Lucrezio in breve</a>\n  <a href=\"#lucretius-figure-title\">Dal raggio di luce all’inferenza</a>\n  <a href=\"#concetti-chiave\">Tabella dei concetti chiave</a>\n  <a href=\"#la-ferita-contemporanea\">La ferita contemporanea</a>\n  <a href=\"#glossario\">Glossario</a>\n  <a href=\"#il-pensiero-in-dialogo\">Il pensiero in dialogo</a>\n  <a href=\"#fonti-e-copyright\">Fonti e copyright</a>\n</nav>\n"
+  ],
+  [
+    22891,
+    "",
+    "</details>\n</aside>\n<div class=\"guide-body complete-body atlas-reading\">\n"
+  ],
+  [
+    50555,
+    "",
+    "<figure class=\"atlas-figure lucretius-figure\" aria-labelledby=\"lucretius-figure-title\">\n<p class=\"atlas-label\">Il raggio di luce · Libro II</p>\n<h2 id=\"lucretius-figure-title\">Che cosa mostra il raggio di luce?</h2>\n<p class=\"lucretius-intro\">Un raggio di sole rende visibile la polvere. Lucrezio parte da quel movimento per farci immaginare qualcosa di molto più piccolo.</p>\n<fieldset class=\"lucretius-switch\"><legend>Distingui l’osservazione dall’inferenza</legend>\n<input type=\"radio\" name=\"lucretius-view\" id=\"lucretius-visible\" checked />\n<label for=\"lucretius-visible\">Ciò che l’occhio vede</label>\n<input type=\"radio\" name=\"lucretius-view\" id=\"lucretius-inferred\" />\n<label for=\"lucretius-inferred\">Ciò che il poeta inferisce</label>\n<section class=\"lucretius-panel lucretius-panel--visible\" aria-labelledby=\"lucretius-visible-heading\">\n<p class=\"lucretius-phase\">01 · La scena visibile</p>\n<h3 id=\"lucretius-visible-heading\">La polvere si muove nella luce.</h3>\n<div class=\"lucretius-path\" aria-hidden=\"true\"><span>Raggio di sole</span><i></i><span>Polvere visibile</span><i></i><b>Osservazione</b></div>\n<p>I granelli sono corpi composti. Sullo sfondo scuro possiamo vederli muoversi.</p></section>\n<section class=\"lucretius-panel lucretius-panel--inferred\" aria-labelledby=\"lucretius-inferred-heading\">\n<p class=\"lucretius-phase\">02 · La materia invisibile</p>\n<h3 id=\"lucretius-inferred-heading\">L’analogia va oltre ciò che vediamo.</h3>\n<div class=\"lucretius-path\" aria-hidden=\"true\"><span>Moto osservato</span><i></i><span>Analogia</span><i></i><b>Atomi e vuoto</b></div>\n<p>Lucrezio ci invita a inferire il movimento dei corpi primi, inaccessibili ai sensi. La scena rende pensabile il moto invisibile. Il suo valore è illustrativo.</p></section>\n</fieldset>\n<p class=\"lucretius-caveat\"><strong>Il limite dell’analogia.</strong> I granelli sono corpi composti già visibili. Il paragone appartiene alla fisica antica e precede l’osservazione sperimentale del moto browniano.</p>\n<figcaption>Lettura editoriale del <em>De rerum natura</em> II.114–141. Le due viste distinguono l’esempio visibile dall’inferenza che suggerisce. In stampa sono leggibili entrambe.</figcaption></figure>\n"
+  ],
+  [
+    105321,
+    "",
+    "<aside class=\"atlas-relation\" id=\"il-pensiero-in-dialogo\" aria-labelledby=\"lucretius-dialogue-title\">\n  <h2 id=\"lucretius-dialogue-title\">Il pensiero in dialogo</h2>\n  <p class=\"atlas-byline\"><em>Saggi di Alessandro Gentili</em></p>\n  <h3><a href=\"/saggi/saggio-20-il-futuro-degli-altri.html#le-frontiere-del-potere\">Saggio 20 · Il futuro degli altri</a></h3>\n  <p><strong>Connessione interpretativa.</strong> In «Le frontiere del potere», Gentili segue cavi, centri di calcolo e reti elettriche fino alla questione di chi li controlla. La ferita contemporanea della guida parte dalla stessa distanza fra un servizio che appare immateriale e i luoghi e il lavoro che lo rendono possibile.</p>\n  <h3><a href=\"/saggi/saggio-21-da-che-parte-sta-chi-guarda.html#quando-linterprete-entra-nel-quadro\">Saggio 21 · Da che parte sta chi guarda</a></h3>\n  <p><strong>Connessione interpretativa.</strong> In «Quando l’interprete entra nel quadro», una graduatoria e una piattaforma traducono esperienze in punteggi. La distinzione lucreziana fra ciò che esiste, ciò che ci raggiunge e il giudizio che formuliamo aiuta a interrogare il passaggio dalla persona alla categoria con cui la leggiamo.</p>\n  <section aria-labelledby=\"lucretius-dialogue-triad\">\n    <hr />\n    <h3 id=\"lucretius-dialogue-triad\">Triade di appartenenza</h3>\n    <p><a href=\"/cerchi/triadi/#decima-triade\"><strong>Triade X · Materia, medium e informazione</strong></a></p>\n    <p>Lucrezio indaga come la realtà materiale raggiunga i sensi, McLuhan come i media configurino l’esperienza e Shannon che cosa possa essere trasmesso attraverso un canale. Il percorso distingue i tre problemi a partire dalla domanda su come il mondo ci raggiunge.</p>\n  </section>\n</aside>\n"
+  ],
+  [
+    114645,
+    "</section>\n",
+    "</div>\n</div>\n"
+  ],
+  [
+    115968,
+    "",
+    "<script src=\"/assets/international-atlas.js\" defer></script>\n<script src=\"/assets/international-complete-guides.js\" defer></script>\n"
+  ]
+]
