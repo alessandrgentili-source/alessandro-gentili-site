@@ -67,6 +67,45 @@ EI03_WEBER_LIST = re.compile(
     rb'  <h2>Idee chiave</h2>\n  <ol>\n(.*?)\n</ol>\n</article>',
     re.S,
 )
+# EI04-A segments only the eight reviewed Seneca IT paragraphs.
+EI04A_SENECA_IT = 'cerchi/guide/seneca-dominio-tempo-morte/index.html'
+EI04A_SENECA_ATLAS_SHA = '26bb46257f50f714a40ee47ce760623b6ec7723878e2151d88d2d10978be0693'
+EI04A_SENECA_REVISED_SHA = 'f075e2da8a1541797c59ed07e7ad116414d333c52ddf8b2a8b8a4e120cbd56e0'
+EI04A_SENECA_BREAK = b'</p>\n    <p>'
+EI04A_SENECA_SECTIONS = {
+    'lettere-a-lucilio': (
+        'Nelle Lettere tornano', 'Il centro delle Lettere', 'Le Lettere sono anche',
+        'Uno degli aspetti più importanti', 'Le Lettere hanno anche',
+    ),
+    'de-brevitate-vitae': (
+        'Seneca distingue tra vivere', 'Questo testo è fondamentale', 'Nel De brevitate vitae Seneca',
+        'Qui Seneca parla', 'Il De brevitate vitae va quindi',
+    ),
+    'de-tranquillitate-animi': (
+        'L’animo instabile desidera', 'Il testo è importante', 'La tranquillità nasce da una misura',
+        'Il De tranquillitate animi è dunque', 'Nel presente, questo testo',
+    ),
+    'de-ira': (
+        'Per Seneca l’ira è pericolosa', 'Il De ira è un testo morale', 'Qui Seneca si colloca',
+        'Seneca insiste sulla prevenzione', 'Il De ira resta attuale',
+    ),
+    'de-clementia': (
+        'La clemenza è una virtù politica', 'Il De clementia mostra un punto decisivo',
+        'Seneca prova a introdurre', 'Il rapporto con Nerone', 'Dentro Cerchi d’inchiostro',
+    ),
+    'de-vita-beata': (
+        'Seneca sviluppa questa posizione', 'La distinzione è filosoficamente importante',
+        'Tuttavia, questa distinzione', 'Il De vita beata è prezioso',
+    ),
+    'tragedie-passione-rovina': (
+        'Medea, Fedra, Tieste', 'La tragedia mostra ciò', 'Seneca tragico è quindi',
+        'Questa dimensione è essenziale', 'Nel presente, le tragedie',
+    ),
+    'stoicismo-romano': (
+        'A Roma, questa dottrina', 'I concetti centrali sono pochi', 'La natura è ordine',
+        'Il destino indica', 'Seneca condivide questi principi', 'Questa posizione rende',
+    ),
+}
 FRAGMENTS = rb'<nav class="guide-toc"[^>]*>.*?</nav>'
 PROTECTED = (
     ARTICLES, FRAGMENTS, rb'<(?:title|h1|header|footer)\b[^>]*>.*?</(?:title|h1|header|footer)>',
@@ -342,6 +381,82 @@ def test_ei03_weber(revised):
     return len(mutations)
 
 
+def ei04a_seneca_paragraphs(document, section):
+    opening = b'<article class="item guide-section" id="' + section.encode() + b'">\n'
+    match = re.search(re.escape(opening) + rb'    <h2>[^\n]+</h2>\n'
+                      rb'    <p>(.*?)</p>\n  </article>', document, re.S)
+    require(match is not None, 'EI04-A Seneca IT paragraph missing: ' + section)
+    return match
+
+
+def ei04a_seneca_document(atlas_output):
+    require(digest(atlas_output) == EI04A_SENECA_ATLAS_SHA, 'EI04-A Seneca IT Atlas preimage changed')
+    result = atlas_output
+    for section, markers in EI04A_SENECA_SECTIONS.items():
+        match = ei04a_seneca_paragraphs(result, section)
+        original = match[1]
+        require(b'<p' not in original and b'</p>' not in original,
+                'EI04-A expected one continuous Seneca IT paragraph: ' + section)
+        pieces = []
+        remaining = original
+        for marker in markers:
+            boundary = b' ' + marker.encode()
+            require(original.count(boundary) == 1, 'EI04-A Seneca IT marker not unique: ' + marker)
+            preceding, found, tail = remaining.partition(boundary)
+            require(preceding and found, 'EI04-A Seneca IT marker out of order: ' + marker)
+            pieces.append(preceding)
+            remaining = found[1:] + tail
+        pieces.append(remaining)
+        require(b' '.join(pieces) == original, 'EI04-A Seneca IT segmentation is not reversible')
+        result = result[:match.start(1)] + EI04A_SENECA_BREAK.join(pieces) + result[match.end(1):]
+    require(digest(result) == EI04A_SENECA_REVISED_SHA, 'EI04-A Seneca IT revised document digest differs')
+    return result
+
+
+def verify_ei04a_seneca(revised, actual):
+    require(actual == revised, 'EI04-A Seneca IT differs from the exact revised document')
+
+
+def test_ei04a_seneca(revised):
+    separator = EI04A_SENECA_BREAK
+    tests = 0
+    for section, markers in EI04A_SENECA_SECTIONS.items():
+        match = ei04a_seneca_paragraphs(revised, section)
+        pieces = match[1].split(separator)
+        require(len(pieces) == len(markers) + 1, 'Unexpected EI04-A Seneca IT paragraph count')
+        mutations = [
+            (f'missing break {number}', separator.join(pieces[:number-1] +
+                [pieces[number-1] + b' ' + pieces[number]] + pieces[number+1:]))
+            for number in range(1, len(pieces))
+        ]
+        first_word, space, rest = pieces[1].partition(b' ')
+        require(space and rest, 'Ineffective EI04-A displaced-break fixture')
+        mutations.extend((
+            ('displaced break', separator.join([pieces[0] + b' ' + first_word, rest, *pieces[2:]])),
+            ('lexical change', separator.join([b'Altro ' + pieces[0], *pieces[1:]])),
+            ('reordered paragraphs', separator.join([pieces[1], pieces[0], *pieces[2:]])),
+        ))
+        for label, changed in mutations:
+            candidate = revised[:match.start(1)] + changed + revised[match.end(1):]
+            require(candidate != revised, 'Ineffective EI04-A mutation: ' + label)
+            try:
+                verify_ei04a_seneca(revised, candidate)
+            except AssertionError as exc:
+                require(str(exc) == 'EI04-A Seneca IT differs from the exact revised document',
+                        'Unexpected EI04-A mutation failure')
+            else:
+                raise AssertionError('EI04-A accepted a mutation: ' + label)
+            tests += 1
+    try:
+        verify_ei04a_seneca(revised, revised + b'\n')
+    except AssertionError as exc:
+        require(str(exc) == 'EI04-A Seneca IT differs from the exact revised document',
+                'Unexpected EI04-A out-of-scope mutation failure')
+    else:
+        raise AssertionError('EI04-A accepted a byte outside the eight paragraphs')
+    return tests + 1
+
+
 def verified_sources(protected=None, base=None, self_test=False, approved_entries=None):
     """Return historical bytes after full validation, with optional reviewed-entry pins."""
     approved_entries = {**(approved_entries or {}), **LUCRETIUS_ENTRIES}
@@ -362,6 +477,7 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
     mutations = 0
     ei02_mutations = 0
     ei03_mutations = 0
+    ei04a_mutations = 0
     for record in manifest['guide']:
         path, profile = record['pagina'], record['profilo']
         editorial = profile == EDITORIAL_PROFILE
@@ -407,6 +523,13 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
             verify_ei03_weber(published, actual)
             if self_test:
                 ei03_mutations += test_ei03_weber(published)
+        elif path == EI04A_SENECA_IT:
+            require(editorial, 'EI04-A requires the reviewed additive Seneca IT Atlas profile')
+            validate(source, expected, expected, record)
+            published = ei04a_seneca_document(expected)
+            verify_ei04a_seneca(published, actual)
+            if self_test:
+                ei04a_mutations += test_ei04a_seneca(published)
         else:
             validate(source, expected, actual, record)
         if not is_en and not editorial:
@@ -479,4 +602,5 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
         print(f'PASS Atlas: {len(sources)} complete documents and {mutations} rejected mutations')
         print(f'PASS EI02: exact Tarde IT/EN revisions and {ei02_mutations} rejected mutations')
         print(f'PASS EI03: exact Weber IT revision and {ei03_mutations} rejected mutations')
+        print(f'PASS EI04-A: exact Seneca IT revision and {ei04a_mutations} rejected mutations')
     return sources, records
