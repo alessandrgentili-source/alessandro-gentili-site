@@ -12,6 +12,8 @@ from pathlib import Path
 import re
 import subprocess
 
+from atlas_it_migration import verified_sources
+
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = "en/cerchi/guides/gabriel-tarde-imitation-belief-desire/index.html"
 CSS = "assets/international-tarde.css"
@@ -89,8 +91,16 @@ def verify(path, base):
             "Wrong page path for Tarde-specific contract")
     require(blob(base, PAGE) == BASE_BLOB,
             "Published Tarde baseline changed: STOP")
-    require(git("hash-object", PAGE) == APPROVED_HTML_BLOB,
-            "Tarde HTML differs from the approved source-conversion snapshot")
+    frozen, _ = verified_sources()
+    if PAGE in frozen:
+        historical_blob = subprocess.check_output(
+            ["git", "hash-object", "--stdin"], cwd=ROOT, input=frozen[PAGE],
+        ).decode("ascii").strip()
+        require(historical_blob == APPROVED_HTML_BLOB,
+                "Tarde Atlas source differs from the approved source-conversion snapshot")
+    else:
+        require(git("hash-object", PAGE) == APPROVED_HTML_BLOB,
+                "Tarde HTML differs from the approved source-conversion snapshot")
     require(git("hash-object", CSS) == APPROVED_CSS_BLOB,
             "Tarde scoped CSS differs from the reviewed snapshot")
     require(git("hash-object", JS) == APPROVED_JS_BLOB,

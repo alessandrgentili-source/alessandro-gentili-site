@@ -30,6 +30,10 @@ EDITORIAL_ENTRIES = {
     'en/cerchi/guides/seneca-time-self-mastery-death/index.html': 'db40807f08d30b2184e45bf5e487d8430615d79b3544658b43ea3af5ff53d5ac',
     'cerchi/guide/cicerone-repubblica-legge-parola-civile/index.html': 'eacb2085a54a1e1a416ef1373ede065bd25964aad2dde56d5f656120d736dae2',
     'en/cerchi/guides/cicero-republic-law-civic-speech/index.html': '71839714c6efb9733b31c583bdd6b420cdd0ec04808f64fda58d2c975803adb6',
+    'cerchi/guide/gabriel-tarde-imitazione-credenza-desiderio/index.html': '0cd6227ff24e447e60f255e16af6cb42d36399713704bbcc905fb13e06211664',
+    'en/cerchi/guides/gabriel-tarde-imitation-belief-desire/index.html': 'adcb9887df2db525516af4178e10ab4f11a5496598896f06dba6e4d880517e33',
+    'cerchi/guide/marshall-mcluhan-media-percezione-ambienti-invisibili/index.html': '53213e5ab873703d2825b4742d65d60cca3ba18058c1724f593f0c8f6b765333',
+    'en/cerchi/guides/marshall-mcluhan-media-perception-invisible-environments/index.html': 'eae63ac801f7bc8b75d2ec563c6ad15329f8393c9075e6cd3e7dbc363b885f05',
 }
 EDITORIAL_PROFILE = 'editorial-additions-v1'
 FRAGMENTS = rb'<nav class="guide-toc"[^>]*>.*?</nav>'
@@ -83,6 +87,12 @@ def editorial_recipe(source, edits, is_en):
     """Only two insertions, outside the historical hero and manuscript body."""
     marker = (b'<div class="wrap atlas-reader">' if is_en else
               b'<section class="wrap section"><figure class="editorial-cover-card guide-cover">')
+    # The complete-guide layout starts with its native jump navigation, not atlas-reader.
+    if is_en and b'<body class="guide-page international-atlas atlas-guide international-complete-guide">' in source:
+        marker = b'<nav class="complete-jump"'
+        require(source.count(b'<div class="wrap complete-reader">') == 1
+                and source.index(marker) < source.index(b'<div class="wrap complete-reader">'),
+                'Ambiguous complete-guide reader')
     end = b'</main>'
     require(source.count(marker) == source.count(end) == 1, 'Ambiguous editorial insertion point')
     require(len(edits) == 2 and all(len(edit) == 3 and edit[1] == '' for edit in edits),

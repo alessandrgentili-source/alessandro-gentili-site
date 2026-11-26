@@ -27,6 +27,9 @@ LUCRETIUS_ITALIAN_REVISIONS = (
     ('bf6187b8e84c1cfbb7985cb564afc3fdd5377bc6', '15ae9aad3f533fb4a9ed15c715532cbb0d2b8751'),
     ('0a6af23767200526f84c41c355a6553ed389cf7a', 'd93a12c8fe04df1493da9877ec04183f6536ea43'),
 )
+MCLUHAN_PAGE = 'en/cerchi/guides/marshall-mcluhan-media-perception-invisible-environments/index.html'
+MCLUHAN_ITALIAN_NAVIGATION_REVISION = 'bf6187b8e84c1cfbb7985cb564afc3fdd5377bc6'
+MCLUHAN_ITALIAN_NAVIGATION_BLOB = '55509bbdd3427d2e76438017dd15d2c224dad074'
 SHANNON_PAGE = 'en/cerchi/guides/claude-shannon-information-noise-limits-of-transmission/index.html'
 SHANNON_OLD_TITLE = b'<title>Claude Shannon: information, noise and the limits of transmission | Circles of Ink</title>'
 SHANNON_APPROVED_TITLE = b'<title>Claude Shannon: information theory, noise and transmission | Circles of Ink</title>'
@@ -335,6 +338,22 @@ def verify_lucretius_history(guide):
     print('PASS Lucretius Atlas: original EN snapshot and IT International navigation/P1 chain')
 
 
+def verify_mcluhan_history(guide, frozen):
+    page, italian = guide['page'], guide['italian']
+    require(page in frozen and italian in frozen, 'Incomplete bilingual McLuhan Atlas release')
+    revision = MCLUHAN_ITALIAN_NAVIGATION_REVISION
+    git('merge-base', '--is-ancestor', COMPLETE_RELEASE, revision)
+    require(git('rev-parse', COMPLETE_RELEASE + ':' + page) == guide['html_blob']
+            and git('rev-parse', COMPLETE_RELEASE + ':' + italian) == guide['italian_blob']
+            and git('rev-parse', revision + '^:' + italian) == guide['italian_blob']
+            and git('rev-parse', revision + ':' + italian) == MCLUHAN_ITALIAN_NAVIGATION_BLOB,
+            'Unexpected McLuhan complete-release/navigation snapshots')
+    for path, blob in ((page, guide['html_blob']), (italian, MCLUHAN_ITALIAN_NAVIGATION_BLOB)):
+        actual = subprocess.check_output(['git', 'cat-file', 'blob', blob], cwd=ROOT)
+        require(frozen[path] == actual, 'Atlas source differs from approved McLuhan history: ' + path)
+    print('PASS McLuhan Atlas: approved EN snapshot and IT navigation chain')
+
+
 def verify_assets(manifest):
     for asset, expected in manifest['asset_sha256'].items():
         if asset == CONSULTATION_JS:
@@ -353,8 +372,11 @@ def verify(path, base):
     base_blob = git('rev-parse', base + ':' + relative)
     shannon_title_revision = relative == SHANNON_PAGE and base_blob == guide['html_blob']
     require(shannon_title_revision or base_blob == guide['baseline_blob'], 'Published baseline changed')
+    frozen, _ = verified_sources() if relative == MCLUHAN_PAGE else ({}, {})
     if relative == LUCRETIUS_EN:
         verify_lucretius_history(guide)
+    elif relative == MCLUHAN_PAGE and (relative in frozen or guide['italian'] in frozen):
+        verify_mcluhan_history(guide, frozen)
     else:
         if not shannon_title_revision:
             require(git('hash-object', relative) == guide['html_blob'], 'Unreviewed guide snapshot')

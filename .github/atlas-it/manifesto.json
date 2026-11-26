@@ -245,6 +245,40 @@
       "modifiche": ".github/atlas-it/cicerone-en-editorial.json",
       "outputSha256": "a00eac3909c3e6d513d333bd34df689339eccdcd10a51a4b116ca3cbf00054a8",
       "revisioneEN": "bd1ead5b7f12adddba35adf280594dfa5fdae29f"
+    },
+    {
+      "pagina": "cerchi/guide/gabriel-tarde-imitazione-credenza-desiderio/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "837d99fd1a46e2099054baa5779ed86249c0d9e2c5d0b0dcaa6159f581238def",
+      "articoliSha256": "3add89b2a7f51b529a7af9b3b1c76f3bea215f49985c349d3d71f9a4657445d3",
+      "modifiche": ".github/atlas-it/tarde-it-editorial.json",
+      "outputSha256": "bf262394e0676f89506106fdfa35ee080381f2e5f7e4683e5a17277b40e6dd2c"
+    },
+    {
+      "pagina": "en/cerchi/guides/gabriel-tarde-imitation-belief-desire/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "388def64137e1072cf32fcdf17477e226cac4534341f6ee09d023081c132fe7a",
+      "articoliSha256": "9e17dca67be2456df1c870efe68ce0365f181a1901d7f9d000094b0787b30ae9",
+      "modifiche": ".github/atlas-it/tarde-en-editorial.json",
+      "outputSha256": "58fce6568d73e060210a30ea34e726c388822e67b39af419fab5dfdacff8f8cb",
+      "revisioneEN": "a161a5b443ed64c8c4775c9441725245a511f3b1"
+    },
+    {
+      "pagina": "cerchi/guide/marshall-mcluhan-media-percezione-ambienti-invisibili/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "125d8650067084f03b6c810fe9fc7faff73b1ee720f867312b41431d713b06ac",
+      "articoliSha256": "6089ab38d7c049340d2124683544c7f3728102f712f907d4eb9fd3e3ad525092",
+      "modifiche": ".github/atlas-it/mcluhan-it-editorial.json",
+      "outputSha256": "8df7f24aa84e55fa7abf592abe34451f36170fb551cbcf1d046f98996d527912"
+    },
+    {
+      "pagina": "en/cerchi/guides/marshall-mcluhan-media-perception-invisible-environments/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "6d465adf103fcdb8f6ff9778c25aab146f9a0a1a89d972fe0f3c5ea118be04c3",
+      "articoliSha256": "649c4fb0ba585a8978c5a1329b796e2498a9c3220fc7aec0f8a9c5e4677db15b",
+      "modifiche": ".github/atlas-it/mcluhan-en-editorial.json",
+      "outputSha256": "0ea68d1e08674c3d66174728800a7326648ba1e3f2f7e849a78b444f04ddcb4e",
+      "revisioneEN": "f8cd3a367f29c6af2bc80db45007fc38a73722b3"
     }
   ]
 }
