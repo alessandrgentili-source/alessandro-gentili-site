@@ -8,6 +8,7 @@ import importlib.util
 import json
 from pathlib import Path
 import re
+from runpy import run_path
 import subprocess
 from urllib.parse import urljoin, urlparse
 
@@ -418,6 +419,48 @@ def test_ei01_gramsci(protected, read_bytes):
     return tests
 
 
+def test_ei01b_gramsci(path, historical, approved, reconstruct):
+    try:
+        reconstruct(historical + b'\n')
+    except AssertionError as exc:
+        require(str(exc) == 'EI01-B historical Gramsci EN baseline mismatch',
+                'Unexpected EI01-B historical baseline failure')
+    else:
+        raise AssertionError('EI01-B accepted a changed historical baseline')
+
+    old_entries = historical.split(b'\n')[438:443]
+    new_entries = approved.split(b'\n')[438:443]
+    mutations = [
+        (f'residual asterisks in entry {index}', approved.replace(new, old, 1))
+        for index, (old, new) in enumerate(zip(old_entries, new_entries), 1)
+    ]
+    mutations += [
+        ('unrevised page', historical),
+        ('incorrect emphasis', approved.replace(b"<strong><em>L'Ordine Nuovo</em>",
+                                                b"<strong><i>L'Ordine Nuovo</i>", 1)),
+        ('incorrect strong markup', approved.replace(
+            b'<strong><em>The Revolution against Capital</em> (1917).</strong>',
+            b'<b><em>The Revolution against Capital</em> (1917).</b>', 1)),
+        ('lexical change', approved.replace(b'A journal founded with collaborators',
+                                            b'A journal founded with colleagues', 1)),
+        ('out-of-scope byte', approved + b'\n'),
+        ('FAQ changed', approved.replace(b'<section class="gramsci-faq"><h3>',
+                                         b'<section class="gramsci-faq"><h3>Edited: ', 1)),
+        ('metadata changed', approved.replace(b'<title>', b'<title>Edited: ', 1)),
+    ]
+    for label, candidate in mutations:
+        require(candidate != approved, 'Ineffective EI01-B fixture: ' + label)
+        try:
+            verify_protected({path: approved}, lambda _: candidate)
+        except AssertionError as exc:
+            require(str(exc) == 'Protected file changed: ' + path, 'Unexpected EI01-B protection failure')
+        else:
+            raise AssertionError('EI01-B mutation accepted: ' + label)
+    tests = len(mutations) + 1
+    print(f'PASS EI01-B exact revision and {tests} rejection regressions')
+    return tests
+
+
 def verify_protected(protected, read_bytes):
     for path, expected in protected.items():
         # Release indexes evolve; frozen guides, triads and assets do not.
@@ -650,6 +693,11 @@ def check(source, self_test):
     protected[shannon] = protected[shannon].replace(old_title, approved_title, 1)
     require(EI01_GRAMSCI in protected, 'Missing EI01 historical guide')
     protected[EI01_GRAMSCI] = ei01_gramsci_document(protected[EI01_GRAMSCI])
+    gramsci = run_path(str(ROOT / 'tools/check-gramsci-revision.py'))
+    gramsci_en = gramsci['PAGE']
+    require(gramsci_en in protected, 'Missing EI01-B historical guide')
+    gramsci_en_historical = protected[gramsci_en]
+    protected[gramsci_en] = gramsci['ei01b_document'](gramsci_en_historical)
     require(P1_SUMMARIES.keys() <= protected.keys(), 'Missing historical P1 guide')
     from atlas_it_migration import verified_sources
     sources, _ = verified_sources(protected=protected, self_test=self_test)
@@ -672,6 +720,8 @@ def check(source, self_test):
             release[path] = p1_document(path, protected[path])
         tests += test_p1(protected, release, read_protected)
         tests += test_ei01_gramsci(protected, read_protected)
+        tests += test_ei01b_gramsci(gramsci_en, gramsci_en_historical,
+                                    protected[gramsci_en], gramsci['ei01b_document'])
         current_alignment = (ROOT / PAGE).read_text()
         alignment_baseline = frozen(PAGE, INDEX14_ALIGNMENT_BASE).decode()
         require(restore_index14_alignment(current_alignment) == alignment_baseline, 'Alignment changed a pre-existing index byte outside XIV')

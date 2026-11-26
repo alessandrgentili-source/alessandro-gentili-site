@@ -10,10 +10,45 @@ SOURCE_FILE='GRAMSCI_EN_GUIDE_11_CANDIDATE_v1.md'
 SOURCE_HASH='011c65fdbf725b92b9a65b498e206ac8234cfdfed311b237007786aa5146f1b9'
 BASE_BLOB='eb557eef9d0d1c10a41edeefb937990acc61d1ca'
 
+# EI01-B restores five bibliography headings in the already published EN guide.
+ORIGINAL_REVISION_BASE = '1fe5905e4968a269a279e43919bcd7399ec03186'
+EI01B_BASE_SHA = 'ff0a58b2850fcf00135ba43442cb6ce61940b85c9e7632319b111245a48edb4a'
+EI01B_APPROVED_SHA = 'b28d15127f209a4742577a4becc98845c2063282d084e6c3db84941f90f2998c'
+EI01B_WORKS = (
+    ("L'Ordine Nuovo", '(1919–1920 and later activity)'),
+    ('The Revolution against Capital', '(1917)'),
+    ('Some Aspects of the Southern Question', '(<em>Alcuni temi della quistione meridionale</em>, 1926, unfinished)'),
+    ('The Prison Notebooks', '(<em>Quaderni del carcere</em>, written 1929–1935)'),
+    ('Prison Letters', '(<em>Lettere dal carcere</em>)'),
+)
+
 def ck(x,msg):
     if not x:raise AssertionError(msg)
+def git_bytes(ref, path):
+    return subprocess.check_output(['git', 'show', f'{ref}:{path}'], cwd=ROOT)
+
+
 def git(ref,path):
-    return subprocess.check_output(['git','show',ref+':'+path],cwd=ROOT).decode('utf-8')
+    return git_bytes(ref, path).decode('utf-8')
+
+
+def ei01b_document(historical):
+    ck(hashlib.sha256(historical).hexdigest() == EI01B_BASE_SHA,
+       'EI01-B historical Gramsci EN baseline mismatch')
+    before, opening, remaining = historical.partition(b'<article class="item guide-section" id="works">')
+    works, closing, after = remaining.partition(b'</article>')
+    ck(opening and closing, 'EI01-B Works section missing')
+    for title, detail in EI01B_WORKS:
+        old = f'<p>***{title}* {detail}.** '.encode('utf-8')
+        new = f'<p><strong><em>{title}</em> {detail}.</strong> '.encode('utf-8')
+        ck(works.count(old) == 1, 'EI01-B historical heading mismatch: ' + title)
+        works = works.replace(old, new, 1)
+    expected = before + opening + works + closing + after
+    ck(hashlib.sha256(expected).hexdigest() == EI01B_APPROVED_SHA,
+       'EI01-B expected Gramsci EN document mismatch')
+    return expected
+
+
 def tokens(s):return re.findall(r'[^\W_]+',s,re.UNICODE)
 def markdown_body(source):
     parts=[];infaq=False
@@ -40,6 +75,11 @@ def schema(s):
 def visible(s):return ' '.join(unescape(re.sub(r'<[^>]*>','',s)).split())
 def verify(path,base):
     ck(path.resolve().relative_to(ROOT).as_posix()==PAGE,'Out of Gramsci scope')
+    historical = git_bytes(base, PAGE)
+    if hashlib.sha256(historical).hexdigest() == EI01B_BASE_SHA:
+        ck(path.read_bytes() == ei01b_document(historical),
+           'EI01-B Gramsci EN differs from the exact formatting revision')
+        base = ORIGINAL_REVISION_BASE
     ck(subprocess.check_output(['git','rev-parse',base+':'+PAGE],cwd=ROOT,text=True).strip()==BASE_BLOB,'Base blob changed')
     src=git(SOURCE_COMMIT,SOURCE_FILE)
     ck(hashlib.sha256(src.encode()).hexdigest()==SOURCE_HASH,'Source hash changed')
