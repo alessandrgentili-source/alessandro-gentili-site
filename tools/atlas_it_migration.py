@@ -22,6 +22,10 @@ EDITORIAL_ENTRIES = {
     'cerchi/guide/nietzsche-vita-opere-pensiero/index.html': '5059aa6c732b9ef86d64eb5b6181ec5ab696f51f2b3c4772e078224c89d5e7fe',
     'en/cerchi/guides/dante-exile-language-divine-comedy/index.html': '1c5af530f61845acc269f1a075029eb25c7d1f9415c56a6655e19d43812b4c1d',
     'en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/index.html': '9ad563fba5aa3c394416d932f10afe9005e7ed1ba70553d26ef5e31113ef5f99',
+    'cerchi/guide/leopardi-desiderio-infinito-modernita/index.html': 'a3253b0a7dd44c99892d43f4d139777cf882dbe0acd3129f0c25a0dcac08c82b',
+    'en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/index.html': 'ee053e537ab3d8e90e1f894fece078e0d9b95dc1b7820db32c8705e23d5fe3b0',
+    'cerchi/guide/weber-razionalizzazione-potere-disincanto/index.html': '452e590307dac3a8244b46fe8677c7eeb2cc41ba6dbdefa8c78a7f128a55b30a',
+    'en/cerchi/guides/max-weber-rationalization-power-disenchantment/index.html': 'a00eb31fa55e278e97c4f79cecc5bc33e56a64cbc995e786d8a384ef930934b1',
 }
 EDITORIAL_PROFILE = 'editorial-additions-v1'
 FRAGMENTS = rb'<nav class="guide-toc"[^>]*>.*?</nav>'

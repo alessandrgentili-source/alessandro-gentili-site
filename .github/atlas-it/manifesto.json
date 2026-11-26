@@ -177,6 +177,40 @@
       "modifiche": ".github/atlas-it/nietzsche-en-editorial.json",
       "outputSha256": "ce612ac3ffed3abb06a3e8aa3c648ee0a3cba815baf796a5d57b3702776536cf",
       "revisioneEN": "ede60f96555bf4f58673e8aca1bb558d6e3f401d"
+    },
+    {
+      "pagina": "cerchi/guide/leopardi-desiderio-infinito-modernita/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "ce5c959e8466a8fa65910bbe3231a53a1bc05503af614b60ca83d16780abec15",
+      "articoliSha256": "bd3e003ae4199325a08c6f45c8d052cd1eeb665e07a22a21dbbafe9cdd9b5da8",
+      "modifiche": ".github/atlas-it/leopardi-it-editorial.json",
+      "outputSha256": "cb2a83f0780b6d1ae4ef115013e68135038906606d579ae2ca68693cb2718369"
+    },
+    {
+      "pagina": "en/cerchi/guides/giacomo-leopardi-desire-infinity-modernity/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "5aecb41fc1ad4e1944b22ac5892caf5d0a3ec15ff82afc92da5a4a8ed927fd61",
+      "articoliSha256": "31406ca7572830bc586a0fd335a03a4352290b53aa5193ef27310472f08507cd",
+      "modifiche": ".github/atlas-it/leopardi-en-editorial.json",
+      "outputSha256": "59098d911619cedb38a47cd2cbad46c9ad2448b9c0ad5d57a133ca0757ab8981",
+      "revisioneEN": "39d53dfa6a016a7b0bc12ea962f3830e231ff0a7"
+    },
+    {
+      "pagina": "cerchi/guide/weber-razionalizzazione-potere-disincanto/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "eb4b73c8bbeaf943cd2309f95617b50fd6f6b7fb64895fe1882b76b09ded8a47",
+      "articoliSha256": "4a0f743cd6908e356e73381d86e1dfdd2cc55bd8c39bb921d845121428b24749",
+      "modifiche": ".github/atlas-it/weber-it-editorial.json",
+      "outputSha256": "f3f3b3bcab0c4925fb25785a7585349db8b7c8a0572db3ebbc4979e39ca061ac"
+    },
+    {
+      "pagina": "en/cerchi/guides/max-weber-rationalization-power-disenchantment/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "cc297c6ef646a1e186a2fa691f3138ecd5fde8674e4441c3678534069f86a8d6",
+      "articoliSha256": "caa5015c8d8d48ac2ed2fe00fdd60128bc93d78257efcb8a28632ee9a3ae7fc8",
+      "modifiche": ".github/atlas-it/weber-en-editorial.json",
+      "outputSha256": "a94f857eed8c19d72cf16e42ca73c02816825584f2484a57f103e5d123532a95",
+      "revisioneEN": "baa6896370b8e2b54204a60e24782f62139160f9"
     }
   ]
 }
