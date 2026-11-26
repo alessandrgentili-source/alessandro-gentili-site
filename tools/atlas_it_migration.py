@@ -17,6 +17,13 @@ LUCRETIUS_ENTRIES = {
     LUCRETIUS_IT: 'ff2bd3b75817b20b23f377207436dd517d115b4098ab8a37a2f264409061da38',
     LUCRETIUS_EN: 'e1e2a14d63548a1dc02922b8613ebc189225b6ff0eaf5645a8bc7cd1acf9ab31',
 }
+EDITORIAL_ENTRIES = {
+    'cerchi/guide/dante-vita-opere-commedia-esilio/index.html': 'e6d8ea22aaade1b8af7f6a3da6f8be8fc32e0cd5524269fa14d5ad608d0f465d',
+    'cerchi/guide/nietzsche-vita-opere-pensiero/index.html': '5059aa6c732b9ef86d64eb5b6181ec5ab696f51f2b3c4772e078224c89d5e7fe',
+    'en/cerchi/guides/dante-exile-language-divine-comedy/index.html': '1c5af530f61845acc269f1a075029eb25c7d1f9415c56a6655e19d43812b4c1d',
+    'en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/index.html': '9ad563fba5aa3c394416d932f10afe9005e7ed1ba70553d26ef5e31113ef5f99',
+}
+EDITORIAL_PROFILE = 'editorial-additions-v1'
 FRAGMENTS = rb'<nav class="guide-toc"[^>]*>.*?</nav>'
 PROTECTED = (
     ARTICLES, FRAGMENTS, rb'<(?:title|h1|header|footer)\b[^>]*>.*?</(?:title|h1|header|footer)>',
@@ -55,6 +62,29 @@ def entry_digest(baseline, record, recipe):
     return digest(entry + b'\0' + recipe)
 
 
+def verify_editorial_entry(baseline, record, recipe):
+    path = record['pagina']
+    require((record['profilo'] == EDITORIAL_PROFILE) == (path in EDITORIAL_ENTRIES),
+            'Editorial profile requires an explicit reviewed entry: ' + path)
+    if path in EDITORIAL_ENTRIES:
+        require(entry_digest(baseline, record, recipe) == EDITORIAL_ENTRIES[path],
+                'Editorial record or recipe differs from the reviewed entry: ' + path)
+
+
+def editorial_recipe(source, edits, is_en):
+    """Only two insertions, outside the historical hero and manuscript body."""
+    marker = (b'<div class="wrap atlas-reader">' if is_en else
+              b'<section class="wrap section"><figure class="editorial-cover-card guide-cover">')
+    end = b'</main>'
+    require(source.count(marker) == source.count(end) == 1, 'Ambiguous editorial insertion point')
+    require(len(edits) == 2 and all(len(edit) == 3 and edit[1] == '' for edit in edits),
+            'Editorial recipe must be two additions')
+    require(edits[0][0] == source.index(marker) and edits[1][0] == source.index(end),
+            'Editorial insertion moved outside its approved position')
+    require('id="editorial-reading-routes"' in edits[0][2] and
+            'id="editorial-dialogue"' in edits[1][2], 'Editorial apparatus missing')
+
+
 def reconstruct(source, edits, additions_only=False):
     pieces = []
     cursor = 0
@@ -64,7 +94,7 @@ def reconstruct(source, edits, additions_only=False):
         require(type(offset) is int and previous < offset and cursor <= offset <= len(source)
                 and source[offset:offset + len(old)] == old and old != new,
                 'Invalid Atlas transformation range')
-        require(not additions_only or not old, 'EN apparatus transformation must be additive')
+        require(not additions_only or not old, 'Additive apparatus transformation cannot remove bytes')
         pieces.extend((source[cursor:offset], new))
         cursor = offset + len(old)
         previous = offset
@@ -183,8 +213,9 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
     mutations = 0
     for record in manifest['guide']:
         path, profile = record['pagina'], record['profilo']
-        is_en = profile == 'apparato-en-v1'
-        require(profile in {'legacy-it-v1', 'apparato-en-v1'} and
+        editorial = profile == EDITORIAL_PROFILE
+        is_en = path.startswith('en/') if editorial else profile == 'apparato-en-v1'
+        require(profile in {'legacy-it-v1', 'apparato-en-v1', EDITORIAL_PROFILE} and
                 re.fullmatch(EN_PATH if is_en else IT_PATH, path)
                 and path not in sources and (protected is None or path in protected),
                 f'Invalid or unprotected Atlas path: {path}')
@@ -196,6 +227,7 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
         require(re.fullmatch(r'\.github/atlas-it/[a-z0-9-]+\.json', recipe)
                 and ROOT / recipe != CONFIG / 'manifesto.json', 'Invalid Atlas transformation path')
         recipe_bytes = read_json_bytes(ROOT / recipe)
+        verify_editorial_entry(baseline, record, recipe_bytes)
         if path in approved_entries:
             require(entry_digest(baseline, record, recipe_bytes) == approved_entries[path],
                     'Atlas manifest record or recipe differs from the reviewed entry: ' + path)
@@ -205,9 +237,11 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
         require(target.is_file() and not target.is_symlink() and target.resolve() == target,
                 'Invalid Atlas page file: ' + path)
         recipe_source = lucretius_consultation(source) if path == LUCRETIUS_IT else source
-        expected = reconstruct(recipe_source, edits, additions_only=is_en)
+        if editorial:
+            editorial_recipe(source, edits, is_en)
+        expected = reconstruct(recipe_source, edits, additions_only=is_en or editorial)
         validate(source, expected, target.read_bytes(), record)
-        if not is_en:
+        if not is_en and not editorial:
             figure = record['figura']
             anchor = re.escape(figure['dopoArticolo'].encode())
             figures = re.findall(rb'<article class="item guide-section" id="' + anchor +
@@ -227,7 +261,31 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
             for marker in (b'<article ', b'<aside class="atlas-relation', b'hreflang="'):
                 require(marker in expected, 'Ineffective Atlas mutation fixture')
                 edits_to_reject.append(expected.replace(marker, b'<!-- changed -->' + marker, 1))
-            if not is_en:
+            if editorial:
+                for offset, removed, inserted in edits:
+                    block = inserted.encode()
+                    require(expected.count(block) == 1, 'Ineffective editorial apparatus fixture')
+                    edits_to_reject.extend((expected.replace(block, b'', 1),
+                                            expected.replace(block, block * 2, 1),
+                                            expected.replace(block, block + b'<!-- altered -->', 1)))
+                # Even a coordinated candidate/recipe/record edit must fail its reviewed pin.
+                tampered = [list(edit) for edit in edits]
+                tampered[1][2] += '<!-- altered -->'
+                altered = reconstruct(source, tampered, additions_only=True)
+                altered_record = {**record, 'outputSha256': digest(altered)}
+                cases = (
+                    (altered_record, json.dumps(tampered).encode()),
+                    ({**record, 'profilo': 'apparato-en-v1' if is_en else 'legacy-it-v1'}, recipe_bytes),
+                    (record, recipe_bytes + b' '),
+                )
+                for invalid_record, invalid_recipe in cases:
+                    try:
+                        verify_editorial_entry(baseline, invalid_record, invalid_recipe)
+                    except AssertionError:
+                        mutations += 1
+                        continue
+                    raise AssertionError('Editorial pin accepted an unapproved entry')
+            if not is_en and not editorial:
                 p1 = re.search(rb'^.*<p><a href="#[^"]+"[^\n]+\n', source, re.M)[0]
                 require(p1 in expected, 'Ineffective P1 mutation fixture')
                 edits_to_reject.extend((expected.replace(p1, b'', 1), expected.replace(p1, p1 * 2, 1)))
@@ -242,6 +300,7 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
         sources[path], records[path] = source, record
     require(sources, 'Empty Atlas migration inventory')
     require(approved_entries.keys() <= sources.keys(), 'A reviewed Atlas entry is missing')
+    require(EDITORIAL_ENTRIES.keys() <= sources.keys(), 'A reviewed editorial entry is missing')
     for path, source in sources.items():
         peer_lang = b'it' if path.startswith('en/') else b'en'
         peer = re.search(rb'<link rel="alternate" hreflang="' + peer_lang +
