@@ -143,6 +143,40 @@
       "revisioneEN": "91eeaab213348182cbeb6a910c96806a01bf3203",
       "modifiche": ".github/atlas-it/lucrezio-en.json",
       "outputSha256": "fd6ed27be4ba38e0bce687fd7471ba2a391f9249bcb0ffe6256bf66a86bb0c51"
+    },
+    {
+      "pagina": "cerchi/guide/dante-vita-opere-commedia-esilio/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "1af0f179fec77363c17249adc1b3329828a383c739f74cbc03a248bbbe5d91ce",
+      "articoliSha256": "4b18897692e1a7232861eba2db1adc825e2173d969ff2524b9658ef027016dfe",
+      "modifiche": ".github/atlas-it/dante-it-editorial.json",
+      "outputSha256": "61e9cd2808179370d0703c540ad1475561f150d608033843a857ab5157327b9a"
+    },
+    {
+      "pagina": "cerchi/guide/nietzsche-vita-opere-pensiero/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "f2df168072565593f06ed4dd02ea8fd0f07969439c1bd9105c69492d17f36e8b",
+      "articoliSha256": "9902442ddcb6565c5c37e84fd66c34949657664c8e1e47ea22658890227497ec",
+      "modifiche": ".github/atlas-it/nietzsche-it-editorial.json",
+      "outputSha256": "5f4b5deca63411bb928c0dbb0e13147ca137407bca40de3bad7ee2a50e774c87"
+    },
+    {
+      "pagina": "en/cerchi/guides/dante-exile-language-divine-comedy/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "221b2354b2eb1477a81b670af96a45800c78b4e181c02e1bfb453990b14a9ed1",
+      "articoliSha256": "8cd84ad81bfc1171e3d47cb33e1487e829969b58d5f123ae1350bf13dbde5e2b",
+      "modifiche": ".github/atlas-it/dante-en-editorial.json",
+      "outputSha256": "54538840bbf28f9abf5b991195ef224844016a2773b6406d34881c30e64abcd7",
+      "revisioneEN": "bc1e39ab85e2303cc460c402ea746a098a44c272"
+    },
+    {
+      "pagina": "en/cerchi/guides/friedrich-nietzsche-nihilism-values-death-of-god/index.html",
+      "profilo": "editorial-additions-v1",
+      "sorgenteSha256": "a5b44f52d6d42392315e8fc9c0f6b21a5134b1ec06c69eb9331b0ab516255c1f",
+      "articoliSha256": "65fbab02cad517fce0874ca16cd85a63d44144a4adc5ddd3b7d7f49c8ea145bc",
+      "modifiche": ".github/atlas-it/nietzsche-en-editorial.json",
+      "outputSha256": "ce612ac3ffed3abb06a3e8aa3cba815baf796a5d57b3702776536cf",
+      "revisioneEN": "ede60f96555bf4f58673e8aca1bb558d6e3f401d"
     }
   ]
 }
