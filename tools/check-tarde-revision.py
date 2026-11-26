@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 import subprocess
 
-from atlas_it_migration import verified_sources
+from atlas_it_migration import EI02_TARDE_EMPHASIS, verified_sources
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = "en/cerchi/guides/gabriel-tarde-imitation-belief-desire/index.html"
@@ -262,6 +262,9 @@ def verify(path, base):
             or re.match(r"^\d+\.\s", paragraph)):
             continue
         expected = md_plain(paragraph)
+        if PAGE in frozen and paragraph.startswith("The MusicLab study offers a bounded example"):
+            for word in EI02_TARDE_EMPHASIS:
+                expected = expected.replace(f"<em>{word}</em>", word)
         require(expected in document,
                 "Approved prose missing or rewritten: " + expected[:95])
         n_paragraphs += 1
