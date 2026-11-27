@@ -8,6 +8,7 @@ from pathlib import Path
 
 import cerchi_ei06b as ei06b
 import cerchi_ei08 as ei08
+import cerchi_ei09 as ei09
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / '.github/atlas-it'
@@ -510,7 +511,8 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
         if editorial:
             editorial_recipe(source, edits, is_en)
         expected = reconstruct(recipe_source, edits, additions_only=is_en or editorial)
-        actual = ei08.historical_bytes(ROOT, path) if path in ei08.ATLAS_PATHS else target.read_bytes()
+        actual = (ei08.historical_bytes(ROOT, path) if path in ei08.ATLAS_PATHS
+                  else ei09.historical_bytes(ROOT, path))
         published = expected
         if path in EI02_TARDE_PINS:
             require(editorial, 'EI02 requires the reviewed additive Atlas profile: ' + path)

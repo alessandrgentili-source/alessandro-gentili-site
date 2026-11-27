@@ -12,6 +12,7 @@ import subprocess
 from pathlib import Path
 
 from atlas_it_migration import LUCRETIUS_EN, LUCRETIUS_IT, verified_sources
+import cerchi_ei09 as ei09
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = '604872f49f1f7e7b3202f9b57d7b077e7a5775e4'
@@ -257,7 +258,7 @@ def self_test():
     manifest = json.loads(MANIFEST.read_text())
     rejected = 0
     for guide in manifest['guides']:
-        original = (ROOT / guide['page']).read_text()
+        original = ei09.historical_bytes(ROOT, guide['page']).decode()
         md = source(guide)
         old = subprocess.check_output(['git', 'show', manifest['base'] + ':' + guide['page']], cwd=ROOT, text=True)
         mutations = [
@@ -370,6 +371,7 @@ def verify(path, base):
     guide = next(g for g in manifest['guides'] if g['page'] == relative)
     require(manifest['source_commit'] == SOURCE, 'Unapproved source commit')
     base_blob = git('rev-parse', base + ':' + relative)
+    checked = ei09.historical_bytes(ROOT, relative)
     shannon_title_revision = relative == SHANNON_PAGE and base_blob == guide['html_blob']
     require(shannon_title_revision or base_blob == guide['baseline_blob'], 'Published baseline changed')
     frozen, _ = verified_sources() if relative == MCLUHAN_PAGE else ({}, {})
@@ -379,23 +381,26 @@ def verify(path, base):
         verify_mcluhan_history(guide, frozen)
     else:
         if not shannon_title_revision:
-            require(git('hash-object', relative) == guide['html_blob'], 'Unreviewed guide snapshot')
+            blob = subprocess.check_output(['git', 'hash-object', '--stdin'], cwd=ROOT, input=checked)
+            require(blob.decode().strip() == guide['html_blob'], 'Unreviewed guide snapshot')
         italian_blob = guide['italian_blob']
         if shannon_title_revision:
             italian_blob = git('rev-parse', base + ':' + guide['italian'])
             require(italian_blob in (guide['italian_blob'], SHANNON_ITALIAN_NAVIGATION_BLOB),
                     'Unreviewed Shannon IT baseline')
-        require(git('hash-object', guide['italian']) == italian_blob, 'Italian guide changed')
+        it = ei09.historical_bytes(ROOT, guide['italian'])
+        blob = subprocess.check_output(['git', 'hash-object', '--stdin'], cwd=ROOT, input=it)
+        require(blob.decode().strip() == italian_blob, 'Italian guide changed')
     verify_assets(manifest)
     if relative == manifest['guides'][0]['page']:
         self_test()
         subprocess.run(['node', '--check', str(ROOT / 'assets/international-complete-guides.js')], check=True)
         subprocess.run(['node', str(ROOT / 'tools/check-international-complete-guides.mjs')], check=True)
     md = source(guide)
-    new = path.read_text()
+    new = checked.decode()
     if shannon_title_revision:
         published = subprocess.check_output(['git', 'cat-file', 'blob', base_blob], cwd=ROOT)
-        approved = path.read_bytes()
+        approved = checked
         verify_shannon_title(published, approved)
         test_shannon_title(published, approved)
         old = subprocess.check_output(['git', 'cat-file', 'blob', guide['baseline_blob']], cwd=ROOT, text=True)

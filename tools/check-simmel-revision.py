@@ -4,6 +4,8 @@ import json,re,subprocess
 from pathlib import Path
 from html import unescape
 from html.parser import HTMLParser
+
+import cerchi_ei09 as ei09
 ROOT=Path(__file__).resolve().parents[1]
 PAGE='en/cerchi/guides/georg-simmel-money-metropolis-individuality/index.html'
 SOURCE_COMMIT='3b7446245fdcea1e5106fe9e64f783301b17d25f'
@@ -63,7 +65,7 @@ def verify(path,base):
     ck(chk.stdout.strip()==SOURCE_BLOB,'Editorial source changed')
     source=git(SOURCE_COMMIT,SOURCE_FILE)
     old=git(base,PAGE)
-    html=path.read_text(encoding='utf-8')
+    html=ei09.historical_bytes(ROOT, PAGE).decode()
     ck(html.startswith('<!doctype html>') and html.endswith('</html>\n'),'HTML framing')
     ck(html.count('<h1>')==1 and '<h1>Georg Simmel</h1>' in html,'Single source H1')
     ck('<body class="guide-page international-atlas atlas-guide atlas-simmel">' in html,'Atlas layout')

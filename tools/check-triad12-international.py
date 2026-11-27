@@ -15,6 +15,7 @@ from urllib.parse import urljoin, urlparse
 import cerchi_ei06b as ei06b
 import cerchi_ei07 as ei07
 import cerchi_ei08 as ei08
+import cerchi_ei09 as ei09
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'b28cb6845ea48c83ff3f51bd3b97f18ac2364631'
@@ -839,6 +840,7 @@ def verify_triad12_it_reading(markup):
 
 
 def check(source, self_test):
+    ei09.verify_release(ROOT, self_test)
     ei07.verify_release(ROOT, self_test)
     ei08.verify_release(ROOT, self_test)
     require(hashlib.sha256(source.read_bytes()).hexdigest() == SHA, 'Approved source SHA-256 mismatch')
@@ -883,7 +885,7 @@ def check(source, self_test):
         previous = protected[path]
         protected[path] = ei06b.transform(path, previous)
         if self_test:
-            ei06b.test_revision(path, previous, (ROOT / path).read_bytes())
+            ei06b.test_revision(path, previous, ei09.historical_bytes(ROOT, path))
     require(not EI06A_PINS.keys() & sources.keys(), 'EI06-A guides must stay outside Atlas migrations')
 
     require(not ei07.PINS.keys() & sources.keys(), 'EI07 guides must stay outside Atlas migrations')

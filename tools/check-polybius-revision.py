@@ -4,6 +4,8 @@ import argparse, hashlib, json, re, subprocess
 from pathlib import Path
 from html import unescape
 from html.parser import HTMLParser
+
+import cerchi_ei09 as ei09
 from itertools import zip_longest
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -66,7 +68,7 @@ def verify(path,base):
     require(chk.stdout.strip()==SOURCE_BLOB,'Source manuscript changed')
     src=gitshow(SOURCE_COMMIT,SOURCE_FILE)
     old=gitshow(base,PAGE)
-    page=path.read_text('utf-8')
+    page=ei09.historical_bytes(ROOT, PAGE).decode()
     require(page.startswith('<!doctype html>') and page.endswith('</html>\n'),'Malformed HTML frame')
     require(page.count('<h1>')==1 and '<h1>Polybius</h1>' in page,'Wrong H1')
     require('atlas-polybius' in page and 'atlas-reader' in page,'Missing Plato-aligned reading architecture')
