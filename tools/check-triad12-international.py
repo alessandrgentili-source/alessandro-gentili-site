@@ -14,6 +14,7 @@ from urllib.parse import urljoin, urlparse
 
 import cerchi_ei06b as ei06b
 import cerchi_ei07 as ei07
+import cerchi_ei08 as ei08
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'b28cb6845ea48c83ff3f51bd3b97f18ac2364631'
@@ -839,6 +840,7 @@ def verify_triad12_it_reading(markup):
 
 def check(source, self_test):
     ei07.verify_release(ROOT, self_test)
+    ei08.verify_release(ROOT, self_test)
     require(hashlib.sha256(source.read_bytes()).hexdigest() == SHA, 'Approved source SHA-256 mismatch')
     raw = source.read_text().strip().split('\n\n')
     blocks = raw[0].splitlines() + raw[1:]
@@ -886,8 +888,14 @@ def check(source, self_test):
 
     require(not ei07.PINS.keys() & sources.keys(), 'EI07 guides must stay outside Atlas migrations')
 
+    require(ei08.PINS.keys() <= protected.keys(), 'Missing EI08 historical guide')
+
     def read_protected(path):
-        return sources[path] if path in sources else ei07.historical_bytes(ROOT, path)
+        if path in sources:
+            return sources[path]
+        if path in ei08.PINS:
+            return ei08.historical_bytes(ROOT, path)
+        return ei07.historical_bytes(ROOT, path)
 
     verify_protected(protected, read_protected)
     for path in ['en/cerchi/index.html', 'en/index.html', 'archivio.html']:
