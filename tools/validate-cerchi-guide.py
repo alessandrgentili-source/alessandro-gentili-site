@@ -481,7 +481,7 @@ def final_headings_valid(headings, language="it", approved_profile=None):
                  or bool(re.fullmatch(r"Chiusura editoriale — [^—]+", closing))))
 
 
-def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=None):
+def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=None, *, historical_html=None):
     errors = []
     report = report if report is not None else []
 
@@ -507,7 +507,7 @@ def validate(page, cover, source, root, mode="DRAFT", release_guides=(), report=
         return errors
 
     approved_profile = approved_source_profile(source)
-    html = page.read_text(encoding="utf-8")
+    html = page.read_text(encoding="utf-8") if historical_html is None else historical_html
     tree = Tree(html)
     nodes = list(walk(tree.root))
     atlas = any(node.tag == "body" and {"international-atlas", "atlas-guide"}.issubset(node.attrs.get("class", "").split()) for node in nodes)
