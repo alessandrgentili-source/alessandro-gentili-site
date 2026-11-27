@@ -6,6 +6,8 @@ import re
 import subprocess
 from pathlib import Path
 
+import cerchi_ei06b as ei06b
+
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / '.github/atlas-it'
 IT_PATH = r'cerchi/guide/[a-z0-9-]+/index\.html'
@@ -530,6 +532,12 @@ def verified_sources(protected=None, base=None, self_test=False, approved_entrie
             verify_ei04a_seneca(published, actual)
             if self_test:
                 ei04a_mutations += test_ei04a_seneca(published)
+        elif path in ei06b.ATLAS_PATHS:
+            validate(source, expected, expected, record)
+            ei06b.verify_revision(path, expected, actual)
+            published = actual
+            if self_test:
+                ei06b.test_revision(path, expected, actual)
         else:
             validate(source, expected, actual, record)
         if not is_en and not editorial:
