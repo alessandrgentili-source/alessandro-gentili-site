@@ -4,6 +4,8 @@ import json
 import re
 import subprocess
 
+import cerchi_ei09 as ei09
+
 
 BASELINE = 'c39f098de8fc6b1f4cf301d8b8acc612b9a2ddd3'
 CANDIDATE_SHA256 = '1f0d8c055878ef969934fcfdd8f0911f0f3c40c6df4506583364c9f1818eefd8'
@@ -638,7 +640,7 @@ def restore(path, revised):
 
 def historical_bytes(root, path):
     """Reconstruct a nominated preimage only after checking the exact release bytes."""
-    document = (root / path).read_bytes()
+    document = ei09.historical_bytes(root, path)
     return restore(path, document) if path in PINS else document
 
 
@@ -720,7 +722,7 @@ def verify_release(root, self_test=False):
             and sum(map(len, PATCHES.values())) == 65, 'unexpected scope')
     tests = 0
     for path in PINS:
-        revised = (root / path).read_bytes()
+        revised = ei09.historical_bytes(root, path)
         before = subprocess.check_output(['git', 'show', f'{BASELINE}:{path}'], cwd=root)
         require(restore(path, revised) == before, f'preimage differs from frozen main: {path}')
         if self_test:

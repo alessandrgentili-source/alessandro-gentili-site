@@ -3,6 +3,8 @@ from hashlib import sha256
 import re
 import subprocess
 
+import cerchi_ei09 as ei09
+
 
 BASELINE = '28de776022cd8f99e52f79699cde3e4d9f7fdf51'
 CANDIDATE_SHA256 = '020187e1d1379b88c58a9a659f67454f638c8d565a2c4f20dff1de2186e0d04d'
@@ -239,7 +241,7 @@ def restore(path, revised):
 
 def historical_bytes(root, path):
     """Give a historical gate the original bytes after proving the exact revision."""
-    document = (root / path).read_bytes()
+    document = ei09.historical_bytes(root, path)
     pins = PINS.get(path)
     if pins is None or sha256(document).hexdigest() == pins[0]:
         return document
@@ -278,7 +280,7 @@ def verify_release(root, self_test=False):
             and sum(map(len, FRAGMENTS.values())) == 23, 'unexpected scope')
     tests = 0
     for path in PINS:
-        approved = (root / path).read_bytes()
+        approved = ei09.historical_bytes(root, path)
         historical = subprocess.check_output(['git', 'show', f'{BASELINE}:{path}'], cwd=root)
         require(restore(path, approved) == historical, f'reconstruction differs from frozen main: {path}')
         if self_test:

@@ -14,6 +14,7 @@ import subprocess
 
 import cerchi_ei06b as ei06b
 import cerchi_ei07 as ei07
+import cerchi_ei09 as ei09
 
 ROOT = Path(__file__).resolve().parents[1]
 BLOCKS = r'<article\b(?=[^>]*\bclass="[^"]*\bguide-section\b)[^>]*>.*?</article>'
@@ -69,7 +70,8 @@ def verify(path, base, atlas_records=None):
     relative = path.resolve().relative_to(ROOT).as_posix()
     require(relative.startswith('en/cerchi/guides/'), f'Not an existing EN guide: {relative}')
     before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
-    after = path.read_text()
+    before = ei09.historical_ref(relative, before.encode()).decode()
+    after = ei09.historical_bytes(ROOT, relative).decode()
     pins = ei07.PINS.get(relative)
     if pins and ei06b.digest(after.encode()) == pins[1]:
         require(relative not in (atlas_records or {}), 'EI07 guides must stay outside Atlas migrations')
