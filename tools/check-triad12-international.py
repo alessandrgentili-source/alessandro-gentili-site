@@ -12,6 +12,8 @@ from runpy import run_path
 import subprocess
 from urllib.parse import urljoin, urlparse
 
+import cerchi_ei06b as ei06b
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'b28cb6845ea48c83ff3f51bd3b97f18ac2364631'
 SHA = '022349195e2cfbfee0e0e7af7d98ca101112c3f364d7efabc07fbfd8a00fcdb0'
@@ -871,6 +873,13 @@ def check(source, self_test):
     require(P1_SUMMARIES.keys() <= protected.keys(), 'Missing historical P1 guide')
     from atlas_it_migration import verified_sources
     sources, _ = verified_sources(protected=protected, self_test=self_test)
+    require(not ei06b.HISTORICAL_BASES.keys() & sources.keys(), 'EI06-B historical guides cannot be Atlas entries')
+    require(ei06b.HISTORICAL_BASES.keys() <= protected.keys(), 'Missing EI06-B historical guide')
+    for path in ei06b.HISTORICAL_BASES:
+        previous = protected[path]
+        protected[path] = ei06b.transform(path, previous)
+        if self_test:
+            ei06b.test_revision(path, previous, (ROOT / path).read_bytes())
     require(not EI06A_PINS.keys() & sources.keys(), 'EI06-A guides must stay outside Atlas migrations')
 
     def read_protected(path):

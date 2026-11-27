@@ -4,6 +4,7 @@ metadata and native-figure preservation. Does not authorize other revisions."""
 import argparse,hashlib,json,re,runpy,subprocess
 from pathlib import Path
 from html import unescape
+import cerchi_ei06b as ei06b
 ROOT=Path(__file__).resolve().parents[1]
 PAGE='en/cerchi/guides/carl-von-clausewitz-war-politics-limits-of-force/index.html'
 CSS='assets/international-clausewitz.css'
@@ -82,7 +83,12 @@ def compare_blocks(actual,expected):
 def verify(path,base):
  check(path.resolve().relative_to(ROOT).as_posix()==PAGE,'Wrong author path')
  check(git('rev-parse',f'{base}:{PAGE}')==BASE_BLOB,'Historical Clausewitz baseline changed')
- check(git('hash-object',PAGE)==HTML_BLOB,'Unreviewed Clausewitz HTML snapshot')
+ actual = path.read_bytes()
+ revised = ei06b.digest(actual) == ei06b.PINS[PAGE][1]
+ historical = ei06b.transform(PAGE, actual, reverse=True) if revised else actual
+ historical_blob = subprocess.check_output(['git','hash-object','--stdin'],cwd=ROOT,input=historical).decode().strip()
+ check(historical_blob==HTML_BLOB,'Unreviewed Clausewitz HTML snapshot')
+ historical_markup = historical.decode()
  check(git('hash-object',CSS)==CSS_BLOB,'Unreviewed Clausewitz CSS snapshot')
  md=source();old=subprocess.check_output(['git','show',f'{base}:{PAGE}'],cwd=ROOT,text=True);new=path.read_text();tree=Tree(new);check(not tree.malformed,'Malformed HTML')
  allnodes=list(walk(tree.root));byid={n.attrs['id']:n for n in allnodes if 'id' in n.attrs}
@@ -91,7 +97,7 @@ def verify(path,base):
  for a in [n for n in allnodes if n.tag=='a' and n.attrs.get('href','').startswith('#')]:check(a.attrs['href'][1:] in byid,'Broken fragment')
  for tag in ['html','body','main','header','footer','h1']:check(len([n for n in allnodes if n.tag==tag])==1,'Invalid frame '+tag)
  for pattern in [r'<title>.*?</title>',r'<nav class="wrap atlas-breadcrumb".*?</nav>',r'<div class="atlas-guide-opening">.*?(?=<div class="wrap atlas-reader">)',r'<h1>.*?</h1>',r'<meta\b[^>]*>',r'<link\b[^>]*>',r'<header class="site-header">.*?</header>',r'<footer class="footer">.*?</footer>',r'<figure class="editorial-cover-card guide-cover">.*?</figure>',r'<figure class="atlas-figure clausewitz-figure".*?</figure>',r'<script src="[^"]+"[^>]*></script>']:
-  check(re.findall(pattern,old,re.S)==re.findall(pattern,new,re.S),'Protected SEO/chrome/cover/native figure/scripts changed')
+  check(re.findall(pattern,old,re.S)==re.findall(pattern,historical_markup,re.S),'Protected SEO/chrome/cover/native figure/scripts changed')
  check((ROOT/CSS).read_text().startswith(subprocess.check_output(['git','show',f'{base}:{CSS}'],cwd=ROOT,text=True)),'Native two-state CSS altered')
  oldld=[json.loads(x)for x in re.findall(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>',old,re.S)]
  newld=[json.loads(x)for x in re.findall(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>',new,re.S)]
@@ -105,7 +111,15 @@ def verify(path,base):
  for article,(title,prose) in zip(articles[1:],sections):
   children=kids(article);same(children[0],title);check(articles.index(article)>0,'Wrong section order')
   if title.startswith('An original Cerchi instrument'):
-   check(children[1].tag=='figure','Native instrument missing');prose=prose[prose.index('**Using the instrument.**'):];compare_blocks(children[2:],body_blocks(prose));checked+=1
+   check(children[1].tag=='figure','Native instrument missing')
+   if revised:
+    captions=list(children[1].find('figcaption'))
+    field='*Figure caption:* '
+    source_captions=[line[len(field):] for line in prose.splitlines() if line.startswith(field)]
+    check(len(captions)==len(source_captions)==1,'EI06-B requires one source caption')
+    same(captions[0],source_captions[0])
+   prose=prose[prose.index('**Using the instrument.**'):]
+   compare_blocks(children[2:],body_blocks(prose));checked+=1
   elif title=='Frequently asked questions':
    blocks=body_blocks(prose);check(len(blocks)==40,'Expected 20 FAQ headings/answers');qsections=children[1:];check(len(qsections)==20,'Visible FAQ missing')
    for qsection,j in zip(qsections,range(0,40,2)):

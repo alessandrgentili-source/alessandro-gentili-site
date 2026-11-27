@@ -12,6 +12,8 @@ from pathlib import Path
 import re
 import subprocess
 
+import cerchi_ei06b as ei06b
+
 ROOT = Path(__file__).resolve().parents[1]
 BLOCKS = r'<article\b(?=[^>]*\bclass="[^"]*\bguide-section\b)[^>]*>.*?</article>'
 
@@ -78,6 +80,9 @@ def verify(path, base, atlas_records=None):
         # original EN manuscript gate against its original predecessor.
         base = record['revisioneEN']
         before = subprocess.check_output(['git', 'show', f'{base}:{relative}'], cwd=ROOT, text=True)
+    if relative in ei06b.HISTORICAL_BASES and ei06b.digest(before.encode()) == ei06b.PINS[relative][0]:
+        ei06b.verify_revision(relative, before.encode(), after.encode())
+        base = ei06b.HISTORICAL_BASES[relative]
     old, new = Page(before), Page(after)
     if relative == 'en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/index.html':
         from runpy import run_path
