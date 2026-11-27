@@ -8,6 +8,8 @@ import re
 import subprocess
 import tempfile
 
+import cerchi_ei07 as ei07
+
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = Path('en/cerchi/guides/adriano-olivetti-community-power/index.html')
 IT = Path('cerchi/guide/adriano-olivetti-la-comunita-e-il-potere/index.html')
@@ -77,8 +79,8 @@ def representations(html, source):
 def check(source, self_test=False):
     require(hashlib.sha256(source.read_bytes()).hexdigest() == SOURCE_SHA, 'Approved EN36 SHA mismatch')
     require(hashlib.sha256(COVER.read_bytes()).hexdigest() == 'b1b1cead7277cd3ece3db662d8d7108b90be56c3de5529f7c5b0888d00e9f408', 'Approved cover changed')
-    html = (ROOT / PAGE).read_text()
-    errors = v.validate(ROOT / PAGE, COVER, source, ROOT, mode='PUBLICATION')
+    html = ei07.historical_bytes(ROOT, PAGE.as_posix()).decode()
+    errors = v.validate(ROOT / PAGE, COVER, source, ROOT, mode='PUBLICATION', historical_html=html)
     require(not errors, '\n'.join(errors))
     representations(html, source)
     tree = v.Tree(html)
@@ -97,7 +99,7 @@ def check(source, self_test=False):
     links = [x.attrs.get('href') for a in articles for x in a.find('a')]
     require(all(x in links for x in source_links), 'Original Italian-edition links changed')
     original = subprocess.check_output(['git', 'show', f'{BASE}:{IT}'], cwd=ROOT, text=True)
-    italian = (ROOT / IT).read_text()
+    italian = ei07.historical_bytes(ROOT, IT.as_posix()).decode()
     it_url = 'https://alessandro-gentili.it/' + str(IT.parent) + '/'
     en_url = 'https://alessandro-gentili.it/' + str(PAGE.parent) + '/'
     alternates = '\n' + '\n'.join(f'<link rel="alternate" hreflang="{lang}" href="{url}" />' for lang, url in [('it', it_url), ('en', en_url), ('x-default', it_url)])

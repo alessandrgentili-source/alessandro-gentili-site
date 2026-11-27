@@ -6,6 +6,8 @@ from pathlib import Path
 import re
 import tempfile
 
+import cerchi_ei07 as ei07
+
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = Path('en/cerchi/guides/enrico-mattei-energy-public-enterprise-autonomy/index.html')
 COVER = ROOT / 'assets/img/cerchi/cerchi-guida-34-enrico-mattei-energia-impresa-pubblica-autonomia-1600x900.webp'
@@ -51,8 +53,8 @@ def figures(html):
 def check(source, self_test=False):
     require(hashlib.sha256(source.read_bytes()).hexdigest() == SOURCE_SHA, 'Approved EN34 manuscript hash mismatch')
     require(hashlib.sha256(COVER.read_bytes()).hexdigest() == '3465bb1c205175ded358c540fa377f733dbce1e4d098bc9684a0dc2448f9ea05', 'Approved cover changed')
-    html = (ROOT / PAGE).read_text()
-    errors = v.validate(ROOT / PAGE, COVER, source, ROOT, mode='PUBLICATION')
+    html = ei07.historical_bytes(ROOT, PAGE.as_posix()).decode()
+    errors = v.validate(ROOT / PAGE, COVER, source, ROOT, mode='PUBLICATION', historical_html=html)
     require(not errors, '\n'.join(errors))
     figures(html)
     raw = re.split(r'(?m)^## ', source.read_text())[1:]

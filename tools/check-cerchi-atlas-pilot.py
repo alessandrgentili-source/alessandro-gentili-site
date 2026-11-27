@@ -9,6 +9,8 @@ import re
 import tempfile
 import subprocess
 
+import cerchi_ei07 as ei07
+
 ROOT = Path(__file__).resolve().parents[1]
 PILOT = ROOT / '.agents/skills/cerchi-publisher/pilots/mattei'
 MASTER_SHA = '631f47c16143f1716f44a74cfbdea429ac82d9e1a78452593e9bbdd0e2078b66'
@@ -96,10 +98,12 @@ def verify():
     release = manifest.get('release')
     if release:
         released_page = ROOT / release['page']
-        verify_public_copy(released_page.read_text(), page.read_text())
+        released_html = ei07.historical_bytes(ROOT, release['page']).decode()
+        verify_public_copy(released_html, page.read_text())
         require((ROOT / release['cover']).read_bytes() == cover.read_bytes(), 'Public cover differs from approved DRAFT')
         require((ROOT / release['css']).read_bytes() == (PILOT / 'site/assets/cerchi-mattei.css').read_bytes(), 'Public figure CSS differs from approved DRAFT')
-        errors = v.validate(released_page, ROOT / release['cover'], source, ROOT, mode='PUBLICATION', report=report)
+        errors = v.validate(released_page, ROOT / release['cover'], source, ROOT,
+                            mode='PUBLICATION', report=report, historical_html=released_html)
         report.append('PUBLICATION proposal verified; archived DRAFT retained unchanged; merge/deploy require human approval')
     else:
         errors = v.validate(page, cover, source, ROOT, report=report)
@@ -143,7 +147,7 @@ def self_test(page, cover, source):
     original = page.read_text()
     released = json.loads((PILOT / 'manifest.json').read_text()).get('release')
     if released:
-        public = (ROOT / released['page']).read_text()
+        public = ei07.historical_bytes(ROOT, released['page']).decode()
         verify_public_copy(public, original)
         for label, changed in [
             ('IT editorial change', public.replace('<p>Mattei ne diventa presidente.</p>', '<p>Testo alterato.</p>', 1)),

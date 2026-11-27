@@ -8,6 +8,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+import cerchi_ei07 as ei07
+
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = Path('en/cerchi/guides/aristide-merloni-enterprise-fate-of-places/index.html')
 IT = Path('cerchi/guide/aristide-merloni-impresa-lavoro-destino-luoghi/index.html')
@@ -42,7 +44,7 @@ def verify_caption_replacement(before, after):
 def verify_caption_revision(path, base):
     require(path.resolve().relative_to(ROOT) == PAGE, 'Caption exception is exclusive to Merloni EN35')
     before = subprocess.check_output(['git', 'show', f'{base}:{PAGE}'], cwd=ROOT)
-    verify_caption_replacement(before, path.read_bytes())
+    verify_caption_replacement(before, ei07.historical_bytes(ROOT, PAGE.as_posix()))
     print('PASS Merloni EN35: single approved caption replacement; all other HTML bytes unchanged')
 
 
@@ -101,8 +103,8 @@ def comparisons(html, source):
 def check(source, self_test=False):
     require(hashlib.sha256(source.read_bytes()).hexdigest() == SOURCE_SHA, 'Frozen EN35 SHA mismatch')
     require(COVER.read_bytes() == subprocess.check_output(['git', 'show', f'{BASE}:{COVER.relative_to(ROOT)}'], cwd=ROOT), 'Cover differs from approved main')
-    html = (ROOT / PAGE).read_text()
-    errors = v.validate(ROOT / PAGE, COVER, source, ROOT, mode='PUBLICATION')
+    html = ei07.historical_bytes(ROOT, PAGE.as_posix()).decode()
+    errors = v.validate(ROOT / PAGE, COVER, source, ROOT, mode='PUBLICATION', historical_html=html)
     require(not errors, '\n'.join(errors))
     comparisons(html, source)
     faq_order(html)
@@ -121,7 +123,7 @@ def check(source, self_test=False):
     require(all(url in links for url in expected_links), 'Original source links changed')
     # The only changes permitted on IT35 are exact alternates and outside-body nav.
     original = subprocess.check_output(['git', 'show', f'{BASE}:{IT}'], cwd=ROOT, text=True)
-    italian = (ROOT / IT).read_text()
+    italian = ei07.historical_bytes(ROOT, IT.as_posix()).decode()
     it_url = 'https://alessandro-gentili.it/' + str(IT.parent) + '/'
     en_url = 'https://alessandro-gentili.it/' + str(PAGE.parent) + '/'
     alternates = '\n' + '\n'.join(f'<link rel="alternate" hreflang="{lang}" href="{url}" />' for lang, url in [('it', it_url), ('en', en_url), ('x-default', it_url)])

@@ -13,6 +13,7 @@ import subprocess
 from urllib.parse import urljoin, urlparse
 
 import cerchi_ei06b as ei06b
+import cerchi_ei07 as ei07
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'b28cb6845ea48c83ff3f51bd3b97f18ac2364631'
@@ -162,7 +163,7 @@ def verify_triad13(node, language):
         if guide_path == 'cerchi/guide/rachel-carson-la-vita-dopo-l-intervento/index.html':
             preserve_carson_markup((ROOT / guide_path).read_text())
         else:
-            require((ROOT / guide_path).read_bytes() == frozen(guide_path), 'A published Triad 13 guide changed')
+            require(ei07.historical_bytes(ROOT, guide_path) == frozen(guide_path), 'A published Triad 13 guide changed')
 
 
 # The English index retains the reviewed XIV presentation.
@@ -321,7 +322,7 @@ def verify_triad14(markup, language="it"):
         require(all(image.attrs.get(k) == cover.attrs.get(k) for k in ['src', 'alt', 'width', 'height']), 'Triad 14 approved cover/alt changed')
         asset = image.attrs['src'].lstrip('/')
         require((ROOT / asset).read_bytes() == frozen(asset, TRIAD14_BASE), 'Triad 14 approved cover bytes changed')
-        require((ROOT / guide_path).read_bytes() == frozen(guide_path, TRIAD14_BASE), 'A published Triad 14 guide changed')
+        require(ei07.historical_bytes(ROOT, guide_path) == frozen(guide_path, TRIAD14_BASE), 'A published Triad 14 guide changed')
 
 
 def canonical_international_links(markup):
@@ -837,6 +838,7 @@ def verify_triad12_it_reading(markup):
 
 
 def check(source, self_test):
+    ei07.verify_release(ROOT, self_test)
     require(hashlib.sha256(source.read_bytes()).hexdigest() == SHA, 'Approved source SHA-256 mismatch')
     raw = source.read_text().strip().split('\n\n')
     blocks = raw[0].splitlines() + raw[1:]
@@ -882,8 +884,10 @@ def check(source, self_test):
             ei06b.test_revision(path, previous, (ROOT / path).read_bytes())
     require(not EI06A_PINS.keys() & sources.keys(), 'EI06-A guides must stay outside Atlas migrations')
 
+    require(not ei07.PINS.keys() & sources.keys(), 'EI07 guides must stay outside Atlas migrations')
+
     def read_protected(path):
-        return sources[path] if path in sources else (ROOT / path).read_bytes()
+        return sources[path] if path in sources else ei07.historical_bytes(ROOT, path)
 
     verify_protected(protected, read_protected)
     for path in ['en/cerchi/index.html', 'en/index.html', 'archivio.html']:
