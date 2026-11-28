@@ -189,6 +189,12 @@
   width:190px;
 }
 
+.home-atlas-v2 .system-node--knots{
+  left:44%;
+  top:9%;
+  width:190px;
+}
+
 .home-atlas-v2 .system-node--themes{
   left:26%;
   top:42%;
@@ -418,7 +424,7 @@
     opacity:1!important;
   }
 
-  .home-atlas-v2 .system-node:nth-of-type(even){
+  .home-atlas-v2 .system-node:nth-child(even of .system-node:not(.system-node--knots)){
     border-right:1px solid rgba(var(--atlas-gold),.11);
   }
 
@@ -436,6 +442,7 @@
 
   .home-atlas-v2 .system-node--guides{order:2}
   .home-atlas-v2 .system-node--triads{order:3}
+  .home-atlas-v2 .system-node--knots{order:3;grid-column:1 / -1;min-height:0}
   .home-atlas-v2 .system-node--themes{order:4}
   .home-atlas-v2 .system-node--essays{order:5}
   .home-atlas-v2 .system-node--power{order:6}
