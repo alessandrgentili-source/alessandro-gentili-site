@@ -231,6 +231,7 @@
 .system-node--aps{left:52%;top:46%;width:215px}
 .system-node--guides{left:8%;top:57%;width:180px}
 .system-node--triads{left:23%;top:57%;width:165px}
+.system-node--knots{left:41%;top:57%;width:180px}
 .system-node--themes{left:31%;top:66%;width:245px}
 .system-node--power{left:25%;top:79%;width:145px}
 .system-node--territory{left:40%;top:79%;width:160px}
@@ -418,7 +419,7 @@
   .system-node--principle strong{font-size:1.8rem}
   .system-node--principle > span:last-child{margin-inline:0}
   .system-node--writing{order:2}.system-node--author{order:3}.system-node--lab{order:4}
-  .system-node--cerchi{order:5}.system-node--guides{order:6}.system-node--triads{order:7}
+  .system-node--cerchi{order:5}.system-node--guides{order:6}.system-node--triads,.system-node--knots{order:7}
   .system-node--poetry{order:8}.system-node--aps{order:9}.system-node--themes{order:10}
   .system-node--power{order:11}.system-node--territory{order:12}.system-node--essays{order:13}
   .system-node--international{order:14}.system-node--positioning{order:15}.system-node--method{order:16}.system-node--system{order:17}
@@ -437,7 +438,8 @@
   .system-node--system,
   .system-node--essays{margin-left:1.45rem}
   .system-node--guides,
-  .system-node--triads{margin-left:2.2rem}
+  .system-node--triads,
+  .system-node--knots{margin-left:2.2rem}
   .system-node--synthesis{background:rgba(255,250,241,.28)}
   .system-reading{
     position:relative;
