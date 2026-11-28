@@ -15,6 +15,8 @@ const assert = (condition, message) => {
 const read = (path) => readFile(join(root, path), 'utf8');
 
 const pages = [
+  { path: 'en/cerchi/knots/index.html', url: `${base}/en/cerchi/knots/`, it: `${base}/cerchi/nodi/`, type: 'CollectionPage', breadcrumb: true },
+  { path: 'en/cerchi/knots/knot-01/index.html', url: `${base}/en/cerchi/knots/knot-01/`, it: `${base}/cerchi/nodi/nodo-01/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/triads/law-guilt-punishment/index.html', url: `${base}/en/cerchi/triads/law-guilt-punishment/`, it: `${base}/cerchi/triadi/legge-colpa-punizione/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/cesare-beccaria-limits-right-to-punish/index.html', url: `${base}/en/cerchi/guides/cesare-beccaria-limits-right-to-punish/`, it: `${base}/cerchi/guide/cesare-beccaria-limite-diritto-punire/`, type: 'Article', breadcrumb: true },
   { path: 'en/cerchi/guides/michel-foucault-life-under-examination/index.html', url: `${base}/en/cerchi/guides/michel-foucault-life-under-examination/`, it: `${base}/cerchi/guide/michel-foucault-la-vita-sotto-esame/`, type: 'Article', breadcrumb: true },
@@ -72,6 +74,8 @@ const pages = [
 ];
 
 const italianPairs = [
+  { path: 'cerchi/nodi/index.html', it: `${base}/cerchi/nodi/`, en: `${base}/en/cerchi/knots/` },
+  { path: 'cerchi/nodi/nodo-01/index.html', it: `${base}/cerchi/nodi/nodo-01/`, en: `${base}/en/cerchi/knots/knot-01/` },
   { path: `${experiment}it.html`, it: `${experimentUrl}it.html`, en: experimentUrl, defaultUrl: experimentUrl },
   { path: `${presentation}it.html`, it: `${presentationUrl}it.html`, en: presentationUrl, defaultUrl: presentationUrl },
   { path: 'cerchi/triadi/legge-colpa-punizione/index.html', it: `${base}/cerchi/triadi/legge-colpa-punizione/`, en: `${base}/en/cerchi/triads/law-guilt-punishment/` },

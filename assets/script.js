@@ -67,12 +67,15 @@ const mainContent = document.querySelector('main');
 if (mainContent) {
   mainContent.id ||= 'main-content';
   mainContent.setAttribute('tabindex', '-1');
-  const skip = document.createElement('a');
-  skip.className = 'skip-link';
-  skip.href = `#${mainContent.id}`;
-  skip.textContent = document.documentElement.lang.startsWith('en') ? 'Skip to content' : 'Salta al contenuto';
+  let skip = document.querySelector('[data-static-skip]');
+  if (!skip) {
+    skip = document.createElement('a');
+    skip.className = 'skip-link';
+    skip.href = `#${mainContent.id}`;
+    skip.textContent = document.documentElement.lang.startsWith('en') ? 'Skip to content' : 'Salta al contenuto';
+    document.body.prepend(skip);
+  }
   skip.addEventListener('click', () => mainContent.focus({ preventScroll: true }));
-  document.body.prepend(skip);
 }
 const siteHeader = document.querySelector('.site-header');
 if (siteHeader) {
@@ -106,6 +109,7 @@ document.querySelectorAll('[data-newsletter-form]').forEach((form) => {
 });
 
 const cookieConsentKey = 'ag_cookie_statistics';
+const statisticsEnabled = !document.querySelector('body[data-no-statistics]');
 const googleAnalyticsId = 'G-NCN48MN7VJ';
 let googleAnalyticsLoaded = false;
 // Disable collection until this page has an explicit statistics opt-in.
@@ -158,7 +162,7 @@ const disableGoogleAnalytics = () => {
 
 // Apply revocation in other open pages without waiting for navigation.
 window.addEventListener('storage', (event) => {
-  if ((event.key === cookieConsentKey && event.newValue !== 'accepted') || event.key === null) {
+  if (statisticsEnabled && ((event.key === cookieConsentKey && event.newValue !== 'accepted') || event.key === null)) {
     disableGoogleAnalytics();
   }
 });
@@ -215,13 +219,14 @@ const showCookieBanner = () => {
   document.body.appendChild(banner);
 };
 
-window.openCookiePreferences = showCookieBanner;
-
-const cookieStatisticsPreference = getCookieStatisticsPreference();
-if (cookieStatisticsPreference === 'accepted') {
-  loadGoogleAnalytics();
-} else if (cookieStatisticsPreference !== 'rejected') {
-  showCookieBanner();
+if (statisticsEnabled) {
+  window.openCookiePreferences = showCookieBanner;
+  const cookieStatisticsPreference = getCookieStatisticsPreference();
+  if (cookieStatisticsPreference === 'accepted') {
+    loadGoogleAnalytics();
+  } else if (cookieStatisticsPreference !== 'rejected') {
+    showCookieBanner();
+  }
 }
 
 const contactPage = window.location.pathname === '/en/contact/index.html'
